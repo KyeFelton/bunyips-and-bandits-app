@@ -5,7 +5,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "./components/ui/button";
-import logo from "./logo.png";
+import logo from "./images/logo.png";
+import characterImage from "./images/character.svg";
 import { Card, CardHeader, CardTitle } from "./components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
 
@@ -41,7 +42,9 @@ function App() {
             </CardHeader>
           </Card>
           <Card className="h-full p-4 overflow-auto">
-            <div>Stats</div>
+            <div className="m-5">
+              <img src={characterImage} alt="character" />
+            </div>
           </Card>
         </div>
         <div className="mt-24 col-span-3">
