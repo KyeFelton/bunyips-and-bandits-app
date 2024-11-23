@@ -37,12 +37,17 @@
   }
 }
 
+@font-face {
+  font-family: "Virgil";
+  src: local("Virgil"), url(./Virgil.woff2) format("woff2");
+}
+
 @layer base {
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
-    font-family: sans-serif;
+    font-family: Virgil;
   }
 }
