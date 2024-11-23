@@ -9,6 +9,7 @@ import logo from "./images/logo.png";
 import characterImage from "./images/character.svg";
 import { Card, CardHeader, CardTitle } from "./components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
+import { StatBar } from "./components/StatBar";
 
 function App() {
   return (
@@ -45,6 +46,9 @@ function App() {
             <div className="m-5">
               <img src={characterImage} alt="character" />
             </div>
+            <StatBar colour="red" max={20} current={12} title="Health" />
+            <StatBar colour="green" max={10} current={9} title="Sanity" />
+            <StatBar colour="blue" max={20} current={8} title="Stamina" />
           </Card>
         </div>
         <div className="mt-24 col-span-3">

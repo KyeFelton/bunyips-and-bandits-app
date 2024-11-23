@@ -31,6 +31,15 @@
     --destructive: 0 100% 50%;
     --destructive-foreground: 210 40% 98%;
 
+    --green: 128 71% 82%;
+    --green-foreground: 131 54% 40%;
+
+    --blue: 206 100% 82%;
+    --blue-foreground: 209 77% 43%;
+
+    --red: 0 100% 89%;
+    --red-foreground: 0 74% 54%;
+
     --ring: 215 20.2% 65.1%;
 
     --radius: 0.5rem;
