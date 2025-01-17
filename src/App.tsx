@@ -10,6 +10,14 @@ import characterImage from "./images/character.svg";
 import { Card, CardHeader, CardTitle } from "./components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
 import { StatBar } from "./components/StatBar";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./components/ui/select";
+import { SenseIcon } from "./components/icons/Sense";
 
 function App() {
   return (
@@ -42,13 +50,39 @@ function App() {
               <CardTitle className="flex justify-center">Teddy</CardTitle>
             </CardHeader>
           </Card>
-          <Card className="h-full p-4 overflow-auto">
+          <Card className="h-full p-4 overflow-auto flex flex-col gap-4">
             <div className="m-5">
               <img src={characterImage} alt="character" />
             </div>
+            {/* <Select>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Species" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="minotaur">Minotaur</SelectItem>
+                <SelectItem value="yowie">Yowie</SelectItem>
+                <SelectItem value="tengaroo">Tengaroo</SelectItem>
+              </SelectContent>
+            </Select> */}
+            <Button variant="outline">
+              <span className="text-lg">Minotaur</span>
+            </Button>
             <StatBar colour="red" max={20} current={12} title="Health" />
             <StatBar colour="green" max={10} current={9} title="Sanity" />
             <StatBar colour="blue" max={20} current={8} title="Stamina" />
+            <div>
+              <div>Senses</div>
+              <div>
+                <SenseIcon
+                  sense={{
+                    type: "sight",
+                    rating: 2,
+                    standard: true,
+                    infrared: true,
+                  }}
+                />
+              </div>
+            </div>
           </Card>
         </div>
         <div className="mt-24 col-span-3">
