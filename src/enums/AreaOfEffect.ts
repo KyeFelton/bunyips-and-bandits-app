@@ -3,4 +3,5 @@ export enum AreaOfEffect {
   MultipleTargets = "Muliple targets",
   Cone = "Cone",
   Sphere = "Sphere",
+  Arena = "Arena",
 }

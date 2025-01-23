@@ -1,5 +1,6 @@
 import { DamageType } from "src/enums/DamageType";
 import { MovementType } from "src/enums/MovementType";
+import { SenseType } from "src/enums/SenseType";
 import { SkillType } from "src/enums/SkillType";
 
 export type StatModifier = {
@@ -17,7 +18,9 @@ export type Effect = {
   };
   evasions?: StatModifier;
   health?: StatModifier;
+  luck?: StatModifier;
   sanity?: StatModifier;
+  senses?: SenseType[];
   skill?: StatModifier & {
     skillType: SkillType;
   };

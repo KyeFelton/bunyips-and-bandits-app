@@ -1,16 +1,24 @@
 import { SkillType } from "src/enums/SkillType";
 import { Skill } from "./skills";
 import { Path } from "./paths";
+import { Item } from "./items";
 import { MovementType } from "src/enums/MovementType";
 import { DamageType } from "src/enums/DamageType";
+import { SenseType } from "src/enums/SenseType";
 
 export type LevelledSkill = Skill & {
   level: number;
 };
 
+export type CharacterItem = Item & {
+  equipped: boolean;
+};
+
 export type Character = {
+  name: string;
   species: string;
   gender: string;
+  image?: string;
   health: {
     max: number;
     current: number;
@@ -29,8 +37,9 @@ export type Character = {
     [MovementType.Climb]: number;
     [MovementType.Fly]: number;
   };
+  senses: SenseType[];
   armour: {
-    [DamageType.Pyro]: number;
+    [DamageType.Fire]: number;
     [DamageType.Electric]: number;
     [DamageType.Toxic]: number;
     [DamageType.Slash]: number;
@@ -38,6 +47,9 @@ export type Character = {
   };
   weaponDamage: number;
   paths: Path[];
+  items: CharacterItem[];
+  money: number;
+  luck: number;
   skills: {
     [SkillType.Strength]: LevelledSkill;
     [SkillType.Agility]: LevelledSkill;
