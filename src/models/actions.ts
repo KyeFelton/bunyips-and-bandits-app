@@ -1,6 +1,6 @@
-import { AreaOfEffect } from "src/enums/AreaOfEffect";
-import { Range } from "src/enums/Range";
-import { SkillType } from "src/enums/SkillType";
+import { AreaOfEffect } from "../enums/AreaOfEffect";
+import { Range } from "../enums/Range";
+import { SkillType } from "../enums/SkillType";
 
 export type Action = {
   name: string;

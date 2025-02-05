@@ -1,8 +1,8 @@
-import { SenseType } from "src/enums/SenseType";
+import { SenseType } from "../enums/SenseType";
 import { Effect } from "./effect";
-import { DamageType } from "src/enums/DamageType";
-import { SkillType } from "src/enums/SkillType";
-import { MovementType } from "src/enums/MovementType";
+import { DamageType } from "../enums/DamageType";
+import { SkillType } from "../enums/SkillType";
+import { MovementType } from "../enums/MovementType";
 
 export type Trait = {
   name: string;
@@ -69,12 +69,12 @@ export const Instinctive: Trait = {
 // Pyromaniac
 
 export const InfraredSight: Trait = {
-  name: "Inrared Sight",
+  name: "Infrared Sight",
   description:
     "Your eyes become attuned to the various spectrums of light. You can now see heat emitted in your environment as infrared light.",
   effects: [
     {
-      senses: [SenseType.InfraredSight],
+      sense: SenseType.InfraredSight,
     },
   ],
 };
@@ -101,7 +101,7 @@ export const FriendlyFire: Trait = {
 
 export const Inflammable: Trait = {
   name: "Inflammable",
-  description: "You cannot catch fire",
+  description: "You cannot catch fire.",
 };
 
 export const Arsonist: Trait = {
@@ -118,7 +118,10 @@ export const TremorHearing: Trait = {
     "Your feet become ultra sensitive, enabling you to feel minor vibrations in the ground. Your ears also adapt to the water, enabling you to sense vibrations clearly when underwater. You gain +4 bonus to hearing checks",
   effects: [
     {
-      senses: [SenseType.TremorHearing],
+      sense: SenseType.TremorHearing,
+    },
+    {
+      sense: SenseType.Hearing,
     },
     {
       skill: {
@@ -175,7 +178,7 @@ export const SharpSmell: Trait = {
     "Your smell sharpens, allowing you to trace faint scents and track down other creatures. You gain +4 bonus to smell checks.",
   effects: [
     {
-      senses: [SenseType.Smell],
+      sense: SenseType.Smell,
     },
     {
       skill: {

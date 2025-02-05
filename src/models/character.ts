@@ -1,35 +1,33 @@
-import { SkillType } from "src/enums/SkillType";
-import { Skill } from "./skills";
+import { SkillType } from "../enums/SkillType";
 import { Path } from "./paths";
-import { Item } from "./items";
-import { MovementType } from "src/enums/MovementType";
-import { DamageType } from "src/enums/DamageType";
-import { SenseType } from "src/enums/SenseType";
-
-export type LevelledSkill = Skill & {
-  level: number;
-};
-
-export type CharacterItem = Item & {
-  equipped: boolean;
-};
+import { MovementType } from "../enums/MovementType";
+import { DamageType } from "../enums/DamageType";
+import { SenseType } from "../enums/SenseType";
+import { CharacterItem } from "./items";
 
 export type Character = {
   name: string;
   species: string;
   gender: string;
+  age: number;
+  languages: string[];
+  personality: string;
   image?: string;
+  level: number;
   health: {
     max: number;
     current: number;
+    increments: number;
   };
   sanity: {
     max: number;
     current: number;
+    increments: number;
   };
   stamina: {
     max: number;
     current: number;
+    increments: number;
   };
   speed: {
     [MovementType.Walk]: number;
@@ -51,28 +49,28 @@ export type Character = {
   money: number;
   luck: number;
   skills: {
-    [SkillType.Strength]: LevelledSkill;
-    [SkillType.Agility]: LevelledSkill;
-    [SkillType.Dexterity]: LevelledSkill;
-    [SkillType.Martial]: LevelledSkill;
-    [SkillType.Throw]: LevelledSkill;
-    [SkillType.Intelligence]: LevelledSkill;
-    [SkillType.Nature]: LevelledSkill;
-    [SkillType.Willpower]: LevelledSkill;
-    [SkillType.Charisma]: LevelledSkill;
-    [SkillType.Psychology]: LevelledSkill;
-    [SkillType.Stealth]: LevelledSkill;
-    [SkillType.Sight]: LevelledSkill;
-    [SkillType.Hearing]: LevelledSkill;
-    [SkillType.Smell]: LevelledSkill;
-    [SkillType.Pyro]: LevelledSkill;
-    [SkillType.Electric]: LevelledSkill;
-    [SkillType.Kinetic]: LevelledSkill;
-    [SkillType.Radiant]: LevelledSkill;
-    [SkillType.Sonic]: LevelledSkill;
-    [SkillType.Psychic]: LevelledSkill;
-    [SkillType.Toxic]: LevelledSkill;
-    [SkillType.Healing]: LevelledSkill;
-    [SkillType.Spirit]: LevelledSkill;
+    [SkillType.Strength]: number;
+    [SkillType.Agility]: number;
+    [SkillType.Dexterity]: number;
+    [SkillType.Martial]: number;
+    [SkillType.Throw]: number;
+    [SkillType.Intelligence]: number;
+    [SkillType.Nature]: number;
+    [SkillType.Willpower]: number;
+    [SkillType.Charisma]: number;
+    [SkillType.Psychology]: number;
+    [SkillType.Stealth]: number;
+    [SkillType.Sight]: number;
+    [SkillType.Hearing]: number;
+    [SkillType.Smell]: number;
+    [SkillType.Pyro]: number;
+    [SkillType.Electric]: number;
+    [SkillType.Kinetic]: number;
+    [SkillType.Radiant]: number;
+    [SkillType.Sonic]: number;
+    [SkillType.Psychic]: number;
+    [SkillType.Toxic]: number;
+    [SkillType.Healing]: number;
+    [SkillType.Spirit]: number;
   };
 };

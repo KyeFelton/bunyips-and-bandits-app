@@ -1,4 +1,4 @@
-import { SkillType } from "src/enums/SkillType";
+import { SkillType } from "../enums/SkillType";
 import {
   Action,
   Plough,
@@ -76,6 +76,10 @@ export type Path = {
     traits: Trait[];
   }[];
 };
+
+export type SelectedPath = Path & {
+  level: number;
+}
 
 export const WeaponMaster: Path = {
   name: "Weapon Master",
@@ -182,7 +186,7 @@ export const Sonomancer: Path = {
 export const Doctor: Path = {
   name: "Doctor",
   skillTypes: [SkillType.Toxic, SkillType.Healing],
-  description: "",
+  description: "Through years of study in morphing, Doctors have mastered the delicate balance between healing and harm. Their knowledge of poisons allows them to weaken powerful enemies, whilst their expertise in healing makes them indispensable during the toughest times.",
   unlockables: [
     {
       level: 1,

@@ -1,4 +1,5 @@
 import { SkillType } from "../enums/SkillType";
+import { DamageType } from "../enums/DamageType";
 import { Effect } from "./effect";
 
 export type Item = {
@@ -8,6 +9,11 @@ export type Item = {
   singleUse: boolean;
   weight: number;
 };
+
+export type CharacterItem = Item & {
+  equipped: boolean;
+  quantity: number;
+}
 
 export const Antidote: Item = {
   name: "Antidote",
@@ -68,3 +74,68 @@ export const KujuHat: Item = {
   singleUse: false,
   weight: 0.5,
 };
+
+export const SteelPlateArmour: Item = {
+  name: "Steel plate armour",
+  description: "You gain +2 armour for all damage types, and an additional +3 armour for slash, force and electric damage. You lose -2 on agility and dexterity checks.",
+  effects: [
+    {
+      armour: {
+        damageType: DamageType.Fire,
+        static: 2
+      }
+    },
+    {
+      armour: {
+        damageType: DamageType.Electric,
+        static: 5
+      }
+    },
+    {
+      armour: {
+        damageType: DamageType.Toxic,
+        static: 2
+      }
+    },
+    {
+      armour: {
+        damageType: DamageType.Slash,
+        static: 5
+      }
+    },
+    {
+      armour: {
+        damageType: DamageType.Force,
+        static: 5
+      }
+    },
+    {
+      skill: {
+        skillType: SkillType.Dexterity,
+        static: -2,
+      },
+    },
+    {
+      skill: {
+        skillType: SkillType.Agility,
+        static: -2,
+      },
+    }
+  ],
+  singleUse: false,
+  weight: 20
+}
+
+export const SteelSword: Item = {
+  name: "Steel sword",
+  description: "Your weapon attacks deal 6 slash damage when wielded.",
+  effects: [
+    {
+      weaponDamage: {
+        static: 6
+      }
+    }
+  ],
+  singleUse: false,
+  weight: 1
+}
