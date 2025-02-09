@@ -1,71 +1,93 @@
-import { atom } from "jotai";
-import {
-  speciesAtom,
-  levelAtom,
-  pathsAtom,
-  skillLevelUpgradesAtom,
-  itemsAtom,
-  currentHealthAtom,
-  currentSanityAtom,
-  currentStaminaAtom,
-  nameAtom,
-  genderAtom,
-  ageAtom,
-  languagesAtom,
-  personalityAtom,
-  imageAtom,
-  moneyAtom,
-} from "./primitives";
-import { Minotaur, Jeli, Pixie } from "../models/species";
-import { SkillType } from "../enums/SkillType";
-import { SaveFile } from "../models/saveFile";
+import { atom } from 'jotai';
+import { SkillType } from '../enums/SkillType';
+import { CharacterItem } from '../models/items';
+import { SelectedPath } from '../models/paths';
+import { AllSpecies } from '../models/species';
+import { SaveFile } from '../models/saveFile';
 
-const species = { Minotaur, Jeli, Pixie };
+const startingSpecies = AllSpecies.Minotaur;
 
-export const luckAtom = atom<number>(0);
+// --- Primitives --- //
+
+// Basic character info
+export const nameAtom = atom<string>('');
+export const speciesAtom = atom<string>(startingSpecies.name);
+export const genderAtom = atom<string>('');
+export const ageAtom = atom<number>(0);
+export const personalityAtom = atom<string>('');
+export const languagesAtom = atom<string[]>([]);
+export const imageAtom = atom<string | undefined>(undefined);
+
+// Character progression
+export const levelAtom = atom<number>(1);
+export const pathsAtom = atom<SelectedPath[]>([]);
+export const skillLevelUpgradesAtom = atom<Partial<Record<SkillType, number>>>(
+  {}
+);
+
+// Character stats
+export const currentHealthAtom = atom<number>(
+  startingSpecies.health.initial + startingSpecies.health.increments
+);
+export const currentSanityAtom = atom<number>(
+  startingSpecies.sanity.initial + startingSpecies.sanity.increments
+);
+export const currentStaminaAtom = atom<number>(
+  startingSpecies.stamina.initial + startingSpecies.stamina.increments
+);
+
+// Items and equipment
+export const itemsAtom = atom<CharacterItem[]>([]);
+export const moneyAtom = atom<number>(0);
+
+// --- Derivatives --- //
 
 // Get species data
 export const speciesDataAtom = atom((get) => {
   const speciesName = get(speciesAtom);
-  return species[speciesName as keyof typeof species];
+  return AllSpecies[speciesName as keyof typeof AllSpecies];
 });
 
-// Health, Sanity, Stamina
+// Health
 export const healthAtom = atom((get) => {
   const speciesData = get(speciesDataAtom);
   const level = get(levelAtom);
   return {
-    max:
-      speciesData.health.initial + (level - 1) * speciesData.health.increments,
+    max: speciesData.health.initial + level * speciesData.health.increments,
     current: get(currentHealthAtom),
     increments: speciesData.health.increments,
   };
 });
 
+// Sanity
 export const sanityAtom = atom((get) => {
   const speciesData = get(speciesDataAtom);
   const level = get(levelAtom);
   return {
-    max:
-      speciesData.sanity.initial + (level - 1) * speciesData.sanity.increments,
+    max: speciesData.sanity.initial + level * speciesData.sanity.increments,
     current: get(currentSanityAtom),
     increments: speciesData.sanity.increments,
   };
 });
 
+// Stamina
 export const staminaAtom = atom((get) => {
   const speciesData = get(speciesDataAtom);
   const level = get(levelAtom);
   return {
-    max:
-      speciesData.stamina.initial +
-      (level - 1) * speciesData.stamina.increments,
+    max: speciesData.stamina.initial + level * speciesData.stamina.increments,
     current: get(currentStaminaAtom),
     increments: speciesData.stamina.increments,
   };
 });
 
-// Movement and Senses
+// Actions
+export const actionsCountAtom = atom<number>(2);
+
+// Evasions
+export const evasionsCountAtom = atom<number>(2);
+
+// Movement
 export const speedAtom = atom((get) => {
   const speciesData = get(speciesDataAtom);
   const paths = get(pathsAtom);
@@ -103,6 +125,7 @@ export const speedAtom = atom((get) => {
   return baseSpeed;
 });
 
+// Senses
 export const sensesAtom = atom((get) => {
   const speciesData = get(speciesDataAtom);
   const paths = get(pathsAtom);
@@ -138,15 +161,16 @@ export const sensesAtom = atom((get) => {
   return senses;
 });
 
-// Skills and Combat
+// Path upgrades
 export const availablePathPointsAtom = atom((get) => {
   const level = get(levelAtom);
-  return Math.floor(level / 2) + 2;
+  return level === 1 ? 1 : Math.floor(level / 4) + 2;
 });
 
+// Skill upgrades
 export const availableSkillPointsAtom = atom((get) => {
   const level = get(levelAtom);
-  return Math.floor(level / 5) * 2;
+  return Math.ceil(level / 2) + 1;
 });
 
 export const skillLevelsAtom = atom((get) => {
@@ -174,6 +198,7 @@ export const skillLevelsAtom = atom((get) => {
   return skills;
 });
 
+// Skill modifiers
 export const skillModifiersAtom = atom((get) => {
   const paths = get(pathsAtom);
   const items = get(itemsAtom);
@@ -212,6 +237,7 @@ export const skillModifiersAtom = atom((get) => {
   return modifiers;
 });
 
+// Armour
 export const armourAtom = atom((get) => {
   const speciesData = get(speciesDataAtom);
   const paths = get(pathsAtom);
@@ -250,6 +276,7 @@ export const armourAtom = atom((get) => {
   return armour;
 });
 
+// Weapon damage
 export const weaponDamageAtom = atom((get) => {
   const paths = get(pathsAtom);
   const items = get(itemsAtom);
@@ -284,6 +311,10 @@ export const weaponDamageAtom = atom((get) => {
   return damage;
 });
 
+// Luck
+export const luckAtom = atom<number>(0);
+
+// Save file
 export const saveFileAtom = atom<SaveFile>((get) => ({
   name: get(nameAtom),
   species: get(speciesAtom),

@@ -1,41 +1,44 @@
-import { useAtom } from "jotai";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
-import { Textarea } from "../ui/textarea";
+import { useAtom } from 'jotai';
+import { Input } from '../ui/input';
+import { Label } from '../ui/label';
+import { Textarea } from '../ui/textarea';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
-import { Badge } from "../ui/badge";
-import { X } from "lucide-react";
+} from '../ui/select';
+import { Badge } from '../ui/badge';
+import { X, Image } from 'lucide-react';
 import {
   nameAtom,
   genderAtom,
   ageAtom,
   personalityAtom,
   languagesAtom,
-} from "../../state/primitives";
+  imageAtom,
+} from '../../state/character';
+import defaultCharacterImage from '../../images/character.svg';
 
 const languages = [
-  "Afaen",
-  "Croakish",
-  "Desert Tongue",
-  "Dharrigal",
-  "Englorian",
-  "Go",
-  "Squawk",
-  "Tolrusian",
+  'Afaen',
+  'Croakish',
+  'Desert Tongue',
+  'Dharrigal',
+  'Englorian',
+  'Go',
+  'Squawk',
+  'Tolrusian',
 ];
 
-export const DetailsStep = () => {
+export const DescriptionStep = () => {
   const [name, setName] = useAtom(nameAtom);
   const [gender, setGender] = useAtom(genderAtom);
   const [age, setAge] = useAtom(ageAtom);
   const [personality, setPersonality] = useAtom(personalityAtom);
   const [selectedLanguages, setLanguages] = useAtom(languagesAtom);
+  const [image, setImage] = useAtom(imageAtom);
 
   const handleLanguageAdd = (language: string) => {
     if (!selectedLanguages.includes(language)) {
@@ -45,6 +48,18 @@ export const DetailsStep = () => {
 
   const handleLanguageRemove = (language: string) => {
     setLanguages(selectedLanguages.filter((l) => l !== language));
+  };
+
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const image = e.target?.result as string;
+        setImage(image);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -57,6 +72,32 @@ export const DetailsStep = () => {
           onChange={(e) => setName(e.target.value)}
           placeholder="Enter character name"
         />
+      </div>
+
+      <div className="space-y-2">
+        <Label>Character Image</Label>
+        <div className="relative group">
+          <label htmlFor="image-upload" className="cursor-pointer">
+            <img
+              src={image || defaultCharacterImage}
+              alt="character"
+              className="w-64 h-64 rounded-lg object-fit"
+            />
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/50 w-64 h-64 rounded-lg">
+              <div className="flex items-center justify-center px-4 py-2 rounded-md text-white transition-colors">
+                <Image className="h-5 w-5 mr-2" />
+                Change Image
+              </div>
+            </div>
+          </label>
+          <input
+            id="image-upload"
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            className="hidden"
+          />
+        </div>
       </div>
 
       <div className="space-y-2">
@@ -75,7 +116,7 @@ export const DetailsStep = () => {
           id="age"
           type="number"
           min="0"
-          value={age || ""}
+          value={age || ''}
           onChange={(e) => setAge(parseInt(e.target.value) || 0)}
           placeholder="Enter age"
         />
@@ -100,7 +141,7 @@ export const DetailsStep = () => {
         )}
         <Select onValueChange={handleLanguageAdd}>
           <SelectTrigger id="languages">
-            <SelectValue placeholder="Add language" />
+            <SelectValue placeholder="Add language">Add language</SelectValue>
           </SelectTrigger>
           <SelectContent>
             {languages

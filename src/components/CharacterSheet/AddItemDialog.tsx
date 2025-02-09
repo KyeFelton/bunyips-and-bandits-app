@@ -1,15 +1,15 @@
-import { useState } from "react";
-import { useAtom } from "jotai";
-import { itemsAtom } from "../state/primitives";
+import { useState } from 'react';
+import { useAtom } from 'jotai';
+import { itemsAtom } from '../../state/character';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "./ui/dialog";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
+} from '../ui/dialog';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
 import {
   Table,
   TableBody,
@@ -17,9 +17,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "./ui/table";
-import { Plus } from "lucide-react";
-import * as Items from "../models/items";
+} from '../ui/table';
+import { Plus } from 'lucide-react';
+import * as Items from '../../models/items';
 
 type Props = {
   maxWeight: number;
@@ -27,11 +27,11 @@ type Props = {
 
 export const AddItemDialog = ({ maxWeight }: Props) => {
   const [items, setItems] = useAtom(itemsAtom);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const [open, setOpen] = useState(false);
 
   const allItems = Object.values(Items).filter(
-    (item) => typeof item === "object" && "name" in item
+    (item) => typeof item === 'object' && 'name' in item
   ) as Items.Item[];
 
   const filteredItems = allItems.filter(
@@ -43,7 +43,7 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
 
   const handleAddItem = (item: Items.Item) => {
     if (!items.some((i) => i.name === item.name)) {
-      setItems([...items, { ...item, equipped: false }]);
+      setItems([...items, { ...item, equipped: false, quantity: 1 }]);
     }
     setOpen(false);
   };
@@ -92,8 +92,8 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
                       disabled={items.some((i) => i.name === item.name)}
                     >
                       {items.some((i) => i.name === item.name)
-                        ? "Added"
-                        : "Add"}
+                        ? 'Added'
+                        : 'Add'}
                     </Button>
                   </TableCell>
                 </TableRow>
@@ -105,8 +105,8 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
                     className="text-center text-muted-foreground"
                   >
                     {maxWeight <= 0
-                      ? "Cannot add more items - weight limit reached"
-                      : "No items found"}
+                      ? 'Cannot add more items - weight limit reached'
+                      : 'No items found'}
                   </TableCell>
                 </TableRow>
               )}

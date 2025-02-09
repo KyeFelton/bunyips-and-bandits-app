@@ -1,7 +1,7 @@
-import { SkillType } from "../enums/SkillType";
-import { MovementType } from "../enums/MovementType";
-import { DamageType } from "../enums/DamageType";
-import { SenseType } from "../enums/SenseType";
+import { SkillType } from '../enums/SkillType';
+import { MovementType } from '../enums/MovementType';
+import { DamageType } from '../enums/DamageType';
+import { SenseType } from '../enums/SenseType';
 
 export type Species = {
   name: string;
@@ -56,9 +56,9 @@ export type Species = {
 };
 
 export const Minotaur: Species = {
-  name: "Minotaur",
+  name: 'Minotaur',
   health: {
-    initial: 33,
+    initial: 30,
     increments: 3,
   },
   sanity: {
@@ -108,10 +108,10 @@ export const Minotaur: Species = {
 };
 
 export const Jeli: Species = {
-  name: "Jeli",
+  name: 'Jeli',
   health: {
-    initial: 22,
-    increments: 10,
+    initial: 20,
+    increments: 2,
   },
   sanity: {
     initial: 10,
@@ -122,9 +122,9 @@ export const Jeli: Species = {
     increments: 1,
   },
   speed: {
-    [MovementType.Walk]: 4,
+    [MovementType.Walk]: 3,
     [MovementType.Swim]: 1,
-    [MovementType.Climb]: 1,
+    [MovementType.Climb]: 0,
     [MovementType.Fly]: 0,
   },
   senses: {
@@ -139,7 +139,7 @@ export const Jeli: Species = {
     [DamageType.Fire]: 0,
     [DamageType.Electric]: 0,
     [DamageType.Toxic]: 0,
-    [DamageType.Slash]: -2,
+    [DamageType.Slash]: 0,
     [DamageType.Force]: 2,
   },
   skillLevels: {
@@ -160,9 +160,9 @@ export const Jeli: Species = {
 };
 
 export const Pixie: Species = {
-  name: "Pixie",
+  name: 'Pixie',
   health: {
-    initial: 5.5,
+    initial: 5,
     increments: 0.5,
   },
   sanity: {
@@ -191,8 +191,8 @@ export const Pixie: Species = {
     [DamageType.Fire]: 0,
     [DamageType.Electric]: 0,
     [DamageType.Toxic]: 0,
-    [DamageType.Slash]: 1,
-    [DamageType.Force]: 1,
+    [DamageType.Slash]: 2,
+    [DamageType.Force]: 2,
   },
   skillLevels: {
     [SkillType.Strength]: 0,
@@ -207,6 +207,8 @@ export const Pixie: Species = {
     [SkillType.Stealth]: 4,
     [SkillType.Sight]: 2,
     [SkillType.Hearing]: 3,
-    [SkillType.Smell]: 1,
+    [SkillType.Smell]: 2,
   },
 };
+
+export const AllSpecies = { Minotaur, Jeli, Pixie };

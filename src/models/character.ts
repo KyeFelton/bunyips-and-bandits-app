@@ -1,9 +1,9 @@
-import { SkillType } from "../enums/SkillType";
-import { Path } from "./paths";
-import { MovementType } from "../enums/MovementType";
-import { DamageType } from "../enums/DamageType";
-import { SenseType } from "../enums/SenseType";
-import { CharacterItem } from "./items";
+import { SkillType } from '../enums/SkillType';
+import { Path } from './paths';
+import { MovementType } from '../enums/MovementType';
+import { DamageType } from '../enums/DamageType';
+import { SenseType } from '../enums/SenseType';
+import { CharacterItem } from './items';
 
 export type Character = {
   name: string;

@@ -1,7 +1,6 @@
-import { useAtom, useAtomValue } from "jotai";
-import { pathsAtom } from "../../state/primitives";
-import { availablePathPointsAtom } from "../../state/derived";
-import { Button } from "../ui/button";
+import { useAtom, useAtomValue } from 'jotai';
+import { pathsAtom, availablePathPointsAtom } from '../../state/character';
+import { Button } from '../ui/button';
 import {
   Table,
   TableBody,
@@ -9,38 +8,41 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../ui/table";
-import { ChevronUp, X } from "lucide-react";
+} from '../ui/table';
+import { ChevronUp, X } from 'lucide-react';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
+} from '../ui/select';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "../ui/tooltip";
-import { Badge } from "../ui/badge";
-import * as Paths from "../../models/paths";
+} from '../ui/tooltip';
+import { Badge } from '../ui/badge';
+import * as Paths from '../../models/paths';
+import { useState } from 'react';
 
 export const PathsStep = () => {
   const [paths, setPaths] = useAtom(pathsAtom);
+  const [selectedPath, setSelectedPath] = useState<string>('');
   const availablePathPoints = useAtomValue(availablePathPointsAtom);
   const usedPathPoints = paths.reduce((sum, path) => sum + path.level, 0);
   const remainingPathPoints = availablePathPoints - usedPathPoints;
 
   const availablePaths = Object.values(Paths)
-    .filter((path) => typeof path === "object" && "name" in path)
+    .filter((path) => typeof path === 'object' && 'name' in path)
     .filter((path) => !paths.some((p) => p.name === path.name)) as Paths.Path[];
 
-  const handleAddPath = (pathName: string) => {
-    const path = availablePaths.find((p) => p.name === pathName);
+  const handleAddPath = () => {
+    const path = availablePaths.find((p) => p.name === selectedPath);
     if (path) {
       setPaths([...paths, { ...path, level: 1 }]);
+      setSelectedPath('');
     }
   };
 
@@ -65,26 +67,41 @@ export const PathsStep = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <Select
-          onValueChange={handleAddPath}
-          disabled={
-            remainingPathPoints < 1 || paths.length >= availablePathPoints
-          }
-        >
-          <SelectTrigger className="w-[200px]">
-            <SelectValue placeholder="Add path" />
-          </SelectTrigger>
-          <SelectContent>
-            {availablePaths.map((path) => (
-              <SelectItem key={path.name} value={path.name}>
-                {path.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <div className="flex gap-2">
+          <Select
+            value={selectedPath}
+            onValueChange={setSelectedPath}
+            disabled={
+              remainingPathPoints < 1 || paths.length >= availablePathPoints
+            }
+          >
+            <SelectTrigger className="w-[200px]">
+              <SelectValue placeholder="Select path" />
+            </SelectTrigger>
+            <SelectContent>
+              {availablePaths.map((path) => (
+                <SelectItem key={path.name} value={path.name}>
+                  {path.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          {selectedPath !== '' && (
+            <Button
+              onClick={handleAddPath}
+              disabled={
+                !selectedPath ||
+                paths.length >= availablePathPoints ||
+                remainingPathPoints < 1
+              }
+            >
+              Add
+            </Button>
+          )}
+        </div>
 
         <span className="text-sm text-muted-foreground">
-          Path Points: {usedPathPoints}/{availablePathPoints}
+          Path progressions: {usedPathPoints}/{availablePathPoints}
         </span>
       </div>
 
@@ -95,7 +112,7 @@ export const PathsStep = () => {
               <div className="flex-1">
                 <div className="flex items-center gap-2">
                   <h3 className="text-lg font-semibold">
-                    {path.name}{" "}
+                    {path.name}{' '}
                     <span className="text-sm font-normal text-muted-foreground">
                       Level {path.level}
                     </span>
@@ -119,7 +136,7 @@ export const PathsStep = () => {
                     variant="ghost"
                     size="icon"
                     onClick={() => handleRemovePath(path.name)}
-                    className="h-6 w-6 text-destructive hover:text-destructive hover:bg-destructive/10"
+                    className="h-6 w-6 text-destructive hover:text-destructive hover:bg-destructive/10 ml-auto"
                   >
                     <X className="h-4 w-4" />
                   </Button>
@@ -155,7 +172,7 @@ export const PathsStep = () => {
                   return (
                     <TableRow
                       key={level}
-                      className={level > path.level ? "opacity-50" : ""}
+                      className={level > path.level ? 'opacity-50' : ''}
                     >
                       <TableCell className="font-medium">{level}</TableCell>
                       <TableCell>
@@ -207,7 +224,8 @@ export const PathsStep = () => {
         {paths.length === 0 && (
           <div className="p-8">
             <div className="text-center text-muted-foreground">
-              No paths selected. Choose a path to begin your journey.
+              No paths selected. Select a path and click "Add" to begin your
+              journey.
             </div>
           </div>
         )}

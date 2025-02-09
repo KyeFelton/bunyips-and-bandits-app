@@ -1,5 +1,5 @@
-import { useAtomValue } from "jotai";
-import { pathsAtom } from "../state/primitives";
+import { useAtomValue } from 'jotai';
+import { pathsAtom } from '../../state/character';
 
 type TraitWithPath = {
   name: string;

@@ -1,6 +1,6 @@
-import { SkillType } from "../enums/SkillType";
-import { CharacterItem } from "./items";
-import { SelectedPath } from "./paths";
+import { SkillType } from '../enums/SkillType';
+import { CharacterItem } from './items';
+import { SelectedPath } from './paths';
 
 export type SaveFile = {
   name: string;

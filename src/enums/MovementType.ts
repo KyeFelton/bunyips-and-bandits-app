@@ -1,6 +1,6 @@
 export enum MovementType {
-  Walk = "Walk",
-  Swim = "Swim",
-  Climb = "Climb",
-  Fly = "Fly",
+  Walk = 'Walk',
+  Swim = 'Swim',
+  Climb = 'Climb',
+  Fly = 'Fly',
 }

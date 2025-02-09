@@ -1,16 +1,36 @@
-import { 
-  BicepsFlexed, Route, Hand, Swords, Crosshair, Book, Leaf, Shield, 
-  Speech, BrainCog, VenetianMask, Eye, Ear, Soup, Flame, Zap, Move3D, 
-  Sun, Music2, BrainCircuit, FlaskRound, Heart, Ghost 
+import {
+  BicepsFlexed,
+  Route,
+  Hand,
+  Swords,
+  Crosshair,
+  Book,
+  Leaf,
+  ShipWheel,
+  Speech,
+  BrainCog,
+  VenetianMask,
+  Eye,
+  Ear,
+  Soup,
+  Flame,
+  Zap,
+  Move3D,
+  Sun,
+  Music2,
+  BrainCircuit,
+  Droplets,
+  Heart,
+  Ghost,
 } from 'lucide-react';
-import { SkillType } from '../enums/SkillType';
+import { SkillType } from '../../enums/SkillType';
 
 type Props = {
   type: SkillType;
   className?: string;
 };
 
-export const SkillIcon = ({ type, className = "h-4 w-4" }: Props) => {
+export const SkillIcon = ({ type, className = 'h-4 w-4' }: Props) => {
   switch (type) {
     case SkillType.Strength:
       return <BicepsFlexed className={className} />;
@@ -27,7 +47,7 @@ export const SkillIcon = ({ type, className = "h-4 w-4" }: Props) => {
     case SkillType.Nature:
       return <Leaf className={className} />;
     case SkillType.Willpower:
-      return <Shield className={className} />;
+      return <ShipWheel className={className} />;
     case SkillType.Charisma:
       return <Speech className={className} />;
     case SkillType.Psychology:
@@ -53,7 +73,7 @@ export const SkillIcon = ({ type, className = "h-4 w-4" }: Props) => {
     case SkillType.Psychic:
       return <BrainCircuit className={className} />;
     case SkillType.Toxic:
-      return <FlaskRound className={className} />;
+      return <Droplets className={className} />;
     case SkillType.Healing:
       return <Heart className={className} />;
     case SkillType.Spirit:

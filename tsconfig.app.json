@@ -20,5 +20,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "archive/AppHeader.tsx"]
+  "include": ["src"]
 }

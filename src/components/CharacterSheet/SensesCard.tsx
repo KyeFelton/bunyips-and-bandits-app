@@ -1,5 +1,5 @@
-import { useAtomValue } from "jotai";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { useAtomValue } from 'jotai';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import {
   Eye,
   Ear,
@@ -9,33 +9,33 @@ import {
   Flame,
   Mountain,
   Wind,
-} from "lucide-react";
-import { SenseType } from "../enums/SenseType";
+} from 'lucide-react';
+import { SenseType } from '../../enums/SenseType';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "./ui/tooltip";
-import { sensesAtom } from "../state/derived";
-import { PropsWithChildren } from "react";
+} from '../ui/tooltip';
+import { sensesAtom } from '../../state/character';
+import { PropsWithChildren } from 'react';
 
 type Senses = Partial<Record<SenseType, boolean>>;
 
 const getSightTooltip = (senses: Senses) => {
   if (senses[SenseType.Sight] && senses[SenseType.InfraredSight])
-    return "Standard & infrared sight";
-  if (senses[SenseType.Sight]) return "Standard sight";
-  if (senses[SenseType.InfraredSight]) return "Infrared sight";
-  return "";
+    return 'Standard & infrared sight';
+  if (senses[SenseType.Sight]) return 'Standard sight';
+  if (senses[SenseType.InfraredSight]) return 'Infrared sight';
+  return '';
 };
 
 const getHearingTooltip = (senses: Senses) => {
   if (senses[SenseType.Hearing] && senses[SenseType.TremorHearing])
-    return "Standard & tremor hearing";
-  if (senses[SenseType.Hearing]) return "Standard hearing";
-  if (senses[SenseType.TremorHearing]) return "Tremor hearing";
-  return "";
+    return 'Standard & tremor hearing';
+  if (senses[SenseType.Hearing]) return 'Standard hearing';
+  if (senses[SenseType.TremorHearing]) return 'Tremor hearing';
+  return '';
 };
 
 const SightIcon = ({ senses }: { senses: Senses }) => (

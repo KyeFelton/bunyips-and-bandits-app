@@ -1,5 +1,8 @@
-import { useAtomValue, useAtom } from "jotai";
-import { pathsAtom, currentStaminaAtom } from "../state/primitives";
+import { useAtomValue, useAtom } from 'jotai';
+import { pathsAtom, currentStaminaAtom } from '../../state/character';
+import { User, Users, Triangle, Circle, Scan } from 'lucide-react';
+import { AreaOfEffect } from '../../enums/AreaOfEffect';
+import { Action } from '../../models/actions';
 import {
   Table,
   TableBody,
@@ -7,18 +10,15 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "./ui/table";
-import { Button } from "./ui/button";
-import { User, Users, Triangle, Circle, Scan } from "lucide-react";
-import { AreaOfEffect } from "../enums/AreaOfEffect";
-import { Action } from "../models/actions";
+} from '../ui/table';
+import { Button } from '../ui/button';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "./ui/tooltip";
-import { SkillIcon } from "./SkillIcon";
+} from '../ui/tooltip';
+import { SkillIcon } from '../icons/SkillIcon';
 
 const AreaIcon = ({ type }: { type: AreaOfEffect }) => {
   switch (type) {
@@ -33,7 +33,7 @@ const AreaIcon = ({ type }: { type: AreaOfEffect }) => {
     case AreaOfEffect.Arena:
       return <Scan className="h-4 w-4" />;
     default:
-      return "-";
+      return '-';
   }
 };
 
@@ -56,7 +56,7 @@ export const ActionsList = () => {
 
   const handlePerformAction = (action: Action) => {
     const staminaCost =
-      typeof action.staminaCost === "number" ? action.staminaCost : 0;
+      typeof action.staminaCost === 'number' ? action.staminaCost : 0;
     if (stamina >= staminaCost) {
       setStamina(stamina - staminaCost);
     }
@@ -80,8 +80,8 @@ export const ActionsList = () => {
             <TableHead>Skill</TableHead>
             <TableHead>Range</TableHead>
             <TableHead className="text-center">Area</TableHead>
-            <TableHead className="text-right">Stamina</TableHead>
-            <TableHead className="text-right">Action</TableHead>
+            <TableHead className="text-center">Stamina</TableHead>
+            <TableHead className="text-right"></TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -89,7 +89,7 @@ export const ActionsList = () => {
             <TableRow key={`${action.path}-${action.name}`} className="group">
               <TableCell>
                 <Tooltip>
-                  <TooltipTrigger className="font-medium cursor-default">
+                  <TooltipTrigger className="font-medium cursor-default text-left">
                     {action.name}
                   </TooltipTrigger>
                   <TooltipContent side="right" className="max-w-[300px]">
@@ -98,16 +98,22 @@ export const ActionsList = () => {
                 </Tooltip>
               </TableCell>
               <TableCell>
-                <span className="text-muted-foreground">
-                  <SkillIcon type={action.skillType} />
-                </span>
-                {/* {action.skillType} */}
+                <div className="flex justify-center">
+                  <Tooltip>
+                    <TooltipTrigger className="cursor-default text-foreground">
+                      <SkillIcon type={action.skillType} />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>{action.skillType}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </div>
               </TableCell>
               <TableCell>{action.range}</TableCell>
               <TableCell className="text-center">
-                <div className="flex justify-center text-muted-foreground group-hover:text-foreground">
+                <div className="flex justify-center">
                   <Tooltip>
-                    <TooltipTrigger>
+                    <TooltipTrigger className="cursor-default text-foreground">
                       <AreaIcon type={action.areaOfEffect} />
                     </TooltipTrigger>
                     <TooltipContent>
@@ -116,10 +122,10 @@ export const ActionsList = () => {
                   </Tooltip>
                 </div>
               </TableCell>
-              <TableCell className="text-right font-mono">
-                {typeof action.staminaCost === "number"
+              <TableCell className="text-center font-mono">
+                {typeof action.staminaCost === 'number'
                   ? action.staminaCost
-                  : "X"}
+                  : 'X'}
               </TableCell>
               <TableCell className="text-right">
                 <Button
@@ -127,7 +133,7 @@ export const ActionsList = () => {
                   size="sm"
                   onClick={() => handlePerformAction(action)}
                   disabled={
-                    typeof action.staminaCost === "number" &&
+                    typeof action.staminaCost === 'number' &&
                     stamina < action.staminaCost
                   }
                 >
