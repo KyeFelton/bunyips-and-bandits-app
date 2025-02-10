@@ -1,4 +1,4 @@
-import { useAtom, useSetAtom, useAtomValue } from 'jotai';
+import { useAtom, useSetAtom, useAtomValue } from "jotai";
 import {
   speciesAtom,
   currentHealthAtom,
@@ -8,22 +8,22 @@ import {
   sanityAtom,
   staminaAtom,
   speciesDataAtom,
-} from '../../state/character';
+} from "../../state/character";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../ui/select';
-import { AllSpecies } from '../../models/species';
-import { Heart, ChartNoAxesColumn, Shield, ArrowLeftRight } from 'lucide-react';
-import { SkillIcon } from '../icons/SkillIcon';
-import { MovementType } from '../../enums/MovementType';
-import { DamageType } from '../../enums/DamageType';
-import { SpeedIcon } from '../icons/SpeedIcon';
-import { ArmourIcon } from '../icons/ArmourIcon';
-import { useEffect } from 'react';
+} from "../ui/select";
+import { AllSpecies } from "../../models/species";
+import { Heart, ChartNoAxesColumn, Shield, ArrowLeftRight } from "lucide-react";
+import { SkillIcon } from "../icons/SkillIcon";
+import { MovementType } from "../../enums/MovementType";
+import { DamageType } from "../../enums/DamageType";
+import { SpeedIcon } from "../icons/SpeedIcon";
+import { ArmourIcon } from "../icons/ArmourIcon";
+import { useEffect } from "react";
 
 export const SpeciesStep = () => {
   const [selectedSpecies, setSpecies] = useAtom(speciesAtom);
@@ -37,15 +37,15 @@ export const SpeciesStep = () => {
 
   useEffect(() => {
     setCurrentHealth(Math.min(health.current, health.max));
-  }, [health.max]);
+  }, [health, setCurrentHealth]);
 
   useEffect(() => {
     setCurrentSanity(Math.min(sanity.current, sanity.max));
-  }, [sanity.max]);
+  }, [sanity, setCurrentSanity]);
 
   useEffect(() => {
     setCurrentStamina(Math.min(stamina.current, stamina.max));
-  }, [stamina.max]);
+  }, [stamina, setCurrentStamina]);
 
   return (
     <div className="space-y-6">
@@ -134,7 +134,7 @@ export const SpeciesStep = () => {
                   <ArmourIcon type={type as DamageType} size={16} />
                   <div>
                     <div className="text-sm font-medium">{type}</div>
-                    <div>{value > 0 ? `+${value}` : '-'}</div>
+                    <div>{value > 0 ? `+${value}` : "-"}</div>
                   </div>
                 </div>
               ))}
@@ -153,7 +153,7 @@ export const SpeciesStep = () => {
                   <SkillIcon type={skill as any} />
                   <div>
                     <div className="text-sm font-medium">{skill}</div>
-                    <div>{value === 0 ? '-' : value}</div>
+                    <div>{value === 0 ? "-" : value}</div>
                   </div>
                 </div>
               ))}

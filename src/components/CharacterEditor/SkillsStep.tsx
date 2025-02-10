@@ -1,9 +1,9 @@
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtom, useAtomValue } from "jotai";
 import {
   skillLevelUpgradesAtom,
   availableSkillPointsAtom,
   skillLevelsAtom,
-} from '../../state/character';
+} from "../../state/character";
 import {
   Table,
   TableBody,
@@ -11,18 +11,18 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '../ui/table';
-import { HelpCircle, Plus, Minus } from 'lucide-react';
-import { Button } from '../ui/button';
+} from "../ui/table";
+import { HelpCircle, Plus, Minus } from "lucide-react";
+import { Button } from "../ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '../ui/tooltip';
-import { SkillType } from '../../enums/SkillType';
-import * as Skills from '../../models/skills';
-import { SkillIcon } from '../icons/SkillIcon';
+} from "../ui/tooltip";
+import { SkillType } from "../../enums/SkillType";
+import * as Skills from "../../models/skills";
+import { SkillIcon } from "../icons/SkillIcon";
 
 export const SkillsStep = () => {
   const [skillLevelUpgrades, setSkillLevelUpgrades] = useAtom(
@@ -73,7 +73,7 @@ export const SkillsStep = () => {
       levelUp: skillLevelUpgrades[skillType] || 0,
       description:
         Object.values(Skills).find((skill) => skill.type === skillType)
-          ?.description || '',
+          ?.description || "",
     }));
 
   return (
@@ -140,7 +140,9 @@ export const SkillsStep = () => {
                     size="sm"
                     onClick={() => handleIncreaseSkill(skill.type)}
                     disabled={
-                      !hasSkillPoints || skill.level + (skill.levelUp || 0) >= 5
+                      !hasSkillPoints ||
+                      !skill.level ||
+                      skill.level + (skill.levelUp || 0) >= 5
                     }
                   >
                     <Plus className="h-4 w-4" />
