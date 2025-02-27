@@ -1,19 +1,20 @@
 import { atom } from 'jotai';
 import { SkillType } from '../enums/SkillType';
-import { CharacterItem } from '../models/items';
+import { ItemDictionary } from '../models/items';
 import { SelectedPath } from '../models/paths';
 import { AllSpecies } from '../models/species';
 import { SaveFile } from '../models/saveFile';
+import { Effect } from '../models/effect';
+import { Trait } from '../models/traits';
 
 const startingSpecies = AllSpecies.Minotaur;
-
-// --- Primitives --- //
 
 // Basic character info
 export const nameAtom = atom<string>('');
 export const speciesAtom = atom<string>(startingSpecies.name);
 export const genderAtom = atom<string>('');
 export const ageAtom = atom<number>(0);
+export const backgroundAtom = atom<string>('');
 export const personalityAtom = atom<string>('');
 export const languagesAtom = atom<string[]>([]);
 export const imageAtom = atom<string | undefined>(undefined);
@@ -21,9 +22,7 @@ export const imageAtom = atom<string | undefined>(undefined);
 // Character progression
 export const levelAtom = atom<number>(1);
 export const pathsAtom = atom<SelectedPath[]>([]);
-export const skillLevelUpgradesAtom = atom<Partial<Record<SkillType, number>>>(
-  {}
-);
+export const skillLevelUpgradesAtom = atom<Partial<Record<SkillType, number>>>({});
 
 // Character stats
 export const currentHealthAtom = atom<number>(
@@ -37,10 +36,50 @@ export const currentStaminaAtom = atom<number>(
 );
 
 // Items and equipment
-export const itemsAtom = atom<CharacterItem[]>([]);
+export const itemsAtom = atom<ItemDictionary>({});
 export const moneyAtom = atom<number>(0);
 
-// --- Derivatives --- //
+// Custom traits
+export const customTraitsAtom = atom<Record<string, Trait>>({});
+
+// Effects atom
+export const effectsAtom = atom((get) => {
+  const paths = get(pathsAtom);
+  const items = get(itemsAtom);
+  const customTraits = get(customTraitsAtom);
+  const effects: Effect[] = [];
+
+  // Collect effects from paths
+  paths.forEach((path) => {
+    path.unlockables
+      .filter((unlock) => unlock.level <= path.level)
+      .forEach((unlock) => {
+        unlock.traits.forEach((trait) => {
+          if (trait.effects) {
+            effects.push(...trait.effects);
+          }
+        });
+      });
+  });
+
+  // Collect effects from equipped items
+  Object.values(items)
+    .filter((item) => item.equipped && item.effects)
+    .forEach((item) => {
+      if (item.effects) {
+        effects.push(...item.effects);
+      }
+    });
+
+  // Collect effects from custom traits
+  Object.values(customTraits).forEach((trait) => {
+    if (trait.effects) {
+      effects.push(...trait.effects);
+    }
+  });
+
+  return effects;
+});
 
 // Get species data
 export const speciesDataAtom = atom((get) => {
@@ -82,45 +121,43 @@ export const staminaAtom = atom((get) => {
 });
 
 // Actions
-export const actionsCountAtom = atom<number>(2);
+export const actionsCountAtom = atom((get) => {
+  const effects = get(effectsAtom);
+  const baseActions = 2;
+
+  return effects.reduce((total, effect) => {
+    if (effect.actions?.static) {
+      return total + effect.actions.static;
+    }
+    return total;
+  }, baseActions);
+});
 
 // Evasions
-export const evasionsCountAtom = atom<number>(2);
+export const evasionsCountAtom = atom((get) => {
+  const effects = get(effectsAtom);
+  const baseEvasions = 2;
+
+  return effects.reduce((total, effect) => {
+    if (effect.evasions?.static) {
+      return total + effect.evasions.static;
+    }
+    return total;
+  }, baseEvasions);
+});
 
 // Movement
 export const speedAtom = atom((get) => {
   const speciesData = get(speciesDataAtom);
-  const paths = get(pathsAtom);
-  const items = get(itemsAtom);
-
+  const effects = get(effectsAtom);
   const baseSpeed = { ...speciesData.speed };
 
-  // Apply modifiers from traits and items
-  paths.forEach((path) => {
-    path.unlockables
-      .filter((unlock) => unlock.level <= path.level)
-      .forEach((unlock) => {
-        unlock.traits.forEach((trait) => {
-          trait.effects?.forEach((effect) => {
-            if (effect.speed?.movementType) {
-              const type = effect.speed.movementType;
-              baseSpeed[type] += effect.speed.static || 0;
-            }
-          });
-        });
-      });
+  effects.forEach((effect) => {
+    if (effect.speed?.movementType) {
+      const type = effect.speed.movementType;
+      baseSpeed[type] += effect.speed.static || 0;
+    }
   });
-
-  items
-    .filter((item) => item.equipped && item.effects)
-    .forEach((item) => {
-      item.effects?.forEach((effect) => {
-        if (effect.speed?.movementType) {
-          const type = effect.speed.movementType;
-          baseSpeed[type] += effect.speed.static || 0;
-        }
-      });
-    });
 
   return baseSpeed;
 });
@@ -128,35 +165,14 @@ export const speedAtom = atom((get) => {
 // Senses
 export const sensesAtom = atom((get) => {
   const speciesData = get(speciesDataAtom);
-  const paths = get(pathsAtom);
-  const items = get(itemsAtom);
+  const effects = get(effectsAtom);
+  const senses = { ...speciesData.senses };
 
-  const senses = speciesData.senses;
-
-  // Add senses from traits and items
-  paths.forEach((path) => {
-    path.unlockables
-      .filter((unlock) => unlock.level <= path.level)
-      .forEach((unlock) => {
-        unlock.traits.forEach((trait) => {
-          trait.effects?.forEach((effect) => {
-            if (effect.sense) {
-              senses[effect.sense] = true;
-            }
-          });
-        });
-      });
+  effects.forEach((effect) => {
+    if (effect.sense) {
+      senses[effect.sense] = true;
+    }
   });
-
-  items
-    .filter((item) => item.equipped && item.effects)
-    .forEach((item) => {
-      item.effects?.forEach((effect) => {
-        if (effect.sense) {
-          senses[effect.sense] = true;
-        }
-      });
-    });
 
   return senses;
 });
@@ -173,6 +189,7 @@ export const availableSkillPointsAtom = atom((get) => {
   return Math.ceil(level / 2) + 1;
 });
 
+// Skill levels
 export const skillLevelsAtom = atom((get) => {
   const speciesData = get(speciesDataAtom);
   const skillLevelUpgrades = get(skillLevelUpgradesAtom);
@@ -200,39 +217,15 @@ export const skillLevelsAtom = atom((get) => {
 
 // Skill modifiers
 export const skillModifiersAtom = atom((get) => {
-  const paths = get(pathsAtom);
-  const items = get(itemsAtom);
-
+  const effects = get(effectsAtom);
   const modifiers: Record<SkillType, number> = {} as Record<SkillType, number>;
 
-  // Add modifiers from traits
-  paths.forEach((path) => {
-    path.unlockables
-      .filter((unlock) => unlock.level <= path.level)
-      .forEach((unlock) => {
-        unlock.traits.forEach((trait) => {
-          trait.effects?.forEach((effect) => {
-            if (effect.skill?.skillType) {
-              const type = effect.skill.skillType;
-              modifiers[type] =
-                (modifiers[type] || 0) + (effect.skill.static || 0);
-            }
-          });
-        });
-      });
+  effects.forEach((effect) => {
+    if (effect.skill?.skillType) {
+      const type = effect.skill.skillType;
+      modifiers[type] = (modifiers[type] || 0) + (effect.skill.static || 0);
+    }
   });
-
-  // Add modifiers from items
-  items
-    .filter((item) => item.equipped && item.effects)
-    .forEach((item) => {
-      item.effects?.forEach((effect) => {
-        if (effect.skill?.skillType) {
-          const type = effect.skill.skillType;
-          modifiers[type] = (modifiers[type] || 0) + (effect.skill.static || 0);
-        }
-      });
-    });
 
   return modifiers;
 });
@@ -240,75 +233,29 @@ export const skillModifiersAtom = atom((get) => {
 // Armour
 export const armourAtom = atom((get) => {
   const speciesData = get(speciesDataAtom);
-  const paths = get(pathsAtom);
-  const items = get(itemsAtom);
-
+  const effects = get(effectsAtom);
   const armour = { ...speciesData.armour };
 
-  // Add armour from traits
-  paths.forEach((path) => {
-    path.unlockables
-      .filter((unlock) => unlock.level <= path.level)
-      .forEach((unlock) => {
-        unlock.traits.forEach((trait) => {
-          trait.effects?.forEach((effect) => {
-            if (effect.armour?.damageType) {
-              const type = effect.armour.damageType;
-              armour[type] += effect.armour.static || 0;
-            }
-          });
-        });
-      });
+  effects.forEach((effect) => {
+    if (effect.armour?.damageType) {
+      const type = effect.armour.damageType;
+      armour[type] += effect.armour.static || 0;
+    }
   });
-
-  // Add armour from items
-  items
-    .filter((item) => item.equipped && item.effects)
-    .forEach((item) => {
-      item.effects?.forEach((effect) => {
-        if (effect.armour?.damageType) {
-          const type = effect.armour.damageType;
-          armour[type] += effect.armour.static || 0;
-        }
-      });
-    });
 
   return armour;
 });
 
 // Weapon damage
 export const weaponDamageAtom = atom((get) => {
-  const paths = get(pathsAtom);
-  const items = get(itemsAtom);
-  let damage = 0;
-
-  // Add damage from traits
-  paths.forEach((path) => {
-    path.unlockables
-      .filter((unlock) => unlock.level <= path.level)
-      .forEach((unlock) => {
-        unlock.traits.forEach((trait) => {
-          trait.effects?.forEach((effect) => {
-            if (effect.weaponDamage?.static) {
-              damage += effect.weaponDamage.static;
-            }
-          });
-        });
-      });
-  });
-
-  // Add damage from items
-  items
-    .filter((item) => item.equipped && item.effects)
-    .forEach((item) => {
-      item.effects?.forEach((effect) => {
-        if (effect.weaponDamage?.static) {
-          damage += effect.weaponDamage.static;
-        }
-      });
-    });
-
-  return damage;
+  const effects = get(effectsAtom);
+  
+  return effects.reduce((damage, effect) => {
+    if (effect.weaponDamage?.static) {
+      return damage + effect.weaponDamage.static;
+    }
+    return damage;
+  }, 0);
 });
 
 // Luck
@@ -321,6 +268,7 @@ export const saveFileAtom = atom<SaveFile>((get) => ({
   gender: get(genderAtom),
   age: get(ageAtom),
   languages: get(languagesAtom),
+  background: get(backgroundAtom),
   personality: get(personalityAtom),
   level: get(levelAtom),
   paths: get(pathsAtom),

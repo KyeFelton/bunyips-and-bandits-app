@@ -41,6 +41,18 @@ import {
   Cure,
   VenomSting,
   DeathCloud,
+  Beacon,
+  Mirage,
+  HeatRay,
+  DazzlingLights,
+  BlindingFlash,
+  MirrorDome,
+  SearingRadiance,
+  Disguise,
+  Apparition,
+  Invisibility,
+  Hyperbeam,
+  SolarFlare,
 } from "./actions";
 import {
   AcidicSkin,
@@ -64,6 +76,9 @@ import {
   Trait,
   TremorHearing,
   Vigilant,
+  IronVision,
+  Photosynthetic,
+  RadiantAura,
 } from "./traits";
 
 export type Path = {
@@ -212,6 +227,39 @@ export const Doctor: Path = {
       level: 5,
       actions: [VenomSting, DeathCloud],
       traits: [AcidicSkin],
+    },
+  ],
+};
+
+export const Lightbender: Path = {
+  name: "Lightbender",
+  skillTypes: [SkillType.Radiant],
+  description: "Lightbenders are the artisans of light. Whether crafting dazzling illusions or blinding adversaries with radiant bursts, lightbenders are a versatile ally to any team.",
+  unlockables: [
+    {
+      level: 1,
+      actions: [Beacon, Mirage, HeatRay],
+      traits: [InfraredSight],
+    },
+    {
+      level: 2,
+      actions: [DazzlingLights, BlindingFlash, MirrorDome],
+      traits: [FireResistant],
+    },
+    {
+      level: 3,
+      actions: [SearingRadiance, Disguise],
+      traits: [Photosynthetic],
+    },
+    {
+      level: 4,
+      actions: [Apparition, Invisibility],
+      traits: [IronVision],
+    },
+    {
+      level: 5,
+      actions: [Hyperbeam, SolarFlare],
+      traits: [RadiantAura],
     },
   ],
 };

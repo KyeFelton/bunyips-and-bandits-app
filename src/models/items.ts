@@ -13,7 +13,9 @@ export type Item = {
 export type CharacterItem = Item & {
   equipped: boolean;
   quantity: number;
-}
+};
+
+export type ItemDictionary = Record<string, CharacterItem>;
 
 export const Antidote: Item = {
   name: "Antidote",

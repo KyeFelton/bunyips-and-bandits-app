@@ -1,41 +1,42 @@
-import { useAtom } from 'jotai';
-import { Input } from '../ui/input';
-import { Label } from '../ui/label';
-import { Textarea } from '../ui/textarea';
+import { useAtom } from "jotai";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { Textarea } from "../ui/textarea";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../ui/select';
-import { Badge } from '../ui/badge';
-import { X, Image } from 'lucide-react';
+} from "../ui/select";
+import { Badge } from "../ui/badge";
+import { X, Image } from "lucide-react";
 import {
   nameAtom,
   genderAtom,
   ageAtom,
+  backgroundAtom,
   personalityAtom,
   languagesAtom,
   imageAtom,
-} from '../../state/character';
-import defaultCharacterImage from '../../images/character.svg';
+} from "../../state/character";
 
 const languages = [
-  'Afaen',
-  'Croakish',
-  'Desert Tongue',
-  'Dharrigal',
-  'Englorian',
-  'Go',
-  'Squawk',
-  'Tolrusian',
+  "Afaen",
+  "Croakish",
+  "Desert Tongue",
+  "Dharrigal",
+  "Englorian",
+  "Go",
+  "Squawk",
+  "Tolrusian",
 ];
 
 export const DescriptionStep = () => {
   const [name, setName] = useAtom(nameAtom);
   const [gender, setGender] = useAtom(genderAtom);
   const [age, setAge] = useAtom(ageAtom);
+  const [background, setBackground] = useAtom(backgroundAtom);
   const [personality, setPersonality] = useAtom(personalityAtom);
   const [selectedLanguages, setLanguages] = useAtom(languagesAtom);
   const [image, setImage] = useAtom(imageAtom);
@@ -79,14 +80,14 @@ export const DescriptionStep = () => {
         <div className="relative group">
           <label htmlFor="image-upload" className="cursor-pointer">
             <img
-              src={image || defaultCharacterImage}
+              src={image}
               alt="character"
-              className="w-64 h-64 rounded-lg object-fit"
+              className="w-64 h-64 rounded-lg object-cover"
             />
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/50 w-64 h-64 rounded-lg">
               <div className="flex items-center justify-center px-4 py-2 rounded-md text-white transition-colors">
                 <Image className="h-5 w-5 mr-2" />
-                Change Image
+                Change image
               </div>
             </div>
           </label>
@@ -116,7 +117,7 @@ export const DescriptionStep = () => {
           id="age"
           type="number"
           min="0"
-          value={age || ''}
+          value={age || ""}
           onChange={(e) => setAge(parseInt(e.target.value) || 0)}
           placeholder="Enter age"
         />
@@ -153,6 +154,17 @@ export const DescriptionStep = () => {
               ))}
           </SelectContent>
         </Select>
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="background">Background</Label>
+        <Textarea
+          id="background"
+          value={background}
+          onChange={(e) => setBackground(e.target.value)}
+          placeholder="Describe your character's background and history..."
+          className="min-h-[100px]"
+        />
       </div>
 
       <div className="space-y-2">

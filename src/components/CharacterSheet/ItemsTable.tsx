@@ -19,7 +19,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '../ui/tooltip';
-import { Item } from '../../models/items';
+import { ItemDictionary } from '../../models/items';
 import { useState } from 'react';
 
 const getWeightLimit = (strengthLevel: number) => {
@@ -41,55 +41,57 @@ const getWeightLimit = (strengthLevel: number) => {
   }
 };
 
-type ItemWithQuantity = Item & {
-  equipped: boolean;
-  quantity: number;
-};
-
 export const ItemsTable = () => {
   const [items, setItems] = useAtom(itemsAtom);
   const [money, setMoney] = useAtom(moneyAtom);
   const [isEditingMoney, setIsEditingMoney] = useState(false);
   const skillLevels = useAtomValue(skillLevelsAtom);
 
-  // Group items by name and add quantities
-  const itemsWithQuantity = items.reduce<ItemWithQuantity[]>((acc, item) => {
-    const existingItem = acc.find((i) => i.name === item.name);
-    if (existingItem) {
-      existingItem.quantity++;
-      // If any of the items are equipped, mark the group as equipped
-      existingItem.equipped = existingItem.equipped || item.equipped;
-    } else {
-      acc.push({ ...item, quantity: 1 });
-    }
-    return acc;
-  }, []);
-
-  const totalWeight = items.reduce((sum, item) => sum + item.weight, 0);
+  const totalWeight = Object.values(items).reduce(
+    (sum, item) => sum + item.weight * item.quantity,
+    0
+  );
   const weightLimit = getWeightLimit(skillLevels[SkillType.Strength]);
 
   const handleToggleEquipped = (itemName: string) => {
-    setItems(
-      items.map((item) =>
-        item.name === itemName ? { ...item, equipped: !item.equipped } : item
-      )
-    );
+    setItems((prev) => ({
+      ...prev,
+      [itemName]: {
+        ...prev[itemName],
+        equipped: !prev[itemName].equipped,
+      },
+    }));
   };
 
   const handleUseItem = (itemName: string) => {
-    const item = items.find((i) => i.name === itemName);
-    if (item?.singleUse) {
-      // Remove one instance of the item
-      const index = items.findIndex((i) => i.name === itemName);
-      setItems([...items.slice(0, index), ...items.slice(index + 1)]);
+    const item = items[itemName];
+    if (item.singleUse) {
+      if (item.quantity > 1) {
+        setItems((prev) => ({
+          ...prev,
+          [itemName]: {
+            ...prev[itemName],
+            quantity: prev[itemName].quantity - 1,
+          },
+        }));
+      } else {
+        setItems((prev) => {
+          const newItems = { ...prev };
+          delete newItems[itemName];
+          return newItems;
+        });
+      }
     } else {
       handleToggleEquipped(itemName);
     }
   };
 
   const handleRemoveItem = (itemName: string) => {
-    // Remove all instances of the item
-    setItems(items.filter((item) => item.name !== itemName));
+    setItems((prev) => {
+      const newItems = { ...prev };
+      delete newItems[itemName];
+      return newItems;
+    });
   };
 
   const handleMoneyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -102,9 +104,7 @@ export const ItemsTable = () => {
   };
 
   const handleMoneyKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      setIsEditingMoney(false);
-    } else if (e.key === 'Escape') {
+    if (e.key === 'Enter' || e.key === 'Escape') {
       setIsEditingMoney(false);
     }
   };
@@ -173,12 +173,12 @@ export const ItemsTable = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {itemsWithQuantity.map((item) => (
-              <TableRow key={item.name}>
+            {Object.entries(items).map(([name, item]) => (
+              <TableRow key={name}>
                 <TableCell>
                   <Tooltip>
                     <TooltipTrigger className="font-medium hover:text-accent-foreground">
-                      {item.name}
+                      {name}
                     </TooltipTrigger>
                     <TooltipContent side="right" className="max-w-[300px]">
                       <p>{item.description}</p>
@@ -191,7 +191,7 @@ export const ItemsTable = () => {
                   <div className="flex justify-end gap-2">
                     <Button
                       variant={item.equipped ? 'default' : 'outline'}
-                      onClick={() => handleUseItem(item.name)}
+                      onClick={() => handleUseItem(name)}
                       className="w-24"
                     >
                       {item.singleUse
@@ -203,8 +203,7 @@ export const ItemsTable = () => {
                     <Button
                       variant="ghost"
                       size="icon"
-                      onClick={() => handleRemoveItem(item.name)}
-                      className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                      onClick={() => handleRemoveItem(name)}
                     >
                       <X className="h-4 w-4" />
                     </Button>
@@ -212,7 +211,7 @@ export const ItemsTable = () => {
                 </TableCell>
               </TableRow>
             ))}
-            {items.length === 0 && (
+            {Object.keys(items).length === 0 && (
               <TableRow>
                 <TableCell
                   colSpan={4}

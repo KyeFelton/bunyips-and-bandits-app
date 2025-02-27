@@ -8,6 +8,7 @@ import {
   sanityAtom,
   staminaAtom,
   speciesDataAtom,
+  imageAtom,
 } from "../../state/character";
 import {
   Select,
@@ -24,6 +25,7 @@ import { DamageType } from "../../enums/DamageType";
 import { SpeedIcon } from "../icons/SpeedIcon";
 import { ArmourIcon } from "../icons/ArmourIcon";
 import { useEffect } from "react";
+import { getSpeciesImage } from "../../utils/speciesImages";
 
 export const SpeciesStep = () => {
   const [selectedSpecies, setSpecies] = useAtom(speciesAtom);
@@ -34,6 +36,7 @@ export const SpeciesStep = () => {
   const setCurrentSanity = useSetAtom(currentSanityAtom);
   const setCurrentStamina = useSetAtom(currentStaminaAtom);
   const speciesData = useAtomValue(speciesDataAtom);
+  const setImage = useSetAtom(imageAtom);
 
   useEffect(() => {
     setCurrentHealth(Math.min(health.current, health.max));
@@ -47,9 +50,14 @@ export const SpeciesStep = () => {
     setCurrentStamina(Math.min(stamina.current, stamina.max));
   }, [stamina, setCurrentStamina]);
 
+  const handleSpeciesChange = (value: string) => {
+    setSpecies(value);
+    setImage(getSpeciesImage(value));
+  };
+
   return (
     <div className="space-y-6">
-      <Select value={selectedSpecies} onValueChange={setSpecies}>
+      <Select value={selectedSpecies} onValueChange={handleSpeciesChange}>
         <SelectTrigger className="w-full">
           <SelectValue placeholder="Select species" />
         </SelectTrigger>

@@ -6,6 +6,7 @@ import {
   genderAtom,
   ageAtom,
   languagesAtom,
+  backgroundAtom,
   personalityAtom,
 } from '../../state/character';
 import { DescriptionDialog } from './DescriptionDialog';
@@ -15,6 +16,7 @@ export const DescriptionCard = () => {
   const gender = useAtomValue(genderAtom);
   const age = useAtomValue(ageAtom);
   const selectedLanguages = useAtomValue(languagesAtom);
+  const background = useAtomValue(backgroundAtom);
   const personality = useAtomValue(personalityAtom);
 
   return (
@@ -63,22 +65,48 @@ export const DescriptionCard = () => {
 
         <div>
           <div className="text-sm font-medium text-muted-foreground mb-1">
+            Background
+          </div>
+            <div className="text-sm flex">
+              <div className="flex-1 whitespace-nowrap overflow-hidden text-ellipsis">{background || '-'}</div>
+              <div>
+              {background && background.length > 0 && (
+                <DescriptionDialog
+                  title="Background"
+                  content={background}
+                  trigger={
+                    <button className="text-sm text-muted-foreground hover:text-accent-foreground ml-1 inline align-baseline">
+                      more
+                    </button>
+                  }
+                />
+              )}
+                </div>
+            </div>
+        </div>
+
+        <div>
+          <div className="text-sm font-medium text-muted-foreground mb-1">
             Personality & Motivation
           </div>
-          <div className="relative max-h-24 overflow-hidden">
-            <div className="text-sm leading-relaxed whitespace-pre-wrap">
+          <div className="text-sm flex">
+            <div className="flex-1 whitespace-nowrap overflow-hidden text-ellipsis">
               {personality || '-'}
             </div>
-            {personality && personality.length > 150 && (
-              <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-card to-transparent" />
-            )}
+            <div>
+              {personality && personality.length > 150 && (
+                <DescriptionDialog
+                  title="Personality & Motivation"
+                  content={personality}
+                  trigger={
+                    <button className="text-sm text-muted-foreground hover:text-accent-foreground ml-1 inline align-baseline">
+                      more
+                    </button>
+                  }
+                />
+              )}
+            </div>
           </div>
-          {personality && personality.length > 150 && (
-            <DescriptionDialog
-              title="Personality & Motivation"
-              content={personality}
-            />
-          )}
         </div>
       </CardContent>
     </Card>

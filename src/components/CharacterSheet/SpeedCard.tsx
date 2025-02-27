@@ -1,14 +1,14 @@
-import { useAtomValue } from 'jotai';
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import { MovementType } from '../../enums/MovementType';
+import { useAtomValue } from "jotai";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { MovementType } from "../../enums/MovementType";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '../ui/tooltip';
-import { speedAtom } from '../../state/character';
-import { SpeedIcon } from '../icons/SpeedIcon';
+} from "../ui/tooltip";
+import { speedAtom } from "../../state/character";
+import { SpeedIcon } from "../icons/SpeedIcon";
 
 export const SpeedCard = () => {
   const speed = useAtomValue(speedAtom);
@@ -22,7 +22,7 @@ export const SpeedCard = () => {
         <TooltipProvider>
           <div className="grid grid-cols-2 gap-3">
             {Object.entries(speed)
-              .filter(([_, value]) => value > 0)
+              // .filter(([_, value]) => value > 0)
               .map(([type, value]) => (
                 <div
                   key={type}
@@ -32,7 +32,7 @@ export const SpeedCard = () => {
                     <TooltipTrigger asChild>
                       <div className="flex items-center gap-1 cursor-default">
                         <SpeedIcon type={type as MovementType} size={20} />
-                        <span>{value}m</span>
+                        <span>{value ? `${value}m` : "-"}</span>
                       </div>
                     </TooltipTrigger>
                     <TooltipContent

@@ -1,5 +1,4 @@
 import { SkillType } from '../enums/SkillType';
-import { Path } from './paths';
 import { MovementType } from '../enums/MovementType';
 import { DamageType } from '../enums/DamageType';
 import { SenseType } from '../enums/SenseType';
@@ -11,6 +10,7 @@ export type Character = {
   gender: string;
   age: number;
   languages: string[];
+  background: string;
   personality: string;
   image?: string;
   level: number;

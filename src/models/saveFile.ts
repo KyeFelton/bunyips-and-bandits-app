@@ -1,5 +1,5 @@
 import { SkillType } from '../enums/SkillType';
-import { CharacterItem } from './items';
+import { ItemDictionary } from './items';
 import { SelectedPath } from './paths';
 
 export type SaveFile = {
@@ -8,6 +8,7 @@ export type SaveFile = {
   gender: string;
   age: number;
   personality: string;
+  background: string;
   languages: string[];
   level: number;
   paths: SelectedPath[];
@@ -15,7 +16,7 @@ export type SaveFile = {
   currentHealth: number;
   currentSanity: number;
   currentStamina: number;
-  items: CharacterItem[];
+  items: ItemDictionary;
   money: number;
   image?: string;
 };

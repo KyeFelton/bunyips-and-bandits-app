@@ -5,24 +5,22 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '../ui/dialog';
-import { Button } from '../ui/button';
 
 type DescriptionDialogProps = {
   title: string;
   content: string;
+  trigger?: React.ReactNode;
 };
 
-export const DescriptionDialog = ({ title, content }: DescriptionDialogProps) => {
+export const DescriptionDialog = ({ title, content, trigger }: DescriptionDialogProps) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button
-          variant="ghost"
-          size="sm"
-          className="w-full mt-2 text-muted-foreground hover:text-foreground"
-        >
-          Show more
-        </Button>
+        {trigger || (
+          <button className="w-full mt-2 text-sm text-muted-foreground hover:text-foreground">
+            Show more
+          </button>
+        )}
       </DialogTrigger>
       <DialogContent className="max-w-2xl max-h-[80vh]">
         <DialogHeader>

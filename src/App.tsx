@@ -1,19 +1,21 @@
-import { useAtomValue } from "jotai";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 import { LandingPage } from "./components/LandingPage";
 import { CharacterSheet } from "./components/CharacterSheet";
 import { CharacterEditor } from "./components/CharacterEditor";
-import { isEditingCharacterAtom, isFirstLoadAtom } from "./state/app";
-import background from "./images/cave.jpg";
+import { RulesPage } from "./components/RulesPage";
+import { RulesButton } from "./components/RulesButton";
+import background from "./images/campfire.webp";
 import frame from "./images/leaf-frame.png";
 
 function App() {
-  const isFirstLoad = useAtomValue(isFirstLoadAtom);
-  const isEditingCharacter = useAtomValue(isEditingCharacterAtom);
+  const location = useLocation();
+  const showRulesButton = location.pathname !== "/rules";
 
   return (
     <div className="min-h-screen relative overflow-hidden">
       <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0  z-30" />
+        <div className="absolute inset-0 z-30" />
         <img
           src={frame}
           className="absolute inset-0 z-20 frame-animation"
@@ -23,7 +25,6 @@ function App() {
             objectFit: "cover",
           }}
         />
-        <div className="absolute inset-0 backdrop-blur-sm z-10" />
         <img
           src={background}
           className="absolute inset-0 background-animation"
@@ -34,13 +35,15 @@ function App() {
           }}
         />
       </div>
-      {isFirstLoad ? (
-        <LandingPage />
-      ) : isEditingCharacter ? (
-        <CharacterEditor />
-      ) : (
-        <CharacterSheet />
-      )}
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/character" element={<CharacterSheet />} />
+          <Route path="/character/edit" element={<CharacterEditor />} />
+          <Route path="/rules" element={<RulesPage />} />
+        </Routes>
+      </AnimatePresence>
+      {showRulesButton && <RulesButton />}
     </div>
   );
 }

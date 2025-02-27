@@ -11,17 +11,35 @@ type CharacterSetters = {
   setSpecies: (value: SetStateAction<string>) => void;
   setGender: (value: SetStateAction<string>) => void;
   setAge: (value: SetStateAction<number>) => void;
+  setBackground: (value: SetStateAction<string>) => void;
   setPersonality: (value: SetStateAction<string>) => void;
   setLanguages: (value: SetStateAction<string[]>) => void;
   setImage: (value: SetStateAction<string | undefined>) => void;
   setMoney: (value: SetStateAction<number>) => void;
-  setItems: (value: SetStateAction<any[]>) => void;
+  setItems: (value: SetStateAction<Record<string, any>>) => void;
   setPaths: (value: SetStateAction<any[]>) => void;
   setSkillLevelUpgrades: (value: SetStateAction<any>) => void;
   setIsFirstLoad?: (value: SetStateAction<boolean>) => void;
 };
 
-export const uploadCharacter = (setters: CharacterSetters) => {
+const validateSaveFile = (data: any): data is SaveFile => {
+  return (
+    typeof data === 'object' &&
+    data !== null &&
+    typeof data.name === 'string' &&
+    typeof data.species === 'string' &&
+    typeof data.level === 'number' &&
+    Array.isArray(data.languages) &&
+    typeof data.currentHealth === 'number' &&
+    typeof data.currentSanity === 'number' &&
+    typeof data.currentStamina === 'number' &&
+    typeof data.money === 'number' &&
+    Array.isArray(data.paths) &&
+    typeof data.items === 'object'
+  );
+};
+
+export const uploadCharacter = async (setters: CharacterSetters, navigate: (path: string) => void) => {
   const input = document.createElement('input');
   input.type = 'file';
   input.accept = '.json';
@@ -31,7 +49,11 @@ export const uploadCharacter = (setters: CharacterSetters) => {
       const reader = new FileReader();
       reader.onload = (e) => {
         try {
-          const data = JSON.parse(e.target?.result as string) as SaveFile;
+          const data = JSON.parse(e.target?.result as string);
+          
+          if (!validateSaveFile(data)) {
+            throw new Error('Invalid save file format');
+          }
 
           // Update all atoms with the loaded data
           setters.setName(data.name);
@@ -40,9 +62,10 @@ export const uploadCharacter = (setters: CharacterSetters) => {
           setters.setCurrentSanity(data.currentSanity);
           setters.setCurrentStamina(data.currentStamina);
           setters.setSpecies(data.species);
-          setters.setGender(data.gender);
-          setters.setAge(data.age);
-          setters.setPersonality(data.personality);
+          setters.setGender(data.gender || '');
+          setters.setAge(data.age || 0);
+          setters.setBackground(data.background || '');
+          setters.setPersonality(data.personality || '');
           setters.setLanguages(data.languages);
           setters.setImage(data.image);
           setters.setMoney(data.money);
@@ -50,8 +73,11 @@ export const uploadCharacter = (setters: CharacterSetters) => {
           setters.setPaths(data.paths);
           setters.setSkillLevelUpgrades(data.skillLevelUpgrades || {});
           setters.setIsFirstLoad?.(false);
+
+          navigate('/character');
         } catch (error) {
-          console.error('Error parsing character file:', error);
+          console.error('Error loading character:', error instanceof Error ? error.message : 'Unknown error');
+          alert('Failed to load character file. Please make sure the file is valid.');
         }
       };
       reader.readAsText(file);
@@ -77,11 +103,12 @@ export const resetCharacter = (setters: CharacterSetters) => {
   );
   setters.setGender('');
   setters.setAge(0);
+  setters.setBackground('');
   setters.setPersonality('');
   setters.setLanguages([]);
   setters.setImage(undefined);
   setters.setMoney(0);
-  setters.setItems([]);
+  setters.setItems({});
   setters.setPaths([]);
   setters.setSkillLevelUpgrades({});
   setters.setIsFirstLoad?.(true);

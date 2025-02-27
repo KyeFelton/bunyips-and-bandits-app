@@ -15,7 +15,7 @@ export type Action = {
 
 export const Strike: Action = {
   name: "Strike",
-  effect: "You strike your opponent and deal your weapon’s damage.",
+  effect: "You strike your opponent and deal your weapon's damage.",
   skillType: SkillType.Martial,
   range: Range.Adjacent,
   areaOfEffect: AreaOfEffect.SingleTarget,
@@ -25,7 +25,7 @@ export const Strike: Action = {
 export const Throw: Action = {
   name: "Throw",
   effect:
-    "You throw your weapon at your target. If you hit, they take your weapon’s damage. Whether hit or miss, you are no longer wielding your weapon.",
+    "You throw your weapon at your target. If you hit, they take your weapon's damage. Whether hit or miss, you are no longer wielding your weapon.",
   skillType: SkillType.Throw,
   range: Range.Nearby,
   areaOfEffect: AreaOfEffect.SingleTarget,
@@ -37,7 +37,7 @@ export const Throw: Action = {
 export const Swipe: Action = {
   name: "Swipe",
   effect:
-    "You attack two targets who are next to each other. They take your weapon’s damage.",
+    "You attack two targets who are next to each other. They take your weapon's damage.",
   skillType: SkillType.Martial,
   range: Range.Adjacent,
   areaOfEffect: AreaOfEffect.MultipleTargets,
@@ -47,7 +47,7 @@ export const Swipe: Action = {
 export const Plough: Action = {
   name: "Plough",
   effect:
-    "Move up to three times your speed towards your target then deal your weapon’s damage. If the creature is equal size to you or smaller, they are stunned. If they are smaller than you, they are also knocked back 2m.",
+    "Move up to three times your speed towards your target then deal your weapon's damage. If the creature is equal size to you or smaller, they are stunned. If they are smaller than you, they are also knocked back 2m.",
   skillType: SkillType.Martial,
   range: Range.Adjacent,
   areaOfEffect: AreaOfEffect.SingleTarget,
@@ -57,7 +57,7 @@ export const Plough: Action = {
 export const Sweep: Action = {
   name: "Sweep",
   effect:
-    "You attack all targets who are next to you. They take your weapon’s damage.",
+    "You attack all targets who are next to you. They take your weapon's damage.",
   skillType: SkillType.Martial,
   range: Range.Adjacent,
   areaOfEffect: AreaOfEffect.MultipleTargets,
@@ -67,7 +67,7 @@ export const Sweep: Action = {
 export const Decimate: Action = {
   name: "Decimate",
   effect:
-    "You focus all your attention to smashing your target’s weak spot. On hit, deal double your weapon’s damage.",
+    "You focus all your attention to smashing your target's weak spot. On hit, deal double your weapon's damage.",
   skillType: SkillType.Martial,
   range: Range.Adjacent,
   areaOfEffect: AreaOfEffect.SingleTarget,
@@ -435,4 +435,113 @@ export const DeathCloud: Action = {
   range: Range.Self,
   areaOfEffect: AreaOfEffect.Sphere,
   staminaCost: 4,
+};
+
+// Lightbender actions
+export const Beacon: Action = {
+  name: "Beacon",
+  effect: "You illuminate your surroundings with light.",
+  skillType: SkillType.Radiant,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.Sphere,
+  staminaCost: 1,
+};
+
+export const Mirage: Action = {
+  name: "Mirage",
+  effect: "You manipulate the light reflected off your target to slightly alter their appearance. The illusion lasts until your next turn.",
+  skillType: SkillType.Radiant,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 1,
+};
+
+export const HeatRay: Action = {
+  name: "Heat ray",
+  effect: "You cast a beam of infrared light at your target. Your target takes 5 fire damage.",
+  skillType: SkillType.Radiant,
+  range: Range.Distant,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 1,
+};
+
+export const DazzlingLights: Action = {
+  name: "Dazzling lights",
+  effect: "Dazzling lights flash to stun targets with sight sense.",
+  skillType: SkillType.Radiant,
+  range: Range.Distant,
+  areaOfEffect: AreaOfEffect.Cone,
+  staminaCost: 1,
+};
+
+export const BlindingFlash: Action = {
+  name: "Blinding flash",
+  effect: "You emit a bright light that scars the eyes of your target. Targets with sight sense are blinded, stunned and lose 1 sanity.",
+  skillType: SkillType.Radiant,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 2,
+};
+
+export const MirrorDome: Action = {
+  name: "Mirror dome",
+  effect: "You manifest an intangible dome that reflects light. Creatures both inside and outside the dome see a mirror. However, if there is no light source within the dome, then the creatures inside are enveloped in darkness. The illusion lasts until your next turn.",
+  skillType: SkillType.Radiant,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.Arena,
+  staminaCost: 3,
+};
+
+export const SearingRadiance: Action = {
+  name: "Searing radiance",
+  effect: "You discharge an intense ray of infrared light at your target. They take 5 fire damage and catch fire.",
+  skillType: SkillType.Radiant,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.Cone,
+  staminaCost: 4,
+};
+
+export const Disguise: Action = {
+  name: "Disguise",
+  effect: "You manipulate the light reflected off your target to dramatically alter their appearance. The illusion lasts until your next turn.",
+  skillType: SkillType.Radiant,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 2,
+};
+
+export const Apparition: Action = {
+  name: "Apparition",
+  effect: "You fabricate an image of a creature or object of a medium size or smaller. The image appears real to all creatures, however physical interaction reveals that it is just an illusion. The illusion lasts until your next turn.",
+  skillType: SkillType.Radiant,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 3,
+};
+
+export const Invisibility: Action = {
+  name: "Invisibility",
+  effect: "Light passes through your body and adjacent allies, making you invisible to visible and infrared light.",
+  skillType: SkillType.Radiant,
+  range: Range.Self,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 1,
+};
+
+export const Hyperbeam: Action = {
+  name: "Hyperbeam",
+  effect: "You channel light into a focalised beam that vaporises your target. They take 20 fire damage and catch fire.",
+  skillType: SkillType.Radiant,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 4,
+};
+
+export const SolarFlare: Action = {
+  name: "Solar flare",
+  effect: "Thermal energy radiates from a point you choose. Targets in the affected area take 15 fire damage and catch fire. If they have sight sense, they are also stunned and blinded.",
+  skillType: SkillType.Radiant,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.Sphere,
+  staminaCost: 8,
 };

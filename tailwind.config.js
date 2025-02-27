@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
@@ -43,8 +43,8 @@ export default {
           foreground: "hsl(var(--red-foreground))",
         },
         yellow: {
-          DEFAULT: "hsl(var(--red))",
-          foreground: "hsl(var(--red-foreground))",
+          DEFAULT: "hsl(var(--yellow))",
+          foreground: "hsl(var(--yellow-foreground))",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",
@@ -77,7 +77,47 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
-    }
+      lineClamp: {
+        2: "2",
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            color: "hsl(var(--foreground))",
+            a: {
+              color: "hsl(var(--primary))",
+              "&:hover": {
+                color: "hsl(var(--primary) / 0.8)",
+              },
+            },
+            h1: {
+              color: "hsl(var(--foreground))",
+            },
+            h2: {
+              color: "hsl(var(--foreground))",
+            },
+            h3: {
+              color: "hsl(var(--foreground))",
+            },
+            h4: {
+              color: "hsl(var(--foreground))",
+            },
+            strong: {
+              color: "hsl(var(--foreground))",
+            },
+            code: {
+              color: "hsl(var(--foreground))",
+            },
+            figcaption: {
+              color: "hsl(var(--muted-foreground))",
+            },
+            blockquote: {
+              color: "hsl(var(--muted-foreground))",
+            },
+          },
+        },
+      },
+    },
   },
-  plugins: [require("tailwindcss-animate")]
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 };

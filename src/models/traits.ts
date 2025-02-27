@@ -220,3 +220,19 @@ export const AcidicSkin: Trait = {
   description:
     "Acid oozes from your skin. Foes that touch your skin take 1d8 toxic damage.",
 };
+
+// Lightbender traits
+export const IronVision: Trait = {
+  name: "Iron Vision",
+  description: "Your eyes have toughened from your experience of crafting light. You cannot be blinded anymore.",
+};
+
+export const Photosynthetic: Trait = {
+  name: "Photosynthetic",
+  description: "You can absorb sunlight. Lightbender actions cost 1 less stamina when performed in direct sunlight.",
+};
+
+export const RadiantAura: Trait = {
+  name: "Radiant Aura",
+  description: "You radiate an aura from your body that is both mesmerising and bewildering. Adjacent foes that rely on sight are stunned at the end of your turn.",
+};

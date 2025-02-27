@@ -1,19 +1,20 @@
-import { useAtomValue, useSetAtom } from 'jotai';
-import { Card, CardHeader, CardContent } from '../ui/card';
-import { Button } from '../ui/button';
+import { useAtomValue, useSetAtom } from "jotai";
+import { useNavigate } from "react-router-dom";
+import { Card, CardHeader, CardContent } from "../ui/card";
+import { Button } from "../ui/button";
 import {
   Upload,
   Download,
   RotateCcw,
   EllipsisVertical,
   Pencil,
-} from 'lucide-react';
+} from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '../ui/dropdown-menu';
+} from "../ui/dropdown-menu";
 import {
   nameAtom,
   levelAtom,
@@ -24,6 +25,7 @@ import {
   genderAtom,
   ageAtom,
   personalityAtom,
+  backgroundAtom,
   languagesAtom,
   imageAtom,
   moneyAtom,
@@ -31,18 +33,15 @@ import {
   pathsAtom,
   skillLevelUpgradesAtom,
   saveFileAtom,
-} from '../../state/character';
-import { isEditingCharacterAtom, isFirstLoadAtom } from '../../state/app';
-import { resetCharacter, uploadCharacter } from '../../utils/character';
-import defaultCharacterImage from '../../images/character.svg';
+} from "../../state/character";
+import { resetCharacter, uploadCharacter } from "../../utils/character";
 
 export const NameCard = () => {
   const name = useAtomValue(nameAtom);
   const level = useAtomValue(levelAtom);
   const image = useAtomValue(imageAtom);
-  const setIsEditingCharacter = useSetAtom(isEditingCharacterAtom);
   const saveFile = useAtomValue(saveFileAtom);
-  const setIsFirstLoad = useSetAtom(isFirstLoadAtom);
+  const navigate = useNavigate();
 
   // Get setters for loading character data
   const setters = {
@@ -54,6 +53,7 @@ export const NameCard = () => {
     setSpecies: useSetAtom(speciesAtom),
     setGender: useSetAtom(genderAtom),
     setAge: useSetAtom(ageAtom),
+    setBackground: useSetAtom(backgroundAtom),
     setPersonality: useSetAtom(personalityAtom),
     setLanguages: useSetAtom(languagesAtom),
     setImage: useSetAtom(imageAtom),
@@ -65,12 +65,12 @@ export const NameCard = () => {
 
   const handleDownload = () => {
     const blob = new Blob([JSON.stringify(saveFile, null, 2)], {
-      type: 'application/json',
+      type: "application/json",
     });
     const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
-    link.download = 'character.json';
+    link.download = "character.json";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -80,10 +80,11 @@ export const NameCard = () => {
   const handleReset = () => {
     if (
       window.confirm(
-        'Are you sure you want to delete this character and return to the main menu?'
+        "Are you sure you want to delete this character and return to the main menu?"
       )
     ) {
-      resetCharacter({ ...setters, setIsFirstLoad });
+      resetCharacter(setters);
+      navigate("/");
     }
   };
 
@@ -99,7 +100,7 @@ export const NameCard = () => {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setIsEditingCharacter(true)}>
+                <DropdownMenuItem onClick={() => navigate("/character/edit")}>
                   <Pencil className="mr-2 h-4 w-4" />
                   Edit
                 </DropdownMenuItem>
@@ -107,7 +108,9 @@ export const NameCard = () => {
                   <Download className="mr-2 h-4 w-4" />
                   Save
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => uploadCharacter(setters)}>
+                <DropdownMenuItem
+                  onClick={() => uploadCharacter(setters, navigate)}
+                >
                   <Upload className="mr-2 h-4 w-4" />
                   Load
                 </DropdownMenuItem>
@@ -123,9 +126,9 @@ export const NameCard = () => {
         </div>
       </CardHeader>
       <CardContent>
-        <div className={'flex justify-center'}>
+        <div className={"flex justify-center"}>
           <img
-            src={image || defaultCharacterImage}
+            src={image}
             alt="character"
             className="w-48 h-48 rounded-md object-cover"
           />
