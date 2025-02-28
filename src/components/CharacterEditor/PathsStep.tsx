@@ -1,6 +1,6 @@
-import { useAtom, useAtomValue } from 'jotai';
-import { pathsAtom, availablePathPointsAtom } from '../../state/character';
-import { Button } from '../ui/button';
+import { useAtom, useAtomValue } from "jotai";
+import { pathsAtom, availablePathPointsAtom } from "../../state/character";
+import { Button } from "../ui/button";
 import {
   Table,
   TableBody,
@@ -8,41 +8,42 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '../ui/table';
-import { ChevronUp, X } from 'lucide-react';
+} from "../ui/table";
+import { ChevronUp, X } from "lucide-react";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../ui/select';
+} from "../ui/select";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '../ui/tooltip';
-import { Badge } from '../ui/badge';
-import * as Paths from '../../models/paths';
-import { useState } from 'react';
+} from "../ui/tooltip";
+import { Badge } from "../ui/badge";
+import * as Paths from "../../models/paths";
+import { useState } from "react";
+import { SkillIcon } from "../icons/SkillIcon";
 
 export const PathsStep = () => {
   const [paths, setPaths] = useAtom(pathsAtom);
-  const [selectedPath, setSelectedPath] = useState<string>('');
+  const [selectedPath, setSelectedPath] = useState<string>("");
   const availablePathPoints = useAtomValue(availablePathPointsAtom);
   const usedPathPoints = paths.reduce((sum, path) => sum + path.level, 0);
   const remainingPathPoints = availablePathPoints - usedPathPoints;
 
   const availablePaths = Object.values(Paths)
-    .filter((path) => typeof path === 'object' && 'name' in path)
+    .filter((path) => typeof path === "object" && "name" in path)
     .filter((path) => !paths.some((p) => p.name === path.name)) as Paths.Path[];
 
   const handleAddPath = () => {
     const path = availablePaths.find((p) => p.name === selectedPath);
     if (path) {
       setPaths([...paths, { ...path, level: 1 }]);
-      setSelectedPath('');
+      setSelectedPath("");
     }
   };
 
@@ -81,12 +82,17 @@ export const PathsStep = () => {
             <SelectContent>
               {availablePaths.map((path) => (
                 <SelectItem key={path.name} value={path.name}>
-                  {path.name}
+                  <div className="flex items-center gap-2">
+                    <span className="text-muted-foreground">
+                      <SkillIcon type={path.skillTypes[0]} />
+                    </span>
+                    {path.name}
+                  </div>
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
-          {selectedPath !== '' && (
+          {selectedPath !== "" && (
             <Button
               onClick={handleAddPath}
               disabled={
@@ -111,8 +117,11 @@ export const PathsStep = () => {
             <div className="flex justify-between items-start mb-2">
               <div className="flex-1">
                 <div className="flex items-center gap-2">
+                  <span className="text-muted-foreground">
+                    <SkillIcon type={path.skillTypes[0]} />
+                  </span>
                   <h3 className="text-lg font-semibold">
-                    {path.name}{' '}
+                    {path.name}{" "}
                     <span className="text-sm font-normal text-muted-foreground">
                       Level {path.level}
                     </span>
@@ -121,7 +130,7 @@ export const PathsStep = () => {
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <Button
-                          variant="ghost"
+                          variant="outline"
                           size="icon"
                           className="h-6 w-6 text-muted-foreground hover:text-accent-foreground"
                           onClick={() => handleUpdateLevel(path.name)}
@@ -136,7 +145,7 @@ export const PathsStep = () => {
                     variant="ghost"
                     size="icon"
                     onClick={() => handleRemovePath(path.name)}
-                    className="h-6 w-6 text-destructive hover:text-destructive hover:bg-destructive/10 ml-auto"
+                    className="h-6 w-6 ml-auto"
                   >
                     <X className="h-4 w-4" />
                   </Button>
@@ -145,6 +154,7 @@ export const PathsStep = () => {
                   {path.description}
                 </p>
                 <div className="flex gap-2 mt-2">
+                  <span className="text-sm">Skills:</span>
                   {path.skillTypes.map((skillType) => (
                     <Badge key={skillType} variant="secondary">
                       {skillType}
@@ -172,7 +182,7 @@ export const PathsStep = () => {
                   return (
                     <TableRow
                       key={level}
-                      className={level > path.level ? 'opacity-50' : ''}
+                      className={level > path.level ? "opacity-50" : ""}
                     >
                       <TableCell className="font-medium">{level}</TableCell>
                       <TableCell>

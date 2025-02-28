@@ -1,38 +1,37 @@
-import { useState } from 'react';
-import { useAtom } from 'jotai';
-import { customTraitsAtom } from '../../state/character';
+import { useState } from "react";
+import { useAtom } from "jotai";
+import { customTraitsAtom } from "../../state/character";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '../ui/dialog';
-import { Button } from '../ui/button';
-import { Input } from '../ui/input';
-import { Plus } from 'lucide-react';
-import { Textarea } from '../ui/textarea';
-import { EffectForm } from '../EffectForm';
-import { Effect } from '../../models/effect';
-import { Trait } from '../../models/traits';
+} from "../ui/dialog";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { Plus } from "lucide-react";
+import { Textarea } from "../ui/textarea";
+import { EffectForm } from "../EffectForm";
+import { Trait } from "../../models/traits";
 
 export const AddTraitDialog = () => {
   const [customTraits, setCustomTraits] = useAtom(customTraitsAtom);
   const [open, setOpen] = useState(false);
   const [newTrait, setNewTrait] = useState<Trait>({
-    name: '',
-    description: '',
+    name: "",
+    description: "",
     effects: [],
   });
 
   const handleAddTrait = () => {
     if (!newTrait.name || !newTrait.description) {
-      alert('Please fill in all required fields');
+      alert("Please fill in all required fields");
       return;
     }
 
     if (customTraits[newTrait.name]) {
-      alert('A trait with this name already exists');
+      alert("A trait with this name already exists");
       return;
     }
 
@@ -43,8 +42,8 @@ export const AddTraitDialog = () => {
 
     setOpen(false);
     setNewTrait({
-      name: '',
-      description: '',
+      name: "",
+      description: "",
       effects: [],
     });
   };
@@ -91,9 +90,7 @@ export const AddTraitDialog = () => {
               <label className="text-sm font-medium block mb-2">Effects</label>
               <EffectForm
                 value={newTrait.effects || []}
-                onChange={(effects) =>
-                  setNewTrait({ ...newTrait, effects })
-                }
+                onChange={(effects) => setNewTrait({ ...newTrait, effects })}
               />
             </div>
             <Button onClick={handleAddTrait} className="w-full">

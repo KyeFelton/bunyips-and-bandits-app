@@ -352,7 +352,7 @@ export const PoisonJab: Action = {
   name: "Poison jab",
   effect:
     "You stab your target with a poisoned barb. They take both 6 toxic and 4 slash damage.",
-  skillType: SkillType.Martial,
+  skillType: SkillType.Toxic,
   range: Range.Adjacent,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 1,
@@ -381,7 +381,7 @@ export const AcidBomb: Action = {
   name: "Acid bomb",
   effect:
     "You hurl a ball of corrosive acid towards your target. They take 15 toxic damage.",
-  skillType: SkillType.Throw,
+  skillType: SkillType.Toxic,
   range: Range.Nearby,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 2,
@@ -421,7 +421,7 @@ export const VenomSting: Action = {
   name: "Venom sting",
   effect:
     "Your target is injected with a deadly dose of debilitating venom. They take 20 toxic damage, 4 slash damage and are stunned.",
-  skillType: SkillType.Martial,
+  skillType: SkillType.Toxic,
   range: Range.Adjacent,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 4,
@@ -449,7 +449,8 @@ export const Beacon: Action = {
 
 export const Mirage: Action = {
   name: "Mirage",
-  effect: "You manipulate the light reflected off your target to slightly alter their appearance. The illusion lasts until your next turn.",
+  effect:
+    "You manipulate the light reflected off your target to slightly alter their appearance. The illusion lasts until your next turn.",
   skillType: SkillType.Radiant,
   range: Range.Nearby,
   areaOfEffect: AreaOfEffect.SingleTarget,
@@ -458,7 +459,8 @@ export const Mirage: Action = {
 
 export const HeatRay: Action = {
   name: "Heat ray",
-  effect: "You cast a beam of infrared light at your target. Your target takes 5 fire damage.",
+  effect:
+    "You cast a beam of infrared light at your target. Your target takes 5 fire damage.",
   skillType: SkillType.Radiant,
   range: Range.Distant,
   areaOfEffect: AreaOfEffect.SingleTarget,
@@ -476,7 +478,8 @@ export const DazzlingLights: Action = {
 
 export const BlindingFlash: Action = {
   name: "Blinding flash",
-  effect: "You emit a bright light that scars the eyes of your target. Targets with sight sense are blinded, stunned and lose 1 sanity.",
+  effect:
+    "You emit a bright light that scars the eyes of your target. Targets with sight sense are blinded, stunned and lose 1 sanity.",
   skillType: SkillType.Radiant,
   range: Range.Nearby,
   areaOfEffect: AreaOfEffect.SingleTarget,
@@ -485,7 +488,8 @@ export const BlindingFlash: Action = {
 
 export const MirrorDome: Action = {
   name: "Mirror dome",
-  effect: "You manifest an intangible dome that reflects light. Creatures both inside and outside the dome see a mirror. However, if there is no light source within the dome, then the creatures inside are enveloped in darkness. The illusion lasts until your next turn.",
+  effect:
+    "You manifest an intangible dome that reflects light. Creatures both inside and outside the dome see a mirror. However, if there is no light source within the dome, then the creatures inside are enveloped in darkness. The illusion lasts until your next turn.",
   skillType: SkillType.Radiant,
   range: Range.Nearby,
   areaOfEffect: AreaOfEffect.Arena,
@@ -494,7 +498,8 @@ export const MirrorDome: Action = {
 
 export const SearingRadiance: Action = {
   name: "Searing radiance",
-  effect: "You discharge an intense ray of infrared light at your target. They take 5 fire damage and catch fire.",
+  effect:
+    "You discharge an intense ray of infrared light at your target. They take 5 fire damage and catch fire.",
   skillType: SkillType.Radiant,
   range: Range.Nearby,
   areaOfEffect: AreaOfEffect.Cone,
@@ -503,7 +508,8 @@ export const SearingRadiance: Action = {
 
 export const Disguise: Action = {
   name: "Disguise",
-  effect: "You manipulate the light reflected off your target to dramatically alter their appearance. The illusion lasts until your next turn.",
+  effect:
+    "You manipulate the light reflected off your target to dramatically alter their appearance. The illusion lasts until your next turn.",
   skillType: SkillType.Radiant,
   range: Range.Nearby,
   areaOfEffect: AreaOfEffect.SingleTarget,
@@ -512,7 +518,8 @@ export const Disguise: Action = {
 
 export const Apparition: Action = {
   name: "Apparition",
-  effect: "You fabricate an image of a creature or object of a medium size or smaller. The image appears real to all creatures, however physical interaction reveals that it is just an illusion. The illusion lasts until your next turn.",
+  effect:
+    "You fabricate an image of a creature or object of a medium size or smaller. The image appears real to all creatures, however physical interaction reveals that it is just an illusion. The illusion lasts until your next turn.",
   skillType: SkillType.Radiant,
   range: Range.Nearby,
   areaOfEffect: AreaOfEffect.SingleTarget,
@@ -521,7 +528,8 @@ export const Apparition: Action = {
 
 export const Invisibility: Action = {
   name: "Invisibility",
-  effect: "Light passes through your body and adjacent allies, making you invisible to visible and infrared light.",
+  effect:
+    "Light passes through your body and adjacent allies, making you invisible to visible and infrared light.",
   skillType: SkillType.Radiant,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.SingleTarget,
@@ -530,7 +538,8 @@ export const Invisibility: Action = {
 
 export const Hyperbeam: Action = {
   name: "Hyperbeam",
-  effect: "You channel light into a focalised beam that vaporises your target. They take 20 fire damage and catch fire.",
+  effect:
+    "You channel light into a focalised beam that vaporises your target. They take 20 fire damage and catch fire.",
   skillType: SkillType.Radiant,
   range: Range.Nearby,
   areaOfEffect: AreaOfEffect.SingleTarget,
@@ -539,7 +548,8 @@ export const Hyperbeam: Action = {
 
 export const SolarFlare: Action = {
   name: "Solar flare",
-  effect: "Thermal energy radiates from a point you choose. Targets in the affected area take 15 fire damage and catch fire. If they have sight sense, they are also stunned and blinded.",
+  effect:
+    "Thermal energy radiates from a point you choose. Targets in the affected area take 15 fire damage and catch fire. If they have sight sense, they are also stunned and blinded.",
   skillType: SkillType.Radiant,
   range: Range.Nearby,
   areaOfEffect: AreaOfEffect.Sphere,
