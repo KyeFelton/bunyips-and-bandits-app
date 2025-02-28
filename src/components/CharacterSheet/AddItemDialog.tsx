@@ -22,24 +22,14 @@ import {
 } from "../ui/select";
 import { Textarea } from "../ui/textarea";
 import { EffectForm } from "../EffectForm";
-import { Effect } from "../../models/effect";
 
 type Props = {
   maxWeight: number;
 };
 
-type ItemWithQuantity = {
-  item: Item;
+type ItemWithQuantity = Item & {
   quantity: number;
   cost?: number;
-};
-
-type ItemCreationState = {
-  name: string;
-  description: string;
-  effects: Effect[];
-  singleUse: boolean;
-  weight: number;
 };
 
 export const AddItemDialog = ({ maxWeight }: Props) => {
@@ -51,12 +41,13 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
     null
   );
   const [isCreatingItem, setIsCreatingItem] = useState(false);
-  const [newItem, setNewItem] = useState<ItemCreationState>({
+  const [newItem, setNewItem] = useState<ItemWithQuantity>({
     name: "",
     description: "",
     effects: [],
     singleUse: false,
     weight: 0,
+    quantity: 1,
   });
 
   const allItems = Object.values(Items)
@@ -71,7 +62,7 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
 
   const handleSelectItem = (item: Item) => {
     setSelectedItem({
-      item,
+      ...item,
       quantity: 1,
       cost: undefined,
     });
@@ -85,7 +76,7 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
     }
   };
 
-  const handleQuantityChange = (value: string) => {
+  const handleSelectItemQuantityChange = (value: string) => {
     if (!selectedItem) return;
     const quantity = parseInt(value) || 1;
     setSelectedItem({
@@ -94,7 +85,7 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
     });
   };
 
-  const handleCostChange = (value: string) => {
+  const handleSelectItemCostChange = (value: string) => {
     if (!selectedItem) return;
     const cost = parseInt(value);
     if (cost === undefined) {
@@ -109,11 +100,33 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
     });
   };
 
+  const handleNewItemQuantityChange = (value: string) => {
+    if (!newItem) return;
+    const quantity = parseInt(value) || 1;
+    setNewItem({
+      ...newItem,
+      quantity: Math.max(1, quantity),
+    });
+  };
+
+  const handleNewItemCostChange = (value: string) => {
+    if (!newItem) return;
+    const cost = parseInt(value);
+    if (cost === undefined) {
+      setNewItem({
+        ...newItem,
+        cost: undefined,
+      });
+    }
+    setNewItem({
+      ...newItem,
+      cost: Math.max(0, cost),
+    });
+  };
+
   const handleAddItem = () => {
     if (!selectedItem) return;
-
-    const { item, quantity, cost } = selectedItem;
-    const totalCost = (cost || 0) * quantity;
+    const totalCost = (selectedItem.cost || 0) * selectedItem.quantity;
 
     if (totalCost > money) {
       alert("You don't have enough money!");
@@ -122,13 +135,17 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
 
     // Update or add item to inventory
     setItems((prev) => {
-      const existingItem = prev[item.name];
+      const existingItem = prev[selectedItem.name];
       return {
         ...prev,
-        [item.name]: {
-          ...item,
+        [selectedItem.name]: {
+          name: selectedItem.name,
+          weight: selectedItem.weight,
+          singleUse: selectedItem.singleUse,
+          description: selectedItem.description,
+          effects: selectedItem.effects,
           equipped: existingItem?.equipped || false,
-          quantity: (existingItem?.quantity || 0) + quantity,
+          quantity: (existingItem?.quantity || 0) + selectedItem.quantity,
         },
       };
     });
@@ -158,7 +175,7 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
     };
 
     setSelectedItem({
-      item: customItem,
+      ...customItem,
       quantity: 1,
       cost: 0,
     });
@@ -166,14 +183,16 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
     setIsCreatingItem(false);
   };
 
-  const getTotalWeight = (item: Item, quantity: number) => {
+  const getTotalWeight = (item: ItemWithQuantity) => {
     const existingQuantity = items[item.name]?.quantity || 0;
-    return item.weight * (quantity + existingQuantity);
+    return item.weight * (item.quantity + existingQuantity);
   };
 
-  const canAddItem = (item: Item, quantity: number) => {
-    const totalWeight = getTotalWeight(item, quantity);
-    return totalWeight <= maxWeight;
+  const canAddItem = (item: ItemWithQuantity) => {
+    const totalWeight = getTotalWeight(item);
+    return (
+      totalWeight <= maxWeight || (item.cost || 0) * item.quantity <= money
+    );
   };
 
   return (
@@ -199,7 +218,7 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
             )}
             <DialogTitle>
               {selectedItem
-                ? selectedItem.item.name
+                ? selectedItem.name
                 : isCreatingItem
                 ? "Create Custom Item"
                 : "Add Items"}
@@ -211,7 +230,7 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
           <div className="flex flex-col justify-between flex-1">
             <div className="space-y-6 py-4">
               <p className="text-sm text-muted-foreground">
-                {selectedItem.item.description}
+                {selectedItem.description}
               </p>
 
               <div className="grid grid-cols-2 gap-4">
@@ -219,7 +238,7 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
                   <label className="text-sm font-medium">Quantity</label>
                   <Select
                     value={selectedItem.quantity.toString()}
-                    onValueChange={handleQuantityChange}
+                    onValueChange={handleSelectItemQuantityChange}
                   >
                     <SelectTrigger className="w-24">
                       <SelectValue placeholder="1" />
@@ -236,13 +255,15 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Cost per item</label>
+                  <label className="text-sm font-medium">
+                    Cost per item (£)
+                  </label>
                   <Input
                     type="number"
                     className="max-w-[100px]"
                     min="0"
                     value={selectedItem.cost}
-                    onChange={(e) => handleCostChange(e.target.value)}
+                    onChange={(e) => handleSelectItemCostChange(e.target.value)}
                   />
                 </div>
               </div>
@@ -250,10 +271,7 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
               <div className="space-y-2 pt-4">
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Total Weight:</span>
-                  <span>
-                    {getTotalWeight(selectedItem.item, selectedItem.quantity)}{" "}
-                    kg
-                  </span>
+                  <span>{getTotalWeight(selectedItem)} kg</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Total Cost:</span>
@@ -271,10 +289,7 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
             <Button
               className="w-full mb-2"
               onClick={handleAddItem}
-              disabled={
-                !canAddItem(selectedItem.item, selectedItem.quantity) ||
-                (selectedItem.cost || 0) * selectedItem.quantity > money
-              }
+              disabled={!canAddItem(selectedItem)}
             >
               Add to inventory
             </Button>
@@ -302,21 +317,56 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
                   placeholder="Enter item description"
                 />
               </div>
-              <div>
-                <label className="text-sm font-medium">Weight (kg)</label>
-                <Input
-                  type="number"
-                  className="max-w-[100px]"
-                  min="0"
-                  step="0.1"
-                  value={newItem.weight}
-                  onChange={(e) =>
-                    setNewItem({
-                      ...newItem,
-                      weight: parseFloat(e.target.value) || 0,
-                    })
-                  }
-                />
+              <div className="flex gap-6">
+                <div>
+                  <label className="text-sm font-medium">Weight (kg)</label>
+                  <Input
+                    type="number"
+                    className="max-w-[100px]"
+                    min="0"
+                    step="0.1"
+                    value={newItem.weight}
+                    onChange={(e) =>
+                      setNewItem({
+                        ...newItem,
+                        weight: parseFloat(e.target.value) || 0,
+                      })
+                    }
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-medium">
+                    Cost per item (£)
+                  </label>
+                  <Input
+                    type="number"
+                    className="max-w-[100px]"
+                    min="0"
+                    value={newItem.cost}
+                    onChange={(e) => handleNewItemCostChange(e.target.value)}
+                  />
+                </div>
+
+                <div>
+                  <label className="text-sm font-medium">Quantity</label>
+                  <Select
+                    value={newItem.quantity.toString()}
+                    onValueChange={handleNewItemQuantityChange}
+                  >
+                    <SelectTrigger className="w-24">
+                      <SelectValue placeholder="1" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {Array.from({ length: 10 }, (_, i) => i + 1).map(
+                        (num) => (
+                          <SelectItem key={num} value={num.toString()}>
+                            {num}
+                          </SelectItem>
+                        )
+                      )}
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
               <div className="flex items-center gap-2">
                 <input
@@ -336,11 +386,15 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
                   Effects
                 </label>
                 <EffectForm
-                  value={newItem.effects}
+                  value={newItem.effects || []}
                   onChange={(effects) => setNewItem({ ...newItem, effects })}
                 />
               </div>
-              <Button onClick={handleCreateItem} className="w-full">
+              <Button
+                onClick={handleCreateItem}
+                className="w-full"
+                disabled={!canAddItem(newItem)}
+              >
                 Add to inventory
               </Button>
             </div>
