@@ -1,7 +1,7 @@
-import { useAtom, useAtomValue } from 'jotai';
-import { itemsAtom, moneyAtom, skillLevelsAtom } from '../../state/character';
-import { Button } from '../ui/button';
-import { Input } from '../ui/input';
+import { useAtom, useAtomValue } from "jotai";
+import { itemsAtom, moneyAtom, skillLevelsAtom } from "../../state/character";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 import {
   Table,
   TableBody,
@@ -9,18 +9,17 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '../ui/table';
-import { X, Coins, Weight } from 'lucide-react';
-import { AddItemDialog } from './AddItemDialog';
-import { SkillType } from '../../enums/SkillType';
+} from "../ui/table";
+import { X, Coins, Weight } from "lucide-react";
+import { AddItemDialog } from "./AddItemDialog";
+import { SkillType } from "../../enums/SkillType";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '../ui/tooltip';
-import { ItemDictionary } from '../../models/items';
-import { useState } from 'react';
+} from "../ui/tooltip";
+import { useState } from "react";
 
 const getWeightLimit = (strengthLevel: number) => {
   switch (strengthLevel) {
@@ -51,7 +50,7 @@ export const ItemsTable = () => {
     (sum, item) => sum + item.weight * item.quantity,
     0
   );
-  const weightLimit = getWeightLimit(skillLevels[SkillType.Strength]);
+  const weightLimit = getWeightLimit(skillLevels[SkillType.Strength] || 1);
 
   const handleToggleEquipped = (itemName: string) => {
     setItems((prev) => ({
@@ -104,7 +103,7 @@ export const ItemsTable = () => {
   };
 
   const handleMoneyKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === 'Escape') {
+    if (e.key === "Enter" || e.key === "Escape") {
       setIsEditingMoney(false);
     }
   };
@@ -123,8 +122,8 @@ export const ItemsTable = () => {
               <div
                 className={`text-sm ${
                   totalWeight > weightLimit
-                    ? 'text-destructive'
-                    : 'text-muted-foreground'
+                    ? "text-destructive"
+                    : "text-muted-foreground"
                 }`}
               >
                 {totalWeight.toFixed(1)} / {weightLimit} kg
@@ -142,7 +141,7 @@ export const ItemsTable = () => {
               {isEditingMoney ? (
                 <Input
                   type="number"
-                  value={money}
+                  value={money === 0 ? "" : money}
                   onChange={handleMoneyChange}
                   onBlur={handleMoneyBlur}
                   onKeyDown={handleMoneyKeyDown}
@@ -190,15 +189,15 @@ export const ItemsTable = () => {
                 <TableCell className="text-right">
                   <div className="flex justify-end gap-2">
                     <Button
-                      variant={item.equipped ? 'default' : 'outline'}
+                      variant={item.equipped ? "default" : "outline"}
                       onClick={() => handleUseItem(name)}
                       className="w-24"
                     >
                       {item.singleUse
-                        ? 'Use'
+                        ? "Use"
                         : item.equipped
-                        ? 'Unequip'
-                        : 'Equip'}
+                        ? "Unequip"
+                        : "Equip"}
                     </Button>
                     <Button
                       variant="ghost"

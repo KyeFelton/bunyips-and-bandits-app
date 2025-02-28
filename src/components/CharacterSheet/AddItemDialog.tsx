@@ -1,27 +1,28 @@
-import { useState } from 'react';
-import { useAtom } from 'jotai';
-import { itemsAtom, moneyAtom } from '../../state/character';
+import { useState } from "react";
+import { useAtom } from "jotai";
+import { itemsAtom, moneyAtom } from "../../state/character";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '../ui/dialog';
-import { Button } from '../ui/button';
-import { Input } from '../ui/input';
-import { ArrowLeft, Plus } from 'lucide-react';
-import * as Items from '../../models/items';
-import { Item } from '../../models/items';
+} from "../ui/dialog";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { ArrowLeft, Plus } from "lucide-react";
+import * as Items from "../../models/items";
+import { Item } from "../../models/items";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../ui/select';
-import { Textarea } from '../ui/textarea';
-import { EffectForm } from '../EffectForm';
+} from "../ui/select";
+import { Textarea } from "../ui/textarea";
+import { EffectForm } from "../EffectForm";
+import { Effect } from "../../models/effect";
 
 type Props = {
   maxWeight: number;
@@ -30,7 +31,7 @@ type Props = {
 type ItemWithQuantity = {
   item: Item;
   quantity: number;
-  cost: number;
+  cost?: number;
 };
 
 type ItemCreationState = {
@@ -44,21 +45,23 @@ type ItemCreationState = {
 export const AddItemDialog = ({ maxWeight }: Props) => {
   const [items, setItems] = useAtom(itemsAtom);
   const [money, setMoney] = useAtom(moneyAtom);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const [open, setOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<ItemWithQuantity | null>(null);
+  const [selectedItem, setSelectedItem] = useState<ItemWithQuantity | null>(
+    null
+  );
   const [isCreatingItem, setIsCreatingItem] = useState(false);
   const [newItem, setNewItem] = useState<ItemCreationState>({
-    name: '',
-    description: '',
+    name: "",
+    description: "",
     effects: [],
     singleUse: false,
     weight: 0,
   });
 
-  const allItems = Object.values(Items).filter(
-    (item): item is Item => typeof item === 'object' && 'name' in item
-  ).sort((a, b) => a.name.localeCompare(b.name));
+  const allItems = Object.values(Items)
+    .filter((item): item is Item => typeof item === "object" && "name" in item)
+    .sort((a, b) => a.name.localeCompare(b.name));
 
   const filteredItems = allItems.filter(
     (item) =>
@@ -70,7 +73,7 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
     setSelectedItem({
       item,
       quantity: 1,
-      cost: 0,
+      cost: undefined,
     });
   };
 
@@ -93,7 +96,13 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
 
   const handleCostChange = (value: string) => {
     if (!selectedItem) return;
-    const cost = parseInt(value) || 0;
+    const cost = parseInt(value);
+    if (cost === undefined) {
+      setSelectedItem({
+        ...selectedItem,
+        cost: undefined,
+      });
+    }
     setSelectedItem({
       ...selectedItem,
       cost: Math.max(0, cost),
@@ -104,7 +113,7 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
     if (!selectedItem) return;
 
     const { item, quantity, cost } = selectedItem;
-    const totalCost = cost * quantity;
+    const totalCost = (cost || 0) * quantity;
 
     if (totalCost > money) {
       alert("You don't have enough money!");
@@ -131,12 +140,12 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
 
   const handleCreateItem = () => {
     if (!newItem.name || !newItem.description) {
-      alert('Please fill in all required fields');
+      alert("Please fill in all required fields");
       return;
     }
 
     if (items[newItem.name]) {
-      alert('An item with this name already exists');
+      alert("An item with this name already exists");
       return;
     }
 
@@ -175,9 +184,9 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
           Add
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-md h-[600px] overflow-hidden flex flex-col">
+      <DialogContent className="max-w-md h-[600px] overflow-auto flex flex-col">
         <DialogHeader>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 mb-2">
             {(selectedItem || isCreatingItem) && (
               <Button
                 variant="ghost"
@@ -192,79 +201,87 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
               {selectedItem
                 ? selectedItem.item.name
                 : isCreatingItem
-                ? 'Create Custom Item'
-                : 'Add Items'}
+                ? "Create Custom Item"
+                : "Add Items"}
             </DialogTitle>
           </div>
         </DialogHeader>
 
         {selectedItem ? (
-          <div className="space-y-6 py-4">
-            <p className="text-sm text-muted-foreground">
-              {selectedItem.item.description}
-            </p>
+          <div className="flex flex-col justify-between flex-1">
+            <div className="space-y-6 py-4">
+              <p className="text-sm text-muted-foreground">
+                {selectedItem.item.description}
+              </p>
 
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Quantity</label>
-                <Select
-                  value={selectedItem.quantity.toString()}
-                  onValueChange={handleQuantityChange}
-                >
-                  <SelectTrigger className="w-24">
-                    <SelectValue placeholder="1" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {Array.from({ length: 10 }, (_, i) => i + 1).map((num) => (
-                      <SelectItem key={num} value={num.toString()}>
-                        {num}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Quantity</label>
+                  <Select
+                    value={selectedItem.quantity.toString()}
+                    onValueChange={handleQuantityChange}
+                  >
+                    <SelectTrigger className="w-24">
+                      <SelectValue placeholder="1" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {Array.from({ length: 10 }, (_, i) => i + 1).map(
+                        (num) => (
+                          <SelectItem key={num} value={num.toString()}>
+                            {num}
+                          </SelectItem>
+                        )
+                      )}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Cost per item</label>
+                  <Input
+                    type="number"
+                    className="max-w-[100px]"
+                    min="0"
+                    value={selectedItem.cost}
+                    onChange={(e) => handleCostChange(e.target.value)}
+                  />
+                </div>
               </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Cost per item</label>
-                <Input
-                  type="number"
-                  min="0"
-                  value={selectedItem.cost}
-                  onChange={(e) => handleCostChange(e.target.value)}
-                />
-              </div>
-            </div>
 
-            <div className="space-y-2 pt-4">
-              <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Total Weight:</span>
-                <span>
-                  {getTotalWeight(selectedItem.item, selectedItem.quantity)} kg
-                </span>
-              </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Total Cost:</span>
-                <span>£ {selectedItem.cost * selectedItem.quantity}</span>
-              </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Your Money:</span>
-                <span>£ {money}</span>
+              <div className="space-y-2 pt-4">
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted-foreground">Total Weight:</span>
+                  <span>
+                    {getTotalWeight(selectedItem.item, selectedItem.quantity)}{" "}
+                    kg
+                  </span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted-foreground">Total Cost:</span>
+                  <span>
+                    £ {(selectedItem.cost || 0) * selectedItem.quantity}
+                  </span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted-foreground">Your Money:</span>
+                  <span>£ {money}</span>
+                </div>
               </div>
             </div>
 
             <Button
-              size="sm"
+              className="w-full mb-2"
               onClick={handleAddItem}
               disabled={
                 !canAddItem(selectedItem.item, selectedItem.quantity) ||
-                selectedItem.cost * selectedItem.quantity > money
+                (selectedItem.cost || 0) * selectedItem.quantity > money
               }
             >
-              Add to Inventory
+              Add to inventory
             </Button>
           </div>
         ) : isCreatingItem ? (
           <div className="flex-1 overflow-auto py-4">
-            <div className="space-y-4">
+            <div className="space-y-4 px-1">
               <div>
                 <label className="text-sm font-medium">Name</label>
                 <Input
@@ -289,6 +306,7 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
                 <label className="text-sm font-medium">Weight (kg)</label>
                 <Input
                   type="number"
+                  className="max-w-[100px]"
                   min="0"
                   step="0.1"
                   value={newItem.weight}
@@ -314,20 +332,33 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
                 </label>
               </div>
               <div>
-                <label className="text-sm font-medium block mb-2">Effects</label>
+                <label className="text-sm font-medium block mb-2">
+                  Effects
+                </label>
                 <EffectForm
                   value={newItem.effects}
                   onChange={(effects) => setNewItem({ ...newItem, effects })}
                 />
               </div>
               <Button onClick={handleCreateItem} className="w-full">
-                Create Item
+                Add to inventory
               </Button>
             </div>
           </div>
         ) : (
           <>
-            <div className="mb-4">
+            <div>
+              <Button
+                variant="outline"
+                className="w-full"
+                onClick={() => setIsCreatingItem(true)}
+              >
+                <Plus className="h-4 w-4 mr-2" />
+                Create custom item
+              </Button>
+            </div>
+            <div className="text-center text-sm text-muted-foreground">or</div>
+            <div>
               <Input
                 placeholder="Search items..."
                 value={search}
@@ -335,15 +366,7 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
                 className="w-full"
               />
             </div>
-            <div className="overflow-y-auto flex-1 -mx-6 px-6">
-              <Button
-                variant="outline"
-                className="w-full mb-4"
-                onClick={() => setIsCreatingItem(true)}
-              >
-                <Plus className="h-4 w-4 mr-2" />
-                Create Custom Item
-              </Button>
+            <div className="overflow-y-auto -mx-6 px-6">
               <div className="space-y-1">
                 {filteredItems.map((item) => (
                   <button
