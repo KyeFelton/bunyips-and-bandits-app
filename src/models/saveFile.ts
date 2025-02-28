@@ -1,6 +1,6 @@
-import { SkillType } from '../enums/SkillType';
-import { ItemDictionary } from './items';
-import { SelectedPath } from './paths';
+import { SkillType } from "../enums/SkillType";
+import { ItemDictionary } from "./items";
+import { SelectedPath } from "./paths";
 
 export type SaveFile = {
   name: string;
@@ -18,5 +18,5 @@ export type SaveFile = {
   currentStamina: number;
   items: ItemDictionary;
   money: number;
-  image?: string;
+  image: string;
 };

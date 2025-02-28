@@ -89,13 +89,13 @@ export const NameCard = () => {
   };
 
   return (
-    <Card>
+    <Card className="h-[332px] flex flex-col">
       <CardHeader className="p-4">
         <div className="relative flex flex-col items-center">
           <div className="absolute right-0 top-0">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="h-8 w-8">
+                <Button variant="outline" size="icon" className="h-8 w-8">
                   <EllipsisVertical className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
@@ -121,18 +121,18 @@ export const NameCard = () => {
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-          <h3 className="text-2xl font-semibold text-center">{name}</h3>
+          <h3 className="px-8 text-2xl font-semibold text-center line-clamp-2">
+            {name}
+          </h3>
           <span className="text-sm text-muted-foreground">Level {level}</span>
         </div>
       </CardHeader>
-      <CardContent>
-        <div className={"flex justify-center"}>
-          <img
-            src={image}
-            alt="character"
-            className="w-48 h-48 rounded-md object-cover"
-          />
-        </div>
+      <CardContent className="flex-grow min-h-0">
+        <img
+          src={image}
+          alt="character"
+          className="w-full h-full rounded-md object-cover"
+        />
       </CardContent>
     </Card>
   );

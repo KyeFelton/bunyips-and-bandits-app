@@ -1,6 +1,7 @@
-import { SetStateAction } from 'jotai';
-import { SaveFile } from '../models/saveFile';
-import { AllSpecies } from '../models/species';
+import { SetStateAction } from "jotai";
+import { SaveFile } from "../models/saveFile";
+import { AllSpecies } from "../models/species";
+import { getSpeciesImage } from "./speciesImages";
 
 type CharacterSetters = {
   setName: (value: SetStateAction<string>) => void;
@@ -14,7 +15,7 @@ type CharacterSetters = {
   setBackground: (value: SetStateAction<string>) => void;
   setPersonality: (value: SetStateAction<string>) => void;
   setLanguages: (value: SetStateAction<string[]>) => void;
-  setImage: (value: SetStateAction<string | undefined>) => void;
+  setImage: (value: SetStateAction<string>) => void;
   setMoney: (value: SetStateAction<number>) => void;
   setItems: (value: SetStateAction<Record<string, any>>) => void;
   setPaths: (value: SetStateAction<any[]>) => void;
@@ -24,25 +25,28 @@ type CharacterSetters = {
 
 const validateSaveFile = (data: any): data is SaveFile => {
   return (
-    typeof data === 'object' &&
+    typeof data === "object" &&
     data !== null &&
-    typeof data.name === 'string' &&
-    typeof data.species === 'string' &&
-    typeof data.level === 'number' &&
+    typeof data.name === "string" &&
+    typeof data.species === "string" &&
+    typeof data.level === "number" &&
     Array.isArray(data.languages) &&
-    typeof data.currentHealth === 'number' &&
-    typeof data.currentSanity === 'number' &&
-    typeof data.currentStamina === 'number' &&
-    typeof data.money === 'number' &&
+    typeof data.currentHealth === "number" &&
+    typeof data.currentSanity === "number" &&
+    typeof data.currentStamina === "number" &&
+    typeof data.money === "number" &&
     Array.isArray(data.paths) &&
-    typeof data.items === 'object'
+    typeof data.items === "object"
   );
 };
 
-export const uploadCharacter = async (setters: CharacterSetters, navigate: (path: string) => void) => {
-  const input = document.createElement('input');
-  input.type = 'file';
-  input.accept = '.json';
+export const uploadCharacter = async (
+  setters: CharacterSetters,
+  navigate: (path: string) => void
+) => {
+  const input = document.createElement("input");
+  input.type = "file";
+  input.accept = ".json";
   input.onchange = (e) => {
     const file = (e.target as HTMLInputElement).files?.[0];
     if (file) {
@@ -50,9 +54,9 @@ export const uploadCharacter = async (setters: CharacterSetters, navigate: (path
       reader.onload = (e) => {
         try {
           const data = JSON.parse(e.target?.result as string);
-          
+
           if (!validateSaveFile(data)) {
-            throw new Error('Invalid save file format');
+            throw new Error("Invalid save file format");
           }
 
           // Update all atoms with the loaded data
@@ -62,10 +66,10 @@ export const uploadCharacter = async (setters: CharacterSetters, navigate: (path
           setters.setCurrentSanity(data.currentSanity);
           setters.setCurrentStamina(data.currentStamina);
           setters.setSpecies(data.species);
-          setters.setGender(data.gender || '');
+          setters.setGender(data.gender || "");
           setters.setAge(data.age || 0);
-          setters.setBackground(data.background || '');
-          setters.setPersonality(data.personality || '');
+          setters.setBackground(data.background || "");
+          setters.setPersonality(data.personality || "");
           setters.setLanguages(data.languages);
           setters.setImage(data.image);
           setters.setMoney(data.money);
@@ -74,10 +78,15 @@ export const uploadCharacter = async (setters: CharacterSetters, navigate: (path
           setters.setSkillLevelUpgrades(data.skillLevelUpgrades || {});
           setters.setIsFirstLoad?.(false);
 
-          navigate('/character');
+          navigate("/character");
         } catch (error) {
-          console.error('Error loading character:', error instanceof Error ? error.message : 'Unknown error');
-          alert('Failed to load character file. Please make sure the file is valid.');
+          console.error(
+            "Error loading character:",
+            error instanceof Error ? error.message : "Unknown error"
+          );
+          alert(
+            "Failed to load character file. Please make sure the file is valid."
+          );
         }
       };
       reader.readAsText(file);
@@ -89,7 +98,7 @@ export const uploadCharacter = async (setters: CharacterSetters, navigate: (path
 export const resetCharacter = (setters: CharacterSetters) => {
   const startingSpecies = AllSpecies.Minotaur;
 
-  setters.setName('');
+  setters.setName("");
   setters.setSpecies(startingSpecies.name);
   setters.setLevel(1);
   setters.setCurrentHealth(
@@ -101,12 +110,12 @@ export const resetCharacter = (setters: CharacterSetters) => {
   setters.setCurrentStamina(
     startingSpecies.stamina.initial + startingSpecies.stamina.increments
   );
-  setters.setGender('');
+  setters.setGender("");
   setters.setAge(0);
-  setters.setBackground('');
-  setters.setPersonality('');
+  setters.setBackground("");
+  setters.setPersonality("");
   setters.setLanguages([]);
-  setters.setImage(undefined);
+  setters.setImage(getSpeciesImage(startingSpecies.name));
   setters.setMoney(0);
   setters.setItems({});
   setters.setPaths([]);

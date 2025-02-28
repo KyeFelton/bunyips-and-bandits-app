@@ -1,18 +1,17 @@
-import { useAtomValue } from 'jotai';
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import { Badge } from '../ui/badge';
+import { useAtomValue } from "jotai";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Badge } from "../ui/badge";
 import {
-  speciesAtom,
+  speciesDataAtom,
   genderAtom,
   ageAtom,
   languagesAtom,
   backgroundAtom,
   personalityAtom,
-} from '../../state/character';
-import { DescriptionDialog } from './DescriptionDialog';
+} from "../../state/character";
 
 export const DescriptionCard = () => {
-  const species = useAtomValue(speciesAtom);
+  const species = useAtomValue(speciesDataAtom);
   const gender = useAtomValue(genderAtom);
   const age = useAtomValue(ageAtom);
   const selectedLanguages = useAtomValue(languagesAtom);
@@ -20,30 +19,37 @@ export const DescriptionCard = () => {
   const personality = useAtomValue(personalityAtom);
 
   return (
-    <Card>
+    <Card className="h-[472px] flex flex-col">
       <CardHeader>
         <CardTitle>Description</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-4 flex-grow min-h-0 overflow-auto">
         <div>
           <div className="text-sm font-medium text-muted-foreground mb-1">
             Species
           </div>
-          <div className="text-sm">{species}</div>
+          <div className="text-sm">{species.name}</div>
         </div>
 
         <div>
           <div className="text-sm font-medium text-muted-foreground mb-1">
             Gender
           </div>
-          <div className="text-sm">{gender || '-'}</div>
+          <div className="text-sm">{gender || "-"}</div>
         </div>
 
         <div>
           <div className="text-sm font-medium text-muted-foreground mb-1">
             Age
           </div>
-          <div className="text-sm">{age || '-'}</div>
+          <div className="text-sm">{age || "-"}</div>
+        </div>
+
+        <div>
+          <div className="text-sm font-medium text-muted-foreground mb-1">
+            Size
+          </div>
+          <div className="text-sm">{species.size || "-"}</div>
         </div>
 
         <div>
@@ -67,22 +73,9 @@ export const DescriptionCard = () => {
           <div className="text-sm font-medium text-muted-foreground mb-1">
             Background
           </div>
-            <div className="text-sm flex">
-              <div className="flex-1 whitespace-nowrap overflow-hidden text-ellipsis">{background || '-'}</div>
-              <div>
-              {background && background.length > 0 && (
-                <DescriptionDialog
-                  title="Background"
-                  content={background}
-                  trigger={
-                    <button className="text-sm text-muted-foreground hover:text-accent-foreground ml-1 inline align-baseline">
-                      more
-                    </button>
-                  }
-                />
-              )}
-                </div>
-            </div>
+          <div className="text-sm flex">
+            <div className="flex-1">{background || "-"}</div>
+          </div>
         </div>
 
         <div>
@@ -90,22 +83,8 @@ export const DescriptionCard = () => {
             Personality & Motivation
           </div>
           <div className="text-sm flex">
-            <div className="flex-1 whitespace-nowrap overflow-hidden text-ellipsis">
-              {personality || '-'}
-            </div>
-            <div>
-              {personality && personality.length > 150 && (
-                <DescriptionDialog
-                  title="Personality & Motivation"
-                  content={personality}
-                  trigger={
-                    <button className="text-sm text-muted-foreground hover:text-accent-foreground ml-1 inline align-baseline">
-                      more
-                    </button>
-                  }
-                />
-              )}
-            </div>
+            <div className="flex-1">{personality || "-"}</div>
+            <div></div>
           </div>
         </div>
       </CardContent>

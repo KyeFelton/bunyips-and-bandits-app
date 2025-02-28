@@ -1,28 +1,31 @@
-import { atom } from 'jotai';
-import { SkillType } from '../enums/SkillType';
-import { ItemDictionary } from '../models/items';
-import { SelectedPath } from '../models/paths';
-import { AllSpecies } from '../models/species';
-import { SaveFile } from '../models/saveFile';
-import { Effect } from '../models/effect';
-import { Trait } from '../models/traits';
+import { atom } from "jotai";
+import { SkillType } from "../enums/SkillType";
+import { ItemDictionary } from "../models/items";
+import { SelectedPath } from "../models/paths";
+import { AllSpecies } from "../models/species";
+import { SaveFile } from "../models/saveFile";
+import { Effect } from "../models/effect";
+import { Trait } from "../models/traits";
+import { getSpeciesImage } from "../utils/speciesImages";
 
 const startingSpecies = AllSpecies.Minotaur;
 
 // Basic character info
-export const nameAtom = atom<string>('');
+export const nameAtom = atom<string>("");
 export const speciesAtom = atom<string>(startingSpecies.name);
-export const genderAtom = atom<string>('');
+export const genderAtom = atom<string>("");
 export const ageAtom = atom<number>(0);
-export const backgroundAtom = atom<string>('');
-export const personalityAtom = atom<string>('');
+export const backgroundAtom = atom<string>("");
+export const personalityAtom = atom<string>("");
 export const languagesAtom = atom<string[]>([]);
-export const imageAtom = atom<string | undefined>(undefined);
+export const imageAtom = atom<string>(getSpeciesImage(startingSpecies.name));
 
 // Character progression
 export const levelAtom = atom<number>(1);
 export const pathsAtom = atom<SelectedPath[]>([]);
-export const skillLevelUpgradesAtom = atom<Partial<Record<SkillType, number>>>({});
+export const skillLevelUpgradesAtom = atom<Partial<Record<SkillType, number>>>(
+  {}
+);
 
 // Character stats
 export const currentHealthAtom = atom<number>(
@@ -249,7 +252,7 @@ export const armourAtom = atom((get) => {
 // Weapon damage
 export const weaponDamageAtom = atom((get) => {
   const effects = get(effectsAtom);
-  
+
   return effects.reduce((damage, effect) => {
     if (effect.weaponDamage?.static) {
       return damage + effect.weaponDamage.static;

@@ -1,10 +1,12 @@
-import { SkillType } from '../enums/SkillType';
-import { MovementType } from '../enums/MovementType';
-import { DamageType } from '../enums/DamageType';
-import { SenseType } from '../enums/SenseType';
+import { SkillType } from "../enums/SkillType";
+import { MovementType } from "../enums/MovementType";
+import { DamageType } from "../enums/DamageType";
+import { SenseType } from "../enums/SenseType";
+import { CreatureSize } from "../enums/CreatureSize";
 
 export type Species = {
   name: string;
+  size: CreatureSize;
   health: {
     initial: number;
     increments: number;
@@ -56,7 +58,8 @@ export type Species = {
 };
 
 export const Minotaur: Species = {
-  name: 'Minotaur',
+  name: "Minotaur",
+  size: CreatureSize.Large,
   health: {
     initial: 30,
     increments: 3,
@@ -108,7 +111,8 @@ export const Minotaur: Species = {
 };
 
 export const Jeli: Species = {
-  name: 'Jeli',
+  name: "Jeli",
+  size: CreatureSize.Medium,
   health: {
     initial: 20,
     increments: 2,
@@ -160,7 +164,8 @@ export const Jeli: Species = {
 };
 
 export const Pixie: Species = {
-  name: 'Pixie',
+  name: "Pixie",
+  size: CreatureSize.Tiny,
   health: {
     initial: 5,
     increments: 0.5,
