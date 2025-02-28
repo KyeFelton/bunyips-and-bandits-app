@@ -94,8 +94,18 @@ export const speciesDataAtom = atom((get) => {
 export const healthAtom = atom((get) => {
   const speciesData = get(speciesDataAtom);
   const level = get(levelAtom);
+  const effects = get(effectsAtom);
+  const baseMaxHealth =
+    speciesData.health.initial + level * speciesData.health.increments;
+  const maxHealth = effects.reduce((total, effect) => {
+    if (effect.health?.static) {
+      return total + effect.health.static;
+    }
+    return total;
+  }, baseMaxHealth);
+
   return {
-    max: speciesData.health.initial + level * speciesData.health.increments,
+    max: maxHealth,
     current: get(currentHealthAtom),
     increments: speciesData.health.increments,
   };
@@ -105,8 +115,18 @@ export const healthAtom = atom((get) => {
 export const sanityAtom = atom((get) => {
   const speciesData = get(speciesDataAtom);
   const level = get(levelAtom);
+  const effects = get(effectsAtom);
+  const baseMaxSanity =
+    speciesData.sanity.initial + level * speciesData.sanity.increments;
+  const maxSanity = effects.reduce((total, effect) => {
+    if (effect.sanity?.static) {
+      return total + effect.sanity.static;
+    }
+    return total;
+  }, baseMaxSanity);
+
   return {
-    max: speciesData.sanity.initial + level * speciesData.sanity.increments,
+    max: maxSanity,
     current: get(currentSanityAtom),
     increments: speciesData.sanity.increments,
   };
@@ -116,8 +136,18 @@ export const sanityAtom = atom((get) => {
 export const staminaAtom = atom((get) => {
   const speciesData = get(speciesDataAtom);
   const level = get(levelAtom);
+  const effects = get(effectsAtom);
+  const baseMaxStamina =
+    speciesData.stamina.initial + level * speciesData.stamina.increments;
+  const maxStamina = effects.reduce((total, effect) => {
+    if (effect.stamina?.static) {
+      return total + effect.stamina.static;
+    }
+    return total;
+  }, baseMaxStamina);
+
   return {
-    max: speciesData.stamina.initial + level * speciesData.stamina.increments,
+    max: maxStamina,
     current: get(currentStaminaAtom),
     increments: speciesData.stamina.increments,
   };
