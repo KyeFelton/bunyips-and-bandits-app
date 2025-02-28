@@ -15,22 +15,22 @@ import {
   Soup,
   Flame,
   Zap,
-  Move3D,
+  Wind,
   Sun,
   Music2,
   BrainCircuit,
   Droplets,
   Heart,
   Ghost,
-} from 'lucide-react';
-import { SkillType } from '../../enums/SkillType';
+} from "lucide-react";
+import { SkillType } from "../../enums/SkillType";
 
 type Props = {
   type: SkillType;
   className?: string;
 };
 
-export const SkillIcon = ({ type, className = 'h-4 w-4' }: Props) => {
+export const SkillIcon = ({ type, className = "h-4 w-4" }: Props) => {
   switch (type) {
     case SkillType.Strength:
       return <BicepsFlexed className={className} />;
@@ -65,7 +65,7 @@ export const SkillIcon = ({ type, className = 'h-4 w-4' }: Props) => {
     case SkillType.Electric:
       return <Zap className={className} />;
     case SkillType.Kinetic:
-      return <Move3D className={className} />;
+      return <Wind className={className} />;
     case SkillType.Radiant:
       return <Sun className={className} />;
     case SkillType.Sonic:

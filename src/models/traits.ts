@@ -224,15 +224,88 @@ export const AcidicSkin: Trait = {
 // Lightbender traits
 export const IronVision: Trait = {
   name: "Iron Vision",
-  description: "Your eyes have toughened from your experience of crafting light. You cannot be blinded anymore.",
+  description:
+    "Your eyes have toughened from your experience of crafting light. You cannot be blinded anymore.",
 };
 
 export const Photosynthetic: Trait = {
   name: "Photosynthetic",
-  description: "You can absorb sunlight. Lightbender actions cost 1 less stamina when performed in direct sunlight.",
+  description:
+    "You can absorb sunlight. Lightbender actions cost 1 less stamina when performed in direct sunlight.",
 };
 
 export const RadiantAura: Trait = {
   name: "Radiant Aura",
-  description: "You radiate an aura from your body that is both mesmerising and bewildering. Adjacent foes that rely on sight are stunned at the end of your turn.",
+  description:
+    "You radiate an aura from your body that is both mesmerising and bewildering. Adjacent foes that rely on sight are stunned at the end of your turn.",
+};
+
+// Electrician traits
+export const Hydrophile: Trait = {
+  name: "Hydrophile",
+  description:
+    "If you and the target are connected by water, all electrics attacks cost 1 less stamina and low success rate becomes a high success rate.",
+};
+
+export const ElectricResistanceI: Trait = {
+  name: "Electric Resistance I",
+  description: "Gain 3 electric armour.",
+  effects: [
+    {
+      armour: {
+        damageType: DamageType.Electric,
+        static: 3,
+      },
+    },
+  ],
+};
+
+export const ThunderBuddy: Trait = {
+  name: "Thunder Buddy",
+  description:
+    "If an ally is hit by one of your aerial or electric attacks, they only receive half the normal damage and do not stun.",
+};
+
+export const LightningRod: Trait = {
+  name: "Lightning Rod",
+  description:
+    "You can direct all nearby electric attacks targeted towards your allies to you instead",
+};
+
+export const ElectricResistanceII: Trait = {
+  name: "Electric Resistance II",
+  description: "Further gain 3 electric armour.",
+  effects: [
+    {
+      armour: {
+        damageType: DamageType.Electric,
+        static: 3,
+      },
+    },
+  ],
+};
+
+export const StaticSkin: Trait = {
+  name: "Static Skin",
+  description:
+    "Electricity surges through your skin. Foes that touch your skin get zapped with 1d8 electric damage.",
+};
+
+// Stormcaller traits
+export const Bellow: Trait = {
+  name: "Bellow",
+  description:
+    "You can choose whether to smoother or aggravate fires when performing aerial attacks. If you smoother, then all creatures in the area of effect remove burning status. If you aggravate an existing fire, then all creatures in the area of effect gain burning status.",
+};
+
+export const WaterBreathing: Trait = {
+  name: "Water Breathing",
+  description:
+    "You can extra oxygen from the water to create an air bubble around you and allow you to breathe underwater.",
+};
+
+export const Rebounder: Trait = {
+  name: "Rebounder",
+  description:
+    "After projecting a small object, you can recall the object back to your possession as part of the same action.",
 };

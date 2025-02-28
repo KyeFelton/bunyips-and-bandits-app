@@ -53,6 +53,30 @@ import {
   Invisibility,
   Hyperbeam,
   SolarFlare,
+  AirSlash,
+  Attract,
+  Catapult,
+  Chain,
+  Discharge,
+  ElectricCharge,
+  Electrocute,
+  Fly,
+  Gust,
+  Hurl,
+  Hurricane,
+  Impedance,
+  Levitate,
+  Lightning,
+  MagnetiseArena,
+  Propel,
+  Rifle,
+  Shock,
+  Taser,
+  Tornado,
+  Torrent,
+  WindBarrier,
+  WindShield,
+  Zap,
 } from "./actions";
 import {
   AcidicSkin,
@@ -79,6 +103,15 @@ import {
   IronVision,
   Photosynthetic,
   RadiantAura,
+  Bellow,
+  ElectricResistanceI,
+  ElectricResistanceII,
+  Hydrophile,
+  LightningRod,
+  Rebounder,
+  StaticSkin,
+  ThunderBuddy,
+  WaterBreathing,
 } from "./traits";
 
 export type Path = {
@@ -94,7 +127,7 @@ export type Path = {
 
 export type SelectedPath = Path & {
   level: number;
-}
+};
 
 export const WeaponMaster: Path = {
   name: "Weapon Master",
@@ -201,7 +234,8 @@ export const Sonomancer: Path = {
 export const Doctor: Path = {
   name: "Doctor",
   skillTypes: [SkillType.Toxic, SkillType.Healing],
-  description: "Through years of study in morphing, Doctors have mastered the delicate balance between healing and harm. Their knowledge of poisons allows them to weaken powerful enemies, whilst their expertise in healing makes them indispensable during the toughest times.",
+  description:
+    "Through years of study in morphing, Doctors have mastered the delicate balance between healing and harm. Their knowledge of poisons allows them to weaken powerful enemies, whilst their expertise in healing makes them indispensable during the toughest times.",
   unlockables: [
     {
       level: 1,
@@ -234,7 +268,8 @@ export const Doctor: Path = {
 export const Lightbender: Path = {
   name: "Lightbender",
   skillTypes: [SkillType.Radiant],
-  description: "Lightbenders are the artisans of light. Whether crafting dazzling illusions or blinding adversaries with radiant bursts, lightbenders are a versatile ally to any team.",
+  description:
+    "Lightbenders are the artisans of light. Whether crafting dazzling illusions or blinding adversaries with radiant bursts, lightbenders are a versatile ally to any team.",
   unlockables: [
     {
       level: 1,
@@ -260,6 +295,74 @@ export const Lightbender: Path = {
       level: 5,
       actions: [Hyperbeam, SolarFlare],
       traits: [RadiantAura],
+    },
+  ],
+};
+
+export const Electrician: Path = {
+  name: "Electrician",
+  skillTypes: [SkillType.Electric],
+  description:
+    "Masters of electricity, these sorcerers can manipulate electrical and magnetic forces to devastating effect. Their powers range from subtle magnetic control to unleashing devastating bolts of lightning.",
+  unlockables: [
+    {
+      level: 1,
+      actions: [Taser, ElectricCharge, Chain],
+      traits: [Hydrophile],
+    },
+    {
+      level: 2,
+      actions: [Shock, Impedance, Levitate],
+      traits: [ElectricResistanceI],
+    },
+    {
+      level: 3,
+      actions: [Attract, Zap],
+      traits: [ThunderBuddy],
+    },
+    {
+      level: 4,
+      actions: [MagnetiseArena, Electrocute],
+      traits: [LightningRod, ElectricResistanceII],
+    },
+    {
+      level: 5,
+      actions: [Lightning, Discharge],
+      traits: [StaticSkin],
+    },
+  ],
+};
+
+export const Stormcaller: Path = {
+  name: "Stormcaller",
+  skillTypes: [SkillType.Kinetic],
+  description:
+    "Masters of wind and weather, Stormcallers harness the raw power of the elements to control the battlefield. They excel at manipulating objects and creatures through the air, creating powerful defensive barriers, and unleashing devastating storms.",
+  unlockables: [
+    {
+      level: 1,
+      actions: [Gust, Hurl, Propel],
+      traits: [Bellow],
+    },
+    {
+      level: 2,
+      actions: [WindBarrier, AirSlash],
+      traits: [Swift],
+    },
+    {
+      level: 3,
+      actions: [Torrent, Rifle],
+      traits: [ThunderBuddy],
+    },
+    {
+      level: 4,
+      actions: [Fly, WindShield, Catapult],
+      traits: [WaterBreathing],
+    },
+    {
+      level: 5,
+      actions: [Tornado, Hurricane],
+      traits: [Rebounder],
     },
   ],
 };

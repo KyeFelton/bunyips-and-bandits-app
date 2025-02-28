@@ -555,3 +555,238 @@ export const SolarFlare: Action = {
   areaOfEffect: AreaOfEffect.Sphere,
   staminaCost: 8,
 };
+
+// Electrician actions
+export const Taser: Action = {
+  name: "Taser",
+  effect: "Your target is stunned.",
+  skillType: SkillType.Electric,
+  range: Range.Adjacent,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 1,
+};
+
+export const ElectricCharge: Action = {
+  name: "Charge",
+  effect:
+    "You take an action to build up and store potential energy. On your next turn, increase any electric damage dealt to a target by 5.",
+  skillType: SkillType.Electric,
+  range: Range.Self,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 1,
+};
+
+export const Chain: Action = {
+  name: "Chain",
+  effect:
+    "If a target of your next electric attack is adjacent to another creature, you can optionally extend the attack to hit the adjacent creature as well.",
+  skillType: SkillType.Electric,
+  range: Range.Self,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 1,
+};
+
+export const Shock: Action = {
+  name: "Shock",
+  effect: "Target takes 10 electric damage.",
+  skillType: SkillType.Electric,
+  range: Range.Adjacent,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 1,
+};
+
+export const Impedance: Action = {
+  name: "Impedance",
+  effect:
+    "You focus your attention towards countering the spells of your foes. Targets of your choosing are protected with 5 electric armour.",
+  skillType: SkillType.Electric,
+  range: Range.Self,
+  areaOfEffect: AreaOfEffect.Sphere,
+  staminaCost: 2,
+};
+
+export const Levitate: Action = {
+  name: "Levitate",
+  effect:
+    "You can charge your body to repel the ground and levitate at will. Whilst hovering, you can move at your walking speed.",
+  skillType: SkillType.Electric,
+  range: Range.Self,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 1,
+};
+
+export const Attract: Action = {
+  name: "Attract",
+  effect:
+    "Your body turns into a super magnet that attracts magnetic metals. Nearby, unsecured, small metal objects fly towards you. Roll a 1d20 to see how effective the action is at attracting secured or large metal objects.",
+  skillType: SkillType.Electric,
+  range: Range.Self,
+  areaOfEffect: AreaOfEffect.Sphere,
+  staminaCost: 2,
+};
+
+export const Zap: Action = {
+  name: "Zap",
+  effect: "Targets take 10 electric damage.",
+  skillType: SkillType.Electric,
+  range: Range.Self,
+  areaOfEffect: AreaOfEffect.Sphere,
+  staminaCost: 2,
+};
+
+export const MagnetiseArena: Action = {
+  name: "Magnetise arena",
+  effect:
+    "You magnetise all nearby magnetic metals. They turn into magnets and attract each other.",
+  skillType: SkillType.Electric,
+  range: Range.Self,
+  areaOfEffect: AreaOfEffect.Arena,
+  staminaCost: 4,
+};
+
+export const Electrocute: Action = {
+  name: "Electrocute",
+  effect: "Target takes 25 electric damage and are stunned.",
+  skillType: SkillType.Electric,
+  range: Range.Adjacent,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 3,
+};
+
+export const Lightning: Action = {
+  name: "Lightning",
+  effect: "Target takes 30 electric damage and are stunned.",
+  skillType: SkillType.Electric,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 5,
+};
+
+export const Discharge: Action = {
+  name: "Discharge",
+  effect: "Targets take 20 electric damage.",
+  skillType: SkillType.Electric,
+  range: Range.Self,
+  areaOfEffect: AreaOfEffect.Sphere,
+  staminaCost: 6,
+};
+
+// Stormcaller actions
+export const Gust: Action = {
+  name: "Gust",
+  effect:
+    "Small sized creatures are thrown back 5m. Medium sized and smaller creatures move at half speed in the direction of the wind on their next turn. Targets are asnomic.",
+  skillType: SkillType.Kinetic,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.Cone,
+  staminaCost: 2,
+};
+
+export const Hurl: Action = {
+  name: "Hurl",
+  effect:
+    "You throw a small object in your possession to a target. They target 5 force damage.",
+  skillType: SkillType.Kinetic,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 1,
+};
+
+export const Propel: Action = {
+  name: "Propel",
+  effect:
+    "You and your allies can move at double your regular speed this turn.",
+  skillType: SkillType.Kinetic,
+  range: Range.Self,
+  areaOfEffect: AreaOfEffect.Arena,
+  staminaCost: 2,
+};
+
+export const WindBarrier: Action = {
+  name: "Wind barrier",
+  effect:
+    "You protect an area with rapid winds. Any creature or object that attempts to enter the area needs to succeed on a strength check, otherwise they are thrown back 5m and restrained for the rest of their turn.",
+  skillType: SkillType.Kinetic,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.Sphere,
+  staminaCost: 3,
+};
+
+export const AirSlash: Action = {
+  name: "Air slash",
+  effect:
+    "Target takes 5 force damage. If medium sized or smaller, they are thrown back 5m.",
+  skillType: SkillType.Kinetic,
+  range: Range.Adjacent,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 1,
+};
+
+export const Torrent: Action = {
+  name: "Torrent",
+  effect:
+    "Large sized creatures are thrown back 5m. Medium sized and smaller creatures are thrown back 15m and are stunned. Targets cannot move against the wind on their turn. Targets are asnomic.",
+  skillType: SkillType.Kinetic,
+  range: Range.Self,
+  areaOfEffect: AreaOfEffect.Cone,
+  staminaCost: 3,
+};
+
+export const Rifle: Action = {
+  name: "Rifle",
+  effect:
+    "You shoot a small object in your possession to a target at a rapid speed. They target 5 slash damage and 10 force damage.",
+  skillType: SkillType.Kinetic,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 3,
+};
+
+export const Fly: Action = {
+  name: "Fly",
+  effect: "You can fly at a speed up to 5 times your walking speed.",
+  skillType: SkillType.Kinetic,
+  range: Range.Self,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 2,
+};
+
+export const WindShield: Action = {
+  name: "Wind shield",
+  effect:
+    "You surround yourself with a torrent of wind. You are protected with 5 force armour and 5 slash armour. Creatures that attempt to melee attack you are stunned afterwards.",
+  skillType: SkillType.Kinetic,
+  range: Range.Self,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 2,
+};
+
+export const Catapult: Action = {
+  name: "Catapult",
+  effect:
+    "You throw a large sized or smaller creature up to 20m through the air. They take 5 force damage for every 5m thrown.",
+  skillType: SkillType.Kinetic,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 4,
+};
+
+export const Tornado: Action = {
+  name: "Tornado",
+  effect:
+    "You summon a tornado to destroy your foes. Large sized and smaller creatures are thrown back 10m. They take 20 force damage and are stunned.",
+  skillType: SkillType.Kinetic,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.Sphere,
+  staminaCost: 6,
+};
+
+export const Hurricane: Action = {
+  name: "Hurricane",
+  effect:
+    "You unleash a tempest. Medium sized and smaller creatures are thrown 5m in a random direction. Targets are stunned and are restrained. They take 5 electric, 5 slash and 5 force damage as they are struck by objects from their environment. Targets are asnomic.",
+  skillType: SkillType.Kinetic,
+  range: Range.Self,
+  areaOfEffect: AreaOfEffect.Arena,
+  staminaCost: 8,
+};
