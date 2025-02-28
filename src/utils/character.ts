@@ -2,6 +2,7 @@ import { SetStateAction } from "jotai";
 import { SaveFile } from "../models/saveFile";
 import { AllSpecies } from "../models/species";
 import { getSpeciesImage } from "./speciesImages";
+import { Trait } from "../models/traits";
 
 type CharacterSetters = {
   setName: (value: SetStateAction<string>) => void;
@@ -19,6 +20,7 @@ type CharacterSetters = {
   setMoney: (value: SetStateAction<number>) => void;
   setItems: (value: SetStateAction<Record<string, any>>) => void;
   setPaths: (value: SetStateAction<any[]>) => void;
+  setCustomTraits: (value: SetStateAction<Record<string, Trait>>) => void;
   setSkillLevelUpgrades: (value: SetStateAction<any>) => void;
   setIsFirstLoad?: (value: SetStateAction<boolean>) => void;
 };
@@ -36,7 +38,8 @@ const validateSaveFile = (data: any): data is SaveFile => {
     typeof data.currentStamina === "number" &&
     typeof data.money === "number" &&
     Array.isArray(data.paths) &&
-    typeof data.items === "object"
+    typeof data.items === "object" &&
+    typeof data.customTraits === "object"
   );
 };
 
@@ -75,6 +78,7 @@ export const uploadCharacter = async (
           setters.setMoney(data.money);
           setters.setItems(data.items);
           setters.setPaths(data.paths);
+          setters.setCustomTraits(data.customTraits);
           setters.setSkillLevelUpgrades(data.skillLevelUpgrades || {});
           setters.setIsFirstLoad?.(false);
 
@@ -119,6 +123,7 @@ export const resetCharacter = (setters: CharacterSetters) => {
   setters.setMoney(0);
   setters.setItems({});
   setters.setPaths([]);
+  setters.setCustomTraits({});
   setters.setSkillLevelUpgrades({});
   setters.setIsFirstLoad?.(true);
 };

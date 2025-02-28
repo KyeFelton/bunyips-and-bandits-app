@@ -33,6 +33,7 @@ import {
   pathsAtom,
   skillLevelUpgradesAtom,
   saveFileAtom,
+  customTraitsAtom,
 } from "../../state/character";
 import { resetCharacter, uploadCharacter } from "../../utils/character";
 
@@ -60,6 +61,7 @@ export const NameCard = () => {
     setMoney: useSetAtom(moneyAtom),
     setItems: useSetAtom(itemsAtom),
     setPaths: useSetAtom(pathsAtom),
+    setCustomTraits: useSetAtom(customTraitsAtom),
     setSkillLevelUpgrades: useSetAtom(skillLevelUpgradesAtom),
   };
 

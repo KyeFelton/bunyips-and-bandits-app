@@ -20,6 +20,7 @@ import {
   itemsAtom,
   pathsAtom,
   skillLevelUpgradesAtom,
+  customTraitsAtom,
 } from "../../state/character";
 import { uploadCharacter } from "../../utils/character";
 import { Logo } from "../Logo";
@@ -44,6 +45,7 @@ export function LandingPage() {
     setMoney: useSetAtom(moneyAtom),
     setItems: useSetAtom(itemsAtom),
     setPaths: useSetAtom(pathsAtom),
+    setCustomTraits: useSetAtom(customTraitsAtom),
     setSkillLevelUpgrades: useSetAtom(skillLevelUpgradesAtom),
   };
 

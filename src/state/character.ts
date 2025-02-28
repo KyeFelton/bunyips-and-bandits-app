@@ -305,6 +305,7 @@ export const saveFileAtom = atom<SaveFile>((get) => ({
   personality: get(personalityAtom),
   level: get(levelAtom),
   paths: get(pathsAtom),
+  customTraits: get(customTraitsAtom),
   skillLevelUpgrades: get(skillLevelUpgradesAtom),
   currentHealth: get(currentHealthAtom),
   currentSanity: get(currentSanityAtom),

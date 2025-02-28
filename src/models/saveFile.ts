@@ -1,6 +1,7 @@
 import { SkillType } from "../enums/SkillType";
 import { ItemDictionary } from "./items";
 import { SelectedPath } from "./paths";
+import { Trait } from "./traits";
 
 export type SaveFile = {
   name: string;
@@ -12,6 +13,7 @@ export type SaveFile = {
   languages: string[];
   level: number;
   paths: SelectedPath[];
+  customTraits: Record<string, Trait>;
   skillLevelUpgrades: Partial<Record<SkillType, number>>;
   currentHealth: number;
   currentSanity: number;
