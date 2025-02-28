@@ -5,7 +5,7 @@ import { CharacterSheet } from "./components/CharacterSheet";
 import { CharacterEditor } from "./components/CharacterEditor";
 import { RulesPage } from "./components/RulesPage";
 import { RulesButton } from "./components/RulesButton";
-import background from "./images/campfire.webp";
+import background from "./images/background.webp";
 import frame from "./images/leaf-frame.png";
 
 function App() {

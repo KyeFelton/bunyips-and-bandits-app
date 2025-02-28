@@ -22,8 +22,7 @@ export function CharacterSheet() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="relative flex justify-center h-full ">
-        {/*  bg-foreground/90 */}
+      <div className="relative flex justify-center h-full bg-foreground/80">
         <main className="py-12 px-8 grid grid-cols-4 gap-4 h-full w-full max-w-[1400px] overflow-auto">
           <div className="flex flex-col gap-2 h-[948px] justify-between">
             <NameCard />
