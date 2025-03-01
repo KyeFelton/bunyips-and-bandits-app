@@ -386,7 +386,7 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
                   Effects
                 </label>
                 <EffectForm
-                  value={newItem.effects || []}
+                  effects={newItem.effects || []}
                   onChange={(effects) => setNewItem({ ...newItem, effects })}
                 />
               </div>

@@ -1,5 +1,5 @@
-import { useAtomValue } from 'jotai';
-import { pathsAtom, customTraitsAtom } from '../../state/character';
+import { useAtomValue } from "jotai";
+import { pathsAtom, customTraitsAtom } from "../../state/character";
 
 type TraitWithPath = {
   name: string;
@@ -25,10 +25,10 @@ export const TraitsList = () => {
           }))
         )
     ),
-    ...Object.values(customTraits).map((trait) => ({
+    ...customTraits.map((trait) => ({
       name: trait.name,
       description: trait.description,
-      path: 'Custom',
+      path: "Custom",
       id: `Custom-${trait.name}`,
     })),
   ].sort((a, b) => a.name.localeCompare(b.name));

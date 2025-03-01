@@ -13,7 +13,7 @@ export type SaveFile = {
   languages: string[];
   level: number;
   paths: SelectedPath[];
-  customTraits: Record<string, Trait>;
+  customTraits: Trait[];
   skillLevelUpgrades: Partial<Record<SkillType, number>>;
   currentHealth: number;
   currentSanity: number;

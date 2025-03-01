@@ -43,7 +43,7 @@ export const itemsAtom = atom<ItemDictionary>({});
 export const moneyAtom = atom<number>(0);
 
 // Custom traits
-export const customTraitsAtom = atom<Record<string, Trait>>({});
+export const customTraitsAtom = atom<Trait[]>([]);
 
 // Effects atom
 export const effectsAtom = atom((get) => {
@@ -75,7 +75,7 @@ export const effectsAtom = atom((get) => {
     });
 
   // Collect effects from custom traits
-  Object.values(customTraits).forEach((trait) => {
+  customTraits.forEach((trait) => {
     if (trait.effects) {
       effects.push(...trait.effects);
     }

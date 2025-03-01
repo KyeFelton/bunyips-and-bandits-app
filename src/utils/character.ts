@@ -20,7 +20,7 @@ type CharacterSetters = {
   setMoney: (value: SetStateAction<number>) => void;
   setItems: (value: SetStateAction<Record<string, any>>) => void;
   setPaths: (value: SetStateAction<any[]>) => void;
-  setCustomTraits: (value: SetStateAction<Record<string, Trait>>) => void;
+  setCustomTraits: (value: SetStateAction<Trait[]>) => void;
   setSkillLevelUpgrades: (value: SetStateAction<any>) => void;
   setIsFirstLoad?: (value: SetStateAction<boolean>) => void;
 };
@@ -39,7 +39,7 @@ const validateSaveFile = (data: any): data is SaveFile => {
     typeof data.money === "number" &&
     Array.isArray(data.paths) &&
     typeof data.items === "object" &&
-    typeof data.customTraits === "object"
+    Array.isArray(data.customTraits)
   );
 };
 
@@ -123,7 +123,7 @@ export const resetCharacter = (setters: CharacterSetters) => {
   setters.setMoney(0);
   setters.setItems({});
   setters.setPaths([]);
-  setters.setCustomTraits({});
+  setters.setCustomTraits([]);
   setters.setSkillLevelUpgrades({});
   setters.setIsFirstLoad?.(true);
 };
