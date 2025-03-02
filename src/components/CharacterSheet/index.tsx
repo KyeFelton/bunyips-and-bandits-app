@@ -41,7 +41,7 @@ export function CharacterSheet() {
                 value="traits"
                 className="w-full flex-grow shadow-sm"
               >
-                <Card className="h-[878px] p-4 overflow-auto">
+                <Card className="h-[900px] p-4 overflow-auto">
                   <TraitsList />
                 </Card>
               </TabsContent>
@@ -49,12 +49,12 @@ export function CharacterSheet() {
                 value="actions"
                 className="w-full flex-grow shadow-sm"
               >
-                <Card className="h-[878px] p-4 overflow-auto">
+                <Card className="h-[900px] p-4 overflow-auto">
                   <ActionsList />
                 </Card>
               </TabsContent>
               <TabsContent value="items" className="w-full flex-grow shadow-sm">
-                <Card className="h-[878px] p-4 overflow-auto">
+                <Card className="h-[900px] p-4 overflow-auto">
                   <ItemsTable />
                 </Card>
               </TabsContent>
@@ -62,7 +62,7 @@ export function CharacterSheet() {
                 value="skills"
                 className="w-full flex-grow shadow-sm"
               >
-                <Card className="h-[898px] p-4 overflow-auto">
+                <Card className="h-[900px] p-4 overflow-auto">
                   <SkillsTable />
                 </Card>
               </TabsContent>
