@@ -39,15 +39,15 @@ export const SpeciesStep = () => {
   const setImage = useSetAtom(imageAtom);
 
   useEffect(() => {
-    setCurrentHealth(Math.min(health.current, health.max));
+    setCurrentHealth(health.max);
   }, [health, setCurrentHealth]);
 
   useEffect(() => {
-    setCurrentSanity(Math.min(sanity.current, sanity.max));
+    setCurrentSanity(sanity.max);
   }, [sanity, setCurrentSanity]);
 
   useEffect(() => {
-    setCurrentStamina(Math.min(stamina.current, stamina.max));
+    setCurrentStamina(stamina.max);
   }, [stamina, setCurrentStamina]);
 
   const handleSpeciesChange = (value: string) => {
