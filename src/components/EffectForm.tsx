@@ -107,7 +107,7 @@ export const EffectForm = ({ effects, onChange }: Props) => {
         return (
           <div
             key={index}
-            className="flex items-center gap-2 bg-muted py-2 rounded-md"
+            className="flex items-center gap-2 bg-muted p-2 rounded-md"
           >
             <Select
               value={Object.keys(effect)[0]}
