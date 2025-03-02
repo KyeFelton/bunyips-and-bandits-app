@@ -171,7 +171,7 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" className="mb-4" disabled={maxWeight <= 0}>
+        <Button variant="outline" disabled={maxWeight <= 0}>
           <Plus className="h-4 w-4 mr-2" />
           Add
         </Button>

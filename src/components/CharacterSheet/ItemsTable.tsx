@@ -191,7 +191,7 @@ export const ItemsTable = () => {
                     <Button
                       variant={item.equipped ? "default" : "outline"}
                       onClick={() => handleUseItem(name)}
-                      className="w-24"
+                      className="w-16"
                     >
                       {item.singleUse
                         ? "Use"
@@ -224,7 +224,7 @@ export const ItemsTable = () => {
         </Table>
       </TooltipProvider>
 
-      <div className="flex justify-end">
+      <div className="flex justify-center">
         <AddItemDialog maxWeight={weightLimit - totalWeight} />
       </div>
     </div>
