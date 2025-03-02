@@ -124,7 +124,7 @@ export const NameCard = () => {
             </DropdownMenu>
           </div>
           <h3 className="px-8 text-2xl font-semibold text-center line-clamp-2">
-            {name}
+            {name || "???"}
           </h3>
           <span className="text-sm text-muted-foreground">Level {level}</span>
         </div>
