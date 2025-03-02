@@ -129,11 +129,11 @@ export const NameCard = () => {
           <span className="text-sm text-muted-foreground">Level {level}</span>
         </div>
       </CardHeader>
-      <CardContent className="flex-grow min-h-0">
+      <CardContent className="flex-grow min-h-0 flex justify-center">
         <img
           src={image}
           alt="character"
-          className="w-full h-full rounded-md object-cover"
+          className="w-full max-w-[250px] h-full max-h-[250px] rounded-md object-cover"
         />
       </CardContent>
     </Card>
