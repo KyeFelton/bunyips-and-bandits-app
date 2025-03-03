@@ -36,6 +36,7 @@ import {
   customTraitsAtom,
 } from "../../state/character";
 import { resetCharacter, uploadCharacter } from "../../utils/character";
+import { CharacterEditorRoute, HomeRoute } from "../../routes";
 
 export const NameCard = () => {
   const name = useAtomValue(nameAtom);
@@ -86,7 +87,7 @@ export const NameCard = () => {
       )
     ) {
       resetCharacter(setters);
-      navigate("/");
+      navigate(HomeRoute);
     }
   };
 
@@ -102,7 +103,9 @@ export const NameCard = () => {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => navigate("/character/edit")}>
+                <DropdownMenuItem
+                  onClick={() => navigate(CharacterEditorRoute)}
+                >
                   <Pencil className="mr-2 h-4 w-4" />
                   Edit
                 </DropdownMenuItem>

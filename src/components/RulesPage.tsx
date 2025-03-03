@@ -1,19 +1,20 @@
-import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Button } from './ui/button';
-import { X } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import ReactMarkdown from 'react-markdown';
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Button } from "./ui/button";
+import { X } from "lucide-react";
+import { useEffect, useState } from "react";
+import ReactMarkdown from "react-markdown";
+import { HomeRoute } from "../routes";
 
 export function RulesPage() {
   const navigate = useNavigate();
-  const [rules, setRules] = useState('');
+  const [rules, setRules] = useState("");
 
   useEffect(() => {
-    fetch('/src/rules.md')
+    fetch(`${HomeRoute}/src/rules.md`)
       .then((response) => response.text())
       .then((text) => setRules(text))
-      .catch((error) => console.error('Error loading rules:', error));
+      .catch((error) => console.error("Error loading rules:", error));
   }, []);
 
   return (
@@ -33,7 +34,7 @@ export function RulesPage() {
         >
           <X className="h-6 w-6" />
         </Button>
-        
+
         <div className="prose prose-sm prose-invert max-w-none">
           <ReactMarkdown>{rules}</ReactMarkdown>
         </div>

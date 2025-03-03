@@ -3,6 +3,7 @@ import { SaveFile } from "../models/saveFile";
 import { AllSpecies } from "../models/species";
 import { getSpeciesImage } from "./speciesImages";
 import { Trait } from "../models/traits";
+import { CharacterSheetRoute } from "../routes";
 
 type CharacterSetters = {
   setName: (value: SetStateAction<string>) => void;
@@ -82,7 +83,7 @@ export const uploadCharacter = async (
           setters.setSkillLevelUpgrades(data.skillLevelUpgrades || {});
           setters.setIsFirstLoad?.(false);
 
-          navigate("/character");
+          navigate(CharacterSheetRoute);
         } catch (error) {
           console.error(
             "Error loading character:",

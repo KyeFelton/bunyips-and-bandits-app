@@ -4,7 +4,7 @@ import react from "@vitejs/plugin-react";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "/bunyips-and-bandits-app/",
+  base: "/bunyips-and-bandits-app",
   optimizeDeps: {
     exclude: ["lucide-react"],
   },

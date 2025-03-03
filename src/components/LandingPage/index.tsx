@@ -25,6 +25,7 @@ import {
 import { uploadCharacter } from "../../utils/character";
 import { Logo } from "../Logo";
 import "./index.sass";
+import { CharacterEditorRoute } from "../../routes";
 
 export function LandingPage() {
   const navigate = useNavigate();
@@ -83,7 +84,7 @@ export function LandingPage() {
             <Button
               variant="outline"
               className="new-button w-md h-14 text-lg hover:scale-105 transition-transform"
-              onClick={() => navigate("/character/edit")}
+              onClick={() => navigate(CharacterEditorRoute)}
             >
               <CirclePlus className="mr-2 h-6 w-6" />
               New

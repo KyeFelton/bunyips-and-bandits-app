@@ -7,6 +7,12 @@ import { RulesPage } from "./components/RulesPage";
 import { RulesButton } from "./components/RulesButton";
 import background from "./images/background.webp";
 import frame from "./images/leaf-frame.png";
+import {
+  CharacterSheetRoute,
+  CharacterEditorRoute,
+  HomeRoute,
+  RulesRoute,
+} from "./routes";
 
 function App() {
   const location = useLocation();
@@ -37,10 +43,10 @@ function App() {
       </div>
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/character" element={<CharacterSheet />} />
-          <Route path="/character/edit" element={<CharacterEditor />} />
-          <Route path="/rules" element={<RulesPage />} />
+          <Route path={HomeRoute} element={<LandingPage />} />
+          <Route path={CharacterSheetRoute} element={<CharacterSheet />} />
+          <Route path={CharacterEditorRoute} element={<CharacterEditor />} />
+          <Route path={RulesRoute} element={<RulesPage />} />
         </Routes>
       </AnimatePresence>
       {showRulesButton && <RulesButton />}
