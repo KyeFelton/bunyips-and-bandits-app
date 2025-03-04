@@ -1,9 +1,9 @@
 import { SetStateAction } from "jotai";
 import { SaveFile } from "../models/saveFile";
-import { AllSpecies } from "../models/species";
 import { getSpeciesImage } from "./speciesImages";
 import { Trait } from "../models/traits";
 import { CharacterSheetRoute } from "../routes";
+import { startingSpecies } from "../models/species";
 
 type CharacterSetters = {
   setName: (value: SetStateAction<string>) => void;
@@ -101,8 +101,6 @@ export const uploadCharacter = async (
 };
 
 export const resetCharacter = (setters: CharacterSetters) => {
-  const startingSpecies = AllSpecies.Minotaur;
-
   setters.setName("");
   setters.setSpecies(startingSpecies.name);
   setters.setLevel(1);

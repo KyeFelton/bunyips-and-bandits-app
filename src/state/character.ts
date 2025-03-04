@@ -2,13 +2,11 @@ import { atom } from "jotai";
 import { SkillType } from "../enums/SkillType";
 import { ItemDictionary } from "../models/items";
 import { SelectedPath } from "../models/paths";
-import { AllSpecies } from "../models/species";
+import { AllSpecies, startingSpecies } from "../models/species";
 import { SaveFile } from "../models/saveFile";
 import { Effect } from "../models/effect";
 import { Trait } from "../models/traits";
 import { getSpeciesImage } from "../utils/speciesImages";
-
-const startingSpecies = AllSpecies.Minotaur;
 
 // Basic character info
 export const nameAtom = atom<string>("");

@@ -599,3 +599,5 @@ export const AllSpecies = {
   Vulturan,
   Yowie,
 };
+
+export const startingSpecies = AllSpecies.Badgerman;
