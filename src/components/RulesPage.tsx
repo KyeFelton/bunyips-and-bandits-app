@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { X } from "lucide-react";
 import ReactMarkdown from "react-markdown";
-import rulesContent from "../rules.md?raw";
+import handbook from "../handbook.md?raw";
 
 export function RulesPage() {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ export function RulesPage() {
         </Button>
 
         <div className="prose prose-sm prose-invert max-w-none">
-          <ReactMarkdown>{rulesContent}</ReactMarkdown>
+          <ReactMarkdown>{handbook}</ReactMarkdown>
         </div>
       </div>
     </motion.div>
