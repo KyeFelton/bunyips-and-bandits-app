@@ -1,8 +1,8 @@
-import { useAtom, useAtomValue } from 'jotai';
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import { Button } from '../ui/button';
-import { StatBar } from '../StatBar';
-import { Bed } from 'lucide-react';
+import { useAtom, useAtomValue } from "jotai";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Button } from "../ui/button";
+import { StatBar } from "../StatBar";
+import { Bed } from "lucide-react";
 import {
   healthAtom,
   sanityAtom,
@@ -10,7 +10,7 @@ import {
   currentHealthAtom,
   currentSanityAtom,
   currentStaminaAtom,
-} from '../../state/character';
+} from "../../state/character";
 
 export const StatsCard = () => {
   const health = useAtomValue(healthAtom);
@@ -21,17 +21,11 @@ export const StatsCard = () => {
   const [currentStamina, setCurrentStamina] = useAtom(currentStaminaAtom);
 
   const handleRest = () => {
-    // Calculate health recovery (25% of missing health)
-    const missingHealth = health.max - currentHealth;
-    const healthRecovery = Math.ceil(missingHealth * 0.25);
-    setCurrentHealth(currentHealth + healthRecovery);
-
-    // Calculate sanity recovery (25% of missing sanity)
-    const missingSanity = sanity.max - currentSanity;
-    const sanityRecovery = Math.ceil(missingSanity * 0.25);
-    setCurrentSanity(currentSanity + sanityRecovery);
-
-    // Restore stamina to full
+    const staminaBeforeRest = currentStamina;
+    const newHealth = Math.min(currentHealth + staminaBeforeRest, health.max);
+    setCurrentHealth(newHealth);
+    const newSanity = Math.min(currentSanity + staminaBeforeRest, sanity.max);
+    setCurrentSanity(newSanity);
     setCurrentStamina(stamina.max);
   };
 
