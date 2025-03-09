@@ -174,6 +174,8 @@ To perform a skill check, roll the die that corresponds to your skill level:
 
 If you have any bonuses or penalties, add (or subtract) them from your roll.
 
+If you don't have a level for the required skill, then you take 1 as the result.
+
 The GM sets a difficulty rating for the task:
 
 * **Easy**: 2+
