@@ -154,7 +154,8 @@ export const staminaAtom = atom((get) => {
 // Actions
 export const actionsCountAtom = atom((get) => {
   const effects = get(effectsAtom);
-  const baseActions = 2;
+  const level = get(levelAtom);
+  const baseActions = Math.ceil(level / 10);
 
   return effects.reduce((total, effect) => {
     if (effect.actions?.bonus) {

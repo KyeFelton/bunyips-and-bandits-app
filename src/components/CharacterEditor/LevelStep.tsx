@@ -63,6 +63,7 @@ export const LevelStep = () => {
       <div className="text-sm text-muted-foreground">
         <p>Your level determines:</p>
         <ul className="list-disc list-inside mt-2 space-y-2">
+          <li>Number of actions: {Math.ceil(level / 10)}</li>
           <li>Number of path progessions: {availablePathPoints}</li>
           <li>Number of skill upgrades: {availableSkillPoints}</li>
           <li>Bonus physique: {physique.increments * level}</li>
