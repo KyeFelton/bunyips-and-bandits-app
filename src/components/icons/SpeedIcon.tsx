@@ -1,13 +1,13 @@
-import { Mountain, PawPrint, Waves, Wind } from 'lucide-react';
-import { MovementType } from '../../enums/MovementType';
+import { Mountain, PawPrint, Waves, Wind } from "lucide-react";
+import { Locomotion } from "../../enums/Locomotion";
 
 type Props = {
-  type: MovementType;
+  type: Locomotion;
   size?: number;
   className?: string;
 };
 
-export const SpeedIcon = ({ type, size = 16, className = '' }: Props) => {
+export const SpeedIcon = ({ type, size = 16, className = "" }: Props) => {
   const props = {
     className,
     width: size,
@@ -15,13 +15,13 @@ export const SpeedIcon = ({ type, size = 16, className = '' }: Props) => {
   };
 
   switch (type) {
-    case MovementType.Walk:
+    case Locomotion.Walk:
       return <PawPrint {...props} />;
-    case MovementType.Swim:
+    case Locomotion.Swim:
       return <Waves {...props} />;
-    case MovementType.Climb:
+    case Locomotion.Climb:
       return <Mountain {...props} />;
-    case MovementType.Fly:
+    case Locomotion.Fly:
       return <Wind {...props} />;
   }
 };

@@ -769,7 +769,7 @@ export const Catapult: Action = {
   skillType: SkillType.Kinetic,
   range: Range.Nearby,
   areaOfEffect: AreaOfEffect.SingleTarget,
-  staminaCost: 4,
+  staminaCost: 6,
 };
 
 export const Hurricane: Action = {

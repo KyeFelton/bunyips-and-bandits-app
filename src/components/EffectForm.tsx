@@ -1,6 +1,6 @@
 import { Effect } from "../models/effect";
 import { DamageType } from "../enums/DamageType";
-import { MovementType } from "../enums/MovementType";
+import { Locomotion } from "../enums/Locomotion";
 import { SkillType } from "../enums/SkillType";
 import { SenseType } from "../enums/SenseType";
 import {
@@ -30,7 +30,7 @@ const EffectTypeLabels: Record<EffectType, string> = {
   sanity: "Morale",
   sense: "Sense",
   skill: "Skill",
-  speed: "Movement",
+  speed: "Speed",
   stamina: "Stamina",
   weaponDamage: "Weapon damage",
 };
@@ -71,7 +71,7 @@ export const EffectForm = ({ effects, onChange }: Props) => {
       case "speed":
         return {
           speed: {
-            movementType: MovementType.Walk,
+            locomotion: Locomotion.Walk,
             bonus: 0,
           },
         };
@@ -230,12 +230,12 @@ export const EffectForm = ({ effects, onChange }: Props) => {
             {effectType === "speed" && (
               <>
                 <Select
-                  value={effectValue.movementType}
+                  value={effectValue.speed}
                   onValueChange={(value) =>
                     handleUpdateEffect(index, {
                       speed: {
                         ...effectValue,
-                        movementType: value as MovementType,
+                        locomotion: value as Locomotion,
                       },
                     })
                   }
@@ -244,7 +244,7 @@ export const EffectForm = ({ effects, onChange }: Props) => {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    {Object.values(MovementType).map((type) => (
+                    {Object.values(Locomotion).map((type) => (
                       <SelectItem key={type} value={type}>
                         {type}
                       </SelectItem>
@@ -258,7 +258,7 @@ export const EffectForm = ({ effects, onChange }: Props) => {
                     handleUpdateEffect(index, {
                       speed: {
                         ...effectValue,
-                        movementType: effectValue.movementType,
+                        locomotion: effectValue.locomotion,
                         bonus: parseInt(e.target.value) || 0,
                       },
                     })

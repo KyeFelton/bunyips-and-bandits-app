@@ -2,7 +2,7 @@ import { SenseType } from "../enums/SenseType";
 import { Effect } from "./effect";
 import { DamageType } from "../enums/DamageType";
 import { SkillType } from "../enums/SkillType";
-import { MovementType } from "../enums/MovementType";
+import { Locomotion } from "../enums/Locomotion";
 
 export type Trait = {
   name: string;
@@ -312,7 +312,7 @@ export const Swift: Trait = {
   effects: [
     {
       speed: {
-        movementType: MovementType.Walk,
+        locomotion: Locomotion.Walk,
         bonus: 1,
       },
     },

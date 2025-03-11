@@ -1,6 +1,6 @@
 import { useAtomValue } from "jotai";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { MovementType } from "../../enums/MovementType";
+import { Locomotion } from "../../enums/Locomotion";
 import {
   Tooltip,
   TooltipContent,
@@ -16,7 +16,7 @@ export const SpeedCard = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Movement</CardTitle>
+        <CardTitle>Speed</CardTitle>
       </CardHeader>
       <CardContent>
         <TooltipProvider>
@@ -31,7 +31,7 @@ export const SpeedCard = () => {
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <div className="flex items-center gap-1 cursor-default">
-                        <SpeedIcon type={type as MovementType} size={20} />
+                        <SpeedIcon type={type as Locomotion} size={20} />
                         <span>{value ? `${value}m` : "-"}</span>
                       </div>
                     </TooltipTrigger>

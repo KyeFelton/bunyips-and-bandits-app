@@ -1,5 +1,5 @@
 import { SkillType } from "../enums/SkillType";
-import { MovementType } from "../enums/MovementType";
+import { Locomotion } from "../enums/Locomotion";
 import { DamageType } from "../enums/DamageType";
 import { SenseType } from "../enums/SenseType";
 import { CreatureSize } from "../enums/CreatureSize";
@@ -20,10 +20,10 @@ export type Species = {
     increments: number;
   };
   speed: {
-    [MovementType.Walk]: number;
-    [MovementType.Swim]: number;
-    [MovementType.Climb]: number;
-    [MovementType.Fly]: number;
+    [Locomotion.Walk]: number;
+    [Locomotion.Swim]: number;
+    [Locomotion.Climb]: number;
+    [Locomotion.Fly]: number;
   };
   senses: {
     [SenseType.Sight]: boolean;
@@ -73,10 +73,10 @@ export const Badgerman: Species = {
     increments: 1,
   },
   speed: {
-    [MovementType.Walk]: 3,
-    [MovementType.Swim]: 1,
-    [MovementType.Climb]: 3,
-    [MovementType.Fly]: 0,
+    [Locomotion.Walk]: 3,
+    [Locomotion.Swim]: 1,
+    [Locomotion.Climb]: 2,
+    [Locomotion.Fly]: 0,
   },
   senses: {
     [SenseType.Sight]: true,
@@ -126,10 +126,10 @@ export const Cobber: Species = {
     increments: 1,
   },
   speed: {
-    [MovementType.Walk]: 3,
-    [MovementType.Swim]: 3,
-    [MovementType.Climb]: 3,
-    [MovementType.Fly]: 0,
+    [Locomotion.Walk]: 3,
+    [Locomotion.Swim]: 3,
+    [Locomotion.Climb]: 2,
+    [Locomotion.Fly]: 0,
   },
   senses: {
     [SenseType.Sight]: true,
@@ -179,10 +179,10 @@ export const Cormiard: Species = {
     increments: 1,
   },
   speed: {
-    [MovementType.Walk]: 4,
-    [MovementType.Swim]: 4,
-    [MovementType.Climb]: 1,
-    [MovementType.Fly]: 0,
+    [Locomotion.Walk]: 4,
+    [Locomotion.Swim]: 4,
+    [Locomotion.Climb]: 1,
+    [Locomotion.Fly]: 0,
   },
   senses: {
     [SenseType.Sight]: true,
@@ -232,10 +232,10 @@ export const Goa: Species = {
     increments: 1,
   },
   speed: {
-    [MovementType.Walk]: 4,
-    [MovementType.Swim]: 1,
-    [MovementType.Climb]: 1,
-    [MovementType.Fly]: 0,
+    [Locomotion.Walk]: 4,
+    [Locomotion.Swim]: 1,
+    [Locomotion.Climb]: 1,
+    [Locomotion.Fly]: 0,
   },
   senses: {
     [SenseType.Sight]: true,
@@ -285,10 +285,10 @@ export const Jeli: Species = {
     increments: 1,
   },
   speed: {
-    [MovementType.Walk]: 3,
-    [MovementType.Swim]: 1,
-    [MovementType.Climb]: 0,
-    [MovementType.Fly]: 0,
+    [Locomotion.Walk]: 3,
+    [Locomotion.Swim]: 1,
+    [Locomotion.Climb]: 0,
+    [Locomotion.Fly]: 0,
   },
   senses: {
     [SenseType.Sight]: true,
@@ -338,10 +338,10 @@ export const Minotaur: Species = {
     increments: 1,
   },
   speed: {
-    [MovementType.Walk]: 5,
-    [MovementType.Swim]: 1,
-    [MovementType.Climb]: 0,
-    [MovementType.Fly]: 0,
+    [Locomotion.Walk]: 5,
+    [Locomotion.Swim]: 1,
+    [Locomotion.Climb]: 0,
+    [Locomotion.Fly]: 0,
   },
   senses: {
     [SenseType.Sight]: true,
@@ -391,10 +391,10 @@ export const Pixie: Species = {
     increments: 1,
   },
   speed: {
-    [MovementType.Walk]: 1,
-    [MovementType.Swim]: 1,
-    [MovementType.Climb]: 1,
-    [MovementType.Fly]: 4,
+    [Locomotion.Walk]: 1,
+    [Locomotion.Swim]: 1,
+    [Locomotion.Climb]: 1,
+    [Locomotion.Fly]: 4,
   },
   senses: {
     [SenseType.Sight]: true,
@@ -444,10 +444,10 @@ export const Tengaroo: Species = {
     increments: 1,
   },
   speed: {
-    [MovementType.Walk]: 3,
-    [MovementType.Swim]: 1,
-    [MovementType.Climb]: 3,
-    [MovementType.Fly]: 0,
+    [Locomotion.Walk]: 3,
+    [Locomotion.Swim]: 1,
+    [Locomotion.Climb]: 3,
+    [Locomotion.Fly]: 0,
   },
   senses: {
     [SenseType.Sight]: true,
@@ -497,10 +497,10 @@ export const Vulturan: Species = {
     increments: 1,
   },
   speed: {
-    [MovementType.Walk]: 4,
-    [MovementType.Swim]: 1,
-    [MovementType.Climb]: 1,
-    [MovementType.Fly]: 0,
+    [Locomotion.Walk]: 4,
+    [Locomotion.Swim]: 1,
+    [Locomotion.Climb]: 1,
+    [Locomotion.Fly]: 0,
   },
   senses: {
     [SenseType.Sight]: true,
@@ -550,10 +550,10 @@ export const Yowie: Species = {
     increments: 1,
   },
   speed: {
-    [MovementType.Walk]: 4,
-    [MovementType.Swim]: 1,
-    [MovementType.Climb]: 1,
-    [MovementType.Fly]: 0,
+    [Locomotion.Walk]: 4,
+    [Locomotion.Swim]: 1,
+    [Locomotion.Climb]: 1,
+    [Locomotion.Fly]: 0,
   },
   senses: {
     [SenseType.Sight]: true,

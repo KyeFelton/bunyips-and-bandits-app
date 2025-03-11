@@ -184,8 +184,8 @@ export const speedAtom = atom((get) => {
   const baseSpeed = { ...speciesData.speed };
 
   effects.forEach((effect) => {
-    if (effect.speed?.movementType) {
-      const type = effect.speed.movementType;
+    if (effect.speed?.locomotion) {
+      const type = effect.speed.locomotion;
       baseSpeed[type] += effect.speed.bonus || 0;
     }
   });

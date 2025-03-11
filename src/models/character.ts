@@ -1,8 +1,9 @@
-import { SkillType } from '../enums/SkillType';
-import { MovementType } from '../enums/MovementType';
-import { DamageType } from '../enums/DamageType';
-import { SenseType } from '../enums/SenseType';
-import { CharacterItem } from './items';
+import { SkillType } from "../enums/SkillType";
+import { Locomotion } from "../enums/Locomotion";
+import { DamageType } from "../enums/DamageType";
+import { SenseType } from "../enums/SenseType";
+import { CharacterItem } from "./items";
+import { Path } from "./paths";
 
 export type Character = {
   name: string;
@@ -30,10 +31,10 @@ export type Character = {
     increments: number;
   };
   speed: {
-    [MovementType.Walk]: number;
-    [MovementType.Swim]: number;
-    [MovementType.Climb]: number;
-    [MovementType.Fly]: number;
+    [Locomotion.Walk]: number;
+    [Locomotion.Swim]: number;
+    [Locomotion.Climb]: number;
+    [Locomotion.Fly]: number;
   };
   senses: SenseType[];
   armour: {

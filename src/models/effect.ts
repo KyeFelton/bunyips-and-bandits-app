@@ -1,5 +1,5 @@
 import { DamageType } from "../enums/DamageType";
-import { MovementType } from "../enums/MovementType";
+import { Locomotion } from "../enums/Locomotion";
 import { SenseType } from "../enums/SenseType";
 import { SkillType } from "../enums/SkillType";
 
@@ -22,7 +22,7 @@ export type Effect = {
     skillType: SkillType;
   };
   speed?: StatModifier & {
-    movementType: MovementType;
+    locomotion: Locomotion;
   };
   stamina?: StatModifier;
   weaponDamage?: StatModifier;

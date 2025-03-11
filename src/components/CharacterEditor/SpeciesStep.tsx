@@ -20,7 +20,7 @@ import {
 import { AllSpecies } from "../../models/species";
 import { Heart, ChartNoAxesColumn, Shield, ArrowLeftRight } from "lucide-react";
 import { SkillIcon } from "../icons/SkillIcon";
-import { MovementType } from "../../enums/MovementType";
+import { Locomotion } from "../../enums/Locomotion";
 import { DamageType } from "../../enums/DamageType";
 import { SpeedIcon } from "../icons/SpeedIcon";
 import { ArmourIcon } from "../icons/ArmourIcon";
@@ -113,14 +113,14 @@ export const SpeciesStep = () => {
           <div>
             <h3 className="font-semibold mb-4 flex items-center gap-2">
               <ArrowLeftRight className="h-5 w-5" />
-              Movement
+              Speed
             </h3>
             <div className="grid grid-cols-4 gap-4">
               {Object.entries(speciesData.speed)
                 .filter(([_, value]) => value > 0)
                 .map(([type, value]) => (
                   <div key={type} className="flex items-center gap-2">
-                    <SpeedIcon type={type as MovementType} size={16} />
+                    <SpeedIcon type={type as Locomotion} size={16} />
                     <div>
                       <div className="text-sm font-medium">{type}</div>
                       <div>{value}m</div>

@@ -130,9 +130,9 @@ Not all creatures are built the same. Every character is assigned a size depende
 * **Large**: 2-4m
 * **Huge**: >4m
 
-### Movement
+### Speed
 
-Each character has a movement speed, which determines how far they can travel per turn. Some characters walk, others climb, swim, or even fly.
+Creatures in Bunyips and Bandits move in four ways: walking, climbing, swimming, and flying. Different species have access to different types of locomotion, each at its own speed. Your speed stat determines how far you can move per turn for each type of locomotion available to you.
 
 ### Senses
 
@@ -227,7 +227,7 @@ Some actions cost stamina, while others are free. Be mindful—if you burn throu
 
 ### Movement
 
-Moving is an action available to all characters. The distance that a character can move in one turn is determined by their movement stat for the locomotion they use (i.e. walk, swim, climb or fly). Standard movement doesn’t use stamina, but the character can optionally expend stamina to increase the distance they move. Using one stamina will double the distance moved, using two stamina will triple the distance moved, and so on. They can expend a maximum of four stamina per movement action.
+Moving is an action available to all characters. The distance that a character can move in one turn is determined by their speed stat for the locomotion they use (i.e. walk, swim, climb or fly). Standard movement doesn’t use stamina, but the character can optionally expend stamina to increase the distance they move. Using one stamina will double the distance moved, using two stamina will triple the distance moved, and so on. They can expend a maximum of four stamina per movement action.
 
 Some terrain slows movement (mud, dense bush), while others make it risky (unstable bridges, slippery surfaces). The GM will let you know if the ground under your feet is about to betray you.
 
