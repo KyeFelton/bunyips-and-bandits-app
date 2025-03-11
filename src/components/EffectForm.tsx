@@ -47,7 +47,7 @@ export const EffectForm = ({ effects, onChange }: Props) => {
       case "weaponDamage":
         return {
           [type]: {
-            static: 0,
+            bonus: 0,
           },
         };
       case "armour":
@@ -172,7 +172,7 @@ export const EffectForm = ({ effects, onChange }: Props) => {
                 </Select>
                 <Input
                   type="number"
-                  value={effectValue.static || ""}
+                  value={effectValue.bonus || ""}
                   onChange={(e) =>
                     handleUpdateEffect(index, {
                       armour: {
@@ -212,7 +212,7 @@ export const EffectForm = ({ effects, onChange }: Props) => {
                 </Select>
                 <Input
                   type="number"
-                  value={effectValue.static || ""}
+                  value={effectValue.bonus || ""}
                   onChange={(e) =>
                     handleUpdateEffect(index, {
                       skill: {
@@ -253,7 +253,7 @@ export const EffectForm = ({ effects, onChange }: Props) => {
                 </Select>
                 <Input
                   type="number"
-                  value={effectValue.static || ""}
+                  value={effectValue.bonus || ""}
                   onChange={(e) =>
                     handleUpdateEffect(index, {
                       speed: {
@@ -277,11 +277,11 @@ export const EffectForm = ({ effects, onChange }: Props) => {
               effectType === "weaponDamage") && (
               <Input
                 type="number"
-                value={effectValue.static || ""}
+                value={effectValue.bonus || ""}
                 onChange={(e) =>
                   handleUpdateEffect(index, {
                     [effectType]: {
-                      static: parseInt(e.target.value) || 0,
+                      bonus: parseInt(e.target.value) || 0,
                     },
                   })
                 }
