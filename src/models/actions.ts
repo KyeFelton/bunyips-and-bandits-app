@@ -23,7 +23,7 @@ export const Strike: Action = {
 };
 
 export const Throw: Action = {
-  name: "Throw",
+  name: "Throw weapon",
   effect:
     "You throw your weapon at your target. If you hit, they take your weapon's damage. Whether hit or miss, you are no longer wielding your weapon.",
   skillType: SkillType.Throw,
@@ -47,7 +47,27 @@ export const Swipe: Action = {
 export const Plough: Action = {
   name: "Plough",
   effect:
-    "Move up to three times your speed towards your target then deal your weapon's damage. If the creature is equal size to you or smaller, they are stunned. If they are smaller than you, they are also knocked back 2m.",
+    "Move up to three times your speed towards your target then deal your weapon's damage. If the creature is equal size to you or smaller, they are stunned.",
+  skillType: SkillType.Martial,
+  range: Range.Adjacent,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 3,
+};
+
+export const Guard: Action = {
+  name: "Guard",
+  effect:
+    "You take a defensive stance to defend your allies. You and your adjacent allies are empowered. Whenever an opponent attacks an ally adjacent to you, you can attempt to counter it.",
+  skillType: SkillType.Martial,
+  range: Range.Self,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 3,
+};
+
+export const Decimate: Action = {
+  name: "Decimate",
+  effect:
+    "You focus all your attention to smashing your target's weak spot. Deal your weapon's damage doubled to your opponent.",
   skillType: SkillType.Martial,
   range: Range.Adjacent,
   areaOfEffect: AreaOfEffect.SingleTarget,
@@ -61,16 +81,6 @@ export const Sweep: Action = {
   skillType: SkillType.Martial,
   range: Range.Adjacent,
   areaOfEffect: AreaOfEffect.MultipleTargets,
-  staminaCost: 4,
-};
-
-export const Decimate: Action = {
-  name: "Decimate",
-  effect:
-    "You focus all your attention to smashing your target's weak spot. On hit, deal double your weapon's damage.",
-  skillType: SkillType.Martial,
-  range: Range.Adjacent,
-  areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 5,
 };
 
@@ -93,7 +103,7 @@ export const Douse: Action = {
   skillType: SkillType.Pyro,
   range: Range.Nearby,
   areaOfEffect: AreaOfEffect.SingleTarget,
-  staminaCost: 0,
+  staminaCost: 1,
 };
 
 export const FlameTorch: Action = {
@@ -106,15 +116,15 @@ export const FlameTorch: Action = {
   staminaCost: 1,
 };
 
-export const HeatBlast: Action = {
-  name: "Heat blast",
-  effect:
-    "A blast of heat bursts from your body. Targets take 5 fire damage and catch fire.",
-  skillType: SkillType.Pyro,
-  range: Range.Self,
-  areaOfEffect: AreaOfEffect.Cone,
-  staminaCost: 4,
-};
+// export const HeatBlast: Action = {
+//   name: "Heat blast",
+//   effect:
+//     "A blast of heat bursts from your body. Targets take 5 fire damage and catch fire.",
+//   skillType: SkillType.Pyro,
+//   range: Range.Self,
+//   areaOfEffect: AreaOfEffect.Cone,
+//   staminaCost: 4,
+// };
 
 export const Fireworks: Action = {
   name: "Fireworks",
@@ -129,22 +139,22 @@ export const Fireworks: Action = {
 export const Insulator: Action = {
   name: "Insulator",
   effect:
-    "You focus your attention towards countering the spells of your foes. Targets of your choosing are protected with 5 fire armour.",
+    "You focus your attention towards countering the actions of your foes. You and adjacent allies are protected with 5 fire armour.",
   skillType: SkillType.Pyro,
-  range: Range.Self,
-  areaOfEffect: AreaOfEffect.Sphere,
-  staminaCost: 2,
+  range: Range.Adjacent,
+  areaOfEffect: AreaOfEffect.MultipleTargets,
+  staminaCost: 1,
 };
 
-export const Fireball: Action = {
-  name: "Fireball",
-  effect:
-    "You throw a ball of flaming liquid at your target that explodes with fire on impact. Your target takes 10 fire damage and catches fire.",
-  skillType: SkillType.Pyro,
-  range: Range.Nearby,
-  areaOfEffect: AreaOfEffect.SingleTarget,
-  staminaCost: 3,
-};
+// export const Fireball: Action = {
+//   name: "Fireball",
+//   effect:
+//     "You throw a ball of flaming liquid at your target that explodes on impact. Your target takes 10 fire damage and catches fire.",
+//   skillType: SkillType.Pyro,
+//   range: Range.Nearby,
+//   areaOfEffect: AreaOfEffect.SingleTarget,
+//   staminaCost: 3,
+// };
 
 export const Extinguish: Action = {
   name: "Extinguish",
@@ -179,7 +189,7 @@ export const HeatWave: Action = {
 export const Inferno: Action = {
   name: "Inferno",
   effect:
-    "You unleash a sudden explosion of fire that leads devastation in its wake. All targets around you take 15 fire damage, catch fire, and become stunned and blinded.",
+    "You unleash a sudden explosion of fire that leads devastation in its wake. All targets around you take 15 fire damage, catch fire, and are blinded.",
   skillType: SkillType.Pyro,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.Sphere,
@@ -198,25 +208,15 @@ export const Incinerate: Action = {
 
 // Sonomancer
 
-export const Tremor: Action = {
-  name: "Tremor",
-  effect:
-    "You create a powerful vibration that causes your target to tremor. The target is stunned.",
-  skillType: SkillType.Sonic,
-  range: Range.Adjacent,
-  areaOfEffect: AreaOfEffect.SingleTarget,
-  staminaCost: 1,
-};
-
-export const Charge: Action = {
-  name: "Charge",
-  effect:
-    "You take an action to build up energy and increase the power of your next attack. On your next turn, increase any force damage dealt to a target by 5.",
-  skillType: SkillType.Sonic,
-  range: Range.Self,
-  areaOfEffect: AreaOfEffect.SingleTarget,
-  staminaCost: 1,
-};
+// export const Tremor: Action = {
+//   name: "Tremor",
+//   effect:
+//     "You create a powerful vibration that causes your target to tremor. The target is stunned.",
+//   skillType: SkillType.Sonic,
+//   range: Range.Adjacent,
+//   areaOfEffect: AreaOfEffect.SingleTarget,
+//   staminaCost: 1,
+// };
 
 export const Distort: Action = {
   name: "Distort",
@@ -228,24 +228,24 @@ export const Distort: Action = {
   staminaCost: 1,
 };
 
-export const ThunderPunch: Action = {
-  name: "Thunder punch",
-  effect:
-    "You punch your foe with devastating force. They take 5 force damage. If they are medium size or smaller, they are knocked back 5m.",
-  skillType: SkillType.Martial,
-  range: Range.Adjacent,
-  areaOfEffect: AreaOfEffect.SingleTarget,
-  staminaCost: 1,
-};
-
 export const Shriek: Action = {
   name: "Shriek",
   effect:
-    "You make an earsplitting sound that stuns, deafens and reduces sanity by 2 for targets with hearing sense.",
+    "You make an earsplitting sound that stuns, deafens and drains 1 sanity for targets with hearing sense.",
   skillType: SkillType.Sonic,
   range: Range.Nearby,
   areaOfEffect: AreaOfEffect.SingleTarget,
-  staminaCost: 2,
+  staminaCost: 3,
+};
+
+export const ThunderPunch: Action = {
+  name: "Thunder punch",
+  effect:
+    "You punch your foe with devastating force embued with sonic energy, dealing 10 force damage. If they are medium size or smaller, they are knocked back 5m.",
+  skillType: SkillType.Martial,
+  range: Range.Adjacent,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 3,
 };
 
 export const PumpUp: Action = {
@@ -254,23 +254,33 @@ export const PumpUp: Action = {
   skillType: SkillType.Sonic,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.Arena,
-  staminaCost: 2,
+  staminaCost: 1,
 };
 
-export const Shatter: Action = {
-  name: "Shatter",
+export const SonicCharge: Action = {
+  name: "Sonic charge",
   effect:
-    "Your target begins to shatter as you emit powerful pulses. They take 10 force damage.",
+    "You take an action to build up energy. On your next turn, deal an addition 5 force damage on all sonic attacks.",
   skillType: SkillType.Sonic,
-  range: Range.Adjacent,
+  range: Range.Self,
   areaOfEffect: AreaOfEffect.SingleTarget,
-  staminaCost: 2,
+  staminaCost: 1,
 };
+
+// export const Shatter: Action = {
+//   name: "Shatter",
+//   effect:
+//     "Your target begins to shatter as you emit powerful pulses. They take 10 force damage.",
+//   skillType: SkillType.Sonic,
+//   range: Range.Adjacent,
+//   areaOfEffect: AreaOfEffect.SingleTarget,
+//   staminaCost: 2,
+// };
 
 export const Shockwave: Action = {
   name: "Shockwave",
   effect:
-    "A thunderous shockwave erupts from a point of your choosing. They take 5 force damage and become deafened. If performed inside an enclosed room or chamber, then deal an additional 5 force damage.",
+    "A thunderous shockwave erupts from a point of your choosing. All targets take 5 force damage and become deafened. If performed inside an enclosed room or chamber, then deal an additional 5 force damage.",
   skillType: SkillType.Sonic,
   range: Range.Nearby,
   areaOfEffect: AreaOfEffect.Sphere,
@@ -319,15 +329,6 @@ export const Pulverize: Action = {
 
 // Doctor
 
-export const Mend: Action = {
-  name: "Mend",
-  effect: "You mend the wounds of your ally. They gain 3 health.",
-  skillType: SkillType.Healing,
-  range: Range.Adjacent,
-  areaOfEffect: AreaOfEffect.SingleTarget,
-  staminaCost: 1,
-};
-
 export const PoisonBreath: Action = {
   name: "Poison breath",
   effect:
@@ -335,46 +336,47 @@ export const PoisonBreath: Action = {
   skillType: SkillType.Toxic,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.Cone,
-  staminaCost: 1,
+  staminaCost: 2,
 };
 
 export const Stench: Action = {
   name: "Stench",
   effect:
-    "A horrendous stench radiates from your body. Nearby targets become asnamic.",
+    "A horrendous stench radiates from your body. Nearby targets become anosmic.",
   skillType: SkillType.Toxic,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.Sphere,
   staminaCost: 1,
 };
 
-export const PoisonJab: Action = {
-  name: "Poison jab",
+export const Resuscitate: Action = {
+  name: "Resuscitate",
   effect:
-    "You stab your target with a poisoned barb. They take both 6 toxic and 4 slash damage.",
+    "You bring back an adjacent ally from unconsciousness. They gain +1 physique.",
+  skillType: SkillType.Healing,
+  range: Range.Adjacent,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 4,
+};
+
+export const VenomSting: Action = {
+  name: "Venom sting",
+  effect:
+    "You stab your target with a venomous barb. They take 6 toxic and 4 slash damage.",
   skillType: SkillType.Toxic,
   range: Range.Adjacent,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 1,
-};
-
-export const Heal: Action = {
-  name: "Heal",
-  effect: "You mend the wounds of your ally. They gain 15 health.",
-  skillType: SkillType.Healing,
-  range: Range.Adjacent,
-  areaOfEffect: AreaOfEffect.SingleTarget,
-  staminaCost: 6,
 };
 
 export const Antidote: Action = {
   name: "Antidote",
   effect:
-    "You focus your attention towards countering the spells of your foes. Targets of your choosing are protected with 5 toxic armour.",
+    "You focus your attention towards countering the actions of your foes. You and adjacent allies are protected with 5 toxic armour.",
   skillType: SkillType.Healing,
-  range: Range.Self,
-  areaOfEffect: AreaOfEffect.Sphere,
-  staminaCost: 2,
+  range: Range.Adjacent,
+  areaOfEffect: AreaOfEffect.MultipleTargets,
+  staminaCost: 1,
 };
 
 export const AcidBomb: Action = {
@@ -390,21 +392,11 @@ export const AcidBomb: Action = {
 export const ToxicPlume: Action = {
   name: "Toxic plume",
   effect:
-    "You expel noxious gas from your body. Nearby targets take 10 toxic damage and become asnamic.",
+    "You expel noxious gas from your body. Nearby targets take 10 toxic damage and become anosmic.",
   skillType: SkillType.Toxic,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.Sphere,
   staminaCost: 4,
-};
-
-export const Cure: Action = {
-  name: "Cure",
-  effect:
-    "You cure the wounds of your ally. For every stamina you choose to expend on the action, the target restores 2 health.",
-  skillType: SkillType.Healing,
-  range: Range.Adjacent,
-  areaOfEffect: AreaOfEffect.SingleTarget,
-  staminaCost: "variable",
 };
 
 export const Odourless: Action = {
@@ -417,23 +409,23 @@ export const Odourless: Action = {
   staminaCost: 0,
 };
 
-export const VenomSting: Action = {
-  name: "Venom sting",
-  effect:
-    "Your target is injected with a deadly dose of debilitating venom. They take 20 toxic damage, 4 slash damage and are stunned.",
-  skillType: SkillType.Toxic,
-  range: Range.Adjacent,
-  areaOfEffect: AreaOfEffect.SingleTarget,
-  staminaCost: 4,
-};
-
 export const DeathCloud: Action = {
   name: "Death cloud",
   effect:
-    "The air around you is overwhelmed with a toxic haze. Targets take 15 toxic damage and are stunned.",
+    "The air around you is overwhelmed with a toxic haze. Targets take 15 toxic damage and become anosmic.",
   skillType: SkillType.Toxic,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.Sphere,
+  staminaCost: 4,
+};
+
+export const Paralysis: Action = {
+  name: "Paralysis",
+  effect:
+    "Your infect your opponent with a deadly dose of debilitating venom. They take 20 toxic damage and become restrained.",
+  skillType: SkillType.Toxic,
+  range: Range.Adjacent,
+  areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 4,
 };
 
@@ -447,15 +439,25 @@ export const Beacon: Action = {
   staminaCost: 1,
 };
 
-export const Mirage: Action = {
-  name: "Mirage",
+export const Disguise: Action = {
+  name: "Disguise",
   effect:
-    "You manipulate the light reflected off your target to slightly alter their appearance. The illusion lasts until your next turn.",
+    "You manipulate the light reflected off your target to alter their appearance. The illusion lasts until your next turn.",
   skillType: SkillType.Radiant,
   range: Range.Nearby,
   areaOfEffect: AreaOfEffect.SingleTarget,
-  staminaCost: 1,
+  staminaCost: 2,
 };
+
+// export const Mirage: Action = {
+//   name: "Mirage",
+//   effect:
+//     "You manipulate the light reflected off your target to slightly alter their appearance. The illusion lasts until your next turn.",
+//   skillType: SkillType.Radiant,
+//   range: Range.Nearby,
+//   areaOfEffect: AreaOfEffect.SingleTarget,
+//   staminaCost: 1,
+// };
 
 export const HeatRay: Action = {
   name: "Heat ray",
@@ -467,14 +469,14 @@ export const HeatRay: Action = {
   staminaCost: 1,
 };
 
-export const DazzlingLights: Action = {
-  name: "Dazzling lights",
-  effect: "Dazzling lights flash to stun targets with sight sense.",
-  skillType: SkillType.Radiant,
-  range: Range.Distant,
-  areaOfEffect: AreaOfEffect.Cone,
-  staminaCost: 1,
-};
+// export const DazzlingLights: Action = {
+//   name: "Dazzling lights",
+//   effect: "Dazzling lights flash to stun targets with sight sense.",
+//   skillType: SkillType.Radiant,
+//   range: Range.Distant,
+//   areaOfEffect: AreaOfEffect.Cone,
+//   staminaCost: 1,
+// };
 
 export const BlindingFlash: Action = {
   name: "Blinding flash",
@@ -489,7 +491,7 @@ export const BlindingFlash: Action = {
 export const MirrorDome: Action = {
   name: "Mirror dome",
   effect:
-    "You manifest an intangible dome that reflects light. Creatures both inside and outside the dome see a mirror. However, if there is no light source within the dome, then the creatures inside are enveloped in darkness. The illusion lasts until your next turn.",
+    "You manifest an intangible dome that reflects light. Creatures both inside and outside the dome see a mirror. If there is no light source within the dome, then the creatures inside are enveloped in darkness. The illusion lasts until your next turn.",
   skillType: SkillType.Radiant,
   range: Range.Nearby,
   areaOfEffect: AreaOfEffect.Arena,
@@ -506,16 +508,6 @@ export const SearingRadiance: Action = {
   staminaCost: 4,
 };
 
-export const Disguise: Action = {
-  name: "Disguise",
-  effect:
-    "You manipulate the light reflected off your target to dramatically alter their appearance. The illusion lasts until your next turn.",
-  skillType: SkillType.Radiant,
-  range: Range.Nearby,
-  areaOfEffect: AreaOfEffect.SingleTarget,
-  staminaCost: 2,
-};
-
 export const Apparition: Action = {
   name: "Apparition",
   effect:
@@ -529,10 +521,10 @@ export const Apparition: Action = {
 export const Invisibility: Action = {
   name: "Invisibility",
   effect:
-    "Light passes through your body and adjacent allies, making you invisible to visible and infrared light.",
+    "Light passes through your body and adjacent allies, making you invisible.",
   skillType: SkillType.Radiant,
-  range: Range.Self,
-  areaOfEffect: AreaOfEffect.SingleTarget,
+  range: Range.Adjacent,
+  areaOfEffect: AreaOfEffect.MultipleTargets,
   staminaCost: 1,
 };
 
@@ -549,11 +541,11 @@ export const Hyperbeam: Action = {
 export const SolarFlare: Action = {
   name: "Solar flare",
   effect:
-    "Thermal energy radiates from a point you choose. Targets in the affected area take 15 fire damage and catch fire. If they have sight sense, they are also stunned and blinded.",
+    "Thermal energy radiates from a point you choose. Targets in the affected area take 10 fire damage and catch fire. If they have sight sense, they are also stunned and blinded.",
   skillType: SkillType.Radiant,
   range: Range.Nearby,
   areaOfEffect: AreaOfEffect.Sphere,
-  staminaCost: 8,
+  staminaCost: 7,
 };
 
 // Electrician actions
@@ -567,28 +559,28 @@ export const Taser: Action = {
 };
 
 export const ElectricCharge: Action = {
-  name: "Charge",
+  name: "Electric charge",
   effect:
-    "You take an action to build up and store potential energy. On your next turn, increase any electric damage dealt to a target by 5.",
+    "You take an action to build up energy. On your next turn, deal an additional 5 electric damage on all electric attacks.",
   skillType: SkillType.Electric,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 1,
 };
 
-export const Chain: Action = {
-  name: "Chain",
-  effect:
-    "If a target of your next electric attack is adjacent to another creature, you can optionally extend the attack to hit the adjacent creature as well.",
-  skillType: SkillType.Electric,
-  range: Range.Self,
-  areaOfEffect: AreaOfEffect.SingleTarget,
-  staminaCost: 1,
-};
+// export const Chain: Action = {
+//   name: "Chain",
+//   effect:
+//     "If a target of your next electric attack is adjacent to another creature, you can optionally extend the attack to hit the adjacent creature as well.",
+//   skillType: SkillType.Electric,
+//   range: Range.Self,
+//   areaOfEffect: AreaOfEffect.SingleTarget,
+//   staminaCost: 1,
+// };
 
 export const Shock: Action = {
   name: "Shock",
-  effect: "Target takes 10 electric damage.",
+  effect: "Your target takes 5 electric damage.",
   skillType: SkillType.Electric,
   range: Range.Adjacent,
   areaOfEffect: AreaOfEffect.SingleTarget,
@@ -598,7 +590,7 @@ export const Shock: Action = {
 export const Impedance: Action = {
   name: "Impedance",
   effect:
-    "You focus your attention towards countering the spells of your foes. Targets of your choosing are protected with 5 electric armour.",
+    "You focus your attention towards countering the actions of your foes. You and your adjacent allies are are protected with 5 electric armour.",
   skillType: SkillType.Electric,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.Sphere,
@@ -618,7 +610,7 @@ export const Levitate: Action = {
 export const Attract: Action = {
   name: "Attract",
   effect:
-    "Your body turns into a super magnet that attracts magnetic metals. Nearby, unsecured, small metal objects fly towards you. Roll a 1d20 to see how effective the action is at attracting secured or large metal objects.",
+    "Your body turns into a super magnet that attracts magnetic metals. Nearby, unsecured metal objects are pulled towards you.",
   skillType: SkillType.Electric,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.Sphere,
@@ -627,22 +619,22 @@ export const Attract: Action = {
 
 export const Zap: Action = {
   name: "Zap",
-  effect: "Targets take 10 electric damage.",
+  effect: "Nearby targets take 10 electric damage.",
   skillType: SkillType.Electric,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.Sphere,
   staminaCost: 2,
 };
 
-export const MagnetiseArena: Action = {
-  name: "Magnetise arena",
-  effect:
-    "You magnetise all nearby magnetic metals. They turn into magnets and attract each other.",
-  skillType: SkillType.Electric,
-  range: Range.Self,
-  areaOfEffect: AreaOfEffect.Arena,
-  staminaCost: 4,
-};
+// export const MagnetiseArena: Action = {
+//   name: "Magnetise arena",
+//   effect:
+//     "You magnetise all nearby magnetic metals. They turn into magnets and attract each other.",
+//   skillType: SkillType.Electric,
+//   range: Range.Self,
+//   areaOfEffect: AreaOfEffect.Arena,
+//   staminaCost: 4,
+// };
 
 export const Electrocute: Action = {
   name: "Electrocute",
@@ -650,7 +642,7 @@ export const Electrocute: Action = {
   skillType: SkillType.Electric,
   range: Range.Adjacent,
   areaOfEffect: AreaOfEffect.SingleTarget,
-  staminaCost: 3,
+  staminaCost: 4,
 };
 
 export const Lightning: Action = {
@@ -659,7 +651,7 @@ export const Lightning: Action = {
   skillType: SkillType.Electric,
   range: Range.Nearby,
   areaOfEffect: AreaOfEffect.SingleTarget,
-  staminaCost: 5,
+  staminaCost: 6,
 };
 
 export const Discharge: Action = {
@@ -675,11 +667,11 @@ export const Discharge: Action = {
 export const Gust: Action = {
   name: "Gust",
   effect:
-    "Small sized creatures are thrown back 5m. Medium sized and smaller creatures move at half speed in the direction of the wind on their next turn. Targets are asnomic.",
+    "Targets become anosmic and roll an easy strength check. If they fail, they are restrained.",
   skillType: SkillType.Kinetic,
   range: Range.Nearby,
   areaOfEffect: AreaOfEffect.Cone,
-  staminaCost: 2,
+  staminaCost: 1,
 };
 
 export const Hurl: Action = {
@@ -692,40 +684,49 @@ export const Hurl: Action = {
   staminaCost: 1,
 };
 
-export const Propel: Action = {
-  name: "Propel",
-  effect:
-    "You and your allies can move at double your regular speed this turn.",
-  skillType: SkillType.Kinetic,
-  range: Range.Self,
-  areaOfEffect: AreaOfEffect.Arena,
-  staminaCost: 2,
-};
+// export const Propel: Action = {
+//   name: "Propel",
+//   effect:
+//     "You and your allies can move at double your regular speed this turn.",
+//   skillType: SkillType.Kinetic,
+//   range: Range.Self,
+//   areaOfEffect: AreaOfEffect.Arena,
+//   staminaCost: 2,
+// };
 
-export const WindBarrier: Action = {
-  name: "Wind barrier",
+export const AirBarrier: Action = {
+  name: "Air barrier",
   effect:
-    "You protect an area with rapid winds. Any creature or object that attempts to enter the area needs to succeed on a strength check, otherwise they are thrown back 5m and restrained for the rest of their turn.",
+    "You protect an area with rapid winds. Until your next turn, any creature that attempts to enter the area must pass a hard strength check, or be thrown back 5m and take 5 force damage.",
   skillType: SkillType.Kinetic,
   range: Range.Nearby,
   areaOfEffect: AreaOfEffect.Sphere,
   staminaCost: 3,
 };
 
-export const AirSlash: Action = {
-  name: "Air slash",
-  effect:
-    "Target takes 5 force damage. If medium sized or smaller, they are thrown back 5m.",
+export const Restrain: Action = {
+  name: "Restrain",
+  effect: "Your target is restrained.",
   skillType: SkillType.Kinetic,
-  range: Range.Adjacent,
+  range: Range.Nearby,
   areaOfEffect: AreaOfEffect.SingleTarget,
-  staminaCost: 1,
+  staminaCost: 2,
 };
+
+// export const AirSlash: Action = {
+//   name: "Air slash",
+//   effect:
+//     "Target takes 5 force damage. If medium sized or smaller, they are thrown back 5m.",
+//   skillType: SkillType.Kinetic,
+//   range: Range.Adjacent,
+//   areaOfEffect: AreaOfEffect.SingleTarget,
+//   staminaCost: 1,
+// };
 
 export const Torrent: Action = {
   name: "Torrent",
   effect:
-    "Large sized creatures are thrown back 5m. Medium sized and smaller creatures are thrown back 15m and are stunned. Targets cannot move against the wind on their turn. Targets are asnomic.",
+    "Targets become anosmic and roll a hard strength check. If they fail, they are thrown back 5m and take 5 force damage.",
   skillType: SkillType.Kinetic,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.Cone,
@@ -744,22 +745,22 @@ export const Rifle: Action = {
 
 export const Fly: Action = {
   name: "Fly",
-  effect: "You can fly at a speed up to 5 times your walking speed.",
+  effect: "You can fly at a speed equal to 5 times your walking speed.",
   skillType: SkillType.Kinetic,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 2,
 };
 
-export const WindShield: Action = {
-  name: "Wind shield",
-  effect:
-    "You surround yourself with a torrent of wind. You are protected with 5 force armour and 5 slash armour. Creatures that attempt to melee attack you are stunned afterwards.",
-  skillType: SkillType.Kinetic,
-  range: Range.Self,
-  areaOfEffect: AreaOfEffect.SingleTarget,
-  staminaCost: 2,
-};
+// export const WindShield: Action = {
+//   name: "Wind shield",
+//   effect:
+//     "You surround yourself with a torrent of wind. You are protected with 5 force armour and 5 slash armour. Creatures that attempt to melee attack you are stunned afterwards.",
+//   skillType: SkillType.Kinetic,
+//   range: Range.Self,
+//   areaOfEffect: AreaOfEffect.SingleTarget,
+//   staminaCost: 2,
+// };
 
 export const Catapult: Action = {
   name: "Catapult",
@@ -771,22 +772,22 @@ export const Catapult: Action = {
   staminaCost: 4,
 };
 
-export const Tornado: Action = {
-  name: "Tornado",
-  effect:
-    "You summon a tornado to destroy your foes. Large sized and smaller creatures are thrown back 10m. They take 20 force damage and are stunned.",
-  skillType: SkillType.Kinetic,
-  range: Range.Nearby,
-  areaOfEffect: AreaOfEffect.Sphere,
-  staminaCost: 6,
-};
-
 export const Hurricane: Action = {
   name: "Hurricane",
   effect:
-    "You unleash a tempest. Medium sized and smaller creatures are thrown 5m in a random direction. Targets are stunned and are restrained. They take 5 electric, 5 slash and 5 force damage as they are struck by objects from their environment. Targets are asnomic.",
+    "You unleash a tempest. Targets take 5 electric, 5 slash and 5 force damage as they are struck by objects from their environment. They also become anosmic. They must pass a hard strength check otherwise they are restrained.",
   skillType: SkillType.Kinetic,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.Arena,
+  staminaCost: 6,
+};
+
+export const Tornado: Action = {
+  name: "Tornado",
+  effect:
+    "You summon a tornado to destroy your foes. They take 20 force damage and become anosmic. They must pass a hard strength check otherwise they are restrained.",
+  skillType: SkillType.Kinetic,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.Sphere,
   staminaCost: 8,
 };

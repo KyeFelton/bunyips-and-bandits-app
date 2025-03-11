@@ -269,9 +269,9 @@ Every character has an evasions count on their character sheet. The evasions cou
 Some actions inflict statuses upon their foes. All statuses, except for burning, last only one round. Some of the :
 
 * **Stunned**: The character loses an evasion until their next turn. If they have no evasions, then they lose an action on their next turn. This status can be stacked multiple times in a round.
-* **Empowered**: The character gains an evasion until their next turn. This status can be stacked multiple times in a round. 
+* **Empowered**: The character gains an evasion until their next turn. This status can be stacked multiple times in a round.
 * **Protected**: The character armour increases by the specified amount for the specified damage type until their next turn. This status can be stacked multiple times in a round.
-* **Restrained**: The character cannot move on their next turn.
+* **Restrained**: The character cannot dodge attacks or move to a new position until the end of their next turn.
 * **Burning**: The character takes 1d8 fire damage at the start of each their turns. After taking the damage, the creature may use an action to douse the flame and remove the status.
 * **Invisible**: The character cannot be detected through sight or infrared sight until their next turn.
 * **Silent**: The character cannot be detected through hearing or tremor hearing until their next turn.
@@ -281,7 +281,7 @@ Some actions inflict statuses upon their foes. All statuses, except for burning,
 * **Deafened**: The character cannot hear sounds in the air or tremors in the earth or water until the end of their next turn.
 * **Anosmic**: The character cannot smell until the end of their next turn.
 * **Blocked**: The character cannot psychic sense until the end of their next turn.
-* **Disoriented**: The character is blind, deaf and asnomic.
+* **Disoriented**: The character is blind, deaf and anosmic.
 * **Deluded**: The caster controls the perception of the target to make them see, hear or smell an altered reality.
 * **Hypnotised**: The target cannot harm the caster. They must obey any commands and act with the best interest of the caster. If the target is attacked by anyone from the opposing side, this status is removed.
 * **Frightened**: The creature is immobilised with fear and their turn is skipped.
