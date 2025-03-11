@@ -14,9 +14,9 @@ export type Effect = {
     damageType: DamageType;
   };
   evasions?: StatModifier;
-  health?: StatModifier;
+  physique?: StatModifier;
   luck?: StatModifier;
-  sanity?: StatModifier;
+  morale?: StatModifier;
   sense?: SenseType;
   skill?: StatModifier & {
     skillType: SkillType;

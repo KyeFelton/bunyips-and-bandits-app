@@ -1,39 +1,41 @@
-import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import {
   levelAtom,
   availablePathPointsAtom,
   availableSkillPointsAtom,
-  healthAtom,
-  sanityAtom,
+  physiqueAtom,
+  moraleAtom,
   staminaAtom,
-  currentHealthAtom,
-  currentSanityAtom,
+  currentPhysiqueAtom,
+  currentMoraleAtom,
   currentStaminaAtom,
-} from '../../state/character';
+} from "../../state/character";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../ui/select';
+} from "../ui/select";
 
 export const LevelStep = () => {
   const [level, setLevel] = useAtom(levelAtom);
   const availablePathPoints = useAtomValue(availablePathPointsAtom);
   const availableSkillPoints = useAtomValue(availableSkillPointsAtom);
-  const health = useAtomValue(healthAtom);
-  const sanity = useAtomValue(sanityAtom);
+  const physique = useAtomValue(physiqueAtom);
+  const morale = useAtomValue(moraleAtom);
   const stamina = useAtomValue(staminaAtom);
-  const setCurrentHealth = useSetAtom(currentHealthAtom);
-  const setCurrentSanity = useSetAtom(currentSanityAtom);
+  const setCurrentPhysique = useSetAtom(currentPhysiqueAtom);
+  const setCurrentMorale = useSetAtom(currentMoraleAtom);
   const setCurrentStamina = useSetAtom(currentStaminaAtom);
   const levels = Array.from({ length: 20 }, (_, i) => i + 1);
 
   const handleLevelChange = (value: number) => {
     const delta = value - level;
-    setCurrentHealth(Math.max(health.current + delta * health.increments, 0));
-    setCurrentSanity(Math.max(sanity.current + delta * sanity.increments, 0));
+    setCurrentPhysique(
+      Math.max(physique.current + delta * physique.increments, 0)
+    );
+    setCurrentMorale(Math.max(morale.current + delta * morale.increments, 0));
     setCurrentStamina(
       Math.max(stamina.current + delta * stamina.increments, 0)
     );
@@ -63,8 +65,8 @@ export const LevelStep = () => {
         <ul className="list-disc list-inside mt-2 space-y-2">
           <li>Number of path progessions: {availablePathPoints}</li>
           <li>Number of skill upgrades: {availableSkillPoints}</li>
-          <li>Bonus hit points: {health.increments * level}</li>
-          <li>Bonus morale: {sanity.increments * level}</li>
+          <li>Bonus physique: {physique.increments * level}</li>
+          <li>Bonus morale: {morale.increments * level}</li>
           <li>Bonus stamina: {stamina.increments * level}</li>
         </ul>
       </div>

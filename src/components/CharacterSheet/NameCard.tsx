@@ -18,8 +18,8 @@ import {
 import {
   nameAtom,
   levelAtom,
-  currentHealthAtom,
-  currentSanityAtom,
+  currentPhysiqueAtom,
+  currentMoraleAtom,
   currentStaminaAtom,
   speciesAtom,
   genderAtom,
@@ -49,8 +49,8 @@ export const NameCard = () => {
   const setters = {
     setName: useSetAtom(nameAtom),
     setLevel: useSetAtom(levelAtom),
-    setCurrentHealth: useSetAtom(currentHealthAtom),
-    setCurrentSanity: useSetAtom(currentSanityAtom),
+    setCurrentPhysique: useSetAtom(currentPhysiqueAtom),
+    setCurrentMorale: useSetAtom(currentMoraleAtom),
     setCurrentStamina: useSetAtom(currentStaminaAtom),
     setSpecies: useSetAtom(speciesAtom),
     setGender: useSetAtom(genderAtom),

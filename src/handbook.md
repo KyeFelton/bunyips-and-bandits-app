@@ -95,13 +95,13 @@ Paths define a set of learnings in a field of sorcery, morphing, psionics, evoca
 
 Your character isn’t invincible—adventuring comes with its fair share of scrapes, bruises, and mind-melting horrors. The game tracks three aspects of your character’s health:
 
-* **Physique**: How much physical damage you can take before collapsing. If your physique hits zero, you’re incapacitated—meaning you can’t move, fight, or do much of anything until you recover. 
-* **Sanity**: Your mental resilience, tested by terrifying encounters and psychic manipulation. Certain experiences—like witnessing the death of an ally horrific—can drain your sanity. If your sanity drops to zero, then you gain a mental condition that lasts until you recover some sanity.
+* **Physique**: How much physical damage you can take before collapsing. If your physique hits zero, you’re incapacitated—meaning you can’t move, fight, or do much of anything until you recover.
+* **Morale**: Your mental resilience, tested by terrifying encounters and psychic manipulation. Certain experiences—like witnessing the death of an ally horrific—can drain your morale. If your morale drops to zero, then you gain a mental condition that lasts until you recover some morale.
 * **Stamina**: How much energy you have before exhaustion sets in. Stamina depletes as you perform actions with a stamina cost. If an action has a stamina cost, you need to have at least that much left in your stamina pool to perform it.
 
-To determine what mental condition your character gains after losing all sanity, roll a d6 and then take the matching condition from the list:
+To determine what mental condition your character gains after losing all morale, roll a d6 and then take the matching condition from the list:
 
-1. **Fainting**: You pass out for 10 minutes, then regain 1 Sanity.
+1. **Fainting**: You pass out for 10 minutes, then regain 1 morale.
 2. **Delusions**: You experience constant hallucinations. You may mistake people for monsters, monsters for people or have flashbacks of past experiences.
 3. **Hysteria**: Uncontrollable emotional outbursts—laughing, crying, screaming.
 4. **Amnesia**: You forget who you are and why you’re here.
@@ -290,6 +290,6 @@ Some actions inflict statuses upon their foes. All statuses, except for burning,
 
 ### Resolving Combat
 
-When a character loses all of their health or sanity, they are out of the combat. Once all characters in the same party have been defeated or surrender, they lose the combat. The victorious party chooses whether to kill, capture or leave the losers in their place. If the players lose the combat, it’s up to the GM to decide their fate.
+When a character loses all of their health or morale, they are out of the combat. Once all characters in the same party have been defeated or surrender, they lose the combat. The victorious party chooses whether to kill, capture or leave the losers in their place. If the players lose the combat, it’s up to the GM to decide their fate.
 
 At any point during their turn, a character can attempt to flee. It is up to the GM discretion to determine whether a character has successfully fled the combat. If successful, then the character is out of the combat and their fate isn’t determined by their opponents.

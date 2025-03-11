@@ -26,11 +26,11 @@ export const skillLevelUpgradesAtom = atom<Partial<Record<SkillType, number>>>(
 );
 
 // Character stats
-export const currentHealthAtom = atom<number>(
-  startingSpecies.health.initial + startingSpecies.health.increments
+export const currentPhysiqueAtom = atom<number>(
+  startingSpecies.physique.initial + startingSpecies.physique.increments
 );
-export const currentSanityAtom = atom<number>(
-  startingSpecies.sanity.initial + startingSpecies.sanity.increments
+export const currentMoraleAtom = atom<number>(
+  startingSpecies.morale.initial + startingSpecies.morale.increments
 );
 export const currentStaminaAtom = atom<number>(
   startingSpecies.stamina.initial + startingSpecies.stamina.increments
@@ -88,45 +88,45 @@ export const speciesDataAtom = atom((get) => {
   return AllSpecies[speciesName as keyof typeof AllSpecies];
 });
 
-// Health
-export const healthAtom = atom((get) => {
+// Physique
+export const physiqueAtom = atom((get) => {
   const speciesData = get(speciesDataAtom);
   const level = get(levelAtom);
   const effects = get(effectsAtom);
-  const baseMaxHealth =
-    speciesData.health.initial + level * speciesData.health.increments;
-  const maxHealth = effects.reduce((total, effect) => {
-    if (effect.health?.bonus) {
-      return total + effect.health.bonus;
+  const baseMaxPhysique =
+    speciesData.physique.initial + level * speciesData.physique.increments;
+  const maxPhysique = effects.reduce((total, effect) => {
+    if (effect.physique?.bonus) {
+      return total + effect.physique.bonus;
     }
     return total;
-  }, baseMaxHealth);
+  }, baseMaxPhysique);
 
   return {
-    max: maxHealth,
-    current: get(currentHealthAtom),
-    increments: speciesData.health.increments,
+    max: maxPhysique,
+    current: get(currentPhysiqueAtom),
+    increments: speciesData.physique.increments,
   };
 });
 
-// Sanity
-export const sanityAtom = atom((get) => {
+// Morale
+export const moraleAtom = atom((get) => {
   const speciesData = get(speciesDataAtom);
   const level = get(levelAtom);
   const effects = get(effectsAtom);
-  const baseMaxSanity =
-    speciesData.sanity.initial + level * speciesData.sanity.increments;
-  const maxSanity = effects.reduce((total, effect) => {
-    if (effect.sanity?.bonus) {
-      return total + effect.sanity.bonus;
+  const baseMaxMorale =
+    speciesData.morale.initial + level * speciesData.morale.increments;
+  const maxMorale = effects.reduce((total, effect) => {
+    if (effect.morale?.bonus) {
+      return total + effect.morale.bonus;
     }
     return total;
-  }, baseMaxSanity);
+  }, baseMaxMorale);
 
   return {
-    max: maxSanity,
-    current: get(currentSanityAtom),
-    increments: speciesData.sanity.increments,
+    max: maxMorale,
+    current: get(currentMoraleAtom),
+    increments: speciesData.morale.increments,
   };
 });
 
@@ -305,8 +305,8 @@ export const saveFileAtom = atom<SaveFile>((get) => ({
   paths: get(pathsAtom),
   customTraits: get(customTraitsAtom),
   skillLevelUpgrades: get(skillLevelUpgradesAtom),
-  currentHealth: get(currentHealthAtom),
-  currentSanity: get(currentSanityAtom),
+  currentPhysique: get(currentPhysiqueAtom),
+  currentMorale: get(currentMoraleAtom),
   currentStamina: get(currentStaminaAtom),
   items: get(itemsAtom),
   money: get(moneyAtom),

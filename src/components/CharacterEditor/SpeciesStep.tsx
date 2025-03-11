@@ -1,11 +1,11 @@
 import { useAtom, useSetAtom, useAtomValue } from "jotai";
 import {
   speciesAtom,
-  currentHealthAtom,
-  currentSanityAtom,
+  currentPhysiqueAtom,
+  currentMoraleAtom,
   currentStaminaAtom,
-  healthAtom,
-  sanityAtom,
+  physiqueAtom,
+  moraleAtom,
   staminaAtom,
   speciesDataAtom,
   imageAtom,
@@ -29,22 +29,22 @@ import { getSpeciesImage } from "../../utils/speciesImages";
 
 export const SpeciesStep = () => {
   const [selectedSpecies, setSpecies] = useAtom(speciesAtom);
-  const health = useAtomValue(healthAtom);
-  const sanity = useAtomValue(sanityAtom);
+  const physique = useAtomValue(physiqueAtom);
+  const morale = useAtomValue(moraleAtom);
   const stamina = useAtomValue(staminaAtom);
-  const setCurrentHealth = useSetAtom(currentHealthAtom);
-  const setCurrentSanity = useSetAtom(currentSanityAtom);
+  const setCurrentPhysique = useSetAtom(currentPhysiqueAtom);
+  const setCurrentMorale = useSetAtom(currentMoraleAtom);
   const setCurrentStamina = useSetAtom(currentStaminaAtom);
   const speciesData = useAtomValue(speciesDataAtom);
   const setImage = useSetAtom(imageAtom);
 
   useEffect(() => {
-    setCurrentHealth(health.max);
-  }, [health, setCurrentHealth]);
+    setCurrentPhysique(physique.max);
+  }, [physique, setCurrentPhysique]);
 
   useEffect(() => {
-    setCurrentSanity(sanity.max);
-  }, [sanity, setCurrentSanity]);
+    setCurrentMorale(morale.max);
+  }, [morale, setCurrentMorale]);
 
   useEffect(() => {
     setCurrentStamina(stamina.max);
@@ -80,20 +80,20 @@ export const SpeciesStep = () => {
             </h3>
             <div className="grid grid-cols-3 gap-6">
               <div className="p-4 bg-red/10 rounded-lg">
-                <div className="text-sm font-medium mb-1">Hit points</div>
+                <div className="text-sm font-medium mb-1">Physique</div>
                 <div className="text-xl">
-                  {speciesData.health.initial}
+                  {speciesData.physique.initial}
                   <span className="text-sm text-muted-foreground ml-1">
-                    (+{speciesData.health.increments} per level)
+                    (+{speciesData.physique.increments} per level)
                   </span>
                 </div>
               </div>
               <div className="p-4 bg-green/10 rounded-lg">
                 <div className="text-sm font-medium mb-1">Morale</div>
                 <div className="text-xl">
-                  {speciesData.sanity.initial}
+                  {speciesData.morale.initial}
                   <span className="text-sm text-muted-foreground ml-1">
-                    (+{speciesData.sanity.increments} per level)
+                    (+{speciesData.morale.increments} per level)
                   </span>
                 </div>
               </div>

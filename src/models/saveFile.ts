@@ -15,8 +15,8 @@ export type SaveFile = {
   paths: SelectedPath[];
   customTraits: Trait[];
   skillLevelUpgrades: Partial<Record<SkillType, number>>;
-  currentHealth: number;
-  currentSanity: number;
+  currentPhysique: number;
+  currentMorale: number;
   currentStamina: number;
   items: ItemDictionary;
   money: number;

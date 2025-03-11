@@ -20,10 +20,10 @@ export type ItemDictionary = Record<string, CharacterItem>;
 export const Antidote: Item = {
   name: "Antidote",
   description:
-    "When consumed within one hour of taking toxic damage, you regain up to 5 health lost.",
+    "When consumed within one hour of taking toxic damage, you regain up to 5 physique lost.",
   effects: [
     {
-      health: {
+      physique: {
         bonus: 5,
       },
     },
@@ -35,7 +35,7 @@ export const Antidote: Item = {
 export const FirstAidKit: Item = {
   name: "First aid kit",
   description:
-    " You roll 1d8 instead of 1d4 when determining the amount of health regained from first aid.",
+    " You roll 1d8 instead of 1d4 when determining the amount of physique regained from first aid.",
   singleUse: false,
   weight: 1,
 };

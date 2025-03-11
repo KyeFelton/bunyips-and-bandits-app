@@ -8,8 +8,8 @@ import { startingSpecies } from "../models/species";
 type CharacterSetters = {
   setName: (value: SetStateAction<string>) => void;
   setLevel: (value: SetStateAction<number>) => void;
-  setCurrentHealth: (value: SetStateAction<number>) => void;
-  setCurrentSanity: (value: SetStateAction<number>) => void;
+  setCurrentPhysique: (value: SetStateAction<number>) => void;
+  setCurrentMorale: (value: SetStateAction<number>) => void;
   setCurrentStamina: (value: SetStateAction<number>) => void;
   setSpecies: (value: SetStateAction<string>) => void;
   setGender: (value: SetStateAction<string>) => void;
@@ -34,8 +34,8 @@ const validateSaveFile = (data: any): data is SaveFile => {
     typeof data.species === "string" &&
     typeof data.level === "number" &&
     Array.isArray(data.languages) &&
-    typeof data.currentHealth === "number" &&
-    typeof data.currentSanity === "number" &&
+    typeof data.currentPhysique === "number" &&
+    typeof data.currentMorale === "number" &&
     typeof data.currentStamina === "number" &&
     typeof data.money === "number" &&
     Array.isArray(data.paths) &&
@@ -66,8 +66,8 @@ export const uploadCharacter = async (
           // Update all atoms with the loaded data
           setters.setName(data.name);
           setters.setLevel(data.level);
-          setters.setCurrentHealth(data.currentHealth);
-          setters.setCurrentSanity(data.currentSanity);
+          setters.setCurrentPhysique(data.currentPhysique);
+          setters.setCurrentMorale(data.currentMorale);
           setters.setCurrentStamina(data.currentStamina);
           setters.setSpecies(data.species);
           setters.setGender(data.gender || "");
@@ -104,11 +104,11 @@ export const resetCharacter = (setters: CharacterSetters) => {
   setters.setName("");
   setters.setSpecies(startingSpecies.name);
   setters.setLevel(1);
-  setters.setCurrentHealth(
-    startingSpecies.health.initial + startingSpecies.health.increments
+  setters.setCurrentPhysique(
+    startingSpecies.physique.initial + startingSpecies.physique.increments
   );
-  setters.setCurrentSanity(
-    startingSpecies.sanity.initial + startingSpecies.sanity.increments
+  setters.setCurrentMorale(
+    startingSpecies.morale.initial + startingSpecies.morale.increments
   );
   setters.setCurrentStamina(
     startingSpecies.stamina.initial + startingSpecies.stamina.increments

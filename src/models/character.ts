@@ -15,12 +15,12 @@ export type Character = {
   personality: string;
   image?: string;
   level: number;
-  health: {
+  physique: {
     max: number;
     current: number;
     increments: number;
   };
-  sanity: {
+  morale: {
     max: number;
     current: number;
     increments: number;

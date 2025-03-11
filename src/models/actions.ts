@@ -231,7 +231,7 @@ export const Distort: Action = {
 export const Shriek: Action = {
   name: "Shriek",
   effect:
-    "You make an earsplitting sound that stuns, deafens and drains 1 sanity for targets with hearing sense.",
+    "You make an earsplitting sound that stuns, deafens and drains 1 morale for targets with hearing sense.",
   skillType: SkillType.Sonic,
   range: Range.Nearby,
   areaOfEffect: AreaOfEffect.SingleTarget,
@@ -481,7 +481,7 @@ export const HeatRay: Action = {
 export const BlindingFlash: Action = {
   name: "Blinding flash",
   effect:
-    "You emit a bright light that scars the eyes of your target. Targets with sight sense are blinded, stunned and lose 1 sanity.",
+    "You emit a bright light that scars the eyes of your target. Targets with sight sense are blinded, stunned and lose 1 morale.",
   skillType: SkillType.Radiant,
   range: Range.Nearby,
   areaOfEffect: AreaOfEffect.SingleTarget,

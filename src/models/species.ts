@@ -7,11 +7,11 @@ import { CreatureSize } from "../enums/CreatureSize";
 export type Species = {
   name: string;
   size: CreatureSize;
-  health: {
+  physique: {
     initial: number;
     increments: number;
   };
-  sanity: {
+  morale: {
     initial: number;
     increments: number;
   };
@@ -60,11 +60,11 @@ export type Species = {
 export const Badgerman: Species = {
   name: "Badgerman",
   size: CreatureSize.Small,
-  health: {
+  physique: {
     initial: 10,
     increments: 1,
   },
-  sanity: {
+  morale: {
     initial: 10,
     increments: 1,
   },
@@ -113,11 +113,11 @@ export const Badgerman: Species = {
 export const Cobber: Species = {
   name: "Cobber",
   size: CreatureSize.Small,
-  health: {
+  physique: {
     initial: 10,
     increments: 1,
   },
-  sanity: {
+  morale: {
     initial: 10,
     increments: 1,
   },
@@ -166,11 +166,11 @@ export const Cobber: Species = {
 export const Cormiard: Species = {
   name: "Cormiard",
   size: CreatureSize.Medium,
-  health: {
+  physique: {
     initial: 20,
     increments: 2,
   },
-  sanity: {
+  morale: {
     initial: 10,
     increments: 1,
   },
@@ -219,11 +219,11 @@ export const Cormiard: Species = {
 export const Goa: Species = {
   name: "Goa",
   size: CreatureSize.Large,
-  health: {
+  physique: {
     initial: 30,
     increments: 3,
   },
-  sanity: {
+  morale: {
     initial: 10,
     increments: 1,
   },
@@ -272,11 +272,11 @@ export const Goa: Species = {
 export const Jeli: Species = {
   name: "Jeli",
   size: CreatureSize.Medium,
-  health: {
+  physique: {
     initial: 20,
     increments: 2,
   },
-  sanity: {
+  morale: {
     initial: 10,
     increments: 1,
   },
@@ -325,11 +325,11 @@ export const Jeli: Species = {
 export const Minotaur: Species = {
   name: "Minotaur",
   size: CreatureSize.Large,
-  health: {
+  physique: {
     initial: 30,
     increments: 3,
   },
-  sanity: {
+  morale: {
     initial: 10,
     increments: 1,
   },
@@ -378,11 +378,11 @@ export const Minotaur: Species = {
 export const Pixie: Species = {
   name: "Pixie",
   size: CreatureSize.Tiny,
-  health: {
+  physique: {
     initial: 5,
     increments: 0.5,
   },
-  sanity: {
+  morale: {
     initial: 10,
     increments: 1,
   },
@@ -431,11 +431,11 @@ export const Pixie: Species = {
 export const Tengaroo: Species = {
   name: "Tengaroo",
   size: CreatureSize.Small,
-  health: {
+  physique: {
     initial: 10,
     increments: 1,
   },
-  sanity: {
+  morale: {
     initial: 10,
     increments: 1,
   },
@@ -484,11 +484,11 @@ export const Tengaroo: Species = {
 export const Vulturan: Species = {
   name: "Vulturan",
   size: CreatureSize.Medium,
-  health: {
+  physique: {
     initial: 20,
     increments: 2,
   },
-  sanity: {
+  morale: {
     initial: 10,
     increments: 1,
   },
@@ -537,11 +537,11 @@ export const Vulturan: Species = {
 export const Yowie: Species = {
   name: "Yowie",
   size: CreatureSize.Large,
-  health: {
+  physique: {
     initial: 30,
     increments: 3,
   },
-  sanity: {
+  morale: {
     initial: 10,
     increments: 1,
   },

@@ -4,28 +4,31 @@ import { Button } from "../ui/button";
 import { StatBar } from "../StatBar";
 import { Bed } from "lucide-react";
 import {
-  healthAtom,
-  sanityAtom,
+  physiqueAtom,
+  moraleAtom,
   staminaAtom,
-  currentHealthAtom,
-  currentSanityAtom,
+  currentPhysiqueAtom,
+  currentMoraleAtom,
   currentStaminaAtom,
 } from "../../state/character";
 
 export const StatsCard = () => {
-  const health = useAtomValue(healthAtom);
-  const sanity = useAtomValue(sanityAtom);
+  const physique = useAtomValue(physiqueAtom);
+  const morale = useAtomValue(moraleAtom);
   const stamina = useAtomValue(staminaAtom);
-  const [currentHealth, setCurrentHealth] = useAtom(currentHealthAtom);
-  const [currentSanity, setCurrentSanity] = useAtom(currentSanityAtom);
+  const [currentPhysique, setCurrentPhysique] = useAtom(currentPhysiqueAtom);
+  const [currentMorale, setCurrentMorale] = useAtom(currentMoraleAtom);
   const [currentStamina, setCurrentStamina] = useAtom(currentStaminaAtom);
 
   const handleRest = () => {
     const staminaBeforeRest = currentStamina;
-    const newHealth = Math.min(currentHealth + staminaBeforeRest, health.max);
-    setCurrentHealth(newHealth);
-    const newSanity = Math.min(currentSanity + staminaBeforeRest, sanity.max);
-    setCurrentSanity(newSanity);
+    const newPhysique = Math.min(
+      currentPhysique + staminaBeforeRest,
+      physique.max
+    );
+    setCurrentPhysique(newPhysique);
+    const newMorale = Math.min(currentMorale + staminaBeforeRest, morale.max);
+    setCurrentMorale(newMorale);
     setCurrentStamina(stamina.max);
   };
 
@@ -46,17 +49,17 @@ export const StatsCard = () => {
       <CardContent className="space-y-4 pt-4">
         <StatBar
           colour="red"
-          max={health.max}
-          name="Hit points"
-          onChange={setCurrentHealth}
-          value={currentHealth}
+          max={physique.max}
+          name="Physique"
+          onChange={setCurrentPhysique}
+          value={currentPhysique}
         />
         <StatBar
           colour="green"
-          max={sanity.max}
+          max={morale.max}
           name="Morale"
-          onChange={setCurrentSanity}
-          value={currentSanity}
+          onChange={setCurrentMorale}
+          value={currentMorale}
         />
         <StatBar
           colour="blue"
