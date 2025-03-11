@@ -4,11 +4,8 @@ import { SenseType } from "../enums/SenseType";
 import { SkillType } from "../enums/SkillType";
 
 export type StatModifier = {
-  static?: number;
-  dynamic?: {
-    skillType: SkillType;
-    multiplier: number;
-  };
+  bonus?: number;
+  multiplier?: number;
 };
 
 export type Effect = {

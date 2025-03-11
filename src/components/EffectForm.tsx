@@ -54,7 +54,7 @@ export const EffectForm = ({ effects, onChange }: Props) => {
         return {
           armour: {
             damageType: DamageType.Slash,
-            static: 0,
+            bonus: 0,
           },
         };
       case "sense":
@@ -65,14 +65,14 @@ export const EffectForm = ({ effects, onChange }: Props) => {
         return {
           skill: {
             skillType: SkillType.Strength,
-            static: 0,
+            bonus: 0,
           },
         };
       case "speed":
         return {
           speed: {
             movementType: MovementType.Walk,
-            static: 0,
+            bonus: 0,
           },
         };
     }
@@ -177,7 +177,7 @@ export const EffectForm = ({ effects, onChange }: Props) => {
                     handleUpdateEffect(index, {
                       armour: {
                         ...effectValue,
-                        static: parseInt(e.target.value) || 0,
+                        bonus: parseInt(e.target.value) || 0,
                       },
                     })
                   }
@@ -218,7 +218,7 @@ export const EffectForm = ({ effects, onChange }: Props) => {
                       skill: {
                         ...effectValue,
                         skillType: effectValue.skillType,
-                        static: parseInt(e.target.value) || 0,
+                        bonus: parseInt(e.target.value) || 0,
                       },
                     })
                   }
@@ -259,7 +259,7 @@ export const EffectForm = ({ effects, onChange }: Props) => {
                       speed: {
                         ...effectValue,
                         movementType: effectValue.movementType,
-                        static: parseInt(e.target.value) || 0,
+                        bonus: parseInt(e.target.value) || 0,
                       },
                     })
                   }

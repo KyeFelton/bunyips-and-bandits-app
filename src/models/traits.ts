@@ -18,7 +18,7 @@ export const Lethal: Trait = {
   effects: [
     {
       weaponDamage: {
-        static: 2,
+        bonus: 2,
       },
     },
   ],
@@ -36,7 +36,7 @@ export const Vigilant: Trait = {
   effects: [
     {
       evasions: {
-        static: 1,
+        bonus: 1,
       },
     },
   ],
@@ -54,7 +54,7 @@ export const Strong: Trait = {
     {
       skill: {
         skillType: SkillType.Strength,
-        static: 2,
+        bonus: 2,
       },
     },
   ],
@@ -81,7 +81,7 @@ export const FireResistant: Trait = {
     {
       armour: {
         damageType: DamageType.Fire,
-        static: 3,
+        bonus: 3,
       },
     },
   ],
@@ -125,7 +125,7 @@ export const SharpEars: Trait = {
     {
       skill: {
         skillType: SkillType.Hearing,
-        static: 3,
+        bonus: 3,
       },
     },
   ],
@@ -139,7 +139,7 @@ export const Bard: Trait = {
     {
       skill: {
         skillType: SkillType.Charisma,
-        static: 3,
+        bonus: 3,
       },
     },
   ],
@@ -172,7 +172,7 @@ export const SharpNose: Trait = {
     {
       skill: {
         skillType: SkillType.Smell,
-        static: 3,
+        bonus: 3,
       },
     },
   ],
@@ -191,7 +191,7 @@ export const ToxicResistance: Trait = {
     {
       armour: {
         damageType: DamageType.Toxic,
-        static: 3,
+        bonus: 3,
       },
     },
   ],
@@ -211,7 +211,7 @@ export const SharpEyes: Trait = {
     {
       skill: {
         skillType: SkillType.Sight,
-        static: 3,
+        bonus: 3,
       },
     },
   ],
@@ -249,7 +249,7 @@ export const ElectricResistance: Trait = {
     {
       armour: {
         damageType: DamageType.Electric,
-        static: 3,
+        bonus: 3,
       },
     },
   ],
@@ -287,7 +287,7 @@ export const Agile: Trait = {
     {
       skill: {
         skillType: SkillType.Agility,
-        static: 2,
+        bonus: 2,
       },
     },
   ],
@@ -313,7 +313,7 @@ export const Swift: Trait = {
     {
       speed: {
         movementType: MovementType.Walk,
-        static: 1,
+        bonus: 1,
       },
     },
   ],
@@ -327,31 +327,31 @@ export const WindShield: Trait = {
     {
       armour: {
         damageType: DamageType.Fire,
-        static: 1,
+        bonus: 1,
       },
     },
     {
       armour: {
         damageType: DamageType.Electric,
-        static: 1,
+        bonus: 1,
       },
     },
     {
       armour: {
         damageType: DamageType.Toxic,
-        static: 1,
+        bonus: 1,
       },
     },
     {
       armour: {
         damageType: DamageType.Slash,
-        static: 1,
+        bonus: 1,
       },
     },
     {
       armour: {
         damageType: DamageType.Force,
-        static: 1,
+        bonus: 1,
       },
     },
   ],
@@ -365,13 +365,13 @@ export const ThickSkin: Trait = {
     {
       armour: {
         damageType: DamageType.Slash,
-        static: 2,
+        bonus: 2,
       },
     },
     {
       armour: {
         damageType: DamageType.Force,
-        static: 2,
+        bonus: 2,
       },
     },
   ],

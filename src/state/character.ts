@@ -96,8 +96,8 @@ export const healthAtom = atom((get) => {
   const baseMaxHealth =
     speciesData.health.initial + level * speciesData.health.increments;
   const maxHealth = effects.reduce((total, effect) => {
-    if (effect.health?.static) {
-      return total + effect.health.static;
+    if (effect.health?.bonus) {
+      return total + effect.health.bonus;
     }
     return total;
   }, baseMaxHealth);
@@ -117,8 +117,8 @@ export const sanityAtom = atom((get) => {
   const baseMaxSanity =
     speciesData.sanity.initial + level * speciesData.sanity.increments;
   const maxSanity = effects.reduce((total, effect) => {
-    if (effect.sanity?.static) {
-      return total + effect.sanity.static;
+    if (effect.sanity?.bonus) {
+      return total + effect.sanity.bonus;
     }
     return total;
   }, baseMaxSanity);
@@ -138,8 +138,8 @@ export const staminaAtom = atom((get) => {
   const baseMaxStamina =
     speciesData.stamina.initial + level * speciesData.stamina.increments;
   const maxStamina = effects.reduce((total, effect) => {
-    if (effect.stamina?.static) {
-      return total + effect.stamina.static;
+    if (effect.stamina?.bonus) {
+      return total + effect.stamina.bonus;
     }
     return total;
   }, baseMaxStamina);
@@ -157,8 +157,8 @@ export const actionsCountAtom = atom((get) => {
   const baseActions = 2;
 
   return effects.reduce((total, effect) => {
-    if (effect.actions?.static) {
-      return total + effect.actions.static;
+    if (effect.actions?.bonus) {
+      return total + effect.actions.bonus;
     }
     return total;
   }, baseActions);
@@ -170,8 +170,8 @@ export const evasionsCountAtom = atom((get) => {
   const baseEvasions = 2;
 
   return effects.reduce((total, effect) => {
-    if (effect.evasions?.static) {
-      return total + effect.evasions.static;
+    if (effect.evasions?.bonus) {
+      return total + effect.evasions.bonus;
     }
     return total;
   }, baseEvasions);
@@ -186,7 +186,7 @@ export const speedAtom = atom((get) => {
   effects.forEach((effect) => {
     if (effect.speed?.movementType) {
       const type = effect.speed.movementType;
-      baseSpeed[type] += effect.speed.static || 0;
+      baseSpeed[type] += effect.speed.bonus || 0;
     }
   });
 
@@ -254,7 +254,7 @@ export const skillModifiersAtom = atom((get) => {
   effects.forEach((effect) => {
     if (effect.skill?.skillType) {
       const type = effect.skill.skillType;
-      modifiers[type] = (modifiers[type] || 0) + (effect.skill.static || 0);
+      modifiers[type] = (modifiers[type] || 0) + (effect.skill.bonus || 0);
     }
   });
 
@@ -270,7 +270,7 @@ export const armourAtom = atom((get) => {
   effects.forEach((effect) => {
     if (effect.armour?.damageType) {
       const type = effect.armour.damageType;
-      armour[type] += effect.armour.static || 0;
+      armour[type] += effect.armour.bonus || 0;
     }
   });
 
@@ -282,8 +282,8 @@ export const weaponDamageAtom = atom((get) => {
   const effects = get(effectsAtom);
 
   return effects.reduce((damage, effect) => {
-    if (effect.weaponDamage?.static) {
-      return damage + effect.weaponDamage.static;
+    if (effect.weaponDamage?.bonus) {
+      return damage + effect.weaponDamage.bonus;
     }
     return damage;
   }, 0);
