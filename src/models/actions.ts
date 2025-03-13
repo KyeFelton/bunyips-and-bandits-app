@@ -206,7 +206,7 @@ export const Incinerate: Action = {
   staminaCost: 4,
 };
 
-// Sonomancer
+// Musician
 
 // export const Tremor: Action = {
 //   name: "Tremor",
@@ -790,4 +790,300 @@ export const Tornado: Action = {
   range: Range.Nearby,
   areaOfEffect: AreaOfEffect.Sphere,
   staminaCost: 8,
+};
+
+// Mindseer
+export const Scorn: Action = {
+  name: "Scorn",
+  effect: "Your target loses 2 morale as you scorn their mind.",
+  skillType: SkillType.Psychic,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 1,
+};
+
+export const Insight: Action = {
+  name: "Insight",
+  effect:
+    "You inspect the mind of your target to gain a random insight about them.",
+  skillType: SkillType.Psychic,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 1,
+};
+
+export const Vex: Action = {
+  name: "Vex",
+  effect:
+    "You overwhelm your target with telepathic voices that confuse their thoughts. They are stunned.",
+  skillType: SkillType.Psychic,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 1,
+};
+
+export const Disturb: Action = {
+  name: "Disturb",
+  effect: "You block your target’s ability to psychic sense.",
+  skillType: SkillType.Psychic,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 2,
+};
+
+export const Reveal: Action = {
+  name: "Reveal",
+  effect:
+    "You probe the mind of your target. You gain some useful insights about their strengths, weaknesses, desires and/or fears.",
+  skillType: SkillType.Psychic,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 3,
+};
+
+export const Foresee: Action = {
+  name: "Foresee",
+  effect: "You foresee your targets next action.",
+  skillType: SkillType.Psychic,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 3,
+};
+
+// export const Focus: Action = {
+//   name: "Focus",
+//   effect:
+//     "You enter a meditative state to close your mind from outside detection and interference. You are composed.",
+//   skillType: SkillType.Psychic,
+//   range: Range.Nearby,
+//   areaOfEffect: AreaOfEffect.SingleTarget,
+//   staminaCost: 0,
+// };
+
+export const Purge: Action = {
+  name: "Purge",
+  effect:
+    "You unleash a wave of psychic energy that muddles all nearby foes. Creatures of your choosing are stunned.",
+  skillType: SkillType.Psychic,
+  range: Range.Self,
+  areaOfEffect: AreaOfEffect.Arena,
+  staminaCost: 4,
+};
+
+export const Interference: Action = {
+  name: "Interference",
+  effect: "Nearby target’s psychic sense is blocked.",
+  skillType: SkillType.Psychic,
+  range: Range.Self,
+  areaOfEffect: AreaOfEffect.Arena,
+  staminaCost: 5,
+};
+
+export const MindRead: Action = {
+  name: "Mind read",
+  effect: "You read all the thoughts and memories of your target.",
+  skillType: SkillType.Psychic,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 8,
+};
+
+// Hypnotist
+export const Torment: Action = {
+  name: "Torment",
+  effect:
+    "You torture the minds of your enemies. Targets of your choosing lose 2 morale.",
+  skillType: SkillType.Psychic,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 3,
+};
+
+export const Disorient: Action = {
+  name: "Disorient",
+  effect:
+    "You disrupt your target’s ability to perceive their environment. They lose 2 morale and become disoriented.",
+  skillType: SkillType.Psychic,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 5,
+};
+
+export const Frighten: Action = {
+  name: "Frighten",
+  effect:
+    "You plague your opponents mind with horrors. Your target loses 2 morale and becomes frightened of you.",
+  skillType: SkillType.Psychic,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 5,
+};
+
+export const Aggravate: Action = {
+  name: "Aggravate",
+  effect:
+    "You bewilder your opponents mind to mistake all nearby creatures as enemies. They lose 2 morale and gain madness.",
+  skillType: SkillType.Psychic,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 5,
+};
+
+export const Delude: Action = {
+  name: "Delude",
+  effect:
+    "Your target sees and hears a hallucination that you’ve crafted. They lose 2 morale and are deluded.",
+  skillType: SkillType.Psychic,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 5,
+};
+
+export const Hypnotise: Action = {
+  name: "Hypnotise",
+  effect:
+    "You overpower the mind of your target and put them in a suggestive state. They are hypnotised by you and will obey your commands.",
+  skillType: SkillType.Psychic,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 5,
+};
+
+export const Scourge: Action = {
+  name: "Scourge",
+  effect: "Your target loses 5 morale as you scourge their mind.",
+  skillType: SkillType.Psychic,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 3,
+};
+
+export const Obliterate: Action = {
+  name: "Scourge",
+  effect:
+    "You tear into the mind of your victim and attack their soul. They lose 12 morale.",
+  skillType: SkillType.Psychic,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 8,
+};
+
+// Summoner
+export const SummonCritter: Action = {
+  name: "Summon critter",
+  effect:
+    "You call upon the spirits of dead animals that once roamed this land to defend you and your allies. The ghost of a small critter appears and attacks a foe of your choosing. They take 1d6 slash damage.",
+  skillType: SkillType.Spirit,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 1,
+};
+
+export const GuardianAngel: Action = {
+  name: "Guardian angel",
+  effect:
+    "You summon a spirit to protect a creature for one round of combat. Your target takes 5 less damage on the next attack that hits them.",
+  skillType: SkillType.Spirit,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 1,
+};
+
+export const Avenge: Action = {
+  name: "Avenge",
+  effect:
+    "You sense and commune with the spirit of a creature recently slain by your opponent. You become empowered. The GM may reveal a useful insight about your opponent. If the opponent is innocent, then this action has no effect.",
+  skillType: SkillType.Spirit,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 1,
+};
+
+export const Revenge: Action = {
+  name: "Revenge",
+  effect:
+    "You open a gateway that allows deceased foes of your opponent to attack their soul. Your opponent lose 5 morale. If the opponent is innocent, then this action has no effect.",
+  skillType: SkillType.Spirit,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 3,
+};
+
+export const SummonBeast: Action = {
+  name: "Summon beast",
+  effect:
+    "You call upon the spirits of dead animals that once roamed this land to defend you and your allies. The ghost of a large beast appears and attacks a foe of your choosing. They take 1d20 damage.",
+  skillType: SkillType.Spirit,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 4,
+};
+
+export const SpectralHands: Action = {
+  name: "Spectral hands",
+  effect:
+    "Shadowy hands emerge from the ground and grapple your target. They are now restrained.",
+  skillType: SkillType.Spirit,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 1,
+};
+
+export const SummonHorde: Action = {
+  name: "Summon horde",
+  effect:
+    "You call upon the spirits of dead animals that once roamed this land to defend you and your allies. A horde of phantoms appear and attack each foe of your choosing in the area. Each foe takes 1d12 damage.",
+  skillType: SkillType.Spirit,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.Arena,
+  staminaCost: 4,
+};
+
+export const Sanctuary: Action = {
+  name: "Sanctuary",
+  effect:
+    "You can summon a spectral, dome barrier that confines a group of targets. The barrier prevents anything from entering or exiting the dome, including magical attacks. The barrier lasts until something breaks it or you dismiss it. The health of the barrier is equal to 5 times the number of stamina points you choose to expend in order to create it.",
+  skillType: SkillType.Spirit,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.Sphere,
+  staminaCost: "variable",
+};
+
+export const GraspOfDeath: Action = {
+  name: "Grasp of death",
+  effect:
+    "You chant to the ethereal plane, grasp your opponent and try to tear their spirit from their body. If the target has 30 health or less, their spirit is ruptured from their body and channelled to the Realm of the Dead. Their body becomes a mindless being in a vegetative state. If they have more than 30 health, they suffer no ill effect, and this action has half the stamina cost.",
+  skillType: SkillType.Spirit,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 8,
+};
+
+export const Resurrect: Action = {
+  name: "Resurrect",
+  effect:
+    "Resurrect a recently slain creature. The creature must have been dead for less than a day, and their body must be healed first.",
+  skillType: SkillType.Spirit,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 10,
+};
+
+// Unassigned
+export const Assist: Action = {
+  name: "Assist",
+  effect: "Your ally is empowered.",
+  skillType: SkillType.Psychic,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.SingleTarget,
+  staminaCost: 1,
+};
+
+export const MassAssist: Action = {
+  name: "Mass assist",
+  effect: "You empower all nearby allies.",
+  skillType: SkillType.Psychic,
+  range: Range.Nearby,
+  areaOfEffect: AreaOfEffect.Arena,
+  staminaCost: 3,
 };

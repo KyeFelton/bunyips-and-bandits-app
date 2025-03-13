@@ -120,6 +120,9 @@ export const moraleAtom = atom((get) => {
     if (effect.morale?.bonus) {
       return total + effect.morale.bonus;
     }
+    if (effect.morale?.multiplier) {
+      return total * effect.morale.multiplier;
+    }
     return total;
   }, baseMaxMorale);
 
@@ -188,6 +191,9 @@ export const speedAtom = atom((get) => {
     if (effect.speed?.locomotion) {
       const type = effect.speed.locomotion;
       baseSpeed[type] += effect.speed.bonus || 0;
+      baseSpeed[type] = Math.ceil(
+        baseSpeed[type] * (effect.speed.multiplier || 1)
+      );
     }
   });
 

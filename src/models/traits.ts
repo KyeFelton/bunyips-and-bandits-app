@@ -104,7 +104,7 @@ export const Arsonist: Trait = {
     "Youre fire power grows wild. Even if your opponent successfully evades your fire attack, they are still burned.",
 };
 
-// Sonomancer
+// Musician
 
 export const TremorHearing: Trait = {
   name: "Tremor hearing",
@@ -307,13 +307,30 @@ export const Boomerang: Trait = {
 
 export const Swift: Trait = {
   name: "Swift",
-  // Fix this
   description: "Your speed increases by 50%.",
   effects: [
     {
       speed: {
         locomotion: Locomotion.Walk,
-        bonus: 1,
+        bonus: 1.5,
+      },
+    },
+    {
+      speed: {
+        locomotion: Locomotion.Swim,
+        bonus: 1.5,
+      },
+    },
+    {
+      speed: {
+        locomotion: Locomotion.Climb,
+        bonus: 1.5,
+      },
+    },
+    {
+      speed: {
+        locomotion: Locomotion.Fly,
+        bonus: 1.5,
       },
     },
   ],
@@ -357,6 +374,112 @@ export const WindShield: Trait = {
   ],
 };
 
+// Mindseer
+export const PsychicSense: Trait = {
+  name: "Psychic sense",
+  description:
+    "You can sense the presence of other creatures and can communicate with them telepathically.",
+  effects: [
+    {
+      sense: SenseType.Psychic,
+    },
+  ],
+};
+
+export const Unbending: Trait = {
+  name: "Unbending",
+  description: "Your morale increases by 50%.",
+  effects: [
+    {
+      morale: {
+        multiplier: 1.5,
+      },
+    },
+  ],
+};
+
+export const Custodian: Trait = {
+  name: "Custodian",
+  description:
+    "Whilst you have morale, you can redirect all psychic attacks targeted towards your allies to you instead.",
+};
+
+export const Psychologist: Trait = {
+  name: "Psychologist",
+  description: "Gain +5 bonus to psychology checks.",
+  effects: [
+    {
+      skill: {
+        skillType: SkillType.Psychology,
+        bonus: 5,
+      },
+    },
+  ],
+};
+
+export const Foresight: Trait = {
+  name: "Foresight",
+  description:
+    "You intuitively sense the intentions of your enemies before they act. Gain +2 bonus to any check when evading an attack.",
+};
+
+// Hypnotist
+export const Psychotic: Trait = {
+  name: "Psychotic",
+  description:
+    "If you are a target of a psychic attack, the attacker loses 1d4 morale.",
+};
+
+export const Captivating: Trait = {
+  name: "Captivating",
+  description: "You gain +3 bonus to charisma checks.",
+  effects: [
+    {
+      skill: {
+        skillType: SkillType.Charisma,
+        bonus: 3,
+      },
+    },
+  ],
+};
+
+export const Unrelenting: Trait = {
+  name: "Unrelenting",
+  description:
+    "Consecutive attacks against the same target with the same action cost half as much stamina.",
+};
+
+// Summoner
+export const ParanormalSense: Trait = {
+  name: "Paranormal sense",
+  description:
+    "You can sense whether a creature, object, or location has recently witnessed death. You can also sense whether a corpse is nearby.",
+};
+
+export const Medium: Trait = {
+  name: "Medium",
+  description:
+    "You can touch a corpse to communicate with their spirit. The creature must have passed away in the last 100 years. Each minute costs 1 stamina.",
+};
+
+export const Undying: Trait = {
+  name: "Undying",
+  description:
+    "Once per combat, upon being dropped to 0 health, you can act for one more round of combat before becoming incapacitated.",
+};
+
+export const SuperiorMedium: Trait = {
+  name: "Superior medium",
+  description:
+    "You can commune with a dead spirit when you touch a sentimental object that they once possessed. You can also communicate with the spirits that once called your current location home. Each minute of communication costs 2 stamina.",
+};
+
+export const Blessed: Trait = {
+  name: "Blessed",
+  description:
+    "You are blessed with protection from your ancestors. Gain +1 armour for all damage types.",
+};
+
 // Unassigned
 export const ThickSkin: Trait = {
   name: "Thick skin",
@@ -371,6 +494,19 @@ export const ThickSkin: Trait = {
     {
       armour: {
         damageType: DamageType.Force,
+        bonus: 2,
+      },
+    },
+  ],
+};
+
+export const StrongWilled: Trait = {
+  name: "Strong willed",
+  description: "Gain +2 bonus to willpower.",
+  effects: [
+    {
+      skill: {
+        skillType: SkillType.Willpower,
         bonus: 2,
       },
     },

@@ -60,13 +60,39 @@ import {
   Taser,
   Tornado,
   Torrent,
-  WindBarrier,
   Zap,
   Guard,
   Resuscitate,
   Paralysis,
   AirBarrier,
   Restrain,
+  Scorn,
+  Insight,
+  Vex,
+  Reveal,
+  Purge,
+  MindRead,
+  Interference,
+  Hypnotise,
+  Obliterate,
+  Scourge,
+  Delude,
+  Aggravate,
+  Frighten,
+  Disorient,
+  Torment,
+  Disturb,
+  Foresee,
+  Avenge,
+  GraspOfDeath,
+  GuardianAngel,
+  Resurrect,
+  Revenge,
+  Sanctuary,
+  SpectralHands,
+  SummonBeast,
+  SummonCritter,
+  SummonHorde,
 } from "./actions";
 import {
   AcidicSkin,
@@ -104,6 +130,19 @@ import {
   Agile,
   Strong,
   WindShield,
+  PsychicSense,
+  Unbending,
+  Custodian,
+  Foresight,
+  Psychotic,
+  Unrelenting,
+  Captivating,
+  Psychologist,
+  Blessed,
+  Medium,
+  ParanormalSense,
+  SuperiorMedium,
+  Undying,
 } from "./traits";
 
 export type Path = {
@@ -189,11 +228,11 @@ export const Pyromaniac: Path = {
   ],
 };
 
-export const Sonomancer: Path = {
-  name: "Sonomancer",
+export const Musician: Path = {
+  name: "Musician",
   skillTypes: [SkillType.Sonic],
   description:
-    "Sonomancers are attuned to the rhythms and sounds of their environment. They can weave soundwaves to conjure enchantments and blast their enemies.",
+    "Musicians are attuned to the rhythms and sounds of their environment. They can weave soundwaves to conjure enchantments and blast their enemies.",
   unlockables: [
     {
       level: 1,
@@ -355,6 +394,108 @@ export const Stormcaller: Path = {
       level: 5,
       actions: [Tornado, Hurricane],
       traits: [WindShield],
+    },
+  ],
+};
+
+export const Mindseer: Path = {
+  name: "Mindseer",
+  skillTypes: [SkillType.Psychic],
+  description:
+    "Mindseers are psychics who peer beyond the surface, reading thoughts and unraveling the deepest secrets of their foes. Masters of insight, they can anticipate enemy actions and exploit weaknesses to manipulate the battlefield to their favour.",
+  unlockables: [
+    {
+      level: 1,
+      actions: [Scorn, Insight],
+      traits: [PsychicSense],
+    },
+    {
+      level: 2,
+      actions: [Vex, Disturb],
+      traits: [Psychologist],
+    },
+    {
+      level: 3,
+      actions: [Scourge, Reveal],
+      traits: [Unbending],
+    },
+    {
+      level: 4,
+      actions: [Torment, Foresee],
+      traits: [Custodian],
+    },
+    {
+      level: 5,
+      actions: [Interference, MindRead],
+      traits: [Foresight],
+    },
+  ],
+};
+
+export const Hypnotist: Path = {
+  name: "Hypnotist",
+  skillTypes: [SkillType.Psychic],
+  description:
+    "Hypnotists are the puppeteers of the mind, bending reality through suggestion and illusion. With a mere whisper or a piercing gaze, they can lull enemies into a trance, distort perceptions, or even command others to act against their own will.",
+  unlockables: [
+    {
+      level: 1,
+      actions: [Scorn, Disorient],
+      traits: [PsychicSense],
+    },
+    {
+      level: 2,
+      actions: [Vex, Frighten],
+      traits: [Captivating],
+    },
+    {
+      level: 3,
+      actions: [Scourge, Aggravate],
+      traits: [Unbending],
+    },
+    {
+      level: 4,
+      actions: [Purge, Delude],
+      traits: [Psychotic],
+    },
+    {
+      level: 5,
+      actions: [Obliterate, Hypnotise],
+      traits: [Unrelenting],
+    },
+  ],
+};
+
+export const Summoner: Path = {
+  name: "Summoner",
+  skillTypes: [SkillType.Spirit],
+  description:
+    "Summoners are intermediaries between the living and the dead, calling forth spirits to aid them in battle. Whether raising spectral warriors or seeking counsel from lost souls, summoners wield the power of the afterlife.",
+  unlockables: [
+    {
+      level: 1,
+      actions: [SummonCritter, GuardianAngel],
+      traits: [ParanormalSense],
+    },
+    {
+      level: 2,
+      actions: [Avenge, Revenge],
+      traits: [Medium],
+    },
+    {
+      level: 3,
+      actions: [SummonBeast, SpectralHands],
+      traits: [Undying],
+    },
+    {
+      level: 4,
+      actions: [SummonHorde, Sanctuary],
+      traits: [SuperiorMedium],
+    },
+    {
+      level: 5,
+      actions: [GraspOfDeath, Resurrect],
+      traits: [Blessed],
     },
   ],
 };
