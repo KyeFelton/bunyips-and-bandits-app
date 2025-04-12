@@ -32,7 +32,7 @@ const EffectTypeLabels: Record<EffectType, string> = {
   skill: "Skill",
   speed: "Speed",
   stamina: "Stamina",
-  weaponDamage: "Weapon damage",
+  weapon: "Weapon",
 };
 
 export const EffectForm = ({ effects, onChange }: Props) => {
@@ -44,7 +44,7 @@ export const EffectForm = ({ effects, onChange }: Props) => {
       case "luck":
       case "morale":
       case "stamina":
-      case "weaponDamage":
+      case "weapon":
         return {
           [type]: {
             bonus: 0,
@@ -268,13 +268,53 @@ export const EffectForm = ({ effects, onChange }: Props) => {
               </>
             )}
 
+            {effectType === "weapon" && (
+              <>
+                <Select
+                  value={effectValue.damageType}
+                  onValueChange={(value) =>
+                    handleUpdateEffect(index, {
+                      weapon: {
+                        ...effectValue,
+                        damageType: value as DamageType,
+                      },
+                    })
+                  }
+                >
+                  <SelectTrigger className="w-[200px]">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {Object.values(DamageType).map((type) => (
+                      <SelectItem key={type} value={type}>
+                        {type}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <Input
+                  type="number"
+                  value={effectValue.bonus || ""}
+                  onChange={(e) =>
+                    handleUpdateEffect(index, {
+                      weapon: {
+                        ...effectValue,
+                        damageType: effectValue.damageType,
+                        bonus: parseInt(e.target.value) || 0,
+                      },
+                    })
+                  }
+                  className="w-20"
+                />
+              </>
+            )}
+
             {(effectType === "actions" ||
               effectType === "evasions" ||
               effectType === "physique" ||
               effectType === "luck" ||
               effectType === "morale" ||
-              effectType === "stamina" ||
-              effectType === "weaponDamage") && (
+              effectType === "stamina") && (
               <Input
                 type="number"
                 value={effectValue.bonus || ""}

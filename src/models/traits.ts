@@ -17,7 +17,7 @@ export const Lethal: Trait = {
   description: "Gain +2 weapon damage.",
   effects: [
     {
-      weaponDamage: {
+      weapon: {
         bonus: 2,
       },
     },

@@ -25,5 +25,7 @@ export type Effect = {
     locomotion: Locomotion;
   };
   stamina?: StatModifier;
-  weaponDamage?: StatModifier;
+  weapon?: StatModifier & {
+    damageType?: DamageType;
+  };
 };

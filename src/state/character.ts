@@ -285,15 +285,23 @@ export const armourAtom = atom((get) => {
 });
 
 // Weapon damage
-export const weaponDamageAtom = atom((get) => {
+export const weaponAtom = atom((get) => {
   const effects = get(effectsAtom);
 
-  return effects.reduce((damage, effect) => {
-    if (effect.weaponDamage?.bonus) {
-      return damage + effect.weaponDamage.bonus;
+  const damage = effects.reduce((damage, effect) => {
+    if (effect.weapon?.bonus) {
+      return damage + effect.weapon.bonus;
     }
     return damage;
   }, 0);
+
+  const damageType = effects.find((effect) => effect.weapon?.damageType)?.weapon
+    ?.damageType;
+
+  return {
+    damage,
+    damageType,
+  };
 });
 
 // Luck

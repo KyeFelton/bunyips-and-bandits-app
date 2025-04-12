@@ -69,7 +69,7 @@ Skills determine how well your character performs various actions. They include:
 * **Psychology**: used for assessing the behaviours and mannerisms of others to determine their true thoughts and emotions
 * **Stealth**: used for avoiding detection, such as surprise ambushing or sneaking past another creature
 * **Sight**: used for visual perception tasks, such as spotting hidden objects or seeing in the dark
-* **Hearing**: used for auditory perception tasks, such as hearing faint noise or identifying specific sounds in a noisy environment
+* **Hearing**: used for auditory perception tasks, such as hearing a faint noise or identifying specific sounds in a noisy environment
 * **Smell**: used for olfactory perception tasks, such as detecting and tracking scents
 
 Furthermore, the following skills can be unlocked and progressed when levelling up a path:
@@ -159,7 +159,7 @@ As you step into the game, the GM will present various scenarios and challenges 
 
 The GM decides when a skill check is needed. If something is challenging, risky, or uncertain, you’ll likely need to roll for it. For example, if you say:
 
-* _“I walk across the room.”_ → No roll needed (unless the room is full of bear traps).
+* _“I walk across the room.”_ → No roll needed (unless the room is full of traps).
 * _“I sprint across a crumbling rope bridge while dodging arrows.”_ → Definitely a roll.
 
 ### How Skill Checks Work
@@ -172,7 +172,7 @@ To perform a skill check, roll the die that corresponds to your skill level:
 * Level 4: d12
 * Level 5: d20
 
-If you have any bonuses or penalties, add (or subtract) them from your roll.
+If you have any bonuses (or penalties), add (or subtract) them from your roll.
 
 If you don't have a level for the required skill, then you take 1 as the result.
 

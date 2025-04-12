@@ -44,7 +44,7 @@ export type Character = {
     [DamageType.Slash]: number;
     [DamageType.Force]: number;
   };
-  weaponDamage: number;
+  weapon: number;
   paths: Path[];
   items: CharacterItem[];
   money: number;

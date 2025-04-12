@@ -11,7 +11,7 @@ import {
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { ArrowLeft, Plus } from "lucide-react";
-import * as Items from "../../models/items";
+import * as Items from "../../data/items";
 import { Item } from "../../models/items";
 import {
   Select,
@@ -67,17 +67,20 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
     setSelectedItem({
       ...item,
       quantity: 1,
-      cost: undefined,
+      cost: item?.defaultCost,
     });
   };
 
   const handleBack = () => {
     if (selectedItem) {
-      if (customItem) {
+      if (customItem.name.length > 0) {
+        console.log("is custom");
         setIsCreatingItem(true);
       }
       setSelectedItem(null);
+      console.log("yep");
     } else {
+      console.log("no");
       setCustomItem(defaultCustomItem);
       setIsCreatingItem(false);
     }
