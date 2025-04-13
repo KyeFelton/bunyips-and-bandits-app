@@ -4,47 +4,47 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 12%;
+    --background: 37 76% 99%;
+    --foreground: 30 15% 18%;
 
-    --muted: 210 17% 98%;
-    --muted-foreground: 210 7% 56%;
+    --muted: 60 30% 92%;
+    --muted-foreground: 40 15% 40%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 12%;
+    --popover: 38 50% 97%;
+    --popover-foreground: 30 15% 18%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
+    --border: 28 18% 70%;
+    --input: 28 18% 70%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 12%;
+    --card: 37 76% 99%;
+    --card-foreground: 30 15% 18%;
 
-    --primary: 0 0% 12%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 18 45% 22%;
+    --primary-foreground: 42 45% 96%;
 
-    --secondary: 210 17% 98%;
-    --secondary-foreground: 0 0% 12%;
+    --secondary: 92 14% 90%;
+    --secondary-foreground: 30 15% 18%;
 
-    --accent: 131 67% 95%;
-    --accent-medium: 128 71% 82%;
-    --accent-foreground: 131 54% 40%;
+    --accent: 160 46% 90%;
+    --accent-medium: 142 48% 72%;
+    --accent-foreground: 131 41% 30%;
 
-    --destructive: 0 100% 50%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 42 45% 98%;
 
-    --green: 128 71% 82%;
-    --green-foreground: 131 54% 40%;
+    --green: 142 28% 72%;
+    --green-foreground: 131 51% 30%;
 
-    --blue: 206 100% 82%;
-    --blue-foreground: 209 77% 43%;
+    --blue: 210 50% 85%;
+    --blue-foreground: 217 61% 45%;
 
-    --red: 0 100% 89%;
-    --red-foreground: 0 74% 54%;
+    --red: 5 70% 76%;
+    --red-foreground: 5 65% 44%;
 
-    --yellow: 50 100% 93%;
-    --yellow-foreground: 47 100% 62%;
+    --yellow: 45 100% 88%;
+    --yellow-foreground: 40 100% 55%;
 
-    --ring: 215 20.2% 65.1%;
+    --ring: 30 25% 50%;
 
     --radius: 0.5rem;
   }

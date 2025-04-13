@@ -54,7 +54,7 @@ export const CharacterEditor = () => {
 
   return (
     <motion.div
-      className="h-screen p-8 bg-foreground/50"
+      className="h-screen p-8 bg-gray-500/15"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -66,7 +66,7 @@ export const CharacterEditor = () => {
             <Button
               variant="ghost"
               size="icon"
-              className="absolute right-0 top-0 text-white hover:text-white/80 hover:bg-white/10"
+              className="absolute right-0 top-0 text-background hover:text-white/80 hover:bg-white/10"
               onClick={handleClose}
             >
               <X className="h-6 w-6" />
@@ -74,7 +74,7 @@ export const CharacterEditor = () => {
             <h1 className="text-3xl font-bold mb-2 text-background">
               Create Your Character
             </h1>
-            <p className="text-white/80">
+            <p className="text-background/80">
               Step {currentStep + 1} of {steps.length}:{" "}
               {steps[currentStep].title}
             </p>
@@ -91,7 +91,7 @@ export const CharacterEditor = () => {
               }}
             >
               <div
-                className="absolute h-full bg-white transition-all duration-500 ease-in-out"
+                className="absolute h-full bg-background transition-all duration-500 ease-in-out"
                 style={{
                   width:
                     currentStep === 0
@@ -110,11 +110,11 @@ export const CharacterEditor = () => {
                 <div
                   className={`relative z-10 w-4 h-4 rounded-full border-2 transition-colors duration-200 ${
                     index <= currentStep
-                      ? "bg-white border-white"
+                      ? "bg-background border-background"
                       : "bg-muted-foreground border-muted-foreground/20"
                   }`}
                 />
-                <span className="mt-4 text-sm font-medium text-center px-2 text-white">
+                <span className="mt-4 text-sm font-medium text-center px-2 text-background">
                   {step.title}
                 </span>
               </div>
