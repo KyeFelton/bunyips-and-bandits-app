@@ -3,7 +3,7 @@ import { AnimatePresence } from "framer-motion";
 import { LandingPage } from "./components/LandingPage";
 import { CharacterSheet } from "./components/CharacterSheet";
 import { CharacterEditor } from "./components/CharacterEditor";
-import { RulesPage } from "./components/RulesPage";
+import { Handbook } from "./components/Handbook";
 import { RulesButton } from "./components/RulesButton";
 import background from "./images/background.png";
 import frame from "./images/leaf-frame.png";
@@ -11,7 +11,7 @@ import {
   CharacterSheetRoute,
   CharacterEditorRoute,
   HomeRoute,
-  RulesRoute,
+  HandbookRoute,
 } from "./routes";
 
 function App() {
@@ -46,7 +46,7 @@ function App() {
           <Route path={HomeRoute} element={<LandingPage />} />
           <Route path={CharacterSheetRoute} element={<CharacterSheet />} />
           <Route path={CharacterEditorRoute} element={<CharacterEditor />} />
-          <Route path={RulesRoute} element={<RulesPage />} />
+          <Route path={HandbookRoute} element={<Handbook />} />
         </Routes>
       </AnimatePresence>
       {showRulesButton && <RulesButton />}

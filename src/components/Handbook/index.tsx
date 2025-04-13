@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { X } from "lucide-react";
 import ReactMarkdown from "react-markdown";
-import handbook from "../handbook.md?raw";
+import handbook from "./handbook.md?raw";
 
-export function RulesPage() {
+export function Handbook() {
   const navigate = useNavigate();
 
   return (
