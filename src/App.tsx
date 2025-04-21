@@ -5,6 +5,7 @@ import { CharacterSheet } from "./components/CharacterSheet";
 import { CharacterEditor } from "./components/CharacterEditor";
 import { Handbook } from "./components/Handbook";
 import { RulesButton } from "./components/RulesButton";
+import { Toaster } from "./components/ui/toaster";
 import background from "./images/background.png";
 import frame from "./images/leaf-frame.png";
 import {
@@ -50,6 +51,7 @@ function App() {
         </Routes>
       </AnimatePresence>
       {showRulesButton && <RulesButton />}
+      <Toaster />
     </div>
   );
 }

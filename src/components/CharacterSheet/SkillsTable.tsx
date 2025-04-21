@@ -18,27 +18,26 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip";
 import { skillLevelsAtom, skillModifiersAtom } from "../../state/character";
-
-const getDiceForLevel = (level: number | undefined) => {
-  switch (level) {
-    case 1:
-      return "d4";
-    case 2:
-      return "d6";
-    case 3:
-      return "d8";
-    case 4:
-      return "d12";
-    case 5:
-      return "d20";
-    default:
-      return "-";
-  }
-};
+import { useRollToast } from "./RollToast";
+import { getDiceForLevel } from "../../utils/dice";
+import { Button } from "../ui/button";
 
 export const SkillsTable = () => {
   const skillLevels = useAtomValue(skillLevelsAtom);
   const skillModifiers = useAtomValue(skillModifiersAtom);
+  const showRollToast = useRollToast();
+
+  const handleRoll = (skill: {
+    type: SkillType;
+    dice: string;
+    modifier: number;
+  }) => {
+    showRollToast({
+      name: skill.type,
+      dice: skill.dice,
+      modifier: skill.modifier,
+    });
+  };
 
   const skillsArray = Object.values(SkillType).map((skillType) => ({
     type: skillType,
@@ -90,16 +89,20 @@ export const SkillsTable = () => {
                       </Tooltip>
                     </div>
                   </TableCell>
-                  <TableCell className="text-right flex items-center justify-center">
-                    {skill.level}
-                  </TableCell>
+                  <TableCell className="text-center">{skill.level}</TableCell>
                   <TableCell className="text-left font-mono">
-                    {skill.dice}
-                    {skill.modifier > 0
-                      ? ` + ${skill.modifier}`
-                      : skill.modifier < 0
-                      ? ` - ${skill.modifier * -1}`
-                      : ""}
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleRoll(skill)}
+                    >
+                      {skill.dice}
+                      {skill.modifier > 0
+                        ? ` + ${skill.modifier}`
+                        : skill.modifier < 0
+                        ? ` - ${skill.modifier * -1}`
+                        : ""}{" "}
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}

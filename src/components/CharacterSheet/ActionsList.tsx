@@ -1,8 +1,13 @@
-import { useAtomValue, useAtom } from 'jotai';
-import { pathsAtom, currentStaminaAtom } from '../../state/character';
-import { User, Users, Triangle, Circle, Scan } from 'lucide-react';
-import { AreaOfEffect } from '../../enums/AreaOfEffect';
-import { Action } from '../../models/actions';
+import { useAtomValue, useAtom } from "jotai";
+import {
+  pathsAtom,
+  currentStaminaAtom,
+  skillLevelsAtom,
+  skillModifiersAtom,
+} from "../../state/character";
+import { User, Users, Triangle, Circle, Scan } from "lucide-react";
+import { AreaOfEffect } from "../../enums/AreaOfEffect";
+import { Action } from "../../models/actions";
 import {
   Table,
   TableBody,
@@ -10,15 +15,17 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '../ui/table';
-import { Button } from '../ui/button';
+} from "../ui/table";
+import { Button } from "../ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '../ui/tooltip';
-import { SkillIcon } from '../icons/SkillIcon';
+} from "../ui/tooltip";
+import { SkillIcon } from "../icons/SkillIcon";
+import { useRollToast } from "./RollToast";
+import { getDiceForLevel } from "../../utils/dice";
 
 const AreaIcon = ({ type }: { type: AreaOfEffect }) => {
   switch (type) {
@@ -33,13 +40,16 @@ const AreaIcon = ({ type }: { type: AreaOfEffect }) => {
     case AreaOfEffect.Arena:
       return <Scan className="h-4 w-4" />;
     default:
-      return '-';
+      return "-";
   }
 };
 
 export const ActionsList = () => {
   const paths = useAtomValue(pathsAtom);
   const [stamina, setStamina] = useAtom(currentStaminaAtom);
+  const skillLevels = useAtomValue(skillLevelsAtom);
+  const skillModifiers = useAtomValue(skillModifiersAtom);
+  const showRollToast = useRollToast();
 
   const actions: (Action & { path: string })[] = paths
     .flatMap((path) =>
@@ -56,9 +66,14 @@ export const ActionsList = () => {
 
   const handlePerformAction = (action: Action) => {
     const staminaCost =
-      typeof action.staminaCost === 'number' ? action.staminaCost : 0;
+      typeof action.staminaCost === "number" ? action.staminaCost : 0;
     if (stamina >= staminaCost) {
       setStamina(stamina - staminaCost);
+      showRollToast({
+        name: `${action.name} (${action.skillType})`,
+        dice: getDiceForLevel(skillLevels[action.skillType]),
+        modifier: skillModifiers[action.skillType] || 0,
+      });
     }
   };
 
@@ -123,9 +138,9 @@ export const ActionsList = () => {
                 </div>
               </TableCell>
               <TableCell className="text-center font-mono">
-                {typeof action.staminaCost === 'number'
+                {typeof action.staminaCost === "number"
                   ? action.staminaCost
-                  : 'X'}
+                  : "X"}
               </TableCell>
               <TableCell className="text-right">
                 <Button
@@ -133,7 +148,7 @@ export const ActionsList = () => {
                   size="sm"
                   onClick={() => handlePerformAction(action)}
                   disabled={
-                    typeof action.staminaCost === 'number' &&
+                    typeof action.staminaCost === "number" &&
                     stamina < action.staminaCost
                   }
                 >
