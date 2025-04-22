@@ -24,7 +24,8 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip";
 import { Badge } from "../ui/badge";
-import * as Paths from "../../models/paths";
+import { Path } from "../../models/paths";
+import * as AllPaths from "../../data/paths";
 import { useState } from "react";
 import { SkillIcon } from "../icons/SkillIcon";
 
@@ -35,9 +36,9 @@ export const PathsStep = () => {
   const usedPathPoints = paths.reduce((sum, path) => sum + path.level, 0);
   const remainingPathPoints = availablePathPoints - usedPathPoints;
 
-  const availablePaths = Object.values(Paths)
+  const availablePaths = Object.values(AllPaths)
     .filter((path) => typeof path === "object" && "name" in path)
-    .filter((path) => !paths.some((p) => p.name === path.name)) as Paths.Path[];
+    .filter((path) => !paths.some((p) => p.name === path.name)) as Path[];
 
   const handleAddPath = () => {
     const path = availablePaths.find((p) => p.name === selectedPath);
