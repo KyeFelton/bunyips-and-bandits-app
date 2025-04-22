@@ -2,7 +2,7 @@ import { atom } from "jotai";
 import { SkillType } from "../enums/SkillType";
 import { ItemDictionary } from "../models/items";
 import { SelectedPath } from "../models/paths";
-import { AllSpecies, startingSpecies } from "../models/species";
+import { AllSpecies, startingSpecies } from "../data/species";
 import { SaveFile } from "../models/saveFile";
 import { Effect } from "../models/effect";
 import { Trait } from "../models/traits";

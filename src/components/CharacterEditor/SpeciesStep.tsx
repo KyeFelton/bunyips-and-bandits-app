@@ -17,7 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { AllSpecies } from "../../models/species";
+import { AllSpecies } from "../../data/species";
 import { Heart, ChartNoAxesColumn, Shield, ArrowLeftRight } from "lucide-react";
 import { SkillIcon } from "../icons/SkillIcon";
 import { Locomotion } from "../../enums/Locomotion";

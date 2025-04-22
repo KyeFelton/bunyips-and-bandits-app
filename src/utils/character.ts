@@ -3,7 +3,7 @@ import { SaveFile } from "../models/saveFile";
 import { getSpeciesImage } from "./speciesImages";
 import { Trait } from "../models/traits";
 import { CharacterSheetRoute } from "../routes";
-import { startingSpecies } from "../models/species";
+import { startingSpecies } from "../data/species";
 
 type CharacterSetters = {
   setName: (value: SetStateAction<string>) => void;
