@@ -1,14 +1,13 @@
 import { useToast } from "../../utils/use-toast";
 import { playDiceRollSound } from "../../utils/sound";
 
-const rollDice = (dice: string) => {
-  const sides = parseInt(dice.substring(1));
+const rollDice = (sides: number) => {
   return Math.ceil(Math.random() * sides);
 };
 
 interface RollToastProps {
   name: string;
-  dice: string;
+  dice: number;
   modifier: number;
 }
 
@@ -28,7 +27,7 @@ export const useRollToast = () => {
             <div className="font-mono space-y-1">
               <div className="text-xl font-bold">{total}</div>
               <div className="text-xs text-muted-foreground">
-                {dice}{" "}
+                d{dice}{" "}
                 {modifier
                   ? modifier >= 0
                     ? `+ ${modifier}`

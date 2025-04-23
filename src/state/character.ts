@@ -7,6 +7,7 @@ import { SaveFile } from "../models/saveFile";
 import { Effect } from "../models/effect";
 import { Trait } from "../models/traits";
 import { getSpeciesImage } from "../utils/speciesImages";
+import { getDiceBonusForLevel } from "../utils/dice";
 
 // Basic character info
 export const nameAtom = atom<string>("");
@@ -256,6 +257,7 @@ export const skillLevelsAtom = atom((get) => {
 // Skill modifiers
 export const skillModifiersAtom = atom((get) => {
   const effects = get(effectsAtom);
+  const skillLevels = get(skillLevelsAtom);
   const modifiers: Record<SkillType, number> = {} as Record<SkillType, number>;
 
   effects.forEach((effect) => {
@@ -263,6 +265,11 @@ export const skillModifiersAtom = atom((get) => {
       const type = effect.skill.skillType;
       modifiers[type] = (modifiers[type] || 0) + (effect.skill.bonus || 0);
     }
+  });
+
+  Object.entries(skillLevels).forEach(([type, level]) => {
+    modifiers[type as SkillType] =
+      (modifiers[type as SkillType] || 0) + getDiceBonusForLevel(level);
   });
 
   return modifiers;

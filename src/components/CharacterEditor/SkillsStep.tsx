@@ -40,7 +40,7 @@ export const SkillsStep = () => {
   const handleIncreaseSkill = (skillType: SkillType) => {
     if (
       skillLevels[skillType] &&
-      skillLevels[skillType] < 5 &&
+      skillLevels[skillType] < 10 &&
       hasSkillPoints
     ) {
       setSkillLevelUpgrades({
@@ -140,9 +140,7 @@ export const SkillsStep = () => {
                     size="sm"
                     onClick={() => handleIncreaseSkill(skill.type)}
                     disabled={
-                      !hasSkillPoints ||
-                      !skill.level ||
-                      skill.level + (skill.levelUp || 0) >= 5
+                      !hasSkillPoints || !skill.level || skill.level >= 10
                     }
                   >
                     <Plus className="h-4 w-4" />

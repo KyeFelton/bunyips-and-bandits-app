@@ -29,7 +29,7 @@ export const SkillsTable = () => {
 
   const handleRoll = (skill: {
     type: SkillType;
-    dice: string;
+    dice: number;
     modifier: number;
   }) => {
     showRollToast({
@@ -65,7 +65,9 @@ export const SkillsTable = () => {
           </TableHeader>
           <TableBody>
             {skillsArray
-              .filter((skill) => skill.level && skill.level > 0)
+              .filter(
+                (skill) => !skill.pathSkill || (skill.level && skill.level > 0)
+              )
               .map((skill) => (
                 <TableRow key={skill.type}>
                   <TableCell className="font-medium">
@@ -91,18 +93,22 @@ export const SkillsTable = () => {
                   </TableCell>
                   <TableCell className="text-center">{skill.level}</TableCell>
                   <TableCell className="text-left font-mono">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => handleRoll(skill)}
-                    >
-                      {skill.dice}
-                      {skill.modifier > 0
-                        ? ` + ${skill.modifier}`
-                        : skill.modifier < 0
-                        ? ` - ${skill.modifier * -1}`
-                        : ""}{" "}
-                    </Button>
+                    {skill.dice ? (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleRoll(skill)}
+                      >
+                        d{skill.dice}
+                        {skill.modifier > 0
+                          ? ` + ${skill.modifier}`
+                          : skill.modifier < 0
+                          ? ` - ${skill.modifier * -1}`
+                          : ""}
+                      </Button>
+                    ) : (
+                      "-"
+                    )}
                   </TableCell>
                 </TableRow>
               ))}
