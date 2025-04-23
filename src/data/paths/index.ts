@@ -1,7 +1,7 @@
 import { Doctor } from "./Doctor";
 import { Electrician } from "./Electrician";
 import { Hypnotist } from "./Hypnotist";
-import { Lightbender } from "./LightBender";
+import { Lightbender } from "./Lightbender";
 import { Mindseer } from "./Mindseer";
 import { Musician } from "./Musician";
 import { Pyromaniac } from "./Pyromaniac";
