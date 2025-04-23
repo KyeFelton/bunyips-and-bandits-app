@@ -21,6 +21,7 @@ import { skillLevelsAtom, skillModifiersAtom } from "../../state/character";
 import { useRollToast } from "./RollToast";
 import { getDiceForLevel } from "../../utils/dice";
 import { Button } from "../ui/button";
+import { SkillForm } from "../../enums/SkillForm";
 
 export const SkillsTable = () => {
   const skillLevels = useAtomValue(skillLevelsAtom);
@@ -39,18 +40,28 @@ export const SkillsTable = () => {
     });
   };
 
-  const skillsArray = Object.values(SkillType).map((skillType) => ({
-    type: skillType,
-    level: skillLevels[skillType],
-    dice: getDiceForLevel(skillLevels[skillType]),
-    modifier: skillModifiers[skillType] || 0,
-    description:
-      Object.values(Skills).find((skill) => skill.type === skillType)
-        ?.description || "",
-    pathSkill:
-      Object.values(Skills).find((skill) => skill.type === skillType)
-        ?.pathSkill || false,
-  }));
+  const skillsArray = Object.values(SkillType)
+    .map((skillType) => ({
+      type: skillType,
+      level: skillLevels[skillType],
+      dice: getDiceForLevel(skillLevels[skillType]),
+      modifier: skillModifiers[skillType] || 0,
+      description:
+        Object.values(Skills).find((skill) => skill.type === skillType)
+          ?.description || "",
+      pathSkill:
+        Object.values(Skills).find((skill) => skill.type === skillType)
+          ?.pathSkill || false,
+      form:
+        Object.values(Skills).find((skill) => skill.type === skillType)?.form ||
+        SkillForm.Physical,
+    }))
+    .sort((a, b) => {
+      if (a.form !== b.form) {
+        return a.form === SkillForm.Physical ? -1 : 1;
+      }
+      return 0;
+    });
 
   return (
     <TooltipProvider delayDuration={0}>
@@ -75,7 +86,12 @@ export const SkillsTable = () => {
                       <span className="text-muted-foreground">
                         <SkillIcon type={skill.type} />
                       </span>
-                      {skill.type}
+                      <div className="flex flex-col">
+                        <span>{skill.type}</span>
+                        <span className="text-xs text-muted-foreground capitalize">
+                          {skill.form}
+                        </span>
+                      </div>
                       <Tooltip>
                         <TooltipTrigger asChild>
                           <button
