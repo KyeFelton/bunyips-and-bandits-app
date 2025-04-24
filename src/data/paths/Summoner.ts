@@ -28,28 +28,53 @@ export const Summoner: Path = {
   unlockables: [
     {
       level: 1,
-      actions: [SummonCritter, GuardianAngel],
+      actions: [SummonCritter],
       traits: [ParanormalSense],
     },
     {
       level: 2,
-      actions: [Avenge, Revenge],
-      traits: [Medium],
+      actions: [GuardianAngel],
+      traits: [],
     },
     {
       level: 3,
-      actions: [SummonBeast, SpectralHands],
-      traits: [Undying],
+      actions: [Avenge],
+      traits: [Medium],
     },
     {
       level: 4,
-      actions: [SummonHorde, Sanctuary],
-      traits: [SuperiorMedium],
+      actions: [Revenge],
+      traits: [],
     },
     {
       level: 5,
-      actions: [GraspOfDeath, Resurrect],
+      actions: [SummonBeast],
+      traits: [Undying],
+    },
+    {
+      level: 6,
+      actions: [SpectralHands],
+      traits: [],
+    },
+    {
+      level: 7,
+      actions: [SummonHorde],
+      traits: [SuperiorMedium],
+    },
+    {
+      level: 8,
+      actions: [Sanctuary],
+      traits: [],
+    },
+    {
+      level: 9,
+      actions: [Resurrect],
       traits: [Blessed],
+    },
+    {
+      level: 10,
+      actions: [GraspOfDeath],
+      traits: [],
     },
   ],
 };

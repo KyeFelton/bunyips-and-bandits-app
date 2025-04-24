@@ -28,28 +28,53 @@ export const Electrician: Path = {
   unlockables: [
     {
       level: 1,
-      actions: [Taser, Shock],
+      actions: [Taser],
       traits: [Conductive],
     },
     {
       level: 2,
-      actions: [Impedance, ElectricCharge],
-      traits: [ThunderBuddy],
+      actions: [Shock],
+      traits: [],
     },
     {
       level: 3,
-      actions: [Attract, Zap],
-      traits: [ElectricResistance],
+      actions: [Impedance],
+      traits: [ThunderBuddy],
     },
     {
       level: 4,
-      actions: [Levitate, Electrocute],
-      traits: [LightningRod],
+      actions: [ElectricCharge],
+      traits: [],
     },
     {
       level: 5,
-      actions: [Lightning, Discharge],
+      actions: [Zap],
+      traits: [ElectricResistance],
+    },
+    {
+      level: 6,
+      actions: [Attract],
+      traits: [],
+    },
+    {
+      level: 7,
+      actions: [Electrocute],
+      traits: [LightningRod],
+    },
+    {
+      level: 8,
+      actions: [Levitate],
+      traits: [],
+    },
+    {
+      level: 9,
+      actions: [Lightning],
       traits: [StaticSkin],
+    },
+    {
+      level: 10,
+      actions: [Discharge],
+      traits: [],
     },
   ],
 };

@@ -28,28 +28,53 @@ export const Pyromaniac: Path = {
   unlockables: [
     {
       level: 1,
-      actions: [Ignite, FlameTorch],
+      actions: [Ignite],
       traits: [InfraredSight],
     },
     {
       level: 2,
-      actions: [Douse, Flamethrower],
-      traits: [FriendlyFire],
+      actions: [FlameTorch],
+      traits: [],
     },
     {
       level: 3,
-      actions: [HeatWave, Extinguish],
-      traits: [FireResistance],
+      actions: [Douse],
+      traits: [FriendlyFire],
     },
     {
       level: 4,
-      actions: [Insulator, Fireworks],
-      traits: [Inflammable],
+      actions: [Flamethrower],
+      traits: [],
     },
     {
       level: 5,
-      actions: [Inferno, Incinerate],
+      actions: [Extinguish],
+      traits: [FireResistance],
+    },
+    {
+      level: 6,
+      actions: [HeatWave],
+      traits: [],
+    },
+    {
+      level: 7,
+      actions: [Insulator],
+      traits: [Inflammable],
+    },
+    {
+      level: 8,
+      actions: [Fireworks],
+      traits: [],
+    },
+    {
+      level: 9,
+      actions: [Incinerate],
       traits: [Arsonist],
+    },
+    {
+      level: 10,
+      actions: [Inferno],
+      traits: [],
     },
   ],
 };

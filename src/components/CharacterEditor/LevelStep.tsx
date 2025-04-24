@@ -9,6 +9,7 @@ import {
   currentPhysiqueAtom,
   currentMoraleAtom,
   currentStaminaAtom,
+  MAX_LEVEL,
 } from "../../state/character";
 import {
   Select,
@@ -28,7 +29,7 @@ export const LevelStep = () => {
   const setCurrentPhysique = useSetAtom(currentPhysiqueAtom);
   const setCurrentMorale = useSetAtom(currentMoraleAtom);
   const setCurrentStamina = useSetAtom(currentStaminaAtom);
-  const levels = Array.from({ length: 20 }, (_, i) => i + 1);
+  const levels = Array.from({ length: MAX_LEVEL }, (_, i) => i + 1);
 
   const handleLevelChange = (value: number) => {
     const delta = value - level;
@@ -63,7 +64,6 @@ export const LevelStep = () => {
       <div className="text-sm text-muted-foreground">
         <p>Your level determines:</p>
         <ul className="list-disc list-inside mt-2 space-y-2">
-          <li>Number of actions: {Math.ceil(level / 10)}</li>
           <li>Number of path progessions: {availablePathPoints}</li>
           <li>Number of skill upgrades: {availableSkillPoints}</li>
           <li>Bonus physique: {physique.increments * level}</li>

@@ -28,28 +28,53 @@ export const Musician: Path = {
   unlockables: [
     {
       level: 1,
-      actions: [Distort, Shriek],
+      actions: [Distort],
       traits: [TremorHearing],
     },
     {
       level: 2,
-      actions: [ThunderPunch, PumpUp],
-      traits: [SharpEars],
+      actions: [Shriek],
+      traits: [],
     },
     {
       level: 3,
-      actions: [Shockwave, Mimic],
-      traits: [Bard],
+      actions: [PumpUp],
+      traits: [SharpEars],
     },
     {
       level: 4,
-      actions: [Silence, SonicCharge],
-      traits: [IronHearing],
+      actions: [ThunderPunch],
+      traits: [],
     },
     {
       level: 5,
-      actions: [SonicBoom, Pulverise],
+      actions: [Mimic],
+      traits: [Bard],
+    },
+    {
+      level: 6,
+      actions: [Shockwave],
+      traits: [],
+    },
+    {
+      level: 7,
+      actions: [Silence],
+      traits: [IronHearing],
+    },
+    {
+      level: 8,
+      actions: [SonicCharge],
+      traits: [],
+    },
+    {
+      level: 9,
+      actions: [SonicBoom],
       traits: [Rockstar],
+    },
+    {
+      level: 10,
+      actions: [Pulverise],
+      traits: [],
     },
   ],
 };

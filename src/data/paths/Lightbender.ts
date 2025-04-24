@@ -28,28 +28,53 @@ export const Lightbender: Path = {
   unlockables: [
     {
       level: 1,
-      actions: [Beacon, Disguise],
+      actions: [Beacon],
       traits: [InfraredSight],
     },
     {
       level: 2,
-      actions: [HeatRay, BlindingFlash],
-      traits: [SharpEyes],
+      actions: [Disguise],
+      traits: [],
     },
     {
       level: 3,
-      actions: [SearingRadiance, Apparition],
-      traits: [Photosynthetic],
+      actions: [BlindingFlash],
+      traits: [SharpEyes],
     },
     {
       level: 4,
-      actions: [Invisibility, MirrorDome],
-      traits: [IronVision],
+      actions: [HeatRay],
+      traits: [],
     },
     {
       level: 5,
-      actions: [Hyperbeam, SolarFlare],
+      actions: [Apparition],
+      traits: [Photosynthetic],
+    },
+    {
+      level: 6,
+      actions: [SearingRadiance],
+      traits: [],
+    },
+    {
+      level: 7,
+      actions: [Invisibility],
+      traits: [IronVision],
+    },
+    {
+      level: 8,
+      actions: [MirrorDome],
+      traits: [],
+    },
+    {
+      level: 9,
+      actions: [Hyperbeam],
       traits: [RadiantAura],
+    },
+    {
+      level: 10,
+      actions: [SolarFlare],
+      traits: [],
     },
   ],
 };

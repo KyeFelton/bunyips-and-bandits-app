@@ -22,28 +22,53 @@ export const Stormcaller: Path = {
   unlockables: [
     {
       level: 1,
-      actions: [Gust, Hurl],
+      actions: [Gust],
       traits: [Agile],
     },
     {
       level: 2,
-      actions: [Torrent, Restrain],
-      traits: [Bellow],
+      actions: [Hurl],
+      traits: [],
     },
     {
       level: 3,
-      actions: [AirBarrier, Rifle],
-      traits: [Swift],
+      actions: [Torrent],
+      traits: [Bellow],
     },
     {
       level: 4,
-      actions: [Fly, Catapult],
-      traits: [Boomerang],
+      actions: [Restrain],
+      traits: [],
     },
     {
       level: 5,
-      actions: [Tornado, Cyclone],
+      actions: [AirBarrier],
+      traits: [Swift],
+    },
+    {
+      level: 6,
+      actions: [Rifle],
+      traits: [],
+    },
+    {
+      level: 7,
+      actions: [Fly],
+      traits: [Boomerang],
+    },
+    {
+      level: 8,
+      actions: [Catapult],
+      traits: [],
+    },
+    {
+      level: 9,
+      actions: [Tornado],
       traits: [WindShield],
+    },
+    {
+      level: 10,
+      actions: [Cyclone],
+      traits: [],
     },
   ],
 };

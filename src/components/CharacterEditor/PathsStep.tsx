@@ -1,5 +1,9 @@
 import { useAtom, useAtomValue } from "jotai";
-import { pathsAtom, availablePathPointsAtom } from "../../state/character";
+import {
+  pathsAtom,
+  availablePathPointsAtom,
+  MAX_PATH_LEVEL,
+} from "../../state/character";
 import { Button } from "../ui/button";
 import {
   Table,
@@ -50,7 +54,7 @@ export const PathsStep = () => {
 
   const handleUpdateLevel = (pathName: string) => {
     const updatedPaths = paths.map((path) => {
-      if (path.name === pathName && path.level < 5) {
+      if (path.name === pathName && path.level < MAX_PATH_LEVEL) {
         if (usedPathPoints + 1 > availablePathPoints) {
           return path;
         }
@@ -127,7 +131,7 @@ export const PathsStep = () => {
                       Level {path.level}
                     </span>
                   </h3>
-                  {remainingPathPoints > 0 && path.level < 5 && (
+                  {remainingPathPoints > 0 && path.level < MAX_PATH_LEVEL && (
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <Button
@@ -174,59 +178,61 @@ export const PathsStep = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {[1, 2, 3, 4, 5].map((level) => {
-                  const unlockable = path.unlockables.find(
-                    (u) => u.level === level
-                  );
-                  const traits = unlockable?.traits || [];
-                  const actions = unlockable?.actions || [];
-                  return (
-                    <TableRow
-                      key={level}
-                      className={level > path.level ? "opacity-50" : ""}
-                    >
-                      <TableCell className="font-medium">{level}</TableCell>
-                      <TableCell>
-                        <ul className="space-y-1">
-                          {traits.map((trait) => (
-                            <li key={trait.name}>
-                              <Tooltip>
-                                <TooltipTrigger className="text-left hover:text-accent-foreground">
-                                  {trait.name}
-                                </TooltipTrigger>
-                                <TooltipContent
-                                  side="right"
-                                  className="max-w-[300px]"
-                                >
-                                  <p>{trait.description}</p>
-                                </TooltipContent>
-                              </Tooltip>
-                            </li>
-                          ))}
-                        </ul>
-                      </TableCell>
-                      <TableCell>
-                        <ul className="space-y-1">
-                          {actions.map((action) => (
-                            <li key={action.name}>
-                              <Tooltip>
-                                <TooltipTrigger className="text-left hover:text-accent-foreground">
-                                  {action.name}
-                                </TooltipTrigger>
-                                <TooltipContent
-                                  side="right"
-                                  className="max-w-[300px]"
-                                >
-                                  <p>{action.effect}</p>
-                                </TooltipContent>
-                              </Tooltip>
-                            </li>
-                          ))}
-                        </ul>
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
+                {Array.from({ length: MAX_PATH_LEVEL }, (_, i) => i + 1).map(
+                  (level) => {
+                    const unlockable = path.unlockables.find(
+                      (u) => u.level === level
+                    );
+                    const traits = unlockable?.traits || [];
+                    const actions = unlockable?.actions || [];
+                    return (
+                      <TableRow
+                        key={level}
+                        className={level > path.level ? "opacity-50" : ""}
+                      >
+                        <TableCell className="font-medium">{level}</TableCell>
+                        <TableCell>
+                          <ul className="space-y-1">
+                            {traits.map((trait) => (
+                              <li key={trait.name}>
+                                <Tooltip>
+                                  <TooltipTrigger className="text-left hover:text-accent-foreground">
+                                    {trait.name}
+                                  </TooltipTrigger>
+                                  <TooltipContent
+                                    side="right"
+                                    className="max-w-[300px]"
+                                  >
+                                    <p>{trait.description}</p>
+                                  </TooltipContent>
+                                </Tooltip>
+                              </li>
+                            ))}
+                          </ul>
+                        </TableCell>
+                        <TableCell>
+                          <ul className="space-y-1">
+                            {actions.map((action) => (
+                              <li key={action.name}>
+                                <Tooltip>
+                                  <TooltipTrigger className="text-left hover:text-accent-foreground">
+                                    {action.name}
+                                  </TooltipTrigger>
+                                  <TooltipContent
+                                    side="right"
+                                    className="max-w-[300px]"
+                                  >
+                                    <p>{action.effect}</p>
+                                  </TooltipContent>
+                                </Tooltip>
+                              </li>
+                            ))}
+                          </ul>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  }
+                )}
               </TableBody>
             </Table>
           </div>

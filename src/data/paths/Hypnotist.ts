@@ -28,28 +28,53 @@ export const Hypnotist: Path = {
   unlockables: [
     {
       level: 1,
-      actions: [Scorn, Disorient],
+      actions: [Disorient],
       traits: [PsychicSense],
     },
     {
       level: 2,
-      actions: [Vex, Frighten],
-      traits: [Captivating],
+      actions: [Scorn],
+      traits: [],
     },
     {
       level: 3,
-      actions: [Scourge, Aggravate],
-      traits: [Unbending],
+      actions: [Frighten],
+      traits: [Captivating],
     },
     {
       level: 4,
-      actions: [Purge, Delude],
-      traits: [Psychotic],
+      actions: [Vex],
+      traits: [],
     },
     {
       level: 5,
-      actions: [Obliterate, Hypnotise],
+      actions: [Aggravate],
+      traits: [Unbending],
+    },
+    {
+      level: 6,
+      actions: [Scourge],
+      traits: [],
+    },
+    {
+      level: 7,
+      actions: [Delude],
+      traits: [Psychotic],
+    },
+    {
+      level: 8,
+      actions: [Purge],
+      traits: [],
+    },
+    {
+      level: 9,
+      actions: [Hypnotise],
       traits: [Unrelenting],
+    },
+    {
+      level: 10,
+      actions: [Obliterate],
+      traits: [],
     },
   ],
 };

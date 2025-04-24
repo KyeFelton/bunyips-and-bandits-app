@@ -28,28 +28,53 @@ export const Mindseer: Path = {
   unlockables: [
     {
       level: 1,
-      actions: [Scorn, Insight],
+      actions: [Insight],
       traits: [PsychicSense],
     },
     {
       level: 2,
-      actions: [Vex, Disturb],
-      traits: [Psychologist],
+      actions: [Scorn],
+      traits: [],
     },
     {
       level: 3,
-      actions: [Scourge, Reveal],
-      traits: [Unbending],
+      actions: [Disturb],
+      traits: [Psychologist],
     },
     {
       level: 4,
-      actions: [Torment, Foresee],
-      traits: [Custodian],
+      actions: [Vex],
+      traits: [],
     },
     {
       level: 5,
-      actions: [Interference, MindRead],
+      actions: [Reveal],
+      traits: [Unbending],
+    },
+    {
+      level: 6,
+      actions: [Scourge],
+      traits: [],
+    },
+    {
+      level: 7,
+      actions: [Foresee],
+      traits: [Custodian],
+    },
+    {
+      level: 8,
+      actions: [Torment],
+      traits: [],
+    },
+    {
+      level: 9,
+      actions: [Interference],
       traits: [Foresight],
+    },
+    {
+      level: 10,
+      actions: [MindRead],
+      traits: [],
     },
   ],
 };

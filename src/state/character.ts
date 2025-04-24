@@ -9,6 +9,11 @@ import { Trait } from "../models/traits";
 import { getSpeciesImage } from "../utils/speciesImages";
 import { getDiceBonusForLevel } from "../utils/dice";
 
+// Constants
+export const MAX_LEVEL = 10;
+export const MAX_PATH_LEVEL = 10;
+export const MAX_SKILL_LEVEL = 10;
+
 // Basic character info
 export const nameAtom = atom<string>("");
 export const speciesAtom = atom<string>(startingSpecies.name);
@@ -158,8 +163,7 @@ export const staminaAtom = atom((get) => {
 // Actions
 export const actionsCountAtom = atom((get) => {
   const effects = get(effectsAtom);
-  const level = get(levelAtom);
-  const baseActions = Math.ceil(level / 10);
+  const baseActions = 2;
 
   return effects.reduce((total, effect) => {
     if (effect.actions?.bonus) {
@@ -217,10 +221,7 @@ export const sensesAtom = atom((get) => {
 });
 
 // Path upgrades
-export const availablePathPointsAtom = atom((get) => {
-  const level = get(levelAtom);
-  return level === 1 ? 1 : Math.floor(level / 4) + 2;
-});
+export const availablePathPointsAtom = atom((get) => get(levelAtom));
 
 // Skill upgrades
 export const availableSkillPointsAtom = atom((get) => {

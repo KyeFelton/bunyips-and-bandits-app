@@ -28,28 +28,53 @@ export const Doctor: Path = {
   unlockables: [
     {
       level: 1,
-      actions: [PoisonBreath, Stench],
+      actions: [PoisonBreath],
       traits: [Healer],
     },
     {
       level: 2,
-      actions: [VenomSting, Resuscitate],
-      traits: [SharpNose],
+      actions: [Stench],
+      traits: [],
     },
     {
       level: 3,
-      actions: [Antidote, ToxicPlume],
-      traits: [QuickRecovery],
+      actions: [VenomSting],
+      traits: [SharpNose],
     },
     {
       level: 4,
-      actions: [Odourless, AcidBomb],
-      traits: [ToxicResistance],
+      actions: [Resuscitate],
+      traits: [],
     },
     {
       level: 5,
-      actions: [Paralysis, DeathCloud],
+      actions: [Antidote],
+      traits: [QuickRecovery],
+    },
+    {
+      level: 6,
+      actions: [ToxicPlume],
+      traits: [],
+    },
+    {
+      level: 7,
+      actions: [Odourless],
+      traits: [ToxicResistance],
+    },
+    {
+      level: 8,
+      actions: [AcidBomb],
+      traits: [],
+    },
+    {
+      level: 9,
+      actions: [Paralysis],
       traits: [AcidicSkin],
+    },
+    {
+      level: 10,
+      actions: [DeathCloud],
+      traits: [],
     },
   ],
 };
