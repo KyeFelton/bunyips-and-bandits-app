@@ -1,4 +1,4 @@
-import { useAtom, useAtomValue } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import { Bed } from "lucide-react";
@@ -12,23 +12,26 @@ import {
 } from "../../state/character";
 import { HealthBar } from "../HealthBar";
 
-export const StatsCard = () => {
+export const HealthCard = () => {
   const physique = useAtomValue(physiqueAtom);
   const morale = useAtomValue(moraleAtom);
   const stamina = useAtomValue(staminaAtom);
-  const [currentPhysique, setCurrentPhysique] = useAtom(currentPhysiqueAtom);
-  const [currentMorale, setCurrentMorale] = useAtom(currentMoraleAtom);
-  const [currentStamina, setCurrentStamina] = useAtom(currentStaminaAtom);
+  const setCurrentPhysique = useSetAtom(currentPhysiqueAtom);
+  const setCurrentMorale = useSetAtom(currentMoraleAtom);
+  const setCurrentStamina = useSetAtom(currentStaminaAtom);
+
+  const calculateRestHealthValue = (
+    health: { current: number; max: number },
+    staminaPercentage: number
+  ) => {
+    const increase = Math.ceil(staminaPercentage / 0.5);
+    return Math.min(health.current + increase, health.max);
+  };
 
   const handleRest = () => {
-    const staminaBeforeRest = currentStamina;
-    const newPhysique = Math.min(
-      currentPhysique + staminaBeforeRest,
-      physique.max
-    );
-    setCurrentPhysique(newPhysique);
-    const newMorale = Math.min(currentMorale + staminaBeforeRest, morale.max);
-    setCurrentMorale(newMorale);
+    const staminaPercentage = stamina.current / stamina.max;
+    setCurrentPhysique(calculateRestHealthValue(physique, staminaPercentage));
+    setCurrentMorale(calculateRestHealthValue(morale, staminaPercentage));
     setCurrentStamina(stamina.max);
   };
 
@@ -52,21 +55,21 @@ export const StatsCard = () => {
           max={physique.max}
           name="Physique"
           onChange={setCurrentPhysique}
-          value={currentPhysique}
+          value={physique.current}
         />
         <HealthBar
           colours={{ good: "green", warning: "yellow", bad: "red" }}
           max={morale.max}
           name="Morale"
           onChange={setCurrentMorale}
-          value={currentMorale}
+          value={morale.current}
         />
         <HealthBar
-          colours={{ good: "blue", warning: "blue", bad: "blue" }}
+          colours={{ good: "blue", warning: "lightBlue", bad: "lightBlue" }}
           max={stamina.max}
           name="Stamina"
           onChange={setCurrentStamina}
-          value={currentStamina}
+          value={stamina.current}
         />
       </CardContent>
     </Card>

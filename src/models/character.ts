@@ -18,17 +18,14 @@ export type Character = {
   physique: {
     max: number;
     current: number;
-    increments: number;
   };
   morale: {
     max: number;
     current: number;
-    increments: number;
   };
   stamina: {
     max: number;
     current: number;
-    increments: number;
   };
   speed: {
     [Locomotion.Walk]: number;

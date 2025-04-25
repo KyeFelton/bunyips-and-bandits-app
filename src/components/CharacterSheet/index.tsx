@@ -3,7 +3,7 @@ import { Card } from "../ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { NameCard } from "./NameCard";
 import { DescriptionCard } from "./DescriptionCard";
-import { StatsCard } from "./HealthCard";
+import { HealthCard } from "./HealthCard";
 import { SensesCard } from "./SensesCard";
 import { ArmourCard } from "./ArmourCard";
 import { SpeedCard } from "./SpeedCard";
@@ -69,7 +69,7 @@ export function CharacterSheet() {
             </Tabs>
           </div>
           <div className="flex flex-col gap-4 h-[948px] justify-between">
-            <StatsCard />
+            <HealthCard />
             <CombatCard />
             <SpeedCard />
             <ArmourCard />

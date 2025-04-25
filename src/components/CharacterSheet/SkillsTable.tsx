@@ -17,26 +17,27 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
-import { skillLevelsAtom, skillModifiersAtom } from "../../state/character";
+import { skillLevelsAtom, skillRollValuesAtom } from "../../state/character";
 import { useRollToast } from "./RollToast";
-import { getDiceForLevel } from "../../utils/dice";
 import { Button } from "../ui/button";
 import { SkillForm } from "../../enums/SkillForm";
+import { RollText } from "../RollText";
 
 export const SkillsTable = () => {
   const skillLevels = useAtomValue(skillLevelsAtom);
-  const skillModifiers = useAtomValue(skillModifiersAtom);
+  const skillRollValues = useAtomValue(skillRollValuesAtom);
   const showRollToast = useRollToast();
 
   const handleRoll = (skill: {
     type: SkillType;
     dice: number;
     modifier: number;
+    hasAdvantage: boolean;
+    hasDisadvantage: boolean;
   }) => {
     showRollToast({
       name: skill.type,
-      dice: skill.dice,
-      modifier: skill.modifier,
+      ...skill,
     });
   };
 
@@ -44,8 +45,6 @@ export const SkillsTable = () => {
     .map((skillType) => ({
       type: skillType,
       level: skillLevels[skillType],
-      dice: getDiceForLevel(skillLevels[skillType]),
-      modifier: skillModifiers[skillType] || 0,
       description:
         Object.values(Skills).find((skill) => skill.type === skillType)
           ?.description || "",
@@ -55,6 +54,7 @@ export const SkillsTable = () => {
       form:
         Object.values(Skills).find((skill) => skill.type === skillType)?.form ||
         SkillForm.Physical,
+      ...skillRollValues[skillType],
     }))
     .sort((a, b) => {
       if (a.form !== b.form) {
@@ -79,55 +79,62 @@ export const SkillsTable = () => {
               .filter(
                 (skill) => !skill.pathSkill || (skill.level && skill.level > 0)
               )
-              .map((skill) => (
-                <TableRow key={skill.type}>
-                  <TableCell className="font-medium">
-                    <div className="flex items-center gap-2">
-                      <span className="text-muted-foreground">
-                        <SkillIcon type={skill.type} />
-                      </span>
-                      <div className="flex flex-col">
-                        <span>{skill.type}</span>
-                        <span className="text-xs text-muted-foreground capitalize">
-                          {skill.form}
+              .map((skill) => {
+                return (
+                  <TableRow key={skill.type}>
+                    <TableCell className="font-medium">
+                      <div className="flex items-center gap-2">
+                        <span className="text-muted-foreground">
+                          <SkillIcon type={skill.type} />
                         </span>
-                      </div>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <button
-                            className="h-5 w-5 hover:bg-accent hover:text-accent-foreground rounded-full flex items-center justify-center"
-                            type="button"
+                        <div className="flex flex-col">
+                          <span>{skill.type}</span>
+                          <span className="text-xs text-muted-foreground capitalize">
+                            {skill.form}
+                          </span>
+                        </div>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <button
+                              className="h-5 w-5 hover:bg-accent hover:text-accent-foreground rounded-full flex items-center justify-center"
+                              type="button"
+                            >
+                              <HelpCircle className="h-4 w-4 text-muted-foreground" />
+                            </button>
+                          </TooltipTrigger>
+                          <TooltipContent
+                            side="right"
+                            className="max-w-[300px]"
                           >
-                            <HelpCircle className="h-4 w-4 text-muted-foreground" />
-                          </button>
-                        </TooltipTrigger>
-                        <TooltipContent side="right" className="max-w-[300px]">
-                          <p>{skill.description}</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </div>
-                  </TableCell>
-                  <TableCell className="text-center">{skill.level}</TableCell>
-                  <TableCell className="text-left font-mono">
-                    {skill.dice ? (
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => handleRoll(skill)}
-                      >
-                        d{skill.dice}
-                        {skill.modifier > 0
-                          ? ` + ${skill.modifier}`
-                          : skill.modifier < 0
-                          ? ` - ${skill.modifier * -1}`
-                          : ""}
-                      </Button>
-                    ) : (
-                      "-"
-                    )}
-                  </TableCell>
-                </TableRow>
-              ))}
+                            <p>{skill.description}</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </div>
+                    </TableCell>
+                    <TableCell className="text-center">{skill.level}</TableCell>
+                    <TableCell className="text-left font-mono">
+                      {skill.dice ? (
+                        <div className="flex items-center gap-1">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handleRoll(skill)}
+                          >
+                            <RollText
+                              dice={skill.dice}
+                              hasAdvantage={skill.hasAdvantage}
+                              hasDisadvantage={skill.hasDisadvantage}
+                              modifier={skill.modifier}
+                            />
+                          </Button>
+                        </div>
+                      ) : (
+                        "-"
+                      )}
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
           </TableBody>
         </Table>
       </div>

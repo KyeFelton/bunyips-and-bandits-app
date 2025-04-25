@@ -5,9 +5,11 @@ import { SelectedPath } from "../models/paths";
 import { AllSpecies, startingSpecies } from "../data/species";
 import { SaveFile } from "../models/saveFile";
 import { Effect } from "../models/effect";
+import * as Skills from "../models/skills";
 import { Trait } from "../models/traits";
 import { getSpeciesImage } from "../utils/speciesImages";
-import { getDiceBonusForLevel } from "../utils/dice";
+import { getDiceBonusForLevel, getDiceForLevel } from "../utils/dice";
+import { SkillForm } from "../enums/SkillForm";
 
 // Constants
 export const MAX_LEVEL = 10;
@@ -252,11 +254,24 @@ export const skillLevelsAtom = atom((get) => {
   return skills;
 });
 
-// Skill modifiers
-export const skillModifiersAtom = atom((get) => {
+// Skill roll values
+type RollValues = {
+  dice: number;
+  modifier: number;
+  hasAdvantage: boolean;
+  hasDisadvantage: boolean;
+};
+
+export const skillRollValuesAtom = atom((get) => {
   const effects = get(effectsAtom);
   const skillLevels = get(skillLevelsAtom);
+  const physique = get(physiqueAtom);
+  const morale = get(moraleAtom);
   const modifiers: Record<SkillType, number> = {} as Record<SkillType, number>;
+  const rollValues: Record<SkillType, RollValues> = {} as Record<
+    SkillType,
+    RollValues
+  >;
 
   effects.forEach((effect) => {
     if (effect.skill?.skillType) {
@@ -265,12 +280,20 @@ export const skillModifiersAtom = atom((get) => {
     }
   });
 
-  Object.entries(skillLevels).forEach(([type, level]) => {
-    modifiers[type as SkillType] =
-      (modifiers[type as SkillType] || 0) + getDiceBonusForLevel(level);
+  Object.values(Skills).forEach((skill) => {
+    const level = skillLevels[skill.type] || 0;
+    rollValues[skill.type] = {
+      dice: getDiceForLevel(level),
+      modifier: (modifiers[skill.type] || 0) + getDiceBonusForLevel(level),
+      hasAdvantage: false,
+      hasDisadvantage:
+        skill.form === SkillForm.Physical
+          ? physique.current / physique.max <= 0.5
+          : morale.current / morale.max <= 0.5,
+    };
   });
 
-  return modifiers;
+  return rollValues;
 });
 
 // Armour

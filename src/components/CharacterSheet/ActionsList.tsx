@@ -2,8 +2,7 @@ import { useAtomValue, useAtom } from "jotai";
 import {
   pathsAtom,
   currentStaminaAtom,
-  skillLevelsAtom,
-  skillModifiersAtom,
+  skillRollValuesAtom,
 } from "../../state/character";
 import { User, Users, Triangle, Circle, Scan } from "lucide-react";
 import { AreaOfEffect } from "../../enums/AreaOfEffect";
@@ -25,7 +24,6 @@ import {
 } from "../ui/tooltip";
 import { SkillIcon } from "../icons/SkillIcon";
 import { useRollToast } from "./RollToast";
-import { getDiceForLevel } from "../../utils/dice";
 
 const AreaIcon = ({ type }: { type: AreaOfEffect }) => {
   switch (type) {
@@ -47,8 +45,7 @@ const AreaIcon = ({ type }: { type: AreaOfEffect }) => {
 export const ActionsList = () => {
   const paths = useAtomValue(pathsAtom);
   const [stamina, setStamina] = useAtom(currentStaminaAtom);
-  const skillLevels = useAtomValue(skillLevelsAtom);
-  const skillModifiers = useAtomValue(skillModifiersAtom);
+  const skillRollValues = useAtomValue(skillRollValuesAtom);
   const showRollToast = useRollToast();
 
   const actions: (Action & { path: string })[] = paths
@@ -67,12 +64,15 @@ export const ActionsList = () => {
   const handlePerformAction = (action: Action) => {
     const staminaCost =
       typeof action.staminaCost === "number" ? action.staminaCost : 0;
+    const rollValues = skillRollValues[action.skillType];
     if (stamina >= staminaCost) {
       setStamina(stamina - staminaCost);
       showRollToast({
         name: `${action.name} (${action.skillType})`,
-        dice: getDiceForLevel(skillLevels[action.skillType]),
-        modifier: skillModifiers[action.skillType] || 0,
+        dice: rollValues.dice,
+        modifier: rollValues.modifier,
+        hasAdvantage: rollValues.hasAdvantage,
+        hasDisadvantage: rollValues.hasDisadvantage,
       });
     }
   };

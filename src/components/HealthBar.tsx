@@ -2,11 +2,12 @@ import { Button } from "./ui/button";
 import { Minus, Plus } from "lucide-react";
 import { useMemo } from "react";
 
-type Colour = "green" | "blue" | "red" | "yellow";
+type Colour = "green" | "blue" | "lightBlue" | "red" | "yellow";
 
 const colourMap: Record<Colour, string> = {
   green: "bg-green-foreground",
   blue: "bg-blue-foreground",
+  lightBlue: "bg-blue",
   red: "bg-red-foreground",
   yellow: "bg-yellow-foreground",
 };
