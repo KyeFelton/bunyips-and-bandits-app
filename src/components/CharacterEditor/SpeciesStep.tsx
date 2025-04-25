@@ -1,15 +1,5 @@
 import { useAtom, useSetAtom, useAtomValue } from "jotai";
-import {
-  speciesAtom,
-  currentPhysiqueAtom,
-  currentMoraleAtom,
-  currentStaminaAtom,
-  physiqueAtom,
-  moraleAtom,
-  staminaAtom,
-  speciesDataAtom,
-  imageAtom,
-} from "../../state/character";
+import { speciesAtom, speciesDataAtom, imageAtom } from "../../state/character";
 import {
   Select,
   SelectContent,
@@ -24,31 +14,12 @@ import { Locomotion } from "../../enums/Locomotion";
 import { DamageType } from "../../enums/DamageType";
 import { SpeedIcon } from "../icons/SpeedIcon";
 import { ArmourIcon } from "../icons/ArmourIcon";
-import { useEffect } from "react";
 import { getSpeciesImage } from "../../utils/speciesImages";
 
 export const SpeciesStep = () => {
   const [selectedSpecies, setSpecies] = useAtom(speciesAtom);
-  const physique = useAtomValue(physiqueAtom);
-  const morale = useAtomValue(moraleAtom);
-  const stamina = useAtomValue(staminaAtom);
-  const setCurrentPhysique = useSetAtom(currentPhysiqueAtom);
-  const setCurrentMorale = useSetAtom(currentMoraleAtom);
-  const setCurrentStamina = useSetAtom(currentStaminaAtom);
   const speciesData = useAtomValue(speciesDataAtom);
   const setImage = useSetAtom(imageAtom);
-
-  useEffect(() => {
-    setCurrentPhysique(physique.max);
-  }, [physique, setCurrentPhysique]);
-
-  useEffect(() => {
-    setCurrentMorale(morale.max);
-  }, [morale, setCurrentMorale]);
-
-  useEffect(() => {
-    setCurrentStamina(stamina.max);
-  }, [stamina, setCurrentStamina]);
 
   const handleSpeciesChange = (value: string) => {
     setSpecies(value);
@@ -81,35 +52,20 @@ export const SpeciesStep = () => {
             <div className="grid grid-cols-3 gap-6">
               <div className="p-4 bg-red/10 rounded-lg">
                 <div className="text-sm font-medium mb-1">Physique</div>
-                <div className="text-xl">
-                  {speciesData.physique.initial}
-                  <span className="text-sm text-muted-foreground ml-1">
-                    (+{speciesData.physique.increments} per level)
-                  </span>
-                </div>
+                <div className="text-xl">{speciesData.physique}</div>
               </div>
               <div className="p-4 bg-green/10 rounded-lg">
                 <div className="text-sm font-medium mb-1">Morale</div>
-                <div className="text-xl">
-                  {speciesData.morale.initial}
-                  <span className="text-sm text-muted-foreground ml-1">
-                    (+{speciesData.morale.increments} per level)
-                  </span>
-                </div>
+                <div className="text-xl">{speciesData.morale}</div>
               </div>
               <div className="p-4 bg-blue/10 rounded-lg">
                 <div className="text-sm font-medium mb-1">Stamina</div>
-                <div className="text-xl">
-                  {speciesData.stamina.initial}
-                  <span className="text-sm text-muted-foreground ml-1">
-                    (+{speciesData.stamina.increments} per level)
-                  </span>
-                </div>
+                <div className="text-xl">{speciesData.stamina}</div>
               </div>
             </div>
           </div>
 
-          {/* Movement */}
+          {/* Spped */}
           <div>
             <h3 className="font-semibold mb-4 flex items-center gap-2">
               <ArrowLeftRight className="h-5 w-5" />

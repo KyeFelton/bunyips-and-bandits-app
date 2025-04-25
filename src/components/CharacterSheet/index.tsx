@@ -3,7 +3,7 @@ import { Card } from "../ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { NameCard } from "./NameCard";
 import { DescriptionCard } from "./DescriptionCard";
-import { StatsCard } from "./StatsCard";
+import { StatsCard } from "./HealthCard";
 import { SensesCard } from "./SensesCard";
 import { ArmourCard } from "./ArmourCard";
 import { SpeedCard } from "./SpeedCard";

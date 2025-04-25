@@ -1,7 +1,6 @@
 import { useAtom, useAtomValue } from "jotai";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
-import { StatBar } from "../StatBar";
 import { Bed } from "lucide-react";
 import {
   physiqueAtom,
@@ -11,6 +10,7 @@ import {
   currentMoraleAtom,
   currentStaminaAtom,
 } from "../../state/character";
+import { HealthBar } from "../HealthBar";
 
 export const StatsCard = () => {
   const physique = useAtomValue(physiqueAtom);
@@ -47,22 +47,22 @@ export const StatsCard = () => {
         </Button>
       </CardHeader>
       <CardContent className="space-y-4 pt-4">
-        <StatBar
-          colour="red"
+        <HealthBar
+          colours={{ good: "green", warning: "yellow", bad: "red" }}
           max={physique.max}
           name="Physique"
           onChange={setCurrentPhysique}
           value={currentPhysique}
         />
-        <StatBar
-          colour="green"
+        <HealthBar
+          colours={{ good: "green", warning: "yellow", bad: "red" }}
           max={morale.max}
           name="Morale"
           onChange={setCurrentMorale}
           value={currentMorale}
         />
-        <StatBar
-          colour="blue"
+        <HealthBar
+          colours={{ good: "blue", warning: "blue", bad: "blue" }}
           max={stamina.max}
           name="Stamina"
           onChange={setCurrentStamina}

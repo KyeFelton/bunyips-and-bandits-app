@@ -104,15 +104,9 @@ export const resetCharacter = (setters: CharacterSetters) => {
   setters.setName("");
   setters.setSpecies(startingSpecies.name);
   setters.setLevel(1);
-  setters.setCurrentPhysique(
-    startingSpecies.physique.initial + startingSpecies.physique.increments
-  );
-  setters.setCurrentMorale(
-    startingSpecies.morale.initial + startingSpecies.morale.increments
-  );
-  setters.setCurrentStamina(
-    startingSpecies.stamina.initial + startingSpecies.stamina.increments
-  );
+  setters.setCurrentPhysique(startingSpecies.physique);
+  setters.setCurrentMorale(startingSpecies.morale);
+  setters.setCurrentStamina(startingSpecies.stamina);
   setters.setGender("");
   setters.setAge(0);
   setters.setBackground("");

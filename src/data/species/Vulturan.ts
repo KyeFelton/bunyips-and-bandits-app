@@ -8,18 +8,9 @@ import { Species } from "../../models/species";
 export const Vulturan: Species = {
   name: "Vulturan",
   size: CreatureSize.Medium,
-  physique: {
-    initial: 20,
-    increments: 2,
-  },
-  morale: {
-    initial: 10,
-    increments: 1,
-  },
-  stamina: {
-    initial: 10,
-    increments: 1,
-  },
+  physique: 6,
+  morale: 8,
+  stamina: 4,
   speed: {
     [Locomotion.Walk]: 4,
     [Locomotion.Swim]: 1,

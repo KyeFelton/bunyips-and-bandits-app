@@ -8,18 +8,9 @@ import { Species } from "../../models/species";
 export const Cormiard: Species = {
   name: "Cormiard",
   size: CreatureSize.Medium,
-  physique: {
-    initial: 20,
-    increments: 2,
-  },
-  morale: {
-    initial: 10,
-    increments: 1,
-  },
-  stamina: {
-    initial: 10,
-    increments: 1,
-  },
+  physique: 6,
+  morale: 4,
+  stamina: 8,
   speed: {
     [Locomotion.Walk]: 4,
     [Locomotion.Swim]: 4,

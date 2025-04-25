@@ -8,18 +8,9 @@ import { Species } from "../../models/species";
 export const Jelly: Species = {
   name: "Jelly",
   size: CreatureSize.Medium,
-  physique: {
-    initial: 20,
-    increments: 2,
-  },
-  morale: {
-    initial: 10,
-    increments: 1,
-  },
-  stamina: {
-    initial: 10,
-    increments: 1,
-  },
+  physique: 5,
+  morale: 8,
+  stamina: 5,
   speed: {
     [Locomotion.Walk]: 3,
     [Locomotion.Swim]: 1,

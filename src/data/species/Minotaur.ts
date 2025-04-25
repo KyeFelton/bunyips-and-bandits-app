@@ -8,18 +8,9 @@ import { Species } from "../../models/species";
 export const Minotaur: Species = {
   name: "Minotaur",
   size: CreatureSize.Large,
-  physique: {
-    initial: 30,
-    increments: 3,
-  },
-  morale: {
-    initial: 10,
-    increments: 1,
-  },
-  stamina: {
-    initial: 10,
-    increments: 1,
-  },
+  physique: 10,
+  morale: 4,
+  stamina: 4,
   speed: {
     [Locomotion.Walk]: 5,
     [Locomotion.Swim]: 1,

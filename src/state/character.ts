@@ -27,20 +27,17 @@ export const imageAtom = atom<string>(getSpeciesImage(startingSpecies.name));
 // Character progression
 export const levelAtom = atom<number>(1);
 export const pathsAtom = atom<SelectedPath[]>([]);
+export const physiqueUpgradesAtom = atom<number>(0);
+export const moraleUpgradesAtom = atom<number>(0);
+export const staminaUpgradesAtom = atom<number>(0);
 export const skillLevelUpgradesAtom = atom<Partial<Record<SkillType, number>>>(
   {}
 );
 
 // Character stats
-export const currentPhysiqueAtom = atom<number>(
-  startingSpecies.physique.initial + startingSpecies.physique.increments
-);
-export const currentMoraleAtom = atom<number>(
-  startingSpecies.morale.initial + startingSpecies.morale.increments
-);
-export const currentStaminaAtom = atom<number>(
-  startingSpecies.stamina.initial + startingSpecies.stamina.increments
-);
+export const currentPhysiqueAtom = atom<number>(startingSpecies.physique);
+export const currentMoraleAtom = atom<number>(startingSpecies.morale);
+export const currentStaminaAtom = atom<number>(startingSpecies.stamina);
 
 // Items and equipment
 export const itemsAtom = atom<ItemDictionary>({});
@@ -94,13 +91,18 @@ export const speciesDataAtom = atom((get) => {
   return AllSpecies[speciesName as keyof typeof AllSpecies];
 });
 
+export const availableHealthUpgradesAtom = atom((get) => {
+  const level = get(levelAtom);
+  return Math.floor(level / 2) * 2;
+});
+
 // Physique
 export const physiqueAtom = atom((get) => {
   const speciesData = get(speciesDataAtom);
-  const level = get(levelAtom);
+  const physiqueUpgrades = get(physiqueUpgradesAtom);
   const effects = get(effectsAtom);
-  const baseMaxPhysique =
-    speciesData.physique.initial + level * speciesData.physique.increments;
+  const baseMaxPhysique = speciesData.physique + physiqueUpgrades;
+
   const maxPhysique = effects.reduce((total, effect) => {
     if (effect.physique?.bonus) {
       return total + effect.physique.bonus;
@@ -111,17 +113,15 @@ export const physiqueAtom = atom((get) => {
   return {
     max: maxPhysique,
     current: get(currentPhysiqueAtom),
-    increments: speciesData.physique.increments,
   };
 });
 
 // Morale
 export const moraleAtom = atom((get) => {
   const speciesData = get(speciesDataAtom);
-  const level = get(levelAtom);
+  const moraleUpgrades = get(moraleUpgradesAtom);
   const effects = get(effectsAtom);
-  const baseMaxMorale =
-    speciesData.morale.initial + level * speciesData.morale.increments;
+  const baseMaxMorale = speciesData.morale + moraleUpgrades;
   const maxMorale = effects.reduce((total, effect) => {
     if (effect.morale?.bonus) {
       return total + effect.morale.bonus;
@@ -135,17 +135,15 @@ export const moraleAtom = atom((get) => {
   return {
     max: maxMorale,
     current: get(currentMoraleAtom),
-    increments: speciesData.morale.increments,
   };
 });
 
 // Stamina
 export const staminaAtom = atom((get) => {
   const speciesData = get(speciesDataAtom);
-  const level = get(levelAtom);
+  const staminaUpgrades = get(staminaUpgradesAtom);
   const effects = get(effectsAtom);
-  const baseMaxStamina =
-    speciesData.stamina.initial + level * speciesData.stamina.increments;
+  const baseMaxStamina = speciesData.stamina + staminaUpgrades;
   const maxStamina = effects.reduce((total, effect) => {
     if (effect.stamina?.bonus) {
       return total + effect.stamina.bonus;
@@ -156,7 +154,6 @@ export const staminaAtom = atom((get) => {
   return {
     max: maxStamina,
     current: get(currentStaminaAtom),
-    increments: speciesData.stamina.increments,
   };
 });
 
@@ -226,7 +223,7 @@ export const availablePathPointsAtom = atom((get) => get(levelAtom));
 // Skill upgrades
 export const availableSkillPointsAtom = atom((get) => {
   const level = get(levelAtom);
-  return Math.ceil(level / 2) + 1;
+  return Math.floor((level + 1) / 2) * 2;
 });
 
 // Skill levels

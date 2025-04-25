@@ -8,18 +8,9 @@ import { Species } from "../../models/species";
 export const Yowie: Species = {
   name: "Yowie",
   size: CreatureSize.Large,
-  physique: {
-    initial: 30,
-    increments: 3,
-  },
-  morale: {
-    initial: 10,
-    increments: 1,
-  },
-  stamina: {
-    initial: 10,
-    increments: 1,
-  },
+  physique: 8,
+  morale: 6,
+  stamina: 4,
   speed: {
     [Locomotion.Walk]: 4,
     [Locomotion.Swim]: 1,

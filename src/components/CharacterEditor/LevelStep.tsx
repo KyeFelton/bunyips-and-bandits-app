@@ -1,15 +1,10 @@
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import {
   levelAtom,
   availablePathPointsAtom,
   availableSkillPointsAtom,
-  physiqueAtom,
-  moraleAtom,
-  staminaAtom,
-  currentPhysiqueAtom,
-  currentMoraleAtom,
-  currentStaminaAtom,
   MAX_LEVEL,
+  availableHealthUpgradesAtom,
 } from "../../state/character";
 import {
   Select,
@@ -21,25 +16,12 @@ import {
 
 export const LevelStep = () => {
   const [level, setLevel] = useAtom(levelAtom);
+  const availableHealthUpgrades = useAtomValue(availableHealthUpgradesAtom);
   const availablePathPoints = useAtomValue(availablePathPointsAtom);
   const availableSkillPoints = useAtomValue(availableSkillPointsAtom);
-  const physique = useAtomValue(physiqueAtom);
-  const morale = useAtomValue(moraleAtom);
-  const stamina = useAtomValue(staminaAtom);
-  const setCurrentPhysique = useSetAtom(currentPhysiqueAtom);
-  const setCurrentMorale = useSetAtom(currentMoraleAtom);
-  const setCurrentStamina = useSetAtom(currentStaminaAtom);
   const levels = Array.from({ length: MAX_LEVEL }, (_, i) => i + 1);
 
   const handleLevelChange = (value: number) => {
-    const delta = value - level;
-    setCurrentPhysique(
-      Math.max(physique.current + delta * physique.increments, 0)
-    );
-    setCurrentMorale(Math.max(morale.current + delta * morale.increments, 0));
-    setCurrentStamina(
-      Math.max(stamina.current + delta * stamina.increments, 0)
-    );
     setLevel(value);
   };
 
@@ -65,10 +47,8 @@ export const LevelStep = () => {
         <p>Your level determines:</p>
         <ul className="list-disc list-inside mt-2 space-y-2">
           <li>Number of path progessions: {availablePathPoints}</li>
+          <li>Number of health upgrades: {availableHealthUpgrades}</li>
           <li>Number of skill upgrades: {availableSkillPoints}</li>
-          <li>Bonus physique: {physique.increments * level}</li>
-          <li>Bonus morale: {morale.increments * level}</li>
-          <li>Bonus stamina: {stamina.increments * level}</li>
         </ul>
       </div>
     </div>

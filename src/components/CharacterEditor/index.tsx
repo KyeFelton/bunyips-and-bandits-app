@@ -10,12 +10,14 @@ import { LevelStep } from "./LevelStep";
 import { PathsStep } from "./PathsStep";
 import { SkillsStep } from "./SkillsStep";
 import { CustomTraitsStep } from "./CustomTraitsStep";
+import { HealthStep } from "./HealthStep";
 import { CharacterSheetRoute } from "../../routes";
 
 const steps = [
   { title: "Choose a species", component: SpeciesStep },
   { title: "Describe your character", component: DescriptionStep },
   { title: "Select a level", component: LevelStep },
+  { title: "Upgrade your health", component: HealthStep },
   { title: "Choose your paths", component: PathsStep },
   { title: "Upgrade your skills", component: SkillsStep },
   { title: "Create custom traits", component: CustomTraitsStep },

@@ -8,18 +8,9 @@ import { Species } from "../../models/species";
 export const Pixie: Species = {
   name: "Pixie",
   size: CreatureSize.Tiny,
-  physique: {
-    initial: 5,
-    increments: 0.5,
-  },
-  morale: {
-    initial: 10,
-    increments: 1,
-  },
-  stamina: {
-    initial: 10,
-    increments: 1,
-  },
+  physique: 4,
+  morale: 4,
+  stamina: 10,
   speed: {
     [Locomotion.Walk]: 1,
     [Locomotion.Swim]: 1,

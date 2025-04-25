@@ -8,18 +8,9 @@ import { Species } from "../../models/species";
 export const Tengaroo: Species = {
   name: "Tengaroo",
   size: CreatureSize.Small,
-  physique: {
-    initial: 10,
-    increments: 1,
-  },
-  morale: {
-    initial: 10,
-    increments: 1,
-  },
-  stamina: {
-    initial: 10,
-    increments: 1,
-  },
+  physique: 4,
+  morale: 7,
+  stamina: 7,
   speed: {
     [Locomotion.Walk]: 3,
     [Locomotion.Swim]: 1,

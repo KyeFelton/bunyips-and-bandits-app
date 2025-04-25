@@ -7,18 +7,9 @@ import { SkillType } from "../enums/SkillType";
 export type Species = {
   name: string;
   size: CreatureSize;
-  physique: {
-    initial: number;
-    increments: number;
-  };
-  morale: {
-    initial: number;
-    increments: number;
-  };
-  stamina: {
-    initial: number;
-    increments: number;
-  };
+  physique: number;
+  morale: number;
+  stamina: number;
   speed: {
     [Locomotion.Walk]: number;
     [Locomotion.Swim]: number;

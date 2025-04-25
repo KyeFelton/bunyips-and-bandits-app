@@ -8,18 +8,9 @@ import { Species } from "../../models/species";
 export const Cobber: Species = {
   name: "Cobber",
   size: CreatureSize.Small,
-  physique: {
-    initial: 10,
-    increments: 1,
-  },
-  morale: {
-    initial: 10,
-    increments: 1,
-  },
-  stamina: {
-    initial: 10,
-    increments: 1,
-  },
+  physique: 4,
+  morale: 6,
+  stamina: 8,
   speed: {
     [Locomotion.Walk]: 3,
     [Locomotion.Swim]: 3,
