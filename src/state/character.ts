@@ -296,8 +296,11 @@ export const skillRollValuesAtom = atom((get) => {
 
   Object.values(Skills).forEach((skill) => {
     const level = skillLevels[skill.type] || 0;
+    const weakHealth =
+      (skill.form === SkillForm.Physical && physique.current <= 1) ||
+      (skill.form === SkillForm.Mental && morale.current <= 1);
     rollValues[skill.type] = {
-      dice: getDiceForLevel(level),
+      dice: weakHealth ? 0 : getDiceForLevel(level),
       modifier: (modifiers[skill.type] || 0) + getDiceBonusForLevel(level),
       hasAdvantage: false,
       hasDisadvantage:

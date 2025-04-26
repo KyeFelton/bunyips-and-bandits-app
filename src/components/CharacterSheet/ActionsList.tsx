@@ -148,8 +148,9 @@ export const ActionsList = () => {
                   size="sm"
                   onClick={() => handlePerformAction(action)}
                   disabled={
-                    typeof action.staminaCost === "number" &&
-                    stamina < action.staminaCost
+                    (typeof action.staminaCost === "number" &&
+                      stamina < action.staminaCost) ||
+                    skillRollValues[action.skillType].dice === 0
                   }
                 >
                   Perform

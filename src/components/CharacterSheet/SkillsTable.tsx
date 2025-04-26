@@ -129,7 +129,7 @@ export const SkillsTable = () => {
                           </Button>
                         </div>
                       ) : (
-                        "-"
+                        <div className="ml-3">-</div>
                       )}
                     </TableCell>
                   </TableRow>
