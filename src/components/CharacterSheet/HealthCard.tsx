@@ -16,6 +16,14 @@ import { Badge } from "../ui/badge";
 import { useState } from "react";
 import { AddConditionModal } from "./AddConditionModal";
 import { DefeatModal } from "./DefeatModal";
+import { ConditionGainedModal } from "./ConditionGainedModal";
+import {
+  Hysteric,
+  Amnesiac,
+  Deluded,
+  Frightened,
+  Condition,
+} from "../../models/conditions";
 
 type Props = {
   className?: string;
@@ -31,6 +39,11 @@ export const HealthCard = ({ className }: Props) => {
   const setCurrentStamina = useSetAtom(currentStaminaAtom);
   const [isAddConditionModalOpen, setIsAddConditionModalOpen] = useState(false);
   const [isDefeatModalOpen, setIsDefeatModalOpen] = useState(false);
+  const [isConditionGainedModalOpen, setIsConditionGainedModalOpen] =
+    useState(false);
+  const [gainedCondition, setGainedCondition] = useState<Condition | null>(
+    null
+  );
 
   const calculateRestHealthValue = (
     health: { current: number; max: number },
@@ -45,6 +58,7 @@ export const HealthCard = ({ className }: Props) => {
     setCurrentPhysique(calculateRestHealthValue(physique, staminaPercentage));
     setCurrentMorale(calculateRestHealthValue(morale, staminaPercentage));
     setCurrentStamina(stamina.max);
+    setConditions([]);
   };
 
   const handleRemoveCondition = (conditionName: string) => {
@@ -56,8 +70,14 @@ export const HealthCard = ({ className }: Props) => {
     setter: (value: number) => void
   ) => {
     setter(value);
-    if (value === 0) {
+    if (value === 0 && setter === setCurrentPhysique) {
       setIsDefeatModalOpen(true);
+    } else if (value === 0 && setter === setCurrentMorale) {
+      const mentalConditions = [Hysteric, Amnesiac, Deluded, Frightened];
+      const randomCondition =
+        mentalConditions[Math.floor(Math.random() * mentalConditions.length)];
+      setGainedCondition(randomCondition);
+      setIsConditionGainedModalOpen(true);
     }
   };
 
@@ -144,6 +164,13 @@ export const HealthCard = ({ className }: Props) => {
         isOpen={isDefeatModalOpen}
         onClose={() => setIsDefeatModalOpen(false)}
       />
+      {gainedCondition && (
+        <ConditionGainedModal
+          isOpen={isConditionGainedModalOpen}
+          onClose={() => setIsConditionGainedModalOpen(false)}
+          condition={gainedCondition}
+        />
+      )}
     </Card>
   );
 };

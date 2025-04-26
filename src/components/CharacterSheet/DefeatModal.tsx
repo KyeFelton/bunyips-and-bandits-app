@@ -2,7 +2,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { Button } from "../ui/button";
 import { HeartPulse, Skull, Stethoscope } from "lucide-react";
 import { useState } from "react";
-import { currentMoraleAtom, currentPhysiqueAtom } from "../../state/character";
+import { currentPhysiqueAtom } from "../../state/character";
 import { useAtom } from "jotai";
 
 type Props = {
@@ -14,7 +14,6 @@ export const DefeatModal = ({ isOpen, onClose }: Props) => {
   const [isRevealed, setIsRevealed] = useState(false);
   const [isDead, setIsDead] = useState(Math.random() < 0.5);
   const [currentPhysique, setCurrentPhysique] = useAtom(currentPhysiqueAtom);
-  const [currentMorale, setCurrentMorale] = useAtom(currentMoraleAtom);
 
   const handleReveal = () => {
     setIsRevealed(true);
@@ -22,7 +21,6 @@ export const DefeatModal = ({ isOpen, onClose }: Props) => {
     setIsDead(isDead);
     if (!isDead) {
       setCurrentPhysique(Math.max(currentPhysique, 1));
-      setCurrentMorale(Math.max(currentMorale, 1));
     }
   };
 
