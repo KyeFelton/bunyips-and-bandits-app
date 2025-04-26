@@ -17,7 +17,10 @@ export type Effect = {
   physique?: StatModifier;
   luck?: StatModifier;
   morale?: StatModifier;
-  sense?: SenseType;
+  sense?: {
+    gain?: SenseType;
+    lose?: SenseType;
+  };
   skill?: StatModifier & {
     skillType: SkillType;
   };

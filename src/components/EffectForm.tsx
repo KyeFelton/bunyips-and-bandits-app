@@ -59,7 +59,9 @@ export const EffectForm = ({ effects, onChange }: Props) => {
         };
       case "sense":
         return {
-          sense: SenseType.Sight,
+          sense: {
+            gain: SenseType.Sight,
+          },
         };
       case "skill":
         return {
@@ -130,7 +132,9 @@ export const EffectForm = ({ effects, onChange }: Props) => {
               <Select
                 value={effectValue as SenseType}
                 onValueChange={(value) =>
-                  handleUpdateEffect(index, { sense: value as SenseType })
+                  handleUpdateEffect(index, {
+                    sense: { gain: value as SenseType },
+                  })
                 }
               >
                 <SelectTrigger className="w-[200px]">

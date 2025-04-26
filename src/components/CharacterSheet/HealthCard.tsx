@@ -15,14 +15,6 @@ import { HealthBar } from "../HealthBar";
 import { Badge } from "../ui/badge";
 import { useState } from "react";
 import { AddConditionModal } from "./AddConditionModal";
-import {
-  Deluded,
-  Hysteric,
-  Amnesiac,
-  Frightened,
-} from "../../models/conditions";
-
-const availableConditions = [Deluded, Hysteric, Amnesiac, Frightened];
 
 export const HealthCard = () => {
   const physique = useAtomValue(physiqueAtom);
@@ -47,13 +39,6 @@ export const HealthCard = () => {
     setCurrentPhysique(calculateRestHealthValue(physique, staminaPercentage));
     setCurrentMorale(calculateRestHealthValue(morale, staminaPercentage));
     setCurrentStamina(stamina.max);
-  };
-
-  const handleAddCondition = (conditionName: string) => {
-    const condition = availableConditions.find((c) => c.name === conditionName);
-    if (condition) {
-      setConditions((prev) => [...prev, condition]);
-    }
   };
 
   const handleRemoveCondition = (conditionName: string) => {
@@ -110,18 +95,20 @@ export const HealthCard = () => {
           </div>
           <div className="flex flex-wrap gap-2">
             {conditions?.length > 0 ? (
-              conditions.map((condition) => (
-                <Badge
-                  key={condition.name}
-                  variant="secondary"
-                  className="gap-1"
-                >
-                  {condition.name}
+              Object.entries(
+                conditions.reduce((acc, condition) => {
+                  acc[condition.name] = (acc[condition.name] || 0) + 1;
+                  return acc;
+                }, {} as Record<string, number>)
+              ).map(([name, count]) => (
+                <Badge key={name} variant="secondary" className="gap-1">
+                  {name}
+                  {count > 1 && <span className="text-xs">x{count}</span>}
                   <Button
                     variant="ghost"
                     size="icon"
                     className="h-4 w-4 hover:bg-transparent"
-                    onClick={() => handleRemoveCondition(condition.name)}
+                    onClick={() => handleRemoveCondition(name)}
                   >
                     <X className="h-3 w-3" />
                   </Button>
@@ -136,7 +123,6 @@ export const HealthCard = () => {
       <AddConditionModal
         isOpen={isAddConditionModalOpen}
         onClose={() => setIsAddConditionModalOpen(false)}
-        onAdd={handleAddCondition}
       />
     </Card>
   );

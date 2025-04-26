@@ -7,7 +7,9 @@ export const TremorHearing: Trait = {
     "Your feet become ultra sensitive, enabling you to feel minor vibrations in the ground. Your ears also adapt to the water, enabling you to sense vibrations clearly when underwater.",
   effects: [
     {
-      sense: SenseType.TremorHearing,
+      sense: {
+        gain: SenseType.TremorHearing,
+      },
     },
   ],
 };

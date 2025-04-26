@@ -16,16 +16,15 @@ import {
 import { AllConditions } from "../../models/conditions";
 import { useState } from "react";
 import { conditionsAtom } from "../../state/character";
-import { useAtomValue } from "jotai";
+import { useAtom } from "jotai";
 
 type Props = {
   isOpen: boolean;
   onClose: () => void;
-  onAdd: (condition: string) => void;
 };
 
-export const AddConditionModal = ({ isOpen, onClose, onAdd }: Props) => {
-  const conditions = useAtomValue(conditionsAtom);
+export const AddConditionModal = ({ isOpen, onClose }: Props) => {
+  const [conditions, setConditions] = useAtom(conditionsAtom);
   const [selectedCondition, setSelectedCondition] = useState<string | null>(
     null
   );
@@ -35,8 +34,9 @@ export const AddConditionModal = ({ isOpen, onClose, onAdd }: Props) => {
   };
 
   const handleAdd = () => {
-    if (selectedCondition) {
-      onAdd(selectedCondition);
+    const condition = AllConditions.find((c) => c.name === selectedCondition);
+    if (condition) {
+      setConditions((prev) => [...prev, condition]);
       setSelectedCondition(null);
       onClose();
     }
@@ -45,6 +45,11 @@ export const AddConditionModal = ({ isOpen, onClose, onAdd }: Props) => {
   const selectedConditionData = selectedCondition
     ? AllConditions.find((c) => c.name === selectedCondition)
     : null;
+
+  const availableConditions = AllConditions.filter((condition) => {
+    const existingCondition = conditions.find((c) => c.name === condition.name);
+    return condition.stackable || !existingCondition;
+  });
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -60,11 +65,8 @@ export const AddConditionModal = ({ isOpen, onClose, onAdd }: Props) => {
             <SelectTrigger>
               <SelectValue placeholder="Select a condition" />
             </SelectTrigger>
-            <SelectContent>
-              {AllConditions.filter(
-                (condition) =>
-                  !conditions.find((c) => c.name === condition.name)
-              ).map((condition) => (
+            <SelectContent className="max-h-[300px] overflow-y-auto">
+              {availableConditions.map((condition) => (
                 <SelectItem key={condition.name} value={condition.name}>
                   {condition.name}
                 </SelectItem>
@@ -74,6 +76,11 @@ export const AddConditionModal = ({ isOpen, onClose, onAdd }: Props) => {
           {selectedConditionData && (
             <div className="text-sm text-muted-foreground">
               {selectedConditionData.description}
+              {selectedConditionData.stackable && (
+                <div className="mt-1">
+                  This condition can be stacked multiple times.
+                </div>
+              )}
             </div>
           )}
         </div>

@@ -7,7 +7,9 @@ export const PsychicSense: Trait = {
     "You can sense the presence of other creatures and can communicate with them telepathically.",
   effects: [
     {
-      sense: SenseType.Psychic,
+      sense: {
+        gain: SenseType.Psychic,
+      },
     },
   ],
 };

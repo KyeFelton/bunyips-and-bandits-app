@@ -56,6 +56,7 @@ export const effectsAtom = atom((get) => {
   const paths = get(pathsAtom);
   const items = get(itemsAtom);
   const customTraits = get(customTraitsAtom);
+  const conditions = get(conditionsAtom);
   const effects: Effect[] = [];
 
   // Collect effects from paths
@@ -84,6 +85,13 @@ export const effectsAtom = atom((get) => {
   customTraits.forEach((trait) => {
     if (trait.effects) {
       effects.push(...trait.effects);
+    }
+  });
+
+  // Collect effects from conditions
+  conditions.forEach((condition) => {
+    if (condition.effects) {
+      effects.push(...condition.effects);
     }
   });
 
@@ -227,8 +235,11 @@ export const sensesAtom = atom((get) => {
   const senses = { ...speciesData.senses };
 
   effects.forEach((effect) => {
-    if (effect.sense) {
-      senses[effect.sense] = true;
+    if (effect.sense?.gain) {
+      senses[effect.sense?.gain] = true;
+    }
+    if (effect.sense?.lose) {
+      senses[effect.sense?.lose] = false;
     }
   });
 
