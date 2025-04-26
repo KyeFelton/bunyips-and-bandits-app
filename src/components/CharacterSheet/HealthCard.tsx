@@ -15,8 +15,13 @@ import { HealthBar } from "../HealthBar";
 import { Badge } from "../ui/badge";
 import { useState } from "react";
 import { AddConditionModal } from "./AddConditionModal";
+import { DefeatModal } from "./DefeatModal";
 
-export const HealthCard = () => {
+type Props = {
+  className?: string;
+};
+
+export const HealthCard = ({ className }: Props) => {
   const physique = useAtomValue(physiqueAtom);
   const morale = useAtomValue(moraleAtom);
   const stamina = useAtomValue(staminaAtom);
@@ -25,6 +30,7 @@ export const HealthCard = () => {
   const setCurrentMorale = useSetAtom(currentMoraleAtom);
   const setCurrentStamina = useSetAtom(currentStaminaAtom);
   const [isAddConditionModalOpen, setIsAddConditionModalOpen] = useState(false);
+  const [isDefeatModalOpen, setIsDefeatModalOpen] = useState(false);
 
   const calculateRestHealthValue = (
     health: { current: number; max: number },
@@ -45,8 +51,18 @@ export const HealthCard = () => {
     setConditions((prev) => prev.filter((c) => c.name !== conditionName));
   };
 
+  const handleHealthChange = (
+    value: number,
+    setter: (value: number) => void
+  ) => {
+    setter(value);
+    if (value === 0) {
+      setIsDefeatModalOpen(true);
+    }
+  };
+
   return (
-    <Card>
+    <Card className={className}>
       <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle>Health</CardTitle>
         <Button
@@ -64,14 +80,14 @@ export const HealthCard = () => {
           colours={{ good: "green", warning: "yellow", bad: "red" }}
           max={physique.max}
           name="Physique"
-          onChange={setCurrentPhysique}
+          onChange={(value) => handleHealthChange(value, setCurrentPhysique)}
           value={physique.current}
         />
         <HealthBar
           colours={{ good: "green", warning: "yellow", bad: "red" }}
           max={morale.max}
           name="Morale"
-          onChange={setCurrentMorale}
+          onChange={(value) => handleHealthChange(value, setCurrentMorale)}
           value={morale.current}
         />
         <HealthBar
@@ -123,6 +139,10 @@ export const HealthCard = () => {
       <AddConditionModal
         isOpen={isAddConditionModalOpen}
         onClose={() => setIsAddConditionModalOpen(false)}
+      />
+      <DefeatModal
+        isOpen={isDefeatModalOpen}
+        onClose={() => setIsDefeatModalOpen(false)}
       />
     </Card>
   );

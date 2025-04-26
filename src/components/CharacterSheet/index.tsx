@@ -69,7 +69,7 @@ export function CharacterSheet() {
             </Tabs>
           </div>
           <div className="flex flex-col gap-4 h-[948px] justify-between">
-            <HealthCard />
+            <HealthCard className="h-[398px] overflow-auto" />
             <CombatCard />
             <SpeedCard />
             <ArmourCard />
