@@ -10,6 +10,7 @@ import { Trait } from "../models/traits";
 import { getSpeciesImage } from "../utils/speciesImages";
 import { getDiceBonusForLevel, getDiceForLevel } from "../utils/dice";
 import { SkillForm } from "../enums/SkillForm";
+import { Locomotion } from "../enums/Locomotion";
 
 // Constants
 export const MAX_LEVEL = 10;
@@ -185,11 +186,14 @@ export const evasionsCountAtom = atom((get) => {
   }, baseEvasions);
 });
 
-// Movement
+// Speed
 export const speedAtom = atom((get) => {
   const speciesData = get(speciesDataAtom);
   const effects = get(effectsAtom);
-  const baseSpeed = { ...speciesData.speed };
+  const physique = get(physiqueAtom);
+  const baseSpeed: Record<Locomotion, number> = {
+    ...speciesData.speed,
+  };
 
   effects.forEach((effect) => {
     if (effect.speed?.locomotion) {
@@ -198,6 +202,16 @@ export const speedAtom = atom((get) => {
       baseSpeed[type] = Math.ceil(
         baseSpeed[type] * (effect.speed.multiplier || 1)
       );
+    }
+  });
+
+  Object.keys(baseSpeed).forEach((locomotion) => {
+    if (physique.current / physique.max <= 0.5 && physique.current > 1) {
+      baseSpeed[locomotion as Locomotion] = Math.ceil(
+        baseSpeed[locomotion as Locomotion] / 2
+      );
+    } else if (physique.current <= 1) {
+      baseSpeed[locomotion as Locomotion] = 0;
     }
   });
 
