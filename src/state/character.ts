@@ -11,6 +11,7 @@ import { getSpeciesImage } from "../utils/speciesImages";
 import { getDiceBonusForLevel, getDiceForLevel } from "../utils/dice";
 import { SkillForm } from "../enums/SkillForm";
 import { Locomotion } from "../enums/Locomotion";
+import { Condition } from "../models/conditions";
 
 // Constants
 export const MAX_LEVEL = 10;
@@ -41,6 +42,7 @@ export const skillLevelUpgradesAtom = atom<Partial<Record<SkillType, number>>>(
 export const currentPhysiqueAtom = atom<number>(startingSpecies.physique);
 export const currentMoraleAtom = atom<number>(startingSpecies.morale);
 export const currentStaminaAtom = atom<number>(startingSpecies.stamina);
+export const conditionsAtom = atom<Condition[]>([]);
 
 // Items and equipment
 export const itemsAtom = atom<ItemDictionary>({});

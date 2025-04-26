@@ -1,7 +1,7 @@
-import { useAtomValue, useSetAtom } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
-import { Bed } from "lucide-react";
+import { Bed, Plus, X } from "lucide-react";
 import {
   physiqueAtom,
   moraleAtom,
@@ -9,16 +9,30 @@ import {
   currentPhysiqueAtom,
   currentMoraleAtom,
   currentStaminaAtom,
+  conditionsAtom,
 } from "../../state/character";
 import { HealthBar } from "../HealthBar";
+import { Badge } from "../ui/badge";
+import { useState } from "react";
+import { AddConditionModal } from "./AddConditionModal";
+import {
+  Deluded,
+  Hysteric,
+  Amnesiac,
+  Frightened,
+} from "../../models/conditions";
+
+const availableConditions = [Deluded, Hysteric, Amnesiac, Frightened];
 
 export const HealthCard = () => {
   const physique = useAtomValue(physiqueAtom);
   const morale = useAtomValue(moraleAtom);
   const stamina = useAtomValue(staminaAtom);
+  const [conditions, setConditions] = useAtom(conditionsAtom);
   const setCurrentPhysique = useSetAtom(currentPhysiqueAtom);
   const setCurrentMorale = useSetAtom(currentMoraleAtom);
   const setCurrentStamina = useSetAtom(currentStaminaAtom);
+  const [isAddConditionModalOpen, setIsAddConditionModalOpen] = useState(false);
 
   const calculateRestHealthValue = (
     health: { current: number; max: number },
@@ -33,6 +47,17 @@ export const HealthCard = () => {
     setCurrentPhysique(calculateRestHealthValue(physique, staminaPercentage));
     setCurrentMorale(calculateRestHealthValue(morale, staminaPercentage));
     setCurrentStamina(stamina.max);
+  };
+
+  const handleAddCondition = (conditionName: string) => {
+    const condition = availableConditions.find((c) => c.name === conditionName);
+    if (condition) {
+      setConditions((prev) => [...prev, condition]);
+    }
+  };
+
+  const handleRemoveCondition = (conditionName: string) => {
+    setConditions((prev) => prev.filter((c) => c.name !== conditionName));
   };
 
   return (
@@ -71,7 +96,48 @@ export const HealthCard = () => {
           onChange={setCurrentStamina}
           value={stamina.current}
         />
+        <div>
+          <div className="flex items-center justify-between mb-1">
+            <div className="text-sm text-muted-foreground">Conditions</div>
+            <Button
+              variant="outline"
+              size="icon"
+              className="h-6 w-6"
+              onClick={() => setIsAddConditionModalOpen(true)}
+            >
+              <Plus className="h-4 w-4" />
+            </Button>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {conditions?.length > 0 ? (
+              conditions.map((condition) => (
+                <Badge
+                  key={condition.name}
+                  variant="secondary"
+                  className="gap-1"
+                >
+                  {condition.name}
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-4 w-4 hover:bg-transparent"
+                    onClick={() => handleRemoveCondition(condition.name)}
+                  >
+                    <X className="h-3 w-3" />
+                  </Button>
+                </Badge>
+              ))
+            ) : (
+              <span className="text-sm">None</span>
+            )}
+          </div>
+        </div>
       </CardContent>
+      <AddConditionModal
+        isOpen={isAddConditionModalOpen}
+        onClose={() => setIsAddConditionModalOpen(false)}
+        onAdd={handleAddCondition}
+      />
     </Card>
   );
 };

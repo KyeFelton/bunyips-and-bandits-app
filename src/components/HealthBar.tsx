@@ -60,8 +60,8 @@ export const HealthBar = ({
 
   return (
     <div className="w-full pb-4">
-      <div className="flex justify-between mb-1">
-        <span className="font-medium">{name}</span>
+      <div className="flex justify-between mb-1 text-sm">
+        <span className="text-muted-foreground">{name}</span>
         <span>
           {value} / {max}
         </span>
