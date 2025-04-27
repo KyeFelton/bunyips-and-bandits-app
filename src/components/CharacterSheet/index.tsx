@@ -31,7 +31,7 @@ export function CharacterSheet() {
           </div>
           <div className="col-span-2">
             <Tabs defaultValue="skills" className="flex flex-col items-start">
-              <TabsList className="mb-2">
+              <TabsList>
                 <TabsTrigger value="skills">Skills</TabsTrigger>
                 <TabsTrigger value="traits">Traits</TabsTrigger>
                 <TabsTrigger value="actions">Actions</TabsTrigger>
@@ -41,7 +41,7 @@ export function CharacterSheet() {
                 value="traits"
                 className="w-full flex-grow shadow-sm"
               >
-                <Card className="h-[900px] p-4 overflow-auto">
+                <Card className="h-[908px] p-4 overflow-auto rounded-tl-none">
                   <TraitsList />
                 </Card>
               </TabsContent>
@@ -49,12 +49,12 @@ export function CharacterSheet() {
                 value="actions"
                 className="w-full flex-grow shadow-sm"
               >
-                <Card className="h-[900px] p-4 overflow-auto">
+                <Card className="h-[908px] p-4 overflow-auto rounded-tl-none">
                   <ActionsList />
                 </Card>
               </TabsContent>
               <TabsContent value="items" className="w-full flex-grow shadow-sm">
-                <Card className="h-[900px] p-4 overflow-auto">
+                <Card className="h-[908px] p-4 overflow-auto rounded-tl-none">
                   <ItemsTable />
                 </Card>
               </TabsContent>
@@ -62,14 +62,14 @@ export function CharacterSheet() {
                 value="skills"
                 className="w-full flex-grow shadow-sm"
               >
-                <Card className="h-[900px] p-4 overflow-auto">
+                <Card className="h-[908px] p-4 overflow-auto rounded-tl-none">
                   <SkillsTable />
                 </Card>
               </TabsContent>
             </Tabs>
           </div>
           <div className="flex flex-col gap-4 h-[948px] justify-between">
-            <HealthCard className="h-[398px] overflow-auto" />
+            <HealthCard className="h-[432px] overflow-auto" />
             <CombatCard />
             <SpeedCard />
             <ArmourCard />

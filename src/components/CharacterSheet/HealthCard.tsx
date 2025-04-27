@@ -18,8 +18,8 @@ import { AddConditionModal } from "./AddConditionModal";
 import { DefeatModal } from "./DefeatModal";
 import { ConditionGainedModal } from "./ConditionGainedModal";
 import {
-  Hysteric,
-  Amnesiac,
+  Hysteria,
+  Amnesia,
   Deluded,
   Frightened,
   Condition,
@@ -73,7 +73,7 @@ export const HealthCard = ({ className }: Props) => {
     if (value === 0 && setter === setCurrentPhysique) {
       setIsDefeatModalOpen(true);
     } else if (value === 0 && setter === setCurrentMorale) {
-      const mentalConditions = [Hysteric, Amnesiac, Deluded, Frightened];
+      const mentalConditions = [Hysteria, Amnesia, Deluded, Frightened];
       const randomCondition =
         mentalConditions[Math.floor(Math.random() * mentalConditions.length)];
       setGainedCondition(randomCondition);

@@ -9,8 +9,8 @@ export type Condition = {
   stackable: boolean;
 };
 
-export const Amnesiac: Condition = {
-  name: "Amnesiac",
+export const Amnesia: Condition = {
+  name: "Amnesia",
   description: "You forget who you are and why you're here.",
   stackable: false,
 };
@@ -81,8 +81,8 @@ export const Frightened: Condition = {
   stackable: false,
 };
 
-export const Hysteric: Condition = {
-  name: "Hysteric",
+export const Hysteria: Condition = {
+  name: "Hysteria",
   description:
     "You experience uncontrollable emotional outbursts—laughing, crying, screaming.",
   stackable: false,
@@ -238,7 +238,7 @@ export const Stunned: Condition = {
 };
 
 export const AllConditions = [
-  Amnesiac,
+  Amnesia,
   Anosmic,
   Blocked,
   Blinded,
@@ -249,7 +249,7 @@ export const AllConditions = [
   Disoriented,
   Empowered,
   Frightened,
-  Hysteric,
+  Hysteria,
   Hypnotised,
   Invisible,
   Madness,
