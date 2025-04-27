@@ -72,6 +72,13 @@ export const Empowered: Condition = {
   name: "Empowered",
   description: "You gain an evasion until your next turn.",
   stackable: true,
+  effects: [
+    {
+      evasions: {
+        bonus: 1,
+      },
+    },
+  ],
 };
 
 export const Frightened: Condition = {
@@ -235,6 +242,13 @@ export const Stunned: Condition = {
   description:
     "You lose an evasion until your next turn. If you have no evasions, then you lose an action on your next turn.",
   stackable: true,
+  effects: [
+    {
+      evasions: {
+        bonus: -1,
+      },
+    },
+  ],
 };
 
 export const AllConditions = [

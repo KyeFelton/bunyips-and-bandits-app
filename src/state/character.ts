@@ -170,19 +170,6 @@ export const staminaAtom = atom((get) => {
   };
 });
 
-// Actions
-export const actionsCountAtom = atom((get) => {
-  const effects = get(effectsAtom);
-  const baseActions = 2;
-
-  return effects.reduce((total, effect) => {
-    if (effect.actions?.bonus) {
-      return total + effect.actions.bonus;
-    }
-    return total;
-  }, baseActions);
-});
-
 // Evasions
 export const evasionsCountAtom = atom((get) => {
   const effects = get(effectsAtom);
@@ -194,6 +181,22 @@ export const evasionsCountAtom = atom((get) => {
     }
     return total;
   }, baseEvasions);
+});
+
+// Actions
+export const actionsCountAtom = atom((get) => {
+  const effects = get(effectsAtom);
+  const evasions = get(evasionsCountAtom);
+  const baseActions = 2;
+
+  return (
+    effects.reduce((total, effect) => {
+      if (effect.actions?.bonus) {
+        return total + effect.actions.bonus;
+      }
+      return total;
+    }, baseActions) + Math.min(evasions, 0)
+  );
 });
 
 // Speed

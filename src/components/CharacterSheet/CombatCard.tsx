@@ -22,11 +22,11 @@ export const CombatCard = () => {
         <div className="space-y-2 text-sm">
           <div className="flex justify-between">
             <span className="text-muted-foreground">Actions</span>
-            <span>{actionsCount}</span>
+            <span>{actionsCount <= 0 ? "-" : actionsCount}</span>
           </div>
           <div className="flex justify-between">
             <span className="text-muted-foreground">Evasions</span>
-            <span>{evasionsCount}</span>
+            <span>{evasionsCount <= 0 ? "-" : evasionsCount}</span>
           </div>
           <div className="flex justify-between">
             <span className="text-muted-foreground">Weapon Damage</span>
