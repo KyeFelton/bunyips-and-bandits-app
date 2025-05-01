@@ -5,6 +5,7 @@ import { CharacterSheet } from "./components/CharacterSheet";
 import { CharacterEditor } from "./components/CharacterEditor";
 import { Handbook } from "./components/Handbook";
 import { RulesButton } from "./components/RulesButton";
+import { SettingsButton } from "./components/SettingsButton";
 import { Toaster } from "./components/ui/toaster";
 import background from "./images/background.png";
 import frame from "./images/leaf-frame.png";
@@ -17,7 +18,7 @@ import {
 
 function App() {
   const location = useLocation();
-  const showRulesButton = location.pathname !== "/rules";
+  const showMenuButton = !location.pathname.endsWith(HandbookRoute);
 
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -50,7 +51,12 @@ function App() {
           <Route path={HandbookRoute} element={<Handbook />} />
         </Routes>
       </AnimatePresence>
-      {showRulesButton && <RulesButton />}
+      {showMenuButton && (
+        <div className="fixed bottom-4 right-4 z-50 flex gap-3">
+          <RulesButton />
+          <SettingsButton />
+        </div>
+      )}
       <Toaster />
     </div>
   );
