@@ -21,6 +21,9 @@ import {
   pathsAtom,
   skillLevelUpgradesAtom,
   customTraitsAtom,
+  moraleUpgradesAtom,
+  physiqueUpgradesAtom,
+  staminaUpgradesAtom,
 } from "../../state/character";
 import { uploadCharacter } from "../../utils/character";
 import { Logo } from "../Logo";
@@ -41,8 +44,11 @@ export function LandingPage() {
     setImage: useSetAtom(imageAtom),
     setLevel: useSetAtom(levelAtom),
     setCurrentPhysique: useSetAtom(currentPhysiqueAtom),
+    setPhysiqueUpgrades: useSetAtom(physiqueUpgradesAtom),
     setCurrentMorale: useSetAtom(currentMoraleAtom),
+    setMoraleUpgrades: useSetAtom(moraleUpgradesAtom),
     setCurrentStamina: useSetAtom(currentStaminaAtom),
+    setStaminaUpgrades: useSetAtom(staminaUpgradesAtom),
     setMoney: useSetAtom(moneyAtom),
     setItems: useSetAtom(itemsAtom),
     setPaths: useSetAtom(pathsAtom),

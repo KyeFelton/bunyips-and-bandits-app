@@ -11,7 +11,7 @@ import {
   staminaUpgradesAtom,
   availableHealthUpgradesAtom,
 } from "../../state/character";
-import { MaxHealthBar } from "../MaxHealthBar";
+import { HealthUpgradeForm } from "../HealthUpgradeForm";
 
 export const HealthStep = () => {
   const physique = useAtomValue(physiqueAtom);
@@ -25,63 +25,35 @@ export const HealthStep = () => {
   const [staminaUpgrades, setStaminaUpgrades] = useAtom(staminaUpgradesAtom);
   const availableHealthUpgrades = useAtomValue(availableHealthUpgradesAtom);
 
-  const totalUpgrades = physiqueUpgrades + moraleUpgrades + staminaUpgrades;
-  const remainingUpgrades = availableHealthUpgrades - totalUpgrades;
-  const maxUpgradesPerTrack = Math.floor(availableHealthUpgrades / 2);
-  const maxSegments = 15;
-
-  const handlePhysiqueUpgrade = (amount: number) => {
-    setPhysiqueUpgrades(physiqueUpgrades + amount);
-    setCurrentPhysique(physique.current + amount);
-  };
-
-  const handleMoraleUpgrade = (amount: number) => {
-    setMoraleUpgrades(moraleUpgrades + amount);
-    setCurrentMorale(morale.current + amount);
-  };
-
-  const handleStaminaUpgrade = (amount: number) => {
-    setStaminaUpgrades(staminaUpgrades + amount);
-    setCurrentStamina(stamina.current + amount);
+  const handleChanges = (changes: {
+    physique: number;
+    morale: number;
+    stamina: number;
+  }) => {
+    setPhysiqueUpgrades(changes.physique);
+    setCurrentPhysique(
+      physique.current + (changes.physique - physiqueUpgrades)
+    );
+    setMoraleUpgrades(changes.morale);
+    setCurrentMorale(morale.current + (changes.morale - moraleUpgrades));
+    setStaminaUpgrades(changes.stamina);
+    setCurrentStamina(stamina.current + (changes.stamina - staminaUpgrades));
   };
 
   return (
-    <div className="space-y-4">
-      <div className="text-sm text-muted-foreground">
-        <p>Available health upgrades: {remainingUpgrades}</p>
-        <p className="mt-2">
-          You can upgrade each health track up to{" "}
-          {Math.floor(availableHealthUpgrades / 2)} times.
-        </p>
-      </div>
-
-      <MaxHealthBar
-        availableUpgrades={remainingUpgrades}
-        maxUpgrades={maxUpgradesPerTrack}
-        maxValue={maxSegments}
-        name="Physique"
-        onChange={(value) => handlePhysiqueUpgrade(value)}
-        upgrades={physiqueUpgrades}
-        value={physique.max}
-      />
-      <MaxHealthBar
-        availableUpgrades={remainingUpgrades}
-        maxUpgrades={maxUpgradesPerTrack}
-        maxValue={maxSegments}
-        name="Morale"
-        onChange={(value) => handleMoraleUpgrade(value)}
-        upgrades={moraleUpgrades}
-        value={morale.max}
-      />
-      <MaxHealthBar
-        availableUpgrades={remainingUpgrades}
-        maxUpgrades={maxUpgradesPerTrack}
-        maxValue={maxSegments}
-        name="Stamina"
-        onChange={(value) => handleStaminaUpgrade(value)}
-        upgrades={staminaUpgrades}
-        value={stamina.max}
-      />
-    </div>
+    <HealthUpgradeForm
+      availableHealthUpgrades={availableHealthUpgrades}
+      onChanges={handleChanges}
+      initialUpgrades={{
+        physique: physiqueUpgrades,
+        morale: moraleUpgrades,
+        stamina: staminaUpgrades,
+      }}
+      currentValues={{
+        physique: physique.max,
+        morale: morale.max,
+        stamina: stamina.max,
+      }}
+    />
   );
 };

@@ -1,4 +1,4 @@
-import { useAtomValue } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { Card, CardHeader, CardContent } from "../ui/card";
 import { Button } from "../ui/button";
 import { Plus } from "lucide-react";
@@ -8,9 +8,21 @@ import { useState } from "react";
 
 export const NameCard = () => {
   const name = useAtomValue(nameAtom);
-  const level = useAtomValue(levelAtom);
+  const [level, setLevel] = useAtom(levelAtom);
   const image = useAtomValue(imageAtom);
   const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false);
+
+  const handleLevelUpModalOpen = () => {
+    setLevel((prev) => prev + 1);
+    setIsLevelUpModalOpen(true);
+  };
+
+  const handleLevelUpModalClose = (success: boolean) => {
+    if (!success) {
+      setLevel((prev) => prev - 1);
+    }
+    setIsLevelUpModalOpen(false);
+  };
 
   return (
     <Card className="h-[332px] flex flex-col">
@@ -26,7 +38,7 @@ export const NameCard = () => {
               variant="outline"
               size="icon"
               className="h-6 w-6"
-              onClick={() => setIsLevelUpModalOpen(true)}
+              onClick={() => handleLevelUpModalOpen()}
               disabled={level >= 10}
             >
               <Plus className="w-4 h-4" />
@@ -43,7 +55,7 @@ export const NameCard = () => {
       </CardContent>
       <LevelUpModal
         open={isLevelUpModalOpen}
-        onOpenChange={setIsLevelUpModalOpen}
+        onClose={handleLevelUpModalClose}
       />
     </Card>
   );

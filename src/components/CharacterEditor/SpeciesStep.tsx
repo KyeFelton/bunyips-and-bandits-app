@@ -1,5 +1,12 @@
 import { useAtom, useSetAtom, useAtomValue } from "jotai";
-import { speciesAtom, speciesDataAtom, imageAtom } from "../../state/character";
+import {
+  speciesAtom,
+  speciesDataAtom,
+  imageAtom,
+  currentPhysiqueAtom,
+  currentMoraleAtom,
+  currentStaminaAtom,
+} from "../../state/character";
 import {
   Select,
   SelectContent,
@@ -20,8 +27,18 @@ export const SpeciesStep = () => {
   const [selectedSpecies, setSpecies] = useAtom(speciesAtom);
   const speciesData = useAtomValue(speciesDataAtom);
   const setImage = useSetAtom(imageAtom);
+  const setCurrentPhysique = useSetAtom(currentPhysiqueAtom);
+  const setCurrentMorale = useSetAtom(currentMoraleAtom);
+  const setCurrentStamina = useSetAtom(currentStaminaAtom);
 
   const handleSpeciesChange = (value: string) => {
+    const newSpeciesData = AllSpecies[value as keyof typeof AllSpecies];
+    const physiqueChange = newSpeciesData.physique - speciesData.physique;
+    const moraleChange = newSpeciesData.morale - speciesData.morale;
+    const staminaChange = newSpeciesData.stamina - speciesData.stamina;
+    setCurrentPhysique((prev) => Math.max(0, prev + physiqueChange));
+    setCurrentMorale((prev) => Math.max(0, prev + moraleChange));
+    setCurrentStamina((prev) => Math.max(0, prev + staminaChange));
     setSpecies(value);
     setImage(getSpeciesImage(value));
   };

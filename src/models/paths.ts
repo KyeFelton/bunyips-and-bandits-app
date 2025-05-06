@@ -13,6 +13,6 @@ export type Path = {
   }[];
 };
 
-export type SelectedPath = Path & {
+export type PathProgression = Path & {
   level: number;
 };

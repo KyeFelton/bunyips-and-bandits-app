@@ -1,7 +1,7 @@
 import { atom } from "jotai";
 import { SkillType } from "../enums/SkillType";
 import { ItemDictionary } from "../models/items";
-import { SelectedPath } from "../models/paths";
+import { PathProgression } from "../models/paths";
 import { AllSpecies, startingSpecies } from "../data/species";
 import { SaveFile } from "../models/saveFile";
 import { Effect } from "../models/effect";
@@ -30,7 +30,7 @@ export const imageAtom = atom<string>(getSpeciesImage(startingSpecies.name));
 
 // Character progression
 export const levelAtom = atom<number>(1);
-export const pathsAtom = atom<SelectedPath[]>([]);
+export const pathsAtom = atom<PathProgression[]>([]);
 export const physiqueUpgradesAtom = atom<number>(0);
 export const moraleUpgradesAtom = atom<number>(0);
 export const staminaUpgradesAtom = atom<number>(0);
@@ -382,8 +382,11 @@ export const saveFileAtom = atom<SaveFile>((get) => ({
   customTraits: get(customTraitsAtom),
   skillLevelUpgrades: get(skillLevelUpgradesAtom),
   currentPhysique: get(currentPhysiqueAtom),
+  physiqueUpgrades: get(physiqueUpgradesAtom),
   currentMorale: get(currentMoraleAtom),
+  moraleUpgrades: get(moraleUpgradesAtom),
   currentStamina: get(currentStaminaAtom),
+  staminaUpgrades: get(staminaUpgradesAtom),
   items: get(itemsAtom),
   money: get(moneyAtom),
   image: get(imageAtom),

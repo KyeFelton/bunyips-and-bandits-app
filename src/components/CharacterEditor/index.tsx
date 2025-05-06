@@ -17,10 +17,10 @@ const steps = [
   { title: "Choose a species", component: SpeciesStep },
   { title: "Describe your character", component: DescriptionStep },
   { title: "Select a level", component: LevelStep },
-  { title: "Upgrade your health", component: HealthStep },
   { title: "Choose your paths", component: PathsStep },
   { title: "Upgrade your skills", component: SkillsStep },
-  { title: "Create custom traits", component: CustomTraitsStep },
+  { title: "Boost your health", component: HealthStep },
+  { title: "Customise your traits", component: CustomTraitsStep },
 ];
 
 export const CharacterEditor = () => {

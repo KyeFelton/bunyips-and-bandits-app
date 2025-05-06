@@ -7,7 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { useSetAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import {
   nameAtom,
   levelAtom,
@@ -26,6 +26,10 @@ import {
   pathsAtom,
   skillLevelUpgradesAtom,
   customTraitsAtom,
+  saveFileAtom,
+  physiqueUpgradesAtom,
+  moraleUpgradesAtom,
+  staminaUpgradesAtom,
 } from "../state/character";
 import { resetCharacter, uploadCharacter } from "../utils/character";
 import {
@@ -37,14 +41,18 @@ import {
 export function SettingsButton() {
   const navigate = useNavigate();
   const location = useLocation();
+  const saveFile = useAtomValue(saveFileAtom);
   const isCharacterSheet = location.pathname.endsWith(CharacterSheetRoute);
 
   const setters = {
     setName: useSetAtom(nameAtom),
     setLevel: useSetAtom(levelAtom),
     setCurrentPhysique: useSetAtom(currentPhysiqueAtom),
+    setPhysiqueUpgrades: useSetAtom(physiqueUpgradesAtom),
     setCurrentMorale: useSetAtom(currentMoraleAtom),
+    setMoraleUpgrades: useSetAtom(moraleUpgradesAtom),
     setCurrentStamina: useSetAtom(currentStaminaAtom),
+    setStaminaUpgrades: useSetAtom(staminaUpgradesAtom),
     setSpecies: useSetAtom(speciesAtom),
     setGender: useSetAtom(genderAtom),
     setAge: useSetAtom(ageAtom),
@@ -57,6 +65,20 @@ export function SettingsButton() {
     setPaths: useSetAtom(pathsAtom),
     setCustomTraits: useSetAtom(customTraitsAtom),
     setSkillLevelUpgrades: useSetAtom(skillLevelUpgradesAtom),
+  };
+
+  const handleDownload = () => {
+    const blob = new Blob([JSON.stringify(saveFile, null, 2)], {
+      type: "application/json",
+    });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "character.json";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   };
 
   const handleReset = () => {
@@ -88,9 +110,7 @@ export function SettingsButton() {
               <Pencil className="mr-2 h-4 w-4" />
               Edit
             </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => uploadCharacter(setters, navigate)}
-            >
+            <DropdownMenuItem onClick={() => handleDownload()}>
               <Download className="mr-2 h-4 w-4" />
               Save
             </DropdownMenuItem>

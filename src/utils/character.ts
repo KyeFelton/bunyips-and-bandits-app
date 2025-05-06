@@ -9,8 +9,11 @@ type CharacterSetters = {
   setName: (value: SetStateAction<string>) => void;
   setLevel: (value: SetStateAction<number>) => void;
   setCurrentPhysique: (value: SetStateAction<number>) => void;
+  setPhysiqueUpgrades: (value: SetStateAction<number>) => void;
   setCurrentMorale: (value: SetStateAction<number>) => void;
+  setMoraleUpgrades: (value: SetStateAction<number>) => void;
   setCurrentStamina: (value: SetStateAction<number>) => void;
+  setStaminaUpgrades: (value: SetStateAction<number>) => void;
   setSpecies: (value: SetStateAction<string>) => void;
   setGender: (value: SetStateAction<string>) => void;
   setAge: (value: SetStateAction<number>) => void;
@@ -35,8 +38,11 @@ const validateSaveFile = (data: any): data is SaveFile => {
     typeof data.level === "number" &&
     Array.isArray(data.languages) &&
     typeof data.currentPhysique === "number" &&
+    typeof data.physiqueUpgrades === "number" &&
     typeof data.currentMorale === "number" &&
+    typeof data.moraleUpgrades === "number" &&
     typeof data.currentStamina === "number" &&
+    typeof data.staminaUpgrades === "number" &&
     typeof data.money === "number" &&
     Array.isArray(data.paths) &&
     typeof data.items === "object" &&
@@ -67,8 +73,11 @@ export const uploadCharacter = async (
           setters.setName(data.name);
           setters.setLevel(data.level);
           setters.setCurrentPhysique(data.currentPhysique);
+          setters.setPhysiqueUpgrades(data.physiqueUpgrades);
           setters.setCurrentMorale(data.currentMorale);
+          setters.setMoraleUpgrades(data.moraleUpgrades);
           setters.setCurrentStamina(data.currentStamina);
+          setters.setStaminaUpgrades(data.staminaUpgrades);
           setters.setSpecies(data.species);
           setters.setGender(data.gender || "");
           setters.setAge(data.age || 0);
@@ -105,8 +114,11 @@ export const resetCharacter = (setters: CharacterSetters) => {
   setters.setSpecies(startingSpecies.name);
   setters.setLevel(1);
   setters.setCurrentPhysique(startingSpecies.physique);
+  setters.setPhysiqueUpgrades(0);
   setters.setCurrentMorale(startingSpecies.morale);
+  setters.setMoraleUpgrades(0);
   setters.setCurrentStamina(startingSpecies.stamina);
+  setters.setStaminaUpgrades(0);
   setters.setGender("");
   setters.setAge(0);
   setters.setBackground("");
