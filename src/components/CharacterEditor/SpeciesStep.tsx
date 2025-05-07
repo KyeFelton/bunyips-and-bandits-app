@@ -22,6 +22,7 @@ import { DamageType } from "../../enums/DamageType";
 import { SpeedIcon } from "../icons/SpeedIcon";
 import { ArmourIcon } from "../icons/ArmourIcon";
 import { getSpeciesImage } from "../../utils/speciesImages";
+import { SpeciesHealthBar } from "../SpeciesHealthBar";
 
 export const SpeciesStep = () => {
   const [selectedSpecies, setSpecies] = useAtom(speciesAtom);
@@ -59,85 +60,128 @@ export const SpeciesStep = () => {
       </Select>
 
       {speciesData && (
-        <div className="p-6 space-y-8">
-          {/* Base Stats */}
-          <div>
-            <h3 className="font-semibold mb-4 flex items-center gap-2">
-              <Heart className="h-5 w-5 text-red-foreground" />
-              Health
-            </h3>
-            <div className="grid grid-cols-3 gap-6">
-              <div className="p-4 bg-red/10 rounded-lg">
-                <div className="text-sm font-medium mb-1">Physique</div>
-                <div className="text-xl">{speciesData.physique}</div>
-              </div>
-              <div className="p-4 bg-green/10 rounded-lg">
-                <div className="text-sm font-medium mb-1">Morale</div>
-                <div className="text-xl">{speciesData.morale}</div>
-              </div>
-              <div className="p-4 bg-blue/10 rounded-lg">
-                <div className="text-sm font-medium mb-1">Stamina</div>
-                <div className="text-xl">{speciesData.stamina}</div>
-              </div>
-            </div>
+        <div className="py-6">
+          {/* Species Image */}
+          <div className="w-64 h-64 float-left mr-6 mb-4">
+            <img
+              src={getSpeciesImage(selectedSpecies)}
+              alt={selectedSpecies}
+              className="w-full h-full object-contain rounded-lg"
+            />
           </div>
 
-          {/* Spped */}
-          <div>
-            <h3 className="font-semibold mb-4 flex items-center gap-2">
-              <ArrowLeftRight className="h-5 w-5" />
-              Speed
-            </h3>
-            <div className="grid grid-cols-4 gap-4">
-              {Object.entries(speciesData.speed)
-                .filter(([_, value]) => value > 0)
-                .map(([type, value]) => (
+          {/* Stats Container */}
+          <div className="space-y-8 !mt-0">
+            {/* Base Stats */}
+            <div>
+              <h3 className="font-semibold mb-4 flex items-center gap-2">
+                <Heart className="h-5 w-5 text-red-foreground" />
+                Health
+              </h3>
+              <div className="grid grid-cols-3 gap-6">
+                <div className="p-4 bg-red/10 rounded-lg">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="text-sm font-medium">Physique</div>
+                    <div className="text-xl font-semibold">
+                      {speciesData.physique}
+                    </div>
+                  </div>
+                  <SpeciesHealthBar
+                    value={speciesData.physique}
+                    maxValue={10}
+                    color="red"
+                  />
+                </div>
+                <div className="p-4 bg-green/10 rounded-lg">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="text-sm font-medium">Morale</div>
+                    <div className="text-xl font-semibold">
+                      {speciesData.morale}
+                    </div>
+                  </div>
+                  <SpeciesHealthBar
+                    value={speciesData.morale}
+                    maxValue={10}
+                    color="green"
+                  />
+                </div>
+                <div className="p-4 bg-blue/10 rounded-lg">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="text-sm font-medium">Stamina</div>
+                    <div className="text-xl font-semibold">
+                      {speciesData.stamina}
+                    </div>
+                  </div>
+                  <SpeciesHealthBar
+                    value={speciesData.stamina}
+                    maxValue={10}
+                    color="blue"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Speed */}
+            <div>
+              <h3 className="font-semibold mb-4 flex items-center gap-2">
+                <ArrowLeftRight className="h-5 w-5" />
+                Speed
+              </h3>
+              <div className="grid grid-cols-4 gap-4">
+                {Object.entries(speciesData.speed)
+                  .filter(([, value]) => value > 0)
+                  .map(([type, value]) => (
+                    <div key={type} className="flex items-center gap-2">
+                      <SpeedIcon type={type as Locomotion} size={16} />
+                      <div>
+                        <div className="text-sm font-medium">{type}</div>
+                        <div>{value}m</div>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </div>
+
+            {/* Armour */}
+            <div>
+              <h3 className="font-semibold mb-4 flex items-center gap-2">
+                <Shield className="h-5 w-5" />
+                Armour
+              </h3>
+              <div className="grid grid-cols-5 gap-4">
+                {Object.entries(speciesData.armour).map(([type, value]) => (
                   <div key={type} className="flex items-center gap-2">
-                    <SpeedIcon type={type as Locomotion} size={16} />
+                    <ArmourIcon type={type as DamageType} size={16} />
                     <div>
                       <div className="text-sm font-medium">{type}</div>
-                      <div>{value}m</div>
+                      <div>{value > 0 ? `+${value}` : "-"}</div>
                     </div>
                   </div>
                 ))}
+              </div>
             </div>
-          </div>
 
-          {/* Armour */}
-          <div>
-            <h3 className="font-semibold mb-4 flex items-center gap-2">
-              <Shield className="h-5 w-5" />
-              Armour
-            </h3>
-            <div className="grid grid-cols-5 gap-4">
-              {Object.entries(speciesData.armour).map(([type, value]) => (
-                <div key={type} className="flex items-center gap-2">
-                  <ArmourIcon type={type as DamageType} size={16} />
-                  <div>
-                    <div className="text-sm font-medium">{type}</div>
-                    <div>{value > 0 ? `+${value}` : "-"}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Skills */}
-          <div>
-            <h3 className="font-semibold mb-4 flex items-center gap-2">
-              <ChartNoAxesColumn className="h-5 w-5" />
-              Skills
-            </h3>
-            <div className="grid grid-cols-4 gap-4">
-              {Object.entries(speciesData.skillLevels).map(([skill, value]) => (
-                <div key={skill} className="flex items-center gap-2">
-                  <SkillIcon type={skill as any} />
-                  <div>
-                    <div className="text-sm font-medium">{skill}</div>
-                    <div>{value === 0 ? "-" : value}</div>
-                  </div>
-                </div>
-              ))}
+            {/* Skills */}
+            <div>
+              <h3 className="font-semibold mb-4 flex items-center gap-2">
+                <ChartNoAxesColumn className="h-5 w-5" />
+                Skills
+              </h3>
+              <div className="grid grid-cols-4 gap-4">
+                {Object.entries(speciesData.skillLevels).map(
+                  ([skill, value]) => (
+                    <div key={skill} className="flex items-center gap-2">
+                      <SkillIcon
+                        type={skill as keyof typeof speciesData.skillLevels}
+                      />
+                      <div>
+                        <div className="text-sm font-medium">{skill}</div>
+                        <div>{value === 0 ? "-" : value}</div>
+                      </div>
+                    </div>
+                  )
+                )}
+              </div>
             </div>
           </div>
         </div>
