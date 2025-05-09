@@ -37,10 +37,12 @@ export const HealthUpgradeForm = ({
   };
 
   return (
-    <div className="space-y-4">
-      <div className="flex justify-between items-center pb-4 text-sm text-muted-foreground">
-        <div>Choose your health tracks to upgrade.</div>
-        <div>
+    <div className="space-y-6">
+      <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 text-md text-muted-foreground">
+        <div className="flex-1 sm:whitespace-nowrap">
+          Choose health tracks to upgrade to bolster your character.
+        </div>
+        <div className="whitespace-nowrap">
           Health tracks upgraded: {totalUpgrades}/{availableHealthUpgrades}
         </div>
       </div>

@@ -90,6 +90,14 @@ export const SpeciesStep = () => {
 
   return (
     <div className="space-y-6">
+      <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 text-md text-muted-foreground">
+        <div className="flex-1 sm:whitespace-nowrap">
+          Choose a species to shape your character’s skills and abilities.
+        </div>
+        <div className="whitespace-nowrap">
+          Selected species: {selectedSpecies}
+        </div>
+      </div>
       {speciesData && (
         <div className="">
           {/* Species Image */}

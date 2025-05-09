@@ -87,9 +87,12 @@ export const SkillsUpgradeTable = ({
 
   return (
     <TooltipProvider>
-      <div className="flex justify-between items-center pb-4 text-sm text-muted-foreground">
-        <div>Choose your skills to level up.</div>
-        <div>
+      <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 text-md text-muted-foreground">
+        <div className="flex-1 sm:whitespace-nowrap">
+          Spend your points to improve the skills that matter most to your
+          character.
+        </div>
+        <div className="whitespace-nowrap">
           Skills upgraded: {totalSkillLevels}/{availablePoints}
         </div>
       </div>

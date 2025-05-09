@@ -250,7 +250,7 @@ export const LevelUpModal = ({ open, onClose }: LevelUpModalProps) => {
     <Dialog open={open} onOpenChange={handleCancel}>
       <DialogContent className="max-w-2xl h-[800px] flex flex-col">
         <DialogHeader className="flex-none px-2">
-          <DialogTitle>Level Up</DialogTitle>
+          <DialogTitle className="text-2xl">Level Up</DialogTitle>
         </DialogHeader>
         <div className="flex flex-col flex-1 min-h-0">
           <div className="flex-none flex items-center justify-center gap-2">

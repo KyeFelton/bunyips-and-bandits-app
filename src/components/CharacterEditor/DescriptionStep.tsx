@@ -65,6 +65,12 @@ export const DescriptionStep = () => {
 
   return (
     <div className="space-y-6">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center text-md text-muted-foreground">
+        <div>
+          Define your character's name, appearance, attributes and backstory to
+          bring them to life.
+        </div>
+      </div>
       <div className="space-y-2">
         <Label htmlFor="name">Name</Label>
         <Input
@@ -72,6 +78,7 @@ export const DescriptionStep = () => {
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Enter character name"
+          className="max-w-[350px]"
         />
       </div>
 
@@ -108,6 +115,7 @@ export const DescriptionStep = () => {
           value={gender}
           onChange={(e) => setGender(e.target.value)}
           placeholder="Enter gender"
+          className="w-[200px]"
         />
       </div>
 
@@ -120,6 +128,7 @@ export const DescriptionStep = () => {
           value={age || ""}
           onChange={(e) => setAge(parseInt(e.target.value) || 0)}
           placeholder="Enter age"
+          className="w-[120px]"
         />
       </div>
 
@@ -141,7 +150,7 @@ export const DescriptionStep = () => {
           </div>
         )}
         <Select onValueChange={handleLanguageAdd}>
-          <SelectTrigger id="languages">
+          <SelectTrigger className="w-[200px]" id="languages">
             <SelectValue placeholder="Add language">Add language</SelectValue>
           </SelectTrigger>
           <SelectContent>

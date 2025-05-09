@@ -75,6 +75,16 @@ export const PathProgressionForm = ({
 
   return (
     <div className="space-y-6">
+      <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 text-md text-muted-foreground">
+        <div className="flex-1 sm:whitespace-nowrap">
+          Select up to {availablePathPoints} path
+          {availablePathPoints > 1 ? "s" : ""} to unlock unique traits and
+          abilities for your character.
+        </div>
+        <div className="whitespace-nowrap">
+          Path progressions: {usedPathPoints}/{availablePathPoints}
+        </div>
+      </div>
       <div className="flex justify-between items-center">
         <div className="flex gap-2">
           <Select
@@ -113,10 +123,6 @@ export const PathProgressionForm = ({
             </Button>
           )}
         </div>
-
-        <span className="text-sm text-muted-foreground">
-          Path progressions: {usedPathPoints}/{availablePathPoints}
-        </span>
       </div>
 
       <TooltipProvider>

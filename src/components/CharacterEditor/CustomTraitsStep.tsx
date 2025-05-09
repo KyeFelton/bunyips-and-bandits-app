@@ -39,9 +39,10 @@ export const CustomTraitsStep = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <div className="text-sm text-muted-foreground">
-          Create custom traits to further customise your character.
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center text-md text-muted-foreground mb-4">
+        <div>
+          Invent personal traits that give your character a creative edge in the
+          world.
         </div>
         <Button variant="outline" onClick={handleAddTrait}>
           <Plus className="h-4 w-4 mr-2" />

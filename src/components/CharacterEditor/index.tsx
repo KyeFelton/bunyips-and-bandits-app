@@ -14,13 +14,13 @@ import { HealthStep } from "./HealthStep";
 import { CharacterSheetRoute } from "../../routes";
 
 const steps = [
-  { title: "Choose a species", component: SpeciesStep },
-  { title: "Describe your character", component: DescriptionStep },
-  { title: "Select a level", component: LevelStep },
-  { title: "Choose your paths", component: PathsStep },
-  { title: "Upgrade your skills", component: SkillsStep },
-  { title: "Boost your health", component: HealthStep },
-  { title: "Customise your traits", component: CustomTraitsStep },
+  { title: "Species", component: SpeciesStep },
+  { title: "Description", component: DescriptionStep },
+  { title: "Level", component: LevelStep },
+  { title: "Paths", component: PathsStep },
+  { title: "Skills", component: SkillsStep },
+  { title: "Health", component: HealthStep },
+  { title: "Traits", component: CustomTraitsStep },
 ];
 
 export const CharacterEditor = () => {
@@ -56,14 +56,14 @@ export const CharacterEditor = () => {
 
   return (
     <motion.div
-      className="h-screen p-8 bg-gray-500/15"
+      className="h-screen p-6 sm:p-8 bg-gray-500/15"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
       <div className="max-w-4xl mx-auto space-y-8 h-full flex flex-col">
-        <div className="pb-8">
+        <div>
           <div className="text-center relative">
             <Button
               variant="ghost"
@@ -116,25 +116,23 @@ export const CharacterEditor = () => {
                       : "bg-muted-foreground border-muted-foreground/20"
                   }`}
                 />
-                <span className="mt-4 text-sm font-medium text-center px-2 text-background">
-                  {step.title}
+                <span className="mt-4 text-sm font-medium text-center px-2 text-background hidden sm:block">
+                  {index + 1}. {step.title}
                 </span>
               </div>
             ))}
           </div>
         </div>
-        <Card className="h-full p-4 sm:py-4 sm:px-6 md:py-6 md:px-9 lg:py-8 lg:px-12 shadow-lg overflow-hidden">
+        <Card className="h-full p-4 sm:py-6 sm:px-9 lg:py-8 lg:px-12 shadow-lg overflow-auto">
           {/* Step Content */}
-          <div className="h-full overflow-auto p-1">
-            <StepComponent />
-          </div>
+          <h2 className="text-2xl my-3 font-bold text-foreground tracking-tight">
+            {currentStep + 1}. {steps[currentStep].title}
+          </h2>
+          <StepComponent />
         </Card>
 
         {/* Navigation */}
-        <div
-          className="flex justify-between pt-8"
-          style={{ marginTop: "auto" }}
-        >
+        <div className="flex justify-between">
           {isFirstStep ? (
             <div />
           ) : (
