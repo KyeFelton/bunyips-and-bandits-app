@@ -123,7 +123,7 @@ export const CharacterEditor = () => {
             ))}
           </div>
         </div>
-        <Card className="h-full py-8 px-12 shadow-lg overflow-hidden">
+        <Card className="h-full p-4 sm:py-4 sm:px-6 md:py-6 md:px-9 lg:py-8 lg:px-12 shadow-lg overflow-hidden">
           {/* Step Content */}
           <div className="h-full overflow-auto p-1">
             <StepComponent />
