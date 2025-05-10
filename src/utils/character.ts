@@ -34,30 +34,116 @@ type CharacterSetters = {
   setIsFirstLoad?: (value: SetStateAction<boolean>) => void;
 };
 
-const validateSaveFile = (data: SaveFile): data is SaveFile => {
-  return (
-    typeof data === "object" &&
-    data !== null &&
-    typeof data.name === "string" &&
-    typeof data.species === "string" &&
-    typeof data.level === "number" &&
-    Array.isArray(data.languages) &&
-    typeof data.currentPhysique === "number" &&
-    typeof data.physiqueUpgrades === "number" &&
-    typeof data.currentMorale === "number" &&
-    typeof data.moraleUpgrades === "number" &&
-    typeof data.currentStamina === "number" &&
-    typeof data.staminaUpgrades === "number" &&
-    typeof data.money === "number" &&
-    Array.isArray(data.paths) &&
-    typeof data.items === "object" &&
-    Array.isArray(data.customTraits)
-  );
-};
+const validateSaveFile = (
+  data: unknown
+): { isValid: boolean; errorMessage?: string } => {
+  if (typeof data !== "object" || data === null) {
+    return {
+      isValid: false,
+      errorMessage: "Save file must be a valid JSON object",
+    };
+  }
 
+  const saveData = data as SaveFile;
+
+  if (typeof saveData.name !== "string") {
+    return {
+      isValid: false,
+      errorMessage: "Expected a string value for 'name'",
+    };
+  }
+
+  if (typeof saveData.species !== "string") {
+    return {
+      isValid: false,
+      errorMessage: "Expected a string value for 'species'",
+    };
+  }
+
+  if (typeof saveData.level !== "number") {
+    return {
+      isValid: false,
+      errorMessage: "Expected a number value for 'level'",
+    };
+  }
+
+  if (!Array.isArray(saveData.languages)) {
+    return {
+      isValid: false,
+      errorMessage: "Expected an array for 'languages'",
+    };
+  }
+
+  if (typeof saveData.currentPhysique !== "number") {
+    return {
+      isValid: false,
+      errorMessage: "Expected a number value for 'currentPhysique'",
+    };
+  }
+
+  if (typeof saveData.physiqueUpgrades !== "number") {
+    return {
+      isValid: false,
+      errorMessage: "Expected a number value for 'physiqueUpgrades'",
+    };
+  }
+
+  if (typeof saveData.currentMorale !== "number") {
+    return {
+      isValid: false,
+      errorMessage: "Expected a number value for 'currentMorale'",
+    };
+  }
+
+  if (typeof saveData.moraleUpgrades !== "number") {
+    return {
+      isValid: false,
+      errorMessage: "Expected a number value for 'moraleUpgrades'",
+    };
+  }
+
+  if (typeof saveData.currentStamina !== "number") {
+    return {
+      isValid: false,
+      errorMessage: "Expected a number value for 'currentStamina'",
+    };
+  }
+
+  if (typeof saveData.staminaUpgrades !== "number") {
+    return {
+      isValid: false,
+      errorMessage: "Expected a number value for 'staminaUpgrades'",
+    };
+  }
+
+  if (typeof saveData.money !== "number") {
+    return {
+      isValid: false,
+      errorMessage: "Expected a number value for 'money'",
+    };
+  }
+
+  if (!Array.isArray(saveData.paths)) {
+    return { isValid: false, errorMessage: "Expected an array for 'paths'" };
+  }
+
+  if (typeof saveData.items !== "object" || saveData.items === null) {
+    return { isValid: false, errorMessage: "Expected an object for 'items'" };
+  }
+
+  if (!Array.isArray(saveData.customTraits)) {
+    return {
+      isValid: false,
+      errorMessage: "Expected an array for 'customTraits'",
+    };
+  }
+
+  return { isValid: true };
+};
 export const uploadCharacter = async (
   setters: CharacterSetters,
-  navigate: (path: string) => void
+  navigate: (path: string) => void,
+  onError?: (title: string, message: string) => void
 ) => {
   const input = document.createElement("input");
   input.type = "file";
@@ -69,9 +155,12 @@ export const uploadCharacter = async (
       reader.onload = (e) => {
         try {
           const data = JSON.parse(e.target?.result as string);
+          const validation = validateSaveFile(data);
 
-          if (!validateSaveFile(data)) {
-            throw new Error("Invalid save file format");
+          if (!validation.isValid) {
+            throw new Error(
+              validation.errorMessage || "Invalid save file format"
+            );
           }
 
           // Update all atoms with the loaded data
@@ -103,9 +192,19 @@ export const uploadCharacter = async (
             "Error loading character:",
             error instanceof Error ? error.message : "Unknown error"
           );
-          alert(
-            "Failed to load character file. Please make sure the file is valid."
-          );
+
+          if (onError) {
+            onError(
+              "Failed to Load Character",
+              error instanceof Error
+                ? error.message + ". Please make sure the file is valid."
+                : "Failed to load character file. Please make sure the file is valid."
+            );
+          } else {
+            alert(
+              "Failed to load character file. Please make sure the file is valid."
+            );
+          }
         }
       };
       reader.readAsText(file);

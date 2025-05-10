@@ -46,6 +46,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "./ui/dialog";
+import { ErrorDialog } from "./ErrorDialog";
 
 export function SettingsButton() {
   const navigate = useNavigate();
@@ -53,6 +54,9 @@ export function SettingsButton() {
   const saveFile = useAtomValue(saveFileAtom);
   const isCharacterSheet = location.pathname.endsWith(CharacterSheetRoute);
   const [isResetDialogOpen, setIsResetDialogOpen] = useState(false);
+  const [errorDialogOpen, setErrorDialogOpen] = useState(false);
+  const [errorTitle, setErrorTitle] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const setters = {
     setName: useSetAtom(nameAtom),
@@ -91,6 +95,14 @@ export function SettingsButton() {
     URL.revokeObjectURL(url);
   };
 
+  const handleUpload = async () => {
+    await uploadCharacter(setters, navigate, (title, message) => {
+      setErrorTitle(title);
+      setErrorMessage(message);
+      setErrorDialogOpen(true);
+    });
+  };
+
   const handleReset = () => {
     setIsResetDialogOpen(true);
   };
@@ -126,7 +138,7 @@ export function SettingsButton() {
               </DropdownMenuItem>
             </>
           )}
-          <DropdownMenuItem onClick={() => uploadCharacter(setters, navigate)}>
+          <DropdownMenuItem onClick={handleUpload}>
             <Upload className="mr-2 h-4 w-4" />
             Load
           </DropdownMenuItem>
@@ -163,6 +175,13 @@ export function SettingsButton() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      <ErrorDialog
+        isOpen={errorDialogOpen}
+        onClose={() => setErrorDialogOpen(false)}
+        title={errorTitle}
+        description={errorMessage}
+      />
     </>
   );
 }

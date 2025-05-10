@@ -29,9 +29,14 @@ import { uploadCharacter } from "../../utils/character";
 import { Logo } from "../Logo";
 import "./index.sass";
 import { CharacterEditorRoute } from "../../routes";
+import { useState } from "react";
+import { ErrorDialog } from "../ErrorDialog";
 
 export function LandingPage() {
   const navigate = useNavigate();
+  const [errorDialogOpen, setErrorDialogOpen] = useState(false);
+  const [errorTitle, setErrorTitle] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const setters = {
     setName: useSetAtom(nameAtom),
@@ -57,7 +62,11 @@ export function LandingPage() {
   };
 
   const handleLoadCharacter = async () => {
-    await uploadCharacter(setters, navigate);
+    await uploadCharacter(setters, navigate, (title, message) => {
+      setErrorTitle(title);
+      setErrorMessage(message);
+      setErrorDialogOpen(true);
+    });
   };
 
   return (
@@ -98,6 +107,13 @@ export function LandingPage() {
           </div>
         </div>
       </div>
+
+      <ErrorDialog
+        isOpen={errorDialogOpen}
+        onClose={() => setErrorDialogOpen(false)}
+        title={errorTitle}
+        description={errorMessage}
+      />
     </motion.div>
   );
 }
