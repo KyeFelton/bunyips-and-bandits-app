@@ -10,16 +10,11 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
-import { X, Coins, Weight } from "lucide-react";
+import { X, Coins, Weight, HelpCircle } from "lucide-react";
 import { AddItemDialog } from "./AddItemDialog";
 import { SkillType } from "../../enums/SkillType";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "../ui/tooltip";
 import { useState } from "react";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 
 const getWeightLimit = (strengthLevel: number) => {
   switch (strengthLevel) {
@@ -161,68 +156,72 @@ export const ItemsTable = () => {
         </div>
       </div>
 
-      <TooltipProvider>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Name</TableHead>
-              <TableHead className="text-center">Quantity</TableHead>
-              <TableHead className="text-right">Weight</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {Object.entries(items).map(([name, item]) => (
-              <TableRow key={name}>
-                <TableCell>
-                  <Tooltip>
-                    <TooltipTrigger className="font-medium hover:text-accent-foreground">
-                      {name}
-                    </TooltipTrigger>
-                    <TooltipContent side="right" className="max-w-[300px]">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Name</TableHead>
+            <TableHead className="text-center">Quantity</TableHead>
+            <TableHead className="text-right">Weight</TableHead>
+            <TableHead className="text-right">Actions</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {Object.entries(items).map(([name, item]) => (
+            <TableRow key={name}>
+              <TableCell>
+                <div className="flex items-center gap-1">
+                  {name}
+                  <Popover>
+                    <PopoverTrigger className="w-6 h-6 flex items-center justify-center text-muted-foreground text-left hover:bg-accent hover:text-accent-foreground rounded-full">
+                      <HelpCircle className="h-4 w-4 text-muted-foreground" />
+                    </PopoverTrigger>
+                    <PopoverContent
+                      className="max-w-[300px] text-sm"
+                      side="right"
+                    >
                       <p>{item.description}</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TableCell>
-                <TableCell className="text-center">{item.quantity}</TableCell>
-                <TableCell className="text-right">{item.weight} kg</TableCell>
-                <TableCell className="text-right">
-                  <div className="flex justify-end gap-2">
-                    <Button
-                      variant={item.equipped ? "default" : "outline"}
-                      onClick={() => handleUseItem(name)}
-                      className="w-16"
-                    >
-                      {item.singleUse
-                        ? "Use"
-                        : item.equipped
-                        ? "Unequip"
-                        : "Equip"}
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => handleRemoveItem(name)}
-                    >
-                      <X className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </TableCell>
-              </TableRow>
-            ))}
-            {Object.keys(items).length === 0 && (
-              <TableRow>
-                <TableCell
-                  colSpan={4}
-                  className="text-center text-muted-foreground"
-                >
-                  No items in inventory
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </TooltipProvider>
+                    </PopoverContent>
+                  </Popover>
+                </div>
+              </TableCell>
+              <TableCell className="text-center">{item.quantity}</TableCell>
+              <TableCell className="text-right">{item.weight} kg</TableCell>
+              <TableCell className="text-right">
+                <div className="flex justify-end gap-2">
+                  <Button
+                    variant={item.equipped ? "default" : "outline"}
+                    onClick={() => handleUseItem(name)}
+                    className="w-16"
+                  >
+                    {item.singleUse
+                      ? "Use"
+                      : item.equipped
+                      ? "Unequip"
+                      : "Equip"}
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => handleRemoveItem(name)}
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                </div>
+              </TableCell>
+            </TableRow>
+          ))}
+          {Object.keys(items).length === 0 && (
+            <TableRow>
+              <TableCell
+                colSpan={4}
+                className="text-center text-muted-foreground"
+              >
+                No items in inventory
+              </TableCell>
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
 
       <div className="flex justify-center">
         <AddItemDialog maxWeight={weightLimit - totalWeight} />

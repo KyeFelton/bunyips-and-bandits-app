@@ -10,13 +10,8 @@ import { SkillIcon } from "./icons/SkillIcon";
 import { HelpCircle, Plus, Minus } from "lucide-react";
 import { SkillType } from "../enums/SkillType";
 import * as Skills from "../models/skills";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./ui/tooltip";
 import { Button } from "./ui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
 interface SkillsUpgradeTableProps {
   skillLevels: Partial<Record<SkillType, number>>;
@@ -86,7 +81,7 @@ export const SkillsUpgradeTable = ({
     });
 
   return (
-    <TooltipProvider>
+    <div>
       <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 text-md text-muted-foreground">
         <div className="flex-1 sm:whitespace-nowrap">
           Spend your points to improve the skills that matter most to your
@@ -96,7 +91,6 @@ export const SkillsUpgradeTable = ({
           Skills upgraded: {totalSkillLevels}/{availablePoints}
         </div>
       </div>
-
       <Table>
         <TableHeader>
           <TableRow>
@@ -114,19 +108,17 @@ export const SkillsUpgradeTable = ({
                     <SkillIcon type={type} />
                   </span>
                   {type}
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <button
-                        className="h-5 w-5 hover:bg-accent hover:text-accent-foreground rounded-full flex items-center justify-center"
-                        type="button"
-                      >
-                        <HelpCircle className="h-4 w-4 text-muted-foreground" />
-                      </button>
-                    </TooltipTrigger>
-                    <TooltipContent side="right" className="max-w-[300px]">
+                  <Popover>
+                    <PopoverTrigger className="w-6 h-6 flex items-center justify-center text-muted-foreground text-left hover:bg-accent hover:text-accent-foreground rounded-full">
+                      <HelpCircle className="h-4 w-4 text-muted-foreground" />
+                    </PopoverTrigger>
+                    <PopoverContent
+                      className="max-w-[300px] text-sm"
+                      side="right"
+                    >
                       <p>{description}</p>
-                    </TooltipContent>
-                  </Tooltip>
+                    </PopoverContent>
+                  </Popover>
                 </div>
               </TableCell>
               <TableCell className="text-center">
@@ -165,6 +157,6 @@ export const SkillsUpgradeTable = ({
           ))}
         </TableBody>
       </Table>
-    </TooltipProvider>
+    </div>
   );
 };

@@ -4,7 +4,7 @@ import {
   currentStaminaAtom,
   skillRollValuesAtom,
 } from "../../state/character";
-import { User, Users, Triangle, Circle, Scan } from "lucide-react";
+import { User, Users, Triangle, Circle, Scan, HelpCircle } from "lucide-react";
 import { AreaOfEffect } from "../../enums/AreaOfEffect";
 import { Action } from "../../models/actions";
 import {
@@ -16,14 +16,15 @@ import {
   TableRow,
 } from "../ui/table";
 import { Button } from "../ui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { SkillIcon } from "../icons/SkillIcon";
+import { useRollToast } from "./RollToast";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
-import { SkillIcon } from "../icons/SkillIcon";
-import { useRollToast } from "./RollToast";
 
 const AreaIcon = ({ type }: { type: AreaOfEffect }) => {
   switch (type) {
@@ -103,19 +104,25 @@ export const ActionsList = () => {
           {actions.map((action) => (
             <TableRow key={`${action.path}-${action.name}`} className="group">
               <TableCell>
-                <Tooltip>
-                  <TooltipTrigger className="font-medium cursor-default text-left">
-                    {action.name}
-                  </TooltipTrigger>
-                  <TooltipContent side="right" className="max-w-[300px]">
-                    <p>{action.effect}</p>
-                  </TooltipContent>
-                </Tooltip>
+                <div className="flex items-center gap-1">
+                  {action.name}
+                  <Popover>
+                    <PopoverTrigger className="w-6 h-6 flex items-center justify-center text-muted-foreground text-left hover:bg-accent hover:text-accent-foreground rounded-full">
+                      <HelpCircle className="h-4 w-4 text-muted-foreground" />
+                    </PopoverTrigger>
+                    <PopoverContent
+                      className="max-w-[300px] text-sm"
+                      side="right"
+                    >
+                      <p>{action.effect}</p>
+                    </PopoverContent>
+                  </Popover>
+                </div>
               </TableCell>
               <TableCell>
                 <div className="flex justify-center">
                   <Tooltip>
-                    <TooltipTrigger className="cursor-default text-foreground">
+                    <TooltipTrigger className="cursor-default text-muted-foreground hover:text-foreground transition-colors">
                       <SkillIcon type={action.skillType} />
                     </TooltipTrigger>
                     <TooltipContent>
@@ -128,7 +135,7 @@ export const ActionsList = () => {
               <TableCell className="text-center">
                 <div className="flex justify-center">
                   <Tooltip>
-                    <TooltipTrigger className="cursor-default text-foreground">
+                    <TooltipTrigger className="cursor-default text-muted-foreground hover:text-foreground transition-colors">
                       <AreaIcon type={action.areaOfEffect} />
                     </TooltipTrigger>
                     <TooltipContent>

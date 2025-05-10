@@ -21,12 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./ui/tooltip";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Badge } from "./ui/badge";
 import { Path, PathProgression } from "../models/paths";
 import * as AllPaths from "../data/paths";
@@ -130,94 +125,91 @@ export const PathProgressionForm = ({
         </div>
       </div>
 
-      <TooltipProvider>
-        {paths.map((path) => (
-          <Collapsible
-            key={path.name}
-            className="pb-2 mb-2 border-b border-muted-foreground/20 last:mb-0 last:border-b-0"
-          >
-            <div className="flex justify-between items-center mb-2">
-              <div className="flex items-center gap-2">
-                <CollapsibleTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-6 w-6 text-muted-foreground hover:text-accent-foreground"
-                  >
-                    <ChevronsUpDown className="h-4 w-4 text-muted-foreground" />
-                  </Button>
-                </CollapsibleTrigger>
-                <span className="text-muted-foreground">
-                  <SkillIcon type={path.skillTypes[0]} />
+      {paths.map((path) => (
+        <Collapsible
+          key={path.name}
+          className="pb-2 mb-2 border-b border-muted-foreground/20 last:mb-0 last:border-b-0"
+        >
+          <div className="flex justify-between items-center mb-2">
+            <div className="flex items-center gap-2">
+              <CollapsibleTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-6 w-6 text-muted-foreground hover:text-accent-foreground"
+                >
+                  <ChevronsUpDown className="h-4 w-4 text-muted-foreground" />
+                </Button>
+              </CollapsibleTrigger>
+              <span className="text-muted-foreground">
+                <SkillIcon type={path.skillTypes[0]} />
+              </span>
+              <h3 className="text-lg font-semibold">{path.name}</h3>
+              <div className="flex items-center gap-1 ml-2 text-sm font-normal text-muted-foreground">
+                Level
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-6 w-6 text-muted-foreground hover:text-accent-foreground"
+                  onClick={() => handleUpdateLevel(path.name, -1)}
+                  disabled={path.level <= (path?.initialLevel || 1)}
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </Button>
+                <span className="text-sm font-normal text-muted-foreground">
+                  {path.level}
                 </span>
-                <h3 className="text-lg font-semibold">{path.name}</h3>
-                <div className="flex items-center gap-1 ml-2 text-sm font-normal text-muted-foreground">
-                  Level
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-6 w-6 text-muted-foreground hover:text-accent-foreground"
-                    onClick={() => handleUpdateLevel(path.name, -1)}
-                    disabled={path.level <= (path?.initialLevel || 1)}
-                  >
-                    <ChevronLeft className="h-4 w-4" />
-                  </Button>
-                  <span className="text-sm font-normal text-muted-foreground">
-                    {path.level}
-                  </span>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-6 w-6 text-muted-foreground hover:text-accent-foreground"
-                    onClick={() => handleUpdateLevel(path.name, 1)}
-                    disabled={
-                      remainingPathPoints <= 0 || path.level >= MAX_PATH_LEVEL
-                    }
-                  >
-                    <ChevronRight className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                {path?.initialLevel === 0 && (
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => handleRemovePath(path.name)}
-                    className="h-6 w-6"
-                  >
-                    <X className="h-4 w-4" />
-                  </Button>
-                )}
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-6 w-6 text-muted-foreground hover:text-accent-foreground"
+                  onClick={() => handleUpdateLevel(path.name, 1)}
+                  disabled={
+                    remainingPathPoints <= 0 || path.level >= MAX_PATH_LEVEL
+                  }
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </Button>
               </div>
             </div>
-            <CollapsibleContent>
-              <div className="space-y-2">
-                <p className="text-sm text-muted-foreground">
-                  {path.description}
-                </p>
-                <div className="flex gap-2">
-                  <span className="text-sm">Skills:</span>
-                  {path.skillTypes.map((skillType) => (
-                    <Badge key={skillType} variant="secondary">
-                      {skillType}
-                    </Badge>
-                  ))}
-                </div>
+            <div className="flex items-center gap-2">
+              {path?.initialLevel === 0 && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => handleRemovePath(path.name)}
+                  className="h-6 w-6"
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              )}
+            </div>
+          </div>
+          <CollapsibleContent>
+            <div className="space-y-2">
+              <p className="text-sm text-muted-foreground">
+                {path.description}
+              </p>
+              <div className="flex gap-2">
+                <span className="text-sm">Skills:</span>
+                {path.skillTypes.map((skillType) => (
+                  <Badge key={skillType} variant="secondary">
+                    {skillType}
+                  </Badge>
+                ))}
+              </div>
 
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Level</TableHead>
-                      <TableHead>Traits</TableHead>
-                      <TableHead>Actions</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {Array.from(
-                      { length: MAX_PATH_LEVEL },
-                      (_, i) => i + 1
-                    ).map((level) => {
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Level</TableHead>
+                    <TableHead>Traits</TableHead>
+                    <TableHead>Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {Array.from({ length: MAX_PATH_LEVEL }, (_, i) => i + 1).map(
+                    (level) => {
                       const unlockable = path.unlockables.find(
                         (u) => u.level === level
                       );
@@ -233,17 +225,17 @@ export const PathProgressionForm = ({
                             <ul className="space-y-1">
                               {traits.map((trait) => (
                                 <li key={trait.name}>
-                                  <Tooltip>
-                                    <TooltipTrigger className="text-left hover:text-accent-foreground">
+                                  <Popover>
+                                    <PopoverTrigger className="text-left hover:text-accent-foreground">
                                       {trait.name}
-                                    </TooltipTrigger>
-                                    <TooltipContent
+                                    </PopoverTrigger>
+                                    <PopoverContent
+                                      className="max-w-[300px] text-sm"
                                       side="right"
-                                      className="max-w-[300px]"
                                     >
                                       <p>{trait.description}</p>
-                                    </TooltipContent>
-                                  </Tooltip>
+                                    </PopoverContent>
+                                  </Popover>
                                 </li>
                               ))}
                             </ul>
@@ -252,39 +244,39 @@ export const PathProgressionForm = ({
                             <ul className="space-y-1">
                               {actions.map((action) => (
                                 <li key={action.name}>
-                                  <Tooltip>
-                                    <TooltipTrigger className="text-left hover:text-accent-foreground">
+                                  <Popover>
+                                    <PopoverTrigger className="text-left hover:text-accent-foreground">
                                       {action.name}
-                                    </TooltipTrigger>
-                                    <TooltipContent
+                                    </PopoverTrigger>
+                                    <PopoverContent
+                                      className="max-w-[300px] text-sm"
                                       side="right"
-                                      className="max-w-[300px]"
                                     >
                                       <p>{action.effect}</p>
-                                    </TooltipContent>
-                                  </Tooltip>
+                                    </PopoverContent>
+                                  </Popover>
                                 </li>
                               ))}
                             </ul>
                           </TableCell>
                         </TableRow>
                       );
-                    })}
-                  </TableBody>
-                </Table>
-              </div>
-            </CollapsibleContent>
-          </Collapsible>
-        ))}
-        {paths.length === 0 && (
-          <div className="p-8">
-            <div className="text-center text-muted-foreground">
-              No paths selected. Select a path and click "Add" to begin your
-              journey.
+                    }
+                  )}
+                </TableBody>
+              </Table>
             </div>
+          </CollapsibleContent>
+        </Collapsible>
+      ))}
+      {paths.length === 0 && (
+        <div className="p-8">
+          <div className="text-center text-muted-foreground">
+            No paths selected. Select a path and click "Add" to begin your
+            journey.
           </div>
-        )}
-      </TooltipProvider>
+        </div>
+      )}
     </div>
   );
 };
