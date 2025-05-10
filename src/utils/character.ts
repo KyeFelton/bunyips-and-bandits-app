@@ -4,6 +4,9 @@ import { getSpeciesImage } from "./speciesImages";
 import { Trait } from "../models/traits";
 import { CharacterSheetRoute } from "../routes";
 import { startingSpecies } from "../data/species";
+import { PathProgression } from "../models/paths";
+import { SkillType } from "../enums/SkillType";
+import { ItemDictionary } from "../models/items";
 
 type CharacterSetters = {
   setName: (value: SetStateAction<string>) => void;
@@ -20,16 +23,18 @@ type CharacterSetters = {
   setBackground: (value: SetStateAction<string>) => void;
   setPersonality: (value: SetStateAction<string>) => void;
   setLanguages: (value: SetStateAction<string[]>) => void;
-  setImage: (value: SetStateAction<string>) => void;
+  setImage: (value: SetStateAction<string | undefined>) => void;
   setMoney: (value: SetStateAction<number>) => void;
-  setItems: (value: SetStateAction<Record<string, any>>) => void;
-  setPaths: (value: SetStateAction<any[]>) => void;
+  setItems: (value: SetStateAction<ItemDictionary>) => void;
+  setPaths: (value: SetStateAction<PathProgression[]>) => void;
   setCustomTraits: (value: SetStateAction<Trait[]>) => void;
-  setSkillLevelUpgrades: (value: SetStateAction<any>) => void;
+  setSkillLevelUpgrades: (
+    value: SetStateAction<Partial<Record<SkillType, number>>>
+  ) => void;
   setIsFirstLoad?: (value: SetStateAction<boolean>) => void;
 };
 
-const validateSaveFile = (data: any): data is SaveFile => {
+const validateSaveFile = (data: SaveFile): data is SaveFile => {
   return (
     typeof data === "object" &&
     data !== null &&
