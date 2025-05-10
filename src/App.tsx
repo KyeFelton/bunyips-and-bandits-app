@@ -22,8 +22,7 @@ function App() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 z-30" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-bl from-slate-900 to-slate-950">
         <img
           src={frame}
           className="absolute inset-0 z-20 frame-animation"
