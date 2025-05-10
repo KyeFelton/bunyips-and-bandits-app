@@ -7,7 +7,6 @@ import { SaveFile } from "../models/saveFile";
 import { Effect } from "../models/effect";
 import * as Skills from "../models/skills";
 import { Trait } from "../models/traits";
-import { getSpeciesImage } from "../utils/speciesImages";
 import { getDiceBonusForLevel, getDiceForLevel } from "../utils/dice";
 import { SkillForm } from "../enums/SkillForm";
 import { Locomotion } from "../enums/Locomotion";
@@ -26,7 +25,7 @@ export const ageAtom = atom<number>(0);
 export const backgroundAtom = atom<string>("");
 export const personalityAtom = atom<string>("");
 export const languagesAtom = atom<string[]>([]);
-export const imageAtom = atom<string>(getSpeciesImage(startingSpecies.name));
+export const imageAtom = atom<string | undefined>();
 
 // Character progression
 export const levelAtom = atom<number>(1);

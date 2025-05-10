@@ -2,7 +2,6 @@ import { useAtom, useSetAtom, useAtomValue } from "jotai";
 import {
   speciesAtom,
   speciesDataAtom,
-  imageAtom,
   currentPhysiqueAtom,
   currentMoraleAtom,
   currentStaminaAtom,
@@ -30,7 +29,6 @@ import { useCallback, useEffect, useState } from "react";
 export const SpeciesStep = () => {
   const [selectedSpecies, setSpecies] = useAtom(speciesAtom);
   const speciesData = useAtomValue(speciesDataAtom);
-  const setImage = useSetAtom(imageAtom);
   const setCurrentPhysique = useSetAtom(currentPhysiqueAtom);
   const setCurrentMorale = useSetAtom(currentMoraleAtom);
   const setCurrentStamina = useSetAtom(currentStaminaAtom);
@@ -46,13 +44,11 @@ export const SpeciesStep = () => {
       setCurrentMorale((prev) => Math.max(0, prev + moraleChange));
       setCurrentStamina((prev) => Math.max(0, prev + staminaChange));
       setSpecies(value);
-      setImage(getSpeciesImage(value));
     },
     [
       setCurrentMorale,
       setCurrentPhysique,
       setCurrentStamina,
-      setImage,
       setSpecies,
       speciesData.morale,
       speciesData.physique,

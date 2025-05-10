@@ -1,4 +1,4 @@
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
@@ -19,7 +19,9 @@ import {
   personalityAtom,
   languagesAtom,
   imageAtom,
+  speciesAtom,
 } from "../../state/character";
+import { getSpeciesImage } from "../../utils/speciesImages";
 
 const languages = [
   "Afaen",
@@ -34,6 +36,7 @@ const languages = [
 
 export const DescriptionStep = () => {
   const [name, setName] = useAtom(nameAtom);
+  const species = useAtomValue(speciesAtom);
   const [gender, setGender] = useAtom(genderAtom);
   const [age, setAge] = useAtom(ageAtom);
   const [background, setBackground] = useAtom(backgroundAtom);
@@ -87,7 +90,7 @@ export const DescriptionStep = () => {
         <div className="relative group w-64 h-64">
           <label htmlFor="image-upload" className="cursor-pointer">
             <img
-              src={image}
+              src={image ?? getSpeciesImage(species)}
               alt="character"
               className="w-64 h-64 rounded-lg object-cover"
             />
