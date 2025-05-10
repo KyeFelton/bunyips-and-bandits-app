@@ -37,12 +37,22 @@ import {
   CharacterSheetRoute,
   HomeRoute,
 } from "../routes";
+import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "./ui/dialog";
 
 export function SettingsButton() {
   const navigate = useNavigate();
   const location = useLocation();
   const saveFile = useAtomValue(saveFileAtom);
   const isCharacterSheet = location.pathname.endsWith(CharacterSheetRoute);
+  const [isResetDialogOpen, setIsResetDialogOpen] = useState(false);
 
   const setters = {
     setName: useSetAtom(nameAtom),
@@ -82,53 +92,77 @@ export function SettingsButton() {
   };
 
   const handleReset = () => {
-    if (
-      window.confirm(
-        "Are you sure you want to delete this character and return to the main menu?"
-      )
-    ) {
-      resetCharacter(setters);
-      navigate(HomeRoute);
-    }
+    setIsResetDialogOpen(true);
+  };
+
+  const confirmReset = () => {
+    resetCharacter(setters);
+    navigate(HomeRoute);
+    setIsResetDialogOpen(false);
   };
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="outline"
-          size="icon"
-          className="rounded-full h-12 w-12 bg-background shadow-lg hover:scale-110 transition-transform"
-        >
-          <Settings className="h-6 w-6" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56">
-        {isCharacterSheet && (
-          <>
-            <DropdownMenuItem onClick={() => navigate(CharacterEditorRoute)}>
-              <Pencil className="mr-2 h-4 w-4" />
-              Edit
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => handleDownload()}>
-              <Download className="mr-2 h-4 w-4" />
-              Save
-            </DropdownMenuItem>
-          </>
-        )}
-        <DropdownMenuItem onClick={() => uploadCharacter(setters, navigate)}>
-          <Upload className="mr-2 h-4 w-4" />
-          Load
-        </DropdownMenuItem>
-        {isCharacterSheet && (
-          <>
-            <DropdownMenuItem onClick={handleReset}>
-              <RotateCcw className="mr-2 h-4 w-4" />
+    <>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button
+            variant="outline"
+            size="icon"
+            className="rounded-full h-12 w-12 bg-background shadow-lg hover:scale-110 transition-transform"
+          >
+            <Settings className="h-6 w-6" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="w-56">
+          {isCharacterSheet && (
+            <>
+              <DropdownMenuItem onClick={() => navigate(CharacterEditorRoute)}>
+                <Pencil className="mr-2 h-4 w-4" />
+                Edit
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleDownload()}>
+                <Download className="mr-2 h-4 w-4" />
+                Save
+              </DropdownMenuItem>
+            </>
+          )}
+          <DropdownMenuItem onClick={() => uploadCharacter(setters, navigate)}>
+            <Upload className="mr-2 h-4 w-4" />
+            Load
+          </DropdownMenuItem>
+          {isCharacterSheet && (
+            <>
+              <DropdownMenuItem onClick={handleReset}>
+                <RotateCcw className="mr-2 h-4 w-4" />
+                Reset
+              </DropdownMenuItem>
+            </>
+          )}
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      <Dialog open={isResetDialogOpen} onOpenChange={setIsResetDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Reset Character</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to delete this character and return to the
+              main menu?
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={() => setIsResetDialogOpen(false)}
+            >
+              Cancel
+            </Button>
+            <Button variant="destructive" onClick={confirmReset}>
               Reset
-            </DropdownMenuItem>
-          </>
-        )}
-      </DropdownMenuContent>
-    </DropdownMenu>
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }

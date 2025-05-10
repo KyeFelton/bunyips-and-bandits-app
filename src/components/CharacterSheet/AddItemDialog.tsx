@@ -50,6 +50,7 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
   );
   const [isCreatingItem, setIsCreatingItem] = useState(false);
   const [customItem, setCustomItem] = useState<Item>(defaultCustomItem);
+  const [nameError, setNameError] = useState<string | null>(null);
 
   const allItems = Object.values(Items)
     .filter((item): item is Item => typeof item === "object" && "name" in item)
@@ -82,6 +83,7 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
       console.log("no");
       setCustomItem(defaultCustomItem);
       setIsCreatingItem(false);
+      setNameError(null);
     }
   };
 
@@ -134,16 +136,32 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
     setOpen(false);
     setSelectedItem(null);
     setCustomItem(defaultCustomItem);
+    setNameError(null);
+  };
+
+  const validateItemName = (name: string) => {
+    if (!name.trim()) {
+      setNameError("Please give the item a name");
+      return false;
+    }
+
+    if (items[name] || allItems.find((item) => item.name === name)) {
+      setNameError("An item with this name already exists");
+      return false;
+    }
+
+    setNameError(null);
+    return true;
+  };
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newName = e.target.value;
+    setCustomItem({ ...customItem, name: newName });
+    validateItemName(newName);
   };
 
   const handleCreateItem = () => {
-    if (!customItem.name) {
-      alert("Please give the item a name");
-      return;
-    }
-
-    if (items[customItem.name]) {
-      alert("An item with this name already exists");
+    if (!validateItemName(customItem.name)) {
       return;
     }
 
@@ -297,11 +315,13 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
                 <label className="text-sm font-medium">Name</label>
                 <Input
                   value={customItem.name}
-                  onChange={(e) =>
-                    setCustomItem({ ...customItem, name: e.target.value })
-                  }
+                  onChange={handleNameChange}
                   placeholder="Enter item name"
+                  variant={nameError ? "error" : "default"}
                 />
+                {nameError && (
+                  <p className="text-destructive text-sm mt-1">{nameError}</p>
+                )}
               </div>
               <div>
                 <label className="text-sm font-medium">Description</label>
@@ -362,7 +382,11 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
                 />
               </div>
             </div>
-            <Button onClick={handleCreateItem} className="w-full mb-2">
+            <Button
+              onClick={handleCreateItem}
+              className="w-full mb-2"
+              disabled={!!nameError}
+            >
               Create item
             </Button>
           </div>
