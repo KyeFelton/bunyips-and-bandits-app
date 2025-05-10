@@ -67,7 +67,6 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
     setSelectedItem({
       ...item,
       quantity: 1,
-      cost: item?.defaultCost,
     });
   };
 
@@ -239,6 +238,7 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
                     className="max-w-[100px]"
                     min="0"
                     value={selectedItem.cost}
+                    placeholder={selectedItem.defaultCost?.toString()}
                     onChange={(e) => handleCostChange(e.target.value)}
                   />
                 </div>
