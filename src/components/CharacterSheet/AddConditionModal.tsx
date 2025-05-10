@@ -53,7 +53,7 @@ export const AddConditionModal = ({ isOpen, onClose }: Props) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent>
+      <DialogContent className="max-w-md min-h-[300px] flex flex-col justify-between">
         <DialogHeader>
           <DialogTitle>Add Condition</DialogTitle>
         </DialogHeader>
@@ -62,7 +62,7 @@ export const AddConditionModal = ({ isOpen, onClose }: Props) => {
             value={selectedCondition ?? undefined}
             onValueChange={handleSelect}
           >
-            <SelectTrigger>
+            <SelectTrigger className="w-[250px]">
               <SelectValue placeholder="Select a condition" />
             </SelectTrigger>
             <SelectContent className="max-h-[300px] overflow-y-auto">
@@ -84,7 +84,7 @@ export const AddConditionModal = ({ isOpen, onClose }: Props) => {
             </div>
           )}
         </div>
-        <DialogFooter>
+        <DialogFooter className="mt-auto">
           <Button variant="outline" onClick={onClose}>
             Cancel
           </Button>
