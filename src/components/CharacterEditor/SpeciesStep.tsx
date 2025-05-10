@@ -88,7 +88,7 @@ export const SpeciesStep = () => {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 text-md text-muted-foreground">
         <div className="flex-1 sm:whitespace-nowrap">
-          Choose a species to shape your character’s skills and abilities.
+          Choose a species to shape your character’s base skills and attributes.
         </div>
         <div className="whitespace-nowrap">
           Selected species: {selectedSpecies}
@@ -157,14 +157,14 @@ export const SpeciesStep = () => {
           </div>
 
           {/* Stats Container */}
-          <div className="space-y-8">
+          <div className="space-y-6">
             {/* Base Stats */}
             <div>
               <h3 className="font-semibold mb-4 flex items-center gap-2">
                 <Heart className="h-5 w-5 text-red-foreground" />
                 Health
               </h3>
-              <div className="grid grid-cols-3 gap-6">
+              <div className="grid sm:grid-cols-3 gap-6">
                 <div className="p-4 bg-red/10 rounded-lg">
                   <div className="flex items-center justify-between mb-2">
                     <div className="text-sm font-medium">Physique</div>
@@ -208,33 +208,31 @@ export const SpeciesStep = () => {
             </div>
 
             {/* Speed */}
-            <div>
+            <div className="space-y-4 pt-6 border-t border-muted-foreground/20">
               <h3 className="font-semibold mb-4 flex items-center gap-2">
                 <ArrowLeftRight className="h-5 w-5" />
                 Speed
               </h3>
-              <div className="grid grid-cols-4 gap-4">
-                {Object.entries(speciesData.speed)
-                  .filter(([, value]) => value > 0)
-                  .map(([type, value]) => (
-                    <div key={type} className="flex items-center gap-2">
-                      <SpeedIcon type={type as Locomotion} size={16} />
-                      <div>
-                        <div className="text-sm font-medium">{type}</div>
-                        <div>{value}m</div>
-                      </div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4">
+                {Object.entries(speciesData.speed).map(([type, value]) => (
+                  <div key={type} className="flex items-center gap-2">
+                    <SpeedIcon type={type as Locomotion} size={16} />
+                    <div>
+                      <div className="text-sm font-medium">{type}</div>
+                      <div>{value ? `${value}m` : "-"}</div>
                     </div>
-                  ))}
+                  </div>
+                ))}
               </div>
             </div>
 
             {/* Armour */}
-            <div>
+            <div className="space-y-4 pt-6 border-t border-muted-foreground/20">
               <h3 className="font-semibold mb-4 flex items-center gap-2">
                 <Shield className="h-5 w-5" />
                 Armour
               </h3>
-              <div className="grid grid-cols-5 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4">
                 {Object.entries(speciesData.armour).map(([type, value]) => (
                   <div key={type} className="flex items-center gap-2">
                     <ArmourIcon type={type as DamageType} size={16} />
@@ -248,12 +246,12 @@ export const SpeciesStep = () => {
             </div>
 
             {/* Skills */}
-            <div>
+            <div className="space-y-4 pt-6 border-t border-muted-foreground/20">
               <h3 className="font-semibold mb-4 flex items-center gap-2">
                 <ChartNoAxesColumn className="h-5 w-5" />
                 Skills
               </h3>
-              <div className="grid grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4">
                 {Object.entries(speciesData.skillLevels).map(
                   ([skill, value]) => (
                     <div key={skill} className="flex items-center gap-2">
