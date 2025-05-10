@@ -1,6 +1,11 @@
 import { MAX_PATH_LEVEL } from "../state/character";
 import { Button } from "./ui/button";
 import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "./ui/collapsible";
+import {
   Table,
   TableBody,
   TableCell,
@@ -8,7 +13,7 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, ChevronsUpDown } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -127,17 +132,27 @@ export const PathProgressionForm = ({
 
       <TooltipProvider>
         {paths.map((path) => (
-          <div key={path.name} className="mb-6 last:mb-0">
-            <div className="flex justify-between items-start mb-2">
-              <div className="flex-1">
-                <div className="flex items-center gap-2">
-                  <span className="text-muted-foreground">
-                    <SkillIcon type={path.skillTypes[0]} />
-                  </span>
-                  <h3 className="text-lg font-semibold">{path.name}</h3>
-                  <span className="text-sm font-normal text-muted-foreground">
-                    Level
-                  </span>
+          <Collapsible
+            key={path.name}
+            className="pb-2 mb-2 border-b border-muted-foreground/20 last:mb-0 last:border-b-0"
+          >
+            <div className="flex justify-between items-center mb-2">
+              <div className="flex items-center gap-2">
+                <CollapsibleTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-6 w-6 text-muted-foreground hover:text-accent-foreground"
+                  >
+                    <ChevronsUpDown className="h-4 w-4 text-muted-foreground" />
+                  </Button>
+                </CollapsibleTrigger>
+                <span className="text-muted-foreground">
+                  <SkillIcon type={path.skillTypes[0]} />
+                </span>
+                <h3 className="text-lg font-semibold">{path.name}</h3>
+                <div className="flex items-center gap-1 ml-2 text-sm font-normal text-muted-foreground">
+                  Level
                   <Button
                     variant="ghost"
                     size="icon"
@@ -161,21 +176,27 @@ export const PathProgressionForm = ({
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
-                  {path?.initialLevel === 0 && (
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => handleRemovePath(path.name)}
-                      className="h-6 w-6 ml-auto"
-                    >
-                      <X className="h-4 w-4" />
-                    </Button>
-                  )}
                 </div>
-                <p className="text-sm text-muted-foreground mt-1">
+              </div>
+              <div className="flex items-center gap-2">
+                {path?.initialLevel === 0 && (
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => handleRemovePath(path.name)}
+                    className="h-6 w-6"
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                )}
+              </div>
+            </div>
+            <CollapsibleContent>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">
                   {path.description}
                 </p>
-                <div className="flex gap-2 mt-2">
+                <div className="flex gap-2">
                   <span className="text-sm">Skills:</span>
                   {path.skillTypes.map((skillType) => (
                     <Badge key={skillType} variant="secondary">
@@ -183,78 +204,78 @@ export const PathProgressionForm = ({
                     </Badge>
                   ))}
                 </div>
+
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Level</TableHead>
+                      <TableHead>Traits</TableHead>
+                      <TableHead>Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {Array.from(
+                      { length: MAX_PATH_LEVEL },
+                      (_, i) => i + 1
+                    ).map((level) => {
+                      const unlockable = path.unlockables.find(
+                        (u) => u.level === level
+                      );
+                      const traits = unlockable?.traits || [];
+                      const actions = unlockable?.actions || [];
+                      return (
+                        <TableRow
+                          key={level}
+                          className={level > path.level ? "opacity-50" : ""}
+                        >
+                          <TableCell className="font-medium">{level}</TableCell>
+                          <TableCell>
+                            <ul className="space-y-1">
+                              {traits.map((trait) => (
+                                <li key={trait.name}>
+                                  <Tooltip>
+                                    <TooltipTrigger className="text-left hover:text-accent-foreground">
+                                      {trait.name}
+                                    </TooltipTrigger>
+                                    <TooltipContent
+                                      side="right"
+                                      className="max-w-[300px]"
+                                    >
+                                      <p>{trait.description}</p>
+                                    </TooltipContent>
+                                  </Tooltip>
+                                </li>
+                              ))}
+                            </ul>
+                          </TableCell>
+                          <TableCell>
+                            <ul className="space-y-1">
+                              {actions.map((action) => (
+                                <li key={action.name}>
+                                  <Tooltip>
+                                    <TooltipTrigger className="text-left hover:text-accent-foreground">
+                                      {action.name}
+                                    </TooltipTrigger>
+                                    <TooltipContent
+                                      side="right"
+                                      className="max-w-[300px]"
+                                    >
+                                      <p>{action.effect}</p>
+                                    </TooltipContent>
+                                  </Tooltip>
+                                </li>
+                              ))}
+                            </ul>
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
+                  </TableBody>
+                </Table>
               </div>
-            </div>
-
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Level</TableHead>
-                  <TableHead>Traits</TableHead>
-                  <TableHead>Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {Array.from({ length: MAX_PATH_LEVEL }, (_, i) => i + 1).map(
-                  (level) => {
-                    const unlockable = path.unlockables.find(
-                      (u) => u.level === level
-                    );
-                    const traits = unlockable?.traits || [];
-                    const actions = unlockable?.actions || [];
-                    return (
-                      <TableRow
-                        key={level}
-                        className={level > path.level ? "opacity-50" : ""}
-                      >
-                        <TableCell className="font-medium">{level}</TableCell>
-                        <TableCell>
-                          <ul className="space-y-1">
-                            {traits.map((trait) => (
-                              <li key={trait.name}>
-                                <Tooltip>
-                                  <TooltipTrigger className="text-left hover:text-accent-foreground">
-                                    {trait.name}
-                                  </TooltipTrigger>
-                                  <TooltipContent
-                                    side="right"
-                                    className="max-w-[300px]"
-                                  >
-                                    <p>{trait.description}</p>
-                                  </TooltipContent>
-                                </Tooltip>
-                              </li>
-                            ))}
-                          </ul>
-                        </TableCell>
-                        <TableCell>
-                          <ul className="space-y-1">
-                            {actions.map((action) => (
-                              <li key={action.name}>
-                                <Tooltip>
-                                  <TooltipTrigger className="text-left hover:text-accent-foreground">
-                                    {action.name}
-                                  </TooltipTrigger>
-                                  <TooltipContent
-                                    side="right"
-                                    className="max-w-[300px]"
-                                  >
-                                    <p>{action.effect}</p>
-                                  </TooltipContent>
-                                </Tooltip>
-                              </li>
-                            ))}
-                          </ul>
-                        </TableCell>
-                      </TableRow>
-                    );
-                  }
-                )}
-              </TableBody>
-            </Table>
-          </div>
+            </CollapsibleContent>
+          </Collapsible>
         ))}
-
         {paths.length === 0 && (
           <div className="p-8">
             <div className="text-center text-muted-foreground">
