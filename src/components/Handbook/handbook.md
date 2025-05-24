@@ -8,7 +8,7 @@ As you explore, you’ll meet strange and wonderful creatures, stumble into unex
 
 ## How the Game Works
 
-Bunyips and Bandits is all about collaborative storytelling. Before you dive into adventure, you’ll create your own character with a unique background, skills, and motivations. They might be a cunning trickster, a brawny bushranger, or a sorcerer who accidentally sets things on fire more often than intended. Unlike a board game where you follow a strict set of rules, here, you step into the boots, paws, claws or webbed feet of the unique character you’ve created. Your choices shape how the story unfolds, and your character's actions drive the adventure.
+Bunyips and Bandits is all about collaborative storytelling. Before you dive into adventure, you’ll create your own character with a unique background, skills, and motivations. They might be a cunning trickster, a brawny bushranger, or a sorcerer who accidentally sets things on fire more often than intended. Unlike a board game where you follow a strict set of rules, here, you step into the boots, paws, claws or webbed feet of the unique character you’ve created. Your choices shape how the story unfolds, and your character’s actions drive the adventure.
 
 The GM is the one pulling the strings—setting up the world, playing non-player characters (NPCs), and ensuring the game flows smoothly (or chaotically, depending on the players). The GM also acts as the ultimate referee, deciding how events play out based on a combination of logic, game rules, and a little bit of storytelling flair. The core of the game boils down to this:
 
@@ -27,7 +27,7 @@ Your game setup depends on your style. If you love the feel of pencil on paper, 
 
 Dice are essential, whether physical or virtual. Bunyips and Bandits uses polyhedral dice sets, including d4, d6, d8, d12, and d20.
 
-The GM may also want a board, physical or digital, to track character positions in combat, but if you're a fan of _Theatre of the Mind_, let your imagination do the work.
+The GM may also want a board, physical or digital, to track character positions in combat, but if you’re a fan of _Theatre of the Mind_, let your imagination do the work.
 
 At the end of the day, all you _really_ need is a good group, a few dice, and a sense of adventure. Everything else? That’s just gravy.
 
@@ -41,10 +41,11 @@ Before setting off on your first adventure, you’ll need to create a character.
 
 1. **Choose a species**: You can play as one of many different creatures, each with their own strengths, weaknesses, and unique traits. Your species affects your base stats, including health, movement, senses, size, armour, and skills.
 2. **Describe your character**: Think about who they are beyond the numbers on the sheet. What’s their name? What do they look like? Where do they come from? Why have they taken to the adventuring life instead of settling down somewhere safe? The GM will work with you to weave your character into the world, ensuring they have a reason to be involved in the story.
-3. **Select a level**: Your character’s level denotes the amount of experience they have, ranked from 1-20. As your character levels up, they become more skilful and powerful.
-4. **Choose your paths**: Paths define a unique set of traits and actions that your character has acquired and mastered. At level 1, you can choose one path to start with. You’ll be able to progress this path or unlock new ones to develop your character’s abilities as you progress. 
-5. **Upgrade your skills**: Every character has a set of skills that define their physical and mental abilities. At the start, you’ll have some default skills from your species, plus two skill upgrades to improve any abilities you like. As you level up, you’ll get even more opportunities to improve your character’s skills.
-6. **Create a unique trait**: Every adventurer has something special about them—something that sets them apart. This is where you and the GM get creative. Your unique trait is linked to your backstory and gives your character an advantage in certain situations. For example, a former assassin might deal extra damage when attacking from behind.
+3. **Select a level**: Your character’s level denotes the amount of experience they have, ranked from 1-10. As your character levels up, they become more skilful and powerful.
+4. **Choose your paths**: Paths define a unique set of traits and actions that your character has acquired and mastered. At level 1, you can choose one path to start with. You’ll be able to progress this path or unlock new ones to develop your character’s abilities as you level up.
+5. **Upgrade your skills**: Every character has a set of skills that define their physical and mental abilities. At the start, you’ll have some default skills from your species, plus two skill upgrades to improve any abilities you like. After each level up to an odd number, you gain an additional two skill upgrades.
+6. **Enhance your health**: Every character has three health attributes - physique, morale, and stamina. After each level up to an even number, you gain two health points to distribute among these attributes as you see fit, increasing your survivability in different situations.
+7. **Create a unique trait**: Every adventurer has something special about them—something that sets them apart. This is where you and the GM get creative. Your unique trait is linked to your backstory and gives your character an advantage in certain situations. For example, a former assassin might deal extra damage when attacking from behind.
 
 ### Species
 
@@ -52,40 +53,48 @@ Your species affects your character’s base stats and natural abilities. Some s
 
 ### Levelling
 
-As you adventure, your character gains experience and improves over time. Levelling up unlocks stronger abilities, better stats, and new paths. The most novice characters start at level 1 and can work their way up to level 20 by completing missions and surviving dangerous encounters. The GM decides when levelling up happens—usually after completing a major milestone. For balance, it’s recommended that all characters level up together so that no one gets left behind.
+As you adventure, your character gains experience and improves over time. Levelling up unlocks stronger abilities, better stats, and new paths. The most novice characters start at level 1 and can work their way up to level 10 by completing missions and surviving dangerous encounters. The GM decides when levelling up happens—usually after completing a major milestone. For balance, it’s recommended that all characters level up together so that no one gets left behind.
+
+When you level up, you gain opportunities to improve your character:
+
+* Every level, you gain one path point to either progress an existing path or unlock a new one.
+* Every odd level (1, 3, 5, 7, 9), you gain two skill points to upgrade your skills. Each skill can be upgraded a maximum of five times.
+* Every even level (2, 4, 6, 8, 10), you gain two health points to upgrade your physique, morale, or stamina. Each health track can be upgraded a maximum of five times.
 
 ### Skills
 
-Skills determine how well your character performs various actions. They include:
+Skills determine how well your character performs various actions. Each skill is categorized as either physical or mental, which affects how your character’s health impacts their performance.
+
+Skills range from level 1 to level 10, with higher levels granting better rolls and stronger effects. At level 1, you start with two skill upgrades, and as you progress, you gain more opportunities to refine your strengths.
+
+#### Physical Skills
 
 * **Strength**: used for physical manoeuvres requiring strength, such as breaking down a door, carrying a heavy load, or escaping a grapple
 * **Agility**: used for physical manoeuvres requiring balance and quick reflexes, such as dodging an attack, running through a busy street, or recovering from a fall
 * **Dexterity**: used for tasks requiring fine motor control and hand-eye coordination, such as pick pocketing, disabling a trap, or playing an instrument
 * **Throw**: used for hurling objects with precision and distance
-* **Intelligence**: used for tasks requiring mental acuity, such as investigating a scene, researching in a library, or recalling historical events
-* **Nature**: used for wilderness and animal-related tasks, such as taming an animal, tracking, or navigating a forest
-* **Willpower**: used for mental fortitude, such as resisting psychic attacks or countering attempts of intimidation
-* **Charisma**: used for social interactions requiring influence, such as charming, persuading or deceiving others
-* **Psychology**: used for assessing the behaviours and mannerisms of others to determine their true thoughts and emotions
 * **Stealth**: used for avoiding detection, such as surprise ambushing or sneaking past another creature
-* **Sight**: used for visual perception tasks, such as spotting hidden objects or seeing in the dark
-* **Hearing**: used for auditory perception tasks, such as hearing a faint noise or identifying specific sounds in a noisy environment
-* **Smell**: used for olfactory perception tasks, such as detecting and tracking scents
-
-Furthermore, the following skills can be unlocked and progressed when levelling up a path:
-
 * **Martial**: used for armed melee attacks
 * **Pyro**: used for fire sorcery, such as igniting a creature on fire
 * **Electric**: used for electric sorcery, such as casting a lightning bolt
 * **Kinetic**: used for kinetic sorcery, such as manifesting a gust of wind
 * **Radiant**: used for light sorcery, such as camouflaging into your surroundings
 * **Sonic**: used for sound sorcery, such as mimicking the voice of another creature
-* **Psychic**: used for psionics, such as mind reading
 * **Toxic**: used for producing poisons, venom and acids
 * **Healing**: used for healing creatures
-* **Spirit**: used for evocation, such as speaking to the dead
 
-Skills range from level 1 to level 5, with higher levels granting better rolls and stronger effects. At level 1, you start with two skill upgrades, and as you progress, you gain more opportunities to refine your strengths.
+#### Mental Skills
+
+* **Intelligence**: used for tasks requiring mental acuity, such as investigating a scene, researching in a library, or recalling historical events
+* **Nature**: used for wilderness and animal-related tasks, such as taming an animal, tracking, or navigating a forest
+* **Willpower**: used for mental fortitude, such as resisting psychic attacks or countering attempts of intimidation
+* **Charisma**: used for social interactions requiring influence, such as charming, persuading or deceiving others
+* **Psychology**: used for assessing the behaviours and mannerisms of others to determine their true thoughts and emotions
+* **Sight**: used for visual perception tasks, such as spotting hidden objects or seeing in the dark
+* **Hearing**: used for auditory perception tasks, such as hearing a faint noise or identifying specific sounds in a noisy environment
+* **Smell**: used for olfactory perception tasks, such as detecting and tracking scents
+* **Psychic**: used for psionics, such as mind reading
+* **Spirit**: used for evocation, such as speaking to the dead
 
 ### Paths
 
@@ -93,20 +102,36 @@ Paths define a set of learnings in a field of sorcery, morphing, psionics, evoca
 
 ### Health
 
-Your character isn’t invincible—adventuring comes with its fair share of scrapes, bruises, and mind-melting horrors. The game tracks three aspects of your character’s health:
+Your character isn’t invincible—adventuring comes with its fair share of scrapes, bruises, and mind-melting horrors. The game tracks three aspects of your character’s health - physique, morale and stamina.
 
-* **Physique**: How much physical damage you can take before collapsing. If your physique hits zero, you’re incapacitated—meaning you can’t move, fight, or do much of anything until you recover.
-* **Morale**: Your mental resilience, tested by terrifying encounters and psychic manipulation. Certain experiences—like witnessing the death of an ally horrific—can drain your morale. If your morale drops to zero, then you gain a mental condition that lasts until you recover some morale.
-* **Stamina**: How much energy you have before exhaustion sets in. Stamina depletes as you perform actions with a stamina cost. If an action has a stamina cost, you need to have at least that much left in your stamina pool to perform it.
+One way to recover health is through resting. To rest, you need to spend several hours of inactivity at a settlement with beds and food, such as a campground, inn or hospital. The amount of physique and morale recovered is dependent on your stamina before the rest (see Stamina). Stamina always replenishes to full after a rest.
 
-To determine what mental condition your character gains after losing all morale, roll a d6 and then take the matching condition from the list:
+#### Physique
 
-1. **Fainting**: You pass out for 10 minutes, then regain 1 morale.
-2. **Delusions**: You experience constant hallucinations. You may mistake people for monsters, monsters for people or have flashbacks of past experiences.
-3. **Hysteria**: Uncontrollable emotional outbursts—laughing, crying, screaming.
-4. **Amnesia**: You forget who you are and why you’re here.
-5. **Paranoia**: You’re overwhelmed with fear, easily startled and flee from all danger. You even have trouble trusting your friends.
-6. **Hyperfocus**: You become obsessed with a single, pointless task, such as cleaning your boots, or going home to prepare for dinner tomorrow.
+Physique tracks how much physical damage you can endure before collapsing.
+
+If your morale drops below half, your movement speed is halved and you have disadvantage on all physical skill checks. At only 1 physique, you become incapacitated—meaning you can’t move, fight, or do much of anything, and automatically fail any physical skill check.
+
+If your physique hits zero, you’re knocked unconscious and potentially dead. Another player must check your vital signs to determine your fate. When they do, roll any die - if the result is even, you’re alive but unconscious; if odd, you’ve died.
+
+#### Morale
+
+Morale refers to your mental resilience, tested by terrifying encounters and psychic manipulation. Certain experiences—like witnessing the death of an ally horrific—can drain your morale. If your morale drops to zero, then you gain a mental condition that lasts until you recover some morale.
+
+As your morale depletes, your mental state starts to deteriorate. At less than half morale, you have disadvantage on all mental skill checks. At 1 morale, you automatically fail all mental skill checks.
+
+Upon dropping to zero morale, you lose control. Roll a d4 and then take the matching condition from the list. The condition lasts until you recover at least one morale:
+
+1. **Delusions**: You experience constant hallucinations. You may mistake people for monsters, monsters for people or have flashbacks of past experiences.
+2. **Hysteria**: Uncontrollable emotional outbursts—laughing, crying, screaming.
+3. **Amnesia**: You forget who you are and why you’re here.
+4. **Paranoia**: You’re overwhelmed with fear, easily startled and flee from all danger. You even have trouble trusting your friends.
+
+#### Stamina
+
+Your stamina is how much energy you have before exhaustion sets in. Stamina depletes as you perform actions with a stamina cost. If an action has a stamina cost, you need to have at least that much left in your stamina pool to perform it.
+
+Stamina also affects how much health you can recover from resting. If you have at least half your maximum stamina before resting, then you can recover 2 physique and 2 morale after the rest. If you have less than half your maximum stamina, you only recover 1 physique and 1 morale per rest. If you have no stamina left, you can’t recover any health. In any case, your stamina always replenishes to full after a rest.
 
 ### Armour
 
@@ -133,6 +158,8 @@ Not all creatures are built the same. Every character is assigned a size depende
 ### Speed
 
 Creatures in Bunyips and Bandits move in four ways: walking, climbing, swimming, and flying. Different species have access to different types of locomotion, each at its own speed. Your speed stat determines how far you can move per turn for each type of locomotion available to you.
+
+When your physique drops below half of its maximum, your movement speed is halved for all types of locomotion. If your physique drops to 1, your movement speed becomes 0 and you cannot move at all.
 
 ### Senses
 
@@ -169,12 +196,17 @@ To perform a skill check, roll the die that corresponds to your skill level:
 * Level 1: d4
 * Level 2: d6
 * Level 3: d8
-* Level 4: d12
-* Level 5: d20
+* Level 4: d10
+* Level 5: d12
+* Level 6: d12 + 1
+* Level 7: d12 + 2
+* Level 8: d12 + 3
+* Level 9: d12 + 4
+* Level 10: d12 + 5
 
 If you have any bonuses (or penalties), add (or subtract) them from your roll.
 
-If you don't have a level for the required skill, then you take 1 as the result.
+If you don’t have a level for the required skill, then you take 1 as the result.
 
 The GM sets a difficulty rating for the task:
 
@@ -182,7 +214,7 @@ The GM sets a difficulty rating for the task:
 * **Moderate**: 4+
 * **Hard**: 6+
 * **Extreme**: 10+
-* **Impossible**: 16+
+* **Deadly**: 16+
 
 If your roll meets or beats the target number, you succeed. If not, well… the GM will decide what happens next. (Hint: it probably won’t be good)
 
