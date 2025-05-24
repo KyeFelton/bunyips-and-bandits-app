@@ -19,7 +19,7 @@ export const DescriptionCard = () => {
   const personality = useAtomValue(personalityAtom);
 
   return (
-    <Card className="h-[472px] flex flex-col">
+    <Card className="sm:h-[472px] flex flex-col">
       <CardHeader>
         <CardTitle>Description</CardTitle>
       </CardHeader>

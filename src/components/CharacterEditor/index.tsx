@@ -56,34 +56,33 @@ export const CharacterEditor = () => {
 
   return (
     <motion.div
-      className="h-full p-6 sm:p-8 bg-gray-500/15"
+      className="h-full p-6 sm:p-8 bg-background sm:bg-gray-500/15"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="max-w-4xl mx-auto space-y-8 h-full flex flex-col">
+      <div className="max-w-4xl mx-auto space-y-4 sm:space-y-8 h-full flex flex-col">
         <div>
-          <div className="text-center relative">
+          <div className="px-1 sm:text-center relative">
             <Button
               variant="ghost"
               size="icon"
-              className="absolute right-0 top-0 text-background hover:text-white/80 hover:bg-white/10"
+              className="absolute right-0 top-0 text-foreground sm:text-background hover:text-foreground/80 hover:bg-white/10"
               onClick={handleClose}
             >
               <X className="h-6 w-6" />
             </Button>
-            <h1 className="text-3xl font-bold mb-2 text-background">
+            <h1 className="text-2xl sm:text-3xl font-bold mb-2 text-foreground sm:text-background">
               Create Your Character
             </h1>
-            <p className="text-background/80">
-              Step {currentStep + 1} of {steps.length}:{" "}
-              {steps[currentStep].title}
+            <p className="md:hidden text-xl text-foreground/80">
+              Step {currentStep + 1}: {steps[currentStep].title}
             </p>
           </div>
 
           {/* Progress Bar */}
-          <div className="flex relative mt-8">
+          <div className="hidden sm:flex relative mt-8">
             <div
               className="absolute top-2 w-full h-0.5 bg-muted-foreground/20"
               style={{
@@ -117,16 +116,16 @@ export const CharacterEditor = () => {
                   }`}
                 />
                 <span className="mt-4 text-sm font-medium text-center px-2 text-background hidden sm:block">
-                  {index + 1}. {step.title}
+                  {step.title}
                 </span>
               </div>
             ))}
           </div>
         </div>
-        <Card className="h-full p-4 sm:py-6 sm:px-9 lg:py-8 lg:px-12 shadow-lg overflow-auto">
+        <Card className="h-full px-1 sm:py-6 sm:px-9 lg:py-8 lg:px-12 overflow-auto shadow-none">
           {/* Step Content */}
-          <h2 className="text-2xl my-3 font-bold text-foreground tracking-tight">
-            {currentStep + 1}. {steps[currentStep].title}
+          <h2 className="hidden sm:flex text-2xl my-3 font-bold text-foreground tracking-tight">
+            {steps[currentStep].title}
           </h2>
           <StepComponent />
         </Card>

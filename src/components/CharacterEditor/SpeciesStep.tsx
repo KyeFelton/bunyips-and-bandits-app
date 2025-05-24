@@ -111,7 +111,7 @@ export const SpeciesStep = () => {
                   {Object.keys(AllSpecies).map((species) => (
                     <CarouselItem
                       key={species}
-                      className="sm:basis-1/2 md:basis-1/3 cursor-pointer flex justify-center items-center"
+                      className="basis-3/4 sm:basis-1/2 md:basis-1/3 cursor-pointer flex justify-center items-center"
                       onClick={() => {
                         const speciesKeys = Object.keys(AllSpecies);
                         const selectedIndex = speciesKeys.indexOf(species);

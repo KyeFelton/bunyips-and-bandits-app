@@ -12,18 +12,99 @@ import { ItemsTable } from "./ItemsTable";
 import { SkillsTable } from "./SkillsTable";
 import { TraitsList } from "./TraitsList";
 import { ActionsList } from "./ActionsList";
+import { useState } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
 export function CharacterSheet() {
+  const [activeSection, setActiveSection] = useState("character");
+
+  // Define sections for mobile navigation
+  const sections = [
+    { value: "character", label: "Character" },
+    { value: "stats", label: "Stats" },
+    { value: "skills", label: "Skills" },
+    { value: "traits", label: "Traits" },
+    { value: "actions", label: "Actions" },
+    { value: "items", label: "Items" },
+  ];
+
   return (
     <motion.div
-      className="min-w-[1024px] h-full relative"
+      className="w-full h-full relative"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="relative flex justify-center h-full bg-gray-500/15">
-        <main className="py-12 px-8 grid grid-cols-4 gap-4 h-full w-full max-w-[1400px] overflow-auto">
+      <div className="relative flex justify-center h-full">
+        {/* Mobile Navigation */}
+        <div className="md:hidden w-full fixed top-0 z-10 p-4 bg-black">
+          <Select value={activeSection} onValueChange={setActiveSection}>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Select section" />
+            </SelectTrigger>
+            <SelectContent>
+              {sections.map((section) => (
+                <SelectItem key={section.value} value={section.value}>
+                  {section.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        {/* Mobile Content */}
+        <main className="md:hidden py-20 px-4 w-full h-full overflow-auto">
+          {activeSection === "character" && (
+            <div className="flex flex-col gap-4">
+              <NameCard />
+              <DescriptionCard />
+            </div>
+          )}
+
+          {activeSection === "skills" && (
+            <Card className="p-4 overflow-auto">
+              <SkillsTable />
+            </Card>
+          )}
+
+          {activeSection === "traits" && (
+            <Card className="p-4 overflow-auto">
+              <TraitsList />
+            </Card>
+          )}
+
+          {activeSection === "actions" && (
+            <Card className="p-4 overflow-auto">
+              <ActionsList />
+            </Card>
+          )}
+
+          {activeSection === "items" && (
+            <Card className="p-4 overflow-auto">
+              <ItemsTable />
+            </Card>
+          )}
+
+          {activeSection === "stats" && (
+            <div className="flex flex-col gap-4">
+              <HealthCard className="overflow-auto" />
+              <CombatCard />
+              <SpeedCard />
+              <ArmourCard />
+              <SensesCard />
+            </div>
+          )}
+        </main>
+
+        {/* Desktop Layout - Unchanged */}
+        <main className="hidden md:grid py-12 px-8 grid-cols-4 gap-4 h-full w-full max-w-[1400px] overflow-auto min-w-[1024px]">
           <div className="flex flex-col gap-2 h-[948px] justify-between">
             <NameCard />
             <DescriptionCard />
