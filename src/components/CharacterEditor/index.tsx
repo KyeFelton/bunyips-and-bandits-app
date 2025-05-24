@@ -56,7 +56,7 @@ export const CharacterEditor = () => {
 
   return (
     <motion.div
-      className="h-screen p-6 sm:p-8 bg-gray-500/15"
+      className="h-full p-6 sm:p-8 bg-gray-500/15"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}

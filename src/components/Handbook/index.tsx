@@ -10,7 +10,7 @@ export function Handbook() {
 
   return (
     <motion.div
-      className="min-h-screen bg-background p-8"
+      className="h-full bg-background p-8 overflow-auto"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}

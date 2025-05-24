@@ -16,7 +16,7 @@ import { ActionsList } from "./ActionsList";
 export function CharacterSheet() {
   return (
     <motion.div
-      className="min-w-[1024px] h-screen relative"
+      className="min-w-[1024px] h-full relative"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}

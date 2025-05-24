@@ -71,7 +71,7 @@ export function LandingPage() {
 
   return (
     <motion.div
-      className="min-h-screen relative overflow-hidden flex items-center justify-center p-4"
+      className="h-full relative overflow-auto flex items-center justify-center p-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}

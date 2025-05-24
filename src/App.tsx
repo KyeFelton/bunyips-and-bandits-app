@@ -4,8 +4,7 @@ import { LandingPage } from "./components/LandingPage";
 import { CharacterSheet } from "./components/CharacterSheet";
 import { CharacterEditor } from "./components/CharacterEditor";
 import { Handbook } from "./components/Handbook";
-import { RulesButton } from "./components/RulesButton";
-import { SettingsButton } from "./components/SettingsButton";
+import { MenuBar } from "./components/MenuBar";
 import { Toaster } from "./components/ui/toaster";
 import background from "./images/background.png";
 import frame from "./images/leaf-frame.png";
@@ -18,10 +17,9 @@ import {
 
 function App() {
   const location = useLocation();
-  const showMenuButton = !location.pathname.endsWith(HandbookRoute);
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="min-h-dvh relative overflow-hidden">
       <div className="absolute inset-0 -z-10 bg-gradient-to-bl from-slate-900 to-slate-950">
         <img
           src={frame}
@@ -42,20 +40,20 @@ function App() {
           }}
         />
       </div>
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          <Route path={HomeRoute} element={<LandingPage />} />
-          <Route path={CharacterSheetRoute} element={<CharacterSheet />} />
-          <Route path={CharacterEditorRoute} element={<CharacterEditor />} />
-          <Route path={HandbookRoute} element={<Handbook />} />
-        </Routes>
-      </AnimatePresence>
-      {showMenuButton && (
-        <div className="fixed bottom-4 right-4 z-50 flex gap-3">
-          <RulesButton />
-          <SettingsButton />
-        </div>
-      )}
+
+      <MenuBar className={"h-14 md:h-16"} />
+
+      <div className="h-dvh pb-14 md:pb-0 md:pt-16 overflow-auto">
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path={HomeRoute} element={<LandingPage />} />
+            <Route path={CharacterSheetRoute} element={<CharacterSheet />} />
+            <Route path={CharacterEditorRoute} element={<CharacterEditor />} />
+            <Route path={HandbookRoute} element={<Handbook />} />
+          </Routes>
+        </AnimatePresence>
+      </div>
+
       <Toaster />
     </div>
   );
