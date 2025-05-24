@@ -1,21 +1,29 @@
 import { Link, useLocation } from "react-router-dom";
-import { CharacterSheetRoute, HandbookRoute, HomeRoute } from "../routes";
+import { CharacterListRoute, HandbookRoute, HomeRoute } from "../routes";
 import { Logo } from "./Logo";
 import { cn } from "../utils/cn";
-import { User, Book, Home } from "lucide-react";
+import { User, Book, Home, Download } from "lucide-react";
+import { Button } from "./ui/button";
+import { useAtomValue } from "jotai";
+import { saveFileAtom } from "../state/character";
+import { saveCharacter } from "../utils/character";
 
-interface MenuBarProps {
+interface NavBarProps {
   className?: string;
 }
 
-export function MenuBar({ className }: MenuBarProps) {
+export function NavBar({ className }: NavBarProps) {
   const location = useLocation();
+  const saveFile = useAtomValue(saveFileAtom);
+
+  const handleDownload = () => {
+    saveCharacter(saveFile);
+  };
 
   return (
     <div
       className={cn(
-        //bg-gradient-to-r from-slate-950 to-black
-        "fixed z-50 bg-black/50 shadow-sm w-full bottom-0 left-0 right-0 md:top-0 md:bottom-auto",
+        "fixed z-50 bg-black/70 shadow-sm w-full bottom-0 left-0 right-0 md:top-0 md:bottom-auto",
         className
       )}
     >
@@ -25,20 +33,6 @@ export function MenuBar({ className }: MenuBarProps) {
         </Link>
         <nav className="flex items-center justify-around md:justify-end w-full md:w-auto md:space-x-6">
           <Link
-            to={CharacterSheetRoute}
-            className={cn(
-              "text-primary-foreground hover:text-accent-medium transition-colors flex flex-col md:flex-row items-center",
-              location.pathname.includes(CharacterSheetRoute)
-                ? "text-accent-medium"
-                : ""
-            )}
-          >
-            <User className="h-5 w-5 md:mr-2" />
-            <span className="text-xs mt-1 md:mt-0 md:text-base hidden md:inline">
-              Character
-            </span>
-          </Link>
-          <Link
             to={HomeRoute}
             className={cn(
               "md:hidden text-primary-foreground hover:text-accent-medium transition-colors flex flex-col items-center",
@@ -47,6 +41,20 @@ export function MenuBar({ className }: MenuBarProps) {
           >
             <Home className="h-5 w-5" />
             <span className="text-xs mt-1 hidden">Home</span>
+          </Link>
+          <Link
+            to={CharacterListRoute}
+            className={cn(
+              "text-primary-foreground hover:text-accent-medium transition-colors flex flex-col md:flex-row items-center",
+              location.pathname.includes(CharacterListRoute)
+                ? "text-accent-medium"
+                : ""
+            )}
+          >
+            <User className="h-5 w-5 md:mr-2" />
+            <span className="text-xs mt-1 md:mt-0 md:text-base hidden md:inline">
+              Character
+            </span>
           </Link>
           <Link
             to={HandbookRoute}
@@ -62,6 +70,14 @@ export function MenuBar({ className }: MenuBarProps) {
               Handbook
             </span>
           </Link>
+          {saveFile.name && (
+            <Button variant="outline" size="sm" onClick={handleDownload}>
+              <Download className="h-5 w-5 md:mr-2" />
+              <span className="text-xs mt-1 md:mt-0 md:text-base hidden md:inline">
+                Save
+              </span>
+            </Button>
+          )}
         </nav>
       </div>
     </div>

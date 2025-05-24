@@ -25,7 +25,7 @@ import {
   physiqueUpgradesAtom,
   staminaUpgradesAtom,
 } from "../../state/character";
-import { uploadCharacter } from "../../utils/character";
+import { loadCharacter } from "../../utils/character";
 import { Logo } from "../Logo";
 import "./index.sass";
 import { CharacterEditorRoute } from "../../routes";
@@ -62,7 +62,7 @@ export function LandingPage() {
   };
 
   const handleLoadCharacter = async () => {
-    await uploadCharacter(setters, navigate, (title, message) => {
+    await loadCharacter(setters, navigate, (title, message) => {
       setErrorTitle(title);
       setErrorMessage(message);
       setErrorDialogOpen(true);

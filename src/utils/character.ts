@@ -140,9 +140,10 @@ const validateSaveFile = (
 
   return { isValid: true };
 };
-export const uploadCharacter = async (
+
+export const loadCharacter = async (
   setters: CharacterSetters,
-  navigate: (path: string) => void,
+  navigate?: (path: string) => void,
   onError?: (title: string, message: string) => void
 ) => {
   const input = document.createElement("input");
@@ -186,7 +187,7 @@ export const uploadCharacter = async (
           setters.setSkillLevelUpgrades(data.skillLevelUpgrades || {});
           setters.setIsFirstLoad?.(false);
 
-          navigate(CharacterSheetRoute);
+          navigate?.(CharacterSheetRoute);
         } catch (error) {
           console.error(
             "Error loading character:",
@@ -211,6 +212,20 @@ export const uploadCharacter = async (
     }
   };
   input.click();
+};
+
+export const saveCharacter = (saveFile: SaveFile) => {
+  const blob = new Blob([JSON.stringify(saveFile, null, 2)], {
+    type: "application/json",
+  });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "character.json";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
 };
 
 export const resetCharacter = (setters: CharacterSetters) => {

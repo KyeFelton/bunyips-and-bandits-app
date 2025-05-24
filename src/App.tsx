@@ -4,7 +4,8 @@ import { LandingPage } from "./components/LandingPage";
 import { CharacterSheet } from "./components/CharacterSheet";
 import { CharacterEditor } from "./components/CharacterEditor";
 import { Handbook } from "./components/Handbook";
-import { MenuBar } from "./components/MenuBar";
+import { CharactersPage } from "./components/CharacterList";
+import { NavBar } from "./components/NavBar";
 import { Toaster } from "./components/ui/toaster";
 import background from "./images/background.png";
 import frame from "./images/leaf-frame.png";
@@ -13,6 +14,7 @@ import {
   CharacterEditorRoute,
   HomeRoute,
   HandbookRoute,
+  CharacterListRoute,
 } from "./routes";
 
 function App() {
@@ -41,7 +43,7 @@ function App() {
         />
       </div>
 
-      <MenuBar className={"h-14 md:h-16"} />
+      <NavBar className={"h-14 md:h-16"} />
 
       <div className="h-dvh pb-14 md:pb-0 md:pt-16 overflow-auto">
         <AnimatePresence mode="wait">
@@ -50,6 +52,7 @@ function App() {
             <Route path={CharacterSheetRoute} element={<CharacterSheet />} />
             <Route path={CharacterEditorRoute} element={<CharacterEditor />} />
             <Route path={HandbookRoute} element={<Handbook />} />
+            <Route path={CharacterListRoute} element={<CharactersPage />} />
           </Routes>
         </AnimatePresence>
       </div>
