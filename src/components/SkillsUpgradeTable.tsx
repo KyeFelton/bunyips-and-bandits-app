@@ -33,7 +33,7 @@ export const SkillsUpgradeTable = ({
     0
   );
   const hasSkillPoints = availablePoints > totalSkillLevels;
-  const maxUpgradePerSkill = Math.floor(availablePoints / 2);
+  const maxUpgradePerSkill = 5;
 
   const handleIncreaseSkill = (skillType: SkillType) => {
     const currentLevel = skillLevels[skillType] ?? 0;

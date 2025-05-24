@@ -22,7 +22,7 @@ export const HealthUpgradeForm = ({
   const totalUpgrades =
     initialUpgrades.physique + initialUpgrades.morale + initialUpgrades.stamina;
   const remainingUpgrades = availableHealthUpgrades - totalUpgrades;
-  const maxUpgradesPerTrack = Math.floor(availableHealthUpgrades / 2);
+  const maxUpgradesPerTrack = 5;
   const maxSegments = 15;
 
   const handleUpgrade = (
