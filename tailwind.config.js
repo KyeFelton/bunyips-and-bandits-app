@@ -114,6 +114,12 @@ export default {
             blockquote: {
               color: "hsl(var(--muted-foreground))",
             },
+            "tbody tr:nth-child(odd)": {
+              backgroundColor: "hsl(var(--muted))",
+            },
+            "tbody tr:nth-child(even)": {
+              backgroundColor: "hsl(var(--primary-foreground))",
+            },
           },
         },
       },
