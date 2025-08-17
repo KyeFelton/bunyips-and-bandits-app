@@ -42,14 +42,18 @@
     transform: scale(1)
 
 .frame-animation 
-  animation: zoomOut 4s ease-in-out 1 forwards
+  animation: zoomOut 5s ease-in-out 1 forwards
 
 @keyframes zoomOut 
-  from 
+  0% 
     transform: scale(1)
   
-  to 
+  80% 
     transform: scale(5)
+
+  100%
+    transform: scale(5)
+    display: none
 
 .load-button:hover
   position: relative
