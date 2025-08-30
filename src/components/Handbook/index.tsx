@@ -10,6 +10,11 @@ import { SightIcon } from "../icons/SenseIcon";
 import { HearingIcon } from "../icons/SenseIcon";
 import { SmellIcon } from "../icons/SenseIcon";
 import { PsychicSenseIcon } from "../icons/SenseIcon";
+import summonerImage from "../../images/handbook/summoner.png";
+import bunyipImage from "../../images/handbook/bunyip.png";
+import dropbearImage from "../../images/handbook/dropbear.png";
+import apothecaryImage from "../../images/handbook/apothecary.png";
+import sleepingWombatInnImage from "../../images/handbook/sleeping wombat inn.png";
 
 const summary = (
   <>
@@ -20,6 +25,11 @@ const summary = (
       waterways of a crocodile-infested billabong, or trading stories at a smoky
       bush pub, adventure is never far away.
     </p>
+    <img
+      src={sleepingWombatInnImage}
+      alt={"sleeping wombat inn"}
+      className="md:w-[50%] md:float-right px-6 m-0"
+    />
     <p>
       This is a game of cooperative storytelling, where you and your friends
       take on the roles of unique characters, facing challenges set by the Games
@@ -66,15 +76,17 @@ const sections = [
         </ol>
         <p>
           The game is intended to be fast and flexible, designed to keep the
-          action moving rather than bogging you down with numbers. The rules
-          encourage creativity—if you want to try something ridiculous, the GM
-          won’t stop you (although the outcome might not be favourable).
+          action moving rather than bogging you down with specific details and
+          calculations. The rules encourage creativity—if you want to try
+          something ridiculous, the GM won’t stop you (although the outcome
+          might not be favourable).
         </p>
         <p>
-          This handbook provides a starting framework, but the most important
-          rule is that everyone at the table enjoys themselves. If something
-          doesn’t quite fit your playstyle, tweak it. The game is meant to be
-          adaptable, just like the creatures that roam its world.
+          This handbook should be viewed as framework to align everyone, rather
+          than a rigid rule system. If something doesn’t quite fit your
+          playstyle, discuss it with your party and tweak it. The game is meant
+          to be adaptable. The only rule is that everyone at the table enjoys
+          themselves.
         </p>
       </>
     ),
@@ -84,14 +96,14 @@ const sections = [
     content: (
       <>
         <p>
-          Your game setup depends on your style. The Bunyips and Bandits App has
-          been created to enhance and streamline the playing experience, but
-          it's not required. If you prefer a more tactile experience, you can
-          play with paper, pens and dice. The game uses polyhedral dice sets,
-          including d4, d6, d8, d12, and d20. The GM may also want a board to
-          track character positions in combat, but if you’re a fan of Theatre of
-          the Mind, let your imagination do the work. At the end of the day, all
-          you really need is a good group of friends and a sense of adventure.
+          Your game setup depends on your style. This website has been created
+          to enhance and streamline the playing experience, but it's not
+          required. If you prefer a more tactile experience, you can play with
+          paper, pens and dice. The game uses polyhedral dice sets, including
+          d4, d6, d8, d12, and d20. The GM may also want a board to track
+          character positions in combat, but if you’re a fan of Theatre of the
+          Mind, let your imagination do the work. At the end of the day, all you
+          really need is a good group of friends and a sense of adventure.
         </p>
       </>
     ),
@@ -104,8 +116,8 @@ const sections = [
           At the heart of Bunyips and Bandits are the characters you create and
           play. While the GM plays the role of everyone and everything else,
           players will be in control of one character—making their choices,
-          speaking in their voice, and deciding how they handle the dangers (and
-          opportunities) that come their way.
+          speaking in their voice, and deciding how they handle the dangers and
+          opportunities that come their way.
         </p>
       </>
     ),
@@ -118,6 +130,13 @@ const sections = [
               Before setting off on your first adventure, you’ll need to create
               a character. This involves a few simple steps:
             </p>
+            <div className="md:w-[35%] md:float-right px-6">
+              <img
+                src={summonerImage}
+                alt={"character artwork"}
+                className="object-contain rounded-lg mt-0"
+              />
+            </div>
             <ol className="list-decimal ml-4">
               <li>
                 <b>Choose a species</b>: You can play as one of many different
@@ -150,15 +169,13 @@ const sections = [
                 that define their physical and mental abilities. At the start,
                 you’ll have some default skills from your species, plus two
                 skill upgrades to improve any abilities you like. After each
-                level up to an odd number, you gain an additional two skill
-                upgrades.
+                level, you can upgrade one additional skill.
               </li>
               <li>
                 <b>Enhance your health</b>: Every character has three health
-                attributes - physique, morale, and stamina. After each level up
-                to an even number, you gain two health points to distribute
-                among these attributes as you see fit, increasing your
-                survivability in different situations.
+                attributes - physique, morale, and stamina. After each level up,
+                you can upgrade one of your health attributes as you see fit,
+                increasing your survivability in different situations.
               </li>
               <li>
                 <b>Create a unique trait</b>: Every adventurer has something
@@ -193,90 +210,16 @@ const sections = [
           <>
             <p>
               As you adventure, your character gains experience and improves
-              over time. Levelling up unlocks stronger abilities, better stats,
-              and new paths. The most novice characters start at level 1 and can
-              work their way up to level 10 by completing missions and surviving
-              dangerous encounters. The GM decides when levelling up
-              happens—usually after completing a major milestone. For balance,
-              it’s generally recommended that all characters level up together
-              so that no one gets left behind.
+              over time. Levels indicate a character’s skill and capability,
+              unlocking stronger abilities, improved stats, and new paths to
+              explore. Characters start at level 1 and can work their way up to
+              level 10 by completing missions and overcoming difficult
+              encounters. The GM decides when levelling up happens—usually after
+              completing a major milestone. Each time you level up, you may
+              choose to progress one path, upgrade one skill, and enhance one
+              health track, allowing you to tailor your character’s growth to
+              your playstyle and strategy.
             </p>
-            <p>
-              The table below shows the upgrades your character gains upon each
-              level up:
-            </p>
-            <table className="w-auto text-center border-collapse">
-              <thead>
-                <tr>
-                  <th className="border p-2 font-bold">Level</th>
-                  <th className="border p-2 font-bold">Paths</th>
-                  <th className="border p-2 font-bold">Skills</th>
-                  <th className="border p-2 font-bold">Health</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="border p-2">1</td>
-                  <td className="border p-2">+1</td>
-                  <td className="border p-2">+2</td>
-                  <td className="border p-2"></td>
-                </tr>
-                <tr>
-                  <td className="border p-2">2</td>
-                  <td className="border p-2">+1</td>
-                  <td className="border p-2"></td>
-                  <td className="border p-2">+2</td>
-                </tr>
-                <tr>
-                  <td className="border p-2">3</td>
-                  <td className="border p-2">+1</td>
-                  <td className="border p-2">+2</td>
-                  <td className="border p-2"></td>
-                </tr>
-                <tr>
-                  <td className="border p-2">4</td>
-                  <td className="border p-2">+1</td>
-                  <td className="border p-2"></td>
-                  <td className="border p-2">+2</td>
-                </tr>
-                <tr>
-                  <td className="border p-2">5</td>
-                  <td className="border p-2">+1</td>
-                  <td className="border p-2">+2</td>
-                  <td className="border p-2"></td>
-                </tr>
-                <tr>
-                  <td className="border p-2">6</td>
-                  <td className="border p-2">+1</td>
-                  <td className="border p-2"></td>
-                  <td className="border p-2">+2</td>
-                </tr>
-                <tr>
-                  <td className="border p-2">7</td>
-                  <td className="border p-2">+1</td>
-                  <td className="border p-2">+2</td>
-                  <td className="border p-2"></td>
-                </tr>
-                <tr>
-                  <td className="border p-2">8</td>
-                  <td className="border p-2">+1</td>
-                  <td className="border p-2"></td>
-                  <td className="border p-2">+2</td>
-                </tr>
-                <tr>
-                  <td className="border p-2">9</td>
-                  <td className="border p-2">+1</td>
-                  <td className="border p-2">+2</td>
-                  <td className="border p-2"></td>
-                </tr>
-                <tr>
-                  <td className="border p-2">10</td>
-                  <td className="border p-2">+1</td>
-                  <td className="border p-2"></td>
-                  <td className="border p-2">+2</td>
-                </tr>
-              </tbody>
-            </table>
           </>
         ),
       },
@@ -292,200 +235,350 @@ const sections = [
             <p>
               Skills range from level 1 to level 10, with higher levels granting
               better rolls and stronger effects. At level 1, you start with two
-              skill upgrades, and as you progress, you gain more opportunities
-              to improve.
+              skill upgrades, and each time you level up thereafter, you can
+              upgrade another skill.
             </p>
             <h4>Physical Skills</h4>
-            <ul className="list-disc ml-4">
-              <li>
-                <SkillIcon
-                  type={SkillType.Strength}
-                  className="inline-block mr-1 pb-1"
-                />
-                <b>Strength</b>: used for physical manoeuvres requiring
-                strength, such as breaking down a door, carrying a heavy load,
-                or escaping a grapple
-              </li>
-              <li>
-                <SkillIcon
-                  type={SkillType.Agility}
-                  className="inline-block mr-1 pb-1"
-                />
-                <b>Agility</b>: used for physical manoeuvres requiring balance
-                and quick reflexes, such as dodging an attack, running through a
-                busy street, or recovering from a fall
-              </li>
-              <li>
-                <SkillIcon
-                  type={SkillType.Dexterity}
-                  className="inline-block mr-1 pb-1"
-                />
-                <b>Dexterity</b>: used for tasks requiring fine motor control
-                and hand-eye coordination, such as pick pocketing, disabling a
-                trap, or playing an instrument
-              </li>
-              <li>
-                <SkillIcon
-                  type={SkillType.Throw}
-                  className="inline-block mr-1 pb-1"
-                />
-                <b>Throw</b>: used for hurling objects with precision and
-                distance
-              </li>
-              <li>
-                <SkillIcon
-                  type={SkillType.Stealth}
-                  className="inline-block mr-1 pb-1"
-                />
-                <b>Stealth</b>: used for avoiding detection, such as surprise
-                ambushing or sneaking past another creature
-              </li>
-              <li>
-                <SkillIcon
-                  type={SkillType.Martial}
-                  className="inline-block mr-1 pb-1"
-                />
-                <b>Martial</b>: used for armed melee attacks
-              </li>
-              <li>
-                <SkillIcon
-                  type={SkillType.Pyro}
-                  className="inline-block mr-1 pb-1"
-                />
-                <b>Pyro</b>: used for fire sorcery, such as igniting a creature
-                on fire
-              </li>
-              <li>
-                <SkillIcon
-                  type={SkillType.Electric}
-                  className="inline-block mr-1 pb-1"
-                />
-                <b>Electric</b>: used for electric sorcery, such as casting a
-                lightning bolt
-              </li>
-              <li>
-                <SkillIcon
-                  type={SkillType.Kinetic}
-                  className="inline-block mr-1 pb-1"
-                />
-                <b>Kinetic</b>: used for kinetic sorcery, such as manifesting a
-                gust of wind
-              </li>
-              <li>
-                <SkillIcon
-                  type={SkillType.Radiant}
-                  className="inline-block mr-1 pb-1"
-                />
-                <b>Radiant</b>: used for light sorcery, such as camouflaging
-                into your surroundings
-              </li>
-              <li>
-                <SkillIcon
-                  type={SkillType.Sonic}
-                  className="inline-block mr-1 pb-1"
-                />
-                <b>Sonic</b>: used for sound sorcery, such as mimicking the
-                voice of another creature
-              </li>
-              <li>
-                <SkillIcon
-                  type={SkillType.Toxic}
-                  className="inline-block mr-1 pb-1"
-                />
-                <b>Toxic</b>: used for producing poisons, venom and acids
-              </li>
-              <li>
-                <SkillIcon
-                  type={SkillType.Healing}
-                  className="inline-block mr-1 pb-1"
-                />
-                <b>Healing</b>: used for healing creatures
-              </li>
-            </ul>
+            <table className="md:mx-4">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Skill</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="pr-0">
+                    <SkillIcon
+                      type={SkillType.Strength}
+                      className="inline-block mr-1 pb-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Strength</b>
+                  </td>
+                  <td>
+                    Physical manoeuvres requiring strength, such as breaking
+                    down a door, carrying a heavy load, or escaping a grapple.
+                  </td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <SkillIcon
+                      type={SkillType.Agility}
+                      className="inline-block mr-1 pb-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Agility</b>
+                  </td>
+                  <td>
+                    Balance and quick reflexes, such as dodging an attack,
+                    running through a busy street, or recovering from a fall.
+                  </td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <SkillIcon
+                      type={SkillType.Dexterity}
+                      className="inline-block mr-1 pb-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Dexterity</b>
+                  </td>
+                  <td>
+                    Fine motor control and hand-eye coordination, such as pick
+                    pocketing, disabling a trap, or playing an instrument.
+                  </td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <SkillIcon
+                      type={SkillType.Throw}
+                      className="inline-block mr-1 pb-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Throw</b>
+                  </td>
+                  <td>Hurling objects with precision and distance.</td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <SkillIcon
+                      type={SkillType.Stealth}
+                      className="inline-block mr-1 pb-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Stealth</b>
+                  </td>
+                  <td>
+                    Avoiding detection, such as surprise ambushing or sneaking
+                    past another creature.
+                  </td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <SkillIcon
+                      type={SkillType.Martial}
+                      className="inline-block mr-1 pb-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Martial</b>
+                  </td>
+                  <td>Armed melee attacks.</td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <SkillIcon
+                      type={SkillType.Pyro}
+                      className="inline-block mr-1 pb-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Pyro</b>
+                  </td>
+                  <td>Fire sorcery, such as igniting a creature on fire.</td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <SkillIcon
+                      type={SkillType.Electric}
+                      className="inline-block mr-1 pb-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Electric</b>
+                  </td>
+                  <td>Electric sorcery, such as casting a lightning bolt.</td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <SkillIcon
+                      type={SkillType.Kinetic}
+                      className="inline-block mr-1 pb-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Kinetic</b>
+                  </td>
+                  <td>Kinetic sorcery, such as manifesting a gust of wind.</td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <SkillIcon
+                      type={SkillType.Radiant}
+                      className="inline-block mr-1 pb-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Radiant</b>
+                  </td>
+                  <td>
+                    Light sorcery, such as camouflaging into your surroundings.
+                  </td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <SkillIcon
+                      type={SkillType.Sonic}
+                      className="inline-block mr-1 pb-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Sonic</b>
+                  </td>
+                  <td>
+                    Sound sorcery, such as mimicking the voice of another
+                    creature.
+                  </td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <SkillIcon
+                      type={SkillType.Toxic}
+                      className="inline-block mr-1 pb-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Toxic</b>
+                  </td>
+                  <td>Producing poisons, venom and acids.</td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <SkillIcon
+                      type={SkillType.Healing}
+                      className="inline-block mr-1 pb-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Healing</b>
+                  </td>
+                  <td>Healing creatures.</td>
+                </tr>
+              </tbody>
+            </table>
             <h4>Mental Skills</h4>
-            <ul className="list-disc ml-4">
-              <li>
-                <SkillIcon
-                  type={SkillType.Intelligence}
-                  className="inline-block mr-1 pb-1"
-                />
-                <b>Intelligence</b>: used for tasks requiring mental acuity,
-                such as investigating a scene, researching in a library, or
-                recalling historical events
-              </li>
-              <li>
-                <SkillIcon
-                  type={SkillType.Nature}
-                  className="inline-block mr-1 pb-1"
-                />
-                <b>Nature</b>: used for wilderness and animal-related tasks,
-                such as taming an animal, tracking, or navigating a forest
-              </li>
-              <li>
-                <SkillIcon
-                  type={SkillType.Willpower}
-                  className="inline-block mr-1 pb-1"
-                />
-                <b>Willpower</b>: used for mental fortitude, such as resisting
-                psychic attacks or countering attempts of intimidation
-              </li>
-              <li>
-                <SkillIcon
-                  type={SkillType.Charisma}
-                  className="inline-block mr-1 pb-1"
-                />
-                <b>Charisma</b>: used for social interactions requiring
-                influence, such as charming, persuading or deceiving others
-              </li>
-              <li>
-                <SkillIcon
-                  type={SkillType.Psychology}
-                  className="inline-block mr-1 pb-1"
-                />
-                <b>Psychology</b>: used for assessing the behaviours and
-                mannerisms of others to determine their true thoughts and
-                emotions
-              </li>
-              <li>
-                <SkillIcon
-                  type={SkillType.Sight}
-                  className="inline-block mr-1 pb-1"
-                />
-                <b>Sight</b>: used for visual perception tasks, such as spotting
-                hidden objects or seeing in the dark
-              </li>
-              <li>
-                <SkillIcon
-                  type={SkillType.Hearing}
-                  className="inline-block mr-1 pb-1"
-                />
-                <b>Hearing</b>: used for auditory perception tasks, such as
-                hearing a faint noise or identifying specific sounds in a noisy
-                environment
-              </li>
-              <li>
-                <SkillIcon
-                  type={SkillType.Smell}
-                  className="inline-block mr-1 pb-1"
-                />
-                <b>Smell</b>: used for olfactory perception tasks, such as
-                detecting and tracking scents
-              </li>
-              <li>
-                <SkillIcon
-                  type={SkillType.Psychic}
-                  className="inline-block mr-1 pb-1"
-                />
-                <b>Psychic</b>: used for psionics, such as mind reading
-              </li>
-              <li>
-                <SkillIcon
-                  type={SkillType.Spirit}
-                  className="inline-block mr-1 pb-1"
-                />
-                <b>Spirit</b>: used for evocation, such as speaking to the dead
-              </li>
-            </ul>
+            <table className="md:mx-4 mt-2 mb-8">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Skill</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="pr-0">
+                    <SkillIcon
+                      type={SkillType.Intelligence}
+                      className="inline-block mr-1 pb-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Intelligence</b>
+                  </td>
+                  <td>
+                    Mental acuity, such as investigating a scene, researching in
+                    a library, or recalling historical events.
+                  </td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <SkillIcon
+                      type={SkillType.Nature}
+                      className="inline-block mr-1 pb-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Nature</b>
+                  </td>
+                  <td>
+                    Wilderness and animal-related tasks, such as taming an
+                    animal, tracking, or navigating a forest.
+                  </td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <SkillIcon
+                      type={SkillType.Willpower}
+                      className="inline-block mr-1 pb-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Willpower</b>
+                  </td>
+                  <td>
+                    Mental fortitude, such as resisting psychic attacks or
+                    countering attempts of intimidation.
+                  </td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <SkillIcon
+                      type={SkillType.Charisma}
+                      className="inline-block mr-1 pb-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Charisma</b>
+                  </td>
+                  <td>
+                    Social interactions requiring influence, such as charming,
+                    persuading or deceiving others.
+                  </td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <SkillIcon
+                      type={SkillType.Psychology}
+                      className="inline-block mr-1 pb-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Psychology</b>
+                  </td>
+                  <td>
+                    Assessing the behaviours and mannerisms of others to
+                    determine their true thoughts and emotions.
+                  </td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <SkillIcon
+                      type={SkillType.Sight}
+                      className="inline-block mr-1 pb-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Sight</b>
+                  </td>
+                  <td>
+                    Visual perception tasks, such as spotting hidden objects or
+                    seeing in the dark.
+                  </td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <SkillIcon
+                      type={SkillType.Hearing}
+                      className="inline-block mr-1 pb-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Hearing</b>
+                  </td>
+                  <td>
+                    Auditory perception tasks, such as hearing a faint noise or
+                    identifying specific sounds in a noisy environment.
+                  </td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <SkillIcon
+                      type={SkillType.Smell}
+                      className="inline-block mr-1 pb-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Smell</b>
+                  </td>
+                  <td>
+                    Olfactory perception tasks, such as detecting and tracking
+                    scents.
+                  </td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <SkillIcon
+                      type={SkillType.Psychic}
+                      className="inline-block mr-1 pb-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Psychic</b>
+                  </td>
+                  <td>Psionics, such as mind reading.</td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <SkillIcon
+                      type={SkillType.Spirit}
+                      className="inline-block mr-1 pb-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Spirit</b>
+                  </td>
+                  <td>Evocation, such as speaking to the dead.</td>
+                </tr>
+              </tbody>
+            </table>
           </>
         ),
       },
@@ -538,14 +631,14 @@ const sections = [
             <p>
               If your physique hits zero, you’re knocked unconscious and
               potentially dead. Another player must check your vital signs to
-              determine your fate. When they do, roll any die - if the result is
-              even, you’re alive but unconscious; if odd, you’re died.
+              determine your fate. When they do, roll any die—if the result is
+              even, you’re alive but unconscious; if odd, you’re dead.
             </p>
             <h4>Morale</h4>
             <p>
               Morale refers to your mental resilience, tested by terrifying
               encounters and psychic manipulation. Certain experiences—like
-              witnessing the death of an ally horrific—can drain your morale.
+              witnessing the death of an ally—can drain your morale.
             </p>
             <p>
               As your morale depletes, your mental state starts to deteriorate.
@@ -553,11 +646,19 @@ const sections = [
               skill checks. At 1 morale, you automatically fail all mental skill
               checks.
             </p>
+            <div className="md:w-[35%] md:float-left px-6 mr-10">
+              <img
+                src={bunyipImage}
+                alt={"character artwork"}
+                className="object-contain rounded-lg mt-0"
+              />
+            </div>
             <p>
               Upon dropping to zero morale, you lose control. Roll a d4 and then
               take the matching condition from the list below. The condition
               lasts until you recover at least one morale.
             </p>
+
             <ol className="list-decimal ml-4">
               <li>
                 <b>Delusions</b>: You experience constant hallucinations. You
@@ -566,13 +667,13 @@ const sections = [
               </li>
               <li>
                 <b>Hysteria</b>: You have frequent, uncontrollable emotional
-                outbursts, including laughing, crying and screaming.
+                outbursts, including laughter, crying and screaming.
               </li>
               <li>
                 <b>Amnesia</b>: You forget who you are and why you’re here.
               </li>
               <li>
-                <b>Paranoia</b>: You’re overwhelmed with fear, easily startled
+                <b>Paranoia</b>: You’re overwhelmed with fear, easy to startle
                 and flee from all danger. You even have trouble trusting your
                 friends.
               </li>
@@ -605,43 +706,77 @@ const sections = [
               types and vulnerable to others. There are five types of physical
               damage, and each creature has armour score for each:
             </p>
-            <ul className="list-disc ml-4">
-              <li>
-                <ArmourIcon
-                  type={DamageType.Fire}
-                  className="inline-block mr-1"
-                />
-                <b>Fire</b>
-              </li>
-              <li>
-                <ArmourIcon
-                  type={DamageType.Electric}
-                  className="inline-block mr-1"
-                />
-                <b>Electric</b>
-              </li>
-              <li>
-                <ArmourIcon
-                  type={DamageType.Toxic}
-                  className="inline-block mr-1"
-                />
-                <b>Toxic</b>
-              </li>
-              <li>
-                <ArmourIcon
-                  type={DamageType.Slash}
-                  className="inline-block mr-1"
-                />
-                <b>Slash</b>
-              </li>
-              <li>
-                <ArmourIcon
-                  type={DamageType.Force}
-                  className="inline-block mr-1"
-                />
-                <b>Force</b>
-              </li>
-            </ul>
+            <table className="md:mx-4">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Type</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="pr-0">
+                    <ArmourIcon
+                      type={DamageType.Fire}
+                      className="inline-block mr-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Fire</b>
+                  </td>
+                  <td>Damage from flames, heat, and radiation.</td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <ArmourIcon
+                      type={DamageType.Electric}
+                      className="inline-block mr-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Electric</b>
+                  </td>
+                  <td>Damage from electricity and lightning.</td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <ArmourIcon
+                      type={DamageType.Toxic}
+                      className="inline-block mr-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Toxic</b>
+                  </td>
+                  <td>Damage from poisons, acids, and venom.</td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <ArmourIcon
+                      type={DamageType.Slash}
+                      className="inline-block mr-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Slash</b>
+                  </td>
+                  <td>Damage from cutting, slashing, or bladed weapons.</td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <ArmourIcon
+                      type={DamageType.Force}
+                      className="inline-block mr-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Force</b>
+                  </td>
+                  <td>Damage from blunt force, impacts, and crushing.</td>
+                </tr>
+              </tbody>
+            </table>
             <p>
               If you have a positive amour score, you reduce incoming damage of
               that type by your armour score. If your armour score is negative,
@@ -661,23 +796,46 @@ const sections = [
               based on their size. Sizes are categorised based on their
               approximate dimensions:
             </p>
-            <ul className="list-disc ml-4">
-              <li>
-                <b>Tiny</b>: &lt;0.5m
-              </li>
-              <li>
-                <b>Small</b>: 0.5 - 1m
-              </li>
-              <li>
-                <b>Medium</b>: 1-2m
-              </li>
-              <li>
-                <b>Large</b>: 2-4m
-              </li>
-              <li>
-                <b>Huge</b>: &gt;4m
-              </li>
-            </ul>
+            <table className="md:mx-4">
+              <thead>
+                <tr>
+                  <th>Size</th>
+                  <th>Dimensions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <b>Tiny</b>
+                  </td>
+                  <td>&lt; 0.5m</td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Small</b>
+                  </td>
+                  <td>0.5 - 1m</td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Medium</b>
+                  </td>
+                  <td>1 - 2m</td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Large</b>
+                  </td>
+                  <td>2 - 4m</td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Huge</b>
+                  </td>
+                  <td>&gt; 4m</td>
+                </tr>
+              </tbody>
+            </table>
           </>
         ),
       },
@@ -691,36 +849,65 @@ const sections = [
               move per turn for each type of locomotion available to you. There
               are four types of locomotion:
             </p>
-            <ul className="list-disc ml-4">
-              <li>
-                <SpeedIcon
-                  type={Locomotion.Walk}
-                  className="inline-block mr-1"
-                />
-                <b>Walk</b>
-              </li>
-              <li>
-                <SpeedIcon
-                  type={Locomotion.Climb}
-                  className="inline-block mr-1"
-                />
-                <b>Climb</b>
-              </li>
-              <li>
-                <SpeedIcon
-                  type={Locomotion.Swim}
-                  className="inline-block mr-1"
-                />
-                <b>Swim</b>
-              </li>
-              <li>
-                <SpeedIcon
-                  type={Locomotion.Fly}
-                  className="inline-block mr-1"
-                />
-                <b>Fly</b>
-              </li>
-            </ul>
+            <table className="md:mx-4">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Locomotion</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="pr-0">
+                    <SpeedIcon
+                      type={Locomotion.Walk}
+                      className="inline-block mr-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Walk</b>
+                  </td>
+                  <td>Moving across land.</td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <SpeedIcon
+                      type={Locomotion.Climb}
+                      className="inline-block mr-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Climb</b>
+                  </td>
+                  <td>Scaling vertical surfaces or obstacles.</td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <SpeedIcon
+                      type={Locomotion.Swim}
+                      className="inline-block mr-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Swim</b>
+                  </td>
+                  <td>Moving through water or other liquids.</td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <SpeedIcon
+                      type={Locomotion.Fly}
+                      className="inline-block mr-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Fly</b>
+                  </td>
+                  <td>Moving through the air using wings or similar means.</td>
+                </tr>
+              </tbody>
+            </table>
             <p>
               When your physique drops below half of its maximum, your movement
               speed is halved for all types of locomotion. If your physique
@@ -739,51 +926,93 @@ const sections = [
               determine how well you perceive the world around you. There are
               eight primary senses:
             </p>
-            <ul className="list-disc ml-4">
-              <li>
-                <SightIcon
-                  standard={true}
-                  infrared={false}
-                  className="inline-block mr-2 pt-1"
-                />
-                <b>Standard sight</b>: Ability to see the visible light
-                spectrum.
-              </li>
-              <li>
-                <SightIcon
-                  standard={false}
-                  infrared={true}
-                  className="inline-block mr-2 pt-1"
-                />
-                <b>Infrared sight</b>: Perception of heat radiated as infrared
-                light.
-              </li>
-              <li>
-                <HearingIcon
-                  standard={true}
-                  tremor={false}
-                  className="inline-block mr-2 pt-1"
-                />
-                <b>Standard hearing</b>: Capacity to hear airborne sounds.
-              </li>
-              <li>
-                <HearingIcon
-                  standard={false}
-                  tremor={true}
-                  className="inline-block mr-2 pt-1"
-                />
-                <b>Tremor hearing</b>: Feeling vibrations in the ground or water
-              </li>
-              <li>
-                <SmellIcon className="inline-block mr-1 pb-1" />
-                <b>Smell</b>: Detection of airborne odours
-              </li>
-              <li>
-                <PsychicSenseIcon className="inline-block mr-1 pb-1" />
-                <b>Psychic sense</b>: Sensing the presence of psychic waves
-                emitted from cognitive thinking
-              </li>
-            </ul>
+            <table className="md:mx-4">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Sense</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="pr-0">
+                    <SightIcon
+                      standard={true}
+                      infrared={false}
+                      className="inline-block mt-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Standard sight</b>
+                  </td>
+
+                  <td>Ability to see the visible light spectrum.</td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <SightIcon
+                      standard={false}
+                      infrared={true}
+                      className="inline-block mt-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Infrared sight</b>
+                  </td>
+
+                  <td>Perception of heat radiated as infrared light.</td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <HearingIcon
+                      standard={true}
+                      tremor={false}
+                      className="inline-block mt-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Standard hearing</b>
+                  </td>
+
+                  <td>Capacity to hear airborne sounds.</td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <HearingIcon
+                      standard={false}
+                      tremor={true}
+                      className="inline-block mt-1"
+                    />
+                  </td>
+                  <td>
+                    <b>Tremor hearing</b>
+                  </td>
+
+                  <td>Feeling vibrations in the ground or water.</td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <SmellIcon className="inline-block mr-1 pb-1" />{" "}
+                  </td>
+                  <td>
+                    <b>Smell</b>
+                  </td>
+
+                  <td>Detection of airborne odours.</td>
+                </tr>
+                <tr>
+                  <td className="pr-0">
+                    <PsychicSenseIcon className="inline-block mr-1 pb-1" />{" "}
+                  </td>
+                  <td>
+                    <b>Psychic sense</b>
+                  </td>
+
+                  <td>Sensing the presence of cognitive thinking.</td>
+                </tr>
+              </tbody>
+            </table>
             <p>
               Different creatures are capable of different senses, and their
               level in the corresponding skill determines their adeptness in
@@ -827,6 +1056,13 @@ const sections = [
           door, your character’s skill check determines how well they perform
           certain tasks.
         </p>
+        <div className="md:w-[42%] md:float-right p-6">
+          <img
+            src={apothecaryImage}
+            alt={"apothecary"}
+            className="object-contain rounded-lg mt-0"
+          />
+        </div>
         <h4>When to Roll</h4>
         <p>
           The GM decides when a skill check is needed. If something is
@@ -866,108 +1102,116 @@ const sections = [
         <h4>Determining the Outcome</h4>
         <p>
           To perform a skill check, roll the die that corresponds to your skill
-          level:
+          level and add the modifier:
         </p>
-        <table className="w-auto text-center border-collapse">
+        <table className="ml-8 mt-0 w-auto text-center border-collapse">
           <thead>
             <tr>
-              <th className="border p-2 font-bold">Level</th>
-              <th className="border p-2 font-bold">Die</th>
+              <th>Level</th>
+              <th>Die</th>
+              <th>Modifier</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td className="border p-2">1</td>
-              <td className="border p-2">d4</td>
+              <td>1</td>
+              <td>d4</td>
+              <td>-</td>
             </tr>
             <tr>
-              <td className="border p-2">2</td>
-              <td className="border p-2">d6</td>
+              <td>2</td>
+              <td>d6</td>
+              <td>-</td>
             </tr>
             <tr>
-              <td className="border p-2">3</td>
-              <td className="border p-2">d8</td>
+              <td>3</td>
+              <td>d8</td>
+              <td>-</td>
             </tr>
             <tr>
-              <td className="border p-2">4</td>
-              <td className="border p-2">d10</td>
+              <td>4</td>
+              <td>d10</td>
+              <td>-</td>
             </tr>
             <tr>
-              <td className="border p-2">5</td>
-              <td className="border p-2">d12</td>
+              <td>5</td>
+              <td>d12</td>
+              <td>-</td>
             </tr>
             <tr>
-              <td className="border p-2">6</td>
-              <td className="border p-2">d12 + 1</td>
+              <td>6</td>
+              <td>d12</td>
+              <td>+1</td>
             </tr>
             <tr>
-              <td className="border p-2">7</td>
-              <td className="border p-2">d12 + 2</td>
+              <td>7</td>
+              <td>d12</td>
+              <td>+2</td>
             </tr>
             <tr>
-              <td className="border p-2">8</td>
-              <td className="border p-2">d12 + 3</td>
+              <td>8</td>
+              <td>d12</td>
+              <td>+3</td>
             </tr>
             <tr>
-              <td className="border p-2">9</td>
-              <td className="border p-2">d12 + 4</td>
+              <td>9</td>
+              <td>d12</td>
+              <td>+4</td>
             </tr>
             <tr>
-              <td className="border p-2">10</td>
-              <td className="border p-2">d12 + 5</td>
+              <td>10</td>
+              <td>d12</td>
+              <td>+5</td>
             </tr>
           </tbody>
         </table>
         <p>
           If you have any bonuses (or penalties), add (or subtract) them from
-          your roll.
-        </p>
-        <p>
-          If you don’t have a level for the required skill, then you take 1 as
-          the result.
+          your roll. If you don’t have a level for the required skill, then you
+          take 1 as the result.
         </p>
         <p>
           The GM chooses difficulty rating for the task that feels reasonable.
           Each rating has a target value that needs to be met in order to
           successfully complete the task:
         </p>
-        <table className="w-auto text-center border-collapse">
+        <table className="ml-8 mt-0 w-auto text-center border-collapse">
           <thead>
             <tr>
-              <th className="border p-2 font-bold">Difficulty</th>
-              <th className="border p-2 font-bold">Target</th>
+              <th>Difficulty</th>
+              <th>Target</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td className="border p-2">Easy</td>
-              <td className="border p-2">2+</td>
+              <td>Easy</td>
+              <td>2+</td>
             </tr>
             <tr>
-              <td className="border p-2">Moderate</td>
-              <td className="border p-2">4+</td>
+              <td>Moderate</td>
+              <td>4+</td>
             </tr>
             <tr>
-              <td className="border p-2">Hard</td>
-              <td className="border p-2">6+</td>
+              <td>Hard</td>
+              <td>6+</td>
             </tr>
             <tr>
-              <td className="border p-2">Extreme</td>
-              <td className="border p-2">10+</td>
+              <td>Extreme</td>
+              <td>10+</td>
             </tr>
             <tr>
-              <td className="border p-2">Deadly</td>
-              <td className="border p-2">16+</td>
+              <td>Deadly</td>
+              <td>16+</td>
             </tr>
           </tbody>
         </table>
         <p>
-          If your roll meets or beats the target number, you succeed. If not,
-          well, the GM decides what happens next. Failure doesn’t always mean
-          instant disaster—but it does mean things don’t go to plan. Instead of
-          breaking down the door, maybe you hurt your shoulder. Instead of
-          sneaking past the guards, maybe you step on a creaky floorboard.
-          That’s where the GM gets to have some fun.
+          If your roll is equal to or greater than the target number, you
+          succeed. If not, well, the GM decides what happens next. Failure
+          doesn’t always mean instant disaster—but it does mean things don’t go
+          to plan. Instead of breaking down the door, maybe you hurt your
+          shoulder. Instead of sneaking past the guards, maybe you step on a
+          creaky floorboard. This is where the GM gets to have some fun.
         </p>
       </>
     ),
@@ -999,6 +1243,13 @@ const sections = [
           can be initiated by anyone, including the GM. When a battle takes
           place, combat rules are applied.
         </p>
+        <div className="md:w-[35%] md:float-right px-6 bg-card">
+          <img
+            src={dropbearImage}
+            alt={"dropbear fighter"}
+            className="object-contain rounded-lg mt-0"
+          />
+        </div>
         <p>
           Combat follows a structured turn-based system, but it’s intended to be
           quick and flexible, encouraging creativity. The party that initiated
@@ -1069,49 +1320,93 @@ const sections = [
               unleashes their energy. Area of effect describe the size and shape
               of the area affected by the action:
             </p>
-            <ul className="list-disc ml-4">
-              <li>
-                <b>Single target</b>: The action only affects one creature or
-                object.
-              </li>
-              <li>
-                <b>Multiple targets</b>: The action can affect as many creatures
-                or objects in range, as chosen by the caster.
-              </li>
-              <li>
-                <b>Cone</b>: A cone extends in a direction from its target
-                point. The caster chooses a length and width of up to 5m.
-              </li>
-              <li>
-                <b>Sphere</b>: A sphere extends from the target point, with a
-                radius chosen by the caster up to 3m.
-              </li>
-              <li>
-                <b>Arena</b>: The action affects all locations in the combat
-                arena.
-              </li>
-            </ul>
+            <table className="md:mx-4">
+              <thead>
+                <tr>
+                  <th>Area Type</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <b>Single target</b>
+                  </td>
+                  <td>Affects one creature or object.</td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Multiple targets</b>
+                  </td>
+                  <td>
+                    Affects as many creatures or objects in range, as chosen by
+                    the caster.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Cone</b>
+                  </td>
+                  <td>
+                    Extends in a direction from its target point. Length and
+                    width up to 5m.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Sphere</b>
+                  </td>
+                  <td>Extends from the target point, radius up to 3m.</td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Arena</b>
+                  </td>
+                  <td>Affects all locations in the combat arena.</td>
+                </tr>
+              </tbody>
+            </table>
             <p>
               Each action also has a range, which determines how far the target
               point can be located:
             </p>
-            <ul className="list-disc ml-4">
-              <li>
-                <b>Self</b>: the caster is the target point.
-              </li>
-              <li>
-                <b>Adjacent</b>: the caster or a square adjacent to the spell
-                caster is the target point.
-              </li>
-              <li>
-                <b>Nearby</b>: the spell caster can be positioned anywhere
-                within 10m and the perception of the caster.
-              </li>
-              <li>
-                <b>Distant</b>: the target point can be positioned anywhere
-                within the perception of the caster.
-              </li>
-            </ul>
+            <table className="md:mx-4">
+              <thead>
+                <tr>
+                  <th>Range</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <b>Self</b>
+                  </td>
+                  <td>The caster is the target point.</td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Adjacent</b>
+                  </td>
+                  <td>
+                    The caster or a square adjacent to the spell caster is the
+                    target point.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Nearby</b>
+                  </td>
+                  <td>Anywhere within 10m and the perception of the caster.</td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Distant</b>
+                  </td>
+                  <td>Anywhere within the perception of the caster.</td>
+                </tr>
+              </tbody>
+            </table>
             <p>
               Obstructions can block attacks—if a wall, tree, or sturdy shield
               is in the way, the GM may rule that your action doesn’t hit as
@@ -1169,89 +1464,158 @@ const sections = [
               Some actions inflict statuses upon their foes. All statuses,
               except for burning, last only one round.
             </p>
-            <ul className="list-disc ml-4">
-              <li>
-                <b>Stunned</b>: The character loses an evasion until their next
-                turn. If they have no evasions, then they lose an action on
-                their next turn. This status can be stacked multiple times in a
-                round.
-              </li>
-              <li>
-                <b>Empowered</b>: The character gains an evasion until their
-                next turn. This status can be stacked multiple times in a round.
-              </li>
-              <li>
-                <b>Protected</b>: The character armour increases by the
-                specified amount for the specified damage type until their next
-                turn. This status can be stacked multiple times in a round.
-              </li>
-              <li>
-                <b>Restrained</b>: The character cannot dodge attacks or move to
-                a new position until the end of their next turn.
-              </li>
-              <li>
-                <b>Burning</b>: The character takes 1d8 fire damage at the start
-                of each their turns. After taking the damage, the creature may
-                use an action to douse the flame and remove the status.
-              </li>
-              <li>
-                <b>Invisible</b>: The character cannot be detected through sight
-                or infrared sight until their next turn.
-              </li>
-              <li>
-                <b>Silent</b>: The character cannot be detected through hearing
-                or tremor hearing until their next turn.
-              </li>
-              <li>
-                <b>Odourless</b>: The character cannot be detected through smell
-                until their next turn.
-              </li>
-              <li>
-                <b>Composed</b>: The character cannot be detected by psychic
-                sense until the end of their next turn.
-              </li>
-              <li>
-                <b>Blinded</b>: The character cannot see visible or infrared
-                light until the end of their next turn.
-              </li>
-              <li>
-                <b>Deafened</b>: The character cannot hear sounds in the air or
-                tremors in the earth or water until the end of their next turn.
-              </li>
-              <li>
-                <b>Anosmic</b>: The character cannot smell until the end of
-                their next turn.
-              </li>
-              <li>
-                <b>Blocked</b>: The character cannot psychic sense until the end
-                of their next turn.
-              </li>
-              <li>
-                <b>Disoriented</b>: The character is blind, deaf and anosmic.
-              </li>
-              <li>
-                <b>Deluded</b>: The caster controls the perception of the target
-                to make them see, hear or smell an altered reality.
-              </li>
-              <li>
-                <b>Hypnotised</b>: The target cannot harm the caster. They must
-                obey any commands and act with the best interest of the caster.
-                If the target is attacked by anyone from the opposing side, this
-                status is removed.
-              </li>
-              <li>
-                <b>Frightened</b>: The creature is immobilised with fear and
-                their turn is skipped.
-              </li>
-              <li>
-                <b>Madness</b>: The creature can only attack the closest
-                creature near them.
-              </li>
-              <li>
-                <b>Provoked</b>: The creature must use at least one of their
-                actions to attempt to harm the caster.
-              </li>
-            </ul>
+            <table className="md:mx-4 mb-8">
+              <thead>
+                <tr>
+                  <th>Status</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <b>Stunned</b>
+                  </td>
+                  <td>
+                    Loses an evasion until next turn. If no evasions, loses an
+                    action. Can be stacked.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Empowered</b>
+                  </td>
+                  <td>Gains an evasion until next turn. Can be stacked.</td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Protected</b>
+                  </td>
+                  <td>
+                    Armour increases by specified amount/type until next turn.
+                    Can be stacked.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Restrained</b>
+                  </td>
+                  <td>Cannot dodge attacks or move until end of next turn.</td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Burning</b>
+                  </td>
+                  <td>
+                    Takes 1d8 fire damage at start of turn. Can use action to
+                    douse flame.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Invisible</b>
+                  </td>
+                  <td>
+                    Cannot be detected through sight or infrared sight until
+                    next turn.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Silent</b>
+                  </td>
+                  <td>
+                    Cannot be detected through hearing or tremor hearing until
+                    next turn.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Odourless</b>
+                  </td>
+                  <td>Cannot be detected through smell until next turn.</td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Composed</b>
+                  </td>
+                  <td>
+                    Cannot be detected by psychic sense until end of next turn.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Blinded</b>
+                  </td>
+                  <td>
+                    Cannot see visible or infrared light until end of next turn.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Deafened</b>
+                  </td>
+                  <td>
+                    Cannot hear sounds in air or tremors until end of next turn.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Anosmic</b>
+                  </td>
+                  <td>Cannot smell until end of next turn.</td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Blocked</b>
+                  </td>
+                  <td>Cannot psychic sense until end of next turn.</td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Disoriented</b>
+                  </td>
+                  <td>Blind, deaf, and anosmic.</td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Deluded</b>
+                  </td>
+                  <td>
+                    Caster controls perception to alter reality for target.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Hypnotised</b>
+                  </td>
+                  <td>
+                    Target cannot harm caster, must obey commands. Removed if
+                    attacked by opposing side.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Frightened</b>
+                  </td>
+                  <td>Immobilised with fear, turn is skipped.</td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Madness</b>
+                  </td>
+                  <td>Can only attack the closest creature.</td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Provoked</b>
+                  </td>
+                  <td>
+                    Must use at least one action to attempt to harm the caster.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </>
         ),
       },
@@ -1289,7 +1653,12 @@ export function Handbook() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <Page title="Handbook" summary={summary} sections={sections} />
+      <Page
+        title="Handbook"
+        summary={summary}
+        tableOfContents={false}
+        sections={sections}
+      />
     </motion.div>
   );
 }

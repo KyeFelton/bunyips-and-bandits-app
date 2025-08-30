@@ -23,7 +23,7 @@ export function NavBar({ className }: NavBarProps) {
   return (
     <div
       className={cn(
-        "fixed z-50 bg-black sm:bg-black/70 shadow-sm w-full bottom-0 left-0 right-0 md:top-0 md:bottom-auto",
+        "fixed z-50 bg-black sm:bg-black/90 shadow-sm w-full bottom-0 left-0 right-0 md:top-0 md:bottom-auto",
         className
       )}
     >
