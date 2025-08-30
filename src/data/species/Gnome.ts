@@ -5,16 +5,16 @@ import { SenseType } from "../../enums/SenseType";
 import { SkillType } from "../../enums/SkillType";
 import { Species } from "../../models/species";
 
-export const Cormiard: Species = {
-  name: "Cormiard",
-  size: CreatureSize.Medium,
+export const Gnome: Species = {
+  name: "Gnome",
+  size: CreatureSize.Small,
   physique: 6,
-  morale: 4,
-  stamina: 8,
+  morale: 6,
+  stamina: 6,
   speed: {
-    [Locomotion.Walk]: 4,
-    [Locomotion.Swim]: 4,
-    [Locomotion.Climb]: 1,
+    [Locomotion.Walk]: 3,
+    [Locomotion.Swim]: 1,
+    [Locomotion.Climb]: 2,
     [Locomotion.Fly]: 0,
   },
   senses: {
@@ -35,16 +35,16 @@ export const Cormiard: Species = {
   skillLevels: {
     [SkillType.Strength]: 2,
     [SkillType.Agility]: 2,
-    [SkillType.Dexterity]: 2,
-    [SkillType.Throw]: 3,
+    [SkillType.Dexterity]: 3,
+    [SkillType.Throw]: 2,
     [SkillType.Intelligence]: 2,
     [SkillType.Nature]: 2,
     [SkillType.Willpower]: 2,
     [SkillType.Charisma]: 2,
     [SkillType.Psychology]: 2,
-    [SkillType.Stealth]: 2,
-    [SkillType.Sight]: 3,
-    [SkillType.Hearing]: 2,
-    [SkillType.Smell]: 1,
+    [SkillType.Stealth]: 3,
+    [SkillType.Sight]: 1,
+    [SkillType.Hearing]: 3,
+    [SkillType.Smell]: 3,
   },
 };

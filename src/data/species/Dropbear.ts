@@ -5,16 +5,16 @@ import { SenseType } from "../../enums/SenseType";
 import { SkillType } from "../../enums/SkillType";
 import { Species } from "../../models/species";
 
-export const Badgerman: Species = {
-  name: "Badgerman",
+export const Dropbear: Species = {
+  name: "Dropbear",
   size: CreatureSize.Small,
-  physique: 6,
-  morale: 6,
-  stamina: 6,
+  physique: 4,
+  morale: 7,
+  stamina: 7,
   speed: {
     [Locomotion.Walk]: 3,
     [Locomotion.Swim]: 1,
-    [Locomotion.Climb]: 2,
+    [Locomotion.Climb]: 3,
     [Locomotion.Fly]: 0,
   },
   senses: {
@@ -33,9 +33,9 @@ export const Badgerman: Species = {
     [DamageType.Force]: 0,
   },
   skillLevels: {
-    [SkillType.Strength]: 2,
-    [SkillType.Agility]: 2,
-    [SkillType.Dexterity]: 3,
+    [SkillType.Strength]: 1,
+    [SkillType.Agility]: 4,
+    [SkillType.Dexterity]: 2,
     [SkillType.Throw]: 2,
     [SkillType.Intelligence]: 2,
     [SkillType.Nature]: 2,
@@ -43,8 +43,8 @@ export const Badgerman: Species = {
     [SkillType.Charisma]: 2,
     [SkillType.Psychology]: 2,
     [SkillType.Stealth]: 3,
-    [SkillType.Sight]: 1,
-    [SkillType.Hearing]: 3,
-    [SkillType.Smell]: 3,
+    [SkillType.Sight]: 3,
+    [SkillType.Hearing]: 1,
+    [SkillType.Smell]: 2,
   },
 };

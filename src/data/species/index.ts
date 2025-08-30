@@ -1,25 +1,27 @@
-import { Badgerman } from "./Badgerman";
+import { Gnome } from "./Gnome";
 import { Cobber } from "./Cobber";
-import { Cormiard } from "./Cormiard";
+import { Human } from "./Human";
+import { Hobgoblin } from "./Hobgoblin";
 import { Goa } from "./Goa";
 import { Jelly } from "./Jelly";
 import { Minotaur } from "./Minotaur";
 import { Pixie } from "./Pixie";
-import { Tengaroo } from "./Tengaroo";
-import { Vulturan } from "./Vulturan";
+import { Dropbear } from "./Dropbear";
+import { Falkir } from "./Falkir";
 import { Yowie } from "./Yowie";
 
 export const AllSpecies = {
-  Badgerman,
   Cobber,
-  Cormiard,
+  Dropbear,
+  Falkir,
+  Gnome,
   Goa,
-  Jelly,
+  Hobgoblin,
+  Human,
+  // Jelly,
   Minotaur,
   Pixie,
-  Tengaroo,
-  Vulturan,
   Yowie,
 };
 
-export const startingSpecies = AllSpecies.Badgerman;
+export const startingSpecies = AllSpecies.Gnome;
