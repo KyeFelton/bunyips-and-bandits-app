@@ -7,8 +7,8 @@ import { Handbook } from "./components/Handbook";
 import { CharactersPage } from "./components/CharacterList";
 import { NavBar } from "./components/NavBar";
 import { Toaster } from "./components/ui/toaster";
-import background from "./images/background.png";
-import frame from "./images/leaf-frame.png";
+import background from "./images/backgrounds/campfire.png";
+import frame from "./images/backgrounds/leaf-frame.png";
 import {
   CharacterSheetRoute,
   CharacterEditorRoute,
