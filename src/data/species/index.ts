@@ -19,9 +19,9 @@ export const AllSpecies = {
   Hobgoblin,
   Human,
   // Jelly,
-  Minotaur,
-  Pixie,
+  // Minotaur,
+  // Pixie,
   Yowie,
 };
 
-export const startingSpecies = AllSpecies.Gnome;
+export const startingSpecies = AllSpecies.Human;

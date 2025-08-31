@@ -119,10 +119,6 @@ export function CharactersPage() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
-      {Array.from({ length: 6 }).map((_, i) => (
-        <div key={i} className="firefly" />
-      ))}
-
       {name && (
         <div className="flex justify-between items-center pb-8">
           <h1 className="text-3xl font-bold text-primary-foreground">

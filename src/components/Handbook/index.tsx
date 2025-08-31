@@ -796,7 +796,7 @@ const sections = [
               based on their size. Sizes are categorised based on their
               approximate dimensions:
             </p>
-            <table className="md:mx-4">
+            <table className="md:mx-4 mb-8">
               <thead>
                 <tr>
                   <th>Size</th>
@@ -1575,7 +1575,7 @@ const sections = [
                   <td>
                     <b>Disoriented</b>
                   </td>
-                  <td>Blind, deaf, and anosmic.</td>
+                  <td>Blind, deaf, anosmic and blocked.</td>
                 </tr>
                 <tr>
                   <td>

@@ -16,6 +16,7 @@ import {
   HandbookRoute,
   CharacterListRoute,
 } from "./routes";
+import "./App.sass";
 
 function App() {
   const location = useLocation();
@@ -25,7 +26,7 @@ function App() {
       <div className="absolute inset-0 -z-10 bg-gradient-to-bl from-slate-900 to-slate-950">
         <img
           src={frame}
-          className="absolute inset-0 z-20 frame-animation"
+          className="absolute inset-0 frame-animation"
           style={{
             width: "100vw",
             height: "100vh",
@@ -34,7 +35,7 @@ function App() {
         />
         <img
           src={background}
-          className="absolute inset-0 background-animation"
+          className="absolute inset-0 -z-20 background-animation"
           style={{
             width: "100vw",
             height: "100vh",
@@ -44,6 +45,10 @@ function App() {
       </div>
 
       <NavBar className={"h-14 md:h-16"} />
+
+      {Array.from({ length: 6 }).map((_, i) => (
+        <div key={i} className="firefly" />
+      ))}
 
       <div className="h-dvh pb-14 md:pb-0 md:pt-16 overflow-auto">
         <AnimatePresence mode="wait">
