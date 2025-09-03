@@ -3,7 +3,7 @@ import { ItemDictionary } from "./items";
 import { PathProgression } from "./paths";
 import { Trait } from "./traits";
 
-export type SaveFile = {
+export type CharacterSaveFile = {
   name: string;
   species: string;
   gender: string;
@@ -23,5 +23,10 @@ export type SaveFile = {
   staminaUpgrades: number;
   items: ItemDictionary;
   money: number;
-  image: string;
+  image: string | undefined;
 };
+
+
+export type SaveFile = {
+  characters: CharacterSaveFile[]
+}

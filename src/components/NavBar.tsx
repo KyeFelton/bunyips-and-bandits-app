@@ -6,7 +6,7 @@ import { User, Book, Home, Download } from "lucide-react";
 import { Button } from "./ui/button";
 import { useAtomValue } from "jotai";
 import { saveFileAtom } from "../state/character";
-import { saveCharacter } from "../utils/character";
+import { saveData } from "../utils/character";
 
 interface NavBarProps {
   className?: string;
@@ -17,7 +17,7 @@ export function NavBar({ className }: NavBarProps) {
   const saveFile = useAtomValue(saveFileAtom);
 
   const handleDownload = () => {
-    saveCharacter(saveFile);
+    saveData(saveFile);
   };
 
   return (

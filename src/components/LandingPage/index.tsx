@@ -24,8 +24,9 @@ import {
   moraleUpgradesAtom,
   physiqueUpgradesAtom,
   staminaUpgradesAtom,
+  otherCharactersAtom,
 } from "../../state/character";
-import { loadCharacter } from "../../utils/character";
+import { loadCharacters } from "../../utils/character";
 import { Logo } from "../Logo";
 import "./index.sass";
 import { CharacterEditorRoute } from "../../routes";
@@ -38,31 +39,33 @@ export function LandingPage() {
   const [errorTitle, setErrorTitle] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const setters = {
-    setName: useSetAtom(nameAtom),
-    setSpecies: useSetAtom(speciesAtom),
-    setGender: useSetAtom(genderAtom),
-    setAge: useSetAtom(ageAtom),
-    setBackground: useSetAtom(backgroundAtom),
-    setPersonality: useSetAtom(personalityAtom),
-    setLanguages: useSetAtom(languagesAtom),
-    setImage: useSetAtom(imageAtom),
-    setLevel: useSetAtom(levelAtom),
-    setCurrentPhysique: useSetAtom(currentPhysiqueAtom),
-    setPhysiqueUpgrades: useSetAtom(physiqueUpgradesAtom),
-    setCurrentMorale: useSetAtom(currentMoraleAtom),
-    setMoraleUpgrades: useSetAtom(moraleUpgradesAtom),
-    setCurrentStamina: useSetAtom(currentStaminaAtom),
-    setStaminaUpgrades: useSetAtom(staminaUpgradesAtom),
-    setMoney: useSetAtom(moneyAtom),
-    setItems: useSetAtom(itemsAtom),
-    setPaths: useSetAtom(pathsAtom),
-    setCustomTraits: useSetAtom(customTraitsAtom),
-    setSkillLevelUpgrades: useSetAtom(skillLevelUpgradesAtom),
-  };
+  // const setters = {
+  //   setName: useSetAtom(nameAtom),
+  //   setSpecies: useSetAtom(speciesAtom),
+  //   setGender: useSetAtom(genderAtom),
+  //   setAge: useSetAtom(ageAtom),
+  //   setBackground: useSetAtom(backgroundAtom),
+  //   setPersonality: useSetAtom(personalityAtom),
+  //   setLanguages: useSetAtom(languagesAtom),
+  //   setImage: useSetAtom(imageAtom),
+  //   setLevel: useSetAtom(levelAtom),
+  //   setCurrentPhysique: useSetAtom(currentPhysiqueAtom),
+  //   setPhysiqueUpgrades: useSetAtom(physiqueUpgradesAtom),
+  //   setCurrentMorale: useSetAtom(currentMoraleAtom),
+  //   setMoraleUpgrades: useSetAtom(moraleUpgradesAtom),
+  //   setCurrentStamina: useSetAtom(currentStaminaAtom),
+  //   setStaminaUpgrades: useSetAtom(staminaUpgradesAtom),
+  //   setMoney: useSetAtom(moneyAtom),
+  //   setItems: useSetAtom(itemsAtom),
+  //   setPaths: useSetAtom(pathsAtom),
+  //   setCustomTraits: useSetAtom(customTraitsAtom),
+  //   setSkillLevelUpgrades: useSetAtom(skillLevelUpgradesAtom),
+  // };
 
-  const handleLoadCharacter = async () => {
-    await loadCharacter(setters, navigate, (title, message) => {
+  const setOtherCharacters = useSetAtom(otherCharactersAtom);
+
+  const handleLoadCharacters = async () => {
+    await loadCharacters(setOtherCharacters, navigate, (title, message) => {
       setErrorTitle(title);
       setErrorMessage(message);
       setErrorDialogOpen(true);
@@ -91,7 +94,7 @@ export function LandingPage() {
           <div className="flex justify-center gap-4 w-full">
             <Button
               className="load-button w-md h-14 text-lg hover:scale-105 transition-transform"
-              onClick={handleLoadCharacter}
+              onClick={handleLoadCharacters}
             >
               <Upload className="mr-2 h-6 w-6" />
               Load
