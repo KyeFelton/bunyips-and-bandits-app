@@ -24,7 +24,7 @@ import {
   customTraitsAtom,
   skillLevelUpgradesAtom,
 } from "../../state/character";
-import { resetCharacter, loadCharacter } from "../../utils/character";
+import { exitCharacter, loadCharacters } from "../../utils/character";
 import { CharacterSheetRoute } from "../../routes";
 import { Upload, MoreVertical, CirclePlus } from "lucide-react";
 import { motion } from "framer-motion";
@@ -57,35 +57,35 @@ export function CharactersPage() {
   const [errorTitle, setErrorTitle] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const setters = {
-    setName: useSetAtom(nameAtom),
-    setLevel: useSetAtom(levelAtom),
-    setCurrentPhysique: useSetAtom(currentPhysiqueAtom),
-    setPhysiqueUpgrades: useSetAtom(physiqueUpgradesAtom),
-    setCurrentMorale: useSetAtom(currentMoraleAtom),
-    setMoraleUpgrades: useSetAtom(moraleUpgradesAtom),
-    setCurrentStamina: useSetAtom(currentStaminaAtom),
-    setStaminaUpgrades: useSetAtom(staminaUpgradesAtom),
-    setSpecies: useSetAtom(speciesAtom),
-    setGender: useSetAtom(genderAtom),
-    setAge: useSetAtom(ageAtom),
-    setBackground: useSetAtom(backgroundAtom),
-    setPersonality: useSetAtom(personalityAtom),
-    setLanguages: useSetAtom(languagesAtom),
-    setImage: useSetAtom(imageAtom),
-    setMoney: useSetAtom(moneyAtom),
-    setItems: useSetAtom(itemsAtom),
-    setPaths: useSetAtom(pathsAtom),
-    setCustomTraits: useSetAtom(customTraitsAtom),
-    setSkillLevelUpgrades: useSetAtom(skillLevelUpgradesAtom),
-  };
+  // const setters = {
+  //   setName: useSetAtom(nameAtom),
+  //   setLevel: useSetAtom(levelAtom),
+  //   setCurrentPhysique: useSetAtom(currentPhysiqueAtom),
+  //   setPhysiqueUpgrades: useSetAtom(physiqueUpgradesAtom),
+  //   setCurrentMorale: useSetAtom(currentMoraleAtom),
+  //   setMoraleUpgrades: useSetAtom(moraleUpgradesAtom),
+  //   setCurrentStamina: useSetAtom(currentStaminaAtom),
+  //   setStaminaUpgrades: useSetAtom(staminaUpgradesAtom),
+  //   setSpecies: useSetAtom(speciesAtom),
+  //   setGender: useSetAtom(genderAtom),
+  //   setAge: useSetAtom(ageAtom),
+  //   setBackground: useSetAtom(backgroundAtom),
+  //   setPersonality: useSetAtom(personalityAtom),
+  //   setLanguages: useSetAtom(languagesAtom),
+  //   setImage: useSetAtom(imageAtom),
+  //   setMoney: useSetAtom(moneyAtom),
+  //   setItems: useSetAtom(itemsAtom),
+  //   setPaths: useSetAtom(pathsAtom),
+  //   setCustomTraits: useSetAtom(customTraitsAtom),
+  //   setSkillLevelUpgrades: useSetAtom(skillLevelUpgradesAtom),
+  // };
 
   const handleLoadCharacter = async () => {
-    await loadCharacter(setters, undefined, (title, message) => {
-      setErrorTitle(title);
-      setErrorMessage(message);
-      setErrorDialogOpen(true);
-    });
+    // await loadCharacters(setters, undefined, (title, message) => {
+    //   setErrorTitle(title);
+    //   setErrorMessage(message);
+    //   setErrorDialogOpen(true);
+    // });
   };
 
   const handleCreateNewCharacter = () => {
@@ -107,7 +107,7 @@ export function CharactersPage() {
   };
 
   const confirmDeleteCharacter = () => {
-    resetCharacter(setters);
+    // resetCharacter(setters);
     setIsDeleteDialogOpen(false);
   };
 

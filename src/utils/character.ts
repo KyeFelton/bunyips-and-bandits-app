@@ -1,5 +1,5 @@
 import { SetStateAction } from "jotai";
-import { SaveFile } from "../models/saveFile";
+import { CharacterSaveFile, SaveFile } from "../models/saveFile";
 import { getSpeciesImage } from "./speciesImages";
 import { Trait } from "../models/traits";
 import { CharacterSheetRoute } from "../routes";
@@ -36,113 +36,87 @@ type CharacterSetters = {
 
 const validateSaveFile = (
   data: unknown
-): { isValid: boolean; errorMessage?: string } => {
+): data is SaveFile  => {
+  let error: string | null = null;
+
   if (typeof data !== "object" || data === null) {
-    return {
-      isValid: false,
-      errorMessage: "Save file must be a valid JSON object",
-    };
+    error = "Save file must be a valid JSON object";
   }
 
   const saveData = data as SaveFile;
 
-  if (typeof saveData.name !== "string") {
-    return {
-      isValid: false,
-      errorMessage: "Expected a string value for 'name'",
-    };
+  if (!Array.isArray(saveData.characters)) {
+    error = "Expected an array of characters";
   }
 
-  if (typeof saveData.species !== "string") {
-    return {
-      isValid: false,
-      errorMessage: "Expected a string value for 'species'",
-    };
+  for (const character of saveData.characters) {
+    if (typeof character.name !== "string") {
+      error = "Expected a string value for 'name'";
+    }
+  
+    if (typeof character.species !== "string") {
+      error = "Expected a string value for 'species'";
+    }
+  
+    if (typeof character.level !== "number") {
+      error = "Expected a number value for 'level'";
+    }
+  
+    if (!Array.isArray(character.languages)) {
+      error = "Expected an array for 'languages'";
+    }
+  
+    if (typeof character.currentPhysique !== "number") {
+      error = "Expected a number value for 'currentPhysique'";
+    }
+  
+    if (typeof character.physiqueUpgrades !== "number") {
+      error = "Expected a number value for 'physiqueUpgrades'";
+    }
+  
+    if (typeof character.currentMorale !== "number") {
+      error = "Expected a number value for 'currentMorale'";
+    }
+  
+    if (typeof character.moraleUpgrades !== "number") {
+      error = "Expected a number value for 'moraleUpgrades'";
+    }
+  
+    if (typeof character.currentStamina !== "number") {
+      error = "Expected a number value for 'currentStamina'";
+    }
+  
+    if (typeof character.staminaUpgrades !== "number") {
+      error = "Expected a number value for 'staminaUpgrades'";
+    }
+  
+    if (typeof character.money !== "number") {
+      error = "Expected a number value for 'money'";
+    }
+  
+    if (!Array.isArray(character.paths)) {
+        error = "Expected an array for 'paths'";
+    }
+  
+    if (typeof character.items !== "object" || character.items === null) {
+        error = "Expected an object for 'items'";
+    }
+  
+    if (!Array.isArray(character.customTraits)) {
+        error = "Expected an array for 'customTraits'";
+    }
+  }
+  
+  if (error) {
+    console.error(error);
+    return false;
   }
 
-  if (typeof saveData.level !== "number") {
-    return {
-      isValid: false,
-      errorMessage: "Expected a number value for 'level'",
-    };
-  }
-
-  if (!Array.isArray(saveData.languages)) {
-    return {
-      isValid: false,
-      errorMessage: "Expected an array for 'languages'",
-    };
-  }
-
-  if (typeof saveData.currentPhysique !== "number") {
-    return {
-      isValid: false,
-      errorMessage: "Expected a number value for 'currentPhysique'",
-    };
-  }
-
-  if (typeof saveData.physiqueUpgrades !== "number") {
-    return {
-      isValid: false,
-      errorMessage: "Expected a number value for 'physiqueUpgrades'",
-    };
-  }
-
-  if (typeof saveData.currentMorale !== "number") {
-    return {
-      isValid: false,
-      errorMessage: "Expected a number value for 'currentMorale'",
-    };
-  }
-
-  if (typeof saveData.moraleUpgrades !== "number") {
-    return {
-      isValid: false,
-      errorMessage: "Expected a number value for 'moraleUpgrades'",
-    };
-  }
-
-  if (typeof saveData.currentStamina !== "number") {
-    return {
-      isValid: false,
-      errorMessage: "Expected a number value for 'currentStamina'",
-    };
-  }
-
-  if (typeof saveData.staminaUpgrades !== "number") {
-    return {
-      isValid: false,
-      errorMessage: "Expected a number value for 'staminaUpgrades'",
-    };
-  }
-
-  if (typeof saveData.money !== "number") {
-    return {
-      isValid: false,
-      errorMessage: "Expected a number value for 'money'",
-    };
-  }
-
-  if (!Array.isArray(saveData.paths)) {
-    return { isValid: false, errorMessage: "Expected an array for 'paths'" };
-  }
-
-  if (typeof saveData.items !== "object" || saveData.items === null) {
-    return { isValid: false, errorMessage: "Expected an object for 'items'" };
-  }
-
-  if (!Array.isArray(saveData.customTraits)) {
-    return {
-      isValid: false,
-      errorMessage: "Expected an array for 'customTraits'",
-    };
-  }
-
-  return { isValid: true };
+  return true;
 };
 
-export const loadCharacter = async (
-  setters: CharacterSetters,
+export const loadCharacters = async (
+  setCharacters: (value: SetStateAction<SaveFile>) => void,
   navigate?: (path: string) => void,
   onError?: (title: string, message: string) => void
 ) => {
@@ -156,55 +130,20 @@ export const loadCharacter = async (
       reader.onload = (e) => {
         try {
           const data = JSON.parse(e.target?.result as string);
-          const validation = validateSaveFile(data);
-
-          if (!validation.isValid) {
-            throw new Error(
-              validation.errorMessage || "Invalid save file format"
-            );
+          if (!validateSaveFile(data)) {
+            throw Error("Failed to load character file. Please make sure the file is valid.");
           }
-
-          // Update all atoms with the loaded data
-          setters.setName(data.name);
-          setters.setLevel(data.level);
-          setters.setCurrentPhysique(data.currentPhysique);
-          setters.setPhysiqueUpgrades(data.physiqueUpgrades);
-          setters.setCurrentMorale(data.currentMorale);
-          setters.setMoraleUpgrades(data.moraleUpgrades);
-          setters.setCurrentStamina(data.currentStamina);
-          setters.setStaminaUpgrades(data.staminaUpgrades);
-          setters.setSpecies(data.species);
-          setters.setGender(data.gender || "");
-          setters.setAge(data.age || 0);
-          setters.setBackground(data.background || "");
-          setters.setPersonality(data.personality || "");
-          setters.setLanguages(data.languages);
-          setters.setImage(data.image);
-          setters.setMoney(data.money);
-          setters.setItems(data.items);
-          setters.setPaths(data.paths);
-          setters.setCustomTraits(data.customTraits);
-          setters.setSkillLevelUpgrades(data.skillLevelUpgrades || {});
-          setters.setIsFirstLoad?.(false);
-
+          setCharacters(data);
           navigate?.(CharacterSheetRoute);
         } catch (error) {
-          console.error(
-            "Error loading character:",
-            error instanceof Error ? error.message : "Unknown error"
-          );
 
           if (onError) {
             onError(
-              "Failed to Load Character",
-              error instanceof Error
-                ? error.message + ". Please make sure the file is valid."
-                : "Failed to load character file. Please make sure the file is valid."
+              "Failed to load character",
+              error instanceof Error ? error.message : ""
             );
           } else {
-            alert(
-              "Failed to load character file. Please make sure the file is valid."
-            );
+            alert(error instanceof Error ? error.message : "Failed to load character");
           }
         }
       };
@@ -214,7 +153,32 @@ export const loadCharacter = async (
   input.click();
 };
 
-export const saveCharacter = (saveFile: SaveFile) => {
+export const setFocalCharacter = (data: CharacterSaveFile, setters: CharacterSetters) => {
+    // Update all atoms with the loaded data
+    setters.setName(data.name);
+    setters.setLevel(data.level);
+    setters.setCurrentPhysique(data.currentPhysique);
+    setters.setPhysiqueUpgrades(data.physiqueUpgrades);
+    setters.setCurrentMorale(data.currentMorale);
+    setters.setMoraleUpgrades(data.moraleUpgrades);
+    setters.setCurrentStamina(data.currentStamina);
+    setters.setStaminaUpgrades(data.staminaUpgrades);
+    setters.setSpecies(data.species);
+    setters.setGender(data.gender || "");
+    setters.setAge(data.age || 0);
+    setters.setBackground(data.background || "");
+    setters.setPersonality(data.personality || "");
+    setters.setLanguages(data.languages);
+    setters.setImage(data.image);
+    setters.setMoney(data.money);
+    setters.setItems(data.items);
+    setters.setPaths(data.paths);
+    setters.setCustomTraits(data.customTraits);
+    setters.setSkillLevelUpgrades(data.skillLevelUpgrades || {});
+    setters.setIsFirstLoad?.(false);
+}
+
+export const saveData = (saveFile: SaveFile) => {
   const blob = new Blob([JSON.stringify(saveFile, null, 2)], {
     type: "application/json",
   });
@@ -228,7 +192,7 @@ export const saveCharacter = (saveFile: SaveFile) => {
   URL.revokeObjectURL(url);
 };
 
-export const resetCharacter = (setters: CharacterSetters) => {
+export const exitCharacter = (setters: CharacterSetters) => {
   setters.setName("");
   setters.setSpecies(startingSpecies.name);
   setters.setLevel(1);

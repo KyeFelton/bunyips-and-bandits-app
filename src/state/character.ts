@@ -3,7 +3,7 @@ import { SkillType } from "../enums/SkillType";
 import { ItemDictionary } from "../models/items";
 import { PathProgression } from "../models/paths";
 import { AllSpecies, startingSpecies } from "../data/species";
-import { SaveFile } from "../models/saveFile";
+import { CharacterSaveFile, SaveFile } from "../models/saveFile";
 import { Effect } from "../models/effect";
 import * as Skills from "../models/skills";
 import { Trait } from "../models/traits";
@@ -49,6 +49,9 @@ export const moneyAtom = atom<number>(0);
 
 // Custom traits
 export const customTraitsAtom = atom<Trait[]>([]);
+
+// Other characters
+export const otherCharactersAtom = atom<CharacterSaveFile[]>([]);
 
 // Effects atom
 export const effectsAtom = atom((get) => {
@@ -367,8 +370,8 @@ export const weaponAtom = atom((get) => {
 // Luck
 export const luckAtom = atom<number>(0);
 
-// Save file
-export const saveFileAtom = atom<SaveFile>((get) => ({
+// Character save file
+export const focalCharacterAtom = atom<CharacterSaveFile>((get) => ({
   name: get(nameAtom),
   species: get(speciesAtom),
   gender: get(genderAtom),
@@ -389,4 +392,10 @@ export const saveFileAtom = atom<SaveFile>((get) => ({
   items: get(itemsAtom),
   money: get(moneyAtom),
   image: get(imageAtom),
+}));
+
+
+// Full save file
+export const saveFileAtom = atom<SaveFile>((get) => ({
+  characters: [get(focalCharacterAtom), ...get(otherCharactersAtom)]
 }));
