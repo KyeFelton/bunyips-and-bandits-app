@@ -2,11 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { CharacterListRoute, HandbookRoute, HomeRoute } from "../routes";
 import { Logo } from "./Logo";
 import { cn } from "../utils/cn";
-import { User, Book, Home, Download } from "lucide-react";
-import { Button } from "./ui/button";
-import { useAtomValue } from "jotai";
-import { saveFileAtom } from "../state/character";
-import { saveCharacter } from "../utils/character";
+import { User, Book } from "lucide-react";
 
 interface NavBarProps {
   className?: string;
@@ -14,11 +10,6 @@ interface NavBarProps {
 
 export function NavBar({ className }: NavBarProps) {
   const location = useLocation();
-  const saveFile = useAtomValue(saveFileAtom);
-
-  const handleDownload = () => {
-    saveCharacter(saveFile);
-  };
 
   return (
     <div
@@ -32,7 +23,7 @@ export function NavBar({ className }: NavBarProps) {
           <Logo className="h-8 md:h-10 mr-2" />
         </Link>
         <nav className="flex items-center justify-around md:justify-end w-full md:w-auto md:space-x-6">
-          <Link
+          {/* <Link
             to={HomeRoute}
             className={cn(
               "md:hidden text-primary-foreground hover:text-accent-medium transition-colors flex flex-col items-center",
@@ -41,12 +32,13 @@ export function NavBar({ className }: NavBarProps) {
           >
             <Home className="h-5 w-5" />
             <span className="text-xs mt-1 hidden">Home</span>
-          </Link>
+          </Link> */}
           <Link
             to={CharacterListRoute}
             className={cn(
               "text-primary-foreground hover:text-accent-medium transition-colors flex flex-col md:flex-row items-center",
-              location.pathname.includes(CharacterListRoute)
+              location.pathname === CharacterListRoute ||
+                location.pathname.includes("character")
                 ? "text-accent-medium"
                 : ""
             )}
@@ -70,14 +62,6 @@ export function NavBar({ className }: NavBarProps) {
               Handbook
             </span>
           </Link>
-          {saveFile.name && (
-            <Button variant="outline" size="sm" onClick={handleDownload}>
-              <Download className="h-5 w-5 md:mr-2" />
-              <span className="text-xs mt-1 md:mt-0 md:text-base hidden md:inline">
-                Save
-              </span>
-            </Button>
-          )}
         </nav>
       </div>
     </div>

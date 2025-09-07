@@ -2,8 +2,7 @@ import { atom } from "jotai";
 import { SkillType } from "../enums/SkillType";
 import { ItemDictionary } from "../models/items";
 import { PathProgression } from "../models/paths";
-import { AllSpecies, startingSpecies } from "../data/species";
-import { SaveFile } from "../models/saveFile";
+import { AllSpecies } from "../data/species";
 import { Effect } from "../models/effect";
 import * as Skills from "../models/skills";
 import { Trait } from "../models/traits";
@@ -19,7 +18,7 @@ export const MAX_SKILL_LEVEL = 10;
 
 // Basic character info
 export const nameAtom = atom<string>("");
-export const speciesAtom = atom<string>(startingSpecies.name);
+export const speciesAtom = atom<string>("");
 export const genderAtom = atom<string>("");
 export const ageAtom = atom<number>(0);
 export const backgroundAtom = atom<string>("");
@@ -38,9 +37,9 @@ export const skillLevelUpgradesAtom = atom<Partial<Record<SkillType, number>>>(
 );
 
 // Character stats
-export const currentPhysiqueAtom = atom<number>(startingSpecies.physique);
-export const currentMoraleAtom = atom<number>(startingSpecies.morale);
-export const currentStaminaAtom = atom<number>(startingSpecies.stamina);
+export const currentPhysiqueAtom = atom<number>(0);
+export const currentMoraleAtom = atom<number>(0);
+export const currentStaminaAtom = atom<number>(0);
 export const conditionsAtom = atom<Condition[]>([]);
 
 // Items and equipment
@@ -366,27 +365,3 @@ export const weaponAtom = atom((get) => {
 
 // Luck
 export const luckAtom = atom<number>(0);
-
-// Save file
-export const saveFileAtom = atom<SaveFile>((get) => ({
-  name: get(nameAtom),
-  species: get(speciesAtom),
-  gender: get(genderAtom),
-  age: get(ageAtom),
-  languages: get(languagesAtom),
-  background: get(backgroundAtom),
-  personality: get(personalityAtom),
-  level: get(levelAtom),
-  paths: get(pathsAtom),
-  customTraits: get(customTraitsAtom),
-  skillLevelUpgrades: get(skillLevelUpgradesAtom),
-  currentPhysique: get(currentPhysiqueAtom),
-  physiqueUpgrades: get(physiqueUpgradesAtom),
-  currentMorale: get(currentMoraleAtom),
-  moraleUpgrades: get(moraleUpgradesAtom),
-  currentStamina: get(currentStaminaAtom),
-  staminaUpgrades: get(staminaUpgradesAtom),
-  items: get(itemsAtom),
-  money: get(moneyAtom),
-  image: get(imageAtom),
-}));

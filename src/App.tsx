@@ -1,6 +1,5 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import { LandingPage } from "./components/LandingPage";
 import { CharacterSheet } from "./components/CharacterSheet";
 import { CharacterEditor } from "./components/CharacterEditor";
 import { Handbook } from "./components/Handbook";
@@ -12,7 +11,6 @@ import frame from "./images/backgrounds/leaf-frame.png";
 import {
   CharacterSheetRoute,
   CharacterEditorRoute,
-  HomeRoute,
   HandbookRoute,
   CharacterListRoute,
 } from "./routes";
@@ -46,14 +44,13 @@ function App() {
 
       <NavBar className={"h-14 md:h-16"} />
 
-      {Array.from({ length: 6 }).map((_, i) => (
+      {Array.from({ length: 8 }).map((_, i) => (
         <div key={i} className="firefly" />
       ))}
 
       <div className="h-dvh pb-14 md:pb-0 md:pt-16 overflow-auto">
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
-            <Route path={HomeRoute} element={<LandingPage />} />
             <Route path={CharacterSheetRoute} element={<CharacterSheet />} />
             <Route path={CharacterEditorRoute} element={<CharacterEditor />} />
             <Route path={HandbookRoute} element={<Handbook />} />

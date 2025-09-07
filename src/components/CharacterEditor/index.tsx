@@ -11,7 +11,6 @@ import { PathsStep } from "./PathsStep";
 import { SkillsStep } from "./SkillsStep";
 import { CustomTraitsStep } from "./CustomTraitsStep";
 import { HealthStep } from "./HealthStep";
-import { CharacterSheetRoute } from "../../routes";
 
 const steps = [
   { title: "Species", component: SpeciesStep },
@@ -32,7 +31,7 @@ export const CharacterEditor = () => {
 
   const handleNext = () => {
     if (isLastStep) {
-      navigate(CharacterSheetRoute);
+      navigate(-1);
     } else {
       setCurrentStep((prev) => prev + 1);
     }

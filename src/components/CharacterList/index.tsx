@@ -1,32 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardFooter } from "../ui/card";
 import { Button } from "../ui/button";
-import { useAtomValue, useSetAtom } from "jotai";
-import {
-  nameAtom,
-  levelAtom,
-  speciesAtom,
-  imageAtom,
-  currentPhysiqueAtom,
-  currentMoraleAtom,
-  currentStaminaAtom,
-  physiqueUpgradesAtom,
-  moraleUpgradesAtom,
-  staminaUpgradesAtom,
-  genderAtom,
-  ageAtom,
-  backgroundAtom,
-  personalityAtom,
-  languagesAtom,
-  moneyAtom,
-  itemsAtom,
-  pathsAtom,
-  customTraitsAtom,
-  skillLevelUpgradesAtom,
-} from "../../state/character";
-import { resetCharacter, loadCharacter } from "../../utils/character";
-import { CharacterSheetRoute } from "../../routes";
-import { Upload, MoreVertical, CirclePlus } from "lucide-react";
+import { useAtom } from "jotai";
+import { downloadSaveFile, loadSaveFile } from "../../utils/saveFile";
+import { getCharacterEditorRoute, getCharacterSheetRoute } from "../../routes";
+import { Upload, MoreVertical, CirclePlus, Download } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import {
@@ -36,7 +14,6 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { ErrorDialog } from "../ErrorDialog";
-import { CharacterEditorRoute } from "../../routes";
 import {
   Dialog,
   DialogContent,
@@ -45,43 +22,133 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../ui/dialog";
+import { saveFileAtom, focalCharacterIdAtom } from "../../state/saveFile";
+import { randomString } from "../../utils/randomString";
+import { CharacterSaveFile, defaultCharacter } from "../../models/saveFile";
+import {
+  ageAtom,
+  backgroundAtom,
+  currentMoraleAtom,
+  currentPhysiqueAtom,
+  currentStaminaAtom,
+  customTraitsAtom,
+  genderAtom,
+  imageAtom,
+  itemsAtom,
+  languagesAtom,
+  levelAtom,
+  moneyAtom,
+  moraleUpgradesAtom,
+  nameAtom,
+  pathsAtom,
+  personalityAtom,
+  physiqueUpgradesAtom,
+  skillLevelUpgradesAtom,
+  speciesAtom,
+  staminaUpgradesAtom,
+} from "../../state/character";
+import { getSpeciesImage } from "../../utils/speciesImages";
+import "./index.sass";
+import { Logo } from "../Logo";
 
 export function CharactersPage() {
   const navigate = useNavigate();
-  const name = useAtomValue(nameAtom);
-  const level = useAtomValue(levelAtom);
-  const species = useAtomValue(speciesAtom);
-  const image = useAtomValue(imageAtom);
-  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [saveFile, setSaveFile] = useAtom(saveFileAtom);
+  const [characterToDelete, setCharacterToDelete] = useState<
+    string | undefined
+  >();
   const [errorDialogOpen, setErrorDialogOpen] = useState(false);
   const [errorTitle, setErrorTitle] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [focalCharacterId, setFocalCharacterId] = useAtom(focalCharacterIdAtom);
 
-  const setters = {
-    setName: useSetAtom(nameAtom),
-    setLevel: useSetAtom(levelAtom),
-    setCurrentPhysique: useSetAtom(currentPhysiqueAtom),
-    setPhysiqueUpgrades: useSetAtom(physiqueUpgradesAtom),
-    setCurrentMorale: useSetAtom(currentMoraleAtom),
-    setMoraleUpgrades: useSetAtom(moraleUpgradesAtom),
-    setCurrentStamina: useSetAtom(currentStaminaAtom),
-    setStaminaUpgrades: useSetAtom(staminaUpgradesAtom),
-    setSpecies: useSetAtom(speciesAtom),
-    setGender: useSetAtom(genderAtom),
-    setAge: useSetAtom(ageAtom),
-    setBackground: useSetAtom(backgroundAtom),
-    setPersonality: useSetAtom(personalityAtom),
-    setLanguages: useSetAtom(languagesAtom),
-    setImage: useSetAtom(imageAtom),
-    setMoney: useSetAtom(moneyAtom),
-    setItems: useSetAtom(itemsAtom),
-    setPaths: useSetAtom(pathsAtom),
-    setCustomTraits: useSetAtom(customTraitsAtom),
-    setSkillLevelUpgrades: useSetAtom(skillLevelUpgradesAtom),
+  const [name, setName] = useAtom(nameAtom);
+  const [level, setLevel] = useAtom(levelAtom);
+  const [currentPhysique, setCurrentPhysique] = useAtom(currentPhysiqueAtom);
+  const [physiqueUpgrades, setPhysiqueUpgrades] = useAtom(physiqueUpgradesAtom);
+  const [currentMorale, setCurrentMorale] = useAtom(currentMoraleAtom);
+  const [moraleUpgrades, setMoraleUpgrades] = useAtom(moraleUpgradesAtom);
+  const [currentStamina, setCurrentStamina] = useAtom(currentStaminaAtom);
+  const [staminaUpgrades, setStaminaUpgrades] = useAtom(staminaUpgradesAtom);
+  const [species, setSpecies] = useAtom(speciesAtom);
+  const [gender, setGender] = useAtom(genderAtom);
+  const [age, setAge] = useAtom(ageAtom);
+  const [background, setBackground] = useAtom(backgroundAtom);
+  const [personality, setPersonality] = useAtom(personalityAtom);
+  const [languages, setLanguages] = useAtom(languagesAtom);
+  const [image, setImage] = useAtom(imageAtom);
+  const [money, setMoney] = useAtom(moneyAtom);
+  const [items, setItems] = useAtom(itemsAtom);
+  const [paths, setPaths] = useAtom(pathsAtom);
+  const [customTraits, setCustomTraits] = useAtom(customTraitsAtom);
+  const [skillLevelUpgrades, setSkillLevelUpgrades] = useAtom(
+    skillLevelUpgradesAtom
+  );
+
+  const focalCharacter = {
+    name,
+    species,
+    gender,
+    age,
+    personality,
+    background,
+    languages,
+    level,
+    paths,
+    customTraits,
+    skillLevelUpgrades,
+    currentPhysique,
+    physiqueUpgrades,
+    currentMorale,
+    moraleUpgrades,
+    currentStamina,
+    staminaUpgrades,
+    items,
+    money,
+    image,
   };
 
-  const handleLoadCharacter = async () => {
-    await loadCharacter(setters, undefined, (title, message) => {
+  const setFocalCharacter = (id: string, character: CharacterSaveFile) => {
+    setFocalCharacterId(id);
+    setName(character.name);
+    setLevel(character.level);
+    setCurrentPhysique(character.currentPhysique);
+    setPhysiqueUpgrades(character.physiqueUpgrades);
+    setCurrentMorale(character.currentMorale);
+    setMoraleUpgrades(character.moraleUpgrades);
+    setCurrentStamina(character.currentStamina);
+    setStaminaUpgrades(character.staminaUpgrades);
+    setSpecies(character.species);
+    setGender(character.gender);
+    setAge(character.age);
+    setBackground(character.background);
+    setPersonality(character.personality);
+    setLanguages(character.languages);
+    setImage(character.image);
+    setMoney(character.money);
+    setItems(character.items);
+    setPaths(character.paths);
+    setCustomTraits(character.customTraits);
+    setSkillLevelUpgrades(character.skillLevelUpgrades);
+  };
+
+  const saveCurrentFocalCharacter = () => {
+    if (
+      typeof focalCharacterId === "string" &&
+      saveFile.characters[focalCharacterId]
+    ) {
+      setSaveFile((prev) => ({
+        ...prev,
+        characters: {
+          ...prev.characters,
+          [focalCharacterId]: focalCharacter,
+        },
+      }));
+    }
+  };
+
+  const handleImport = async () => {
+    await loadSaveFile(setSaveFile, undefined, (title, message) => {
       setErrorTitle(title);
       setErrorMessage(message);
       setErrorDialogOpen(true);
@@ -89,27 +156,67 @@ export function CharactersPage() {
   };
 
   const handleCreateNewCharacter = () => {
-    navigate(CharacterEditorRoute);
+    saveCurrentFocalCharacter();
+    const id = randomString(10);
+    setSaveFile((prev) => {
+      return {
+        ...prev,
+        characters: { ...prev.characters, [id]: defaultCharacter },
+      };
+    });
+    setFocalCharacterId(id);
+    setFocalCharacter(id, defaultCharacter);
+    navigate(getCharacterEditorRoute(id));
   };
 
-  const handleCardClick = () => {
-    navigate(CharacterSheetRoute);
+  const handleSelectCharacter = (id: string) => {
+    saveCurrentFocalCharacter();
+    if (id !== focalCharacterId) {
+      const character = saveFile.characters[id];
+      setFocalCharacter(id, character);
+    }
+    navigate(getCharacterSheetRoute(id));
   };
 
-  const handleEditCharacter = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    navigate(CharacterEditorRoute);
+  const handleEditCharacter = (id: string) => {
+    saveCurrentFocalCharacter();
+    if (id !== focalCharacterId) {
+      const character = saveFile.characters[id];
+      setFocalCharacter(id, character);
+    }
+    navigate(getCharacterEditorRoute(id));
   };
 
-  const handleDeleteCharacter = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsDeleteDialogOpen(true);
+  const handleDeleteCharacter = (id: string) => {
+    setCharacterToDelete(id);
   };
 
   const confirmDeleteCharacter = () => {
-    resetCharacter(setters);
-    setIsDeleteDialogOpen(false);
+    if (!characterToDelete) {
+      return;
+    }
+    setSaveFile((prev) => {
+      const characters = { ...prev.characters };
+      delete characters[characterToDelete];
+      return { ...prev, characters: characters };
+    });
+    setCharacterToDelete(undefined);
   };
+
+  const handleDownload = () => {
+    const updatedSaveFile = focalCharacterId
+      ? {
+          ...saveFile,
+          characters: {
+            ...saveFile.characters,
+            [focalCharacterId]: focalCharacter,
+          },
+        }
+      : saveFile;
+    downloadSaveFile(updatedSaveFile);
+  };
+
+  console.log(JSON.stringify(saveFile));
 
   return (
     <motion.div
@@ -117,95 +224,118 @@ export function CharactersPage() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0 }}
     >
-      {name && (
+      {Object.keys(saveFile.characters).length > 0 && (
         <div className="flex justify-between items-center pb-8">
           <h1 className="text-3xl font-bold text-primary-foreground">
             Characters
           </h1>
           <div className="flex gap-2">
-            <Button variant="outline" onClick={handleLoadCharacter}>
+            <Button onClick={handleCreateNewCharacter}>
+              <CirclePlus className="h-5 w-5 mr-2" />
+              New
+            </Button>
+            <Button className="hidden md:flex" onClick={handleImport}>
               <Upload className="h-4 w-4 mr-2" />
-              Import
+              Load
+            </Button>
+            <Button variant="outline" size="sm" onClick={handleDownload}>
+              <Download className="h-4 w-4 mr-2" />
+              Save
             </Button>
           </div>
         </div>
       )}
 
-      <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 z-20">
-        {name && (
-          <Card
-            className="cursor-pointer hover:shadow-md transition-shadow"
-            onClick={handleCardClick}
-          >
-            <CardContent className="p-0">
-              <div className="relative">
-                <div className="absolute top-2 right-2 z-10">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <MoreVertical className="h-4 w-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuItem onClick={handleEditCharacter}>
-                        Edit
-                      </DropdownMenuItem>
-                      <DropdownMenuItem onClick={handleDeleteCharacter}>
-                        Delete
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </div>
-                {image && (
-                  <img
-                    src={image}
-                    alt={name}
-                    className="w-full h-48 object-cover rounded-t-lg"
-                  />
-                )}
-                {!image && (
-                  <div className="w-full h-48 bg-muted flex items-center justify-center rounded-t-lg">
-                    <span className="text-muted-foreground">No Image</span>
+      <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 z-20">
+        {Object.entries(saveFile.characters).map(([id, saveFileCharacter]) => {
+          const character =
+            focalCharacterId === id ? focalCharacter : saveFileCharacter;
+          return (
+            <Card
+              className="cursor-pointer hover:shadow-md transition-shadow"
+              onClick={() => handleSelectCharacter(id)}
+              key={id}
+            >
+              <CardContent className="p-0">
+                <div className="relative">
+                  <div className="absolute top-2 right-2 z-10">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <MoreVertical className="h-4 w-4" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuItem
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleEditCharacter(id);
+                          }}
+                        >
+                          Edit
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDeleteCharacter(id);
+                          }}
+                        >
+                          Delete
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </div>
-                )}
-              </div>
-            </CardContent>
-            <CardFooter className="flex flex-col items-start p-4">
-              <h3 className="font-semibold text-lg">{name}</h3>
-              <div className="text-sm text-muted-foreground">
-                Level {level} {species}
-              </div>
-            </CardFooter>
-          </Card>
-        )}
+                  {
+                    <img
+                      src={
+                        character.image ?? getSpeciesImage(character.species)
+                      }
+                      alt={character.name}
+                      className="w-full h-48 object-cover rounded-t-lg"
+                    />
+                  }
+                </div>
+              </CardContent>
+              <CardFooter className="flex flex-col items-start p-4">
+                <h3 className="font-semibold text-lg">{character.name}</h3>
+                <div className="text-sm text-muted-foreground">
+                  Level {character.level} {character.species}
+                </div>
+              </CardFooter>
+            </Card>
+          );
+        })}
       </div>
 
-      {!name && (
-        <div className="left-1/2 top-[45%] absolute -translate-x-1/2 -translate-y-1/2">
-          <div className="w-full flex flex-col justify-center items-center p-8 space-y-4 rounded-lg shadow-2xl backdrop-blur-sm border border-white/100 bg-black/95 z-20">
-            <p className="text-primary-foreground text-lg mb-6">
-              You don't have any characters yet.
-            </p>
-            <div className="flex gap-4">
+      {Object.keys(saveFile.characters).length === 0 && (
+        <div className="relative w-full max-w-xl min-w-[300px] flex flex-col items-center left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          <div className="logo-animation absolute top-8 z-30 flex justify-center">
+            <Logo className="w-[90%] h-16" />
+          </div>
+          <div className="banner-animation w-full flex flex-col justify-center items-center p-8 space-y-8 rounded-lg shadow-2xl backdrop-blur-sm border border-white/100 bg-black/95 z-20">
+            <div className="invisible">
+              <Logo className="w-full h-16" />
+            </div>
+            <div className="flex justify-center gap-4 w-full">
               <Button
-                className="h-12 px-6 text-base hover:scale-105 transition-transform"
-                onClick={handleLoadCharacter}
+                className="load-button w-md h-14 text-lg hover:scale-105 transition-transform"
+                onClick={handleImport}
               >
-                <Upload className="h-5 w-5 mr-2" />
+                <Upload className="mr-2 h-6 w-6" />
                 Load
               </Button>
               <Button
                 variant="outline"
-                className="h-12 px-6 text-base hover:scale-105 transition-transform"
+                className="new-button w-md h-14 text-lg hover:scale-105 transition-transform"
                 onClick={handleCreateNewCharacter}
               >
-                <CirclePlus className="h-5 w-5 mr-2" />
+                <CirclePlus className="mr-2 h-6 w-6" />
                 New
               </Button>
             </div>
@@ -213,27 +343,33 @@ export function CharactersPage() {
         </div>
       )}
 
-      <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Delete Character</DialogTitle>
-            <DialogDescription>
-              Are you sure you want to delete {name}?
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <Button
-              variant="outline"
-              onClick={() => setIsDeleteDialogOpen(false)}
-            >
-              Cancel
-            </Button>
-            <Button variant="destructive" onClick={confirmDeleteCharacter}>
-              Delete
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      {characterToDelete && (
+        <Dialog
+          open={characterToDelete !== undefined}
+          // onOpenChange={setIsDeleteDialogOpen}
+        >
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Delete Character</DialogTitle>
+              <DialogDescription>
+                Are you sure you want to delete{" "}
+                {saveFile.characters[characterToDelete].name}?
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <Button variant="destructive" onClick={confirmDeleteCharacter}>
+                Delete
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => setCharacterToDelete(undefined)}
+              >
+                Cancel
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      )}
 
       <ErrorDialog
         isOpen={errorDialogOpen}

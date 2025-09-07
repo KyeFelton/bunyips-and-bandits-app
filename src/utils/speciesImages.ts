@@ -12,19 +12,19 @@ import yowieImage from "../images/species/yowie.png";
 import { AllSpecies } from "../data/species";
 
 const speciesImages: Record<string, string> = {
-  Gnome: gnomeImage,
   Cobber: cobberImage,
-  Human: humanImage,
-  Goa: goaImage,
-  Jelly: jellyImage,
-  Minotaur: minotaurImage,
-  Pixie: pixieImage,
   Dropbear: dropbearImage,
+  Gnome: gnomeImage,
+  Human: humanImage,
+  Hobgoblin: hobgoblinImage,
+  Goa: goaImage,
+  // Jelly: jellyImage,
+  // Minotaur: minotaurImage,
+  // Pixie: pixieImage,
   Falkir: falkirImage,
   Yowie: yowieImage,
-  Hobgoblin: hobgoblinImage,
 };
 
 export const getSpeciesImage = (speciesName: string): string => {
-  return speciesImages[speciesName] || speciesImages[AllSpecies.Minotaur.name];
+  return speciesImages[speciesName] || speciesImages[AllSpecies.Human.name];
 };
