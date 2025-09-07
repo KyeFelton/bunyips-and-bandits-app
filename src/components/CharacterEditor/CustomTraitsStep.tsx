@@ -23,7 +23,6 @@ export const CustomTraitsStep = () => {
   const handleUpdateTrait = (index: number, updatedTrait: Trait) => {
     setCustomTraits((prev) => {
       const newTraits = [...prev];
-      console.log(updatedTrait);
       newTraits[index] = updatedTrait;
       return newTraits;
     });

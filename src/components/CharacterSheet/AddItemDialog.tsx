@@ -62,8 +62,6 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
       item.description.toLowerCase().includes(search.toLowerCase())
   );
 
-  console.log(maxWeight);
-
   const handleSelectItem = (item: Item) => {
     setSelectedItem({
       ...item,
@@ -74,13 +72,10 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
   const handleBack = () => {
     if (selectedItem) {
       if (customItem.name.length > 0) {
-        console.log("is custom");
         setIsCreatingItem(true);
       }
       setSelectedItem(null);
-      console.log("yep");
     } else {
-      console.log("no");
       setCustomItem(defaultCustomItem);
       setIsCreatingItem(false);
       setNameError(null);

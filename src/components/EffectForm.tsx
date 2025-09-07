@@ -93,10 +93,8 @@ export const EffectForm = ({ effects, onChange }: Props) => {
   };
 
   const handleUpdateEffect = (index: number, updatedEffect: Effect) => {
-    console.log(effects);
     const newEffects = [...effects];
     newEffects[index] = updatedEffect;
-    console.log(newEffects);
     onChange(newEffects);
   };
 
