@@ -4,12 +4,12 @@ import { DamageType } from "../../enums/DamageType";
 export const SunstoneClub: Item = {
   name: "Sunstone club",
   description:
-    "Your weapon attacks deal 4 force damage when wielded and your target is blinded.",
+    "Your weapon attacks deal 1 force damage when wielded and your target is blinded.",
   effects: [
     {
       weapon: {
         damageType: DamageType.Force,
-        bonus: 4,
+        bonus: 1,
       },
     },
   ],

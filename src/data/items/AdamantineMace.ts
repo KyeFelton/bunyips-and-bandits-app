@@ -3,11 +3,11 @@ import { DamageType } from "../../enums/DamageType";
 
 export const AdamantineMace: Item = {
   name: "Adamantine mace",
-  description: "Your weapon attacks deal 7 force damage when wielded.",
+  description: "Your weapon attacks deal 3 force damage when wielded.",
   effects: [
     {
       weapon: {
-        bonus: 7,
+        bonus: 3,
         damageType: DamageType.Force,
       },
     },

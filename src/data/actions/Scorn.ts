@@ -5,7 +5,7 @@ import { Action } from "../../models/actions";
 
 export const Scorn: Action = {
   name: "Scorn",
-  effect: "Your target loses 2 morale as you scorn their mind.",
+  effect: "Your target loses 1 morale as you scorn their mind.",
   skillType: SkillType.Psychic,
   range: Range.Nearby,
   areaOfEffect: AreaOfEffect.SingleTarget,

@@ -4,12 +4,12 @@ import { DamageType } from "../../enums/DamageType";
 export const LavastoneClub: Item = {
   name: "Lavastone club",
   description:
-    "Your weapon attacks deal 4 force damage when wielded and your target catches fire.",
+    "Your weapon attacks deal 1 force damage when wielded and your target catches fire.",
   effects: [
     {
       weapon: {
         damageType: DamageType.Force,
-        bonus: 4,
+        bonus: 1,
       },
     },
   ],

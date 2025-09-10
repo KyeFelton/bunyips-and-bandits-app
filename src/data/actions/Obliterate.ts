@@ -6,7 +6,7 @@ import { Action } from "../../models/actions";
 export const Obliterate: Action = {
   name: "Scourge",
   effect:
-    "You tear into the mind of your victim and attack their soul. They lose 12 morale.",
+    "You tear into the mind of your victim and attack their soul. They lose 10 morale.",
   skillType: SkillType.Psychic,
   range: Range.Nearby,
   areaOfEffect: AreaOfEffect.SingleTarget,

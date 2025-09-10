@@ -5,7 +5,7 @@ import { Action } from "../../models/actions";
 
 export const Discharge: Action = {
   name: "Discharge",
-  effect: "Targets take 20 electric damage.",
+  effect: "Targets take 6 electric damage.",
   skillType: SkillType.Electric,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.Sphere,

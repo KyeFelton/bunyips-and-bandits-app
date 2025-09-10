@@ -3,7 +3,7 @@ import { Item } from "../../models/items";
 export const Adrenaline: Item = {
   name: "Adrenaline",
   description:
-    "When consumed, you gain a boost of energy. Increase stamina by 5. If you have already consumed adrenaline since your last rest, you take 1d12 damage.",
+    "When consumed, you gain a boost of energy. Increase stamina by 5. If you have already consumed adrenaline since your last rest, you take 1d6 damage.",
   effects: [
     {
       stamina: {

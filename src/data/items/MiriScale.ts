@@ -2,9 +2,9 @@ import { SkillType } from "../../enums/SkillType";
 import { Item } from "../../models/items";
 
 export const MiriScale: Item = {
-  name: "Miri's scale",
+  name: "Rainbow Serpent's scale",
   description:
-    "A large, rainbow scale believed to belong Miri. Being in possession of the scale grants you +3 bonus to nature and spirit checks.",
+    "A large, rainbow scale believed to belong to the Rainbow Serpent. Being in possession of the scale grants you +3 bonus to nature and spirit checks.",
   effects: [
     {
       skill: {

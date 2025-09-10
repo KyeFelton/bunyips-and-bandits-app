@@ -5,7 +5,7 @@ import { Item } from "../../models/items";
 export const SteelPlateArmour: Item = {
   name: "Steel plate armour",
   description:
-    "You gain +2 armour for all damage types, and an additional +3 armour for slash, force and electric damage. You lose -2 on agility and dexterity checks.",
+    "You gain +2 armour for all damage types, and an additional +1 armour for slash and force damage. You lose -2 on agility and dexterity checks.",
   effects: [
     {
       armour: {
@@ -16,7 +16,7 @@ export const SteelPlateArmour: Item = {
     {
       armour: {
         damageType: DamageType.Electric,
-        bonus: 5,
+        bonus: 2,
       },
     },
     {
@@ -28,13 +28,13 @@ export const SteelPlateArmour: Item = {
     {
       armour: {
         damageType: DamageType.Slash,
-        bonus: 5,
+        bonus: 4,
       },
     },
     {
       armour: {
         damageType: DamageType.Force,
-        bonus: 5,
+        bonus: 4,
       },
     },
     {

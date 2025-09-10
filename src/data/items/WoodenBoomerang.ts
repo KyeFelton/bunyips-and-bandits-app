@@ -4,12 +4,12 @@ import { DamageType } from "../../enums/DamageType";
 export const WoodenBoomerang: Item = {
   name: "Wooden boomerang",
   description:
-    "Your weapon attacks deal 2 force damage when wielded. If thrown and misses the target, the weapon returns back to you.",
+    "Your weapon attacks deal 1 force damage when wielded. If thrown and misses the target, the weapon returns back to you.",
   effects: [
     {
       weapon: {
         damageType: DamageType.Force,
-        bonus: 2,
+        bonus: 1,
       },
     },
   ],

@@ -5,7 +5,7 @@ import { Action } from "../../models/actions";
 
 export const Shock: Action = {
   name: "Shock",
-  effect: "Your target takes 5 electric damage.",
+  effect: "Your target takes 1 electric damage.",
   skillType: SkillType.Electric,
   range: Range.Adjacent,
   areaOfEffect: AreaOfEffect.SingleTarget,

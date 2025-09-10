@@ -3,11 +3,11 @@ import { DamageType } from "../../enums/DamageType";
 
 export const SteelJavelin: Item = {
   name: "Steel javelin",
-  description: "Your weapon attacks deal 4 slash damage when wielded.",
+  description: "Your weapon attacks deal 3 slash damage when wielded.",
   effects: [
     {
       weapon: {
-        bonus: 4,
+        bonus: 3,
         damageType: DamageType.Slash,
       },
     },

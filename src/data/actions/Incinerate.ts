@@ -6,7 +6,7 @@ import { Action } from "../../models/actions";
 export const Incinerate: Action = {
   name: "Incinerate",
   effect:
-    "You destroy your target with fire. Your target takes 25 fire damage and catches fire.",
+    "You destroy your target with fire. Your target takes 8 fire damage and catches fire.",
   skillType: SkillType.Pyro,
   range: Range.Adjacent,
   areaOfEffect: AreaOfEffect.SingleTarget,

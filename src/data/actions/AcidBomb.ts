@@ -6,7 +6,7 @@ import { Action } from "../../models/actions";
 export const AcidBomb: Action = {
   name: "Acid bomb",
   effect:
-    "You hurl a ball of corrosive acid towards your target. They take 15 toxic damage.",
+    "You hurl a ball of corrosive acid towards your target. They take 5 toxic damage.",
   skillType: SkillType.Toxic,
   range: Range.Nearby,
   areaOfEffect: AreaOfEffect.SingleTarget,

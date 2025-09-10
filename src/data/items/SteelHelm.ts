@@ -3,26 +3,8 @@ import { Item } from "../../models/items";
 
 export const SteelHelm: Item = {
   name: "Steel helm",
-  description: "You gain +1 armour for all damage types.",
+  description: "You gain +1 armour for slash and force damage.",
   effects: [
-    {
-      armour: {
-        damageType: DamageType.Fire,
-        bonus: 1,
-      },
-    },
-    {
-      armour: {
-        damageType: DamageType.Electric,
-        bonus: 1,
-      },
-    },
-    {
-      armour: {
-        damageType: DamageType.Toxic,
-        bonus: 1,
-      },
-    },
     {
       armour: {
         damageType: DamageType.Slash,

@@ -6,7 +6,7 @@ import { Action } from "../../models/actions";
 export const SonicCharge: Action = {
   name: "Sonic charge",
   effect:
-    "You take an action to build up energy. On your next turn, deal an addition 5 force damage on all sonic attacks.",
+    "You take an action to build up energy. On your next turn, deal an addition 1 force damage on all sonic attacks.",
   skillType: SkillType.Sonic,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.SingleTarget,

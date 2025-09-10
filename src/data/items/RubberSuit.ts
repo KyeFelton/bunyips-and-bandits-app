@@ -4,24 +4,12 @@ import { Item } from "../../models/items";
 export const RubberSuit: Item = {
   name: "Rubber suit",
   description:
-    "You gain +3 armour for fire and toxic damage, and an additional +2 armour for electric damage.",
+    "You gain +4 armour for electric damage.",
   effects: [
     {
       armour: {
-        damageType: DamageType.Fire,
-        bonus: 3,
-      },
-    },
-    {
-      armour: {
         damageType: DamageType.Electric,
-        bonus: 2,
-      },
-    },
-    {
-      armour: {
-        damageType: DamageType.Toxic,
-        bonus: 3,
+        bonus: 4,
       },
     },
   ],

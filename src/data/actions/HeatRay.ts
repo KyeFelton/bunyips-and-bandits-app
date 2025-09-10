@@ -6,7 +6,7 @@ import { Action } from "../../models/actions";
 export const HeatRay: Action = {
   name: "Heat ray",
   effect:
-    "You cast a beam of infrared light at your target. Your target takes 5 fire damage.",
+    "You cast a beam of infrared light at your target. Your target takes 1 fire damage.",
   skillType: SkillType.Radiant,
   range: Range.Distant,
   areaOfEffect: AreaOfEffect.SingleTarget,

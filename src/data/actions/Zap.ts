@@ -5,7 +5,7 @@ import { Action } from "../../models/actions";
 
 export const Zap: Action = {
   name: "Zap",
-  effect: "Nearby targets take 10 electric damage.",
+  effect: "Nearby targets take 3 electric damage.",
   skillType: SkillType.Electric,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.Sphere,

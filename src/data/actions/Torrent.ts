@@ -6,7 +6,7 @@ import { Action } from "../../models/actions";
 export const Torrent: Action = {
   name: "Torrent",
   effect:
-    "Targets become anosmic and roll a hard strength check. If they fail, they are thrown back 5m and take 5 force damage.",
+    "Targets become anosmic and roll a hard strength check. If they fail, they are thrown back 5m and take 1 force damage.",
   skillType: SkillType.Kinetic,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.Cone,
