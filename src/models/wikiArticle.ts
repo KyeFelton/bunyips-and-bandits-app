@@ -6,7 +6,7 @@ export type InfoBoxTrait = {
 };
 
 export type InfoBox = {
-  imageSrc: string;
+  imageSrc?: string;
   traits: InfoBoxTrait[];
 };
 
