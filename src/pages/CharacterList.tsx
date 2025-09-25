@@ -216,8 +216,6 @@ export function CharactersPage() {
     downloadSaveFile(updatedSaveFile);
   };
 
-  console.log(JSON.stringify(saveFile));
-
   return (
     <motion.div
       className="h-full container mx-auto py-8 px-4 relative"

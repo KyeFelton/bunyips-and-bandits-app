@@ -1,22 +1,25 @@
 import { Link } from "react-router-dom";
-import { WikiArticle } from "../../models/wikiArticle";
-import { WikiUri } from "../../enums/WikiUri";
+import { WikiContent } from "../../models/wikiContent";
+import { WikiId } from "../../enums/WikiId";
+import { WikiCategory } from "../../enums/WikiCategory";
 
-export const Dharrigal: WikiArticle = {
+export const Dharrigal: WikiContent = {
+  id: WikiId.Dharrigal,
+  category: WikiCategory.Cultures,
   title: "Dharrigal",
   summary: <p></p>,
   infoBox: {
     traits: [
       {
         key: "Regions",
-        value: <Link to={WikiUri.CultureDropbear}>Downunda</Link>,
+        value: <Link to={WikiId.Dropbear}>Downunda</Link>,
       },
       {
         key: "Subcultures",
         value: (
           <ul>
             <li>
-              <Link to={WikiUri.CultureDropbear}>Dropbear</Link>
+              <Link to={WikiId.Dropbear}>Dropbear</Link>
             </li>
           </ul>
         ),

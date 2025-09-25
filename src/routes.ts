@@ -8,3 +8,6 @@ export const getCharacterEditorRoute = (id: string) =>
   `${HomeRoute}/character/${id}/edit`;
 export const HandbookRoute = `${HomeRoute}/handbook`;
 export const WikiRoute = `${HomeRoute}/wiki`;
+export const WikiArticleRoute = `${HomeRoute}/wiki/:category/:id`;
+export const getWikiArticleRoute = (category: string, id: string) =>
+  `${HomeRoute}/wiki/${category}/${id}`;

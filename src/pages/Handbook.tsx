@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Content, H2, H3, WikiPage } from "../components/WikiPage";
+import { Body, H2, H3, WikiPage } from "../components/WikiPage";
 import { ArmourIcon } from "../components/icons/ArmourIcon";
 import { SkillIcon } from "../components/icons/SkillIcon";
 import { SpeedIcon } from "../components/icons/SpeedIcon";
@@ -48,7 +48,7 @@ const summary = (
 const content = (
   <>
     <H2>How the Game Works</H2>
-    <Content>
+    <Body>
       <p>
         Bunyips and Bandits is all about collaborative storytelling. Before you
         dive into adventure, you’ll create your own character with a unique
@@ -87,9 +87,9 @@ const content = (
         adaptable. The only rule is that everyone at the table enjoys
         themselves.
       </p>
-    </Content>
+    </Body>
     <H2>What You’ll Need</H2>
-    <Content>
+    <Body>
       <p>
         Your game setup depends on your style. This website has been created to
         enhance and streamline the playing experience, but it's not required. If
@@ -100,9 +100,9 @@ const content = (
         do the work. At the end of the day, all you really need is a good group
         of friends and a sense of adventure.
       </p>
-    </Content>
+    </Body>
     <H2>Characters</H2>
-    <Content>
+    <Body>
       <p>
         At the heart of Bunyips and Bandits are the characters you create and
         play. While the GM plays the role of everyone and everything else,
@@ -110,9 +110,9 @@ const content = (
         speaking in their voice, and deciding how they handle the dangers and
         opportunities that come their way.
       </p>
-    </Content>
+    </Body>
     <H3>Creating Your First Character</H3>
-    <Content>
+    <Body>
       <p>
         Before setting off on your first adventure, you’ll need to create a
         character. This involves a few simple steps:
@@ -173,18 +173,18 @@ const content = (
           and gives your character an advantage in certain situations.
         </li>
       </ol>
-    </Content>
+    </Body>
     <H3>Species</H3>
-    <Content>
+    <Body>
       <p>
         Your species affects your character’s base stats and natural abilities.
         Some species are tougher, others are faster, and some have heightened
         senses. What you choose will influence how you experience the world,
         both in terms of game mechanics and role-playing opportunities.
       </p>
-    </Content>
+    </Body>
     <H3>Levelling</H3>
-    <Content>
+    <Body>
       <p>
         As you adventure, your character gains experience and improves over
         time. Levels indicate a character’s skill and capability, unlocking
@@ -196,9 +196,9 @@ const content = (
         skill, and enhance one health track, allowing you to tailor your
         character’s growth to your playstyle and strategy.
       </p>
-    </Content>
+    </Body>
     <H3>Skills</H3>
-    <Content>
+    <Body>
       <p>
         Skills determine how well your character performs various actions. Each
         skill is categorized as either physical or mental, which affects how
@@ -547,9 +547,9 @@ const content = (
           </tr>
         </tbody>
       </table>
-    </Content>
+    </Body>
     <H3>Paths</H3>
-    <Content>
+    <Body>
       <p>
         Paths define a set of learnings in a field of sorcery, morphing,
         psionics, evocation or martial arts. Consider them as specialisations
@@ -559,9 +559,9 @@ const content = (
         up, you can progress an existing, trained path or choose to learn a new
         one.
       </p>
-    </Content>
+    </Body>
     <H3>Health</H3>
-    <Content>
+    <Body>
       <p>
         Your character isn’t invincible—adventuring comes with its fair share of
         scrapes, bruises, and mind-melting horrors. The game tracks three
@@ -648,9 +648,9 @@ const content = (
         rest. If you have no stamina left, you can’t recover any health. In any
         case, your stamina always replenishes to full after a rest.
       </p>
-    </Content>
+    </Body>
     <H3>Armour</H3>
-    <Content>
+    <Body>
       <p>
         Not all damage is equal—some creatures are resistant to certain types
         and vulnerable to others. There are five types of physical damage, and
@@ -732,9 +732,9 @@ const content = (
         type by your armour score. If your armour score is negative, you take
         extra damage equal to the value instead.
       </p>
-    </Content>
+    </Body>
     <H3>Size</H3>
-    <Content>
+    <Body>
       <p>
         Not all creatures are built the same. Every character is assigned a size
         dependent on the species you chose. Certain actions, spells, or
@@ -781,9 +781,9 @@ const content = (
           </tr>
         </tbody>
       </table>
-    </Content>
+    </Body>
     <H3>Speed</H3>
-    <Content>
+    <Body>
       <p>
         Different species have access to different types of locomotion, each at
         its own speed. Your speed stat determines how far you can move per turn
@@ -845,9 +845,9 @@ const content = (
         is halved for all types of locomotion. If your physique drops to 1, your
         movement speed becomes 0 and you cannot move without assistance.
       </p>
-    </Content>
+    </Body>
     <H3>Senses</H3>
-    <Content>
+    <Body>
       <p>
         You can’t interact with what you can’t detect—your senses determine how
         well you perceive the world around you. There are eight primary senses:
@@ -948,9 +948,9 @@ const content = (
         effective each sense is depending on the situation and the result of
         your skill check for that sense.
       </p>
-    </Content>
+    </Body>
     <H3>Language</H3>
-    <Content>
+    <Body>
       <p>
         There are many different languages of the world. If two creatures share
         a language, they can communicate normally. If they don’t, well… good
@@ -959,9 +959,9 @@ const content = (
         communicate regardless of language barriers. Otherwise, you might just
         have to make do with pointing and hoping for the best.
       </p>
-    </Content>
+    </Body>
     <H2>Skill Checks</H2>
-    <Content>
+    <Body>
       <p>
         As you step into the game, the GM will present various scenarios and
         challenges along the way. Depending on your decisions and what the GM
@@ -1123,9 +1123,9 @@ const content = (
         sneaking past the guards, maybe you step on a creaky floorboard. This is
         where the GM gets to have some fun.
       </p>
-    </Content>
+    </Body>
     <H2>Luck</H2>
-    <Content>
+    <Body>
       <p>
         Sometimes, life doesn’t come down to skill—it comes down to sheer dumb
         luck. Luck checks are used when an outcome is completely random with no
@@ -1137,9 +1137,9 @@ const content = (
         A luck check is a simple d20 roll. Higher rolls mean better outcomes,
         and lower rolls mean things go pear-shaped.
       </p>
-    </Content>
+    </Body>
     <H2>Combat</H2>
-    <Content>
+    <Body>
       <p>
         Sometimes, words fail. And when they do, there’s always combat. Combat
         can be initiated by anyone, including the GM. When a battle takes place,
@@ -1159,9 +1159,9 @@ const content = (
         go clockwise around the table, while the GM controls enemies on their
         turn. Each round represents about 5 seconds in the game world.
       </p>
-    </Content>
+    </Body>
     <H3>Actions</H3>
-    <Content>
+    <Body>
       <p>
         On their turn, each character may perform as many actions as specified
         by the action count on their character sheet. Actions may incur damage,
@@ -1182,9 +1182,9 @@ const content = (
         through all your stamina, you might find yourself too exhausted to fight
         when it really matters.
       </p>
-    </Content>
+    </Body>
     <H3>Movement</H3>
-    <Content>
+    <Body>
       <p>
         Moving is an action available to all characters. The distance that a
         character can move in one turn is determined by their speed stat for the
@@ -1199,9 +1199,9 @@ const content = (
         risky (unstable bridges, slippery surfaces). The GM will let you know if
         the ground under your feet is about to betray you.
       </p>
-    </Content>
+    </Body>
     <H3>Range and area of effect</H3>
-    <Content>
+    <Body>
       <p>
         Some actions cover an area that can hit multiple targets. All actions
         have a target point - a location where the caster unleashes their
@@ -1303,9 +1303,9 @@ const content = (
         Hidden enemies can’t be directly targeted, but they can be hit by area
         of effects if you’re lucky enough to guess their location.
       </p>
-    </Content>
+    </Body>
     <H3>Hitting a target</H3>
-    <Content>
+    <Body>
       <p>
         Landing an attack isn’t always guaranteed—opponents can counter, dodge
         or resist attacks:
@@ -1335,9 +1335,9 @@ const content = (
         evasions count determines the number of attacks they can attempt to
         evade in one round of combat.
       </p>
-    </Content>
+    </Body>
     <H3>Statuses</H3>
-    <Content>
+    <Body>
       <p>
         Some actions inflict statuses upon their foes. All statuses, except for
         burning, last only one round.
@@ -1488,9 +1488,9 @@ const content = (
           </tr>
         </tbody>
       </table>
-    </Content>
+    </Body>
     <H3>Resolving Combat</H3>
-    <Content>
+    <Body>
       <p>
         When a character loses all of their health or morale, they are out of
         the combat. Once all characters in the same party have been defeated or
@@ -1504,7 +1504,7 @@ const content = (
         successfully fled the combat. If successful, then the character is out
         of the combat and their fate isn’t determined by their opponents.
       </p>
-    </Content>
+    </Body>
   </>
 );
 
@@ -1516,7 +1516,12 @@ export function Handbook() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <WikiPage title="Handbook" summary={summary} content={content} />
+      <WikiPage
+        id="handbook"
+        title="Handbook"
+        summary={summary}
+        main={content}
+      />
     </motion.div>
   );
 }

@@ -10,11 +10,13 @@ export type InfoBox = {
   traits: InfoBoxTrait[];
 };
 
-export type WikiArticle = {
+export type WikiContent = {
+  id: string;
+  category?: string;
   title: string;
   subTitle?: string;
   summary?: ReactNode;
   infoBox?: InfoBox;
   tableOfContents?: ReactNode;
-  content?: ReactNode;
+  main?: ReactNode;
 };

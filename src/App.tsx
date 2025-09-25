@@ -13,8 +13,11 @@ import {
   CharacterEditorRoute,
   HandbookRoute,
   CharacterListRoute,
+  WikiRoute,
+  WikiArticleRoute,
 } from "./routes";
 import "./App.sass";
+import { Wiki } from "./pages/Wiki";
 
 function App() {
   const location = useLocation();
@@ -51,10 +54,12 @@ function App() {
       <div className="h-dvh pb-14 md:pb-0 md:pt-16 overflow-auto">
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
+            <Route path={CharacterListRoute} element={<CharactersPage />} />
             <Route path={CharacterSheetRoute} element={<CharacterSheet />} />
             <Route path={CharacterEditorRoute} element={<CharacterEditor />} />
             <Route path={HandbookRoute} element={<Handbook />} />
-            <Route path={CharacterListRoute} element={<CharactersPage />} />
+            <Route path={WikiRoute} element={<Wiki />} />
+            <Route path={WikiArticleRoute} element={<Wiki />} />
           </Routes>
         </AnimatePresence>
       </div>

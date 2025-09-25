@@ -1,15 +1,15 @@
 import { PropsWithChildren } from "react";
 import { Card } from "./ui/card";
-import { WikiArticle } from "../models/wikiArticle";
+import { WikiContent } from "../models/wikiContent";
 
-type Props = WikiArticle;
+type Props = WikiContent;
 
 export function WikiPage({
   title,
   subTitle,
   summary,
   tableOfContents,
-  content,
+  main,
 }: Props) {
   return (
     <div className={"sm:max-w-4xl sm:mx-auto sm:px-4 sm:py-8"}>
@@ -20,7 +20,7 @@ export function WikiPage({
         )}
         {summary && <div className="prose max-w-none mb-8">{summary}</div>}
         {tableOfContents}
-        {content}
+        {main}
       </Card>
     </div>
   );
@@ -40,6 +40,6 @@ export const H3 = ({ children }: PropsWithChildren) => (
   </>
 );
 
-export const Content = ({ children }: PropsWithChildren) => (
+export const Body = ({ children }: PropsWithChildren) => (
   <section className="prose max-w-none mb-8">{children}</section>
 );
