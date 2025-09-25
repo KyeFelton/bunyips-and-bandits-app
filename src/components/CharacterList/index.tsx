@@ -353,7 +353,7 @@ export function CharactersPage() {
               <DialogTitle>Delete Character</DialogTitle>
               <DialogDescription>
                 Are you sure you want to delete{" "}
-                {saveFile.characters[characterToDelete].name}?
+                <strong>{saveFile.characters[characterToDelete].name}</strong>?
               </DialogDescription>
             </DialogHeader>
             <DialogFooter>

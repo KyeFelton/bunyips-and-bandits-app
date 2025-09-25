@@ -11,17 +11,17 @@ import { Falkir } from "./Falkir";
 import { Yowie } from "./Yowie";
 
 export const AllSpecies = {
+  Human,
+  // Jelly,
+  // Minotaur,
+  // Pixie,
+  Yowie,
   Cobber,
   Dropbear,
   Falkir,
   Gnome,
   Goa,
   Hobgoblin,
-  Human,
-  // Jelly,
-  // Minotaur,
-  // Pixie,
-  Yowie,
 };
 
 export const startingSpecies = AllSpecies.Human;
