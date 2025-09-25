@@ -1,9 +1,9 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import { CharacterSheet } from "./components/CharacterSheet";
-import { CharacterEditor } from "./components/CharacterEditor";
-import { Handbook } from "./components/Handbook";
-import { CharactersPage } from "./components/CharacterList";
+import { CharacterSheet } from "./pages/CharacterSheet";
+import { CharacterEditor } from "./pages/CharacterEditor";
+import { Handbook } from "./pages/Handbook";
+import { CharactersPage } from "./pages/CharacterList";
 import { NavBar } from "./components/NavBar";
 import { Toaster } from "./components/ui/toaster";
 import background from "./images/backgrounds/campfire.png";
