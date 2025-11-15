@@ -43,3 +43,26 @@ export const H3 = ({ children }: PropsWithChildren) => (
 export const Body = ({ children }: PropsWithChildren) => (
   <section className="prose max-w-none mb-8">{children}</section>
 );
+
+export function TornPaper({ children }: PropsWithChildren) {
+  return (
+    <div
+      className={`
+        relative bg-[#fdf6e3] border-4 border-[#bfa76a] rounded-lg shadow-lg
+        px-8 py-6 my-8
+        font-serif
+        before:absolute before:inset-x-0 before:-top-4 before:h-4
+        before:bg-[url('/images/torn-edge-top.png')] before:bg-repeat-x
+        after:absolute after:inset-x-0 after:-bottom-4 after:h-4
+        after:bg-[url('/images/torn-edge-bottom.png')] after:bg-repeat-x
+      `}
+      style={{
+        // Optional: Add a subtle paper texture if you have one
+        backgroundImage: "url('/images/paper-texture.png')",
+        backgroundBlendMode: "multiply",
+      }}
+    >
+      <div className="relative z-10">{children}</div>
+    </div>
+  );
+}

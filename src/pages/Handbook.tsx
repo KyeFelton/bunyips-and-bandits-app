@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Body, H2, H3, WikiPage } from "../components/WikiPage";
+import { Body, H2, H3, TornPaper, WikiPage } from "../components/WikiPage";
 import { ArmourIcon } from "../components/icons/ArmourIcon";
 import { SkillIcon } from "../components/icons/SkillIcon";
 import { SpeedIcon } from "../components/icons/SpeedIcon";
@@ -20,10 +20,10 @@ const summary = (
   <>
     <p>
       G’day, adventurer! Welcome to Bunyips and Bandits, a tabletop role-playing
-      game set in a world inspired by the landscapes, creatures, and legends of
-      Australia. Whether you’re trekking through the Outback, navigating the
-      waterways of a crocodile-infested billabong, or trading stories at a smoky
-      bush pub, adventure is never far away.
+      game set in a fictional world inspired by the landscapes, creatures, and
+      legends of Australia. Whether you’re trekking through the Outback,
+      navigating the waterways of a crocodile-infested billabong, or trading
+      stories at a smoky bush pub, adventure is never far away.
     </p>
     <img
       src={sleepingWombatInnImage}
@@ -42,6 +42,19 @@ const summary = (
       choices shape the story, and the dice determine whether things go to plan
       or take a turn for the worse.
     </p>
+    <TornPaper>
+      <p>
+        Bunyips and Bandits draws inspiration from real Australian history,
+        culture and landscape, but it is not a fair depiction of Australia, past
+        or present. Australia is a place with a long, deep, and ongoing history,
+        that for many thousands of years has been inhabited by Aboriginal and
+        Torres Strait Islander peoples. Their cultures are not singular, but
+        instead a network of over two hundred nations, each with their own
+        language, laws, and stories. Their land was wrongfully seized by
+        European invaders, and with it, lives, culture and language have been
+        lost—tragedies whose impacts are still felt today.
+      </p>
+    </TornPaper>
   </>
 );
 
@@ -53,16 +66,14 @@ const content = (
         Bunyips and Bandits is all about collaborative storytelling. Before you
         dive into adventure, you’ll create your own character with a unique
         background, skills, and motivations. They might be a cunning trickster,
-        a brawny bushranger, or a sorcerer who accidentally sets their own pants
-        on fire while trying to cast a spell.
+        a brawny bushranger, or a clumsy sorcerer—the choice is yours.
       </p>
       <p>
         The GM is the one pulling the strings—setting up the world, playing
-        non-player characters (NPCs), and ensuring the game flows smoothly (or
-        chaotically, depending on the players). The GM also acts as the ultimate
-        referee, deciding how events play out based on a combination of logic,
-        game rules, and a little bit of storytelling flair. The core of the game
-        boils down to this:
+        non-player characters (NPCs), and ensuring the game flows smoothly. The
+        GM also acts as the ultimate referee, deciding how events play out based
+        on a combination of logic, game rules, and a little bit of storytelling
+        flair. The core of the game boils down to this:
       </p>
       <ol className="list-decimal ml-4">
         <li>The GM describes a scene.</li>
@@ -82,10 +93,10 @@ const content = (
       </p>
       <p>
         This handbook should be viewed as framework to align everyone, rather
-        than a rigid rule system. If something doesn’t quite fit your playstyle,
-        discuss it with your party and tweak it. The game is meant to be
-        adaptable. The only rule is that everyone at the table enjoys
-        themselves.
+        than a rigid rule system. If anything is unclear, discuss it with your
+        party and agree on a ruling. If something doesn’t quite fit your
+        playstyle, discuss that too and potentially tweak it. The game is meant
+        to be adaptable. The only rule is that everyone at the table has fun.
       </p>
     </Body>
     <H2>What You’ll Need</H2>
