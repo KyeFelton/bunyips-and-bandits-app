@@ -1,8 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
-import { CharacterListRoute, HandbookRoute, HomeRoute } from "../routes";
+import { CharacterListRoute, HandbookRoute, HomeRoute, WikiRoute } from "../routes";
 import { Logo } from "./Logo";
 import { cn } from "../utils/cn";
-import { User, Book } from "lucide-react";
+import { User, Book, Library } from "lucide-react";
 
 interface NavBarProps {
   className?: string;
@@ -60,6 +60,20 @@ export function NavBar({ className }: NavBarProps) {
             <Book className="h-5 w-5 md:mr-2" />
             <span className="text-xs mt-1 md:mt-0 md:text-base hidden md:inline">
               Handbook
+            </span>
+          </Link>
+          <Link
+            to={WikiRoute}
+            className={cn(
+              "text-primary-foreground hover:text-accent-medium transition-colors flex flex-col md:flex-row items-center",
+              location.pathname.includes(WikiRoute)
+                ? "text-accent-medium"
+                : ""
+            )}
+          >
+            <Library className="h-5 w-5 md:mr-2" />
+            <span className="text-xs mt-1 md:mt-0 md:text-base hidden md:inline">
+              Wiki
             </span>
           </Link>
         </nav>
