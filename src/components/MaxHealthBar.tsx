@@ -39,7 +39,7 @@ export const MaxHealthBar = ({
           <span className="font-medium">{name}</span>
           <span>
             {value}
-            <span className={"text-sm text-muted-foreground ml-1"}>
+            <span className="text-sm text-muted-foreground ml-1">
               (+{upgrades})
             </span>
           </span>

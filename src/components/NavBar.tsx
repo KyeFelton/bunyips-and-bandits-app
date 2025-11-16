@@ -1,5 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
-import { CharacterListRoute, HandbookRoute, HomeRoute, WikiRoute } from "../routes";
+import {
+  CharacterListRoute,
+  HandbookRoute,
+  HomeRoute,
+  WikiRoute,
+} from "../routes";
 import { Logo } from "./Logo";
 import { cn } from "../utils/cn";
 import { User, Book, Library } from "lucide-react";
@@ -14,7 +19,7 @@ export function NavBar({ className }: NavBarProps) {
   return (
     <div
       className={cn(
-        "fixed z-50 bg-black sm:bg-black/90 shadow-sm w-full bottom-0 left-0 right-0 md:top-0 md:bottom-auto",
+        "fixed z-50 bg-black shadow-sm w-full bottom-0 left-0 right-0 md:top-0 md:bottom-auto",
         className
       )}
     >
@@ -23,22 +28,13 @@ export function NavBar({ className }: NavBarProps) {
           <Logo className="h-8 md:h-10 mr-2" />
         </Link>
         <nav className="flex items-center justify-around md:justify-end w-full md:w-auto md:space-x-6">
-          {/* <Link
-            to={HomeRoute}
-            className={cn(
-              "md:hidden text-primary-foreground hover:text-accent-medium transition-colors flex flex-col items-center",
-              location.pathname === HomeRoute ? "text-accent-medium" : ""
-            )}
-          >
-            <Home className="h-5 w-5" />
-            <span className="text-xs mt-1 hidden">Home</span>
-          </Link> */}
           <Link
             to={CharacterListRoute}
             className={cn(
               "text-primary-foreground hover:text-accent-medium transition-colors flex flex-col md:flex-row items-center",
               location.pathname === CharacterListRoute ||
-                location.pathname.includes("character")
+                location.pathname.includes("/character/") ||
+                location.pathname.includes("/character?")
                 ? "text-accent-medium"
                 : ""
             )}
@@ -66,9 +62,7 @@ export function NavBar({ className }: NavBarProps) {
             to={WikiRoute}
             className={cn(
               "text-primary-foreground hover:text-accent-medium transition-colors flex flex-col md:flex-row items-center",
-              location.pathname.includes(WikiRoute)
-                ? "text-accent-medium"
-                : ""
+              location.pathname.includes(WikiRoute) ? "text-accent-medium" : ""
             )}
           >
             <Library className="h-5 w-5 md:mr-2" />

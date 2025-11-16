@@ -1527,12 +1527,14 @@ export function Handbook() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <WikiPage
-        id="handbook"
-        title="Handbook"
-        summary={summary}
-        main={content}
-      />
+      <div className="sm:max-w-4xl sm:mx-auto h-full">
+        <WikiPage
+          id="handbook"
+          title="Handbook"
+          summary={summary}
+          main={content}
+        />
+      </div>
     </motion.div>
   );
 }

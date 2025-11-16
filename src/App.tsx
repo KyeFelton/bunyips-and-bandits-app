@@ -14,6 +14,7 @@ import {
   HandbookRoute,
   CharacterListRoute,
   WikiRoute,
+  WikiCategoryRoute,
   WikiArticleRoute,
 } from "./routes";
 import "./App.sass";
@@ -21,6 +22,14 @@ import { Wiki } from "./pages/Wiki";
 
 function App() {
   const location = useLocation();
+
+  // Get main section for animation key (only animate between main sections)
+  const getMainSection = (pathname: string) => {
+    if (pathname.includes("/character")) return "character";
+    if (pathname.includes("/handbook")) return "handbook";
+    if (pathname.includes("/wiki")) return "wiki";
+    return "home";
+  };
 
   return (
     <div className="min-h-dvh relative overflow-hidden">
@@ -45,7 +54,7 @@ function App() {
         />
       </div>
 
-      <NavBar className={"h-14 md:h-16"} />
+      <NavBar className="h-14 md:h-16" />
 
       {Array.from({ length: 8 }).map((_, i) => (
         <div key={i} className="firefly" />
@@ -53,13 +62,14 @@ function App() {
 
       <div className="h-dvh pb-14 md:pb-0 md:pt-16 overflow-auto">
         <AnimatePresence mode="wait">
-          <Routes location={location} key={location.pathname}>
+          <Routes location={location} key={getMainSection(location.pathname)}>
             <Route path={CharacterListRoute} element={<CharactersPage />} />
             <Route path={CharacterSheetRoute} element={<CharacterSheet />} />
             <Route path={CharacterEditorRoute} element={<CharacterEditor />} />
             <Route path={HandbookRoute} element={<Handbook />} />
-            <Route path={WikiRoute} element={<Wiki />} />
             <Route path={WikiArticleRoute} element={<Wiki />} />
+            <Route path={WikiCategoryRoute} element={<Wiki />} />
+            <Route path={WikiRoute} element={<Wiki />} />
           </Routes>
         </AnimatePresence>
       </div>

@@ -1,8 +1,13 @@
-import { PropsWithChildren } from "react";
-import { Card } from "./ui/card";
+import { PropsWithChildren, ReactNode } from "react";
+import { Link } from "react-router-dom";
+import { Button } from "./ui/button";
 import { WikiContent } from "../models/wikiContent";
+import { ArrowLeft } from "lucide-react";
 
-type Props = WikiContent;
+type Props = Partial<WikiContent> & {
+  backTo?: { label: string; path: string };
+  children?: ReactNode;
+};
 
 export function WikiPage({
   title,
@@ -10,18 +15,25 @@ export function WikiPage({
   summary,
   tableOfContents,
   main,
+  backTo,
+  children,
 }: Props) {
   return (
-    <div className={"sm:max-w-4xl sm:mx-auto sm:px-4 sm:py-8"}>
-      <Card className="py-8 px-12 rounded-none sm:rounded-lg">
-        <h1 className="text-3xl font-bold mb-4">{title}</h1>
-        {subTitle && (
-          <h2 className="text-2xl font-semibold mb-2">{subTitle}</h2>
-        )}
-        {summary && <div className="prose max-w-none mb-8">{summary}</div>}
-        {tableOfContents}
-        {main}
-      </Card>
+    <div className="py-6 px-4 md:py-8 md:px-12 min-h-full space-y-6 md:space-y-8 bg-background">
+      {backTo && (
+        <Link to={backTo.path} className="inline-block">
+          <Button variant="ghost" size="sm">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            {backTo.label}
+          </Button>
+        </Link>
+      )}
+      {title && <h1 className="text-3xl md:text-4xl font-bold">{title}</h1>}
+      {subTitle && <h2 className="text-2xl font-semibold mb-2">{subTitle}</h2>}
+      {summary && <div className="prose max-w-none mb-8">{summary}</div>}
+      {tableOfContents}
+      {main}
+      {children}
     </div>
   );
 }
