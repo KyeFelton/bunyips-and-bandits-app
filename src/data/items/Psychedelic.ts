@@ -1,18 +1,12 @@
-import { SkillType } from "../../enums/SkillType";
 import { Item } from "../../models/items";
 
 const MildPsychedelic: Item = {
   name: "Mild psychedelic",
   description:
-    "When consumed, you gain +1 bonus to psychic checks for the next hour. If you have already consumed a psychedlic within the last hour, you also take 1d4 toxic damage. At most three psychedelics can be consumed at one time.",
-  effects: [
-    {
-      skill: {
-        skillType: SkillType.Psychic,
-        bonus: 1,
-      },
-    },
-  ],
+    "Grants the Psychedelic Trip (Mild) condition until your next rest, providing +1 bonus to psychic checks. If you have already consumed a psychedelic within the last hour, you also take 2 damage. At most three psychedelics can be consumed at one time.",
+  immediateEffect: {
+    condition: "Psychedelic Trip (Mild)",
+  },
   singleUse: true,
   weight: 0.2,
   defaultCost: 85,
@@ -21,15 +15,10 @@ const MildPsychedelic: Item = {
 const StrongPsychedelic: Item = {
   name: "Strong psychedelic",
   description:
-    "When consumed, you gain +2 bonus to psychic checks for next hour. If you have already consumed a psychedlic within the last hour, you also take 1d6 toxic damage. At most three psychedelics can be consumed at one time.",
-  effects: [
-    {
-      skill: {
-        skillType: SkillType.Psychic,
-        bonus: 2,
-      },
-    },
-  ],
+    "Grants the Psychedelic Trip (Strong) condition until your next rest, providing +2 bonus to psychic checks. If you have already consumed a psychedelic within the last hour, you also take 2 damage. At most three psychedelics can be consumed at one time.",
+  immediateEffect: {
+    condition: "Psychedelic Trip (Strong)",
+  },
   singleUse: true,
   weight: 0.2,
   defaultCost: 300,

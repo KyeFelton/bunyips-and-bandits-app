@@ -1,77 +1,78 @@
 import { DamageType } from "../enums/DamageType";
 import { Locomotion } from "../enums/Locomotion";
+import { SkillType } from "../enums/SkillType";
 import { Effect } from "./effect";
 
 export type Condition = {
   name: string;
   description: string;
   effects?: Effect[];
-  stackable: boolean;
+  stackable: number; // 0 = not stackable, >0 = max stack count
 };
 
 export const Amnesia: Condition = {
   name: "Amnesia",
   description: "You forget who you are and why you're here.",
-  stackable: false,
+  stackable: 0,
 };
 
 export const Anosmic: Condition = {
   name: "Anosmic",
   description: "You cannot smell until the end of your next turn.",
-  stackable: false,
+  stackable: 0,
 };
 
 export const Blocked: Condition = {
   name: "Blocked",
   description: "You cannot use psychic sense until the end of your next turn.",
-  stackable: false,
+  stackable: 0,
 };
 
 export const Blinded: Condition = {
   name: "Blinded",
   description:
     "You cannot see visible or infrared light until the end of your next turn.",
-  stackable: false,
+  stackable: 0,
 };
 
 export const Burning: Condition = {
   name: "Burning",
   description:
     "You take 1 fire damage at the start of each of your turns. After taking the damage, you may use an action to douse the flame and remove the status.",
-  stackable: false,
+  stackable: 0,
 };
 
 export const Composed: Condition = {
   name: "Composed",
   description:
     "You cannot be detected by psychic sense until the end of your next turn.",
-  stackable: false,
+  stackable: 0,
 };
 
 export const Deafened: Condition = {
   name: "Deafened",
   description:
     "You cannot hear sounds in the air or tremors in the earth or water until the end of your next turn.",
-  stackable: false,
+  stackable: 0,
 };
 
 export const Deluded: Condition = {
   name: "Deluded",
   description:
     "Your perception of reality is warped. You may mistake people for monsters, monsters for people or have flashbacks of past experiences.",
-  stackable: false,
+  stackable: 0,
 };
 
 export const Disoriented: Condition = {
   name: "Disoriented",
   description: "You are blind, deaf and anosmic.",
-  stackable: false,
+  stackable: 0,
 };
 
 export const Empowered: Condition = {
   name: "Empowered",
   description: "You gain an evasion until your next turn.",
-  stackable: true,
+  stackable: 3,
   effects: [
     {
       evasions: {
@@ -85,46 +86,46 @@ export const Frightened: Condition = {
   name: "Frightened",
   description:
     "You're overwhelmed with fear, easily startled and flee from all danger. You even have trouble trusting your friends.",
-  stackable: false,
+  stackable: 0,
 };
 
 export const Hysteria: Condition = {
   name: "Hysteria",
   description:
     "You experience uncontrollable emotional outbursts—laughing, crying, screaming.",
-  stackable: false,
+  stackable: 0,
 };
 
 export const Hypnotised: Condition = {
   name: "Hypnotised",
   description:
     "You cannot harm the caster. You must obey any commands and act with the best interest of the caster. If you are attacked by anyone from the opposing side, this status is removed.",
-  stackable: false,
+  stackable: 0,
 };
 
 export const Invisible: Condition = {
   name: "Invisible",
   description:
     "You cannot be detected through sight or infrared sight until your next turn.",
-  stackable: false,
+  stackable: 0,
 };
 
 export const Madness: Condition = {
   name: "Madness",
   description: "You can only attack the closest creature near you.",
-  stackable: false,
+  stackable: 0,
 };
 
 export const Odourless: Condition = {
   name: "Odourless",
   description: "You cannot be detected through smell until your next turn.",
-  stackable: false,
+  stackable: 0,
 };
 
 export const ProtectedElectric: Condition = {
   name: "Protected - Electric",
   description: "You gain +1 armour for electric damage until your next turn.",
-  stackable: true,
+  stackable: 3,
   effects: [
     {
       armour: {
@@ -138,7 +139,7 @@ export const ProtectedElectric: Condition = {
 export const ProtectedFire: Condition = {
   name: "Protected - Fire",
   description: "You gain +1 armour for fire damage until your next turn.",
-  stackable: true,
+  stackable: 3,
   effects: [
     {
       armour: {
@@ -152,7 +153,7 @@ export const ProtectedFire: Condition = {
 export const ProtectedForce: Condition = {
   name: "Protected - Force",
   description: "You gain +1 armour for force damage until your next turn.",
-  stackable: true,
+  stackable: 3,
   effects: [
     {
       armour: {
@@ -166,7 +167,7 @@ export const ProtectedForce: Condition = {
 export const ProtectedSlash: Condition = {
   name: "Protected - Slash",
   description: "You gain +1 armour for slash damage until your next turn.",
-  stackable: true,
+  stackable: 3,
   effects: [
     {
       armour: {
@@ -180,7 +181,7 @@ export const ProtectedSlash: Condition = {
 export const ProtectedToxic: Condition = {
   name: "Protected - Toxic",
   description: "You gain +1 armour for toxic damage until your next turn.",
-  stackable: true,
+  stackable: 3,
   effects: [
     {
       armour: {
@@ -195,13 +196,13 @@ export const Provoked: Condition = {
   name: "Provoked",
   description:
     "You must use at least one of your actions to attempt to harm the opponent who provoked you.",
-  stackable: false,
+  stackable: 0,
 };
 
 export const Restrained: Condition = {
   name: "Restrained",
   description: "You cannot move on your next turn.",
-  stackable: false,
+  stackable: 0,
   effects: [
     {
       speed: {
@@ -234,14 +235,14 @@ export const Silent: Condition = {
   name: "Silent",
   description:
     "You cannot be detected through hearing or tremor hearing until your next turn.",
-  stackable: false,
+  stackable: 0,
 };
 
 export const Stunned: Condition = {
   name: "Stunned",
   description:
     "You lose an evasion until your next turn. If you have no evasions, then you lose an action on your next turn.",
-  stackable: true,
+  stackable: 3,
   effects: [
     {
       evasions: {
@@ -251,7 +252,101 @@ export const Stunned: Condition = {
   ],
 };
 
+export const SteroidBoost: Condition = {
+  name: "Steroid Boost",
+  description:
+    "You have enhanced physical abilities until your next rest. You gain +1 bonus to strength and agility checks. This effect lasts until you take a rest.",
+  stackable: 3,
+  effects: [
+    {
+      skill: {
+        skillType: SkillType.Strength,
+        bonus: 1,
+      },
+    },
+    {
+      skill: {
+        skillType: SkillType.Agility,
+        bonus: 1,
+      },
+    },
+  ],
+};
+
+export const AdrenalineRush: Condition = {
+  name: "Adrenaline Rush",
+  description:
+    "You have a surge of energy until your next rest. Your maximum stamina is increased by 5. This effect lasts until you take a rest.",
+  stackable: 3,
+};
+
+export const PsychedelicTripMild: Condition = {
+  name: "Psychedelic Trip - Mild",
+  description:
+    "Your mind is expanded until your next rest. You gain +1 bonus to psychic checks. This effect lasts until you take a rest.",
+  stackable: 0,
+  effects: [
+    {
+      skill: {
+        skillType: SkillType.Psychic,
+        bonus: 1,
+      },
+    },
+  ],
+};
+
+export const PsychedelicTripStrong: Condition = {
+  name: "Psychedelic Trip - Strong",
+  description:
+    "Your mind is greatly expanded until your next rest. You gain +2 bonus to psychic checks. This effect lasts until you take a rest.",
+  stackable: 0,
+  effects: [
+    {
+      skill: {
+        skillType: SkillType.Psychic,
+        bonus: 2,
+      },
+    },
+  ],
+};
+
+export const Infatuated: Condition = {
+  name: "Infatuated",
+  description:
+    "You are deeply infatuated with another creature. You cannot harm them and will act in their best interest. This effect lasts until your next rest or until they harm you.",
+  stackable: 0,
+};
+
+export const Sleeping: Condition = {
+  name: "Sleeping",
+  description:
+    "You are in a deep sleep and are unconscious. You cannot perceive your surroundings or take actions. Loud noises or physical contact may wake you.",
+  stackable: 0,
+};
+
+export const FeignDeath: Condition = {
+  name: "Feign Death",
+  description:
+    "You appear to be dead for up to 1 hour. You are unconscious and cannot take actions, but you remain aware of your surroundings. This effect lasts until your next rest or until you choose to end it.",
+  stackable: 0,
+};
+
+export const Unconscious: Condition = {
+  name: "Unconscious",
+  description:
+    "You are unconscious and cannot perceive your surroundings or take actions. You automatically fail strength and agility checks.",
+  stackable: 0,
+};
+
+export const Soothed: Condition = {
+  name: "Soothed",
+  description:
+    "You have consumed a soothing herb and feel calm until your next rest. Consuming another soothing herb will cause harm.",
+  stackable: 0,
+};
+
 export const AllConditions = [
+  AdrenalineRush,
   Amnesia,
   Anosmic,
   Blocked,
@@ -262,9 +357,11 @@ export const AllConditions = [
   Deluded,
   Disoriented,
   Empowered,
+  FeignDeath,
   Frightened,
   Hysteria,
   Hypnotised,
+  Infatuated,
   Invisible,
   Madness,
   Odourless,
@@ -274,7 +371,13 @@ export const AllConditions = [
   ProtectedSlash,
   ProtectedToxic,
   Provoked,
+  PsychedelicTripMild,
+  PsychedelicTripStrong,
   Restrained,
   Silent,
+  Sleeping,
+  Soothed,
+  SteroidBoost,
   Stunned,
+  Unconscious,
 ];

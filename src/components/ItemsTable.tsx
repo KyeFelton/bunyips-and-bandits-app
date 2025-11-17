@@ -1,5 +1,16 @@
-import { useAtom, useAtomValue } from "jotai";
-import { itemsAtom, moneyAtom, skillLevelsAtom } from "./../state/character";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import {
+  itemsAtom,
+  moneyAtom,
+  skillLevelsAtom,
+  conditionsAtom,
+  currentPhysiqueAtom,
+  currentMoraleAtom,
+  currentStaminaAtom,
+  physiqueAtom,
+  moraleAtom,
+  staminaAtom,
+} from "./../state/character";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import {
@@ -22,6 +33,7 @@ import { AddItemDialog } from "./AddItemDialog";
 import { SkillType } from "./../enums/SkillType";
 import { useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { AllConditions } from "./../models/conditions";
 
 const getWeightLimit = (strengthLevel: number) => {
   switch (strengthLevel) {
@@ -47,6 +59,13 @@ export const ItemsTable = () => {
   const [money, setMoney] = useAtom(moneyAtom);
   const [isEditingMoney, setIsEditingMoney] = useState(false);
   const skillLevels = useAtomValue(skillLevelsAtom);
+  const [conditions, setConditions] = useAtom(conditionsAtom);
+  const setCurrentPhysique = useSetAtom(currentPhysiqueAtom);
+  const setCurrentMorale = useSetAtom(currentMoraleAtom);
+  const setCurrentStamina = useSetAtom(currentStaminaAtom);
+  const physique = useAtomValue(physiqueAtom);
+  const morale = useAtomValue(moraleAtom);
+  const stamina = useAtomValue(staminaAtom);
 
   const totalWeight = Object.values(items).reduce(
     (sum, item) => sum + item.weight * item.quantity,
@@ -67,6 +86,64 @@ export const ItemsTable = () => {
   const handleUseItem = (itemName: string) => {
     const item = items[itemName];
     if (item.singleUse) {
+      // Process immediate effects before removing the item
+      if (item.immediateEffect) {
+        const {
+          physique: physiqueBonus,
+          morale: moraleBonus,
+          stamina: staminaBonus,
+          condition,
+        } = item.immediateEffect;
+
+        // Apply stat increases (capped at max)
+        if (physiqueBonus) {
+          setCurrentPhysique((prev) =>
+            Math.min(prev + physiqueBonus, physique.max)
+          );
+        }
+        if (moraleBonus) {
+          setCurrentMorale((prev) => Math.min(prev + moraleBonus, morale.max));
+        }
+        if (staminaBonus) {
+          setCurrentStamina((prev) =>
+            Math.min(prev + staminaBonus, stamina.max)
+          );
+        }
+
+        // Grant condition
+        if (condition) {
+          const conditionData = AllConditions.find((c) => c.name === condition);
+          if (conditionData) {
+            // Check if character already has this condition
+            const existingConditionCount = conditions.filter(
+              (c) => c.name === condition
+            ).length;
+
+            // Apply damage if consuming repeatedly (already has the condition)
+            if (existingConditionCount > 0) {
+              setCurrentPhysique((prev) => Math.max(0, prev - 2));
+            }
+
+            setConditions((prev) => {
+              // For stackable conditions (stackable > 0), add up to max stack count
+              // For non-stackable (stackable = 0), only add if not already present
+              if (conditionData.stackable > 0) {
+                // Check if at max stack count
+                if (existingConditionCount < conditionData.stackable) {
+                  return [...prev, conditionData];
+                }
+                // Already at max, don't add more
+                return prev;
+              } else {
+                const hasCondition = prev.some((c) => c.name === condition);
+                return hasCondition ? prev : [...prev, conditionData];
+              }
+            });
+          }
+        }
+      }
+
+      // Remove or decrement item
       if (item.quantity > 1) {
         setItems((prev) => ({
           ...prev,

@@ -3,14 +3,11 @@ import { Item } from "../../models/items";
 export const Adrenaline: Item = {
   name: "Adrenaline",
   description:
-    "When consumed, you gain a boost of energy. Increase stamina by 5. If you have already consumed adrenaline since your last rest, you take 1d6 damage.",
-  effects: [
-    {
-      stamina: {
-        bonus: 5,
-      },
-    },
-  ],
+    "Grants the Adrenaline Rush condition until your next rest, increasing maximum stamina by 5. If you already have this condition and consume another, you take 2 damage.",
+  immediateEffect: {
+    stamina: 5,
+    condition: "Adrenaline Rush",
+  },
   singleUse: true,
   weight: 0.2,
   defaultCost: 125,

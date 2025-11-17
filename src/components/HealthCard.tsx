@@ -18,6 +18,12 @@ import { AddConditionModal } from "./AddConditionModal";
 import { DefeatModal } from "./DefeatModal";
 import { ConditionGainedModal } from "./ConditionGainedModal";
 import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "./ui/dialog";
+import {
   Hysteria,
   Amnesia,
   Deluded,
@@ -42,6 +48,9 @@ export const HealthCard = ({ className }: Props) => {
   const [isConditionGainedModalOpen, setIsConditionGainedModalOpen] =
     useState(false);
   const [gainedCondition, setGainedCondition] = useState<Condition | null>(
+    null
+  );
+  const [selectedCondition, setSelectedCondition] = useState<Condition | null>(
     null
   );
 
@@ -136,20 +145,31 @@ export const HealthCard = ({ className }: Props) => {
                   acc[condition.name] = (acc[condition.name] || 0) + 1;
                   return acc;
                 }, {} as Record<string, number>)
-              ).map(([name, count]) => (
-                <Badge key={name} variant="secondary" className="gap-1">
-                  {name}
-                  {count > 1 && <span className="text-xs">x{count}</span>}
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-4 w-4 hover:bg-transparent"
-                    onClick={() => handleRemoveCondition(name)}
+              ).map(([name, count]) => {
+                const condition = conditions.find((c) => c.name === name);
+                return (
+                  <Badge
+                    key={name}
+                    variant="secondary"
+                    className="gap-1 cursor-pointer hover:bg-secondary/80"
+                    onClick={() => condition && setSelectedCondition(condition)}
                   >
-                    <X className="h-3 w-3" />
-                  </Button>
-                </Badge>
-              ))
+                    {name}
+                    {count > 1 && <span className="text-xs">x{count}</span>}
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-4 w-4 hover:bg-transparent"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleRemoveCondition(name);
+                      }}
+                    >
+                      <X className="h-3 w-3" />
+                    </Button>
+                  </Badge>
+                );
+              })
             ) : (
               <span className="text-sm">None</span>
             )}
@@ -171,6 +191,78 @@ export const HealthCard = ({ className }: Props) => {
           condition={gainedCondition}
         />
       )}
+      <Dialog
+        open={selectedCondition !== null}
+        onOpenChange={(open) => !open && setSelectedCondition(null)}
+      >
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{selectedCondition?.name}</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <p className="text-sm text-muted-foreground">
+              {selectedCondition?.description}
+            </p>
+            {selectedCondition?.effects && selectedCondition.effects.length > 0 && (
+              <div className="space-y-2">
+                <h4 className="text-sm font-medium">Effects:</h4>
+                <ul className="text-sm text-muted-foreground space-y-1">
+                  {selectedCondition.effects.map((effect, index) => (
+                    <li key={index}>
+                      {effect.skill && (
+                        <span>
+                          {effect.skill.bonus && effect.skill.bonus > 0 ? "+" : ""}
+                          {effect.skill.bonus} {effect.skill.skillType}
+                        </span>
+                      )}
+                      {effect.stamina && (
+                        <span>
+                          {effect.stamina.bonus && effect.stamina.bonus > 0 ? "+" : ""}
+                          {effect.stamina.bonus} Stamina
+                        </span>
+                      )}
+                      {effect.physique && (
+                        <span>
+                          {effect.physique.bonus && effect.physique.bonus > 0 ? "+" : ""}
+                          {effect.physique.bonus} Physique
+                        </span>
+                      )}
+                      {effect.morale && (
+                        <span>
+                          {effect.morale.bonus && effect.morale.bonus > 0 ? "+" : ""}
+                          {effect.morale.bonus} Morale
+                        </span>
+                      )}
+                      {effect.evasions && (
+                        <span>
+                          {effect.evasions.bonus && effect.evasions.bonus > 0 ? "+" : ""}
+                          {effect.evasions.bonus} Evasion
+                        </span>
+                      )}
+                      {effect.armour && (
+                        <span>
+                          {effect.armour.bonus && effect.armour.bonus > 0 ? "+" : ""}
+                          {effect.armour.bonus} {effect.armour.damageType} Armour
+                        </span>
+                      )}
+                      {effect.speed && (
+                        <span>
+                          {effect.speed.multiplier !== undefined
+                            ? `${effect.speed.multiplier}x`
+                            : effect.speed.bonus && effect.speed.bonus > 0
+                            ? "+"
+                            : ""}
+                          {effect.speed.bonus} {effect.speed.locomotion} Speed
+                        </span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </Card>
   );
 };

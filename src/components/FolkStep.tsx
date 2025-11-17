@@ -45,7 +45,7 @@ export const FolkStep = () => {
     if (!selectedSpecies) return Object.keys(AllAncestries);
 
     return Object.entries(AllAncestries)
-      .filter(([_, ancestry]) => ancestry.species.includes(selectedSpecies))
+      .filter(([, ancestry]) => ancestry.species.includes(selectedSpecies))
       .map(([name]) => name);
   }, [selectedSpecies]);
 
@@ -82,7 +82,7 @@ export const FolkStep = () => {
           // Current ancestry not available for new species
           // Find first available ancestry for this species
           const firstAvailableAncestry = Object.entries(AllAncestries)
-            .find(([_, ancestry]) => ancestry.species.includes(value));
+            .find(([, ancestry]) => ancestry.species.includes(value));
           if (firstAvailableAncestry) {
             setAncestry(firstAvailableAncestry[0]);
           }
@@ -90,7 +90,7 @@ export const FolkStep = () => {
       } else {
         // No ancestry selected, auto-select first available
         const firstAvailableAncestry = Object.entries(AllAncestries)
-          .find(([_, ancestry]) => ancestry.species.includes(value));
+          .find(([, ancestry]) => ancestry.species.includes(value));
         if (firstAvailableAncestry) {
           setAncestry(firstAvailableAncestry[0]);
         }

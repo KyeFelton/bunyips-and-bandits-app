@@ -122,6 +122,7 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
           singleUse: selectedItem.singleUse,
           description: selectedItem.description,
           effects: selectedItem.effects,
+          immediateEffect: selectedItem.immediateEffect,
           equipped: existingItem?.equipped || false,
           quantity: (existingItem?.quantity || 0) + selectedItem.quantity,
         },
