@@ -5,16 +5,16 @@ import { SenseType } from "../../enums/SenseType";
 import { SkillType } from "../../enums/SkillType";
 import { Species } from "../../models/species";
 
-export const Goa: Species = {
-  name: "Goa",
+export const Giant: Species = {
+  name: "Giant",
   size: CreatureSize.Large,
-  physique: 7,
-  morale: 7,
+  physique: 8,
+  morale: 6,
   stamina: 4,
   speed: {
-    [Locomotion.Walk]: 4,
-    [Locomotion.Swim]: 1,
-    [Locomotion.Climb]: 1,
+    [Locomotion.Walk]: 5,
+    [Locomotion.Swim]: 3,
+    [Locomotion.Climb]: 2,
     [Locomotion.Fly]: 0,
   },
   senses: {
@@ -28,23 +28,23 @@ export const Goa: Species = {
   armour: {
     [DamageType.Fire]: 0,
     [DamageType.Electric]: 0,
-    [DamageType.Toxic]: 0,
-    [DamageType.Slash]: 0,
-    [DamageType.Force]: 0,
+    [DamageType.Toxic]: 1,
+    [DamageType.Slash]: 1,
+    [DamageType.Force]: 2,
   },
   skillLevels: {
-    [SkillType.Strength]: 3,
+    [SkillType.Strength]: 4,
     [SkillType.Agility]: 1,
-    [SkillType.Dexterity]: 2,
+    [SkillType.Dexterity]: 1,
     [SkillType.Throw]: 3,
-    [SkillType.Intelligence]: 2,
+    [SkillType.Intelligence]: 1,
     [SkillType.Nature]: 2,
-    [SkillType.Willpower]: 2,
+    [SkillType.Willpower]: 3,
     [SkillType.Charisma]: 2,
-    [SkillType.Psychology]: 2,
+    [SkillType.Psychology]: 1,
     [SkillType.Stealth]: 1,
     [SkillType.Sight]: 2,
-    [SkillType.Hearing]: 3,
-    [SkillType.Smell]: 1,
+    [SkillType.Hearing]: 2,
+    [SkillType.Smell]: 2,
   },
 };

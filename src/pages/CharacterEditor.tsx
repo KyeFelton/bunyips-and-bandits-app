@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Card } from "../components/ui/card";
 import { Button } from "../components/ui/button";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import { SpeciesStep } from "../components/SpeciesStep";
+import { FolkStep } from "../components/FolkStep";
 import { DescriptionStep } from "../components/DescriptionStep";
 import { LevelStep } from "../components/LevelStep";
 import { PathsStep } from "../components/PathsStep";
@@ -13,7 +13,7 @@ import { CustomTraitsStep } from "../components/CustomTraitsStep";
 import { HealthStep } from "../components/HealthStep";
 
 const steps = [
-  { title: "Species", component: SpeciesStep },
+  { title: "Folk", component: FolkStep },
   { title: "Description", component: DescriptionStep },
   { title: "Level", component: LevelStep },
   { title: "Paths", component: PathsStep },

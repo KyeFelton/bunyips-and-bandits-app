@@ -3,6 +3,7 @@ import { SkillType } from "../enums/SkillType";
 import { ItemDictionary } from "../models/items";
 import { PathProgression } from "../models/paths";
 import { AllSpecies } from "../data/species";
+import { AllAncestries } from "../data/ancestries";
 import { Effect } from "../models/effect";
 import * as Skills from "../models/skills";
 import { Trait } from "../models/traits";
@@ -18,6 +19,7 @@ export const MAX_SKILL_LEVEL = 10;
 
 // Basic character info
 export const nameAtom = atom<string>("");
+export const ancestryAtom = atom<string>("");
 export const speciesAtom = atom<string>("");
 export const genderAtom = atom<string>("");
 export const ageAtom = atom<number>(0);
@@ -51,11 +53,17 @@ export const customTraitsAtom = atom<Trait[]>([]);
 
 // Effects atom
 export const effectsAtom = atom((get) => {
+  const ancestry = get(ancestryDataAtom);
   const paths = get(pathsAtom);
   const items = get(itemsAtom);
   const customTraits = get(customTraitsAtom);
   const conditions = get(conditionsAtom);
   const effects: Effect[] = [];
+
+  // Collect effects from ancestry
+  if (ancestry?.effects) {
+    effects.push(...ancestry.effects);
+  }
 
   // Collect effects from paths
   paths.forEach((path) => {
@@ -100,6 +108,13 @@ export const effectsAtom = atom((get) => {
 export const speciesDataAtom = atom((get) => {
   const speciesName = get(speciesAtom);
   return AllSpecies[speciesName as keyof typeof AllSpecies];
+});
+
+// Get ancestry data
+export const ancestryDataAtom = atom((get) => {
+  const ancestryName = get(ancestryAtom);
+  if (!ancestryName) return null;
+  return AllAncestries[ancestryName as keyof typeof AllAncestries] || null;
 });
 
 export const availableHealthUpgradesAtom = atom((get) => {

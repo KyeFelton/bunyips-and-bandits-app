@@ -7,6 +7,7 @@ import {
   levelAtom,
   imageAtom,
   speciesAtom,
+  ancestryAtom,
 } from "./../state/character";
 import { LevelUpModal } from "./LevelUpModal";
 import { useState } from "react";
@@ -17,6 +18,7 @@ export const NameCard = () => {
   const [level, setLevel] = useAtom(levelAtom);
   const image = useAtomValue(imageAtom);
   const species = useAtomValue(speciesAtom);
+  const ancestry = useAtomValue(ancestryAtom);
   const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false);
 
   const handleLevelUpModalOpen = () => {
@@ -55,7 +57,7 @@ export const NameCard = () => {
       </CardHeader>
       <CardContent className="flex-grow min-h-0 flex justify-center">
         <img
-          src={image ?? getSpeciesImage(species)}
+          src={image ?? getSpeciesImage(species, ancestry || "Englorian")}
           alt="character"
           className="w-full max-w-[250px] h-full max-h-[250px] rounded-md object-cover"
         />

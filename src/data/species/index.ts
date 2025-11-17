@@ -1,21 +1,19 @@
-import { Gnome } from "./Gnome";
-import { Cobber } from "./Cobber";
-import { Human } from "./Human";
-import { Hobgoblin } from "./Hobgoblin";
-import { Goa } from "./Goa";
-import { Dropbear } from "./Dropbear";
-import { Falkir } from "./Falkir";
-import { Yowie } from "./Yowie";
+import { Avian } from './Avian';
+import { Floret } from './Floret';
+import { Giant } from './Giant';
+import { Goblin } from './Goblin';
+import { Human } from './Human';
+import { Reptilian } from './Reptilian';
+import { Sprite } from './Sprite';
 
 export const AllSpecies = {
+  Avian,
+  Floret,
+  Giant,
+  Goblin,
   Human,
-  Yowie,
-  Cobber,
-  Dropbear,
-  Falkir,
-  Gnome,
-  Goa,
-  Hobgoblin,
+  Reptilian,
+  Sprite,
 };
 
 export const startingSpecies = AllSpecies.Human;

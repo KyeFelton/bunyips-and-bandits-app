@@ -1,24 +1,44 @@
-import gnomeImage from "../images/species/gnome.png";
-import cobberImage from "../images/species/cobber.png";
-import hobgoblinImage from "../images/species/hobgoblin.png";
-import humanImage from "../images/species/human.png";
-import goaImage from "../images/species/goa.png";
-import dropbearImage from "../images/species/dropbear.png";
-import falkirImage from "../images/species/falkir.png";
-import yowieImage from "../images/species/yowie.png";
-import { AllSpecies } from "../data/species";
+// Englorian species images
+import avianEnglorianImage from "../images/species/englorian/avian.png";
+import floretEnglorianImage from "../images/species/englorian/floret.png";
+import giantEnglorianImage from "../images/species/englorian/giant.png";
+import goblinEnglorianImage from "../images/species/englorian/goblin.png";
+import humanEnglorianImage from "../images/species/englorian/human.png";
+import spriteEnglorianImage from "../images/species/englorian/sprite.png";
 
-const speciesImages: Record<string, string> = {
-  Cobber: cobberImage,
-  Dropbear: dropbearImage,
-  Gnome: gnomeImage,
-  Human: humanImage,
-  Hobgoblin: hobgoblinImage,
-  Goa: goaImage,
-  Falkir: falkirImage,
-  Yowie: yowieImage,
+// Downunda species images
+import avianDownundaImage from "../images/species/downunda/avian.png";
+import floretDownundaImage from "../images/species/downunda/floret.png";
+import giantDownundaImage from "../images/species/downunda/giant.png";
+import goblinDownundaImage from "../images/species/downunda/goblin.png";
+import humanDownundaImage from "../images/species/downunda/human.png";
+import reptilianDownundaImage from "../images/species/downunda/reptilian.png";
+import spriteDownundaImage from "../images/species/downunda/sprite.png";
+
+const speciesImages: Record<string, Record<string, string>> = {
+  Englorian: {
+    Avian: avianEnglorianImage,
+    Floret: floretEnglorianImage,
+    Giant: giantEnglorianImage,
+    Goblin: goblinEnglorianImage,
+    Human: humanEnglorianImage,
+    Sprite: spriteEnglorianImage,
+  },
+  Downunda: {
+    Avian: avianDownundaImage,
+    Floret: floretDownundaImage,
+    Giant: giantDownundaImage,
+    Goblin: goblinDownundaImage,
+    Human: humanDownundaImage,
+    Reptilian: reptilianDownundaImage,
+    Sprite: spriteDownundaImage,
+  },
 };
 
-export const getSpeciesImage = (speciesName: string): string => {
-  return speciesImages[speciesName] || speciesImages[AllSpecies.Human.name];
+export const getSpeciesImage = (speciesName: string, ancestry: string): string => {
+  const ancestryImages = speciesImages[ancestry];
+  if (!ancestryImages) {
+    return speciesImages.Englorian.Human;
+  }
+  return ancestryImages[speciesName] || speciesImages.Englorian.Human;
 };

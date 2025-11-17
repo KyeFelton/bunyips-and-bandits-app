@@ -27,6 +27,7 @@ import { randomString } from "../utils/randomString";
 import { CharacterSaveFile, defaultCharacter } from "../models/saveFile";
 import {
   ageAtom,
+  ancestryAtom,
   backgroundAtom,
   currentMoraleAtom,
   currentPhysiqueAtom,
@@ -70,6 +71,7 @@ export function CharactersPage() {
   const [moraleUpgrades, setMoraleUpgrades] = useAtom(moraleUpgradesAtom);
   const [currentStamina, setCurrentStamina] = useAtom(currentStaminaAtom);
   const [staminaUpgrades, setStaminaUpgrades] = useAtom(staminaUpgradesAtom);
+  const [ancestry, setAncestry] = useAtom(ancestryAtom);
   const [species, setSpecies] = useAtom(speciesAtom);
   const [gender, setGender] = useAtom(genderAtom);
   const [age, setAge] = useAtom(ageAtom);
@@ -87,6 +89,7 @@ export function CharactersPage() {
 
   const focalCharacter = {
     name,
+    ancestry,
     species,
     gender,
     age,
@@ -118,6 +121,7 @@ export function CharactersPage() {
     setMoraleUpgrades(character.moraleUpgrades);
     setCurrentStamina(character.currentStamina);
     setStaminaUpgrades(character.staminaUpgrades);
+    setAncestry(character.ancestry || "Englorian");
     setSpecies(character.species);
     setGender(character.gender);
     setAge(character.age);
@@ -292,7 +296,7 @@ export function CharactersPage() {
                   {
                     <img
                       src={
-                        character.image ?? getSpeciesImage(character.species)
+                        character.image ?? getSpeciesImage(character.species, character.ancestry || "Englorian")
                       }
                       alt={character.name}
                       className="w-full h-48 object-cover rounded-t-lg"

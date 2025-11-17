@@ -7,6 +7,7 @@ import { Path } from "./paths";
 
 export type Character = {
   name: string;
+  ancestry: string;
   species: string;
   gender: string;
   age: number;

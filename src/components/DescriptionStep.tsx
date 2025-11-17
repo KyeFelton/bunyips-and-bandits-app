@@ -20,6 +20,7 @@ import {
   languagesAtom,
   imageAtom,
   speciesAtom,
+  ancestryAtom,
 } from "./../state/character";
 import { getSpeciesImage } from "./../utils/speciesImages";
 
@@ -37,6 +38,7 @@ const languages = [
 export const DescriptionStep = () => {
   const [name, setName] = useAtom(nameAtom);
   const species = useAtomValue(speciesAtom);
+  const ancestry = useAtomValue(ancestryAtom);
   const [gender, setGender] = useAtom(genderAtom);
   const [age, setAge] = useAtom(ageAtom);
   const [background, setBackground] = useAtom(backgroundAtom);
@@ -90,7 +92,7 @@ export const DescriptionStep = () => {
         <div className="relative group w-64 h-64">
           <label htmlFor="image-upload" className="cursor-pointer">
             <img
-              src={image ?? getSpeciesImage(species)}
+              src={image ?? getSpeciesImage(species, ancestry || "Englorian")}
               alt="character"
               className="w-64 h-64 rounded-lg object-cover"
             />
