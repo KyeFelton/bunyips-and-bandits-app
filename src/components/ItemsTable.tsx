@@ -11,6 +11,13 @@ import {
   TableRow,
 } from "./ui/table";
 import { X, Coins, Weight, HelpCircle } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 import { AddItemDialog } from "./AddItemDialog";
 import { SkillType } from "./../enums/SkillType";
 import { useState } from "react";
@@ -86,6 +93,17 @@ export const ItemsTable = () => {
       delete newItems[itemName];
       return newItems;
     });
+  };
+
+  const handleQuantityChange = (itemName: string, value: string) => {
+    const quantity = Math.max(1, parseInt(value) || 1);
+    setItems((prev) => ({
+      ...prev,
+      [itemName]: {
+        ...prev[itemName],
+        quantity,
+      },
+    }));
   };
 
   const handleMoneyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -184,8 +202,29 @@ export const ItemsTable = () => {
                   </Popover>
                 </div>
               </TableCell>
-              <TableCell className="text-center">{item.quantity}</TableCell>
-              <TableCell className="text-right">{item.weight} kg</TableCell>
+              <TableCell className="text-center">
+                <Select
+                  value={item.quantity.toString()}
+                  onValueChange={(value) => handleQuantityChange(name, value)}
+                >
+                  <SelectTrigger className="h-8 w-16 mx-auto">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {[
+                      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 40, 50, 75,
+                      100,
+                    ].map((qty) => (
+                      <SelectItem key={qty} value={qty.toString()}>
+                        {qty}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </TableCell>
+              <TableCell className="text-right">
+                {Math.round(item.weight * item.quantity * 10) / 10} kg
+              </TableCell>
               <TableCell className="text-right">
                 <div className="flex justify-end gap-2">
                   <Button
