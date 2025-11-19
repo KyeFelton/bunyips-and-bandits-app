@@ -5,6 +5,18 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bunyips &amp; Bandits</title>
+    <script>
+      // GitHub Pages SPA URL restoration
+      // This script runs before React Router and restores the intended path
+      // that was stored by 404.html during the redirect
+      (function() {
+        const redirectPath = sessionStorage.getItem('redirectPath');
+        if (redirectPath) {
+          sessionStorage.removeItem('redirectPath');
+          history.replaceState(null, '', redirectPath);
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
