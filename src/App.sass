@@ -1,26 +1,33 @@
-.background-animation 
-  animation: zoomIn 4s ease-in-out 1 forwards
+.background-animation
+  animation: zoomIn 4s ease-in-out 1 forwards, fadeIn 0.3s ease-in 1 forwards
 
-@keyframes zoomIn 
-  from 
+@keyframes zoomIn
+  from
     transform: scale(1.2)
-  
-  to 
+
+  to
     transform: scale(1)
 
-.frame-animation 
-  animation: zoomOut 5s ease-in-out 1 forwards
+.frame-animation
+  animation: zoomOut 5s ease-in-out 1 forwards, fadeIn 0.3s ease-in 1 forwards
 
-@keyframes zoomOut 
-  0% 
+@keyframes zoomOut
+  0%
     transform: scale(1)
-  
-  80% 
+
+  80%
     transform: scale(5)
 
   100%
     transform: scale(5)
     display: none
+
+@keyframes fadeIn
+  from
+    opacity: 0
+
+  to
+    opacity: 1
 
 .firefly
   position: fixed

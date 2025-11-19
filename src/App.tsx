@@ -19,9 +19,11 @@ import {
 } from "./routes";
 import "./App.sass";
 import { Wiki } from "./pages/Wiki";
+import { useImagePreloader } from "./hooks/useImagePreloader";
 
 function App() {
   const location = useLocation();
+  const isLoading = useImagePreloader([background, frame]);
 
   // Get main section for animation key (only animate between main sections)
   const getMainSection = (pathname: string) => {
@@ -30,6 +32,13 @@ function App() {
     if (pathname.includes("/wiki")) return "wiki";
     return "home";
   };
+
+  // Show loading state while images are preloading
+  if (isLoading) {
+    return (
+      <div className="min-h-dvh bg-gradient-to-bl from-slate-900 to-slate-950" />
+    );
+  }
 
   return (
     <div className="min-h-dvh relative overflow-hidden">
