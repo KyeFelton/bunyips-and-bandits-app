@@ -9,17 +9,21 @@
       // preserving the intended route for the React Router
 
       (function() {
-        const pathSegmentsToKeep = 1; // Keep '/bunyips-and-bandits-app'
+        const basePath = '/bunyips-and-bandits-app';
+        const fullPath = window.location.pathname;
 
-        const path = window.location.pathname.split('/').slice(0, pathSegmentsToKeep + 1).join('/');
-        const route = window.location.pathname.slice(path.length);
+        // Extract the route relative to the base path
+        // e.g., '/bunyips-and-bandits-app/handbook' -> '/handbook'
+        const route = fullPath.startsWith(basePath)
+          ? fullPath.substring(basePath.length)
+          : fullPath;
 
         // Store the intended route in sessionStorage
         // This will be picked up by the script in index.html
         sessionStorage.setItem('redirectPath', route + window.location.search + window.location.hash);
 
         // Redirect to the base path
-        window.location.replace(path);
+        window.location.replace(basePath + '/');
       })();
     </script>
   </head>
