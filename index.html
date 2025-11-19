@@ -13,7 +13,9 @@
         const redirectPath = sessionStorage.getItem('redirectPath');
         if (redirectPath) {
           sessionStorage.removeItem('redirectPath');
-          history.replaceState(null, '', redirectPath);
+          const basePath = '/bunyips-and-bandits-app';
+          const fullPath = basePath + redirectPath;
+          history.replaceState(null, '', fullPath);
         }
       })();
     </script>
