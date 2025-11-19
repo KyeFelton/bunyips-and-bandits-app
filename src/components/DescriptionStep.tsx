@@ -1,4 +1,5 @@
 import { useAtom, useAtomValue } from "jotai";
+import { useState, useEffect } from "react";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
@@ -35,6 +36,9 @@ const languages = [
   "Tolrusian",
 ];
 
+const genders = ["Male", "Female", "Non-binary"];
+const CUSTOM_GENDER_OPTION = "Let me type...";
+
 export const DescriptionStep = () => {
   const [name, setName] = useAtom(nameAtom);
   const species = useAtomValue(speciesAtom);
@@ -45,6 +49,37 @@ export const DescriptionStep = () => {
   const [personality, setPersonality] = useAtom(personalityAtom);
   const [selectedLanguages, setLanguages] = useAtom(languagesAtom);
   const [image, setImage] = useAtom(imageAtom);
+
+  const [isCustomGender, setIsCustomGender] = useState(false);
+  const [customGenderValue, setCustomGenderValue] = useState("");
+
+  // Initialize custom gender state if character has a custom gender value
+  useEffect(() => {
+    if (gender && !genders.includes(gender) && gender !== CUSTOM_GENDER_OPTION) {
+      setIsCustomGender(true);
+      setCustomGenderValue(gender);
+    }
+  }, [gender]);
+
+  const handleGenderChange = (value: string) => {
+    if (value === CUSTOM_GENDER_OPTION) {
+      setIsCustomGender(true);
+      setGender(CUSTOM_GENDER_OPTION);
+      setCustomGenderValue("");
+    } else {
+      setIsCustomGender(false);
+      setGender(value);
+      setCustomGenderValue("");
+    }
+  };
+
+  const handleCustomGenderChange = (value: string) => {
+    setCustomGenderValue(value);
+    // Only update the main gender atom if there's a value, otherwise keep "Let me type..."
+    if (value.trim()) {
+      setGender(value);
+    }
+  };
 
   const handleLanguageAdd = (language: string) => {
     if (!selectedLanguages.includes(language)) {
@@ -115,13 +150,35 @@ export const DescriptionStep = () => {
 
       <div className="space-y-2">
         <Label htmlFor="gender">Gender</Label>
-        <Input
-          id="gender"
-          value={gender}
-          onChange={(e) => setGender(e.target.value)}
-          placeholder="Enter gender"
-          className="w-[200px]"
-        />
+        <div className="flex gap-2">
+          <Select
+            value={isCustomGender ? CUSTOM_GENDER_OPTION : gender}
+            onValueChange={handleGenderChange}
+          >
+            <SelectTrigger className="w-[200px]" id="gender">
+              <SelectValue placeholder="Select gender" />
+            </SelectTrigger>
+            <SelectContent>
+              {genders.map((g) => (
+                <SelectItem key={g} value={g}>
+                  {g}
+                </SelectItem>
+              ))}
+              <SelectItem value={CUSTOM_GENDER_OPTION}>
+                {CUSTOM_GENDER_OPTION}
+              </SelectItem>
+            </SelectContent>
+          </Select>
+          {isCustomGender && (
+            <Input
+              id="gender-custom"
+              value={customGenderValue}
+              onChange={(e) => handleCustomGenderChange(e.target.value)}
+              placeholder="Enter custom gender"
+              className="w-[200px]"
+            />
+          )}
+        </div>
       </div>
 
       <div className="space-y-2">
