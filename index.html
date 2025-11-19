@@ -13,12 +13,14 @@
         const redirectPath = sessionStorage.getItem('redirectPath');
         if (redirectPath) {
           sessionStorage.removeItem('redirectPath');
-          history.replaceState(null, '', redirectPath);
+          const basePath = '/bunyips-and-bandits-app';
+          const fullPath = basePath + redirectPath;
+          history.replaceState(null, '', fullPath);
         }
       })();
     </script>
-    <script type="module" crossorigin src="/bunyips-and-bandits-app/assets/index-BTizZV4z.js"></script>
-    <link rel="stylesheet" crossorigin href="/bunyips-and-bandits-app/assets/index-CCk8zaul.css">
+    <script type="module" crossorigin src="/bunyips-and-bandits-app/assets/index-C6ZlfNHQ.js"></script>
+    <link rel="stylesheet" crossorigin href="/bunyips-and-bandits-app/assets/index-BLtbLWy6.css">
   </head>
   <body>
     <div id="root"></div>
