@@ -185,6 +185,22 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
   const canAddItem = (item: ItemWithQuantity) =>
     canCarryWeight(item) && canAffordCost(item);
 
+  const getAddItemError = (item: ItemWithQuantity): string | null => {
+    const canCarry = canCarryWeight(item);
+    const canAfford = canAffordCost(item);
+
+    if (!canCarry && !canAfford) {
+      return "Exceeds weight capacity and insufficient funds";
+    }
+    if (!canCarry) {
+      return "Exceeds weight capacity";
+    }
+    if (!canAfford) {
+      return "Insufficient funds";
+    }
+    return null;
+  };
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -246,15 +262,20 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-medium">
-                    Cost per item (£)
+                    Cost per item
                   </label>
-                  <Input
-                    type="number"
-                    className="max-w-[100px]"
-                    min="0"
-                    value={selectedItem.cost}
-                    onChange={(e) => handleCostChange(e.target.value)}
-                  />
+                  <div className="relative max-w-[100px]">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground pointer-events-none">
+                      £
+                    </span>
+                    <Input
+                      type="number"
+                      className="pl-7"
+                      min="0"
+                      value={selectedItem.cost}
+                      onChange={(e) => handleCostChange(e.target.value)}
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -296,13 +317,20 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
               </div>
             </div>
 
-            <Button
-              className="w-full mb-2"
-              onClick={handleAddItem}
-              disabled={!canAddItem(selectedItem)}
-            >
-              Add to inventory
-            </Button>
+            <div className="space-y-2">
+              <Button
+                className="w-full"
+                onClick={handleAddItem}
+                disabled={!canAddItem(selectedItem)}
+              >
+                Add to inventory
+              </Button>
+              {!canAddItem(selectedItem) && (
+                <p className="text-sm text-destructive text-center">
+                  {getAddItemError(selectedItem)}
+                </p>
+              )}
+            </div>
           </div>
         ) : isCreatingItem ? (
           <div className="flex flex-col justify-between flex-1">

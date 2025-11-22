@@ -288,14 +288,34 @@ export const ItemsTable = () => {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    {[
-                      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 40, 50, 75,
-                      100,
-                    ].map((qty) => (
-                      <SelectItem key={qty} value={qty.toString()}>
-                        {qty}
-                      </SelectItem>
-                    ))}
+                    {(() => {
+                      // Calculate weight used by other items
+                      const otherItemsWeight = Object.entries(items)
+                        .filter(([itemName]) => itemName !== name)
+                        .reduce((sum, [, i]) => sum + i.weight * i.quantity, 0);
+
+                      // Calculate max quantity we can carry of this item
+                      const availableWeight = weightLimit - otherItemsWeight;
+                      const maxQuantity =
+                        item.weight > 0
+                          ? Math.floor(availableWeight / item.weight)
+                          : 20;
+
+                      // Cap at 20 for practical reasons
+                      const cappedMaxQuantity = Math.min(
+                        Math.max(1, maxQuantity),
+                        20
+                      );
+
+                      return Array.from(
+                        { length: cappedMaxQuantity },
+                        (_, i) => i + 1
+                      ).map((qty) => (
+                        <SelectItem key={qty} value={qty.toString()}>
+                          {qty}
+                        </SelectItem>
+                      ));
+                    })()}
                   </SelectContent>
                 </Select>
               </TableCell>
@@ -339,8 +359,13 @@ export const ItemsTable = () => {
         </TableBody>
       </Table>
 
-      <div className="flex justify-center">
+      <div className="flex flex-col items-center gap-2">
         <AddItemDialog maxWeight={weightLimit - totalWeight} />
+        {weightLimit - totalWeight <= 0 && (
+          <p className="text-sm text-muted-foreground text-center">
+            Weight capacity full
+          </p>
+        )}
       </div>
     </div>
   );
