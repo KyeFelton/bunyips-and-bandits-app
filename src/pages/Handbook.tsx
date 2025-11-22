@@ -144,36 +144,25 @@ const content = (
         </li>
         <li>
           <b>Describe your character</b>: Think about who they are beyond the
-          numbers on the sheet. What’s their name? What do they look like? Where
+          numbers on the sheet. What's their name? What do they look like? Where
           do they come from? Why have they taken to the adventuring life instead
           of settling down somewhere safe? The GM will work with you to weave
           your character into the world, ensuring they have a reason to be
           involved in the story.
         </li>
         <li>
-          <b>Select a level</b>: Your character’s level denotes the amount of
-          experience they have, ranked from 1-10. As your character levels up,
-          they become more skilful and powerful.
-        </li>
-        <li>
           <b>Choose your paths</b>: Paths define a unique set of traits and
           actions that your character has acquired and mastered. At level 1, you
-          can choose one path to start with. You’ll be able to progress this
-          path or unlock new ones to develop your character’s abilities as you
+          can choose one path to start with. You'll be able to progress this
+          path or unlock new ones to develop your character's abilities as you
           level up.
         </li>
         <li>
           <b>Upgrade your skills</b>: Every character has a set of skills that
-          define their physical and mental abilities. At the start, you’ll have
+          define their physical and mental abilities. At the start, you'll have
           some default skills from your species, plus two skill upgrades to
           improve any abilities you like. After each level, you can upgrade one
           additional skill.
-        </li>
-        <li>
-          <b>Enhance your health</b>: Every character has three health
-          attributes - physique, morale, and stamina. After each level up, you
-          can upgrade one of your health attributes as you see fit, increasing
-          your survivability in different situations.
         </li>
         <li>
           <b>Create a unique trait</b>: Every adventurer has something special
@@ -198,14 +187,14 @@ const content = (
     <Body>
       <p>
         As you adventure, your character gains experience and improves over
-        time. Levels indicate a character’s skill and capability, unlocking
+        time. Levels indicate a character's skill and capability, unlocking
         stronger abilities, improved stats, and new paths to explore. Characters
         start at level 1 and can work their way up to level 10 by completing
         missions and overcoming difficult encounters. The GM decides when
         levelling up happens—usually after completing a major milestone. Each
-        time you level up, you may choose to progress one path, upgrade one
-        skill, and enhance one health track, allowing you to tailor your
-        character’s growth to your playstyle and strategy.
+        time you level up, you may choose to progress one path and upgrade one
+        skill, allowing you to tailor your character's growth to your playstyle
+        and strategy.
       </p>
     </Body>
     <H3>Skills</H3>

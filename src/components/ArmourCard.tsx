@@ -31,7 +31,7 @@ export const ArmourCard = () => {
                     <div className="flex items-center gap-1 cursor-default">
                       <ArmourIcon type={type as DamageType} size={20} />
                       <span className={value < 0 ? "text-destructive" : ""}>
-                        {value > 0 ? `+${value}` : value}
+                        {value === 0 ? "-" : value > 0 ? `+${value}` : value}
                       </span>
                     </div>
                   </TooltipTrigger>

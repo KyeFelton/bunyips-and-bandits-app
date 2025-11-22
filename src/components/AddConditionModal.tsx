@@ -76,9 +76,10 @@ export const AddConditionModal = ({ isOpen, onClose }: Props) => {
           {selectedConditionData && (
             <div className="text-sm text-muted-foreground">
               {selectedConditionData.description}
-              {selectedConditionData.stackable && (
+              {selectedConditionData.stackable > 0 && (
                 <div className="mt-1">
-                  This condition can be stacked multiple times.
+                  This condition can be stacked{" "}
+                  {selectedConditionData.stackable} times.
                 </div>
               )}
             </div>

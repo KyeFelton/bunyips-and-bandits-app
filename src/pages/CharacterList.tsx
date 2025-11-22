@@ -313,7 +313,7 @@ export function CharactersPage() {
           className="cursor-pointer hover:shadow-lg hover:scale-105 transition-all border-2 border-dashed border-primary/40 hover:border-primary/60"
           onClick={handleCreateNewCharacter}
         >
-          <CardContent className="p-0 h-48 md:h-full flex items-center justify-center rounded-t-lg text-muted-foreground hover:text-foreground">
+          <CardContent className="p-0 h-48 md:min-h-full flex items-center justify-center rounded-t-lg text-muted-foreground hover:text-foreground">
             <div className="flex flex-col items-center gap-3">
               <CirclePlus className="h-14 w-14" />
               <span className="text-lg font-bold ">New Character</span>

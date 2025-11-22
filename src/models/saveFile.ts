@@ -38,7 +38,7 @@ export const defaultCharacter: CharacterSaveFile = {
   personality: "",
   background: "",
   languages: [],
-  level: 0,
+  level: 1,
   paths: [],
   customTraits: [],
   skillLevelUpgrades: {},

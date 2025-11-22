@@ -45,7 +45,7 @@ export const CustomTraitsStep = () => {
         </div>
         <Button variant="outline" onClick={handleAddTrait}>
           <Plus className="h-4 w-4 mr-2" />
-          Add custom trait
+          Add Custom Trait
         </Button>
       </div>
 

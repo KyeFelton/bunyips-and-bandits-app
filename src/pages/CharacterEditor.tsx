@@ -1,24 +1,23 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAtom, useSetAtom } from "jotai";
 import { motion } from "framer-motion";
 import { Card } from "../components/ui/card";
 import { Button } from "../components/ui/button";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { saveFileAtom, focalCharacterIdAtom } from "../state/saveFile";
+import { nameAtom } from "../state/character";
 import { FolkStep } from "../components/FolkStep";
 import { DescriptionStep } from "../components/DescriptionStep";
-import { LevelStep } from "../components/LevelStep";
 import { PathsStep } from "../components/PathsStep";
 import { SkillsStep } from "../components/SkillsStep";
 import { CustomTraitsStep } from "../components/CustomTraitsStep";
-import { HealthStep } from "../components/HealthStep";
 
 const steps = [
   { title: "Folk", component: FolkStep },
   { title: "Description", component: DescriptionStep },
-  { title: "Level", component: LevelStep },
   { title: "Paths", component: PathsStep },
   { title: "Skills", component: SkillsStep },
-  { title: "Health", component: HealthStep },
   { title: "Traits", component: CustomTraitsStep },
 ];
 
@@ -28,9 +27,30 @@ export const CharacterEditor = () => {
   const isFirstStep = currentStep === 0;
   const navigate = useNavigate();
   const StepComponent = steps[currentStep].component;
+  const setSaveFile = useSetAtom(saveFileAtom);
+  const [focalCharacterId] = useAtom(focalCharacterIdAtom);
+  const [name, setName] = useAtom(nameAtom);
 
   const handleNext = () => {
     if (isLastStep) {
+      const finalName = name.trim() === "" ? "No name" : name;
+      if (name.trim() === "") {
+        setName("No name");
+      }
+
+      if (focalCharacterId) {
+        setSaveFile((prev) => ({
+          ...prev,
+          characters: {
+            ...prev.characters,
+            [focalCharacterId]: {
+              ...prev.characters[focalCharacterId],
+              name: finalName,
+            },
+          },
+        }));
+      }
+
       navigate(-1);
     } else {
       setCurrentStep((prev) => prev + 1);
@@ -39,13 +59,21 @@ export const CharacterEditor = () => {
 
   const handlePrevious = () => {
     if (isFirstStep) {
-      navigate(-1);
+      handleClose();
     } else {
       setCurrentStep((prev) => prev - 1);
     }
   };
 
   const handleClose = () => {
+    // Delete the character if exiting without completing
+    if (focalCharacterId) {
+      setSaveFile((prev) => {
+        const characters = { ...prev.characters };
+        delete characters[focalCharacterId];
+        return { ...prev, characters };
+      });
+    }
     navigate(-1);
   };
 
