@@ -1,6 +1,9 @@
 import { useAtomValue } from "jotai";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
+import { Edit2 } from "lucide-react";
+import { useState } from "react";
 import {
   ancestryAtom,
   speciesDataAtom,
@@ -10,6 +13,7 @@ import {
   backgroundAtom,
   personalityAtom,
 } from "./../state/character";
+import { EditDescriptionDialog } from "./EditDescriptionDialog";
 
 export const DescriptionCard = () => {
   const ancestry = useAtomValue(ancestryAtom);
@@ -20,10 +24,21 @@ export const DescriptionCard = () => {
   const background = useAtomValue(backgroundAtom);
   const personality = useAtomValue(personalityAtom);
 
+  const [isEditDescriptionDialogOpen, setIsEditDescriptionDialogOpen] =
+    useState(false);
+
   return (
-    <Card className="sm:h-[472px] flex flex-col">
-      <CardHeader>
+    <Card className="sm:h-[472px] flex flex-col group">
+      <CardHeader className="relative">
         <CardTitle>Description</CardTitle>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="absolute top-4 right-4 h-6 w-6 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity"
+          onClick={() => setIsEditDescriptionDialogOpen(true)}
+        >
+          <Edit2 className="h-3 w-3" />
+        </Button>
       </CardHeader>
       <CardContent className="space-y-4 flex-grow min-h-0 overflow-auto">
         <div>
@@ -93,10 +108,13 @@ export const DescriptionCard = () => {
           </div>
           <div className="text-sm flex">
             <div className="flex-1">{personality || "-"}</div>
-            <div></div>
           </div>
         </div>
       </CardContent>
+      <EditDescriptionDialog
+        isOpen={isEditDescriptionDialogOpen}
+        onClose={() => setIsEditDescriptionDialogOpen(false)}
+      />
     </Card>
   );
 };

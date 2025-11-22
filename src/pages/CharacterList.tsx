@@ -180,14 +180,6 @@ export function CharactersPage() {
     navigate(getCharacterSheetRoute(id));
   };
 
-  const handleEditCharacter = (id: string) => {
-    saveCurrentFocalCharacter();
-    if (id !== focalCharacterId) {
-      const character = saveFile.characters[id];
-      setFocalCharacter(id, character);
-    }
-    navigate(getCharacterEditorRoute(id));
-  };
 
   const handleDeleteCharacter = (id: string) => {
     setCharacterToDelete(id);
@@ -266,14 +258,6 @@ export function CharactersPage() {
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
-                        <DropdownMenuItem
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleEditCharacter(id);
-                          }}
-                        >
-                          Edit
-                        </DropdownMenuItem>
                         <DropdownMenuItem
                           onClick={(e) => {
                             e.stopPropagation();

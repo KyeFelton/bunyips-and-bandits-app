@@ -31,6 +31,7 @@ import { SkillsUpgradeTable } from "./SkillsUpgradeTable";
 interface LevelUpModalProps {
   open: boolean;
   onClose: (success: boolean) => void;
+  preventCancel?: boolean;
 }
 
 type Step = {
@@ -89,7 +90,11 @@ const usePendingChanges = () => {
   };
 };
 
-export const LevelUpModal = ({ open, onClose }: LevelUpModalProps) => {
+export const LevelUpModal = ({
+  open,
+  onClose,
+  preventCancel = false,
+}: LevelUpModalProps) => {
   const [currentStep, setCurrentStep] = useState(0);
   const availablePathPoints = useAtomValue(availablePathPointsAtom);
   const availableHealthUpgrades = useAtomValue(availableHealthUpgradesAtom);
@@ -192,9 +197,43 @@ export const LevelUpModal = ({ open, onClose }: LevelUpModalProps) => {
     },
   ];
 
+  const usedPathPoints =
+    paths.reduce((sum, path) => sum + path.level, 0) +
+    adjustedPaths.reduce(
+      (sum, path) => sum + (path.level - (path.initialLevel || 0)),
+      0
+    );
+  const remainingPathPoints = availablePathPoints - usedPathPoints;
+
   const visibleSteps = steps.filter((step) => step.canShow);
   const isLastStep = currentStep === visibleSteps.length - 1;
   const isFirstStep = currentStep === 0;
+
+  const isCurrentStepComplete = () => {
+    const currentStepId = visibleSteps[currentStep]?.id;
+
+    if (currentStepId === "paths") {
+      return remainingPathPoints === 0;
+    }
+
+    if (currentStepId === "health") {
+      const totalHealthUpgrades =
+        pendingChanges.health.physique +
+        pendingChanges.health.morale +
+        pendingChanges.health.stamina;
+      return totalHealthUpgrades === remainingHealthUpgrades;
+    }
+
+    if (currentStepId === "skills") {
+      const totalSkillUpgrades = Object.values(pendingChanges.skills).reduce(
+        (sum, value) => sum + value,
+        0
+      );
+      return totalSkillUpgrades === remainingSkillUpgrades;
+    }
+
+    return true;
+  };
 
   const handleNext = () => {
     setCurrentStep((prev) => prev + 1);
@@ -247,7 +286,7 @@ export const LevelUpModal = ({ open, onClose }: LevelUpModalProps) => {
   const CurrentStepComponent = visibleSteps[currentStep]?.component;
 
   return (
-    <Dialog open={open} onOpenChange={handleCancel}>
+    <Dialog open={open} onOpenChange={preventCancel ? undefined : handleCancel}>
       <DialogContent className="max-w-2xl h-[800px] flex flex-col">
         <DialogHeader className="flex-none px-2">
           <DialogTitle className="text-2xl">Level Up</DialogTitle>
@@ -277,7 +316,10 @@ export const LevelUpModal = ({ open, onClose }: LevelUpModalProps) => {
             ) : (
               <div />
             )}
-            <Button onClick={isLastStep ? handleFinish : handleNext}>
+            <Button
+              onClick={isLastStep ? handleFinish : handleNext}
+              disabled={!isCurrentStepComplete()}
+            >
               {isLastStep ? "Finish" : "Next"}
               {!isLastStep && <ChevronRight className="ml-2 h-4 w-4" />}
             </Button>

@@ -77,7 +77,7 @@ export const PathProgressionForm = ({
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 text-md text-muted-foreground">
         <div className="flex-1 sm:whitespace-nowrap">
-          Select up to {availablePathPoints} path
+          Select up to {availablePathPoints - usedPathPoints} path
           {availablePathPoints > 1 ? "s" : ""} to unlock unique traits and
           abilities for your character.
         </div>

@@ -55,7 +55,11 @@ export const DescriptionStep = () => {
 
   // Initialize custom gender state if character has a custom gender value
   useEffect(() => {
-    if (gender && !genders.includes(gender) && gender !== CUSTOM_GENDER_OPTION) {
+    if (
+      gender &&
+      !genders.includes(gender) &&
+      gender !== CUSTOM_GENDER_OPTION
+    ) {
       setIsCustomGender(true);
       setCustomGenderValue(gender);
     }
@@ -155,7 +159,7 @@ export const DescriptionStep = () => {
             value={isCustomGender ? CUSTOM_GENDER_OPTION : gender}
             onValueChange={handleGenderChange}
           >
-            <SelectTrigger className="w-[200px]" id="gender">
+            <SelectTrigger className="w-[154px]" id="gender">
               <SelectValue placeholder="Select gender" />
             </SelectTrigger>
             <SelectContent>
@@ -175,7 +179,7 @@ export const DescriptionStep = () => {
               value={customGenderValue}
               onChange={(e) => handleCustomGenderChange(e.target.value)}
               placeholder="Enter custom gender"
-              className="w-[200px]"
+              className="w-[174px]"
             />
           )}
         </div>
