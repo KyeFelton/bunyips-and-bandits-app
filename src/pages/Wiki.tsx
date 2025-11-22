@@ -5,6 +5,7 @@ import { WikiNavigation } from "../components/WikiNavigation";
 import { WikiHome } from "../components/WikiHome";
 import { WikiCategoryPage } from "../components/WikiCategoryPage";
 import { getWikiCategoryRoute } from "../routes";
+import { motion } from "framer-motion";
 
 export function Wiki() {
   const { category, id } = useParams();
@@ -34,12 +35,17 @@ export function Wiki() {
   }
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+    >
       <div className="flex sm:max-w-5xl sm:mx-auto min-h-full">
         <WikiNavigation />
         <main className="w-full">{content}</main>
       </div>
-    </>
+    </motion.div>
   );
 }
 

@@ -180,7 +180,6 @@ export function CharactersPage() {
     navigate(getCharacterSheetRoute(id));
   };
 
-
   const handleDeleteCharacter = (id: string) => {
     setCharacterToDelete(id);
   };
@@ -216,7 +215,7 @@ export function CharactersPage() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0 }}
+      transition={{ duration: 0.3 }}
     >
       <div className="flex justify-between items-center pb-8">
         <h1 className="text-3xl font-bold text-primary-foreground">
