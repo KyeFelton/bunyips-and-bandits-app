@@ -1,10 +1,9 @@
 export const HomeRoute = "/";
-export const CharacterListRoute = HomeRoute;
+export const CharacterListRoute = "/character";
 export const CharacterSheetRoute = `/character/:id`;
 export const getCharacterSheetRoute = (id: string) => `/character/${id}`;
 export const CharacterEditorRoute = `/character/:id/edit`;
-export const getCharacterEditorRoute = (id: string) =>
-  `/character/${id}/edit`;
+export const getCharacterEditorRoute = (id: string) => `/character/${id}/edit`;
 export const HandbookRoute = `/handbook`;
 export const WikiRoute = `/wiki`;
 export const WikiCategoryRoute = `/wiki/:category`;

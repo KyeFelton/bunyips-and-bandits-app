@@ -4,6 +4,7 @@ import { CharacterSheet } from "./pages/CharacterSheet";
 import { CharacterEditor } from "./pages/CharacterEditor";
 import { Handbook } from "./pages/Handbook";
 import { CharactersPage } from "./pages/CharacterList";
+import { Home } from "./pages/Home";
 import { NavBar } from "./components/NavBar";
 import { Toaster } from "./components/ui/toaster";
 import background from "./images/backgrounds/campfire.png";
@@ -13,6 +14,7 @@ import {
   CharacterEditorRoute,
   HandbookRoute,
   CharacterListRoute,
+  HomeRoute,
   WikiRoute,
   WikiCategoryRoute,
   WikiArticleRoute,
@@ -27,6 +29,7 @@ function App() {
 
   // Get main section for animation key (only animate between main sections)
   const getMainSection = (pathname: string) => {
+    if (pathname === HomeRoute) return "home";
     if (pathname.includes("/character")) return "character";
     if (pathname.includes("/handbook")) return "handbook";
     if (pathname.includes("/wiki")) return "wiki";
@@ -72,6 +75,7 @@ function App() {
       <div className="h-dvh pb-14 md:pb-0 md:pt-16 overflow-auto">
         <AnimatePresence mode="wait">
           <Routes location={location} key={getMainSection(location.pathname)}>
+            <Route path={HomeRoute} element={<Home />} />
             <Route path={CharacterListRoute} element={<CharactersPage />} />
             <Route path={CharacterSheetRoute} element={<CharacterSheet />} />
             <Route path={CharacterEditorRoute} element={<CharacterEditor />} />

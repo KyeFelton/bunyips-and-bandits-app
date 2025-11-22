@@ -49,8 +49,6 @@ import {
   staminaUpgradesAtom,
 } from "../state/character";
 import { getSpeciesImage } from "../utils/speciesImages";
-import "./CharacterList.sass";
-import { Logo } from "../components/Logo";
 
 export function CharactersPage() {
   const navigate = useNavigate();
@@ -228,27 +226,25 @@ export function CharactersPage() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0 }}
     >
-      {Object.keys(saveFile.characters).length > 0 && (
-        <div className="flex justify-between items-center pb-8">
-          <h1 className="text-3xl font-bold text-primary-foreground">
-            Characters
-          </h1>
-          <div className="flex gap-2">
-            <Button onClick={handleCreateNewCharacter}>
-              <CirclePlus className="h-5 w-5 mr-2" />
-              New
-            </Button>
-            <Button className="hidden md:flex" onClick={handleImport}>
-              <Upload className="h-4 w-4 mr-2" />
-              Load
-            </Button>
-            <Button variant="outline" size="sm" onClick={handleDownload}>
-              <Download className="h-4 w-4 mr-2" />
-              Save
-            </Button>
-          </div>
+      <div className="flex justify-between items-center pb-8">
+        <h1 className="text-3xl font-bold text-primary-foreground">
+          Characters
+        </h1>
+        <div className="flex gap-2">
+          <Button onClick={handleCreateNewCharacter}>
+            <CirclePlus className="h-5 w-5 mr-2" />
+            New
+          </Button>
+          <Button className="hidden md:flex" onClick={handleImport}>
+            <Upload className="h-4 w-4 mr-2" />
+            Load
+          </Button>
+          <Button variant="outline" size="sm" onClick={handleDownload}>
+            <Download className="h-4 w-4 mr-2" />
+            Save
+          </Button>
         </div>
-      )}
+      </div>
 
       <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 z-20">
         {Object.entries(saveFile.characters).map(([id, saveFileCharacter]) => {
@@ -296,7 +292,11 @@ export function CharactersPage() {
                   {
                     <img
                       src={
-                        character.image ?? getSpeciesImage(character.species, character.ancestry || "Englorian")
+                        character.image ??
+                        getSpeciesImage(
+                          character.species,
+                          character.ancestry || "Englorian"
+                        )
                       }
                       alt={character.name}
                       className="w-full h-48 object-cover rounded-t-lg"
@@ -314,36 +314,6 @@ export function CharactersPage() {
           );
         })}
       </div>
-
-      {Object.keys(saveFile.characters).length === 0 && (
-        <div className="relative w-full max-w-xl min-w-[300px] flex flex-col items-center left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <div className="logo-animation absolute top-8 z-30 flex justify-center">
-            <Logo className="w-[90%] h-16" />
-          </div>
-          <div className="banner-animation w-full flex flex-col justify-center items-center p-8 space-y-8 rounded-lg shadow-2xl backdrop-blur-sm border border-white/100 bg-black/95 z-20">
-            <div className="invisible">
-              <Logo className="w-full h-16" />
-            </div>
-            <div className="flex justify-center gap-4 w-full">
-              <Button
-                className="load-button w-md h-14 text-lg hover:scale-105 transition-transform"
-                onClick={handleImport}
-              >
-                <Upload className="mr-2 h-6 w-6" />
-                Load
-              </Button>
-              <Button
-                variant="outline"
-                className="new-button w-md h-14 text-lg hover:scale-105 transition-transform"
-                onClick={handleCreateNewCharacter}
-              >
-                <CirclePlus className="mr-2 h-6 w-6" />
-                New
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {characterToDelete && (
         <Dialog

@@ -1,0 +1,74 @@
+.logo-animation svg path
+  fill: transparent
+  stroke: #fff
+  stroke-width: 0.1
+  stroke-dasharray: 70
+  stroke-dashoffset: 70
+  animation: logoAnimation 3s ease-in-out 1 forwards
+
+@keyframes logoAnimation
+  0%
+    stroke-dashoffset: 70
+
+  60%
+    fill: transparent
+
+  100%
+    fill: #fff
+    stroke-dashoffset: 0
+
+.banner-animation
+  animation: bannerAnimation 4s ease-in-out 1 forwards
+  opacity: 0
+
+@keyframes bannerAnimation
+  0%
+    opacity: 0
+
+  60%
+    opacity: 0
+
+  100%
+    opacity: 1
+
+.how-to-play-button:hover
+  position: relative
+  overflow: hidden
+
+  &::after
+    content: ''
+    position: absolute
+    top: -50%
+    left: -50%
+    width: 200%
+    height: 200%
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent)
+    transform: translateX(-100%)
+    animation: shine 4s infinite
+
+@keyframes shine
+  50%
+    transform: translateX(100%)
+  100%
+    transform: translateX(100%)
+
+.get-started-button:hover
+  position: relative
+  overflow: hidden
+
+  &::after
+    content: ''
+    position: absolute
+    top: -50%
+    left: -50%
+    width: 200%
+    height: 200%
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.5), transparent)
+    transform: translateX(-100%)
+    animation: darkShine 4s infinite
+
+@keyframes darkShine
+  50%
+    transform: translateX(100%)
+  100%
+    transform: translateX(100%)
