@@ -231,10 +231,6 @@ export function CharactersPage() {
           Characters
         </h1>
         <div className="flex gap-2">
-          <Button onClick={handleCreateNewCharacter}>
-            <CirclePlus className="h-5 w-5 mr-2" />
-            New
-          </Button>
           <Button className="hidden md:flex" onClick={handleImport}>
             <Upload className="h-4 w-4 mr-2" />
             Load
@@ -252,7 +248,7 @@ export function CharactersPage() {
             focalCharacterId === id ? focalCharacter : saveFileCharacter;
           return (
             <Card
-              className="cursor-pointer hover:shadow-md transition-shadow"
+              className="cursor-pointer hover:shadow-md hover:scale-105 transition-all"
               onClick={() => handleSelectCharacter(id)}
               key={id}
             >
@@ -313,13 +309,21 @@ export function CharactersPage() {
             </Card>
           );
         })}
+        <Card
+          className="cursor-pointer hover:shadow-lg hover:scale-105 transition-all border-2 border-dashed border-primary/40 hover:border-primary/60"
+          onClick={handleCreateNewCharacter}
+        >
+          <CardContent className="p-0 h-48 md:h-full flex items-center justify-center rounded-t-lg text-muted-foreground hover:text-foreground">
+            <div className="flex flex-col items-center gap-3">
+              <CirclePlus className="h-14 w-14" />
+              <span className="text-lg font-bold ">New Character</span>
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
       {characterToDelete && (
-        <Dialog
-          open={characterToDelete !== undefined}
-          // onOpenChange={setIsDeleteDialogOpen}
-        >
+        <Dialog open={characterToDelete !== undefined}>
           <DialogContent>
             <DialogHeader>
               <DialogTitle>Delete Character</DialogTitle>
