@@ -1,3 +1,5 @@
+@use 'sass:math'
+
 .background-animation
   animation: zoomIn 4s ease-in-out 1 forwards, fadeIn 0.3s ease-in 1 forwards
 
@@ -62,9 +64,9 @@
 
 // Randomize Fireflies Motion
 @for $i from 1 through 10
-  $steps: random(12) + 16
-  $rotationSpeed: random(10) + 8s
-  
+  $steps: math.random(12) + 16
+  $rotationSpeed: math.random(10) + 8s
+
   .firefly:nth-child(#{$i})
     animation-name: move#{$i}
 
@@ -72,13 +74,13 @@
       animation-duration: #{$rotationSpeed}
 
     &::after
-      animation-duration: #{$rotationSpeed}, #{random(6000) + 5000}ms
-      animation-delay: 0ms, #{random(8000) + 500}ms
+      animation-duration: #{$rotationSpeed}, #{math.random(6000) + 5000}ms
+      animation-delay: 0ms, #{math.random(8000) + 500}ms
 
   @keyframes move#{$i}
     @for $step from 0 through $steps
-      #{$step * (100 / $steps)}%
-        transform: translateX(#{random(100) - 50}vw) translateY(#{random(100) - 50}vh) scale(#{random(75) / 100 + 0.25})
+      #{$step * math.div(100, $steps)}%
+        transform: translateX(#{math.random(100) - 50}vw) translateY(#{math.random(100) - 50}vh) scale(#{math.div(math.random(75), 100) + 0.25})
 
 @keyframes drift
   0%
