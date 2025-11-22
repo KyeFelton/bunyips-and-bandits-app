@@ -13,7 +13,7 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import { ChevronLeft, ChevronRight, X, ChevronsUpDown } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, ChevronDown } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -51,10 +51,17 @@ export const PathProgressionForm = ({
     .filter((path) => typeof path === "object" && "name" in path)
     .filter((path) => !paths.some((p) => p.name === path.name)) as Path[];
 
+  const handleOpenClosePath = (pathName: string, open: boolean) => {
+    const path = paths.find((path) => path.name === pathName);
+    if (path) {
+      onPathChange({ ...path, open });
+    }
+  };
+
   const handleAddPath = () => {
     const path = availablePaths.find((p) => p.name === selectedPath);
     if (path) {
-      onPathChange({ ...path, level: 1, initialLevel: 0 });
+      onPathChange({ ...path, level: 1, initialLevel: 0, open: true });
       setSelectedPath("");
     }
   };
@@ -128,6 +135,8 @@ export const PathProgressionForm = ({
       {paths.map((path) => (
         <Collapsible
           key={path.name}
+          open={path.open}
+          onOpenChange={(open) => handleOpenClosePath(path.name, open)}
           className="pb-2 mb-2 border-b border-muted-foreground/20 last:mb-0 last:border-b-0"
         >
           <div className="flex justify-between items-center mb-2">
@@ -138,7 +147,11 @@ export const PathProgressionForm = ({
                   size="icon"
                   className="h-6 w-6 text-muted-foreground hover:text-accent-foreground"
                 >
-                  <ChevronsUpDown className="h-4 w-4 text-muted-foreground" />
+                  <ChevronDown
+                    className={`h-4 w-4 text-muted-foreground transition-transform duration-200 ${
+                      path.open ? "" : "-rotate-90"
+                    }`}
+                  />
                 </Button>
               </CollapsibleTrigger>
               <span className="text-muted-foreground">

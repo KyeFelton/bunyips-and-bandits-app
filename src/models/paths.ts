@@ -15,4 +15,5 @@ export type Path = {
 
 export type PathProgression = Path & {
   level: number;
+  open: boolean;
 };

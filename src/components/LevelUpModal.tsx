@@ -42,14 +42,14 @@ type Step = {
 };
 
 type PendingChanges = {
-  path: PathProgressionWithInitial | null;
+  paths: PathProgressionWithInitial[];
   health: Health;
   skills: Record<string, number>;
 };
 
 const usePendingChanges = () => {
   const [pendingChanges, setPendingChanges] = useState<PendingChanges>({
-    path: null,
+    paths: [],
     health: {
       physique: 0,
       morale: 0,
@@ -57,8 +57,23 @@ const usePendingChanges = () => {
     },
     skills: {},
   });
-  const updatePath = (path: PathProgressionWithInitial | null) => {
-    setPendingChanges((prev) => ({ ...prev, path }));
+  const updatePath = (path: PathProgressionWithInitial) => {
+    setPendingChanges((prev) => {
+      if (path.level === 0) {
+        return {
+          ...prev,
+          paths: prev.paths.filter((p) => p.name !== path.name),
+        };
+      }
+      const updatedPaths = [...prev.paths];
+      const pathIndex = updatedPaths.findIndex((p) => p.name === path.name);
+      if (pathIndex === -1) {
+        updatedPaths.push(path);
+      } else {
+        updatedPaths[pathIndex] = path;
+      }
+      return { ...prev, paths: updatedPaths };
+    });
   };
 
   const updateHealth = (health: Health) => {
@@ -71,7 +86,7 @@ const usePendingChanges = () => {
 
   const reset = () => {
     setPendingChanges({
-      path: null,
+      paths: [],
       health: {
         physique: 0,
         morale: 0,
@@ -127,7 +142,7 @@ export const LevelUpModal = ({
   );
 
   const adjustedPaths = paths
-    .filter((p) => p.name !== pendingChanges.path?.name)
+    .filter((p) => !pendingChanges.paths.some((path) => path.name === p.name))
     .map(
       (p) =>
         ({
@@ -135,7 +150,7 @@ export const LevelUpModal = ({
           initialLevel: p.level,
         } as PathProgressionWithInitial)
     )
-    .concat(pendingChanges.path?.level ? [pendingChanges.path] : [])
+    .concat(pendingChanges.paths)
     .sort((a, b) => a.name.localeCompare(b.name));
 
   const remainingHealthUpgrades =
@@ -246,18 +261,14 @@ export const LevelUpModal = ({
   };
 
   const handleFinish = () => {
-    if (pendingChanges.path) {
-      setPaths((prev) =>
-        prev
-          .filter((p) => p.name !== pendingChanges.path?.name)
-          .concat(
-            pendingChanges.path && pendingChanges.path.level > 0
-              ? [pendingChanges.path]
-              : []
-          )
-          .sort((a, b) => a.name.localeCompare(b.name))
-      );
-    }
+    setPaths((prev) =>
+      prev
+        .filter(
+          (p) => !pendingChanges.paths.some((path) => path.name === p.name)
+        )
+        .concat(pendingChanges.paths)
+        .sort((a, b) => a.name.localeCompare(b.name))
+    );
     setPhysiqueUpgrades((prev) => prev + pendingChanges.health.physique);
     setMoraleUpgrades((prev) => prev + pendingChanges.health.morale);
     setStaminaUpgrades((prev) => prev + pendingChanges.health.stamina);
