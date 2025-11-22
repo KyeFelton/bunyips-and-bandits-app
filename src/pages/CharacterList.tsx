@@ -211,7 +211,7 @@ export function CharactersPage() {
 
   return (
     <motion.div
-      className="h-full container mx-auto py-8 px-4 relative"
+      className="min-h-full container mx-auto py-8 px-4 relative"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
