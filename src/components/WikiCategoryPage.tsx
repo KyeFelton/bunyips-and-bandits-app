@@ -22,7 +22,8 @@ export function WikiCategoryPage() {
     ? categoryArticles.filter(
         (article) =>
           article.title.toLowerCase().includes(trimmedSearch.toLowerCase()) ||
-          article.subTitle?.toLowerCase().includes(trimmedSearch.toLowerCase())
+          article.subTitle?.toLowerCase().includes(trimmedSearch.toLowerCase()) ||
+          article.blurb?.toLowerCase().includes(trimmedSearch.toLowerCase())
       )
     : categoryArticles;
 
@@ -67,6 +68,11 @@ export function WikiCategoryPage() {
                 {article.subTitle && (
                   <p className="text-xs md:text-sm text-muted-foreground">
                     {article.subTitle}
+                  </p>
+                )}
+                {article.blurb && (
+                  <p className="text-xs md:text-sm text-muted-foreground">
+                    {article.blurb}
                   </p>
                 )}
               </div>

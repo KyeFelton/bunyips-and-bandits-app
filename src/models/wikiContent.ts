@@ -15,6 +15,7 @@ export type WikiContent = {
   category?: string;
   title: string;
   subTitle?: string;
+  blurb?: string;
   summary?: ReactNode;
   infoBox?: InfoBox;
   tableOfContents?: ReactNode;

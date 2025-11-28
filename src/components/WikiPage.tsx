@@ -39,17 +39,17 @@ export function WikiPage({
 }
 
 export const H2 = ({ children }: PropsWithChildren) => (
-  <>
+  <div>
     <h2 className="text-2xl font-semibold mb-2">{children}</h2>
-    <div className="w-full border-b border-gray-300 mb-4" />
-  </>
+    <div className="w-full border-b border-gray-300" />
+  </div>
 );
 
 export const H3 = ({ children }: PropsWithChildren) => (
-  <>
+  <div>
     <h3 className="text-xl font-semibold mb-2">{children}</h3>
-    <div className="w-full border-b border-gray-200 mb-4" />
-  </>
+    <div className="w-full border-b border-gray-200" />
+  </div>
 );
 
 export const Body = ({ children }: PropsWithChildren) => (
