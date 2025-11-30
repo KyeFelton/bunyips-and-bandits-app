@@ -18,10 +18,10 @@ export type CharacterSaveFile = {
   paths: PathProgression[];
   customTraits: Trait[];
   skillLevelUpgrades: Partial<Record<SkillType, number>>;
-  currentPhysique: number;
-  physiqueUpgrades: number;
-  currentMorale: number;
-  moraleUpgrades: number;
+  currentBody: number;
+  bodyUpgrades: number;
+  currentMind: number;
+  mindUpgrades: number;
   currentStamina: number;
   staminaUpgrades: number;
   items: ItemDictionary;
@@ -42,10 +42,10 @@ export const defaultCharacter: CharacterSaveFile = {
   paths: [],
   customTraits: [],
   skillLevelUpgrades: {},
-  currentPhysique: startingSpecies.physique,
-  physiqueUpgrades: 0,
-  currentMorale: startingSpecies.morale,
-  moraleUpgrades: 0,
+  currentBody: startingSpecies.body,
+  bodyUpgrades: 0,
+  currentMind: startingSpecies.mind,
+  mindUpgrades: 0,
   currentStamina: startingSpecies.stamina,
   staminaUpgrades: 0,
   items: {},

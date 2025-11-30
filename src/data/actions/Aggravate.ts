@@ -6,7 +6,7 @@ import { Action } from "../../models/actions";
 export const Aggravate: Action = {
   name: "Aggravate",
   effect:
-    "You bewilder your opponents mind to mistake all nearby creatures as enemies. They lose 2 morale and gain madness.",
+    "You bewilder your opponents mind to mistake all nearby creatures as enemies. They take 2 psychic damage and gain madness.",
   skillType: SkillType.Psychic,
   range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,

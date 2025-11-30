@@ -8,8 +8,8 @@ import { SpeedRating } from "../enums/SpeedRating";
 export type Species = {
   name: string;
   size: CreatureSize;
-  physique: number;
-  morale: number;
+  body: number;
+  mind: number;
   stamina: number;
   speed: {
     [Locomotion.Walk]: SpeedRating;

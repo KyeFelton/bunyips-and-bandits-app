@@ -9,8 +9,8 @@ import { Species } from "../../models/species";
 export const Goblin: Species = {
   name: "Goblin",
   size: CreatureSize.Small,
-  physique: 4,
-  morale: 6,
+  body: 4,
+  mind: 6,
   stamina: 8,
   speed: {
     [Locomotion.Walk]: SpeedRating.Moderate,

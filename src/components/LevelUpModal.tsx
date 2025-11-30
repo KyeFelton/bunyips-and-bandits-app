@@ -9,15 +9,15 @@ import {
   availableSkillPointsAtom,
   pathsAtom,
   skillLevelUpgradesAtom,
-  moraleAtom,
-  physiqueAtom,
+  mindAtom,
+  bodyAtom,
   staminaAtom,
-  physiqueUpgradesAtom,
-  moraleUpgradesAtom,
+  bodyUpgradesAtom,
+  mindUpgradesAtom,
   staminaUpgradesAtom,
   skillLevelsAtom,
-  currentPhysiqueAtom,
-  currentMoraleAtom,
+  currentBodyAtom,
+  currentMindAtom,
   currentStaminaAtom,
 } from "./../state/character";
 import { SkillType } from "./../enums/SkillType";
@@ -51,8 +51,8 @@ const usePendingChanges = () => {
   const [pendingChanges, setPendingChanges] = useState<PendingChanges>({
     paths: [],
     health: {
-      physique: 0,
-      morale: 0,
+      body: 0,
+      mind: 0,
       stamina: 0,
     },
     skills: {},
@@ -88,8 +88,8 @@ const usePendingChanges = () => {
     setPendingChanges({
       paths: [],
       health: {
-        physique: 0,
-        morale: 0,
+        body: 0,
+        mind: 0,
         stamina: 0,
       },
       skills: {},
@@ -119,14 +119,14 @@ export const LevelUpModal = ({
     skillLevelUpgradesAtom
   );
   const skillLevels = useAtomValue(skillLevelsAtom);
-  const physique = useAtomValue(physiqueAtom);
-  const [physiqueUpgrades, setPhysiqueUpgrades] = useAtom(physiqueUpgradesAtom);
-  const morale = useAtomValue(moraleAtom);
-  const [moraleUpgrades, setMoraleUpgrades] = useAtom(moraleUpgradesAtom);
+  const body = useAtomValue(bodyAtom);
+  const [bodyUpgrades, setBodyUpgrades] = useAtom(bodyUpgradesAtom);
+  const mind = useAtomValue(mindAtom);
+  const [mindUpgrades, setMindUpgrades] = useAtom(mindUpgradesAtom);
   const stamina = useAtomValue(staminaAtom);
   const [staminaUpgrades, setStaminaUpgrades] = useAtom(staminaUpgradesAtom);
-  const [currentPhysique, setCurrentPhysique] = useAtom(currentPhysiqueAtom);
-  const [currentMorale, setCurrentMorale] = useAtom(currentMoraleAtom);
+  const [currentBody, setCurrentBody] = useAtom(currentBodyAtom);
+  const [currentMind, setCurrentMind] = useAtom(currentMindAtom);
   const [currentStamina, setCurrentStamina] = useAtom(currentStaminaAtom);
 
   const { pendingChanges, updatePath, updateHealth, updateSkills, reset } =
@@ -155,8 +155,8 @@ export const LevelUpModal = ({
 
   const remainingHealthUpgrades =
     availableHealthUpgrades -
-    physiqueUpgrades -
-    moraleUpgrades -
+    bodyUpgrades -
+    mindUpgrades -
     staminaUpgrades;
 
   const remainingSkillUpgrades =
@@ -164,8 +164,8 @@ export const LevelUpModal = ({
     Object.values(skillLevelUpgrades).reduce((sum, value) => sum + value, 0);
 
   const currentHealth = {
-    physique: physique.max + pendingChanges.health.physique,
-    morale: morale.max + pendingChanges.health.morale,
+    body: body.max + pendingChanges.health.body,
+    mind: mind.max + pendingChanges.health.mind,
     stamina: stamina.max + pendingChanges.health.stamina,
   };
 
@@ -233,8 +233,8 @@ export const LevelUpModal = ({
 
     if (currentStepId === "health") {
       const totalHealthUpgrades =
-        pendingChanges.health.physique +
-        pendingChanges.health.morale +
+        pendingChanges.health.body +
+        pendingChanges.health.mind +
         pendingChanges.health.stamina;
       return totalHealthUpgrades === remainingHealthUpgrades;
     }
@@ -269,8 +269,8 @@ export const LevelUpModal = ({
         .concat(pendingChanges.paths)
         .sort((a, b) => a.name.localeCompare(b.name))
     );
-    setPhysiqueUpgrades((prev) => prev + pendingChanges.health.physique);
-    setMoraleUpgrades((prev) => prev + pendingChanges.health.morale);
+    setBodyUpgrades((prev) => prev + pendingChanges.health.body);
+    setMindUpgrades((prev) => prev + pendingChanges.health.mind);
     setStaminaUpgrades((prev) => prev + pendingChanges.health.stamina);
     setSkillLevelUpgrades((prev) => {
       const updatedSkills = { ...prev };
@@ -280,8 +280,8 @@ export const LevelUpModal = ({
       });
       return updatedSkills;
     });
-    setCurrentPhysique(currentPhysique + pendingChanges.health.physique);
-    setCurrentMorale(currentMorale + pendingChanges.health.morale);
+    setCurrentBody(currentBody + pendingChanges.health.body);
+    setCurrentMind(currentMind + pendingChanges.health.mind);
     setCurrentStamina(currentStamina + pendingChanges.health.stamina);
     onClose(true);
     setCurrentStep(0);

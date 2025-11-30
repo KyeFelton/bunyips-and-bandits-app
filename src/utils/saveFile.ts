@@ -32,20 +32,20 @@ const validateSaveFile = (data: unknown): data is SaveFile => {
       error = "Expected an array for 'languages'";
     }
 
-    if (typeof character.currentPhysique !== "number") {
-      error = "Expected a number value for 'currentPhysique'";
+    if (typeof character.currentBody !== "number") {
+      error = "Expected a number value for 'currentBody'";
     }
 
-    if (typeof character.physiqueUpgrades !== "number") {
-      error = "Expected a number value for 'physiqueUpgrades'";
+    if (typeof character.bodyUpgrades !== "number") {
+      error = "Expected a number value for 'bodyUpgrades'";
     }
 
-    if (typeof character.currentMorale !== "number") {
-      error = "Expected a number value for 'currentMorale'";
+    if (typeof character.currentMind !== "number") {
+      error = "Expected a number value for 'currentMind'";
     }
 
-    if (typeof character.moraleUpgrades !== "number") {
-      error = "Expected a number value for 'moraleUpgrades'";
+    if (typeof character.mindUpgrades !== "number") {
+      error = "Expected a number value for 'mindUpgrades'";
     }
 
     if (typeof character.currentStamina !== "number") {

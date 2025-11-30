@@ -29,8 +29,8 @@ import {
   ageAtom,
   ancestryAtom,
   backgroundAtom,
-  currentMoraleAtom,
-  currentPhysiqueAtom,
+  currentMindAtom,
+  currentBodyAtom,
   currentStaminaAtom,
   customTraitsAtom,
   genderAtom,
@@ -39,11 +39,11 @@ import {
   languagesAtom,
   levelAtom,
   moneyAtom,
-  moraleUpgradesAtom,
+  mindUpgradesAtom,
   nameAtom,
   pathsAtom,
   personalityAtom,
-  physiqueUpgradesAtom,
+  bodyUpgradesAtom,
   skillLevelUpgradesAtom,
   speciesAtom,
   staminaUpgradesAtom,
@@ -63,10 +63,10 @@ export function CharactersPage() {
 
   const [name, setName] = useAtom(nameAtom);
   const [level, setLevel] = useAtom(levelAtom);
-  const [currentPhysique, setCurrentPhysique] = useAtom(currentPhysiqueAtom);
-  const [physiqueUpgrades, setPhysiqueUpgrades] = useAtom(physiqueUpgradesAtom);
-  const [currentMorale, setCurrentMorale] = useAtom(currentMoraleAtom);
-  const [moraleUpgrades, setMoraleUpgrades] = useAtom(moraleUpgradesAtom);
+  const [currentBody, setCurrentBody] = useAtom(currentBodyAtom);
+  const [bodyUpgrades, setBodyUpgrades] = useAtom(bodyUpgradesAtom);
+  const [currentMind, setCurrentMind] = useAtom(currentMindAtom);
+  const [mindUpgrades, setMindUpgrades] = useAtom(mindUpgradesAtom);
   const [currentStamina, setCurrentStamina] = useAtom(currentStaminaAtom);
   const [staminaUpgrades, setStaminaUpgrades] = useAtom(staminaUpgradesAtom);
   const [ancestry, setAncestry] = useAtom(ancestryAtom);
@@ -98,10 +98,10 @@ export function CharactersPage() {
     paths,
     customTraits,
     skillLevelUpgrades,
-    currentPhysique,
-    physiqueUpgrades,
-    currentMorale,
-    moraleUpgrades,
+    currentBody,
+    bodyUpgrades,
+    currentMind,
+    mindUpgrades,
     currentStamina,
     staminaUpgrades,
     items,
@@ -113,10 +113,10 @@ export function CharactersPage() {
     setFocalCharacterId(id);
     setName(character.name);
     setLevel(character.level);
-    setCurrentPhysique(character.currentPhysique);
-    setPhysiqueUpgrades(character.physiqueUpgrades);
-    setCurrentMorale(character.currentMorale);
-    setMoraleUpgrades(character.moraleUpgrades);
+    setCurrentBody(character.currentBody);
+    setBodyUpgrades(character.bodyUpgrades);
+    setCurrentMind(character.currentMind);
+    setMindUpgrades(character.mindUpgrades);
     setCurrentStamina(character.currentStamina);
     setStaminaUpgrades(character.staminaUpgrades);
     setAncestry(character.ancestry || "Englorian");

@@ -6,7 +6,7 @@ import { Action } from "../../models/actions";
 export const Torment: Action = {
   name: "Torment",
   effect:
-    "You torture the minds of your enemies. Targets of your choosing lose 2 morale.",
+    "You torture the minds of your enemies. Targets of your choosing take 2 psychic damage.",
   skillType: SkillType.Psychic,
   range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,

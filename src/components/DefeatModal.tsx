@@ -2,7 +2,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { HeartPulse, Skull, Stethoscope } from "lucide-react";
 import { useState } from "react";
-import { currentPhysiqueAtom } from "./../state/character";
+import { currentBodyAtom } from "./../state/character";
 import { useAtom } from "jotai";
 
 type Props = {
@@ -13,14 +13,14 @@ type Props = {
 export const DefeatModal = ({ isOpen, onClose }: Props) => {
   const [isRevealed, setIsRevealed] = useState(false);
   const [isDead, setIsDead] = useState(Math.random() < 0.5);
-  const [currentPhysique, setCurrentPhysique] = useAtom(currentPhysiqueAtom);
+  const [currentBody, setCurrentBody] = useAtom(currentBodyAtom);
 
   const handleReveal = () => {
     setIsRevealed(true);
     const isDead = Math.random() < 0.5;
     setIsDead(isDead);
     if (!isDead) {
-      setCurrentPhysique(Math.max(currentPhysique, 1));
+      setCurrentBody(Math.max(currentBody, 1));
     }
   };
 

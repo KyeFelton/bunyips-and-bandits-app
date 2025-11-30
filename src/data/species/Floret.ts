@@ -9,8 +9,8 @@ import { Species } from "../../models/species";
 export const Floret: Species = {
   name: "Floret",
   size: CreatureSize.Small,
-  physique: 5,
-  morale: 7,
+  body: 5,
+  mind: 7,
   stamina: 6,
   speed: {
     [Locomotion.Walk]: SpeedRating.Moderate,

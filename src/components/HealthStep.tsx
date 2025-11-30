@@ -1,41 +1,41 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import {
-  physiqueAtom,
-  moraleAtom,
+  bodyAtom,
+  mindAtom,
   staminaAtom,
-  currentPhysiqueAtom,
-  currentMoraleAtom,
+  currentBodyAtom,
+  currentMindAtom,
   currentStaminaAtom,
-  physiqueUpgradesAtom,
-  moraleUpgradesAtom,
+  bodyUpgradesAtom,
+  mindUpgradesAtom,
   staminaUpgradesAtom,
   availableHealthUpgradesAtom,
 } from "./../state/character";
 import { HealthUpgradeForm } from "./HealthUpgradeForm";
 
 export const HealthStep = () => {
-  const physique = useAtomValue(physiqueAtom);
-  const morale = useAtomValue(moraleAtom);
+  const body = useAtomValue(bodyAtom);
+  const mind = useAtomValue(mindAtom);
   const stamina = useAtomValue(staminaAtom);
-  const setCurrentPhysique = useSetAtom(currentPhysiqueAtom);
-  const setCurrentMorale = useSetAtom(currentMoraleAtom);
+  const setCurrentBody = useSetAtom(currentBodyAtom);
+  const setCurrentMind = useSetAtom(currentMindAtom);
   const setCurrentStamina = useSetAtom(currentStaminaAtom);
-  const [physiqueUpgrades, setPhysiqueUpgrades] = useAtom(physiqueUpgradesAtom);
-  const [moraleUpgrades, setMoraleUpgrades] = useAtom(moraleUpgradesAtom);
+  const [bodyUpgrades, setBodyUpgrades] = useAtom(bodyUpgradesAtom);
+  const [mindUpgrades, setMindUpgrades] = useAtom(mindUpgradesAtom);
   const [staminaUpgrades, setStaminaUpgrades] = useAtom(staminaUpgradesAtom);
   const availableHealthUpgrades = useAtomValue(availableHealthUpgradesAtom);
 
   const handleChanges = (changes: {
-    physique: number;
-    morale: number;
+    body: number;
+    mind: number;
     stamina: number;
   }) => {
-    setPhysiqueUpgrades(changes.physique);
-    setCurrentPhysique(
-      physique.current + (changes.physique - physiqueUpgrades)
+    setBodyUpgrades(changes.body);
+    setCurrentBody(
+      body.current + (changes.body - bodyUpgrades)
     );
-    setMoraleUpgrades(changes.morale);
-    setCurrentMorale(morale.current + (changes.morale - moraleUpgrades));
+    setMindUpgrades(changes.mind);
+    setCurrentMind(mind.current + (changes.mind - mindUpgrades));
     setStaminaUpgrades(changes.stamina);
     setCurrentStamina(stamina.current + (changes.stamina - staminaUpgrades));
   };
@@ -45,13 +45,13 @@ export const HealthStep = () => {
       availableHealthUpgrades={availableHealthUpgrades}
       onChanges={handleChanges}
       initialUpgrades={{
-        physique: physiqueUpgrades,
-        morale: moraleUpgrades,
+        body: bodyUpgrades,
+        mind: mindUpgrades,
         stamina: staminaUpgrades,
       }}
       currentValues={{
-        physique: physique.max,
-        morale: morale.max,
+        body: body.max,
+        mind: mind.max,
         stamina: stamina.max,
       }}
     />

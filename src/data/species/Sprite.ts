@@ -9,8 +9,8 @@ import { Species } from "../../models/species";
 export const Sprite: Species = {
   name: "Sprite",
   size: CreatureSize.Tiny,
-  physique: 3,
-  morale: 5,
+  body: 3,
+  mind: 5,
   stamina: 10,
   speed: {
     [Locomotion.Walk]: SpeedRating.Slow,

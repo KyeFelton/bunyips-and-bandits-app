@@ -4,8 +4,8 @@ import {
   ancestryDataAtom,
   speciesAtom,
   speciesDataAtom,
-  currentPhysiqueAtom,
-  currentMoraleAtom,
+  currentBodyAtom,
+  currentMindAtom,
   currentStaminaAtom,
 } from "./../state/character";
 import { AllSpecies } from "./../data/species";
@@ -42,8 +42,8 @@ export const FolkStep = () => {
   const ancestryData = useAtomValue(ancestryDataAtom);
   const [selectedSpecies, setSpecies] = useAtom(speciesAtom);
   const speciesData = useAtomValue(speciesDataAtom);
-  const setCurrentPhysique = useSetAtom(currentPhysiqueAtom);
-  const setCurrentMorale = useSetAtom(currentMoraleAtom);
+  const setCurrentBody = useSetAtom(currentBodyAtom);
+  const setCurrentMind = useSetAtom(currentMindAtom);
   const setCurrentStamina = useSetAtom(currentStaminaAtom);
   const [api, setApi] = useState<CarouselApi>();
 
@@ -68,16 +68,16 @@ export const FolkStep = () => {
       const newSpeciesData = AllSpecies[value as keyof typeof AllSpecies];
       if (!speciesData) {
         // First selection
-        setCurrentPhysique(newSpeciesData.physique);
-        setCurrentMorale(newSpeciesData.morale);
+        setCurrentBody(newSpeciesData.body);
+        setCurrentMind(newSpeciesData.mind);
         setCurrentStamina(newSpeciesData.stamina);
       } else {
         // Changing species
-        const physiqueChange = newSpeciesData.physique - speciesData.physique;
-        const moraleChange = newSpeciesData.morale - speciesData.morale;
+        const bodyChange = newSpeciesData.body - speciesData.body;
+        const mindChange = newSpeciesData.mind - speciesData.mind;
         const staminaChange = newSpeciesData.stamina - speciesData.stamina;
-        setCurrentPhysique((prev) => Math.max(0, prev + physiqueChange));
-        setCurrentMorale((prev) => Math.max(0, prev + moraleChange));
+        setCurrentBody((prev) => Math.max(0, prev + bodyChange));
+        setCurrentMind((prev) => Math.max(0, prev + mindChange));
         setCurrentStamina((prev) => Math.max(0, prev + staminaChange));
       }
       setSpecies(value);
@@ -107,8 +107,8 @@ export const FolkStep = () => {
       }
     },
     [
-      setCurrentMorale,
-      setCurrentPhysique,
+      setCurrentMind,
+      setCurrentBody,
       setCurrentStamina,
       setSpecies,
       speciesData,
@@ -291,26 +291,26 @@ export const FolkStep = () => {
             <div className="grid sm:grid-cols-3 gap-6">
               <div className="p-4 bg-red/10 rounded-lg">
                 <div className="flex items-center justify-between mb-2">
-                  <div className="text-sm font-medium">Physique</div>
+                  <div className="text-sm font-medium">Body</div>
                   <div className="text-xl font-semibold">
-                    {speciesData.physique}
+                    {speciesData.body}
                   </div>
                 </div>
                 <SpeciesHealthBar
-                  value={speciesData.physique}
+                  value={speciesData.body}
                   maxValue={10}
                   color="red"
                 />
               </div>
               <div className="p-4 bg-green/10 rounded-lg">
                 <div className="flex items-center justify-between mb-2">
-                  <div className="text-sm font-medium">Morale</div>
+                  <div className="text-sm font-medium">Mind</div>
                   <div className="text-xl font-semibold">
-                    {speciesData.morale}
+                    {speciesData.mind}
                   </div>
                 </div>
                 <SpeciesHealthBar
-                  value={speciesData.morale}
+                  value={speciesData.mind}
                   maxValue={10}
                   color="green"
                 />

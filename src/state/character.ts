@@ -32,16 +32,16 @@ export const imageAtom = atom<string | undefined>();
 // Character progression
 export const levelAtom = atom<number>(1);
 export const pathsAtom = atom<PathProgression[]>([]);
-export const physiqueUpgradesAtom = atom<number>(0);
-export const moraleUpgradesAtom = atom<number>(0);
+export const bodyUpgradesAtom = atom<number>(0);
+export const mindUpgradesAtom = atom<number>(0);
 export const staminaUpgradesAtom = atom<number>(0);
 export const skillLevelUpgradesAtom = atom<Partial<Record<SkillType, number>>>(
   {}
 );
 
 // Character stats
-export const currentPhysiqueAtom = atom<number>(0);
-export const currentMoraleAtom = atom<number>(0);
+export const currentBodyAtom = atom<number>(0);
+export const currentMindAtom = atom<number>(0);
 export const currentStaminaAtom = atom<number>(0);
 export const conditionsAtom = atom<Condition[]>([]);
 
@@ -123,45 +123,45 @@ export const availableHealthUpgradesAtom = atom((get) => {
   return Math.floor(level / 2) * 2;
 });
 
-// Physique
-export const physiqueAtom = atom((get) => {
+// Body
+export const bodyAtom = atom((get) => {
   const speciesData = get(speciesDataAtom);
-  const physiqueUpgrades = get(physiqueUpgradesAtom);
+  const bodyUpgrades = get(bodyUpgradesAtom);
   const effects = get(effectsAtom);
-  const baseMaxPhysique = speciesData.physique + physiqueUpgrades;
+  const baseMaxBody = speciesData.body + bodyUpgrades;
 
-  const maxPhysique = effects.reduce((total, effect) => {
-    if (effect.physique?.bonus) {
-      return total + effect.physique.bonus;
+  const maxBody = effects.reduce((total, effect) => {
+    if (effect.body?.bonus) {
+      return total + effect.body.bonus;
     }
     return total;
-  }, baseMaxPhysique);
+  }, baseMaxBody);
 
   return {
-    max: maxPhysique,
-    current: get(currentPhysiqueAtom),
+    max: maxBody,
+    current: get(currentBodyAtom),
   };
 });
 
-// Morale
-export const moraleAtom = atom((get) => {
+// Mind
+export const mindAtom = atom((get) => {
   const speciesData = get(speciesDataAtom);
-  const moraleUpgrades = get(moraleUpgradesAtom);
+  const mindUpgrades = get(mindUpgradesAtom);
   const effects = get(effectsAtom);
-  const baseMaxMorale = speciesData.morale + moraleUpgrades;
-  const maxMorale = effects.reduce((total, effect) => {
-    if (effect.morale?.bonus) {
-      return total + effect.morale.bonus;
+  const baseMaxMind = speciesData.mind + mindUpgrades;
+  const maxMind = effects.reduce((total, effect) => {
+    if (effect.mind?.bonus) {
+      return total + effect.mind.bonus;
     }
-    if (effect.morale?.multiplier) {
-      return total * effect.morale.multiplier;
+    if (effect.mind?.multiplier) {
+      return total * effect.mind.multiplier;
     }
     return total;
-  }, baseMaxMorale);
+  }, baseMaxMind);
 
   return {
-    max: maxMorale,
-    current: get(currentMoraleAtom),
+    max: maxMind,
+    current: get(currentMindAtom),
   };
 });
 
@@ -217,7 +217,7 @@ export const actionsCountAtom = atom((get) => {
 export const speedAtom = atom((get) => {
   const speciesData = get(speciesDataAtom);
   const effects = get(effectsAtom);
-  const physique = get(physiqueAtom);
+  const body = get(bodyAtom);
   const baseSpeed: Record<Locomotion, SpeedRating> = {
     ...speciesData.speed,
   };
@@ -258,7 +258,7 @@ export const speedAtom = atom((get) => {
     }
   });
 
-  // Apply physique penalties
+  // Apply body penalties
   Object.keys(baseSpeed).forEach((locomotion) => {
     const currentRating = baseSpeed[locomotion as Locomotion];
     // Don't apply penalties to None ratings
@@ -267,7 +267,7 @@ export const speedAtom = atom((get) => {
     }
 
     const currentValue = ratingToNumber(currentRating);
-    if (physique.current / physique.max <= 0.5) {
+    if (body.current / body.max <= 0.5) {
       // Reduce speed rating by 1 level
       baseSpeed[locomotion as Locomotion] = numberToRating(
         Math.max(0, currentValue - 1)
@@ -342,8 +342,8 @@ type RollValues = {
 export const skillRollValuesAtom = atom((get) => {
   const effects = get(effectsAtom);
   const skillLevels = get(skillLevelsAtom);
-  const physique = get(physiqueAtom);
-  const morale = get(moraleAtom);
+  const body = get(bodyAtom);
+  const mind = get(mindAtom);
   const modifiers: Record<SkillType, number> = {} as Record<SkillType, number>;
   const rollValues: Record<SkillType, RollValues> = {} as Record<
     SkillType,
@@ -360,16 +360,16 @@ export const skillRollValuesAtom = atom((get) => {
   Object.values(Skills).forEach((skill) => {
     const level = skillLevels[skill.type] || 0;
     const weakHealth =
-      (skill.form === SkillForm.Physical && physique.current <= 1) ||
-      (skill.form === SkillForm.Mental && morale.current <= 1);
+      (skill.form === SkillForm.Physical && body.current <= 1) ||
+      (skill.form === SkillForm.Mental && mind.current <= 1);
     rollValues[skill.type] = {
       dice: weakHealth ? 0 : getDiceForLevel(level),
       modifier: (modifiers[skill.type] || 0) + getDiceBonusForLevel(level),
       hasAdvantage: false,
       hasDisadvantage:
         skill.form === SkillForm.Physical
-          ? physique.current / physique.max <= 0.5
-          : morale.current / morale.max <= 0.5,
+          ? body.current / body.max <= 0.5
+          : mind.current / mind.max <= 0.5,
     };
   });
 

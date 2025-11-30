@@ -3,11 +3,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
 import { Bed, Plus, X } from "lucide-react";
 import {
-  physiqueAtom,
-  moraleAtom,
+  bodyAtom,
+  mindAtom,
   staminaAtom,
-  currentPhysiqueAtom,
-  currentMoraleAtom,
+  currentBodyAtom,
+  currentMindAtom,
   currentStaminaAtom,
   conditionsAtom,
 } from "../state/character";
@@ -17,12 +17,7 @@ import { useState } from "react";
 import { AddConditionModal } from "./AddConditionModal";
 import { DefeatModal } from "./DefeatModal";
 import { ConditionGainedModal } from "./ConditionGainedModal";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "./ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 import {
   Hysteria,
   Amnesia,
@@ -36,12 +31,12 @@ type Props = {
 };
 
 export const HealthCard = ({ className }: Props) => {
-  const physique = useAtomValue(physiqueAtom);
-  const morale = useAtomValue(moraleAtom);
+  const body = useAtomValue(bodyAtom);
+  const mind = useAtomValue(mindAtom);
   const stamina = useAtomValue(staminaAtom);
   const [conditions, setConditions] = useAtom(conditionsAtom);
-  const setCurrentPhysique = useSetAtom(currentPhysiqueAtom);
-  const setCurrentMorale = useSetAtom(currentMoraleAtom);
+  const setCurrentBody = useSetAtom(currentBodyAtom);
+  const setCurrentMind = useSetAtom(currentMindAtom);
   const setCurrentStamina = useSetAtom(currentStaminaAtom);
   const [isAddConditionModalOpen, setIsAddConditionModalOpen] = useState(false);
   const [isDefeatModalOpen, setIsDefeatModalOpen] = useState(false);
@@ -64,8 +59,8 @@ export const HealthCard = ({ className }: Props) => {
 
   const handleRest = () => {
     const staminaPercentage = stamina.current / stamina.max;
-    setCurrentPhysique(calculateRestHealthValue(physique, staminaPercentage));
-    setCurrentMorale(calculateRestHealthValue(morale, staminaPercentage));
+    setCurrentBody(calculateRestHealthValue(body, staminaPercentage));
+    setCurrentMind(calculateRestHealthValue(mind, staminaPercentage));
     setCurrentStamina(stamina.max);
     setConditions([]);
   };
@@ -79,9 +74,9 @@ export const HealthCard = ({ className }: Props) => {
     setter: (value: number) => void
   ) => {
     setter(value);
-    if (value === 0 && setter === setCurrentPhysique) {
+    if (value === 0 && setter === setCurrentBody) {
       setIsDefeatModalOpen(true);
-    } else if (value === 0 && setter === setCurrentMorale) {
+    } else if (value === 0 && setter === setCurrentMind) {
       const mentalConditions = [Hysteria, Amnesia, Deluded, Frightened];
       const randomCondition =
         mentalConditions[Math.floor(Math.random() * mentalConditions.length)];
@@ -107,17 +102,17 @@ export const HealthCard = ({ className }: Props) => {
       <CardContent className="space-y-4 pt-4">
         <HealthBar
           colours={{ good: "green", warning: "yellow", bad: "red" }}
-          max={physique.max}
-          name="Physique"
-          onChange={(value) => handleHealthChange(value, setCurrentPhysique)}
-          value={physique.current}
+          max={body.max}
+          name="Body"
+          onChange={(value) => handleHealthChange(value, setCurrentBody)}
+          value={body.current}
         />
         <HealthBar
           colours={{ good: "green", warning: "yellow", bad: "red" }}
-          max={morale.max}
-          name="Morale"
-          onChange={(value) => handleHealthChange(value, setCurrentMorale)}
-          value={morale.current}
+          max={mind.max}
+          name="Mind"
+          onChange={(value) => handleHealthChange(value, setCurrentMind)}
+          value={mind.current}
         />
         <HealthBar
           colours={{ good: "blue", warning: "lightBlue", bad: "lightBlue" }}
@@ -203,63 +198,73 @@ export const HealthCard = ({ className }: Props) => {
             <p className="text-sm text-muted-foreground">
               {selectedCondition?.description}
             </p>
-            {selectedCondition?.effects && selectedCondition.effects.length > 0 && (
-              <div className="space-y-2">
-                <h4 className="text-sm font-medium">Effects:</h4>
-                <ul className="text-sm text-muted-foreground space-y-1">
-                  {selectedCondition.effects.map((effect, index) => (
-                    <li key={index}>
-                      {effect.skill && (
-                        <span>
-                          {effect.skill.bonus && effect.skill.bonus > 0 ? "+" : ""}
-                          {effect.skill.bonus} {effect.skill.skillType}
-                        </span>
-                      )}
-                      {effect.stamina && (
-                        <span>
-                          {effect.stamina.bonus && effect.stamina.bonus > 0 ? "+" : ""}
-                          {effect.stamina.bonus} Stamina
-                        </span>
-                      )}
-                      {effect.physique && (
-                        <span>
-                          {effect.physique.bonus && effect.physique.bonus > 0 ? "+" : ""}
-                          {effect.physique.bonus} Physique
-                        </span>
-                      )}
-                      {effect.morale && (
-                        <span>
-                          {effect.morale.bonus && effect.morale.bonus > 0 ? "+" : ""}
-                          {effect.morale.bonus} Morale
-                        </span>
-                      )}
-                      {effect.evasions && (
-                        <span>
-                          {effect.evasions.bonus && effect.evasions.bonus > 0 ? "+" : ""}
-                          {effect.evasions.bonus} Evasion
-                        </span>
-                      )}
-                      {effect.armour && (
-                        <span>
-                          {effect.armour.bonus && effect.armour.bonus > 0 ? "+" : ""}
-                          {effect.armour.bonus} {effect.armour.damageType} Armour
-                        </span>
-                      )}
-                      {effect.speed && (
-                        <span>
-                          {effect.speed.multiplier !== undefined
-                            ? `${effect.speed.multiplier}x`
-                            : effect.speed.bonus && effect.speed.bonus > 0
-                            ? "+"
-                            : ""}
-                          {effect.speed.bonus} {effect.speed.locomotion} Speed
-                        </span>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+            {selectedCondition?.effects &&
+              selectedCondition.effects.length > 0 && (
+                <div className="space-y-2">
+                  <h4 className="text-sm font-medium">Effects:</h4>
+                  <ul className="text-sm text-muted-foreground space-y-1">
+                    {selectedCondition.effects.map((effect, index) => (
+                      <li key={index}>
+                        {effect.skill && (
+                          <span>
+                            {effect.skill.bonus && effect.skill.bonus > 0
+                              ? "+"
+                              : ""}
+                            {effect.skill.bonus} {effect.skill.skillType}
+                          </span>
+                        )}
+                        {effect.stamina && (
+                          <span>
+                            {effect.stamina.bonus && effect.stamina.bonus > 0
+                              ? "+"
+                              : ""}
+                            {effect.stamina.bonus} Stamina
+                          </span>
+                        )}
+                        {effect.body && (
+                          <span>
+                            {effect.body.bonus && effect.body.bonus > 0
+                              ? "+"
+                              : ""}
+                            {effect.body.bonus} Body
+                          </span>
+                        )}
+                        {effect.mind && (
+                          <span>
+                            {effect.mind.bonus && effect.mind.bonus > 0
+                              ? "+"
+                              : ""}
+                            {effect.mind.bonus} Mind
+                          </span>
+                        )}
+                        {effect.evasions && (
+                          <span>
+                            {effect.evasions.bonus && effect.evasions.bonus > 0
+                              ? "+"
+                              : ""}
+                            {effect.evasions.bonus} Evasion
+                          </span>
+                        )}
+                        {effect.armour && (
+                          <span>
+                            {effect.armour.bonus && effect.armour.bonus > 0
+                              ? "+"
+                              : ""}
+                            {effect.armour.bonus} {effect.armour.damageType}{" "}
+                            Armour
+                          </span>
+                        )}
+                        {effect.speed && (
+                          <span>
+                            {effect.speed.increase ? "Increases" : "Decreases"}{" "}
+                            {effect.speed.locomotion} Speed
+                          </span>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
           </div>
         </DialogContent>
       </Dialog>

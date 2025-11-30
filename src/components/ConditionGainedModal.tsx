@@ -30,7 +30,7 @@ export const ConditionGainedModal = ({ isOpen, onClose, condition }: Props) => {
             <i>{condition.name}</i>
           </div>
           <p>{condition.description}</p>
-          <p>The condition lasts until you recover morale or next rest.</p>
+          <p>The condition lasts until you next rest.</p>
         </div>
       </DialogContent>
     </Dialog>

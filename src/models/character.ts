@@ -17,11 +17,11 @@ export type Character = {
   personality: string;
   image?: string;
   level: number;
-  physique: {
+  body: {
     max: number;
     current: number;
   };
-  morale: {
+  mind: {
     max: number;
     current: number;
   };

@@ -9,8 +9,8 @@ import { Species } from "../../models/species";
 export const Giant: Species = {
   name: "Giant",
   size: CreatureSize.Large,
-  physique: 8,
-  morale: 6,
+  body: 8,
+  mind: 6,
   stamina: 4,
   speed: {
     [Locomotion.Walk]: SpeedRating.Fast,

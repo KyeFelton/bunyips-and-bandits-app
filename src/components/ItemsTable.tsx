@@ -4,11 +4,11 @@ import {
   moneyAtom,
   skillLevelsAtom,
   conditionsAtom,
-  currentPhysiqueAtom,
-  currentMoraleAtom,
+  currentBodyAtom,
+  currentMindAtom,
   currentStaminaAtom,
-  physiqueAtom,
-  moraleAtom,
+  bodyAtom,
+  mindAtom,
   staminaAtom,
 } from "./../state/character";
 import { Button } from "./ui/button";
@@ -60,11 +60,11 @@ export const ItemsTable = () => {
   const [isEditingMoney, setIsEditingMoney] = useState(false);
   const skillLevels = useAtomValue(skillLevelsAtom);
   const [conditions, setConditions] = useAtom(conditionsAtom);
-  const setCurrentPhysique = useSetAtom(currentPhysiqueAtom);
-  const setCurrentMorale = useSetAtom(currentMoraleAtom);
+  const setCurrentBody = useSetAtom(currentBodyAtom);
+  const setCurrentMind = useSetAtom(currentMindAtom);
   const setCurrentStamina = useSetAtom(currentStaminaAtom);
-  const physique = useAtomValue(physiqueAtom);
-  const morale = useAtomValue(moraleAtom);
+  const body = useAtomValue(bodyAtom);
+  const mind = useAtomValue(mindAtom);
   const stamina = useAtomValue(staminaAtom);
 
   const totalWeight = Object.values(items).reduce(
@@ -89,20 +89,20 @@ export const ItemsTable = () => {
       // Process immediate effects before removing the item
       if (item.immediateEffect) {
         const {
-          physique: physiqueBonus,
-          morale: moraleBonus,
+          body: bodyBonus,
+          mind: mindBonus,
           stamina: staminaBonus,
           condition,
         } = item.immediateEffect;
 
         // Apply stat increases (capped at max)
-        if (physiqueBonus) {
-          setCurrentPhysique((prev) =>
-            Math.min(prev + physiqueBonus, physique.max)
+        if (bodyBonus) {
+          setCurrentBody((prev) =>
+            Math.min(prev + bodyBonus, body.max)
           );
         }
-        if (moraleBonus) {
-          setCurrentMorale((prev) => Math.min(prev + moraleBonus, morale.max));
+        if (mindBonus) {
+          setCurrentMind((prev) => Math.min(prev + mindBonus, mind.max));
         }
         if (staminaBonus) {
           setCurrentStamina((prev) =>

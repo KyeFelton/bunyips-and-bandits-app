@@ -553,42 +553,40 @@ const content = (
       <p>
         Your character isn’t invincible—adventuring comes with its fair share of
         scrapes, bruises, and mind-melting horrors. The game tracks three
-        aspects of your character’s health - physique, morale and stamina.
+        aspects of your character’s health - body, mind and stamina.
       </p>
       <p>
         One way to recover health is through resting. To rest, you need to spend
         several hours of inactivity at a settlement with beds and food, such as
-        a campground, inn or hospital. The amount of physique and morale you
-        recover is dependent on your stamina before the rest, whilst stamina
-        always replenishes to full after a rest.
+        a campground, inn or hospital. The amount of body and mind you recover
+        is dependent on your stamina before the rest, whilst stamina always
+        replenishes to full after a rest.
       </p>
-      <h4>Physique</h4>
+      <h4>Body</h4>
       <p>
-        Physique tracks how much physical damage you can endure before
-        collapsing.
-      </p>
-      <p>
-        If your morale drops below half, your movement speed is halved and you
-        have disadvantage on all physical skill checks. At only 1 physique, you
-        become incapacitated—meaning you can’t move, fight, or do much of
-        anything, and automatically fail any physical skill check.
+        Body tracks how much physical damage you can endure before collapsing.
       </p>
       <p>
-        If your physique hits zero, you’re knocked unconscious and potentially
-        dead. Another player must check your vital signs to determine your fate.
-        When they do, roll any die—if the result is even, you’re alive but
+        If your body drops below half, your movement speed is halved and you
+        have disadvantage on all physical skill checks. At only 1 health, you
+        automatically fail any physical skill check.
+      </p>
+      <p>
+        If your body hits zero, you’re knocked unconscious and potentially dead.
+        Another player must check your vital signs to determine your fate. When
+        they do, roll any die—if the result is even, you’re alive but
         unconscious; if odd, you’re dead.
       </p>
-      <h4>Morale</h4>
+      <h4>Mind</h4>
       <p>
-        Morale refers to your mental resilience, tested by terrifying encounters
+        Mind refers to your mental resilience, tested by terrifying encounters
         and psychic manipulation. Certain experiences—like witnessing the death
-        of an ally—can drain your morale.
+        of an ally—can drain your mind.
       </p>
       <p>
-        As your morale depletes, your mental state starts to deteriorate. At
-        less than half morale, you have disadvantage on all mental skill checks.
-        At 1 morale, you automatically fail all mental skill checks.
+        As your mind depletes, your mental state starts to deteriorate. At less
+        than half health, you have disadvantage on all mental skill checks. At 1
+        health, you automatically fail all mental skill checks.
       </p>
       <div className="md:w-[35%] md:float-left px-6 mr-10">
         <img
@@ -598,9 +596,9 @@ const content = (
         />
       </div>
       <p>
-        Upon dropping to zero morale, you lose control. Roll a d4 and then take
-        the matching condition from the list below. The condition lasts until
-        you recover at least one morale.
+        Upon your mind dropping to zero health, you lose control. Roll a d4 and
+        then take the matching condition from the list below. The condition
+        lasts until your mind recovers at least 1 health.
       </p>
 
       <ol className="list-decimal ml-4">
@@ -630,11 +628,11 @@ const content = (
       </p>
       <p>
         Stamina also affects how much health you can recover from resting. If
-        you have at least half your maximum stamina before resting, then you can
-        recover 2 physique and 2 morale after the rest. If you have less than
-        half your maximum stamina, you only recover 1 physique and 1 morale per
-        rest. If you have no stamina left, you can’t recover any health. In any
-        case, your stamina always replenishes to full after a rest.
+        you have at least half your maximum stamina before resting, then your
+        body and mind each recover 2 health after the rest. If you have less
+        than half your maximum stamina, you only recover 1 health per rest. If
+        you have no stamina left, you can’t recover any health. In any case,
+        your stamina always replenishes to full after a rest.
       </p>
     </Body>
     <H3>Armour</H3>
@@ -773,10 +771,8 @@ const content = (
     <H3>Speed</H3>
     <Body>
       <p>
-        Different species have access to different types of locomotion, each
-        with its own speed rating. Your speed rating determines which distances
-        you can reach in a single turn and how much stamina it costs. There are
-        four types of locomotion:
+        Different species have different forms of locomotion, each each at their
+        own speed. There are four types of locomotion:
       </p>
       <table className="md:mx-4">
         <thead>
@@ -829,64 +825,54 @@ const content = (
         </tbody>
       </table>
       <p>
-        Each type of locomotion has a speed rating: None, Slow, Moderate, Fast,
-        or Extreme. Your rating determines how far you can move and the stamina
-        cost:
+        For each type of locomotion, you can have a speed of slow, moderate,
+        fast, or extreme. This speed determines the distance that can be
+        tranversed in a single action in combat:
       </p>
       <table className="md:mx-4 mb-8">
         <thead>
           <tr>
-            <th>Rating</th>
-            <th>Close</th>
-            <th>Near</th>
-            <th>Far</th>
+            <th>Speed</th>
+            <th>Distance</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>
-              <b>None</b>
-            </td>
-            <td colSpan={3}>Cannot use this type of locomotion</td>
-          </tr>
-          <tr>
-            <td>
               <b>Slow</b>
             </td>
-            <td>0 stamina</td>
-            <td>Impossible</td>
-            <td>Impossible</td>
+            <td>None</td>
           </tr>
           <tr>
             <td>
               <b>Moderate</b>
             </td>
-            <td>0 stamina</td>
-            <td>1 stamina</td>
-            <td>Impossible</td>
+            <td>Close</td>
           </tr>
           <tr>
             <td>
               <b>Fast</b>
             </td>
-            <td>0 stamina</td>
-            <td>0 stamina</td>
-            <td>1 stamina</td>
+            <td>Near</td>
           </tr>
           <tr>
             <td>
               <b>Extreme</b>
             </td>
-            <td>0 stamina</td>
-            <td>0 stamina</td>
-            <td>0 stamina</td>
+            <td>Far</td>
           </tr>
         </tbody>
       </table>
       <p>
-        If your physique drops below half, your speed decreases by one rating.
-        For example, if your walking speed is moderate, upon dropping below half
-        physique, your walking speed becomes slow.
+        A standard move action doesn't use stamina. You can choose to spend 1
+        stamina to use a dash action, which allows you to move at the next speed
+        tier. For example, if your speed is moderate, you can dash to move to a
+        near distance.
+      </p>
+      <p>
+        If your body drops below half health, your speed decreases by one
+        rating. For example, if your walking speed is moderate, upon your body
+        dropping below half health, your walking speed drops to slow.
       </p>
     </Body>
     <H3>Senses</H3>

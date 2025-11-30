@@ -1,8 +1,8 @@
 import { MaxHealthBar } from "./MaxHealthBar";
 
 export type Health = {
-  physique: number;
-  morale: number;
+  body: number;
+  mind: number;
   stamina: number;
 };
 
@@ -20,13 +20,13 @@ export const HealthUpgradeForm = ({
   currentValues,
 }: HealthUpgradeFormProps) => {
   const totalUpgrades =
-    initialUpgrades.physique + initialUpgrades.morale + initialUpgrades.stamina;
+    initialUpgrades.body + initialUpgrades.mind + initialUpgrades.stamina;
   const remainingUpgrades = availableHealthUpgrades - totalUpgrades;
   const maxUpgradesPerTrack = 5;
   const maxSegments = 15;
 
   const handleUpgrade = (
-    type: "physique" | "morale" | "stamina",
+    type: "body" | "mind" | "stamina",
     amount: number
   ) => {
     const newUpgrades = {
@@ -51,19 +51,19 @@ export const HealthUpgradeForm = ({
         availableUpgrades={remainingUpgrades}
         maxUpgrades={maxUpgradesPerTrack}
         maxValue={maxSegments}
-        name="Physique"
-        onChange={(value) => handleUpgrade("physique", value)}
-        upgrades={initialUpgrades.physique}
-        value={currentValues.physique}
+        name="Body"
+        onChange={(value) => handleUpgrade("body", value)}
+        upgrades={initialUpgrades.body}
+        value={currentValues.body}
       />
       <MaxHealthBar
         availableUpgrades={remainingUpgrades}
         maxUpgrades={maxUpgradesPerTrack}
         maxValue={maxSegments}
-        name="Morale"
-        onChange={(value) => handleUpgrade("morale", value)}
-        upgrades={initialUpgrades.morale}
-        value={currentValues.morale}
+        name="Mind"
+        onChange={(value) => handleUpgrade("mind", value)}
+        upgrades={initialUpgrades.mind}
+        value={currentValues.mind}
       />
       <MaxHealthBar
         availableUpgrades={remainingUpgrades}

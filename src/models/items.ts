@@ -1,8 +1,8 @@
 import { Effect } from "./effect";
 
 export type ImmediateEffect = {
-  physique?: number;
-  morale?: number;
+  body?: number;
+  mind?: number;
   stamina?: number;
   condition?: string;
 };
