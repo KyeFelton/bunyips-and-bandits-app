@@ -66,20 +66,9 @@ export const FolkStep = () => {
   const handleSpeciesChange = useCallback(
     (value: string) => {
       const newSpeciesData = AllSpecies[value as keyof typeof AllSpecies];
-      if (!speciesData) {
-        // First selection
-        setCurrentBody(newSpeciesData.body);
-        setCurrentMind(newSpeciesData.mind);
-        setCurrentStamina(newSpeciesData.stamina);
-      } else {
-        // Changing species
-        const bodyChange = newSpeciesData.body - speciesData.body;
-        const mindChange = newSpeciesData.mind - speciesData.mind;
-        const staminaChange = newSpeciesData.stamina - speciesData.stamina;
-        setCurrentBody((prev) => Math.max(0, prev + bodyChange));
-        setCurrentMind((prev) => Math.max(0, prev + mindChange));
-        setCurrentStamina((prev) => Math.max(0, prev + staminaChange));
-      }
+      setCurrentBody(newSpeciesData.body);
+      setCurrentMind(newSpeciesData.mind);
+      setCurrentStamina(newSpeciesData.stamina);
       setSpecies(value);
 
       // Check if current ancestry is still valid for the new species
@@ -111,7 +100,6 @@ export const FolkStep = () => {
       setCurrentBody,
       setCurrentStamina,
       setSpecies,
-      speciesData,
       selectedAncestry,
       setAncestry,
     ]
