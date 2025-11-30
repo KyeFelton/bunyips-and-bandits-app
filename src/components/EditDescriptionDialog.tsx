@@ -19,7 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { X } from "lucide-react";
+import { X, Plus } from "lucide-react";
 import {
   backgroundAtom,
   personalityAtom,
@@ -30,17 +30,6 @@ import {
   speciesDataAtom,
 } from "../state/character";
 import { saveFileAtom, focalCharacterIdAtom } from "../state/saveFile";
-
-const languages = [
-  "Afaen",
-  "Croakish",
-  "Desert Tongue",
-  "Dharrigal",
-  "Englorian",
-  "Go",
-  "Squawk",
-  "Tolrusian",
-];
 
 const genders = ["Male", "Female", "Non-binary"];
 const CUSTOM_GENDER_OPTION = "Let me type...";
@@ -68,6 +57,7 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
   const [pendingGender, setPendingGender] = useState("");
   const [isCustomGender, setIsCustomGender] = useState(false);
   const [customGenderValue, setCustomGenderValue] = useState("");
+  const [customLanguageInput, setCustomLanguageInput] = useState("");
 
   useEffect(() => {
     if (isOpen) {
@@ -121,9 +111,11 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
     onClose();
   };
 
-  const handleLanguageAdd = (language: string) => {
-    if (!pendingLanguages.includes(language)) {
-      setPendingLanguages([...pendingLanguages, language]);
+  const handleLanguageAdd = () => {
+    const trimmedLanguage = customLanguageInput.trim();
+    if (trimmedLanguage && !pendingLanguages.includes(trimmedLanguage)) {
+      setPendingLanguages([...pendingLanguages, trimmedLanguage]);
+      setCustomLanguageInput("");
     }
   };
 
@@ -236,10 +228,27 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
             />
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-2">
             <Label htmlFor="languages">Languages</Label>
+            <div className="flex gap-2">
+              <Input
+                id="languages"
+                value={customLanguageInput}
+                onChange={(e) => setCustomLanguageInput(e.target.value)}
+                placeholder="Type language..."
+                className="flex-1"
+              />
+              <Button
+                type="button"
+                size="sm"
+                onClick={handleLanguageAdd}
+                disabled={!customLanguageInput.trim()}
+              >
+                <Plus className="h-4 w-4" />
+              </Button>
+            </div>
             {pendingLanguages.length > 0 && (
-              <div className="flex flex-wrap gap-2 pb-1">
+              <div className="flex flex-wrap gap-2 pt-2">
                 {pendingLanguages.map((lang) => (
                   <Badge key={lang} variant="secondary" className="gap-1">
                     {lang}
@@ -253,22 +262,6 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
                 ))}
               </div>
             )}
-            <Select onValueChange={handleLanguageAdd}>
-              <SelectTrigger className="w-[200px]" id="languages">
-                <SelectValue placeholder="Add language">
-                  Add language
-                </SelectValue>
-              </SelectTrigger>
-              <SelectContent>
-                {languages
-                  .filter((lang) => !pendingLanguages.includes(lang))
-                  .map((lang) => (
-                    <SelectItem key={lang} value={lang}>
-                      {lang}
-                    </SelectItem>
-                  ))}
-              </SelectContent>
-            </Select>
           </div>
 
           <div className="space-y-2">

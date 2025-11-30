@@ -1,9 +1,9 @@
 // Englorian species images
-import avianEnglorianImage from "../images/species/englorian/avian.png";
-import giantEnglorianImage from "../images/species/englorian/giant.png";
-import goblinEnglorianImage from "../images/species/englorian/goblin.png";
-import humanEnglorianImage from "../images/species/englorian/human.png";
-import spriteEnglorianImage from "../images/species/englorian/sprite.png";
+import avianEnglorianImage from "../images/species/engloria/avian.png";
+import giantEnglorianImage from "../images/species/engloria/giant.png";
+import goblinEnglorianImage from "../images/species/engloria/goblin.png";
+import humanEnglorianImage from "../images/species/engloria/human.png";
+import spriteEnglorianImage from "../images/species/engloria/sprite.png";
 
 // Downunda species images
 import avianDownundaImage from "../images/species/downunda/avian.png";
@@ -14,7 +14,7 @@ import reptilianDownundaImage from "../images/species/downunda/reptilian.png";
 import spriteDownundaImage from "../images/species/downunda/sprite.png";
 
 const speciesImages: Record<string, Record<string, string>> = {
-  Englorian: {
+  Engloria: {
     Avian: avianEnglorianImage,
     Giant: giantEnglorianImage,
     Goblin: goblinEnglorianImage,

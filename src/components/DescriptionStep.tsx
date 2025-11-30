@@ -11,7 +11,8 @@ import {
   SelectValue,
 } from "./ui/select";
 import { Badge } from "./ui/badge";
-import { X, Image } from "lucide-react";
+import { Button } from "./ui/button";
+import { X, Image, Plus } from "lucide-react";
 import {
   nameAtom,
   genderAtom,
@@ -24,17 +25,6 @@ import {
   originAtom,
 } from "./../state/character";
 import { getSpeciesImage } from "./../utils/speciesImages";
-
-const languages = [
-  "Afaen",
-  "Croakish",
-  "Desert Tongue",
-  "Dharrigal",
-  "Englorian",
-  "Go",
-  "Squawk",
-  "Tolrusian",
-];
 
 const genders = ["Male", "Female", "Non-binary"];
 const CUSTOM_GENDER_OPTION = "Let me type...";
@@ -52,6 +42,7 @@ export const DescriptionStep = () => {
 
   const [isCustomGender, setIsCustomGender] = useState(false);
   const [customGenderValue, setCustomGenderValue] = useState("");
+  const [customLanguageInput, setCustomLanguageInput] = useState("");
 
   // Initialize custom gender state if character has a custom gender value
   useEffect(() => {
@@ -85,14 +76,16 @@ export const DescriptionStep = () => {
     }
   };
 
-  const handleLanguageAdd = (language: string) => {
-    if (!selectedLanguages.includes(language)) {
-      setLanguages([...selectedLanguages, language]);
-    }
-  };
-
   const handleLanguageRemove = (language: string) => {
     setLanguages(selectedLanguages.filter((l) => l !== language));
+  };
+
+  const handleLanguageAdd = () => {
+    const trimmedLanguage = customLanguageInput.trim();
+    if (trimmedLanguage && !selectedLanguages.includes(trimmedLanguage)) {
+      setLanguages([...selectedLanguages, trimmedLanguage]);
+      setCustomLanguageInput("");
+    }
   };
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -108,149 +101,166 @@ export const DescriptionStep = () => {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center text-md text-muted-foreground">
-        <div>
-          Define your character's name, appearance, attributes and backstory to
-          bring them to life.
-        </div>
-      </div>
-      <div className="space-y-2">
-        <Label htmlFor="name">Name</Label>
-        <Input
-          id="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Enter character name"
-          className="max-w-[350px]"
-        />
-      </div>
+    <div className="space-y-4">
+      <p className="text-sm text-muted-foreground">
+        Define your character's name, appearance, attributes and backstory to
+        bring them to life.
+      </p>
 
-      <div className="space-y-2">
-        <Label>Character Image</Label>
-        <div className="relative group w-64 h-64">
-          <label htmlFor="image-upload" className="cursor-pointer">
-            <img
-              src={image ?? getSpeciesImage(species, origin)}
-              alt="character"
-              className="w-64 h-64 rounded-lg object-cover"
-            />
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/50 rounded-lg">
-              <div className="flex items-center justify-center px-4 py-2 rounded-md text-white transition-colors">
-                <Image className="h-5 w-5 mr-2" />
-                Change image
-              </div>
+      {/* Main grid layout: image/stats on left, details on right */}
+      <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-4 lg:gap-6">
+        {/* Left column: Image and basic stats */}
+        <div className="space-y-4">
+          {/* Character Image */}
+          <div className="space-y-2">
+            <Label>Character Image</Label>
+            <div className="relative group w-full aspect-square max-w-[300px]">
+              <label htmlFor="image-upload" className="cursor-pointer">
+                <img
+                  src={image ?? getSpeciesImage(species, origin)}
+                  alt="character"
+                  className="w-full h-full rounded-lg object-cover"
+                />
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/50 rounded-lg">
+                  <div className="flex items-center justify-center px-4 py-2 rounded-md text-white transition-colors">
+                    <Image className="h-5 w-5 mr-2" />
+                    Change image
+                  </div>
+                </div>
+              </label>
+              <input
+                id="image-upload"
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                className="hidden"
+              />
             </div>
-          </label>
-          <input
-            id="image-upload"
-            type="file"
-            accept="image/*"
-            onChange={handleImageUpload}
-            className="hidden"
-          />
-        </div>
-      </div>
-
-      <div className="space-y-2">
-        <Label htmlFor="gender">Gender</Label>
-        <div className="flex gap-2">
-          <Select
-            value={isCustomGender ? CUSTOM_GENDER_OPTION : gender}
-            onValueChange={handleGenderChange}
-          >
-            <SelectTrigger className="w-[154px]" id="gender">
-              <SelectValue placeholder="Select gender" />
-            </SelectTrigger>
-            <SelectContent>
-              {genders.map((g) => (
-                <SelectItem key={g} value={g}>
-                  {g}
-                </SelectItem>
-              ))}
-              <SelectItem value={CUSTOM_GENDER_OPTION}>
-                {CUSTOM_GENDER_OPTION}
-              </SelectItem>
-            </SelectContent>
-          </Select>
-          {isCustomGender && (
-            <Input
-              id="gender-custom"
-              value={customGenderValue}
-              onChange={(e) => handleCustomGenderChange(e.target.value)}
-              placeholder="Enter custom gender"
-              className="w-[174px]"
-            />
-          )}
-        </div>
-      </div>
-
-      <div className="space-y-2">
-        <Label htmlFor="age">Age</Label>
-        <Input
-          id="age"
-          type="number"
-          min="0"
-          value={age || ""}
-          onChange={(e) => setAge(parseInt(e.target.value) || 0)}
-          placeholder="Enter age"
-          className="w-[120px]"
-        />
-      </div>
-
-      <div className="space-y-3">
-        <Label htmlFor="languages">Languages</Label>
-        {selectedLanguages.length !== 0 && (
-          <div className="flex flex-wrap gap-2 pb-1">
-            {selectedLanguages.map((lang) => (
-              <Badge key={lang} variant="secondary" className="gap-1">
-                {lang}
-                <button
-                  onClick={() => handleLanguageRemove(lang)}
-                  className="ml-1 hover:text-destructive"
-                >
-                  <X className="h-3 w-3" />
-                </button>
-              </Badge>
-            ))}
           </div>
-        )}
-        <Select onValueChange={handleLanguageAdd}>
-          <SelectTrigger className="w-[200px]" id="languages">
-            <SelectValue placeholder="Add language">Add language</SelectValue>
-          </SelectTrigger>
-          <SelectContent>
-            {languages
-              .filter((lang) => !selectedLanguages.includes(lang))
-              .map((lang) => (
-                <SelectItem key={lang} value={lang}>
-                  {lang}
-                </SelectItem>
-              ))}
-          </SelectContent>
-        </Select>
-      </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="background">Background</Label>
-        <Textarea
-          id="background"
-          value={background}
-          onChange={(e) => setBackground(e.target.value)}
-          placeholder="Describe your character's background and history..."
-          className="min-h-[100px]"
-        />
-      </div>
+          {/* Name */}
+          <div className="space-y-2">
+            <Label htmlFor="name">Name</Label>
+            <Input
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Enter character name"
+            />
+          </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="personality">Personality & Motivation</Label>
-        <Textarea
-          id="personality"
-          value={personality}
-          onChange={(e) => setPersonality(e.target.value)}
-          placeholder="Describe your character's personality and motivations..."
-          className="min-h-[100px]"
-        />
+          {/* Gender and Age in a compact grid */}
+          <div className="grid grid-cols-2 gap-3">
+            <div className="space-y-2">
+              <Label htmlFor="gender">Gender</Label>
+              <Select
+                value={isCustomGender ? CUSTOM_GENDER_OPTION : gender}
+                onValueChange={handleGenderChange}
+              >
+                <SelectTrigger id="gender">
+                  <SelectValue placeholder="Select" />
+                </SelectTrigger>
+                <SelectContent>
+                  {genders.map((g) => (
+                    <SelectItem key={g} value={g}>
+                      {g}
+                    </SelectItem>
+                  ))}
+                  <SelectItem value={CUSTOM_GENDER_OPTION}>
+                    {CUSTOM_GENDER_OPTION}
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="age">Age</Label>
+              <Input
+                id="age"
+                type="number"
+                min="0"
+                value={age || ""}
+                onChange={(e) => setAge(parseInt(e.target.value) || 0)}
+                placeholder="Age"
+              />
+            </div>
+          </div>
+
+          {/* Custom gender input if needed */}
+          {isCustomGender && (
+            <div className="space-y-2">
+              <Label htmlFor="gender-custom">Custom Gender</Label>
+              <Input
+                id="gender-custom"
+                value={customGenderValue}
+                onChange={(e) => handleCustomGenderChange(e.target.value)}
+                placeholder="Enter custom gender"
+              />
+            </div>
+          )}
+
+          {/* Languages */}
+          <div className="space-y-2">
+            <Label htmlFor="languages">Languages</Label>
+            <div className="flex items-center gap-2">
+              <Input
+                id="languages"
+                value={customLanguageInput}
+                onChange={(e) => setCustomLanguageInput(e.target.value)}
+                placeholder="Enter a language"
+                className="flex-1"
+              />
+              <Button
+                type="button"
+                size="sm"
+                onClick={handleLanguageAdd}
+                disabled={!customLanguageInput.trim()}
+              >
+                <Plus className="h-4 w-4" />
+              </Button>
+            </div>
+            {selectedLanguages.length !== 0 && (
+              <div className="flex flex-wrap gap-2 pt-2">
+                {selectedLanguages.map((lang) => (
+                  <Badge key={lang} variant="secondary" className="gap-1">
+                    {lang}
+                    <button
+                      onClick={() => handleLanguageRemove(lang)}
+                      className="ml-1 hover:text-destructive"
+                    >
+                      <X className="h-3 w-3" />
+                    </button>
+                  </Badge>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Right column: Background and personality */}
+        <div className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="background">Background</Label>
+            <Textarea
+              id="background"
+              value={background}
+              onChange={(e) => setBackground(e.target.value)}
+              placeholder="Describe your character's background and history..."
+              className="min-h-[180px] lg:min-h-[256px]"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="personality">Personality & Motivation</Label>
+            <Textarea
+              id="personality"
+              value={personality}
+              onChange={(e) => setPersonality(e.target.value)}
+              placeholder="Describe your character's personality and motivations..."
+              className="min-h-[180px] lg:min-h-[256px]"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

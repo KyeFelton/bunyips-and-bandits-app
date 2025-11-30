@@ -39,7 +39,7 @@ export const defaultCharacter: CharacterSaveFile = {
   age: 0,
   personality: "",
   background: "",
-  languages: [],
+  languages: ["Dharrigal", "Englorian"],
   level: 1,
   paths: [],
   customTraits: [],

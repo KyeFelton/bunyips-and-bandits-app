@@ -1,9 +1,9 @@
-import { Englorian } from "./Englorian";
+import { Engloria } from "./Engloria";
 import { Downunda } from "./Downunda";
 
 export const AllOrigins = {
   Downunda,
-  Englorian,
+  Engloria,
 };
 
 export const startingOrigin = AllOrigins.Downunda;

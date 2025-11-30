@@ -7,6 +7,7 @@ import {
   currentBodyAtom,
   currentMindAtom,
   currentStaminaAtom,
+  languagesAtom,
 } from "./../state/character";
 import { AllSpecies } from "./../data/species";
 import { AllOrigins } from "../data/origins";
@@ -69,7 +70,7 @@ const FOLK_DESCRIPTIONS: Record<
         "Humans of Downunda are diverse in culture, with many tracing their lineage to the Dharrigal peoples who have inhabited these lands for countless generations.",
     },
   },
-  Englorian: {
+  Engloria: {
     Avian: {
       name: "Skerrig",
       description:
@@ -106,6 +107,7 @@ export const FolkStep = () => {
   const setCurrentBody = useSetAtom(currentBodyAtom);
   const setCurrentMind = useSetAtom(currentMindAtom);
   const setCurrentStamina = useSetAtom(currentStaminaAtom);
+  const setLanguages = useSetAtom(languagesAtom);
   const [api, setApi] = useState<CarouselApi>();
 
   // Get available ancestries for selected species
@@ -132,8 +134,13 @@ export const FolkStep = () => {
   const handleOriginChange = useCallback(
     (originName: string) => {
       setOrigin(originName);
+      if (originName === "Downunda") {
+        setLanguages(["Dharrigal", "Englorian"]);
+      } else if (originName === "Engloria") {
+        setLanguages(["Englorian"]);
+      }
     },
-    [setOrigin]
+    [setOrigin, setLanguages]
   );
 
   const handleSpeciesChange = useCallback(
