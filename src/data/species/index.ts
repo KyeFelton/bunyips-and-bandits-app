@@ -1,5 +1,4 @@
 import { Avian } from "./Avian";
-import { Floret } from "./Floret";
 import { Giant } from "./Giant";
 import { Goblin } from "./Goblin";
 import { Human } from "./Human";
@@ -11,7 +10,6 @@ export const AllSpecies = {
   Reptilian,
   Sprite,
   Avian,
-  Floret,
   Giant,
   Goblin,
 };

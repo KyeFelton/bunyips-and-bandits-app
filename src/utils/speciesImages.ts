@@ -1,6 +1,5 @@
 // Englorian species images
 import avianEnglorianImage from "../images/species/englorian/avian.png";
-import floretEnglorianImage from "../images/species/englorian/floret.png";
 import giantEnglorianImage from "../images/species/englorian/giant.png";
 import goblinEnglorianImage from "../images/species/englorian/goblin.png";
 import humanEnglorianImage from "../images/species/englorian/human.png";
@@ -8,7 +7,6 @@ import spriteEnglorianImage from "../images/species/englorian/sprite.png";
 
 // Downunda species images
 import avianDownundaImage from "../images/species/downunda/avian.png";
-import floretDownundaImage from "../images/species/downunda/floret.png";
 import giantDownundaImage from "../images/species/downunda/giant.png";
 import goblinDownundaImage from "../images/species/downunda/goblin.png";
 import humanDownundaImage from "../images/species/downunda/human.png";
@@ -18,7 +16,6 @@ import spriteDownundaImage from "../images/species/downunda/sprite.png";
 const speciesImages: Record<string, Record<string, string>> = {
   Englorian: {
     Avian: avianEnglorianImage,
-    Floret: floretEnglorianImage,
     Giant: giantEnglorianImage,
     Goblin: goblinEnglorianImage,
     Human: humanEnglorianImage,
@@ -26,7 +23,6 @@ const speciesImages: Record<string, Record<string, string>> = {
   },
   Downunda: {
     Avian: avianDownundaImage,
-    Floret: floretDownundaImage,
     Giant: giantDownundaImage,
     Goblin: goblinDownundaImage,
     Human: humanDownundaImage,
@@ -35,7 +31,10 @@ const speciesImages: Record<string, Record<string, string>> = {
   },
 };
 
-export const getSpeciesImage = (speciesName: string, ancestry: string): string => {
+export const getSpeciesImage = (
+  speciesName: string,
+  ancestry: string
+): string => {
   const ancestryImages = speciesImages[ancestry];
   if (!ancestryImages) {
     return speciesImages.Englorian.Human;
