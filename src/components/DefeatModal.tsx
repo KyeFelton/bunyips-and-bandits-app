@@ -1,9 +1,8 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { HeartPulse, Skull, Stethoscope } from "lucide-react";
-import { useState } from "react";
-import { currentBodyAtom } from "./../state/character";
-import { useAtom } from "jotai";
+import { useState, useEffect } from "react";
+import { playHeartbeatSound, playBreatheSound, playDeadSound } from "../utils/sound";
 
 type Props = {
   isOpen: boolean;
@@ -13,14 +12,22 @@ type Props = {
 export const DefeatModal = ({ isOpen, onClose }: Props) => {
   const [isRevealed, setIsRevealed] = useState(false);
   const [isDead, setIsDead] = useState(Math.random() < 0.5);
-  const [currentBody, setCurrentBody] = useAtom(currentBodyAtom);
+
+  useEffect(() => {
+    if (isOpen) {
+      playHeartbeatSound();
+    }
+  }, [isOpen]);
 
   const handleReveal = () => {
     setIsRevealed(true);
     const isDead = Math.random() < 0.5;
     setIsDead(isDead);
-    if (!isDead) {
-      setCurrentBody(Math.max(currentBody, 1));
+
+    if (isDead) {
+      playDeadSound();
+    } else {
+      playBreatheSound();
     }
   };
 
@@ -47,11 +54,12 @@ export const DefeatModal = ({ isOpen, onClose }: Props) => {
               <Stethoscope className="h-16 w-16" />
               <p>
                 You have been pushed to your breaking point and collapse to the
-                floor
+                floor unconscious.
               </p>
               <p>
                 Until an ally checks your vital signs, no one knows for sure if
-                you're alive or not...
+                you're alive... Click Reveal Fate once an ally comes to your
+                aid.
               </p>
               <div />
               <Button onClick={handleReveal} className="w-full">
@@ -68,8 +76,9 @@ export const DefeatModal = ({ isOpen, onClose }: Props) => {
               <HeartPulse className="h-16 w-16 text-red-foreground" />
               <p>...but only just</p>
               <p>
-                You need to spend one week in a safe environment with food
-                before you can recover your heatlh through resting
+                You regain consciousness, but are still weak. If you take any
+                more damage whilst your body is at zero health, you will fall
+                back unconscious and test your chances of survival again.
               </p>
             </>
           )}
