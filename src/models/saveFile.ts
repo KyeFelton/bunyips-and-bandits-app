@@ -1,5 +1,5 @@
 import { startingSpecies } from "../data/species";
-import { startingAncestry } from "../data/ancestries";
+import { startingOrigin } from "../data/origins";
 import { SkillType } from "../enums/SkillType";
 import { ItemDictionary } from "./items";
 import { PathProgression } from "./paths";
@@ -8,7 +8,7 @@ import { Condition } from "./conditions";
 
 export type CharacterSaveFile = {
   name: string;
-  ancestry: string;
+  origin: string;
   species: string;
   gender: string;
   age: number;
@@ -33,7 +33,7 @@ export type CharacterSaveFile = {
 
 export const defaultCharacter: CharacterSaveFile = {
   name: "",
-  ancestry: startingAncestry.name,
+  origin: startingOrigin.name,
   species: startingSpecies.name,
   gender: "",
   age: 0,

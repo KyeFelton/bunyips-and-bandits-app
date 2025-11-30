@@ -68,7 +68,7 @@ const content = (
         focusing on self-preservation and scholarly purity, while others pursued
         more pragmatic or militarised approaches to survival. Today, Longren
         civilisation exists as a network of independent city-states that share a
-        common ancestry and culture but operate autonomously. Afae remains a
+        common origin and culture but operate autonomously. Afae remains a
         symbol of both the civilisation's former greatness and the dangers of
         unrestrained ambition.
       </p>

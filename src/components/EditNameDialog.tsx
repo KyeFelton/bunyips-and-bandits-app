@@ -22,7 +22,7 @@ import {
   nameAtom,
   imageAtom,
   speciesAtom,
-  ancestryAtom,
+  originAtom,
   levelAtom,
 } from "../state/character";
 import { saveFileAtom, focalCharacterIdAtom } from "../state/saveFile";
@@ -38,7 +38,7 @@ export const EditNameDialog = ({ isOpen, onClose }: Props) => {
   const [name, setName] = useAtom(nameAtom);
   const [image, setImage] = useAtom(imageAtom);
   const [species] = useAtom(speciesAtom);
-  const [ancestry] = useAtom(ancestryAtom);
+  const [origin] = useAtom(originAtom);
   const [level, setLevel] = useAtom(levelAtom);
   const setSaveFile = useSetAtom(saveFileAtom);
   const [focalCharacterId] = useAtom(focalCharacterIdAtom);
@@ -133,13 +133,14 @@ export const EditNameDialog = ({ isOpen, onClose }: Props) => {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                {Array.from({ length: 10 - level + 1 }, (_, i) => level + i).map(
-                  (lvl) => (
-                    <SelectItem key={lvl} value={lvl.toString()}>
-                      {lvl}
-                    </SelectItem>
-                  )
-                )}
+                {Array.from(
+                  { length: 10 - level + 1 },
+                  (_, i) => level + i
+                ).map((lvl) => (
+                  <SelectItem key={lvl} value={lvl.toString()}>
+                    {lvl}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
             <p className="text-xs text-muted-foreground">
@@ -153,9 +154,7 @@ export const EditNameDialog = ({ isOpen, onClose }: Props) => {
               <label htmlFor="image-upload" className="cursor-pointer">
                 <img
                   src={
-                    pendingImage ??
-                    image ??
-                    getSpeciesImage(species, ancestry || "Englorian")
+                    pendingImage ?? image ?? getSpeciesImage(species, origin)
                   }
                   alt="character"
                   className="w-64 h-64 rounded-lg object-cover"

@@ -5,9 +5,9 @@ import { Body } from "../../components/WikiPage";
 
 const summary = (
   <p>
-    Yowies are a giant folk found in the snowy mountains of Downunda. They are
-    large, fur-covered humanoids with features resembling marsupials, including
-    a pronounced muzzle and a thick tail similar to that of a kangaroo.
+    Yowies are a giant folk found in the highlands of Downunda. They are large,
+    fur-covered humanoids with features resembling marsupials, including a
+    pronounced muzzle and a thick tail similar to that of a kangaroo.
   </p>
 );
 
@@ -39,7 +39,7 @@ export const Yowie: WikiContent = {
   id: WikiId.Yowie,
   category: WikiCategory.Folk,
   title: "Yowie",
-  blurb: "Yowies are a giant folk found in the snowy mountains of Downunda.",
+  blurb: "Yowies are a giant folk found in the highlands of Downunda.",
   summary,
   main: content,
 };

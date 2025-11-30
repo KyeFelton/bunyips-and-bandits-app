@@ -26,7 +26,7 @@ import {
   languagesAtom,
   ageAtom,
   genderAtom,
-  ancestryAtom,
+  originAtom,
   speciesDataAtom,
 } from "../state/character";
 import { saveFileAtom, focalCharacterIdAtom } from "../state/saveFile";
@@ -56,7 +56,7 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
   const [selectedLanguages, setLanguages] = useAtom(languagesAtom);
   const [age, setAge] = useAtom(ageAtom);
   const [gender, setGender] = useAtom(genderAtom);
-  const ancestry = useAtomValue(ancestryAtom);
+  const origin = useAtomValue(originAtom);
   const species = useAtomValue(speciesDataAtom);
   const setSaveFile = useSetAtom(saveFileAtom);
   const [focalCharacterId] = useAtom(focalCharacterIdAtom);
@@ -157,10 +157,10 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
           {/* Read-only fields */}
           <div className="grid grid-cols-3 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="ancestry">Ancestry</Label>
+              <Label htmlFor="origin">Origin</Label>
               <Input
-                id="ancestry"
-                value={ancestry || "Englorian"}
+                id="origin"
+                value={origin}
                 disabled
                 className="bg-muted cursor-not-allowed text-sm"
               />
@@ -185,7 +185,7 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
             </div>
           </div>
           <p className="text-xs text-muted-foreground -mt-2">
-            Ancestry, Species, and Size are set during character creation and
+            Origin, Species, and Size are set during character creation and
             cannot be changed.
           </p>
 

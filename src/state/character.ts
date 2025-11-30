@@ -3,7 +3,7 @@ import { SkillType } from "../enums/SkillType";
 import { ItemDictionary } from "../models/items";
 import { PathProgression } from "../models/paths";
 import { AllSpecies } from "../data/species";
-import { AllAncestries } from "../data/ancestries";
+import { AllOrigins } from "../data/origins";
 import { Effect } from "../models/effect";
 import * as Skills from "../models/skills";
 import { Trait } from "../models/traits";
@@ -20,7 +20,7 @@ export const MAX_SKILL_LEVEL = 10;
 
 // Basic character info
 export const nameAtom = atom<string>("");
-export const ancestryAtom = atom<string>("");
+export const originAtom = atom<string>("");
 export const speciesAtom = atom<string>("");
 export const genderAtom = atom<string>("");
 export const ageAtom = atom<number>(0);
@@ -54,16 +54,16 @@ export const customTraitsAtom = atom<Trait[]>([]);
 
 // Effects atom
 export const effectsAtom = atom((get) => {
-  const ancestry = get(ancestryDataAtom);
+  const origin = get(originDataAtom);
   const paths = get(pathsAtom);
   const items = get(itemsAtom);
   const customTraits = get(customTraitsAtom);
   const conditions = get(conditionsAtom);
   const effects: Effect[] = [];
 
-  // Collect effects from ancestry
-  if (ancestry?.effects) {
-    effects.push(...ancestry.effects);
+  // Collect effects from origin
+  if (origin?.effects) {
+    effects.push(...origin.effects);
   }
 
   // Collect effects from paths
@@ -111,11 +111,11 @@ export const speciesDataAtom = atom((get) => {
   return AllSpecies[speciesName as keyof typeof AllSpecies];
 });
 
-// Get ancestry data
-export const ancestryDataAtom = atom((get) => {
-  const ancestryName = get(ancestryAtom);
-  if (!ancestryName) return null;
-  return AllAncestries[ancestryName as keyof typeof AllAncestries] || null;
+// Get origin data
+export const originDataAtom = atom((get) => {
+  const originName = get(originAtom);
+  if (!originName) return null;
+  return AllOrigins[originName as keyof typeof AllOrigins] || null;
 });
 
 export const availableHealthUpgradesAtom = atom((get) => {

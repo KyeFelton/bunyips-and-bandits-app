@@ -1,7 +1,7 @@
 import { useAtom, useSetAtom, useAtomValue } from "jotai";
 import {
-  ancestryAtom,
-  ancestryDataAtom,
+  originAtom,
+  originDataAtom,
   speciesAtom,
   speciesDataAtom,
   currentBodyAtom,
@@ -9,14 +9,8 @@ import {
   currentStaminaAtom,
 } from "./../state/character";
 import { AllSpecies } from "./../data/species";
-import { AllAncestries } from "./../data/ancestries";
-import {
-  Heart,
-  ChartNoAxesColumn,
-  Shield,
-  ArrowLeftRight,
-  Sparkles,
-} from "lucide-react";
+import { AllOrigins } from "../data/origins";
+import { Heart, ChartNoAxesColumn, Shield, ArrowLeftRight } from "lucide-react";
 import { SkillIcon } from "./icons/SkillIcon";
 import { Locomotion } from "./../enums/Locomotion";
 import { DamageType } from "./../enums/DamageType";
@@ -36,10 +30,77 @@ import { cn } from "./../utils/cn";
 import { useCallback, useEffect, useState, useMemo } from "react";
 import { Card } from "./ui/card";
 import { SpeedRating } from "../enums/SpeedRating";
+import { Human } from "../data/species/Human";
+
+// Folk descriptions by origin and species
+const FOLK_DESCRIPTIONS: Record<
+  string,
+  Record<string, { name: string; description: string }>
+> = {
+  Downunda: {
+    Reptilian: {
+      name: "Birim",
+      description:
+        "The Birim are a reptilian folk originating from the deserts of Downunda. They are distinguished by their tall and slender physique, with features resembling goannas.",
+    },
+    Avian: {
+      name: "Karrakan",
+      description:
+        "The Karrakan are an avian folk with ancestral ties to Downunda. Their feather colours vary widely, with some resembling pink galahs, sulphur-crested cockatoos, or black cockatoos.",
+    },
+    Giant: {
+      name: "Yowie",
+      description:
+        "Yowies are a giant folk found in the highlands of Downunda. They are large, fur-covered humanoids with features resembling marsupials.",
+    },
+    Goblin: {
+      name: "Drop Bear",
+      description:
+        "Drop Bears are a koala-like, goblin folk native to the forests of Downunda. They possess stocky, hunched bodies, with strong arms suited for climbing and wrestling.",
+    },
+    Sprite: {
+      name: "Joonyar",
+      description:
+        "The Joonyar are a sprite folk that live in the underground regions of Downunda. They are small humanoids with skin in shades of eucalyptus, brown hair, and glowing orange eyes that provide illumination in low-light environments.",
+    },
+    Human: {
+      name: "Dharrigal",
+      description:
+        "Humans of Downunda are diverse in culture, with many tracing their lineage to the Dharrigal peoples who have inhabited these lands for countless generations.",
+    },
+  },
+  Englorian: {
+    Avian: {
+      name: "Skerrig",
+      description:
+        "The Skerrig are an avian folk native to the coasts and rivers of Engloria and Downunda. Their plumage varies widely, often resembling seabirds such as gulls, cormorants, and puffins.",
+    },
+    Giant: {
+      name: "Troll",
+      description:
+        "Trolls are a giant folk native to the swamps and mountains of Engloria. They are large humanoids with broad noses, heavy brows, mossy hair, and enormous hands and feet.",
+    },
+    Goblin: {
+      name: "Hob",
+      description:
+        "Hobs are a goblin folk with ancestral ties to Engloria. They are slightly shorter than humans, with a stocky build, coarse body hair, and facial features often likened to bats, including wide-set eyes, flat nose and pointed ears.",
+    },
+    Sprite: {
+      name: "Gnome",
+      description:
+        "Gnomes are sprites originating from the underground regions of Engloria. They are small in stature and are recognised by their sky-blue skin, white hair, and glowing yellow eyes.",
+    },
+    Human: {
+      name: "Englorian",
+      description:
+        "Englorian humans descend from the Englorian settlers who arrived from across the seas. They are the most abundant of all folk in Downunda.",
+    },
+  },
+};
 
 export const FolkStep = () => {
-  const [selectedAncestry, setAncestry] = useAtom(ancestryAtom);
-  const ancestryData = useAtomValue(ancestryDataAtom);
+  const [selectedOrigin, setOrigin] = useAtom(originAtom);
+  const originData = useAtomValue(originDataAtom);
   const [selectedSpecies, setSpecies] = useAtom(speciesAtom);
   const speciesData = useAtomValue(speciesDataAtom);
   const setCurrentBody = useSetAtom(currentBodyAtom);
@@ -48,19 +109,31 @@ export const FolkStep = () => {
   const [api, setApi] = useState<CarouselApi>();
 
   // Get available ancestries for selected species
-  const availableAncestries = useMemo(() => {
-    if (!selectedSpecies) return Object.keys(AllAncestries);
+  const availableOrigins = useMemo(() => {
+    if (!selectedSpecies) return Object.keys(AllOrigins);
 
-    return Object.entries(AllAncestries)
-      .filter(([, ancestry]) => ancestry.species.includes(selectedSpecies))
+    return Object.entries(AllOrigins)
+      .filter(([, origin]) => origin.species.includes(selectedSpecies))
       .map(([name]) => name);
   }, [selectedSpecies]);
 
-  const handleAncestryChange = useCallback(
-    (ancestryName: string) => {
-      setAncestry(ancestryName);
+  // Get available species for selected origin
+  const availableSpecies = useMemo(() => {
+    if (!selectedOrigin) return Object.keys(AllSpecies);
+
+    const originData = AllOrigins[selectedOrigin as keyof typeof AllOrigins];
+    if (!originData) return Object.keys(AllSpecies);
+
+    return Object.keys(AllSpecies).filter((speciesName) =>
+      originData.species.includes(speciesName)
+    );
+  }, [selectedOrigin]);
+
+  const handleOriginChange = useCallback(
+    (originName: string) => {
+      setOrigin(originName);
     },
-    [setAncestry]
+    [setOrigin]
   );
 
   const handleSpeciesChange = useCallback(
@@ -71,27 +144,27 @@ export const FolkStep = () => {
       setCurrentStamina(newSpeciesData.stamina);
       setSpecies(value);
 
-      // Check if current ancestry is still valid for the new species
-      if (selectedAncestry) {
-        const ancestryData =
-          AllAncestries[selectedAncestry as keyof typeof AllAncestries];
-        if (!ancestryData.species.includes(value)) {
-          // Current ancestry not available for new species
-          // Find first available ancestry for this species
-          const firstAvailableAncestry = Object.entries(AllAncestries).find(
-            ([, ancestry]) => ancestry.species.includes(value)
+      // Check if current origin is still valid for the new species
+      if (selectedOrigin) {
+        const originData =
+          AllOrigins[selectedOrigin as keyof typeof AllOrigins];
+        if (!originData.species.includes(value)) {
+          // Current origin not available for new species
+          // Find first available origin for this species
+          const firstAvailableOrigin = Object.entries(AllOrigins).find(
+            ([, origin]) => origin.species.includes(value)
           );
-          if (firstAvailableAncestry) {
-            setAncestry(firstAvailableAncestry[0]);
+          if (firstAvailableOrigin) {
+            setOrigin(firstAvailableOrigin[0]);
           }
         }
       } else {
-        // No ancestry selected, auto-select first available
-        const firstAvailableAncestry = Object.entries(AllAncestries).find(
-          ([, ancestry]) => ancestry.species.includes(value)
+        // No origin selected, auto-select first available
+        const firstAvailableOrigin = Object.entries(AllOrigins).find(
+          ([, origin]) => origin.species.includes(value)
         );
-        if (firstAvailableAncestry) {
-          setAncestry(firstAvailableAncestry[0]);
+        if (firstAvailableOrigin) {
+          setOrigin(firstAvailableOrigin[0]);
         }
       }
     },
@@ -100,8 +173,8 @@ export const FolkStep = () => {
       setCurrentBody,
       setCurrentStamina,
       setSpecies,
-      selectedAncestry,
-      setAncestry,
+      selectedOrigin,
+      setOrigin,
     ]
   );
 
@@ -109,13 +182,12 @@ export const FolkStep = () => {
     (api: CarouselApi) => {
       if (!api) return;
       const selectedIndex = api.selectedScrollSnap();
-      const allSpeciesKeys = Object.keys(AllSpecies);
-      const selectedSpeciesName = allSpeciesKeys[selectedIndex];
+      const selectedSpeciesName = availableSpecies[selectedIndex];
       if (selectedSpeciesName) {
         handleSpeciesChange(selectedSpeciesName);
       }
     },
-    [handleSpeciesChange]
+    [handleSpeciesChange, availableSpecies]
   );
 
   useEffect(() => {
@@ -128,75 +200,53 @@ export const FolkStep = () => {
 
   useEffect(() => {
     if (!api || !selectedSpecies) return;
-    const allSpeciesKeys = Object.keys(AllSpecies);
-    const selectedIndex = allSpeciesKeys.indexOf(selectedSpecies);
+    const selectedIndex = availableSpecies.indexOf(selectedSpecies);
     if (selectedIndex !== -1) {
       api.scrollTo(selectedIndex);
     }
-  }, [api, selectedSpecies]);
+  }, [api, selectedSpecies, availableSpecies]);
 
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 text-md text-muted-foreground">
         <div className="flex-1 sm:whitespace-nowrap">
-          Choose your species and ancestry to shape your character's heritage
-          and abilities.
+          Choose your species and origin to shape your character's heritage and
+          abilities.
         </div>
       </div>
 
-      {/* Ancestry Selection */}
+      {/* Origin Selection */}
       <div className="">
-        <h3 className="font-semibold mb-4 text-lg">Select Ancestry</h3>
+        <h3 className="font-semibold mb-4 text-lg">Origin</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {availableAncestries.map((ancestryName) => {
-            const ancestry =
-              AllAncestries[ancestryName as keyof typeof AllAncestries];
+          {availableOrigins.map((originName) => {
+            const origin = AllOrigins[originName as keyof typeof AllOrigins];
             return (
               <Card
-                key={ancestryName}
+                key={originName}
                 className={cn(
                   "p-4 cursor-pointer transition-all duration-200 hover:shadow-lg border-2",
-                  selectedAncestry === ancestryName
+                  selectedOrigin === originName
                     ? "border-primary bg-primary/5"
                     : "border-muted hover:border-primary/50"
                 )}
-                onClick={() => handleAncestryChange(ancestryName)}
+                onClick={() => handleOriginChange(originName)}
               >
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-lg">{ancestry.name}</h4>
+                  <h4 className="font-semibold text-lg">{origin.name}</h4>
                   <p className="text-sm text-muted-foreground">
-                    {ancestry.description}
+                    {origin.description}
                   </p>
                 </div>
               </Card>
             );
           })}
         </div>
-
-        {/* Ancestry Trait Details (shown below cards when ancestry is selected) */}
-        {selectedAncestry && ancestryData && (
-          <div className="mt-4 p-4 bg-primary/10 rounded-lg">
-            <div className="font-medium flex items-center gap-2">
-              <Sparkles className="h-4 w-4 text-primary" />
-              {ancestryData.name} Heritage
-            </div>
-            <div className="text-sm text-muted-foreground mt-1">
-              {ancestryData.description}
-            </div>
-            {ancestryData.effects && ancestryData.effects.length > 0 && (
-              <div className="text-sm mt-2">
-                <span className="font-medium">Bonus:</span> +
-                {ancestryData.effects[0].skill?.bonus || 1}{" "}
-                {ancestryData.effects[0].skill?.skillType || "skill"}
-              </div>
-            )}
-          </div>
-        )}
       </div>
 
       {/* Species Selection */}
       <div className="pt-6 border-t border-muted-foreground/20">
-        <h3 className="font-semibold mb-4 text-lg">Select Species</h3>
+        <h3 className="font-semibold mb-4 text-lg">Species</h3>
         <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 text-md text-muted-foreground mb-4">
           <div className="whitespace-nowrap">
             Selected: {selectedSpecies || "None"}
@@ -215,13 +265,13 @@ export const FolkStep = () => {
               className="w-full"
             >
               <CarouselContent>
-                {Object.keys(AllSpecies).map((speciesName) => (
+                {availableSpecies.map((speciesName) => (
                   <CarouselItem
                     key={speciesName}
                     className="basis-3/4 sm:basis-1/2 md:basis-1/3 cursor-pointer flex justify-center items-center"
                     onClick={() => {
-                      const allSpeciesKeys = Object.keys(AllSpecies);
-                      const selectedIndex = allSpeciesKeys.indexOf(speciesName);
+                      const selectedIndex =
+                        availableSpecies.indexOf(speciesName);
                       if (selectedIndex !== -1) {
                         api?.scrollTo(selectedIndex);
                         handleSpeciesChange(speciesName);
@@ -238,10 +288,7 @@ export const FolkStep = () => {
                         )}
                       >
                         <img
-                          src={getSpeciesImage(
-                            speciesName,
-                            selectedAncestry || "Englorian"
-                          )}
+                          src={getSpeciesImage(speciesName, selectedOrigin)}
                           alt={speciesName}
                           className="w-full h-full object-contain rounded-lg"
                         />
@@ -265,10 +312,32 @@ export const FolkStep = () => {
             </Carousel>
           </div>
         </div>
+
+        {/* Folk Description */}
+        {selectedSpecies &&
+          selectedOrigin &&
+          (() => {
+            const folkInfo =
+              FOLK_DESCRIPTIONS[selectedOrigin]?.[selectedSpecies];
+            if (!folkInfo) return null;
+
+            return (
+              <div className="p-4 bg-primary/10 rounded-lg">
+                <h4 className="font-semibold text-lg mb-2">
+                  {selectedSpecies === Human.name
+                    ? `${folkInfo.name} ${selectedSpecies}`
+                    : `${folkInfo.name} (${selectedSpecies})`}
+                </h4>
+                <p className="text-sm text-muted-foreground">
+                  {folkInfo.description}
+                </p>
+              </div>
+            );
+          })()}
       </div>
 
-      {/* Stats Display (only show if both ancestry and species are selected) */}
-      {speciesData && ancestryData && (
+      {/* Stats Display (only show if both origin and species are selected) */}
+      {speciesData && originData && (
         <div className="space-y-6 pt-6 border-t border-muted-foreground/20">
           {/* Base Stats */}
           <div>

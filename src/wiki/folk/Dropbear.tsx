@@ -5,9 +5,9 @@ import { Body } from "../../components/WikiPage";
 
 const summary = (
   <p>
-    Drop Bears are a carnivorous, koala-like folk native to the forests of
-    Downunda. They possess stocky, hunched bodies, with strong arms suited for
-    climbing and wrestling.
+    Drop Bears are a koala-like, goblin folk native to the forests of Downunda.
+    They possess stocky, hunched bodies, with strong arms suited for climbing
+    and wrestling.
   </p>
 );
 
@@ -36,7 +36,7 @@ export const Dropbear: WikiContent = {
   category: WikiCategory.Folk,
   title: "Drop Bear",
   blurb:
-    "Drop Bears are a carnivorous, koala-like folk native to the forests of Downunda.",
+    "Drop Bears are a koala-like, goblin folk native to the forests of Downunda.",
   summary,
   main: content,
 };

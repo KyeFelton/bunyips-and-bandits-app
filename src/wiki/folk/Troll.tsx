@@ -5,9 +5,9 @@ import { Body } from "../../components/WikiPage";
 
 const summary = (
   <p>
-    Trolls are a giant folk native to the swamps and mountains of Engloria.
-    They are large humanoids with broad noses, heavy brows, and clawed hands and
-    feet.
+    Trolls are a giant folk native to the swamps and mountains of Engloria. They
+    are large humanoids with broad noses, heavy brows, mossy hair, and enormous
+    hands and feet.
   </p>
 );
 

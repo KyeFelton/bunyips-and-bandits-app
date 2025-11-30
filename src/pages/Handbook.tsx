@@ -558,9 +558,11 @@ const content = (
       <p>
         One way to recover health is through resting. To rest, you need to spend
         several hours of inactivity at a settlement with beds and food, such as
-        a campground, inn or hospital. The amount of body and mind you recover
-        is dependent on your stamina before the rest, whilst stamina always
-        replenishes to full after a rest.
+        a campground, inn or hospital. Resting restores all your stamina. If you
+        have at least half your maximum stamina before resting, then your body
+        and mind also recover 2 health after the rest. If you have less than
+        half your maximum stamina, they only recover 1 health per rest. If you
+        have no stamina left, you can’t recover any health.
       </p>
       <h4>Body</h4>
       <p>
@@ -574,8 +576,9 @@ const content = (
       <p>
         If your body hits zero, you’re knocked unconscious and potentially dead.
         Another player must check your vital signs to determine your fate. When
-        they do, roll any die—if the result is even, you’re alive but
-        unconscious; if odd, you’re dead.
+        they do, roll any die—if the result is even, you’re alive and regain
+        conscious; if odd, you’re dead. Each time you take damage whilst on zero
+        health, you must roll a die to determine whether you die.
       </p>
       <h4>Mind</h4>
       <p>
@@ -625,14 +628,6 @@ const content = (
         Stamina depletes as you perform actions with a stamina cost. If an
         action has a stamina cost, you need to have at least that much left in
         your stamina pool to perform it.
-      </p>
-      <p>
-        Stamina also affects how much health you can recover from resting. If
-        you have at least half your maximum stamina before resting, then your
-        body and mind each recover 2 health after the rest. If you have less
-        than half your maximum stamina, you only recover 1 health per rest. If
-        you have no stamina left, you can’t recover any health. In any case,
-        your stamina always replenishes to full after a rest.
       </p>
     </Body>
     <H3>Armour</H3>
@@ -872,7 +867,8 @@ const content = (
       <p>
         If your body drops below half health, your speed decreases by one
         rating. For example, if your walking speed is moderate, upon your body
-        dropping below half health, your walking speed drops to slow.
+        dropping below half health, your walking speed drops to slow. At zero
+        health, you are unable to move unassisted.
       </p>
     </Body>
     <H3>Senses</H3>

@@ -7,7 +7,7 @@ const summary = (
   <p>
     Hobs are a goblin folk with ancestral ties to Engloria. They are slightly
     shorter than humans, with a stocky build, coarse body hair, and facial
-    features often likened to bats, including wide-set eyes, ugly, flat nose and
+    features often likened to bats, including wide-set eyes, flat nose and
     pointed ears.
   </p>
 );

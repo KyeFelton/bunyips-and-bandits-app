@@ -7,7 +7,7 @@ import {
   levelAtom,
   imageAtom,
   speciesAtom,
-  ancestryAtom,
+  originAtom,
 } from "./../state/character";
 import { LevelUpModal } from "./LevelUpModal";
 import { EditNameDialog } from "./EditNameDialog";
@@ -19,7 +19,7 @@ export const NameCard = () => {
   const [level, setLevel] = useAtom(levelAtom);
   const image = useAtomValue(imageAtom);
   const species = useAtomValue(speciesAtom);
-  const ancestry = useAtomValue(ancestryAtom);
+  const origin = useAtomValue(originAtom);
 
   const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false);
   const [isEditNameDialogOpen, setIsEditNameDialogOpen] = useState(false);
@@ -68,7 +68,7 @@ export const NameCard = () => {
       </CardHeader>
       <CardContent className="flex-grow min-h-0 flex justify-center">
         <img
-          src={image ?? getSpeciesImage(species, ancestry || "Englorian")}
+          src={image ?? getSpeciesImage(species, origin)}
           alt="character"
           className="w-full max-w-[250px] h-full max-h-[250px] rounded-md object-cover"
         />
