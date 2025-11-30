@@ -6,7 +6,7 @@ import {
   Frightened,
   Hysteria,
 } from "./../models/conditions";
-import { useSetAtom } from "jotai";
+import { useAtom } from "jotai";
 import { conditionsAtom } from "./../state/character";
 import { useEffect } from "react";
 import {
@@ -23,7 +23,7 @@ type Props = {
 };
 
 export const ConditionGainedModal = ({ isOpen, onClose, condition }: Props) => {
-  const setConditions = useSetAtom(conditionsAtom);
+  const [conditions, setConditions] = useAtom(conditionsAtom);
 
   useEffect(() => {
     if (isOpen) {
@@ -35,6 +35,23 @@ export const ConditionGainedModal = ({ isOpen, onClose, condition }: Props) => {
   }, [isOpen, condition]);
 
   const handleClose = () => {
+    const existingCount = conditions.filter(
+      (c) => c.name === condition.name
+    ).length;
+
+    // Check if we can add this condition
+    if (condition.stackable === 0 && existingCount > 0) {
+      // Non-stackable condition already exists, can't add
+      onClose();
+      return;
+    }
+
+    if (condition.stackable > 0 && existingCount >= condition.stackable) {
+      // Already at max stack count
+      onClose();
+      return;
+    }
+
     setConditions((prev) => [...prev, condition]);
     onClose();
   };

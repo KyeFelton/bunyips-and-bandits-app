@@ -36,6 +36,21 @@ export const AddConditionModal = ({ isOpen, onClose }: Props) => {
   const handleAdd = () => {
     const condition = AllConditions.find((c) => c.name === selectedCondition);
     if (condition) {
+      const existingCount = conditions.filter(
+        (c) => c.name === condition.name
+      ).length;
+
+      // Check if we can add this condition
+      if (condition.stackable === 0 && existingCount > 0) {
+        // Non-stackable condition already exists, can't add
+        return;
+      }
+
+      if (condition.stackable > 0 && existingCount >= condition.stackable) {
+        // Already at max stack count
+        return;
+      }
+
       setConditions((prev) => [...prev, condition]);
       setSelectedCondition(null);
       onClose();
@@ -47,8 +62,21 @@ export const AddConditionModal = ({ isOpen, onClose }: Props) => {
     : null;
 
   const availableConditions = AllConditions.filter((condition) => {
-    const existingCondition = conditions.find((c) => c.name === condition.name);
-    return condition.stackable || !existingCondition;
+    const existingCount = conditions.filter(
+      (c) => c.name === condition.name
+    ).length;
+
+    // Non-stackable conditions that already exist should be filtered out
+    if (condition.stackable === 0 && existingCount > 0) {
+      return false;
+    }
+
+    // Stackable conditions at max count should be filtered out
+    if (condition.stackable > 0 && existingCount >= condition.stackable) {
+      return false;
+    }
+
+    return true;
   });
 
   return (

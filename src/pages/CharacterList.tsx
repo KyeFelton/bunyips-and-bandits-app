@@ -47,6 +47,7 @@ import {
   skillLevelUpgradesAtom,
   speciesAtom,
   staminaUpgradesAtom,
+  conditionsAtom,
 } from "../state/character";
 import { getSpeciesImage } from "../utils/speciesImages";
 
@@ -84,6 +85,7 @@ export function CharactersPage() {
   const [skillLevelUpgrades, setSkillLevelUpgrades] = useAtom(
     skillLevelUpgradesAtom
   );
+  const [conditions, setConditions] = useAtom(conditionsAtom);
 
   const focalCharacter = {
     name,
@@ -107,6 +109,7 @@ export function CharactersPage() {
     items,
     money,
     image,
+    conditions,
   };
 
   const setFocalCharacter = (id: string, character: CharacterSaveFile) => {
@@ -132,6 +135,7 @@ export function CharactersPage() {
     setPaths(character.paths);
     setCustomTraits(character.customTraits);
     setSkillLevelUpgrades(character.skillLevelUpgrades);
+    setConditions(character.conditions || []);
   };
 
   const saveCurrentFocalCharacter = () => {

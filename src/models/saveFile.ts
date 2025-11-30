@@ -4,6 +4,7 @@ import { SkillType } from "../enums/SkillType";
 import { ItemDictionary } from "./items";
 import { PathProgression } from "./paths";
 import { Trait } from "./traits";
+import { Condition } from "./conditions";
 
 export type CharacterSaveFile = {
   name: string;
@@ -27,6 +28,7 @@ export type CharacterSaveFile = {
   items: ItemDictionary;
   money: number;
   image: string | undefined;
+  conditions: Condition[];
 };
 
 export const defaultCharacter: CharacterSaveFile = {
@@ -51,6 +53,7 @@ export const defaultCharacter: CharacterSaveFile = {
   items: {},
   money: 0,
   image: undefined,
+  conditions: [],
 };
 
 export type SaveFile = {
