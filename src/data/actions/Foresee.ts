@@ -7,7 +7,7 @@ export const Foresee: Action = {
   name: "Foresee",
   effect: "You foresee your targets next action.",
   skillType: SkillType.Psychic,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 3,
 };

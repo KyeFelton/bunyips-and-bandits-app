@@ -24,8 +24,9 @@ export type Effect = {
   skill?: StatModifier & {
     skillType: SkillType;
   };
-  speed?: StatModifier & {
+  speed?: {
     locomotion: Locomotion;
+    increase: boolean;
   };
   stamina?: StatModifier;
   weapon?: StatModifier & {

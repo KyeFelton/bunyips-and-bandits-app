@@ -8,7 +8,7 @@ export const GuardianAngel: Action = {
   effect:
     "You summon a spirit to protect a creature for one round of combat. Your target takes 5 less damage on the next attack that hits them.",
   skillType: SkillType.Spirit,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 1,
 };

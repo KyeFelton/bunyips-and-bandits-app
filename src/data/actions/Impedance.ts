@@ -9,6 +9,6 @@ export const Impedance: Action = {
     "You focus your attention towards countering the actions of your foes. You and your adjacent allies are are protected with 2 electric armour.",
   skillType: SkillType.Electric,
   range: Range.Self,
-  areaOfEffect: AreaOfEffect.Sphere,
+  areaOfEffect: AreaOfEffect.Near,
   staminaCost: 2,
 };

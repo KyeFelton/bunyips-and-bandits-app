@@ -3,6 +3,7 @@ import { DamageType } from "../../enums/DamageType";
 import { Locomotion } from "../../enums/Locomotion";
 import { SenseType } from "../../enums/SenseType";
 import { SkillType } from "../../enums/SkillType";
+import { SpeedRating } from "../../enums/SpeedRating";
 import { Species } from "../../models/species";
 
 export const Avian: Species = {
@@ -12,10 +13,10 @@ export const Avian: Species = {
   morale: 6,
   stamina: 8,
   speed: {
-    [Locomotion.Walk]: 3,
-    [Locomotion.Swim]: 1,
-    [Locomotion.Climb]: 2,
-    [Locomotion.Fly]: 6,
+    [Locomotion.Walk]: SpeedRating.Moderate,
+    [Locomotion.Swim]: SpeedRating.Slow,
+    [Locomotion.Climb]: SpeedRating.Slow,
+    [Locomotion.Fly]: SpeedRating.Fast,
   },
   senses: {
     [SenseType.Sight]: true,

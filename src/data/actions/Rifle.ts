@@ -8,7 +8,7 @@ export const Rifle: Action = {
   effect:
     "You shoot a small object in your possession to a target at a rapid speed. They target 3 slash damage and 3 force damage.",
   skillType: SkillType.Kinetic,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 3,
 };

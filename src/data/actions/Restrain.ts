@@ -7,7 +7,7 @@ export const Restrain: Action = {
   name: "Restrain",
   effect: "Your target is restrained.",
   skillType: SkillType.Kinetic,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 2,
 };

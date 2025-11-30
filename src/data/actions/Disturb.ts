@@ -7,7 +7,7 @@ export const Disturb: Action = {
   name: "Disturb",
   effect: "You block your target’s ability to psychic sense.",
   skillType: SkillType.Psychic,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 2,
 };

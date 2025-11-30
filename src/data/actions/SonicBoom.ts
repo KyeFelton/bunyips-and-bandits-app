@@ -8,7 +8,7 @@ export const SonicBoom: Action = {
   effect:
     "You blast your targets with a sonic boom. They take 3 force damage and are deafened. If they are medium size or smaller, they are thrown back 5m. If performed inside an enclosed room or chamber, then deal an additional 3 force damage",
   skillType: SkillType.Sonic,
-  range: Range.Nearby,
-  areaOfEffect: AreaOfEffect.Sphere,
+  range: Range.Near,
+  areaOfEffect: AreaOfEffect.Near,
   staminaCost: 5,
 };

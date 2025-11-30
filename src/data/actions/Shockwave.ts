@@ -8,7 +8,7 @@ export const Shockwave: Action = {
   effect:
     "A thunderous shockwave erupts from a point of your choosing. All targets take 2 force damage and become deafened. If performed inside an enclosed room or chamber, then deal an additional 2 force damage.",
   skillType: SkillType.Sonic,
-  range: Range.Nearby,
-  areaOfEffect: AreaOfEffect.Sphere,
+  range: Range.Near,
+  areaOfEffect: AreaOfEffect.Near,
   staminaCost: 3,
 };

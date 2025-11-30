@@ -1,7 +1,6 @@
 export enum AreaOfEffect {
-  SingleTarget = 'Single target',
-  MultipleTargets = 'Muliple targets',
-  Cone = 'Cone',
-  Sphere = 'Sphere',
-  Arena = 'Arena',
+  SingleTarget = "Single target",
+  Close = "Close area",
+  Near = "Near area",
+  Far = "Far area",
 }

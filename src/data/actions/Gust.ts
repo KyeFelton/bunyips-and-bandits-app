@@ -8,7 +8,7 @@ export const Gust: Action = {
   effect:
     "Targets become anosmic and roll an easy strength check. If they fail, they are restrained.",
   skillType: SkillType.Kinetic,
-  range: Range.Nearby,
-  areaOfEffect: AreaOfEffect.Cone,
+  range: Range.Near,
+  areaOfEffect: AreaOfEffect.Near,
   staminaCost: 1,
 };

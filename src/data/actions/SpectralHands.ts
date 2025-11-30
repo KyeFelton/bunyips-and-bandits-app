@@ -8,7 +8,7 @@ export const SpectralHands: Action = {
   effect:
     "Shadowy hands emerge from the ground and grapple your target. They are now restrained.",
   skillType: SkillType.Spirit,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 1,
 };

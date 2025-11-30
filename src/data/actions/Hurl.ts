@@ -8,7 +8,7 @@ export const Hurl: Action = {
   effect:
     "You throw a small object in your possession to a target. They target 1 force damage.",
   skillType: SkillType.Kinetic,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 1,
 };

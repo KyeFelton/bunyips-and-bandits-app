@@ -9,6 +9,6 @@ export const Silence: Action = {
     "You soften all vibrations around you, making you and adjacent allies silent.",
   skillType: SkillType.Sonic,
   range: Range.Self,
-  areaOfEffect: AreaOfEffect.Sphere,
+  areaOfEffect: AreaOfEffect.Near,
   staminaCost: 1,
 };

@@ -8,6 +8,6 @@ export const Interference: Action = {
   effect: "Nearby target’s psychic sense is blocked.",
   skillType: SkillType.Psychic,
   range: Range.Self,
-  areaOfEffect: AreaOfEffect.Arena,
+  areaOfEffect: AreaOfEffect.Far,
   staminaCost: 5,
 };

@@ -35,6 +35,7 @@ import {
 import { cn } from "./../utils/cn";
 import { useCallback, useEffect, useState, useMemo } from "react";
 import { Card } from "./ui/card";
+import { SpeedRating } from "../enums/SpeedRating";
 
 export const FolkStep = () => {
   const [selectedAncestry, setAncestry] = useAtom(ancestryAtom);
@@ -342,7 +343,7 @@ export const FolkStep = () => {
                   <SpeedIcon type={type as Locomotion} size={16} />
                   <div>
                     <div className="text-sm font-medium">{type}</div>
-                    <div>{value ? `${value}m` : "-"}</div>
+                    <div>{value === SpeedRating.None ? "-" : value}</div>
                   </div>
                 </div>
               ))}

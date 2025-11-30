@@ -8,7 +8,7 @@ export const Delude: Action = {
   effect:
     "Your target sees and hears a hallucination that you’ve crafted. They lose 2 morale and are deluded.",
   skillType: SkillType.Psychic,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 5,
 };

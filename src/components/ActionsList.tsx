@@ -4,7 +4,7 @@ import {
   currentStaminaAtom,
   skillRollValuesAtom,
 } from "./../state/character";
-import { User, Users, Triangle, Circle, Scan, HelpCircle } from "lucide-react";
+import { User, Users, Circle, Scan, HelpCircle } from "lucide-react";
 import { AreaOfEffect } from "./../enums/AreaOfEffect";
 import { Action } from "./../models/actions";
 import {
@@ -30,13 +30,11 @@ const AreaIcon = ({ type }: { type: AreaOfEffect }) => {
   switch (type) {
     case AreaOfEffect.SingleTarget:
       return <User className="h-4 w-4" />;
-    case AreaOfEffect.MultipleTargets:
+    case AreaOfEffect.Close:
       return <Users className="h-4 w-4" />;
-    case AreaOfEffect.Cone:
-      return <Triangle className="h-4 w-4" />;
-    case AreaOfEffect.Sphere:
+    case AreaOfEffect.Near:
       return <Circle className="h-4 w-4" />;
-    case AreaOfEffect.Arena:
+    case AreaOfEffect.Far:
       return <Scan className="h-4 w-4" />;
     default:
       return "-";

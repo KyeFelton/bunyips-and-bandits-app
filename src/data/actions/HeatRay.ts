@@ -8,7 +8,7 @@ export const HeatRay: Action = {
   effect:
     "You cast a beam of infrared light at your target. Your target takes 1 fire damage.",
   skillType: SkillType.Radiant,
-  range: Range.Distant,
+  range: Range.Far,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 1,
 };

@@ -8,7 +8,7 @@ export const Aggravate: Action = {
   effect:
     "You bewilder your opponents mind to mistake all nearby creatures as enemies. They lose 2 morale and gain madness.",
   skillType: SkillType.Psychic,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 5,
 };

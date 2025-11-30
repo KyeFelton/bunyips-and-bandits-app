@@ -9,6 +9,6 @@ export const Stench: Action = {
     "A horrendous stench radiates from your body. Nearby targets become anosmic.",
   skillType: SkillType.Toxic,
   range: Range.Self,
-  areaOfEffect: AreaOfEffect.Sphere,
+  areaOfEffect: AreaOfEffect.Near,
   staminaCost: 1,
 };

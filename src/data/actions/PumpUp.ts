@@ -8,6 +8,6 @@ export const PumpUp: Action = {
   effect: "You play a song that empowers your allies.",
   skillType: SkillType.Sonic,
   range: Range.Self,
-  areaOfEffect: AreaOfEffect.Arena,
+  areaOfEffect: AreaOfEffect.Far,
   staminaCost: 1,
 };

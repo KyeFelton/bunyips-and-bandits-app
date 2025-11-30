@@ -8,7 +8,7 @@ export const AirBarrier: Action = {
   effect:
     "You protect an area with rapid winds. Until your next turn, any creature that attempts to enter the area must pass a hard strength check, or be thrown back 5m and take 1 force damage.",
   skillType: SkillType.Kinetic,
-  range: Range.Nearby,
-  areaOfEffect: AreaOfEffect.Sphere,
+  range: Range.Near,
+  areaOfEffect: AreaOfEffect.Near,
   staminaCost: 3,
 };

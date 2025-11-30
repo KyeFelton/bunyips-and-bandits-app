@@ -3,6 +3,7 @@ import { DamageType } from "../../enums/DamageType";
 import { Locomotion } from "../../enums/Locomotion";
 import { SenseType } from "../../enums/SenseType";
 import { SkillType } from "../../enums/SkillType";
+import { SpeedRating } from "../../enums/SpeedRating";
 import { Species } from "../../models/species";
 
 export const Giant: Species = {
@@ -12,10 +13,10 @@ export const Giant: Species = {
   morale: 6,
   stamina: 4,
   speed: {
-    [Locomotion.Walk]: 5,
-    [Locomotion.Swim]: 3,
-    [Locomotion.Climb]: 2,
-    [Locomotion.Fly]: 0,
+    [Locomotion.Walk]: SpeedRating.Fast,
+    [Locomotion.Swim]: SpeedRating.Moderate,
+    [Locomotion.Climb]: SpeedRating.Slow,
+    [Locomotion.Fly]: SpeedRating.None,
   },
   senses: {
     [SenseType.Sight]: true,

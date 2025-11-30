@@ -8,7 +8,7 @@ export const MirrorDome: Action = {
   effect:
     "You manifest an intangible dome that reflects light. Creatures both inside and outside the dome see a mirror. If there is no light source within the dome, then the creatures inside are enveloped in darkness. The illusion lasts until your next turn.",
   skillType: SkillType.Radiant,
-  range: Range.Nearby,
-  areaOfEffect: AreaOfEffect.Arena,
+  range: Range.Near,
+  areaOfEffect: AreaOfEffect.Far,
   staminaCost: 3,
 };

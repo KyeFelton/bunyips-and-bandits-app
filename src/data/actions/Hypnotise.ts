@@ -8,7 +8,7 @@ export const Hypnotise: Action = {
   effect:
     "You overpower the mind of your target and put them in a suggestive state. They are hypnotised by you and will obey your commands.",
   skillType: SkillType.Psychic,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 5,
 };

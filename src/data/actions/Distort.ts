@@ -8,7 +8,7 @@ export const Distort: Action = {
   effect:
     "You manipulate the noises of your target to make them sound different. The illusion lasts until your next turn.",
   skillType: SkillType.Sonic,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 1,
 };

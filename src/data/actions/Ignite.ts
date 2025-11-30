@@ -8,7 +8,7 @@ export const Ignite: Action = {
   effect:
     "A spark of energy emits from your body towards your opponent, causing them to catch fire.",
   skillType: SkillType.Pyro,
-  range: Range.Adjacent,
+  range: Range.Close,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 1,
 };

@@ -8,7 +8,7 @@ export const Hyperbeam: Action = {
   effect:
     "You channel light into a focalised beam that vaporises your target. They take 6 fire damage and catch fire.",
   skillType: SkillType.Radiant,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 4,
 };

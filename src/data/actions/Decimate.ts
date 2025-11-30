@@ -8,7 +8,7 @@ export const Decimate: Action = {
   effect:
     "You focus all your attention to smashing your target's weak spot. Deal your weapon's damage doubled to your opponent.",
   skillType: SkillType.Martial,
-  range: Range.Adjacent,
+  range: Range.Close,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 3,
 };

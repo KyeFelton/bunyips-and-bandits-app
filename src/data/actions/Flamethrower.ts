@@ -9,6 +9,6 @@ export const Flamethrower: Action = {
     "Fire erupts from your body, engulfing your targets in flames. Every target takes 3 fire damage and catches fire.",
   skillType: SkillType.Pyro,
   range: Range.Self,
-  areaOfEffect: AreaOfEffect.Cone,
+  areaOfEffect: AreaOfEffect.Near,
   staminaCost: 4,
 };

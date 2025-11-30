@@ -8,7 +8,7 @@ export const SummonCritter: Action = {
   effect:
     "You call upon the spirits of dead animals that once roamed this land to defend you and your allies. The ghost of a small critter appears and attacks a foe of your choosing. They take 1 slash damage.",
   skillType: SkillType.Spirit,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 1,
 };

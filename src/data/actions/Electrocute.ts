@@ -7,7 +7,7 @@ export const Electrocute: Action = {
   name: "Electrocute",
   effect: "Target takes 8 electric damage and are stunned.",
   skillType: SkillType.Electric,
-  range: Range.Adjacent,
+  range: Range.Close,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 4,
 };

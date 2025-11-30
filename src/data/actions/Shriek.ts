@@ -8,7 +8,7 @@ export const Shriek: Action = {
   effect:
     "You make an earsplitting sound that stuns, deafens and drains 1 morale for targets with hearing sense.",
   skillType: SkillType.Sonic,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 3,
 };

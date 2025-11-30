@@ -8,7 +8,7 @@ export const Douse: Action = {
   effect:
     "You dispel the heat of a nearby fire causing it to smother immediately. The target is no longer burning.",
   skillType: SkillType.Pyro,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 1,
 };

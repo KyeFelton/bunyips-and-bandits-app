@@ -7,7 +7,7 @@ export const Lightning: Action = {
   name: "Lightning",
   effect: "Target takes 10 electric damage and are stunned.",
   skillType: SkillType.Electric,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 6,
 };

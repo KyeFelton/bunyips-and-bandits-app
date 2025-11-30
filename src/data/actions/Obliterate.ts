@@ -8,7 +8,7 @@ export const Obliterate: Action = {
   effect:
     "You tear into the mind of your victim and attack their soul. They lose 10 morale.",
   skillType: SkillType.Psychic,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 8,
 };

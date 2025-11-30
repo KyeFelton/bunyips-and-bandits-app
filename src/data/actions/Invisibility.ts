@@ -8,7 +8,7 @@ export const Invisibility: Action = {
   effect:
     "Light passes through your body and adjacent allies, making you invisible.",
   skillType: SkillType.Radiant,
-  range: Range.Adjacent,
-  areaOfEffect: AreaOfEffect.MultipleTargets,
+  range: Range.Close,
+  areaOfEffect: AreaOfEffect.Close,
   staminaCost: 1,
 };

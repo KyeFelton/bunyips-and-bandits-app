@@ -9,6 +9,6 @@ export const Extinguish: Action = {
     "You dispel the heat of nearby fires causing them to smother immediately. Targets of your choosing are no longer burning.",
   skillType: SkillType.Pyro,
   range: Range.Self,
-  areaOfEffect: AreaOfEffect.Arena,
+  areaOfEffect: AreaOfEffect.Far,
   staminaCost: 2,
 };

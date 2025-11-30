@@ -8,7 +8,7 @@ export const Reveal: Action = {
   effect:
     "You probe the mind of your target. You gain some useful insights about their strengths, weaknesses, desires and/or fears.",
   skillType: SkillType.Psychic,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 3,
 };

@@ -8,7 +8,7 @@ export const BlindingFlash: Action = {
   effect:
     "You emit a bright light that scars the eyes of your target. Targets with sight sense are blinded, stunned and lose 1 morale.",
   skillType: SkillType.Radiant,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 2,
 };

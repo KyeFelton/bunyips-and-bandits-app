@@ -9,6 +9,6 @@ export const HeatWave: Action = {
     "Heat expelled from your body rapidly rises the air temperature around you for the duration of the round. All creatures in the area take 2 fire damage.",
   skillType: SkillType.Pyro,
   range: Range.Self,
-  areaOfEffect: AreaOfEffect.Arena,
+  areaOfEffect: AreaOfEffect.Far,
   staminaCost: 2,
 };

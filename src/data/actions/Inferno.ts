@@ -9,6 +9,6 @@ export const Inferno: Action = {
     "You unleash a sudden explosion of fire that leads devastation in its wake. All targets around you take 5 fire damage, catch fire, and are blinded.",
   skillType: SkillType.Pyro,
   range: Range.Self,
-  areaOfEffect: AreaOfEffect.Sphere,
+  areaOfEffect: AreaOfEffect.Near,
   staminaCost: 8,
 };

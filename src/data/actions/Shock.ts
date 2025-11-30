@@ -7,7 +7,7 @@ export const Shock: Action = {
   name: "Shock",
   effect: "Your target takes 1 electric damage.",
   skillType: SkillType.Electric,
-  range: Range.Adjacent,
+  range: Range.Close,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 1,
 };

@@ -9,6 +9,6 @@ export const FlameTorch: Action = {
     "You produce a small flame that illuminates your surroundings. The torch lasts until your next turn.",
   skillType: SkillType.Pyro,
   range: Range.Self,
-  areaOfEffect: AreaOfEffect.Sphere,
+  areaOfEffect: AreaOfEffect.Near,
   staminaCost: 1,
 };

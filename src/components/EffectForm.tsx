@@ -74,7 +74,7 @@ export const EffectForm = ({ effects, onChange }: Props) => {
         return {
           speed: {
             locomotion: Locomotion.Walk,
-            bonus: 0,
+            increase: true,
           },
         };
     }
@@ -232,7 +232,7 @@ export const EffectForm = ({ effects, onChange }: Props) => {
             {effectType === "speed" && (
               <>
                 <Select
-                  value={effectValue.speed}
+                  value={effectValue.locomotion}
                   onValueChange={(value) =>
                     handleUpdateEffect(index, {
                       speed: {
@@ -253,20 +253,26 @@ export const EffectForm = ({ effects, onChange }: Props) => {
                     ))}
                   </SelectContent>
                 </Select>
-                <Input
-                  type="number"
-                  value={effectValue.bonus || ""}
-                  onChange={(e) =>
+                <Select
+                  value={effectValue.increase ? "increase" : "decrease"}
+                  onValueChange={(value) =>
                     handleUpdateEffect(index, {
                       speed: {
                         ...effectValue,
                         locomotion: effectValue.locomotion,
-                        bonus: parseInt(e.target.value) || 0,
+                        increase: value === "increase",
                       },
                     })
                   }
-                  className="w-20"
-                />
+                >
+                  <SelectTrigger className="w-[150px]">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="increase">Increase</SelectItem>
+                    <SelectItem value="decrease">Decrease</SelectItem>
+                  </SelectContent>
+                </Select>
               </>
             )}
 

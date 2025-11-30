@@ -785,10 +785,10 @@ const content = (
     <H3>Speed</H3>
     <Body>
       <p>
-        Different species have access to different types of locomotion, each at
-        its own speed. Your speed stat determines how far you can move per turn
-        for each type of locomotion available to you. There are four types of
-        locomotion:
+        Different species have access to different types of locomotion, each
+        with its own speed rating. Your speed rating determines which distances
+        you can reach in a single turn and how much stamina it costs. There are
+        four types of locomotion:
       </p>
       <table className="md:mx-4">
         <thead>
@@ -841,9 +841,64 @@ const content = (
         </tbody>
       </table>
       <p>
-        When your physique drops below half of its maximum, your movement speed
-        is halved for all types of locomotion. If your physique drops to 1, your
-        movement speed becomes 0 and you cannot move without assistance.
+        Each type of locomotion has a speed rating: None, Slow, Moderate, Fast,
+        or Extreme. Your rating determines how far you can move and the stamina
+        cost:
+      </p>
+      <table className="md:mx-4 mb-8">
+        <thead>
+          <tr>
+            <th>Rating</th>
+            <th>Close</th>
+            <th>Near</th>
+            <th>Far</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <b>None</b>
+            </td>
+            <td colSpan={3}>Cannot use this type of locomotion</td>
+          </tr>
+          <tr>
+            <td>
+              <b>Slow</b>
+            </td>
+            <td>0 stamina</td>
+            <td>Impossible</td>
+            <td>Impossible</td>
+          </tr>
+          <tr>
+            <td>
+              <b>Moderate</b>
+            </td>
+            <td>0 stamina</td>
+            <td>1 stamina</td>
+            <td>Impossible</td>
+          </tr>
+          <tr>
+            <td>
+              <b>Fast</b>
+            </td>
+            <td>0 stamina</td>
+            <td>0 stamina</td>
+            <td>1 stamina</td>
+          </tr>
+          <tr>
+            <td>
+              <b>Extreme</b>
+            </td>
+            <td>0 stamina</td>
+            <td>0 stamina</td>
+            <td>0 stamina</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        If your physique drops below half, your speed decreases by one rating.
+        For example, if your walking speed is moderate, upon dropping below half
+        physique, your walking speed becomes slow.
       </p>
     </Body>
     <H3>Senses</H3>
@@ -1186,13 +1241,11 @@ const content = (
     <H3>Movement</H3>
     <Body>
       <p>
-        Moving is an action available to all characters. The distance that a
-        character can move in one turn is determined by their speed stat for the
-        locomotion they use (i.e. walk, swim, climb or fly). Standard movement
-        doesn’t use stamina, but the character can optionally expend stamina to
-        increase the distance they move. Using one stamina will double the
-        distance moved, using two stamina will triple the distance moved, and so
-        on. They can expend a maximum of four stamina per movement action.
+        Moving is an action available to all characters. The distance you can
+        reach in one turn is determined by your speed rating for the locomotion
+        type you're using (walk, swim, climb, or fly). Your speed rating
+        determines how much stamina it costs to reach different distances—refer
+        to the stamina cost table in the Speed section above.
       </p>
       <p>
         Some terrain slows movement (mud, dense bush), while others make it
@@ -1203,60 +1256,9 @@ const content = (
     <H3>Range and area of effect</H3>
     <Body>
       <p>
-        Some actions cover an area that can hit multiple targets. All actions
-        have a target point - a location where the caster unleashes their
-        energy. Area of effect describe the size and shape of the area affected
-        by the action:
-      </p>
-      <table className="md:mx-4">
-        <thead>
-          <tr>
-            <th>Area Type</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <b>Single target</b>
-            </td>
-            <td>Affects one creature or object.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>Multiple targets</b>
-            </td>
-            <td>
-              Affects as many creatures or objects in range, as chosen by the
-              caster.
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <b>Cone</b>
-            </td>
-            <td>
-              Extends in a direction from its target point. Length and width up
-              to 5m.
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <b>Sphere</b>
-            </td>
-            <td>Extends from the target point, radius up to 3m.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>Arena</b>
-            </td>
-            <td>Affects all locations in the combat arena.</td>
-          </tr>
-        </tbody>
-      </table>
-      <p>
-        Each action also has a range, which determines how far the target point
-        can be located:
+        Each action has a range, which determines how far the target point can
+        be located. To target a location or creature, it must be within your
+        perception:
       </p>
       <table className="md:mx-4">
         <thead>
@@ -1270,38 +1272,81 @@ const content = (
             <td>
               <b>Self</b>
             </td>
-            <td>The caster is the target point.</td>
+            <td>You are the target</td>
           </tr>
           <tr>
             <td>
-              <b>Adjacent</b>
+              <b>Close</b>
             </td>
-            <td>
-              The caster or a square adjacent to the spell caster is the target
-              point.
-            </td>
+            <td>Within 2m</td>
           </tr>
           <tr>
             <td>
-              <b>Nearby</b>
+              <b>Near</b>
             </td>
-            <td>Anywhere within 10m and the perception of the caster.</td>
+            <td>Within 10m</td>
           </tr>
           <tr>
             <td>
-              <b>Distant</b>
+              <b>Far</b>
             </td>
-            <td>Anywhere within the perception of the caster.</td>
+            <td>Within 50m</td>
           </tr>
         </tbody>
       </table>
       <p>
-        Obstructions can block attacks—if a wall, tree, or sturdy shield is in
-        the way, the GM may rule that your action doesn’t hit as expected.
+        Some actions cover an area that can hit multiple targets. The area of
+        effect determines the maximum size of the area affected by the action:
+      </p>
+      <table className="md:mx-4">
+        <thead>
+          <tr>
+            <th>Area Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <b>Single target</b>
+            </td>
+            <td>Affects one creature or object</td>
+          </tr>
+          <tr>
+            <td>
+              <b>Close area</b>
+            </td>
+            <td>Affects a close-sized area from the target point</td>
+          </tr>
+          <tr>
+            <td>
+              <b>Near area</b>
+            </td>
+            <td>Affects a near-sized area from the target point</td>
+          </tr>
+          <tr>
+            <td>
+              <b>Far area</b>
+            </td>
+            <td>Affects a far-sized area from the target point</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        When using an action with an area of effect, the caster chooses the
+        shape of the affected area (such as a circle, cone, line, or square).
+        The shape must be regular and enclosed. All creatures within that area
+        are affected, including both allies and foes. The size of the shaped
+        area cannot exceed the maximum size specified by the action's area of
+        effect.
       </p>
       <p>
-        Hidden enemies can’t be directly targeted, but they can be hit by area
-        of effects if you’re lucky enough to guess their location.
+        Obstructions can block attacks—if a wall, tree, or sturdy shield is in
+        the way, the GM may rule that your action doesn't hit as expected.
+      </p>
+      <p>
+        Hidden enemies can't be directly targeted, but they can be hit by area
+        of effects if you're lucky enough to guess their location.
       </p>
     </Body>
     <H3>Hitting a target</H3>

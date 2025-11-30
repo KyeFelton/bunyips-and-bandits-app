@@ -8,7 +8,7 @@ export const Vex: Action = {
   effect:
     "You overwhelm your target with telepathic voices that confuse their thoughts. They are stunned.",
   skillType: SkillType.Psychic,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 1,
 };

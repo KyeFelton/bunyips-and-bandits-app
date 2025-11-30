@@ -9,6 +9,6 @@ export const Purge: Action = {
     "You unleash a wave of psychic energy that muddles all nearby foes. Creatures of your choosing are stunned.",
   skillType: SkillType.Psychic,
   range: Range.Self,
-  areaOfEffect: AreaOfEffect.Arena,
+  areaOfEffect: AreaOfEffect.Far,
   staminaCost: 4,
 };

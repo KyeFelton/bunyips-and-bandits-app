@@ -9,6 +9,6 @@ export const Torrent: Action = {
     "Targets become anosmic and roll a hard strength check. If they fail, they are thrown back 5m and take 1 force damage.",
   skillType: SkillType.Kinetic,
   range: Range.Self,
-  areaOfEffect: AreaOfEffect.Cone,
+  areaOfEffect: AreaOfEffect.Near,
   staminaCost: 3,
 };

@@ -8,7 +8,7 @@ export const Resuscitate: Action = {
   effect:
     "You bring back a recently slain ally from death. They gain +1 physique.",
   skillType: SkillType.Healing,
-  range: Range.Adjacent,
+  range: Range.Close,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 4,
 };

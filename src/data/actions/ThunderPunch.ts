@@ -8,7 +8,7 @@ export const ThunderPunch: Action = {
   effect:
     "You punch your foe with devastating force embued with sonic energy, dealing 3 force damage. If they are medium size or smaller, they are knocked back 5m.",
   skillType: SkillType.Martial,
-  range: Range.Adjacent,
+  range: Range.Close,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 3,
 };

@@ -8,7 +8,7 @@ export const Sweep: Action = {
   effect:
     "You attack all targets who are next to you. They take your weapon's damage.",
   skillType: SkillType.Martial,
-  range: Range.Adjacent,
-  areaOfEffect: AreaOfEffect.MultipleTargets,
+  range: Range.Close,
+  areaOfEffect: AreaOfEffect.Close,
   staminaCost: 5,
 };

@@ -8,7 +8,7 @@ export const VenomSting: Action = {
   effect:
     "You stab your target with a venomous barb. They take 1 toxic and 1 slash damage.",
   skillType: SkillType.Toxic,
-  range: Range.Adjacent,
+  range: Range.Close,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 1,
 };

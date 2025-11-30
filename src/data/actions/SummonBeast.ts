@@ -8,7 +8,7 @@ export const SummonBeast: Action = {
   effect:
     "You call upon the spirits of dead animals that once roamed this land to defend you and your allies. The ghost of a large beast appears and attacks a foe of your choosing. They take 4 force damage.",
   skillType: SkillType.Spirit,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 4,
 };

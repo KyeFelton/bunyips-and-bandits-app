@@ -3,6 +3,7 @@ import { DamageType } from "../../enums/DamageType";
 import { Locomotion } from "../../enums/Locomotion";
 import { SenseType } from "../../enums/SenseType";
 import { SkillType } from "../../enums/SkillType";
+import { SpeedRating } from "../../enums/SpeedRating";
 import { Species } from "../../models/species";
 
 export const Goblin: Species = {
@@ -12,10 +13,10 @@ export const Goblin: Species = {
   morale: 6,
   stamina: 8,
   speed: {
-    [Locomotion.Walk]: 4,
-    [Locomotion.Swim]: 2,
-    [Locomotion.Climb]: 3,
-    [Locomotion.Fly]: 0,
+    [Locomotion.Walk]: SpeedRating.Moderate,
+    [Locomotion.Swim]: SpeedRating.Slow,
+    [Locomotion.Climb]: SpeedRating.Moderate,
+    [Locomotion.Fly]: SpeedRating.None,
   },
   senses: {
     [SenseType.Sight]: true,

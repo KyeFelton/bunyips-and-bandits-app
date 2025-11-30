@@ -8,7 +8,7 @@ export const Resurrect: Action = {
   effect:
     "Resurrect a recently slain creature. The creature must have been dead for less than a day, and their body must be healed first.",
   skillType: SkillType.Spirit,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 10,
 };

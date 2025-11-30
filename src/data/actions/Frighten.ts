@@ -8,7 +8,7 @@ export const Frighten: Action = {
   effect:
     "You plague your opponents mind with horrors. Your target loses 2 morale and becomes frightened of you.",
   skillType: SkillType.Psychic,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 5,
 };

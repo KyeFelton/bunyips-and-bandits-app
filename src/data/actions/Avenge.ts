@@ -8,7 +8,7 @@ export const Avenge: Action = {
   effect:
     "You sense and commune with the spirit of a creature recently slain by your opponent. You become empowered. The GM may reveal a useful insight about your opponent. If the opponent is innocent, then this action has no effect.",
   skillType: SkillType.Spirit,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 1,
 };

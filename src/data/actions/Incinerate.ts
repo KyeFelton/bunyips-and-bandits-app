@@ -8,7 +8,7 @@ export const Incinerate: Action = {
   effect:
     "You destroy your target with fire. Your target takes 8 fire damage and catches fire.",
   skillType: SkillType.Pyro,
-  range: Range.Adjacent,
+  range: Range.Close,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 4,
 };

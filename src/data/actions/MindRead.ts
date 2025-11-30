@@ -7,7 +7,7 @@ export const MindRead: Action = {
   name: "Mind read",
   effect: "You read all the thoughts and memories of your target.",
   skillType: SkillType.Psychic,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 8,
 };

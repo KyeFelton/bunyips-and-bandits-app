@@ -8,7 +8,7 @@ export const Torment: Action = {
   effect:
     "You torture the minds of your enemies. Targets of your choosing lose 2 morale.",
   skillType: SkillType.Psychic,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 3,
 };

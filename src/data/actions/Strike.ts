@@ -7,7 +7,7 @@ export const Strike: Action = {
   name: "Strike",
   effect: "You strike your opponent and deal your weapon's damage.",
   skillType: SkillType.Martial,
-  range: Range.Adjacent,
+  range: Range.Close,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 1,
 };

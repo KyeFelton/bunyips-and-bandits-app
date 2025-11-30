@@ -9,6 +9,6 @@ export const Fireworks: Action = {
     "Fireworks shoot out in all directions to create chaos. Targets are stunned.",
   skillType: SkillType.Pyro,
   range: Range.Self,
-  areaOfEffect: AreaOfEffect.Sphere,
+  areaOfEffect: AreaOfEffect.Near,
   staminaCost: 2,
 };

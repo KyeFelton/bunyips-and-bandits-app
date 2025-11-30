@@ -3,6 +3,7 @@ import { DamageType } from "../enums/DamageType";
 import { Locomotion } from "../enums/Locomotion";
 import { SenseType } from "../enums/SenseType";
 import { SkillType } from "../enums/SkillType";
+import { SpeedRating } from "../enums/SpeedRating";
 
 export type Species = {
   name: string;
@@ -11,10 +12,10 @@ export type Species = {
   morale: number;
   stamina: number;
   speed: {
-    [Locomotion.Walk]: number;
-    [Locomotion.Swim]: number;
-    [Locomotion.Climb]: number;
-    [Locomotion.Fly]: number;
+    [Locomotion.Walk]: SpeedRating;
+    [Locomotion.Swim]: SpeedRating;
+    [Locomotion.Climb]: SpeedRating;
+    [Locomotion.Fly]: SpeedRating;
   };
   senses: {
     [SenseType.Sight]: boolean;

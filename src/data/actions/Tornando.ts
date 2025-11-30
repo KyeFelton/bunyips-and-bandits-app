@@ -8,7 +8,7 @@ export const Tornado: Action = {
   effect:
     "You summon a tornado to destroy your foes. They take 6 force damage and become anosmic. They must pass a hard strength check otherwise they are restrained.",
   skillType: SkillType.Kinetic,
-  range: Range.Nearby,
-  areaOfEffect: AreaOfEffect.Sphere,
+  range: Range.Near,
+  areaOfEffect: AreaOfEffect.Near,
   staminaCost: 8,
 };

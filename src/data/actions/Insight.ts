@@ -8,7 +8,7 @@ export const Insight: Action = {
   effect:
     "You inspect the mind of your target to gain a random insight about them.",
   skillType: SkillType.Psychic,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 1,
 };

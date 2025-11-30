@@ -8,7 +8,7 @@ export const Swipe: Action = {
   effect:
     "You attack two targets who are next to each other. They take your weapon's damage.",
   skillType: SkillType.Martial,
-  range: Range.Adjacent,
-  areaOfEffect: AreaOfEffect.MultipleTargets,
+  range: Range.Close,
+  areaOfEffect: AreaOfEffect.Close,
   staminaCost: 2,
 };

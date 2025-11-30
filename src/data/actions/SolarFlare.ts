@@ -8,7 +8,7 @@ export const SolarFlare: Action = {
   effect:
     "Thermal energy radiates from a point you choose. Targets in the affected area take 4 fire damage and catch fire. If they have sight sense, they are also stunned and blinded.",
   skillType: SkillType.Radiant,
-  range: Range.Nearby,
-  areaOfEffect: AreaOfEffect.Sphere,
+  range: Range.Near,
+  areaOfEffect: AreaOfEffect.Near,
   staminaCost: 7,
 };

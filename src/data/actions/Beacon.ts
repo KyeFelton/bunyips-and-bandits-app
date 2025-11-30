@@ -7,7 +7,7 @@ export const Beacon: Action = {
   name: "Beacon",
   effect: "You illuminate your surroundings with light.",
   skillType: SkillType.Radiant,
-  range: Range.Nearby,
-  areaOfEffect: AreaOfEffect.Sphere,
+  range: Range.Near,
+  areaOfEffect: AreaOfEffect.Near,
   staminaCost: 1,
 };

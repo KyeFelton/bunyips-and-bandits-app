@@ -8,7 +8,7 @@ export const Disguise: Action = {
   effect:
     "You manipulate the light reflected off your target to alter their appearance. The illusion lasts until your next turn.",
   skillType: SkillType.Radiant,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 2,
 };

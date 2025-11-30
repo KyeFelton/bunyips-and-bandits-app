@@ -3,6 +3,7 @@ import { DamageType } from "../../enums/DamageType";
 import { Locomotion } from "../../enums/Locomotion";
 import { SenseType } from "../../enums/SenseType";
 import { SkillType } from "../../enums/SkillType";
+import { SpeedRating } from "../../enums/SpeedRating";
 import { Species } from "../../models/species";
 
 export const Floret: Species = {
@@ -12,10 +13,10 @@ export const Floret: Species = {
   morale: 7,
   stamina: 6,
   speed: {
-    [Locomotion.Walk]: 3,
-    [Locomotion.Swim]: 2,
-    [Locomotion.Climb]: 3,
-    [Locomotion.Fly]: 0,
+    [Locomotion.Walk]: SpeedRating.Moderate,
+    [Locomotion.Swim]: SpeedRating.Slow,
+    [Locomotion.Climb]: SpeedRating.Moderate,
+    [Locomotion.Fly]: SpeedRating.None,
   },
   senses: {
     [SenseType.Sight]: true,

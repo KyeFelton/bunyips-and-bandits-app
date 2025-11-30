@@ -8,7 +8,7 @@ export const AcidBomb: Action = {
   effect:
     "You hurl a ball of corrosive acid towards your target. They take 5 toxic damage.",
   skillType: SkillType.Toxic,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 2,
 };

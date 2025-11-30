@@ -7,7 +7,7 @@ export const Taser: Action = {
   name: "Taser",
   effect: "Your target is stunned.",
   skillType: SkillType.Electric,
-  range: Range.Adjacent,
+  range: Range.Close,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 1,
 };

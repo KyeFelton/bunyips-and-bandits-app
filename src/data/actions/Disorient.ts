@@ -8,7 +8,7 @@ export const Disorient: Action = {
   effect:
     "You disrupt your target’s ability to perceive their environment. They lose 2 morale and become disoriented.",
   skillType: SkillType.Psychic,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 5,
 };

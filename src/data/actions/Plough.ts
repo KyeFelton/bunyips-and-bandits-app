@@ -8,7 +8,7 @@ export const Plough: Action = {
   effect:
     "Move up to three times your speed towards your target then deal your weapon's damage. If the creature is equal size to you or smaller, they are stunned.",
   skillType: SkillType.Martial,
-  range: Range.Adjacent,
+  range: Range.Close,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 3,
 };

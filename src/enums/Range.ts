@@ -1,6 +1,6 @@
 export enum Range {
-  Self = 'Self',
-  Adjacent = 'Adjacent',
-  Nearby = 'Nearby',
-  Distant = 'Distant',
+  Self = "Self",
+  Close = "Close",
+  Near = "Near",
+  Far = "Far",
 }

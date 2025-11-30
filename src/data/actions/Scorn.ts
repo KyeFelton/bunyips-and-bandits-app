@@ -7,7 +7,7 @@ export const Scorn: Action = {
   name: "Scorn",
   effect: "Your target loses 1 morale as you scorn their mind.",
   skillType: SkillType.Psychic,
-  range: Range.Nearby,
+  range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 1,
 };

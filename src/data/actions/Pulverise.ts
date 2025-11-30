@@ -8,7 +8,7 @@ export const Pulverise: Action = {
   effect:
     "You pulverise your opponent with powerful shockwaves. Deal 8 force damage.",
   skillType: SkillType.Sonic,
-  range: Range.Adjacent,
+  range: Range.Close,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 4,
 };

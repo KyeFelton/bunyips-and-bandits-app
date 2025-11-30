@@ -8,6 +8,6 @@ export const Discharge: Action = {
   effect: "Targets take 6 electric damage.",
   skillType: SkillType.Electric,
   range: Range.Self,
-  areaOfEffect: AreaOfEffect.Sphere,
+  areaOfEffect: AreaOfEffect.Near,
   staminaCost: 6,
 };

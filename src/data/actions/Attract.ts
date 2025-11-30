@@ -9,6 +9,6 @@ export const Attract: Action = {
     "Your body turns into a super magnet that attracts magnetic metals. Nearby, unsecured metal objects are pulled towards you.",
   skillType: SkillType.Electric,
   range: Range.Self,
-  areaOfEffect: AreaOfEffect.Sphere,
+  areaOfEffect: AreaOfEffect.Near,
   staminaCost: 2,
 };

@@ -8,6 +8,6 @@ export const Zap: Action = {
   effect: "Nearby targets take 3 electric damage.",
   skillType: SkillType.Electric,
   range: Range.Self,
-  areaOfEffect: AreaOfEffect.Sphere,
+  areaOfEffect: AreaOfEffect.Near,
   staminaCost: 2,
 };

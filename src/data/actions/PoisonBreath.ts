@@ -9,6 +9,6 @@ export const PoisonBreath: Action = {
     "You breathe a mist of poisonous gas towards your targets. They take 1 toxic damage.",
   skillType: SkillType.Toxic,
   range: Range.Self,
-  areaOfEffect: AreaOfEffect.Cone,
+  areaOfEffect: AreaOfEffect.Near,
   staminaCost: 2,
 };

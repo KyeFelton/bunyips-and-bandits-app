@@ -10,6 +10,7 @@ import { Trait } from "../models/traits";
 import { getDiceBonusForLevel, getDiceForLevel } from "../utils/dice";
 import { SkillForm } from "../enums/SkillForm";
 import { Locomotion } from "../enums/Locomotion";
+import { SpeedRating } from "../enums/SpeedRating";
 import { Condition } from "../models/conditions";
 
 // Constants
@@ -217,27 +218,60 @@ export const speedAtom = atom((get) => {
   const speciesData = get(speciesDataAtom);
   const effects = get(effectsAtom);
   const physique = get(physiqueAtom);
-  const baseSpeed: Record<Locomotion, number> = {
+  const baseSpeed: Record<Locomotion, SpeedRating> = {
     ...speciesData.speed,
   };
 
+  // Helper function to convert rating to numeric value for calculations
+  const ratingToNumber = (rating: SpeedRating): number => {
+    switch (rating) {
+      case SpeedRating.None:
+        return -1;
+      case SpeedRating.Slow:
+        return 0;
+      case SpeedRating.Moderate:
+        return 1;
+      case SpeedRating.Fast:
+        return 2;
+      case SpeedRating.Extreme:
+        return 3;
+    }
+  };
+
+  // Helper function to convert numeric value back to rating
+  const numberToRating = (value: number): SpeedRating => {
+    if (value < 0) return SpeedRating.None;
+    if (value === 0) return SpeedRating.Slow;
+    if (value === 1) return SpeedRating.Moderate;
+    if (value === 2) return SpeedRating.Fast;
+    return SpeedRating.Extreme;
+  };
+
+  // Apply effects (rating changes)
   effects.forEach((effect) => {
-    if (effect.speed?.locomotion) {
+    if (effect.speed?.locomotion && effect.speed.increase !== undefined) {
       const type = effect.speed.locomotion;
-      baseSpeed[type] += effect.speed.bonus || 0;
-      baseSpeed[type] = Math.ceil(
-        baseSpeed[type] * (effect.speed.multiplier || 1)
-      );
+      const currentValue = ratingToNumber(baseSpeed[type]);
+      const change = effect.speed.increase ? 1 : -1;
+      const newValue = Math.max(-1, Math.min(3, currentValue + change));
+      baseSpeed[type] = numberToRating(newValue);
     }
   });
 
+  // Apply physique penalties
   Object.keys(baseSpeed).forEach((locomotion) => {
-    if (physique.current / physique.max <= 0.5 && physique.current > 1) {
-      baseSpeed[locomotion as Locomotion] = Math.ceil(
-        baseSpeed[locomotion as Locomotion] / 2
+    const currentRating = baseSpeed[locomotion as Locomotion];
+    // Don't apply penalties to None ratings
+    if (currentRating === SpeedRating.None) {
+      return;
+    }
+
+    const currentValue = ratingToNumber(currentRating);
+    if (physique.current / physique.max <= 0.5) {
+      // Reduce speed rating by 1 level
+      baseSpeed[locomotion as Locomotion] = numberToRating(
+        Math.max(0, currentValue - 1)
       );
-    } else if (physique.current <= 1) {
-      baseSpeed[locomotion as Locomotion] = 0;
     }
   });
 
