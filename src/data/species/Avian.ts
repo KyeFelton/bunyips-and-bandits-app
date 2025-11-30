@@ -37,7 +37,6 @@ export const Avian: Species = {
     [SkillType.Strength]: 1,
     [SkillType.Agility]: 4,
     [SkillType.Dexterity]: 2,
-    [SkillType.Throw]: 2,
     [SkillType.Intelligence]: 2,
     [SkillType.Nature]: 2,
     [SkillType.Willpower]: 2,

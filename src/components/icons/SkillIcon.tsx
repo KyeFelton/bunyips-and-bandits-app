@@ -3,7 +3,6 @@ import {
   Route,
   Hand,
   Swords,
-  Crosshair,
   Book,
   Leaf,
   ShipWheel,
@@ -40,8 +39,6 @@ export const SkillIcon = ({ type, className = "h-4 w-4" }: Props) => {
       return <Hand className={className} />;
     case SkillType.Martial:
       return <Swords className={className} />;
-    case SkillType.Throw:
-      return <Crosshair className={className} />;
     case SkillType.Intelligence:
       return <Book className={className} />;
     case SkillType.Nature:

@@ -37,7 +37,6 @@ export const Reptilian: Species = {
     [SkillType.Strength]: 3,
     [SkillType.Agility]: 2,
     [SkillType.Dexterity]: 1,
-    [SkillType.Throw]: 2,
     [SkillType.Intelligence]: 2,
     [SkillType.Nature]: 3,
     [SkillType.Willpower]: 2,

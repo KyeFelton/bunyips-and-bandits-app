@@ -36,7 +36,6 @@ export type Species = {
     [SkillType.Strength]: number;
     [SkillType.Agility]: number;
     [SkillType.Dexterity]: number;
-    [SkillType.Throw]: number;
     [SkillType.Intelligence]: number;
     [SkillType.Nature]: number;
     [SkillType.Willpower]: number;

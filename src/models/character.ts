@@ -53,7 +53,6 @@ export type Character = {
     [SkillType.Agility]: number;
     [SkillType.Dexterity]: number;
     [SkillType.Martial]: number;
-    [SkillType.Throw]: number;
     [SkillType.Intelligence]: number;
     [SkillType.Nature]: number;
     [SkillType.Willpower]: number;

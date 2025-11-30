@@ -37,7 +37,6 @@ export const Goblin: Species = {
     [SkillType.Strength]: 1,
     [SkillType.Agility]: 3,
     [SkillType.Dexterity]: 4,
-    [SkillType.Throw]: 2,
     [SkillType.Intelligence]: 2,
     [SkillType.Nature]: 2,
     [SkillType.Willpower]: 2,

@@ -32,13 +32,6 @@ export const Dexterity: Skill = {
   form: SkillForm.Physical,
 };
 
-export const Throw: Skill = {
-  type: SkillType.Throw,
-  pathSkill: false,
-  description: "Used for hurling objects with precision and distance.",
-  form: SkillForm.Physical,
-};
-
 export const Stealth: Skill = {
   type: SkillType.Stealth,
   pathSkill: false,

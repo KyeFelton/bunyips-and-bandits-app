@@ -262,20 +262,8 @@ const content = (
             </td>
             <td>
               Fine motor control and hand-eye coordination, such as pick
-              pocketing, disabling a trap, or playing an instrument.
+              pocketing, playing an instrument or throwing a knife.
             </td>
-          </tr>
-          <tr>
-            <td className="pr-0">
-              <SkillIcon
-                type={SkillType.Throw}
-                className="inline-block mr-1 pb-1"
-              />
-            </td>
-            <td>
-              <b>Throw</b>
-            </td>
-            <td>Hurling objects with precision and distance.</td>
           </tr>
           <tr>
             <td className="pr-0">
@@ -1358,8 +1346,7 @@ const content = (
       <ul className="list-disc ml-4">
         <li>
           <b>Counter</b>: The defender rolls the same skill check as the
-          attacker to counter the attack. If the action uses a throw skill, then
-          the defender rolls a kinetic check instead to deflect it.
+          attacker to counter the attack.
         </li>
         <li>
           <b>Dodge</b>: If the attack is physical and doesn’t cover a large

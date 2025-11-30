@@ -37,7 +37,6 @@ export const Sprite: Species = {
     [SkillType.Strength]: 0,
     [SkillType.Agility]: 4,
     [SkillType.Dexterity]: 3,
-    [SkillType.Throw]: 1,
     [SkillType.Intelligence]: 3,
     [SkillType.Nature]: 2,
     [SkillType.Willpower]: 3,

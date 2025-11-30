@@ -37,7 +37,6 @@ export const Giant: Species = {
     [SkillType.Strength]: 4,
     [SkillType.Agility]: 1,
     [SkillType.Dexterity]: 1,
-    [SkillType.Throw]: 3,
     [SkillType.Intelligence]: 1,
     [SkillType.Nature]: 2,
     [SkillType.Willpower]: 3,

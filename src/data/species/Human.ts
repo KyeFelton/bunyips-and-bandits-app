@@ -37,7 +37,6 @@ export const Human: Species = {
     [SkillType.Strength]: 2,
     [SkillType.Agility]: 2,
     [SkillType.Dexterity]: 2,
-    [SkillType.Throw]: 3,
     [SkillType.Intelligence]: 2,
     [SkillType.Nature]: 2,
     [SkillType.Willpower]: 2,

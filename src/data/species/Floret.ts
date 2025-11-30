@@ -37,7 +37,6 @@ export const Floret: Species = {
     [SkillType.Strength]: 1,
     [SkillType.Agility]: 2,
     [SkillType.Dexterity]: 3,
-    [SkillType.Throw]: 1,
     [SkillType.Intelligence]: 2,
     [SkillType.Nature]: 4,
     [SkillType.Willpower]: 3,
