@@ -19,12 +19,8 @@ export const Floret: Species = {
     [Locomotion.Fly]: SpeedRating.None,
   },
   senses: {
-    [SenseType.Sight]: true,
-    [SenseType.InfraredSight]: false,
-    [SenseType.Hearing]: true,
-    [SenseType.TremorHearing]: true,
-    [SenseType.Smell]: true,
-    [SenseType.Psychic]: false,
+    primary: [SenseType.Smell],
+    secondary: [SenseType.Sight, SenseType.Hearing, SenseType.TremorHearing],
   },
   armour: {
     [DamageType.Fire]: -1,
@@ -43,8 +39,6 @@ export const Floret: Species = {
     [SkillType.Charisma]: 2,
     [SkillType.Psychology]: 2,
     [SkillType.Stealth]: 3,
-    [SkillType.Sight]: 2,
-    [SkillType.Hearing]: 1,
-    [SkillType.Smell]: 3,
+    [SkillType.Perception]: 3,
   },
 };

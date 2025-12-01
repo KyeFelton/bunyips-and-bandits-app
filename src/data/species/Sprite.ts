@@ -19,12 +19,8 @@ export const Sprite: Species = {
     [Locomotion.Fly]: SpeedRating.Fast,
   },
   senses: {
-    [SenseType.Sight]: true,
-    [SenseType.InfraredSight]: false,
-    [SenseType.Hearing]: true,
-    [SenseType.TremorHearing]: false,
-    [SenseType.Smell]: true,
-    [SenseType.Psychic]: true,
+    primary: [SenseType.Sight, SenseType.Psychic],
+    secondary: [SenseType.Hearing, SenseType.Smell],
   },
   armour: {
     [DamageType.Fire]: 0,
@@ -43,8 +39,6 @@ export const Sprite: Species = {
     [SkillType.Charisma]: 3,
     [SkillType.Psychology]: 2,
     [SkillType.Stealth]: 4,
-    [SkillType.Sight]: 3,
-    [SkillType.Hearing]: 2,
-    [SkillType.Smell]: 1,
+    [SkillType.Perception]: 3,
   },
 };

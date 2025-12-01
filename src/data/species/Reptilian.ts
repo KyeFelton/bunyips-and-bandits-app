@@ -19,12 +19,8 @@ export const Reptilian: Species = {
     [Locomotion.Fly]: SpeedRating.None,
   },
   senses: {
-    [SenseType.Sight]: true,
-    [SenseType.InfraredSight]: true,
-    [SenseType.Hearing]: true,
-    [SenseType.TremorHearing]: false,
-    [SenseType.Smell]: true,
-    [SenseType.Psychic]: false,
+    primary: [SenseType.Sight, SenseType.InfraredSight, SenseType.Smell],
+    secondary: [SenseType.Hearing],
   },
   armour: {
     [DamageType.Fire]: 1,
@@ -43,8 +39,6 @@ export const Reptilian: Species = {
     [SkillType.Charisma]: 1,
     [SkillType.Psychology]: 1,
     [SkillType.Stealth]: 3,
-    [SkillType.Sight]: 3,
-    [SkillType.Hearing]: 2,
-    [SkillType.Smell]: 3,
+    [SkillType.Perception]: 3,
   },
 };

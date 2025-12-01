@@ -19,12 +19,8 @@ export const Avian: Species = {
     [Locomotion.Fly]: SpeedRating.Fast,
   },
   senses: {
-    [SenseType.Sight]: true,
-    [SenseType.InfraredSight]: false,
-    [SenseType.Hearing]: true,
-    [SenseType.TremorHearing]: false,
-    [SenseType.Smell]: false,
-    [SenseType.Psychic]: false,
+    primary: [SenseType.Sight, SenseType.Hearing],
+    secondary: [],
   },
   armour: {
     [DamageType.Fire]: 0,
@@ -43,8 +39,6 @@ export const Avian: Species = {
     [SkillType.Charisma]: 2,
     [SkillType.Psychology]: 2,
     [SkillType.Stealth]: 2,
-    [SkillType.Sight]: 4,
-    [SkillType.Hearing]: 3,
-    [SkillType.Smell]: 1,
+    [SkillType.Perception]: 4,
   },
 };

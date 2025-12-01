@@ -282,18 +282,29 @@ export const speedAtom = atom((get) => {
 export const sensesAtom = atom((get) => {
   const speciesData = get(speciesDataAtom);
   const effects = get(effectsAtom);
-  const senses = { ...speciesData.senses };
 
+  // Start with species senses
+  const primary = [...speciesData.senses.primary];
+  const secondary = [...speciesData.senses.secondary];
+
+  // Apply effects that modify senses
   effects.forEach((effect) => {
     if (effect.sense?.gain) {
-      senses[effect.sense?.gain] = true;
+      // Add to primary if not already in primary or secondary
+      if (!primary.includes(effect.sense.gain) && !secondary.includes(effect.sense.gain)) {
+        primary.push(effect.sense.gain);
+      }
     }
     if (effect.sense?.lose) {
-      senses[effect.sense?.lose] = false;
+      // Remove from both primary and secondary
+      const primaryIndex = primary.indexOf(effect.sense.lose);
+      if (primaryIndex > -1) primary.splice(primaryIndex, 1);
+      const secondaryIndex = secondary.indexOf(effect.sense.lose);
+      if (secondaryIndex > -1) secondary.splice(secondaryIndex, 1);
     }
   });
 
-  return senses;
+  return { primary, secondary };
 });
 
 // Path upgrades

@@ -36,27 +36,20 @@ export const SkillsTable = () => {
     });
   };
 
-  const skillsArray = Object.values(SkillType)
-    .map((skillType) => ({
-      type: skillType,
-      level: skillLevels[skillType],
-      description:
-        Object.values(Skills).find((skill) => skill.type === skillType)
-          ?.description || "",
-      pathSkill:
-        Object.values(Skills).find((skill) => skill.type === skillType)
-          ?.pathSkill || false,
-      form:
-        Object.values(Skills).find((skill) => skill.type === skillType)?.form ||
-        SkillForm.Physical,
-      ...skillRollValues[skillType],
-    }))
-    .sort((a, b) => {
-      if (a.form !== b.form) {
-        return a.form === SkillForm.Physical ? -1 : 1;
-      }
-      return 0;
-    });
+  const skillsArray = Object.values(SkillType).map((skillType) => ({
+    type: skillType,
+    level: skillLevels[skillType],
+    description:
+      Object.values(Skills).find((skill) => skill.type === skillType)
+        ?.description || "",
+    pathSkill:
+      Object.values(Skills).find((skill) => skill.type === skillType)
+        ?.pathSkill || false,
+    form:
+      Object.values(Skills).find((skill) => skill.type === skillType)?.form ||
+      SkillForm.Physical,
+    ...skillRollValues[skillType],
+  }));
 
   return (
     <div className="space-y-4">

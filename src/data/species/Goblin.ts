@@ -19,12 +19,8 @@ export const Goblin: Species = {
     [Locomotion.Fly]: SpeedRating.None,
   },
   senses: {
-    [SenseType.Sight]: true,
-    [SenseType.InfraredSight]: true,
-    [SenseType.Hearing]: true,
-    [SenseType.TremorHearing]: false,
-    [SenseType.Smell]: true,
-    [SenseType.Psychic]: false,
+    primary: [SenseType.Sight, SenseType.InfraredSight, SenseType.Hearing],
+    secondary: [SenseType.Smell],
   },
   armour: {
     [DamageType.Fire]: 0,
@@ -43,8 +39,6 @@ export const Goblin: Species = {
     [SkillType.Charisma]: 1,
     [SkillType.Psychology]: 2,
     [SkillType.Stealth]: 4,
-    [SkillType.Sight]: 3,
-    [SkillType.Hearing]: 3,
-    [SkillType.Smell]: 2,
+    [SkillType.Perception]: 3,
   },
 };

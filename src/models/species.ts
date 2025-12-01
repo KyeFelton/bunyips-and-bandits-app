@@ -18,12 +18,8 @@ export type Species = {
     [Locomotion.Fly]: SpeedRating;
   };
   senses: {
-    [SenseType.Sight]: boolean;
-    [SenseType.InfraredSight]: boolean;
-    [SenseType.Hearing]: boolean;
-    [SenseType.TremorHearing]: boolean;
-    [SenseType.Smell]: boolean;
-    [SenseType.Psychic]: boolean;
+    primary: SenseType[];
+    secondary: SenseType[];
   };
   armour: {
     [DamageType.Fire]: number;
@@ -33,17 +29,15 @@ export type Species = {
     [DamageType.Force]: number;
   };
   skillLevels: {
-    [SkillType.Strength]: number;
     [SkillType.Agility]: number;
+    [SkillType.Charisma]: number;
     [SkillType.Dexterity]: number;
     [SkillType.Intelligence]: number;
     [SkillType.Nature]: number;
-    [SkillType.Willpower]: number;
-    [SkillType.Charisma]: number;
+    [SkillType.Perception]: number;
     [SkillType.Psychology]: number;
     [SkillType.Stealth]: number;
-    [SkillType.Sight]: number;
-    [SkillType.Hearing]: number;
-    [SkillType.Smell]: number;
+    [SkillType.Strength]: number;
+    [SkillType.Willpower]: number;
   };
 };

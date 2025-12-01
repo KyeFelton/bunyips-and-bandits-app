@@ -12,7 +12,7 @@ export const Strength: Skill = {
   type: SkillType.Strength,
   pathSkill: false,
   description:
-    "Used for physical maneuvers requiring strength, such as breaking down a door, carrying a heavy load, escaping a grapple or determining damage from a punch.",
+    "Used for physical maneuvers requiring strength, such as breaking down a door, carrying a heavy load, or escaping a grapple.",
   form: SkillForm.Physical,
 };
 
@@ -28,7 +28,7 @@ export const Dexterity: Skill = {
   type: SkillType.Dexterity,
   pathSkill: false,
   description:
-    "Used for tasks requiring fine motor control and hand-eye coordination, such as pick pocketing, disabling a trap, playing an instrument, or determing whether a punch hits a moving creature.",
+    "Used for tasks requiring fine motor control and hand-eye coordination, such as pick pocketing, playing an instrument, or throwing a knife.",
   form: SkillForm.Physical,
 };
 
@@ -80,27 +80,11 @@ export const Psychology: Skill = {
   form: SkillForm.Mental,
 };
 
-export const Sight: Skill = {
-  type: SkillType.Sight,
+export const Perception: Skill = {
+  type: SkillType.Perception,
   pathSkill: false,
   description:
-    "Used for visual perception tasks, such as spotting hidden objects or seeing in the dark.",
-  form: SkillForm.Mental,
-};
-
-export const Hearing: Skill = {
-  type: SkillType.Hearing,
-  pathSkill: false,
-  description:
-    "Used for auditory perception tasks, such as hearing faint noise or identifying specific sounds in a noisy environment.",
-  form: SkillForm.Mental,
-};
-
-export const Smell: Skill = {
-  type: SkillType.Smell,
-  pathSkill: false,
-  description:
-    "Used for olfactory perception tasks, such as detecting and tracking scents.",
+    "Used for detecting things through your senses, such as spotting hidden objects, hearing faint sounds, or tracking scents.",
   form: SkillForm.Mental,
 };
 

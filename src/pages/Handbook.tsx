@@ -468,45 +468,16 @@ const content = (
           <tr>
             <td className="pr-0">
               <SkillIcon
-                type={SkillType.Sight}
+                type={SkillType.Perception}
                 className="inline-block mr-1 pb-1"
               />
             </td>
             <td>
-              <b>Sight</b>
+              <b>Perception</b>
             </td>
             <td>
-              Visual perception tasks, such as spotting hidden objects or seeing
-              in the dark.
-            </td>
-          </tr>
-          <tr>
-            <td className="pr-0">
-              <SkillIcon
-                type={SkillType.Hearing}
-                className="inline-block mr-1 pb-1"
-              />
-            </td>
-            <td>
-              <b>Hearing</b>
-            </td>
-            <td>
-              Auditory perception tasks, such as hearing a faint noise or
-              identifying specific sounds in a noisy environment.
-            </td>
-          </tr>
-          <tr>
-            <td className="pr-0">
-              <SkillIcon
-                type={SkillType.Smell}
-                className="inline-block mr-1 pb-1"
-              />
-            </td>
-            <td>
-              <b>Smell</b>
-            </td>
-            <td>
-              Olfactory perception tasks, such as detecting and tracking scents.
+              Detecting things through your senses, such as spotting hidden
+              objects, hearing faint sounds, or tracking scents.
             </td>
           </tr>
           <tr>
@@ -874,8 +845,9 @@ const content = (
     <H3>Senses</H3>
     <Body>
       <p>
-        You can’t interact with what you can’t detect—your senses determine how
-        well you perceive the world around you. There are eight primary senses:
+        You can't interact with what you can't detect—your senses determine how
+        well you perceive the world around you. There are six primary sense
+        types:
       </p>
       <table className="md:mx-4">
         <thead>
@@ -965,13 +937,22 @@ const content = (
         </tbody>
       </table>
       <p>
-        Different creatures are capable of different senses, and their level in
-        the corresponding skill determines their adeptness in that sense. The
-        environment also plays a role in determining how well the creature can
-        perceive their surroundings. A dark cave makes things hard to see. A
-        windy night messes with your ability to track scents. The GM decides how
-        effective each sense is depending on the situation and the result of
-        your skill check for that sense.
+        Different creatures have different sensory strengths. Each species has
+        primary and secondary senses. If you're using a primary sense, you roll
+        your Perception check normally. If you're using a secondary sense, you
+        roll at disadvantage. If you lack a sense entirely, you cannot make the
+        check at all.
+      </p>
+      <p>
+        When the GM calls for a Perception check, they specify which sense is
+        being used, such as sight for spotting a hidden creature, hearing for
+        detecting faint footsteps, or smell for tracking a scent trail.
+      </p>
+      <p>
+        The environment also affects perception. A dark cave makes sight checks
+        harder unless you have infrared vision. A windy night makes smell checks
+        nearly impossible. The GM decides how effective each sense is based on
+        the situation and your Perception check result.
       </p>
     </Body>
     <H3>Language</H3>

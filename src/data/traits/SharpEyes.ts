@@ -3,11 +3,11 @@ import { Trait } from "./../../models/traits";
 
 export const SharpEyes: Trait = {
   name: "Sharp eyes",
-  description: "Your sight sharpens, granting you +3 bonus to sight checks.",
+  description: "Your sight sharpens, granting you +3 bonus to Perception checks using sight.",
   effects: [
     {
       skill: {
-        skillType: SkillType.Sight,
+        skillType: SkillType.Perception,
         bonus: 3,
       },
     },

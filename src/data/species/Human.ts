@@ -19,12 +19,8 @@ export const Human: Species = {
     [Locomotion.Fly]: SpeedRating.None,
   },
   senses: {
-    [SenseType.Sight]: true,
-    [SenseType.InfraredSight]: false,
-    [SenseType.Hearing]: true,
-    [SenseType.TremorHearing]: false,
-    [SenseType.Smell]: true,
-    [SenseType.Psychic]: false,
+    primary: [SenseType.Sight],
+    secondary: [SenseType.Hearing, SenseType.Smell],
   },
   armour: {
     [DamageType.Fire]: 0,
@@ -43,8 +39,6 @@ export const Human: Species = {
     [SkillType.Charisma]: 2,
     [SkillType.Psychology]: 2,
     [SkillType.Stealth]: 2,
-    [SkillType.Sight]: 3,
-    [SkillType.Hearing]: 2,
-    [SkillType.Smell]: 1,
+    [SkillType.Perception]: 3,
   },
 };

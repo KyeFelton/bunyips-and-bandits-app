@@ -19,12 +19,8 @@ export const Giant: Species = {
     [Locomotion.Fly]: SpeedRating.None,
   },
   senses: {
-    [SenseType.Sight]: true,
-    [SenseType.InfraredSight]: false,
-    [SenseType.Hearing]: true,
-    [SenseType.TremorHearing]: false,
-    [SenseType.Smell]: true,
-    [SenseType.Psychic]: false,
+    primary: [SenseType.Sight, SenseType.Hearing, SenseType.Smell],
+    secondary: [],
   },
   armour: {
     [DamageType.Fire]: 0,
@@ -43,8 +39,6 @@ export const Giant: Species = {
     [SkillType.Charisma]: 2,
     [SkillType.Psychology]: 1,
     [SkillType.Stealth]: 1,
-    [SkillType.Sight]: 2,
-    [SkillType.Hearing]: 2,
-    [SkillType.Smell]: 2,
+    [SkillType.Perception]: 2,
   },
 };
