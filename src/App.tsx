@@ -66,13 +66,13 @@ function App() {
         />
       </div>
 
-      <NavBar className="h-14 md:h-16" />
+      <NavBar className="h-16" />
 
       {Array.from({ length: 8 }).map((_, i) => (
         <div key={i} className="firefly" />
       ))}
 
-      <div className="h-dvh pb-14 md:pb-0 md:pt-16 overflow-auto">
+      <div className="h-dvh pt-16 overflow-auto">
         <AnimatePresence mode="wait">
           <Routes location={location} key={getMainSection(location.pathname)}>
             <Route path={HomeRoute} element={<Home />} />

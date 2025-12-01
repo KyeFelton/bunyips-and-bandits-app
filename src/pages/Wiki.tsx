@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import Articles from "../wiki";
 import { WikiPage } from "../components/WikiPage";
-import { WikiNavigation } from "../components/WikiNavigation";
 import { WikiHome } from "../components/WikiHome";
 import { WikiCategoryPage } from "../components/WikiCategoryPage";
 import { getWikiCategoryRoute } from "../routes";
@@ -41,10 +40,7 @@ export function Wiki() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="flex sm:max-w-5xl sm:mx-auto min-h-full">
-        <WikiNavigation />
-        <main className="w-full">{content}</main>
-      </div>
+      <main className="w-full max-w-5xl mx-auto">{content}</main>
     </motion.div>
   );
 }

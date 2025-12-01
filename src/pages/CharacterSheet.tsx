@@ -18,26 +18,12 @@ import { SkillsTable } from "../components/SkillsTable";
 import { TraitsList } from "../components/TraitsList";
 import { ActionsList } from "../components/ActionsList";
 import { useState } from "react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../components/ui/select";
+import { CharacterSheetGridNav } from "../components/CharacterSheetGridNav";
+import { LayoutGrid } from "lucide-react";
 
 export function CharacterSheet() {
   const [activeSection, setActiveSection] = useState("character");
-
-  // Define sections for mobile navigation
-  const sections = [
-    { value: "character", label: "Character" },
-    { value: "stats", label: "Stats" },
-    { value: "skills", label: "Skills" },
-    { value: "traits", label: "Traits" },
-    { value: "actions", label: "Actions" },
-    { value: "items", label: "Items" },
-  ];
+  const [gridNavOpen, setGridNavOpen] = useState(false);
 
   return (
     <motion.div
@@ -48,24 +34,25 @@ export function CharacterSheet() {
       transition={{ duration: 0.3 }}
     >
       <div className="relative flex justify-center h-full">
-        {/* Mobile Navigation */}
-        <div className="md:hidden w-full fixed top-0 z-10 p-4 bg-black">
-          <Select value={activeSection} onValueChange={setActiveSection}>
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Select section" />
-            </SelectTrigger>
-            <SelectContent>
-              {sections.map((section) => (
-                <SelectItem key={section.value} value={section.value}>
-                  {section.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+        {/* Mobile Grid Navigation Button */}
+        <button
+          onClick={() => setGridNavOpen(true)}
+          className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-20 bg-accent-medium hover:bg-accent-medium/80 text-black rounded-full p-4 shadow-lg transition-all"
+        >
+          <LayoutGrid className="h-6 w-6" />
+          <span className="sr-only">Open navigation</span>
+        </button>
+
+        {/* Mobile Grid Navigation Overlay */}
+        <CharacterSheetGridNav
+          activeSection={activeSection}
+          setActiveSection={setActiveSection}
+          isOpen={gridNavOpen}
+          onClose={() => setGridNavOpen(false)}
+        />
 
         {/* Mobile Content */}
-        <main className="md:hidden py-20 px-4 w-full h-full overflow-auto">
+        <main className="md:hidden py-4 px-4 pb-24 w-full h-full overflow-auto">
           {activeSection === "character" && (
             <div className="flex flex-col gap-4">
               <NameCard />
