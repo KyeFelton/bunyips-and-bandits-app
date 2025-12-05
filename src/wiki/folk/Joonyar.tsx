@@ -5,7 +5,7 @@ import { Body } from "../../components/WikiPage";
 
 const summary = (
   <p>
-    The Joonyar are a sprite folk that live in the underground regions of
+    The Joonyar are a delver folk that live in the underground regions of
     Downunda. They are small humanoids with skin in shades of eucalyptus, brown
     hair, and glowing orange eyes that provide illumination in low-light
     environments.
@@ -43,7 +43,7 @@ export const Joonyar: WikiContent = {
   category: WikiCategory.Folk,
   title: "Joonyar",
   blurb:
-    "The Joonyar are a sprite folk that live in the underground regions of Downunda.",
+    "The Joonyar are a delver folk that live in the underground regions of Downunda.",
   summary,
   main: content,
 };

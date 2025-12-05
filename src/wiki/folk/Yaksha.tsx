@@ -5,7 +5,7 @@ import { Body } from "../../components/WikiPage";
 
 const summary = (
   <p>
-    The Yaksha are sprites native to Rajakha. They are small in stature and
+    The Yaksha are delvers native to Rajakha. They are small in stature and
     characterised by their turquoise-hued skin, muscular features, pointed
     fangs, and piercing eyes.
   </p>
@@ -42,7 +42,7 @@ export const Yaksha: WikiContent = {
   id: WikiId.Yaksha,
   category: WikiCategory.Folk,
   title: "Yaksha",
-  blurb: "The Yaksha are sprites native to Rajakha.",
+  blurb: "The Yaksha are delvers native to Rajakha.",
   summary,
   main: content,
 };

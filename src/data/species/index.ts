@@ -3,13 +3,13 @@ import { Giant } from "./Giant";
 import { Goblin } from "./Goblin";
 import { Human } from "./Human";
 import { Reptilian } from "./Reptilian";
-import { Sprite } from "./Sprite";
+import { Delver } from "./Delver";
 
 export const AllSpecies = {
   Human,
   Reptilian,
-  Sprite,
   Avian,
+  Delver,
   Giant,
   Goblin,
 };

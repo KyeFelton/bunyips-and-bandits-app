@@ -59,10 +59,10 @@ const FOLK_DESCRIPTIONS: Record<
       description:
         "Drop Bears are a koala-like, goblin folk native to the forests of Downunda. They possess stocky, hunched bodies, with strong arms suited for climbing and wrestling.",
     },
-    Sprite: {
+    Delver: {
       name: "Joonyar",
       description:
-        "The Joonyar are a sprite folk that live in the underground regions of Downunda. They are small humanoids with skin in shades of eucalyptus, brown hair, and glowing orange eyes that provide illumination in low-light environments.",
+        "The Joonyar are a delver folk that live in the underground regions of Downunda. They are small humanoids with skin in shades of eucalyptus, brown hair, and glowing orange eyes that provide illumination in low-light environments.",
     },
     Human: {
       name: "Dharrigal",
@@ -86,10 +86,10 @@ const FOLK_DESCRIPTIONS: Record<
       description:
         "Hobs are a goblin folk with ancestral ties to Engloria. They are slightly shorter than humans, with a stocky build, coarse body hair, and facial features often likened to bats, including wide-set eyes, flat nose and pointed ears.",
     },
-    Sprite: {
+    Delver: {
       name: "Gnome",
       description:
-        "Gnomes are sprites originating from the underground regions of Engloria. They are small in stature and are recognised by their sky-blue skin, white hair, and glowing yellow eyes.",
+        "Gnomes are delvers originating from the underground regions of Engloria. They are small in stature and are recognised by their sky-blue skin, white hair, and glowing yellow eyes.",
     },
     Human: {
       name: "Englorian",
@@ -150,39 +150,8 @@ export const FolkStep = () => {
       setCurrentMind(newSpeciesData.mind);
       setCurrentStamina(newSpeciesData.stamina);
       setSpecies(value);
-
-      // Check if current origin is still valid for the new species
-      if (selectedOrigin) {
-        const originData =
-          AllOrigins[selectedOrigin as keyof typeof AllOrigins];
-        if (!originData.species.includes(value)) {
-          // Current origin not available for new species
-          // Find first available origin for this species
-          const firstAvailableOrigin = Object.entries(AllOrigins).find(
-            ([, origin]) => origin.species.includes(value)
-          );
-          if (firstAvailableOrigin) {
-            setOrigin(firstAvailableOrigin[0]);
-          }
-        }
-      } else {
-        // No origin selected, auto-select first available
-        const firstAvailableOrigin = Object.entries(AllOrigins).find(
-          ([, origin]) => origin.species.includes(value)
-        );
-        if (firstAvailableOrigin) {
-          setOrigin(firstAvailableOrigin[0]);
-        }
-      }
     },
-    [
-      setCurrentMind,
-      setCurrentBody,
-      setCurrentStamina,
-      setSpecies,
-      selectedOrigin,
-      setOrigin,
-    ]
+    [setCurrentMind, setCurrentBody, setCurrentStamina, setSpecies]
   );
 
   const onSelect = useCallback(
@@ -226,18 +195,23 @@ export const FolkStep = () => {
       <div className="">
         <h3 className="font-semibold mb-4 text-lg">Origin</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {availableOrigins.map((originName) => {
-            const origin = AllOrigins[originName as keyof typeof AllOrigins];
+          {Object.values(AllOrigins).map((origin) => {
+            const isAvailable = availableOrigins.includes(origin.name);
             return (
               <Card
-                key={originName}
+                key={origin.name}
                 className={cn(
-                  "p-4 cursor-pointer transition-all duration-200 hover:shadow-lg border-2",
-                  selectedOrigin === originName
+                  "p-4 transition-all duration-200 border-2",
+                  isAvailable
+                    ? "cursor-pointer hover:shadow-lg"
+                    : "cursor-not-allowed opacity-50",
+                  selectedOrigin === origin.name
                     ? "border-primary bg-primary/5"
-                    : "border-muted hover:border-primary/50"
+                    : isAvailable
+                    ? "border-muted hover:border-primary/50"
+                    : "border-muted"
                 )}
-                onClick={() => handleOriginChange(originName)}
+                onClick={() => isAvailable && handleOriginChange(origin.name)}
               >
                 <div className="space-y-2">
                   <h4 className="font-semibold text-lg">{origin.name}</h4>
@@ -414,27 +388,6 @@ export const FolkStep = () => {
             </div>
           </div>
 
-          {/* Armour */}
-          <div className="space-y-4 pt-6 border-t border-muted-foreground/20">
-            <h3 className="font-semibold mb-4 flex items-center gap-2">
-              <Shield className="h-5 w-5" />
-              Armour
-            </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4">
-              {Object.entries(speciesData.armour).map(([type, value]) => (
-                <div key={type} className="flex items-center gap-2">
-                  <ArmourIcon type={type as DamageType} size={16} />
-                  <div>
-                    <div className="text-sm font-medium">{type}</div>
-                    <div>
-                      {value > 0 ? `+${value}` : value < 0 ? value : "-"}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
           {/* Skills */}
           <div className="space-y-4 pt-6 border-t border-muted-foreground/20">
             <h3 className="font-semibold mb-4 flex items-center gap-2">
@@ -455,6 +408,27 @@ export const FolkStep = () => {
               ))}
             </div>
           </div>
+
+          {/* Armour */}
+          {/* <div className="space-y-4 pt-6 border-t border-muted-foreground/20">
+            <h3 className="font-semibold mb-4 flex items-center gap-2">
+              <Shield className="h-5 w-5" />
+              Armour
+            </h3>
+            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4">
+              {Object.entries(speciesData.armour).map(([type, value]) => (
+                <div key={type} className="flex items-center gap-2">
+                  <ArmourIcon type={type as DamageType} size={16} />
+                  <div>
+                    <div className="text-sm font-medium">{type}</div>
+                    <div>
+                      {value > 0 ? `+${value}` : value < 0 ? value : "-"}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div> */}
         </div>
       )}
     </div>

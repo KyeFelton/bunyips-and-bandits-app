@@ -1774,7 +1774,7 @@ const content = (
             <td>
               <b>Common Tongue</b>
             </td>
-            <td>Human, Goblin and Sprite</td>
+            <td>Human, Goblin and Delver</td>
             <td>
               Conventional spoken tongues using familiar vocal patterns of tone,
               consonant, and vowel.

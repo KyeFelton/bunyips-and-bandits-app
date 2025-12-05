@@ -5,7 +5,7 @@ import { Body } from "../../components/WikiPage";
 
 const summary = (
   <p>
-    Gnomes are sprites originating from the underground regions of Engloria.
+    Gnomes are delvers originating from the underground regions of Engloria.
     They are small in stature and are recognised by their sky-blue skin, white
     hair, and glowing yellow eyes.
   </p>
@@ -40,7 +40,7 @@ export const Gnome: WikiContent = {
   category: WikiCategory.Folk,
   title: "Gnome",
   blurb:
-    "Gnomes are sprites originating from the underground regions of Engloria.",
+    "Gnomes are delvers originating from the underground regions of Engloria.",
   summary,
   main: content,
 };
