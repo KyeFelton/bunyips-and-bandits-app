@@ -19,7 +19,7 @@ export function WikiPage({
   children,
 }: Props) {
   return (
-    <div className="py-6 px-4 md:py-8 md:px-12 min-h-full space-y-6 md:space-y-8 bg-background">
+    <div className="py-6 px-4 md:py-8 md:px-12 min-h-full space-y-6 bg-background">
       {backTo && (
         <Link to={backTo.path} className="inline-block">
           <Button variant="ghost" size="sm">

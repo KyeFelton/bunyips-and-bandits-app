@@ -1220,8 +1220,8 @@ const content = (
     <H3>Range and area of effect</H3>
     <Body>
       <p>
-        Each action has a range, which determines how far the target point can
-        be located. To target a location or creature, it must be within your
+        An action may specify a range, which determines how far the target point
+        can be located. To target a location or creature, it must be within your
         perception:
       </p>
       <table className="md:mx-4">
@@ -1232,12 +1232,6 @@ const content = (
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <b>Self</b>
-            </td>
-            <td>You are the target</td>
-          </tr>
           <tr>
             <td>
               <b>Close</b>
@@ -1259,8 +1253,9 @@ const content = (
         </tbody>
       </table>
       <p>
-        Some actions cover an area that can hit multiple targets. The area of
-        effect determines the maximum size of the area affected by the action:
+        Some actions can also hit multiple targets. An action's area of effect
+        determines the maximum size of the area that targets can be affected by
+        the action:
       </p>
       <table className="md:mx-4">
         <thead>
@@ -1270,12 +1265,6 @@ const content = (
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <b>Single target</b>
-            </td>
-            <td>Affects one creature or object</td>
-          </tr>
           <tr>
             <td>
               <b>Close area</b>

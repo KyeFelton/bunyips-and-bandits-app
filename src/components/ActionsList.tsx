@@ -4,8 +4,9 @@ import {
   currentStaminaAtom,
   skillRollValuesAtom,
 } from "./../state/character";
-import { User, Users, Circle, Scan, HelpCircle } from "lucide-react";
+import { Users, Circle, Scan, HelpCircle } from "lucide-react";
 import { AreaOfEffect } from "./../enums/AreaOfEffect";
+import { Range } from "./../enums/Range";
 import { Action } from "./../models/actions";
 import { Brawl } from "./../data/actions/Brawl";
 import { Dash } from "./../data/actions/Dash";
@@ -31,7 +32,7 @@ import {
 const AreaIcon = ({ type }: { type: AreaOfEffect }) => {
   switch (type) {
     case AreaOfEffect.SingleTarget:
-      return <User className="h-4 w-4" />;
+      return <span className="text-muted-foreground">-</span>;
     case AreaOfEffect.Close:
       return <Users className="h-4 w-4" />;
     case AreaOfEffect.Near:
@@ -39,7 +40,7 @@ const AreaIcon = ({ type }: { type: AreaOfEffect }) => {
     case AreaOfEffect.Far:
       return <Scan className="h-4 w-4" />;
     default:
-      return "-";
+      return <span className="text-muted-foreground">-</span>;
   }
 };
 
@@ -141,7 +142,9 @@ export const ActionsList = () => {
                   )}
                 </div>
               </TableCell>
-              <TableCell>{action.range}</TableCell>
+              <TableCell>
+                {action.range === Range.Self ? "-" : action.range}
+              </TableCell>
               <TableCell className="text-center">
                 <div className="flex justify-center">
                   <Tooltip>
