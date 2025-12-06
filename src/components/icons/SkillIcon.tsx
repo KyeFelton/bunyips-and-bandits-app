@@ -7,9 +7,9 @@ import {
   Leaf,
   ShipWheel,
   Speech,
-  BrainCog,
+  Brain,
   VenetianMask,
-  Eye,
+  Radio,
   Flame,
   Zap,
   Wind,
@@ -46,11 +46,11 @@ export const SkillIcon = ({ type, className = "h-4 w-4" }: Props) => {
     case SkillType.Charisma:
       return <Speech className={className} />;
     case SkillType.Psychology:
-      return <BrainCog className={className} />;
+      return <Brain className={className} />;
     case SkillType.Stealth:
       return <VenetianMask className={className} />;
     case SkillType.Perception:
-      return <Eye className={className} />;
+      return <Radio className={className} />;
     case SkillType.Pyro:
       return <Flame className={className} />;
     case SkillType.Electric:

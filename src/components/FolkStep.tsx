@@ -11,12 +11,13 @@ import {
 } from "./../state/character";
 import { AllSpecies } from "./../data/species";
 import { AllOrigins } from "../data/origins";
-import { Heart, ChartNoAxesColumn, Shield, ArrowLeftRight } from "lucide-react";
+import { Heart, ChartNoAxesColumn, ArrowLeftRight, Radio } from "lucide-react";
 import { SkillIcon } from "./icons/SkillIcon";
 import { Locomotion } from "./../enums/Locomotion";
-import { DamageType } from "./../enums/DamageType";
 import { SpeedIcon } from "./icons/SpeedIcon";
-import { ArmourIcon } from "./icons/ArmourIcon";
+import { SenseIcon } from "./icons/SenseIcon";
+import { SenseType } from "./../enums/SenseType";
+import { SkillType } from "./../enums/SkillType";
 import { getSpeciesImage } from "./../utils/speciesImages";
 import { SpeciesHealthBar } from "./SpeciesHealthBar";
 import {
@@ -381,7 +382,40 @@ export const FolkStep = () => {
                   <SpeedIcon type={type as Locomotion} size={16} />
                   <div>
                     <div className="text-sm font-medium">{type}</div>
-                    <div>{value === SpeedRating.None ? "-" : value}</div>
+                    <div>
+                      {value === SpeedRating.None ? "-" : String(value)}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Senses */}
+          <div className="space-y-4 pt-6 border-t border-muted-foreground/20">
+            <h3 className="font-semibold mb-4 flex items-center gap-2">
+              <Radio className="h-5 w-5" />
+              Senses
+            </h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+              {[
+                { type: SenseType.Sight, label: "Sight" },
+                { type: SenseType.InfraredSight, label: "Infrared" },
+                { type: SenseType.Hearing, label: "Hearing" },
+                { type: SenseType.TremorHearing, label: "Tremor" },
+                { type: SenseType.Smell, label: "Smell" },
+              ].map(({ type, label }) => (
+                <div key={type} className="flex items-center gap-4">
+                  <SenseIcon type={type} />
+                  <div>
+                    <div className="text-sm font-medium">{label}</div>
+                    <div>
+                      {speciesData.senses.primary.includes(type)
+                        ? "Primary"
+                        : speciesData.senses.secondary.includes(type)
+                        ? "Secondary"
+                        : "-"}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -397,12 +431,10 @@ export const FolkStep = () => {
             <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4">
               {Object.entries(speciesData.skillLevels).map(([skill, value]) => (
                 <div key={skill} className="flex items-center gap-2">
-                  <SkillIcon
-                    type={skill as keyof typeof speciesData.skillLevels}
-                  />
+                  <SkillIcon type={skill as SkillType} />
                   <div>
                     <div className="text-sm font-medium">{skill}</div>
-                    <div>{value === 0 ? "-" : value}</div>
+                    <div>{value === 0 ? "-" : String(value)}</div>
                   </div>
                 </div>
               ))}

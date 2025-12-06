@@ -3,13 +3,11 @@ import { Body, H2, H3, TornPaper, WikiPage } from "../components/WikiPage";
 import { ArmourIcon } from "../components/icons/ArmourIcon";
 import { SkillIcon } from "../components/icons/SkillIcon";
 import { SpeedIcon } from "../components/icons/SpeedIcon";
+import { SenseIcon } from "../components/icons/SenseIcon";
 import { DamageType } from "../enums/DamageType";
 import { SkillType } from "../enums/SkillType";
 import { Locomotion } from "../enums/Locomotion";
-import { SightIcon } from "../components/icons/SenseIcon";
-import { HearingIcon } from "../components/icons/SenseIcon";
-import { SmellIcon } from "../components/icons/SenseIcon";
-import { PsychicSenseIcon } from "../components/icons/SenseIcon";
+import { SenseType } from "../enums/SenseType";
 import summonerImage from "../images/handbook/summoner.png";
 import bunyipImage from "../images/handbook/bunyip.png";
 import dropbearImage from "../images/handbook/dropbear.png";
@@ -860,11 +858,7 @@ const content = (
         <tbody>
           <tr>
             <td className="pr-0">
-              <SightIcon
-                standard={true}
-                infrared={false}
-                className="inline-block mt-1"
-              />
+              <SenseIcon type={SenseType.Sight} className="inline-block mt-1" />
             </td>
             <td>
               <b>Standard sight</b>
@@ -874,9 +868,8 @@ const content = (
           </tr>
           <tr>
             <td className="pr-0">
-              <SightIcon
-                standard={false}
-                infrared={true}
+              <SenseIcon
+                type={SenseType.InfraredSight}
                 className="inline-block mt-1"
               />
             </td>
@@ -888,9 +881,8 @@ const content = (
           </tr>
           <tr>
             <td className="pr-0">
-              <HearingIcon
-                standard={true}
-                tremor={false}
+              <SenseIcon
+                type={SenseType.Hearing}
                 className="inline-block mt-1"
               />
             </td>
@@ -902,9 +894,8 @@ const content = (
           </tr>
           <tr>
             <td className="pr-0">
-              <HearingIcon
-                standard={false}
-                tremor={true}
+              <SenseIcon
+                type={SenseType.TremorHearing}
                 className="inline-block mt-1"
               />
             </td>
@@ -916,7 +907,10 @@ const content = (
           </tr>
           <tr>
             <td className="pr-0">
-              <SmellIcon className="inline-block mr-1 pb-1" />{" "}
+              <SenseIcon
+                type={SenseType.Smell}
+                className="inline-block mr-1 pb-1 h-5"
+              />
             </td>
             <td>
               <b>Smell</b>
@@ -926,7 +920,10 @@ const content = (
           </tr>
           <tr>
             <td className="pr-0">
-              <PsychicSenseIcon className="inline-block mr-1 pb-1" />{" "}
+              <SenseIcon
+                type={SenseType.Psychic}
+                className="inline-block mr-1 pb-1 h-5"
+              />
             </td>
             <td>
               <b>Psychic sense</b>

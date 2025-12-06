@@ -8,70 +8,28 @@ import {
   TooltipTrigger,
 } from "./ui/tooltip";
 import { sensesAtom } from "./../state/character";
-import {
-  HearingIcon,
-  PsychicSenseIcon,
-  SightIcon,
-  SmellIcon,
-} from "./icons/SenseIcon";
+import { SenseIcon } from "./icons/SenseIcon";
 
-const getSenseTooltipText = (
-  senseType: SenseType,
-  isPrimary: boolean,
-  allSenses: SenseType[]
-) => {
-  // Build sense name with variants
-  let senseName = "";
+const getSenseTooltipText = (senseType: SenseType, isPrimary: boolean) => {
+  const senseNameMap: Record<SenseType, string> = {
+    [SenseType.Sight]: "Standard sight",
+    [SenseType.InfraredSight]: "Infrared sight",
+    [SenseType.Hearing]: "Standard hearing",
+    [SenseType.TremorHearing]: "Tremor hearing",
+    [SenseType.Smell]: "Smell",
+    [SenseType.Psychic]: "Psychic sense",
+  };
 
-  if (senseType === SenseType.Sight || senseType === SenseType.InfraredSight) {
-    const hasSight = allSenses.includes(SenseType.Sight);
-    const hasInfrared = allSenses.includes(SenseType.InfraredSight);
-    if (hasSight && hasInfrared) {
-      senseName = "Standard & infrared sight";
-    } else if (hasInfrared) {
-      senseName = "Infrared sight";
-    } else {
-      senseName = "Sight";
-    }
-  } else if (
-    senseType === SenseType.Hearing ||
-    senseType === SenseType.TremorHearing
-  ) {
-    const hasHearing = allSenses.includes(SenseType.Hearing);
-    const hasTremor = allSenses.includes(SenseType.TremorHearing);
-    if (hasHearing && hasTremor) {
-      senseName = "Airborne & tremor hearing";
-    } else if (hasTremor) {
-      senseName = "Tremor hearing";
-    } else {
-      senseName = "Hearing";
-    }
-  } else if (senseType === SenseType.Smell) {
-    senseName = "Smell";
-  } else if (senseType === SenseType.Psychic) {
-    senseName = "Psychic sense";
-  }
-
-  const isPlural = senseName.includes("&");
-  const verb = isPlural ? "are" : "is";
-  const article = isPrimary
-    ? isPlural
-      ? "primary senses"
-      : "a primary sense"
-    : isPlural
-    ? "secondary senses"
-    : "a secondary sense";
   const actionText = isPrimary
-    ? `You can roll normally for Perception checks involving this sense.`
-    : `You must roll with disadvantage for Perception checks involving this sense.`;
+    ? `is a primary sense. You can roll normally for Perception checks involving this sense.`
+    : `is a secondary sense. You must roll with disadvantage for Perception checks involving this sense.`;
 
-  return `${senseName} ${verb} ${article}. ${actionText}`;
+  return `${senseNameMap[senseType]} ${actionText}`;
 };
 
 export const SensesCard = () => {
   const senses = useAtomValue(sensesAtom);
   const { primary: primarySenses, secondary: secondarySenses } = senses;
-  const allSenses = [...primarySenses, ...secondarySenses];
 
   return (
     <Card>
@@ -81,26 +39,12 @@ export const SensesCard = () => {
       <CardContent>
         <TooltipProvider>
           <div className="flex items-center gap-3">
-            <div className="flex gap-2">
-              {primarySenses.map((senseType) => (
+            <div className="flex gap-3">
+              {primarySenses.map((senseType: SenseType) => (
                 <Tooltip key={senseType}>
                   <TooltipTrigger asChild>
                     <div className="text-muted-foreground hover:text-foreground transition-colors cursor-default">
-                      {senseType === SenseType.Sight ? (
-                        <SightIcon
-                          standard={allSenses.includes(SenseType.Sight)}
-                          infrared={allSenses.includes(SenseType.InfraredSight)}
-                        />
-                      ) : senseType === SenseType.Hearing ? (
-                        <HearingIcon
-                          standard={allSenses.includes(SenseType.Hearing)}
-                          tremor={allSenses.includes(SenseType.TremorHearing)}
-                        />
-                      ) : senseType === SenseType.Smell ? (
-                        <SmellIcon />
-                      ) : senseType === SenseType.Psychic ? (
-                        <PsychicSenseIcon />
-                      ) : null}
+                      <SenseIcon type={senseType} className="w-6" />
                     </div>
                   </TooltipTrigger>
                   <TooltipContent
@@ -109,7 +53,7 @@ export const SensesCard = () => {
                     className="max-w-[250px]"
                   >
                     <p className="text-xs">
-                      {getSenseTooltipText(senseType, true, allSenses)}
+                      {getSenseTooltipText(senseType, true)}
                     </p>
                   </TooltipContent>
                 </Tooltip>
@@ -119,29 +63,11 @@ export const SensesCard = () => {
               <>
                 <div className="h-6 w-px bg-border" />
                 <div className="flex gap-2 opacity-50">
-                  {secondarySenses.map((senseType) => (
+                  {secondarySenses.map((senseType: SenseType) => (
                     <Tooltip key={senseType}>
                       <TooltipTrigger asChild>
                         <div className="text-muted-foreground hover:text-foreground transition-colors cursor-default">
-                          {senseType === SenseType.Sight ? (
-                            <SightIcon
-                              standard={allSenses.includes(SenseType.Sight)}
-                              infrared={allSenses.includes(
-                                SenseType.InfraredSight
-                              )}
-                            />
-                          ) : senseType === SenseType.Hearing ? (
-                            <HearingIcon
-                              standard={allSenses.includes(SenseType.Hearing)}
-                              tremor={allSenses.includes(
-                                SenseType.TremorHearing
-                              )}
-                            />
-                          ) : senseType === SenseType.Smell ? (
-                            <SmellIcon />
-                          ) : senseType === SenseType.Psychic ? (
-                            <PsychicSenseIcon />
-                          ) : null}
+                          <SenseIcon type={senseType} className="w-6" />
                         </div>
                       </TooltipTrigger>
                       <TooltipContent
@@ -150,7 +76,7 @@ export const SensesCard = () => {
                         className="max-w-[250px]"
                       >
                         <p className="text-xs">
-                          {getSenseTooltipText(senseType, false, allSenses)}
+                          {getSenseTooltipText(senseType, false)}
                         </p>
                       </TooltipContent>
                     </Tooltip>
