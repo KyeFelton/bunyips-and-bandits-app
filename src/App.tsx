@@ -22,10 +22,13 @@ import {
 import "./App.sass";
 import { Wiki } from "./pages/Wiki";
 import { useImagePreloader } from "./hooks/useImagePreloader";
+import { useSyncFocalCharacter } from "./state/saveFile";
 
 function App() {
   const location = useLocation();
   const isLoading = useImagePreloader([background, frame]);
+
+  useSyncFocalCharacter();
 
   // Get main section for animation key (only animate between main sections)
   const getMainSection = (pathname: string) => {

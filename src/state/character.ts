@@ -2,8 +2,8 @@ import { atom } from "jotai";
 import { SkillType } from "../enums/SkillType";
 import { ItemDictionary } from "../models/items";
 import { PathProgression } from "../models/paths";
-import { AllSpecies } from "../data/species";
-import { AllOrigins } from "../data/origins";
+import { AllSpecies, startingSpecies } from "../data/species";
+import { AllOrigins, startingOrigin } from "../data/origins";
 import { Effect } from "../models/effect";
 import * as Skills from "../models/skills";
 import { Trait } from "../models/traits";
@@ -20,14 +20,14 @@ export const MAX_SKILL_LEVEL = 10;
 
 // Basic character info
 export const nameAtom = atom<string>("");
-export const originAtom = atom<string>("");
-export const speciesAtom = atom<string>("");
+export const originAtom = atom<string>(startingOrigin.name);
+export const speciesAtom = atom<string>(startingSpecies.name);
 export const genderAtom = atom<string>("");
 export const ageAtom = atom<number>(0);
 export const backgroundAtom = atom<string>("");
 export const personalityAtom = atom<string>("");
-export const languagesAtom = atom<string[]>([]);
-export const imageAtom = atom<string | undefined>();
+export const languagesAtom = atom<string[]>(["Dharrigal", "Englorian"]);
+export const imageAtom = atom<string | undefined>(undefined);
 
 // Character progression
 export const levelAtom = atom<number>(1);
@@ -40,9 +40,9 @@ export const skillLevelUpgradesAtom = atom<Partial<Record<SkillType, number>>>(
 );
 
 // Character stats
-export const currentBodyAtom = atom<number>(0);
-export const currentMindAtom = atom<number>(0);
-export const currentStaminaAtom = atom<number>(0);
+export const currentBodyAtom = atom<number>(startingSpecies.body);
+export const currentMindAtom = atom<number>(startingSpecies.mind);
+export const currentStaminaAtom = atom<number>(startingSpecies.stamina);
 export const conditionsAtom = atom<Condition[]>([]);
 
 // Items and equipment

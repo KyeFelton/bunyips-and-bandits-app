@@ -22,33 +22,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../components/ui/dialog";
-import { saveFileAtom, focalCharacterIdAtom } from "../state/saveFile";
+import { saveFileAtom } from "../state/saveFile";
 import { randomString } from "../utils/randomString";
-import { CharacterSaveFile, defaultCharacter } from "../models/saveFile";
-import {
-  ageAtom,
-  originAtom,
-  backgroundAtom,
-  currentMindAtom,
-  currentBodyAtom,
-  currentStaminaAtom,
-  customTraitsAtom,
-  genderAtom,
-  imageAtom,
-  itemsAtom,
-  languagesAtom,
-  levelAtom,
-  moneyAtom,
-  mindUpgradesAtom,
-  nameAtom,
-  pathsAtom,
-  personalityAtom,
-  bodyUpgradesAtom,
-  skillLevelUpgradesAtom,
-  speciesAtom,
-  staminaUpgradesAtom,
-  conditionsAtom,
-} from "../state/character";
+import { defaultCharacter } from "../models/saveFile";
 import { getSpeciesImage } from "../utils/speciesImages";
 
 export function CharactersPage() {
@@ -60,98 +36,6 @@ export function CharactersPage() {
   const [errorDialogOpen, setErrorDialogOpen] = useState(false);
   const [errorTitle, setErrorTitle] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [focalCharacterId, setFocalCharacterId] = useAtom(focalCharacterIdAtom);
-
-  const [name, setName] = useAtom(nameAtom);
-  const [level, setLevel] = useAtom(levelAtom);
-  const [currentBody, setCurrentBody] = useAtom(currentBodyAtom);
-  const [bodyUpgrades, setBodyUpgrades] = useAtom(bodyUpgradesAtom);
-  const [currentMind, setCurrentMind] = useAtom(currentMindAtom);
-  const [mindUpgrades, setMindUpgrades] = useAtom(mindUpgradesAtom);
-  const [currentStamina, setCurrentStamina] = useAtom(currentStaminaAtom);
-  const [staminaUpgrades, setStaminaUpgrades] = useAtom(staminaUpgradesAtom);
-  const [origin, setOrigin] = useAtom(originAtom);
-  const [species, setSpecies] = useAtom(speciesAtom);
-  const [gender, setGender] = useAtom(genderAtom);
-  const [age, setAge] = useAtom(ageAtom);
-  const [background, setBackground] = useAtom(backgroundAtom);
-  const [personality, setPersonality] = useAtom(personalityAtom);
-  const [languages, setLanguages] = useAtom(languagesAtom);
-  const [image, setImage] = useAtom(imageAtom);
-  const [money, setMoney] = useAtom(moneyAtom);
-  const [items, setItems] = useAtom(itemsAtom);
-  const [paths, setPaths] = useAtom(pathsAtom);
-  const [customTraits, setCustomTraits] = useAtom(customTraitsAtom);
-  const [skillLevelUpgrades, setSkillLevelUpgrades] = useAtom(
-    skillLevelUpgradesAtom
-  );
-  const [conditions, setConditions] = useAtom(conditionsAtom);
-
-  const focalCharacter = {
-    name,
-    origin,
-    species,
-    gender,
-    age,
-    personality,
-    background,
-    languages,
-    level,
-    paths,
-    customTraits,
-    skillLevelUpgrades,
-    currentBody,
-    bodyUpgrades,
-    currentMind,
-    mindUpgrades,
-    currentStamina,
-    staminaUpgrades,
-    items,
-    money,
-    image,
-    conditions,
-  };
-
-  const setFocalCharacter = (id: string, character: CharacterSaveFile) => {
-    setFocalCharacterId(id);
-    setName(character.name);
-    setLevel(character.level);
-    setCurrentBody(character.currentBody);
-    setBodyUpgrades(character.bodyUpgrades);
-    setCurrentMind(character.currentMind);
-    setMindUpgrades(character.mindUpgrades);
-    setCurrentStamina(character.currentStamina);
-    setStaminaUpgrades(character.staminaUpgrades);
-    setOrigin(character.origin);
-    setSpecies(character.species);
-    setGender(character.gender);
-    setAge(character.age);
-    setBackground(character.background);
-    setPersonality(character.personality);
-    setLanguages(character.languages);
-    setImage(character.image);
-    setMoney(character.money);
-    setItems(character.items);
-    setPaths(character.paths);
-    setCustomTraits(character.customTraits);
-    setSkillLevelUpgrades(character.skillLevelUpgrades);
-    setConditions(character.conditions || []);
-  };
-
-  const saveCurrentFocalCharacter = () => {
-    if (
-      typeof focalCharacterId === "string" &&
-      saveFile.characters[focalCharacterId]
-    ) {
-      setSaveFile((prev) => ({
-        ...prev,
-        characters: {
-          ...prev.characters,
-          [focalCharacterId]: focalCharacter,
-        },
-      }));
-    }
-  };
 
   const handleImport = async () => {
     await loadSaveFile(setSaveFile, undefined, (title, message) => {
@@ -162,7 +46,6 @@ export function CharactersPage() {
   };
 
   const handleCreateNewCharacter = () => {
-    saveCurrentFocalCharacter();
     const id = randomString(10);
     setSaveFile((prev) => {
       return {
@@ -170,17 +53,10 @@ export function CharactersPage() {
         characters: { ...prev.characters, [id]: defaultCharacter },
       };
     });
-    setFocalCharacterId(id);
-    setFocalCharacter(id, defaultCharacter);
     navigate(getCharacterEditorRoute(id));
   };
 
   const handleSelectCharacter = (id: string) => {
-    saveCurrentFocalCharacter();
-    if (id !== focalCharacterId) {
-      const character = saveFile.characters[id];
-      setFocalCharacter(id, character);
-    }
     navigate(getCharacterSheetRoute(id));
   };
 
@@ -201,16 +77,7 @@ export function CharactersPage() {
   };
 
   const handleDownload = () => {
-    const updatedSaveFile = focalCharacterId
-      ? {
-          ...saveFile,
-          characters: {
-            ...saveFile.characters,
-            [focalCharacterId]: focalCharacter,
-          },
-        }
-      : saveFile;
-    downloadSaveFile(updatedSaveFile);
+    downloadSaveFile(saveFile);
   };
 
   return (
@@ -238,9 +105,7 @@ export function CharactersPage() {
       </div>
 
       <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 z-20">
-        {Object.entries(saveFile.characters).map(([id, saveFileCharacter]) => {
-          const character =
-            focalCharacterId === id ? focalCharacter : saveFileCharacter;
+        {Object.entries(saveFile.characters).map(([id, character]) => {
           return (
             <Card
               className="cursor-pointer hover:shadow-md hover:scale-105 transition-all"

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useAtom, useSetAtom } from "jotai";
+import { useAtom } from "jotai";
 import {
   Dialog,
   DialogContent,
@@ -25,7 +25,6 @@ import {
   originAtom,
   levelAtom,
 } from "../state/character";
-import { saveFileAtom, focalCharacterIdAtom } from "../state/saveFile";
 import { getSpeciesImage } from "../utils/speciesImages";
 import { LevelUpModal } from "./LevelUpModal";
 
@@ -40,8 +39,6 @@ export const EditNameDialog = ({ isOpen, onClose }: Props) => {
   const [species] = useAtom(speciesAtom);
   const [origin] = useAtom(originAtom);
   const [level, setLevel] = useAtom(levelAtom);
-  const setSaveFile = useSetAtom(saveFileAtom);
-  const [focalCharacterId] = useAtom(focalCharacterIdAtom);
 
   const [pendingName, setPendingName] = useState("");
   const [pendingImage, setPendingImage] = useState<string | undefined>(
@@ -62,20 +59,6 @@ export const EditNameDialog = ({ isOpen, onClose }: Props) => {
     const finalName = pendingName.trim() === "" ? "No name" : pendingName;
     setName(finalName);
     setImage(pendingImage);
-
-    if (focalCharacterId) {
-      setSaveFile((prev) => ({
-        ...prev,
-        characters: {
-          ...prev.characters,
-          [focalCharacterId]: {
-            ...prev.characters[focalCharacterId],
-            name: finalName,
-            image: pendingImage,
-          },
-        },
-      }));
-    }
 
     // If level changed, open level up modal
     if (pendingLevel > level) {

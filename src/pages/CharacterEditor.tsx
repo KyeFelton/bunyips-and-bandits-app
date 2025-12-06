@@ -12,6 +12,7 @@ import { DescriptionStep } from "../components/DescriptionStep";
 import { PathsStep } from "../components/PathsStep";
 import { SkillsStep } from "../components/SkillsStep";
 import { CustomTraitsStep } from "../components/CustomTraitsStep";
+import { useLoadCharacterFromUrl } from "../hooks/useLoadCharacterFromUrl";
 
 const steps = [
   { title: "Folk", component: FolkStep },
@@ -31,24 +32,12 @@ export const CharacterEditor = () => {
   const [focalCharacterId] = useAtom(focalCharacterIdAtom);
   const [name, setName] = useAtom(nameAtom);
 
+  useLoadCharacterFromUrl();
+
   const handleNext = () => {
     if (isLastStep) {
-      const finalName = name.trim() === "" ? "No name" : name;
       if (name.trim() === "") {
         setName("No name");
-      }
-
-      if (focalCharacterId) {
-        setSaveFile((prev) => ({
-          ...prev,
-          characters: {
-            ...prev.characters,
-            [focalCharacterId]: {
-              ...prev.characters[focalCharacterId],
-              name: finalName,
-            },
-          },
-        }));
       }
 
       navigate(-1);

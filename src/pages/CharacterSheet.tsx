@@ -20,10 +20,13 @@ import { ActionsList } from "../components/ActionsList";
 import { useState } from "react";
 import { CharacterSheetGridNav } from "../components/CharacterSheetGridNav";
 import { LayoutGrid } from "lucide-react";
+import { useLoadCharacterFromUrl } from "../hooks/useLoadCharacterFromUrl";
 
 export function CharacterSheet() {
   const [activeSection, setActiveSection] = useState("character");
   const [gridNavOpen, setGridNavOpen] = useState(false);
+
+  useLoadCharacterFromUrl();
 
   return (
     <motion.div

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import {
   Dialog,
   DialogContent,
@@ -29,7 +29,6 @@ import {
   originAtom,
   speciesDataAtom,
 } from "../state/character";
-import { saveFileAtom, focalCharacterIdAtom } from "../state/saveFile";
 
 const genders = ["Male", "Female", "Non-binary"];
 const CUSTOM_GENDER_OPTION = "Let me type...";
@@ -47,8 +46,6 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
   const [gender, setGender] = useAtom(genderAtom);
   const origin = useAtomValue(originAtom);
   const species = useAtomValue(speciesDataAtom);
-  const setSaveFile = useSetAtom(saveFileAtom);
-  const [focalCharacterId] = useAtom(focalCharacterIdAtom);
 
   const [pendingBackground, setPendingBackground] = useState("");
   const [pendingPersonality, setPendingPersonality] = useState("");
@@ -90,23 +87,6 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
     setLanguages(pendingLanguages);
     setAge(pendingAge);
     setGender(finalGender);
-
-    if (focalCharacterId) {
-      setSaveFile((prev) => ({
-        ...prev,
-        characters: {
-          ...prev.characters,
-          [focalCharacterId]: {
-            ...prev.characters[focalCharacterId],
-            background: pendingBackground,
-            personality: pendingPersonality,
-            languages: pendingLanguages,
-            age: pendingAge,
-            gender: finalGender,
-          },
-        },
-      }));
-    }
 
     onClose();
   };
