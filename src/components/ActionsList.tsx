@@ -7,6 +7,8 @@ import {
 import { User, Users, Circle, Scan, HelpCircle } from "lucide-react";
 import { AreaOfEffect } from "./../enums/AreaOfEffect";
 import { Action } from "./../models/actions";
+import { Brawl } from "./../data/actions/Brawl";
+import { Dash } from "./../data/actions/Dash";
 import {
   Table,
   TableBody,
@@ -47,43 +49,49 @@ export const ActionsList = () => {
   const skillRollValues = useAtomValue(skillRollValuesAtom);
   const showRollToast = useRollToast();
 
-  const actions: (Action & { path: string })[] = paths
-    .flatMap((path) =>
-      path.unlockables
-        .filter((unlock) => unlock.level <= path.level)
-        .flatMap((unlock) =>
-          unlock.actions.map((action) => ({
-            ...action,
-            path: path.name,
-          }))
-        )
-    )
-    .sort((a, b) => a.name.localeCompare(b.name));
+  // Basic actions available to all characters
+  const basicActions: (Action & { path: string })[] = [
+    { ...Brawl, path: "Basic" },
+    { ...Dash, path: "Basic" },
+  ];
+
+  // Path-unlocked actions
+  const pathActions: (Action & { path: string })[] = paths.flatMap((path) =>
+    path.unlockables
+      .filter((unlock) => unlock.level <= path.level)
+      .flatMap((unlock) =>
+        unlock.actions.map((action) => ({
+          ...action,
+          path: path.name,
+        }))
+      )
+  );
+
+  // Combine and sort all actions
+  const actions = [...basicActions, ...pathActions].sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
 
   const handlePerformAction = (action: Action) => {
     const staminaCost =
       typeof action.staminaCost === "number" ? action.staminaCost : 0;
-    const rollValues = skillRollValues[action.skillType];
+
     if (stamina >= staminaCost) {
       setStamina(stamina - staminaCost);
-      showRollToast({
-        name: `${action.name} (${action.skillType})`,
-        dice: rollValues.dice,
-        modifier: rollValues.modifier,
-        hasAdvantage: rollValues.hasAdvantage,
-        hasDisadvantage: rollValues.hasDisadvantage,
-      });
+
+      // Only show roll toast for actions with a skill check
+      if (action.skillType) {
+        const rollValues = skillRollValues[action.skillType];
+        showRollToast({
+          name: `${action.name} (${action.skillType})`,
+          dice: rollValues.dice,
+          modifier: rollValues.modifier,
+          hasAdvantage: rollValues.hasAdvantage,
+          hasDisadvantage: rollValues.hasDisadvantage,
+        });
+      }
     }
   };
-
-  if (actions.length === 0) {
-    return (
-      <div className="text-center text-muted-foreground p-8">
-        No actions available. Select a path and increase its level to unlock
-        actions.
-      </div>
-    );
-  }
 
   return (
     <TooltipProvider>
@@ -119,14 +127,18 @@ export const ActionsList = () => {
               </TableCell>
               <TableCell>
                 <div className="flex justify-center">
-                  <Tooltip>
-                    <TooltipTrigger className="cursor-default text-muted-foreground hover:text-foreground transition-colors">
-                      <SkillIcon type={action.skillType} />
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>{action.skillType}</p>
-                    </TooltipContent>
-                  </Tooltip>
+                  {action.skillType ? (
+                    <Tooltip>
+                      <TooltipTrigger className="cursor-default text-muted-foreground hover:text-foreground transition-colors">
+                        <SkillIcon type={action.skillType} />
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>{action.skillType}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  ) : (
+                    <span className="text-muted-foreground">-</span>
+                  )}
                 </div>
               </TableCell>
               <TableCell>{action.range}</TableCell>
@@ -155,7 +167,8 @@ export const ActionsList = () => {
                   disabled={
                     (typeof action.staminaCost === "number" &&
                       stamina < action.staminaCost) ||
-                    skillRollValues[action.skillType].dice === 0
+                    (action.skillType &&
+                      skillRollValues[action.skillType].dice === 0)
                   }
                 >
                   Perform

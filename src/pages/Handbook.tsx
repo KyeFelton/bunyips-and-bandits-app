@@ -1185,15 +1185,31 @@ const content = (
         through all your stamina, you might find yourself too exhausted to fight
         when it really matters.
       </p>
+      <h4 className="font-bold mt-4 mb-2">Basic Actions</h4>
+      <p>
+        All characters can perform these basic actions without needing to unlock
+        them:
+      </p>
+      <ul className="list-disc ml-6 mb-4">
+        <li>
+          <b>Brawl</b> - You strike your opponent with your fists to deal 1
+          force damage.
+        </li>
+        <li>
+          <b>Dash</b> - Move at one speed tier higher than normal. Slow
+          creatures reach close distance, moderate reach near, and fast reach
+          far. Costs 1 stamina.
+        </li>
+      </ul>
     </Body>
     <H3>Movement</H3>
     <Body>
       <p>
-        Moving is an action available to all characters. The distance you can
-        reach in one turn is determined by your speed rating for the locomotion
-        type you're using (walk, swim, climb, or fly). Your speed rating
-        determines how much stamina it costs to reach different distances—refer
-        to the stamina cost table in the Speed section above.
+        Moving is a basic action available to all characters. The distance you
+        can reach in one turn is determined by your speed rating for the
+        locomotion type you're using (walk, swim, climb, or fly). To move
+        faster, use the Dash action, which costs 1 stamina and moves you one
+        speed tier higher (see Speed section).
       </p>
       <p>
         Some terrain slows movement (mud, dense bush), while others make it

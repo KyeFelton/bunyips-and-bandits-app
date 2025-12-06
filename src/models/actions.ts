@@ -5,7 +5,7 @@ import { SkillType } from "../enums/SkillType";
 export type Action = {
   name: string;
   effect: string;
-  skillType: SkillType;
+  skillType?: SkillType;
   range: Range;
   areaOfEffect: AreaOfEffect;
   staminaCost: number | "variable";

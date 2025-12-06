@@ -8,8 +8,10 @@ import { Attract } from "./Attract";
 import { Avenge } from "./Avenge";
 import { Beacon } from "./Beacon";
 import { BlindingFlash } from "./BlindingFlash";
+import { Brawl } from "./Brawl";
 import { Catapult } from "./Catapult";
 import { Cyclone } from "./Cyclone";
+import { Dash } from "./Dash";
 import { DeathCloud } from "./DeathCloud";
 import { Decimate } from "./Decimate";
 import { Delude } from "./Delude";
@@ -99,8 +101,10 @@ export {
   Avenge,
   Beacon,
   BlindingFlash,
+  Brawl,
   Catapult,
   Cyclone,
+  Dash,
   DeathCloud,
   Decimate,
   Delude,
