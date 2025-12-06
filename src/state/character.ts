@@ -291,7 +291,10 @@ export const sensesAtom = atom((get) => {
   effects.forEach((effect) => {
     if (effect.sense?.gain) {
       // Add to primary if not already in primary or secondary
-      if (!primary.includes(effect.sense.gain) && !secondary.includes(effect.sense.gain)) {
+      if (
+        !primary.includes(effect.sense.gain) &&
+        !secondary.includes(effect.sense.gain)
+      ) {
         primary.push(effect.sense.gain);
       }
     }
@@ -422,6 +425,3 @@ export const weaponAtom = atom((get) => {
     damageType,
   };
 });
-
-// Luck
-export const luckAtom = atom<number>(0);

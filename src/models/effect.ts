@@ -15,7 +15,6 @@ export type Effect = {
   };
   evasions?: StatModifier;
   body?: StatModifier;
-  luck?: StatModifier;
   mind?: StatModifier;
   sense?: {
     gain?: SenseType;

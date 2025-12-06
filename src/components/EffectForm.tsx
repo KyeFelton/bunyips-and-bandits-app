@@ -26,7 +26,6 @@ const EffectTypeLabels: Record<EffectType, string> = {
   armour: "Armour",
   evasions: "Evasions",
   body: "Body",
-  luck: "Luck",
   mind: "Mind",
   sense: "Sense",
   skill: "Skill",
@@ -41,7 +40,6 @@ export const EffectForm = ({ effects, onChange }: Props) => {
       case "actions":
       case "evasions":
       case "body":
-      case "luck":
       case "mind":
       case "stamina":
       case "weapon":
@@ -320,7 +318,6 @@ export const EffectForm = ({ effects, onChange }: Props) => {
             {(effectType === "actions" ||
               effectType === "evasions" ||
               effectType === "body" ||
-              effectType === "luck" ||
               effectType === "mind" ||
               effectType === "stamina") && (
               <Input

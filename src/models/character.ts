@@ -47,7 +47,6 @@ export type Character = {
   paths: Path[];
   items: CharacterItem[];
   money: number;
-  luck: number;
   skills: {
     [SkillType.Agility]: number;
     [SkillType.Charisma]: number;

@@ -34,7 +34,6 @@ import * as PortalStone from "./PortalStone";
 import { SteelPlateArmour } from "./SteelPlateArmour";
 import { WoodenClub } from "./WoodenClub";
 import { ChloroformAndCloth } from "./ChloroformAndCloth";
-import { KujuHat } from "./KujuHat";
 import * as Psychedelic from "./Psychedelic";
 import { SteelSpear } from "./SteelSpear";
 import { CrocodileScaleArmour } from "./CrocodileScaleArmour";
@@ -87,7 +86,6 @@ export {
   SteelPlateArmour,
   WoodenClub,
   ChloroformAndCloth,
-  KujuHat,
   Psychedelic,
   SteelSpear,
   CrocodileScaleArmour,
