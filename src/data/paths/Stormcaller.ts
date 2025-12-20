@@ -1,73 +1,70 @@
 import { SkillType } from "../../enums/SkillType";
 import { Path } from "../../models/paths";
 import {
-  AirBarrier,
-  Catapult,
-  Cyclone,
-  Fly,
+  Telekinesis,
   Gust,
-  Rifle,
+  Fly,
+  Cyclone,
+  Catapult,
   Tornado,
   Torrent,
 } from "../actions";
-import { Hurl } from "../actions/Hurl";
-import { Restrain } from "../actions/Restrain";
-import { Agile, Bellow, Swift, Boomerang, WindShield } from "../traits";
+import { Boomerang, Telekinetic, WindShield } from "../traits";
 
 export const Stormcaller: Path = {
   name: "Stormcaller",
   skillTypes: [SkillType.Kinetic],
   description:
-    "Stormcallers harness the raw power of the elements to control the battlefield. They excel at hurling objects and creatures through the air and dealing devastating damage.",
+    "Stormcallers harness the raw power of wind and telekinetic force to dominate the battlefield. They excel at manipulating objects, controlling movement, and unleashing devastating aerial assaults.",
   unlockables: [
     {
       level: 1,
-      actions: [Gust],
-      traits: [Agile],
+      actions: [Telekinesis],
+      traits: [],
     },
     {
       level: 2,
-      actions: [Hurl],
+      actions: [Gust],
       traits: [],
     },
     {
       level: 3,
-      actions: [Torrent],
-      traits: [Bellow],
+      actions: [],
+      traits: [Boomerang],
     },
     {
       level: 4,
-      actions: [Restrain],
+      actions: [Fly],
       traits: [],
     },
     {
       level: 5,
-      actions: [AirBarrier],
-      traits: [Swift],
-    },
-    {
-      level: 6,
-      actions: [Rifle],
+      actions: [Cyclone],
       traits: [],
     },
     {
-      level: 7,
-      actions: [Fly],
-      traits: [Boomerang],
-    },
-    {
-      level: 8,
+      level: 6,
       actions: [Catapult],
       traits: [],
     },
     {
+      level: 7,
+      actions: [],
+      traits: [Telekinetic],
+    },
+    {
+      level: 8,
+      actions: [Torrent],
+      traits: [],
+    },
+    {
       level: 9,
-      actions: [Tornado],
+      actions: [],
       traits: [WindShield],
     },
     {
       level: 10,
-      actions: [Cyclone],
+      actions: [Tornado],
       traits: [],
     },
   ],

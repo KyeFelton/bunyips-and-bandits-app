@@ -6,9 +6,9 @@ import { Action } from "../../models/actions";
 export const Purge: Action = {
   name: "Purge",
   effect:
-    "You unleash a wave of psychic energy that muddles all nearby foes. Creatures of your choosing are stunned.",
+    "You unleash a wave of psychic energy that muddles all nearby foes, dealing 3 psychic damage and stunning them.",
   skillType: SkillType.Psychic,
   range: Range.Self,
-  areaOfEffect: AreaOfEffect.Far,
+  areaOfEffect: AreaOfEffect.Near,
   staminaCost: 4,
 };

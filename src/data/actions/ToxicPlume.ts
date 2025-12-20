@@ -7,7 +7,7 @@ export const ToxicPlume: Action = {
   name: "Toxic plume",
   effect:
     "You expel noxious gas from your body. Nearby targets take 3 toxic damage and become anosmic.",
-  skillType: SkillType.Toxic,
+  skillType: SkillType.Biotic,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.Near,
   staminaCost: 4,

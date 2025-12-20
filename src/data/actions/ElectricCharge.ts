@@ -6,9 +6,9 @@ import { Action } from "../../models/actions";
 export const ElectricCharge: Action = {
   name: "Electric charge",
   effect:
-    "You take an action to build up energy. On your next turn, deal an additional 1 electric damage on all electric attacks.",
+    "You spend your action building up energy. Double the electric damage dealt on your next action.",
   skillType: SkillType.Electric,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.SingleTarget,
-  staminaCost: 1,
+  staminaCost: 2,
 };

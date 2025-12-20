@@ -1,4 +1,4 @@
-import { AcidicSkin } from "./AcidicSkin";
+import { Poisonous } from "./Poisonous";
 import { Agile } from "./Agile";
 import { Arsonist } from "./Arsonist";
 import { Bard } from "./Bard";
@@ -45,9 +45,37 @@ import { Undying } from "./Undying";
 import { Unrelenting } from "./Unrelenting";
 import { Vigilant } from "./Vigilant";
 import { WindShield } from "./WindShield";
+import { Medic } from "./MedicalLore";
+import { Pharmacist } from "./Pharmacist";
+import { Detector } from "./Detector";
+import { Omnipresent } from "./Omnipresent";
+import { Ablaze } from "./Ablaze";
+import { SharpSenses } from "./SharpSenses";
+import { RapidShift } from "./RapidShift";
+import { Telekinetic } from "./Telekinetic";
+import { Fighter } from "./Fighter";
+import { Guard as GuardTrait } from "./Guard";
+import { Bulldozer } from "./Bulldozer";
+import { Rage } from "./Rage";
+import { Taunt } from "./Taunt";
+import { FighterII } from "./FighterII";
+import { Archer } from "./Archer";
+import { Tracker } from "./Tracker";
+import { Fletcher } from "./Fletcher";
+import { Sleuth } from "./Sleuth";
+import { Assassin } from "./Assassin";
+import { Trapper } from "./Trapper";
+import { Sharpshooter } from "./Sharpshooter";
+import { ClaimTheHunt } from "./ClaimTheHunt";
+import { ArcherII } from "./ArcherII";
+import { ThickSkin } from "./ThickSkin";
 
 export {
-  AcidicSkin,
+  Ablaze,
+  Detector,
+  Omnipresent,
+  Pharmacist,
+  Medic,
   Agile,
   Arsonist,
   Bard,
@@ -94,4 +122,24 @@ export {
   Unrelenting,
   Vigilant,
   WindShield,
+  SharpSenses,
+  RapidShift,
+  Poisonous,
+  Telekinetic,
+  Fighter,
+  GuardTrait,
+  Bulldozer,
+  Rage,
+  Taunt,
+  FighterII,
+  Archer,
+  Tracker,
+  Fletcher,
+  Sleuth,
+  Assassin,
+  Trapper,
+  Sharpshooter,
+  ClaimTheHunt,
+  ArcherII,
+  ThickSkin,
 };

@@ -49,13 +49,12 @@ export type Character = {
   money: number;
   skills: {
     [SkillType.Agility]: number;
+    [SkillType.Biotic]: number;
     [SkillType.Charisma]: number;
     [SkillType.Dexterity]: number;
     [SkillType.Electric]: number;
     [SkillType.Intelligence]: number;
-    [SkillType.Healing]: number;
     [SkillType.Kinetic]: number;
-    [SkillType.Martial]: number;
     [SkillType.Nature]: number;
     [SkillType.Perception]: number;
     [SkillType.Psychic]: number;
@@ -66,7 +65,6 @@ export type Character = {
     [SkillType.Spirit]: number;
     [SkillType.Stealth]: number;
     [SkillType.Strength]: number;
-    [SkillType.Toxic]: number;
     [SkillType.Willpower]: number;
   };
 };

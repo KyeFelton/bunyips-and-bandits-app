@@ -5,9 +5,9 @@ import { Action } from "../../models/actions";
 
 export const Electrocute: Action = {
   name: "Electrocute",
-  effect: "Target takes 8 electric damage and are stunned.",
+  effect: "Target takes 10 electric damage and are stunned.",
   skillType: SkillType.Electric,
   range: Range.Close,
   areaOfEffect: AreaOfEffect.SingleTarget,
-  staminaCost: 4,
+  staminaCost: 5,
 };

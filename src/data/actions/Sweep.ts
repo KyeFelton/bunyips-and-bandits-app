@@ -6,9 +6,9 @@ import { Action } from "../../models/actions";
 export const Sweep: Action = {
   name: "Sweep",
   effect:
-    "You attack all targets who are next to you. They take your weapon's damage.",
-  skillType: SkillType.Martial,
-  range: Range.Close,
+    "You melee attack all targets who are close to you. They take your weapon's damage.",
+  skillType: SkillType.Strength,
+  range: Range.Self,
   areaOfEffect: AreaOfEffect.Close,
-  staminaCost: 5,
+  staminaCost: 3,
 };

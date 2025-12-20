@@ -7,7 +7,7 @@ export const Paralysis: Action = {
   name: "Paralysis",
   effect:
     "Your infect your opponent with a deadly dose of debilitating venom. They take 6 toxic damage and become restrained.",
-  skillType: SkillType.Toxic,
+  skillType: SkillType.Biotic,
   range: Range.Close,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 4,

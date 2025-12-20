@@ -6,9 +6,9 @@ import { Action } from "../../models/actions";
 export const Gust: Action = {
   name: "Gust",
   effect:
-    "Targets become anosmic and roll an easy strength check. If they fail, they are restrained.",
+    "You manifest a large gust of wind. Targets become anosmic and must pass a moderate strength check otherwise be pushed back a close distance.",
   skillType: SkillType.Kinetic,
-  range: Range.Near,
+  range: Range.Self,
   areaOfEffect: AreaOfEffect.Near,
   staminaCost: 1,
 };

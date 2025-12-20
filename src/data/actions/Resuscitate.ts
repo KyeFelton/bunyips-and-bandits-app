@@ -6,8 +6,8 @@ import { Action } from "../../models/actions";
 export const Resuscitate: Action = {
   name: "Resuscitate",
   effect:
-    "You bring back a recently slain ally from death. Their body recovers 1 health.",
-  skillType: SkillType.Healing,
+    "You bring back to life an ally that has died in the last minute. Their body recovers 1 health.",
+  skillType: SkillType.Biotic,
   range: Range.Close,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 4,

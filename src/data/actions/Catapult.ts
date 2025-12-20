@@ -6,9 +6,9 @@ import { Action } from "../../models/actions";
 export const Catapult: Action = {
   name: "Catapult",
   effect:
-    "You throw a large sized or smaller creature up to 20m through the air. They take 1 force damage for every 5m thrown.",
+    "You throw a large sized or smaller creature to a near location. If done forcefully, they take 3 force damage from the impact.",
   skillType: SkillType.Kinetic,
   range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
-  staminaCost: 6,
+  staminaCost: 3,
 };

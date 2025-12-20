@@ -5,7 +5,7 @@ import { Action } from "../../models/actions";
 
 export const Taser: Action = {
   name: "Taser",
-  effect: "Your target is stunned.",
+  effect: "You zap your target to deal 1 electric damage. They are stunned.",
   skillType: SkillType.Electric,
   range: Range.Close,
   areaOfEffect: AreaOfEffect.SingleTarget,

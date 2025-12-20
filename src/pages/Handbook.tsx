@@ -8,6 +8,7 @@ import { DamageType } from "../enums/DamageType";
 import { SkillType } from "../enums/SkillType";
 import { Locomotion } from "../enums/Locomotion";
 import { SenseType } from "../enums/SenseType";
+import * as Skills from "../models/skills";
 import summonerImage from "../images/handbook/summoner.png";
 import bunyipImage from "../images/handbook/bunyip.png";
 import dropbearImage from "../images/handbook/dropbear.png";
@@ -226,12 +227,9 @@ const content = (
               />
             </td>
             <td>
-              <b>Strength</b>
+              <b>{SkillType.Strength}</b>
             </td>
-            <td>
-              Physical manoeuvres requiring strength, such as breaking down a
-              door, carrying a heavy load, or escaping a grapple.
-            </td>
+            <td>{Skills.Strength.description}</td>
           </tr>
           <tr>
             <td className="pr-0">
@@ -241,12 +239,9 @@ const content = (
               />
             </td>
             <td>
-              <b>Agility</b>
+              <b>{SkillType.Agility}</b>
             </td>
-            <td>
-              Balance and quick reflexes, such as dodging an attack, running
-              through a busy street, or recovering from a fall.
-            </td>
+            <td>{Skills.Agility.description}</td>
           </tr>
           <tr>
             <td className="pr-0">
@@ -256,12 +251,9 @@ const content = (
               />
             </td>
             <td>
-              <b>Dexterity</b>
+              <b>{SkillType.Dexterity}</b>
             </td>
-            <td>
-              Fine motor control and hand-eye coordination, such as pick
-              pocketing, playing an instrument or throwing a knife.
-            </td>
+            <td>{Skills.Dexterity.description}</td>
           </tr>
           <tr>
             <td className="pr-0">
@@ -271,24 +263,9 @@ const content = (
               />
             </td>
             <td>
-              <b>Stealth</b>
+              <b>{SkillType.Stealth}</b>
             </td>
-            <td>
-              Avoiding detection, such as surprise ambushing or sneaking past
-              another creature.
-            </td>
-          </tr>
-          <tr>
-            <td className="pr-0">
-              <SkillIcon
-                type={SkillType.Martial}
-                className="inline-block mr-1 pb-1"
-              />
-            </td>
-            <td>
-              <b>Martial</b>
-            </td>
-            <td>Armed melee attacks.</td>
+            <td>{Skills.Stealth.description}</td>
           </tr>
           <tr>
             <td className="pr-0">
@@ -298,9 +275,9 @@ const content = (
               />
             </td>
             <td>
-              <b>Pyro</b>
+              <b>{SkillType.Pyro}</b>
             </td>
-            <td>Fire sorcery, such as igniting a creature on fire.</td>
+            <td>{Skills.Pyro.description}</td>
           </tr>
           <tr>
             <td className="pr-0">
@@ -310,9 +287,9 @@ const content = (
               />
             </td>
             <td>
-              <b>Electric</b>
+              <b>{SkillType.Electric}</b>
             </td>
-            <td>Electric sorcery, such as casting a lightning bolt.</td>
+            <td>{Skills.Electric.description}</td>
           </tr>
           <tr>
             <td className="pr-0">
@@ -322,9 +299,9 @@ const content = (
               />
             </td>
             <td>
-              <b>Kinetic</b>
+              <b>{SkillType.Kinetic}</b>
             </td>
-            <td>Kinetic sorcery, such as manifesting a gust of wind.</td>
+            <td>{Skills.Kinetic.description}</td>
           </tr>
           <tr>
             <td className="pr-0">
@@ -334,9 +311,9 @@ const content = (
               />
             </td>
             <td>
-              <b>Radiant</b>
+              <b>{SkillType.Radiant}</b>
             </td>
-            <td>Light sorcery, such as camouflaging into your surroundings.</td>
+            <td>{Skills.Radiant.description}</td>
           </tr>
           <tr>
             <td className="pr-0">
@@ -346,35 +323,21 @@ const content = (
               />
             </td>
             <td>
-              <b>Sonic</b>
+              <b>{SkillType.Sonic}</b>
             </td>
-            <td>
-              Sound sorcery, such as mimicking the voice of another creature.
-            </td>
+            <td>{Skills.Sonic.description}</td>
           </tr>
           <tr>
             <td className="pr-0">
               <SkillIcon
-                type={SkillType.Toxic}
+                type={SkillType.Biotic}
                 className="inline-block mr-1 pb-1"
               />
             </td>
             <td>
-              <b>Toxic</b>
+              <b>{SkillType.Biotic}</b>
             </td>
-            <td>Producing poisons, venom and acids.</td>
-          </tr>
-          <tr>
-            <td className="pr-0">
-              <SkillIcon
-                type={SkillType.Healing}
-                className="inline-block mr-1 pb-1"
-              />
-            </td>
-            <td>
-              <b>Healing</b>
-            </td>
-            <td>Healing creatures.</td>
+            <td>{Skills.Biotic.description}</td>
           </tr>
         </tbody>
       </table>
@@ -396,12 +359,9 @@ const content = (
               />
             </td>
             <td>
-              <b>Intelligence</b>
+              <b>{SkillType.Intelligence}</b>
             </td>
-            <td>
-              Mental acuity, such as investigating a scene, researching in a
-              library, or recalling historical events.
-            </td>
+            <td>{Skills.Intelligence.description}</td>
           </tr>
           <tr>
             <td className="pr-0">
@@ -411,12 +371,9 @@ const content = (
               />
             </td>
             <td>
-              <b>Nature</b>
+              <b>{SkillType.Nature}</b>
             </td>
-            <td>
-              Wilderness and animal-related tasks, such as taming an animal,
-              tracking, or navigating a forest.
-            </td>
+            <td>{Skills.Nature.description}</td>
           </tr>
           <tr>
             <td className="pr-0">
@@ -426,12 +383,9 @@ const content = (
               />
             </td>
             <td>
-              <b>Willpower</b>
+              <b>{SkillType.Willpower}</b>
             </td>
-            <td>
-              Mental fortitude, such as resisting psychic attacks or countering
-              attempts of intimidation.
-            </td>
+            <td>{Skills.Willpower.description}</td>
           </tr>
           <tr>
             <td className="pr-0">
@@ -441,12 +395,9 @@ const content = (
               />
             </td>
             <td>
-              <b>Charisma</b>
+              <b>{SkillType.Charisma}</b>
             </td>
-            <td>
-              Social interactions requiring influence, such as charming,
-              persuading or deceiving others.
-            </td>
+            <td>{Skills.Charisma.description}</td>
           </tr>
           <tr>
             <td className="pr-0">
@@ -456,12 +407,9 @@ const content = (
               />
             </td>
             <td>
-              <b>Psychology</b>
+              <b>{SkillType.Psychology}</b>
             </td>
-            <td>
-              Assessing the behaviours and mannerisms of others to determine
-              their true thoughts and emotions.
-            </td>
+            <td>{Skills.Psychology.description}</td>
           </tr>
           <tr>
             <td className="pr-0">
@@ -471,12 +419,9 @@ const content = (
               />
             </td>
             <td>
-              <b>Perception</b>
+              <b>{SkillType.Perception}</b>
             </td>
-            <td>
-              Detecting things through your senses, such as spotting hidden
-              objects, hearing faint sounds, or tracking scents.
-            </td>
+            <td>{Skills.Perception.description}</td>
           </tr>
           <tr>
             <td className="pr-0">
@@ -486,9 +431,9 @@ const content = (
               />
             </td>
             <td>
-              <b>Psychic</b>
+              <b>{SkillType.Psychic}</b>
             </td>
-            <td>Psionics, such as mind reading.</td>
+            <td>{Skills.Psychic.description}</td>
           </tr>
           <tr>
             <td className="pr-0">
@@ -498,9 +443,9 @@ const content = (
               />
             </td>
             <td>
-              <b>Spirit</b>
+              <b>{SkillType.Spirit}</b>
             </td>
-            <td>Evocation, such as speaking to the dead.</td>
+            <td>{Skills.Spirit.description}</td>
           </tr>
         </tbody>
       </table>

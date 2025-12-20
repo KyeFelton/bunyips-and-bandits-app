@@ -6,7 +6,7 @@ import { Action } from "../../models/actions";
 export const Resurrect: Action = {
   name: "Resurrect",
   effect:
-    "Resurrect a recently slain creature. The creature must have been dead for less than a day, and their body must be healed first.",
+    "You resurrect a spirit that has been dead for less than one hundred years. True ressurection requires a living body that has had its soul torn out in order for the new spirit to occupy it. For false resurrection, you need an object for the spirit to posess. Spirits summoned through false resurrection will slowly degenerate into a wight over 1d20 days.",
   skillType: SkillType.Spirit,
   range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,

@@ -6,7 +6,7 @@ import { Antidote } from "./Antidote";
 import { Apparition } from "./Apparition";
 import { Attract } from "./Attract";
 import { Avenge } from "./Avenge";
-import { Beacon } from "./Beacon";
+import { GlowingOrb } from "./GlowingOrb";
 import { BlindingFlash } from "./BlindingFlash";
 import { Brawl } from "./Brawl";
 import { Catapult } from "./Catapult";
@@ -38,7 +38,7 @@ import { HeatRay } from "./HeatRay";
 import { HeatWave } from "./HeatWave";
 import { Hyperbeam } from "./Hyperbeam";
 import { Hypnotise } from "./Hypnotise";
-import { Ignite } from "./Ignite";
+import { Heat } from "./Heat";
 import { Impedance } from "./Impedance";
 import { Incinerate } from "./Incinerate";
 import { Inferno } from "./Inferno";
@@ -53,7 +53,7 @@ import { MirrorDome } from "./MirrorDome";
 import { Odourless } from "./Odourless";
 import { Paralysis } from "./Paralysis";
 import { Plough } from "./Plough";
-import { PoisonBreath } from "./PoisonBreath";
+import { PoisonSpray } from "./PoisonSpray";
 import { Pulverise } from "./Pulverise";
 import { PumpUp } from "./PumpUp";
 import { Purge } from "./Purge";
@@ -89,8 +89,29 @@ import { ToxicPlume } from "./ToxicPlume";
 import { VenomSting } from "./VenomSting";
 import { Vex } from "./Vex";
 import { Zap } from "./Zap";
+import { Message } from "./Message";
+import { Broadcast } from "./Broadcast";
+import { Implant } from "./Implant";
+import { Pandemonium } from "./Pandemonium";
+import { Heal } from "./Heal";
+import { Meditate } from "./Meditate";
+import { Envisage } from "./Envisage";
+import { Regenerate } from "./Regenerate";
+import { Mask } from "./Mask";
+import { Mutate } from "./Mutate";
+import { Morph } from "./Morph";
+import { Absorb } from "./Absorb";
+import { Burst } from "./Burst";
+import { Telekinesis } from "./Telekinesis";
+import { QuickDraw } from "./QuickDraw";
+import { Amplify } from "./Amplify";
+import { DistantNoise } from "./DistantNoise";
+import { Mimic } from "./Mimic";
 
 export {
+  Meditate,
+  Envisage,
+  Heal,
   Strike,
   AcidBomb,
   Aggravate,
@@ -99,7 +120,7 @@ export {
   Apparition,
   Attract,
   Avenge,
-  Beacon,
+  GlowingOrb,
   BlindingFlash,
   Brawl,
   Catapult,
@@ -131,7 +152,7 @@ export {
   HeatWave,
   Hyperbeam,
   Hypnotise,
-  Ignite,
+  Heat,
   Impedance,
   Incinerate,
   Inferno,
@@ -146,12 +167,14 @@ export {
   Odourless,
   Paralysis,
   Plough,
-  PoisonBreath,
+  PoisonSpray,
   Pulverise,
   PumpUp,
   Purge,
   Revenge,
   Resurrect,
+  Message,
+  Broadcast,
   Resuscitate,
   Reveal,
   Rifle,
@@ -182,4 +205,17 @@ export {
   VenomSting,
   Vex,
   Zap,
+  Pandemonium,
+  Implant,
+  Regenerate,
+  Mask,
+  Mutate,
+  Morph,
+  Absorb,
+  Burst,
+  Telekinesis,
+  QuickDraw,
+  Amplify,
+  DistantNoise,
+  Mimic,
 };

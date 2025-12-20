@@ -1,65 +1,57 @@
 import { SkillType } from "../../enums/SkillType";
 import { Path } from "../../models/paths";
 import {
-  SummonCritter,
   GuardianAngel,
-  Avenge,
   Revenge,
   SummonBeast,
   SpectralHands,
   SummonHorde,
   Sanctuary,
-  GraspOfDeath,
   Resurrect,
+  GraspOfDeath,
 } from "../actions";
-import {
-  ParanormalSense,
-  Medium,
-  Undying,
-  SuperiorMedium,
-  Blessed,
-} from "../traits";
+import { ParanormalSense, Medium, SuperiorMedium } from "../traits";
 
-export const Summoner: Path = {
-  name: "Summoner",
+export const Evoker: Path = {
+  name: "Evoker",
   skillTypes: [SkillType.Spirit],
   description:
     "Summoners are intermediaries between the living and the dead, calling forth spirits to aid them in battle. Whether raising spectral warriors or seeking counsel from lost souls, summoners wield the power of the afterlife.",
   unlockables: [
     {
       level: 1,
-      actions: [SummonCritter],
+      actions: [],
       traits: [ParanormalSense],
     },
     {
       level: 2,
+      actions: [],
+      traits: [Medium],
+    },
+    {
+      level: 3,
+      actions: [SummonBeast],
+      traits: [],
+    },
+    {
+      level: 4,
       actions: [GuardianAngel],
       traits: [],
     },
     {
-      level: 3,
-      actions: [Avenge],
-      traits: [Medium],
-    },
-    {
-      level: 4,
-      actions: [Revenge],
-      traits: [],
-    },
-    {
       level: 5,
-      actions: [SummonBeast],
-      traits: [Undying],
-    },
-    {
-      level: 6,
       actions: [SpectralHands],
       traits: [],
     },
     {
-      level: 7,
-      actions: [SummonHorde],
+      level: 6,
+      actions: [],
       traits: [SuperiorMedium],
+    },
+    {
+      level: 7,
+      actions: [Revenge],
+      traits: [],
     },
     {
       level: 8,
@@ -68,12 +60,12 @@ export const Summoner: Path = {
     },
     {
       level: 9,
-      actions: [Resurrect],
-      traits: [Blessed],
+      actions: [SummonHorde],
+      traits: [],
     },
     {
       level: 10,
-      actions: [GraspOfDeath],
+      actions: [GraspOfDeath, Resurrect],
       traits: [],
     },
   ],

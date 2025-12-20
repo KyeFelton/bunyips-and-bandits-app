@@ -1,75 +1,64 @@
 import { SkillType } from "../../enums/SkillType";
 import { Path } from "../../models/paths";
+import { PoisonSpray, Stench, Resuscitate, DeathCloud, Heal } from "../actions";
 import {
-  PoisonBreath,
-  Stench,
-  VenomSting,
-  Resuscitate,
-  ToxicPlume,
-  Odourless,
-  AcidBomb,
-  Paralysis,
-  DeathCloud,
-  Antidote,
-} from "../actions";
-import {
-  Healer,
-  SharpNose,
   QuickRecovery,
   ToxicResistance,
-  AcidicSkin,
+  Medic,
+  Pharmacist,
+  Undying,
 } from "../traits";
 
 export const Doctor: Path = {
   name: "Doctor",
-  skillTypes: [SkillType.Healing, SkillType.Toxic],
+  skillTypes: [SkillType.Biotic],
   description:
-    "Through years of study in morphing, doctors have mastered the delicate balance between healing and harm. Their knowledge of poisons allows them to weaken powerful enemies, whilst their expertise in healing makes them indispensable during the toughest times.",
+    "Through years of study, doctors have mastered the delicate balance between healing and harm. Their knowledge of poisons allows them to weaken powerful enemies, whilst their expertise in healing makes them indispensable during the toughest times.",
   unlockables: [
     {
       level: 1,
-      actions: [PoisonBreath],
-      traits: [Healer],
-    },
-    {
-      level: 2,
-      actions: [Stench],
+      actions: [Heal],
       traits: [],
     },
     {
+      level: 2,
+      actions: [],
+      traits: [Medic],
+    },
+    {
       level: 3,
-      actions: [VenomSting],
-      traits: [SharpNose],
+      actions: [],
+      traits: [ToxicResistance],
     },
     {
       level: 4,
-      actions: [Resuscitate],
+      actions: [PoisonSpray],
       traits: [],
     },
     {
       level: 5,
-      actions: [Antidote],
-      traits: [QuickRecovery],
+      actions: [Resuscitate],
+      traits: [],
     },
     {
       level: 6,
-      actions: [ToxicPlume],
+      actions: [Stench],
       traits: [],
     },
     {
       level: 7,
-      actions: [Odourless],
-      traits: [ToxicResistance],
+      actions: [],
+      traits: [QuickRecovery],
     },
     {
       level: 8,
-      actions: [AcidBomb],
-      traits: [],
+      actions: [],
+      traits: [Pharmacist],
     },
     {
       level: 9,
-      actions: [Paralysis],
-      traits: [AcidicSkin],
+      actions: [],
+      traits: [Undying],
     },
     {
       level: 10,

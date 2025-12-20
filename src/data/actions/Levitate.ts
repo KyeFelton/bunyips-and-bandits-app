@@ -6,7 +6,7 @@ import { Action } from "../../models/actions";
 export const Levitate: Action = {
   name: "Levitate",
   effect:
-    "You can charge your body to repel the ground and levitate at will. Whilst hovering, you can move at your walking speed.",
+    "You can charge your body to repel the ground and levitate up to a height of 10m. Whilst levitating, you can move at your walking speed.",
   skillType: SkillType.Electric,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.SingleTarget,

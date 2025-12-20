@@ -1,24 +1,16 @@
 import { SkillType } from "../../enums/SkillType";
 import { Path } from "../../models/paths";
 import {
-  Beacon,
+  GlowingOrb,
   Disguise,
   HeatRay,
   BlindingFlash,
-  SearingRadiance,
   Apparition,
   Invisibility,
   MirrorDome,
-  Hyperbeam,
   SolarFlare,
 } from "../actions";
-import {
-  InfraredSight,
-  SharpEyes,
-  Photosynthetic,
-  IronVision,
-  RadiantAura,
-} from "../traits";
+import { Photosynthetic, RadiantAura } from "../traits";
 
 export const Lightbender: Path = {
   name: "Lightbender",
@@ -28,18 +20,18 @@ export const Lightbender: Path = {
   unlockables: [
     {
       level: 1,
-      actions: [Beacon],
-      traits: [InfraredSight],
+      actions: [GlowingOrb],
+      traits: [],
     },
     {
       level: 2,
-      actions: [Disguise],
+      actions: [BlindingFlash],
       traits: [],
     },
     {
       level: 3,
-      actions: [BlindingFlash],
-      traits: [SharpEyes],
+      actions: [Disguise],
+      traits: [],
     },
     {
       level: 4,
@@ -48,28 +40,28 @@ export const Lightbender: Path = {
     },
     {
       level: 5,
-      actions: [Apparition],
-      traits: [Photosynthetic],
+      actions: [Invisibility],
+      traits: [],
     },
     {
       level: 6,
-      actions: [SearingRadiance],
+      actions: [Apparition],
       traits: [],
     },
     {
       level: 7,
-      actions: [Invisibility],
-      traits: [IronVision],
+      actions: [],
+      traits: [Photosynthetic],
     },
     {
       level: 8,
-      actions: [MirrorDome],
-      traits: [],
+      actions: [],
+      traits: [RadiantAura],
     },
     {
       level: 9,
-      actions: [Hyperbeam],
-      traits: [RadiantAura],
+      actions: [MirrorDome],
+      traits: [],
     },
     {
       level: 10,

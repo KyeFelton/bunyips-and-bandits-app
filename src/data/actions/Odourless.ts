@@ -7,7 +7,7 @@ export const Odourless: Action = {
   name: "Odourless",
   effect:
     "You mask your scent from detection by other creatures to make you odourless.",
-  skillType: SkillType.Toxic,
+  skillType: SkillType.Biotic,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 0,

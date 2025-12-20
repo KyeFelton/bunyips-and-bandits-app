@@ -10,5 +10,5 @@ export const Disguise: Action = {
   skillType: SkillType.Radiant,
   range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
-  staminaCost: 2,
+  staminaCost: 0,
 };

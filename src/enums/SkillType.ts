@@ -1,12 +1,11 @@
 export enum SkillType {
   Agility = "Agility",
+  Biotic = "Biotic",
   Charisma = "Charisma",
   Dexterity = "Dexterity",
   Electric = "Electric",
   Intelligence = "Intelligence",
-  Healing = "Healing",
   Kinetic = "Kinetic",
-  Martial = "Martial",
   Nature = "Nature",
   Perception = "Perception",
   Psychic = "Psychic",
@@ -17,6 +16,5 @@ export enum SkillType {
   Spirit = "Spirit",
   Stealth = "Stealth",
   Strength = "Strength",
-  Toxic = "Toxic",
   Willpower = "Willpower",
 }

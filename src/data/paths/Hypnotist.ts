@@ -1,24 +1,16 @@
 import { SkillType } from "../../enums/SkillType";
 import { Path } from "../../models/paths";
 import {
-  Scorn,
-  Disorient,
   Vex,
-  Frighten,
   Scourge,
-  Aggravate,
   Purge,
-  Delude,
   Hypnotise,
+  Message,
+  Broadcast,
+  Implant,
+  Pandemonium,
 } from "../actions";
-import { Obliterate } from "../actions/Obliterate";
-import {
-  PsychicSense,
-  Captivating,
-  Unbending,
-  Psychotic,
-  Unrelenting,
-} from "../traits";
+import { Psychotic, Unrelenting } from "../traits";
 
 export const Hypnotist: Path = {
   name: "Hypnotist",
@@ -28,52 +20,52 @@ export const Hypnotist: Path = {
   unlockables: [
     {
       level: 1,
-      actions: [Disorient],
-      traits: [PsychicSense],
+      actions: [Message],
+      traits: [],
     },
     {
       level: 2,
-      actions: [Scorn],
-      traits: [],
-    },
-    {
-      level: 3,
-      actions: [Frighten],
-      traits: [Captivating],
-    },
-    {
-      level: 4,
-      actions: [Vex],
-      traits: [],
-    },
-    {
-      level: 5,
-      actions: [Aggravate],
-      traits: [Unbending],
-    },
-    {
-      level: 6,
       actions: [Scourge],
       traits: [],
     },
     {
-      level: 7,
-      actions: [Delude],
-      traits: [Psychotic],
+      level: 3,
+      actions: [Vex],
+      traits: [],
     },
     {
-      level: 8,
+      level: 4,
+      actions: [],
+      traits: [Unrelenting],
+    },
+    {
+      level: 5,
+      actions: [Broadcast],
+      traits: [],
+    },
+    {
+      level: 6,
+      actions: [Hypnotise],
+      traits: [],
+    },
+    {
+      level: 7,
       actions: [Purge],
       traits: [],
     },
     {
+      level: 8,
+      actions: [],
+      traits: [Psychotic],
+    },
+    {
       level: 9,
-      actions: [Hypnotise],
-      traits: [Unrelenting],
+      actions: [Implant],
+      traits: [],
     },
     {
       level: 10,
-      actions: [Obliterate],
+      actions: [Pandemonium],
       traits: [],
     },
   ],

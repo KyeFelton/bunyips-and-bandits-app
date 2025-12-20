@@ -1,24 +1,14 @@
 import { SkillType } from "../../enums/SkillType";
 import { Path } from "../../models/paths";
 import {
-  Ignite,
-  FlameTorch,
-  Douse,
+  Heat,
   Flamethrower,
-  HeatWave,
   Extinguish,
-  Insulator,
   Fireworks,
   Inferno,
   Incinerate,
 } from "../actions";
-import {
-  InfraredSight,
-  FriendlyFire,
-  Inflammable,
-  Arsonist,
-  FireResistance,
-} from "../traits";
+import { InfraredSight, FriendlyFire, FireResistance, Ablaze } from "../traits";
 
 export const Pyromaniac: Path = {
   name: "Pyromaniac",
@@ -28,52 +18,52 @@ export const Pyromaniac: Path = {
   unlockables: [
     {
       level: 1,
-      actions: [Ignite],
-      traits: [InfraredSight],
-    },
-    {
-      level: 2,
-      actions: [FlameTorch],
+      actions: [Heat],
       traits: [],
     },
     {
-      level: 3,
-      actions: [Douse],
-      traits: [FriendlyFire],
-    },
-    {
-      level: 4,
+      level: 2,
       actions: [Flamethrower],
       traits: [],
     },
     {
-      level: 5,
+      level: 3,
+      actions: [],
+      traits: [InfraredSight],
+    },
+    {
+      level: 4,
       actions: [Extinguish],
+      traits: [],
+    },
+    {
+      level: 5,
+      actions: [],
       traits: [FireResistance],
     },
     {
       level: 6,
-      actions: [HeatWave],
-      traits: [],
-    },
-    {
-      level: 7,
-      actions: [Insulator],
-      traits: [Inflammable],
-    },
-    {
-      level: 8,
       actions: [Fireworks],
       traits: [],
     },
     {
+      level: 7,
+      actions: [],
+      traits: [FriendlyFire],
+    },
+    {
+      level: 8,
+      actions: [Inferno],
+      traits: [],
+    },
+    {
       level: 9,
-      actions: [Incinerate],
-      traits: [Arsonist],
+      actions: [],
+      traits: [Ablaze],
     },
     {
       level: 10,
-      actions: [Inferno],
+      actions: [Incinerate],
       traits: [],
     },
   ],

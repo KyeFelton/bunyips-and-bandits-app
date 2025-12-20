@@ -2,23 +2,14 @@ import { SkillType } from "../../enums/SkillType";
 import { Path } from "../../models/paths";
 import {
   Taser,
-  Shock,
-  Impedance,
   ElectricCharge,
   Attract,
   Levitate,
   Electrocute,
   Lightning,
   Discharge,
-  Zap,
 } from "../actions";
-import {
-  Conductive,
-  ThunderBuddy,
-  ElectricResistance,
-  LightningRod,
-  StaticSkin,
-} from "../traits";
+import { ElectricResistance, LightningRod, StaticSkin } from "../traits";
 
 export const Electrician: Path = {
   name: "Electrician",
@@ -29,51 +20,51 @@ export const Electrician: Path = {
     {
       level: 1,
       actions: [Taser],
-      traits: [Conductive],
+      traits: [],
     },
     {
       level: 2,
-      actions: [Shock],
-      traits: [],
-    },
-    {
-      level: 3,
-      actions: [Impedance],
-      traits: [ThunderBuddy],
-    },
-    {
-      level: 4,
-      actions: [ElectricCharge],
-      traits: [],
-    },
-    {
-      level: 5,
-      actions: [Zap],
-      traits: [ElectricResistance],
-    },
-    {
-      level: 6,
       actions: [Attract],
       traits: [],
     },
     {
-      level: 7,
-      actions: [Electrocute],
-      traits: [LightningRod],
+      level: 3,
+      actions: [],
+      traits: [ElectricResistance],
     },
     {
-      level: 8,
+      level: 4,
+      actions: [Lightning],
+      traits: [],
+    },
+    {
+      level: 5,
+      actions: [ElectricCharge],
+      traits: [],
+    },
+    {
+      level: 6,
       actions: [Levitate],
       traits: [],
     },
     {
+      level: 7,
+      actions: [],
+      traits: [LightningRod],
+    },
+    {
+      level: 8,
+      actions: [Discharge],
+      traits: [],
+    },
+    {
       level: 9,
-      actions: [Lightning],
+      actions: [],
       traits: [StaticSkin],
     },
     {
       level: 10,
-      actions: [Discharge],
+      actions: [Electrocute],
       traits: [],
     },
   ],

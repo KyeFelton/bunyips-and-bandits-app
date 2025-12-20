@@ -6,9 +6,9 @@ import { Action } from "../../models/actions";
 export const Stench: Action = {
   name: "Stench",
   effect:
-    "A horrendous stench radiates from your body. Nearby targets become anosmic.",
-  skillType: SkillType.Toxic,
+    "A horrendous stench radiates from your body. Nearby targets take 1 psychic damage, become anosmic and are stunned.",
+  skillType: SkillType.Biotic,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.Near,
-  staminaCost: 1,
+  staminaCost: 2,
 };

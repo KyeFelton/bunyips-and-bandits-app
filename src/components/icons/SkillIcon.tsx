@@ -2,7 +2,6 @@ import {
   BicepsFlexed,
   Route,
   Hand,
-  Swords,
   Book,
   Leaf,
   ShipWheel,
@@ -16,7 +15,6 @@ import {
   Sun,
   Music2,
   BrainCircuit,
-  Droplets,
   Heart,
   Ghost,
 } from "lucide-react";
@@ -35,8 +33,6 @@ export const SkillIcon = ({ type, className = "h-4 w-4" }: Props) => {
       return <Route className={className} />;
     case SkillType.Dexterity:
       return <Hand className={className} />;
-    case SkillType.Martial:
-      return <Swords className={className} />;
     case SkillType.Intelligence:
       return <Book className={className} />;
     case SkillType.Nature:
@@ -63,9 +59,7 @@ export const SkillIcon = ({ type, className = "h-4 w-4" }: Props) => {
       return <Music2 className={className} />;
     case SkillType.Psychic:
       return <BrainCircuit className={className} />;
-    case SkillType.Toxic:
-      return <Droplets className={className} />;
-    case SkillType.Healing:
+    case SkillType.Biotic:
       return <Heart className={className} />;
     case SkillType.Spirit:
       return <Ghost className={className} />;

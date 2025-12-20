@@ -1,23 +1,12 @@
 import { SkillType } from "../../enums/SkillType";
 import { Path } from "../../models/paths";
-import {
-  Scorn,
-  Insight,
-  Vex,
-  Disturb,
-  Scourge,
-  Reveal,
-  Torment,
-  Foresee,
-  Interference,
-  MindRead,
-} from "../actions";
+import { Insight, Reveal, MindRead, Envisage, Meditate } from "../actions";
 import {
   PsychicSense,
-  Psychologist,
   Unbending,
-  Custodian,
   Foresight,
+  Detector,
+  Omnipresent,
 } from "../traits";
 
 export const Mindseer: Path = {
@@ -28,53 +17,53 @@ export const Mindseer: Path = {
   unlockables: [
     {
       level: 1,
-      actions: [Insight],
+      actions: [],
       traits: [PsychicSense],
     },
     {
       level: 2,
-      actions: [Scorn],
+      actions: [Insight],
       traits: [],
     },
     {
       level: 3,
-      actions: [Disturb],
-      traits: [Psychologist],
+      actions: [Meditate],
+      traits: [],
     },
     {
       level: 4,
-      actions: [Vex],
-      traits: [],
+      actions: [],
+      traits: [Detector],
     },
     {
       level: 5,
       actions: [Reveal],
-      traits: [Unbending],
-    },
-    {
-      level: 6,
-      actions: [Scourge],
       traits: [],
     },
     {
+      level: 6,
+      actions: [],
+      traits: [Foresight],
+    },
+    {
       level: 7,
-      actions: [Foresee],
-      traits: [Custodian],
+      actions: [],
+      traits: [Omnipresent],
     },
     {
       level: 8,
-      actions: [Torment],
+      actions: [MindRead],
       traits: [],
     },
     {
       level: 9,
-      actions: [Interference],
-      traits: [Foresight],
+      actions: [Envisage],
+      traits: [],
     },
     {
       level: 10,
-      actions: [MindRead],
-      traits: [],
+      actions: [],
+      traits: [Unbending],
     },
   ],
 };

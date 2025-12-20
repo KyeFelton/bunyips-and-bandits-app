@@ -7,7 +7,7 @@ export const Antidote: Action = {
   name: "Antidote",
   effect:
     "You focus your attention towards countering the actions of your foes. You and adjacent allies are protected with 2 toxic armour.",
-  skillType: SkillType.Healing,
+  skillType: SkillType.Biotic,
   range: Range.Close,
   areaOfEffect: AreaOfEffect.Close,
   staminaCost: 1,

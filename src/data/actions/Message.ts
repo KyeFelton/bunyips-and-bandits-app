@@ -3,12 +3,11 @@ import { Range } from "../../enums/Range";
 import { SkillType } from "../../enums/SkillType";
 import { Action } from "../../models/actions";
 
-export const Ignite: Action = {
-  name: "Ignite",
-  effect:
-    "A spark of energy emits from your body towards your opponent, causing them to catch fire.",
-  skillType: SkillType.Pyro,
-  range: Range.Close,
+export const Message: Action = {
+  name: "Message",
+  effect: "You send a telepathic message to a creature.",
+  skillType: SkillType.Psychic,
+  range: Range.Far,
   areaOfEffect: AreaOfEffect.SingleTarget,
-  staminaCost: 1,
+  staminaCost: 0,
 };

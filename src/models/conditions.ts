@@ -1,5 +1,4 @@
 import { DamageType } from "../enums/DamageType";
-import { Locomotion } from "../enums/Locomotion";
 import { SkillType } from "../enums/SkillType";
 import { Effect } from "./effect";
 
@@ -38,7 +37,7 @@ export const Blinded: Condition = {
 export const Burning: Condition = {
   name: "Burning",
   description:
-    "You take 1 fire damage at the start of each of your turns. After taking the damage, you may use an action to douse the flame and remove the status.",
+    "You take 2 fire damage at the start of each of your turns. After taking the damage, you may use an action to douse the flame and remove the status.",
   stackable: 0,
 };
 
@@ -203,32 +202,7 @@ export const Restrained: Condition = {
   name: "Restrained",
   description: "You cannot move on your next turn.",
   stackable: 0,
-  effects: [
-    {
-      speed: {
-        locomotion: Locomotion.Climb,
-        multiplier: 0,
-      },
-    },
-    {
-      speed: {
-        locomotion: Locomotion.Fly,
-        multiplier: 0,
-      },
-    },
-    {
-      speed: {
-        locomotion: Locomotion.Swim,
-        multiplier: 0,
-      },
-    },
-    {
-      speed: {
-        locomotion: Locomotion.Walk,
-        multiplier: 0,
-      },
-    },
-  ],
+  effects: [],
 };
 
 export const Silent: Condition = {
@@ -320,7 +294,7 @@ export const Infatuated: Condition = {
 export const Sleeping: Condition = {
   name: "Sleeping",
   description:
-    "You are in a deep sleep and are unconscious. You cannot perceive your surroundings or take actions. Loud noises or physical contact may wake you.",
+    "You are in a deep sleep. You cannot perceive your surroundings or take actions. Loud noises or physical contact may wake you.",
   stackable: 0,
 };
 

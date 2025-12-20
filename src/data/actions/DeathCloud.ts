@@ -7,7 +7,7 @@ export const DeathCloud: Action = {
   name: "Death cloud",
   effect:
     "The air around you is overwhelmed with a toxic haze. Targets take 5 toxic damage and become anosmic.",
-  skillType: SkillType.Toxic,
+  skillType: SkillType.Biotic,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.Near,
   staminaCost: 4,

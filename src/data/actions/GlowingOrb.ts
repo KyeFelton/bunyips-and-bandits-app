@@ -3,11 +3,11 @@ import { Range } from "../../enums/Range";
 import { SkillType } from "../../enums/SkillType";
 import { Action } from "../../models/actions";
 
-export const Beacon: Action = {
-  name: "Beacon",
-  effect: "You illuminate your surroundings with light.",
+export const GlowingOrb: Action = {
+  name: "Glowing orb",
+  effect: "You manifest a glowing orb that illuminates your surroundings.",
   skillType: SkillType.Radiant,
   range: Range.Near,
   areaOfEffect: AreaOfEffect.Near,
-  staminaCost: 1,
+  staminaCost: 0,
 };

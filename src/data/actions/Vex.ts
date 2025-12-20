@@ -6,9 +6,9 @@ import { Action } from "../../models/actions";
 export const Vex: Action = {
   name: "Vex",
   effect:
-    "You overwhelm your target with telepathic voices that confuse their thoughts. They are stunned.",
+    "You overwhelm the mind of a near creature to perceive an illusion. They take 1 psychic damage and become deluded for one turn. Describe the illusion that they perceive to the GM.",
   skillType: SkillType.Psychic,
   range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
-  staminaCost: 1,
+  staminaCost: 4,
 };
