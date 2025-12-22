@@ -1,5 +1,5 @@
 import { SkillType } from "../../enums/SkillType";
-import { Path } from "../../models/paths";
+import { SkillProgression } from "../../models/skillProgression";
 import {
   Amplify,
   Mimic,
@@ -12,11 +12,8 @@ import {
 } from "../actions";
 import { TremorHearing, Rockstar } from "../traits";
 
-export const Sonomancer: Path = {
-  name: "Sonomancer",
-  skillTypes: [SkillType.Sonic],
-  description:
-    "Sonomancers are attuned to the rhythms and sounds of their environment. They can weave soundwaves to conjure enchantments and blast their enemies with devastating force.",
+export const SonicProgression: SkillProgression = {
+  skill: SkillType.Sonic,
   unlockables: [
     {
       level: 1,

@@ -1,5 +1,5 @@
 import { SkillType } from "../../enums/SkillType";
-import { Path } from "../../models/paths";
+import { SkillProgression } from "../../models/skillProgression";
 import {
   GuardianAngel,
   Revenge,
@@ -12,11 +12,8 @@ import {
 } from "../actions";
 import { ParanormalSense, Medium, SuperiorMedium } from "../traits";
 
-export const Evoker: Path = {
-  name: "Evoker",
-  skillTypes: [SkillType.Spirit],
-  description:
-    "Summoners are intermediaries between the living and the dead, calling forth spirits to aid them in battle. Whether raising spectral warriors or seeking counsel from lost souls, summoners wield the power of the afterlife.",
+export const SpiritProgression: SkillProgression = {
+  skill: SkillType.Spirit,
   unlockables: [
     {
       level: 1,

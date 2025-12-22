@@ -10,7 +10,9 @@ import {
   currentMindAtom,
   currentStaminaAtom,
   conditionsAtom,
+  skillsProgressedSinceRestAtom,
 } from "../state/character";
+import { SkillType } from "../enums/SkillType";
 import { HealthBar } from "./HealthBar";
 import { Badge } from "./ui/badge";
 import { useState } from "react";
@@ -38,6 +40,7 @@ export const HealthCard = ({ className }: Props) => {
   const setCurrentBody = useSetAtom(currentBodyAtom);
   const setCurrentMind = useSetAtom(currentMindAtom);
   const setCurrentStamina = useSetAtom(currentStaminaAtom);
+  const setSkillsProgressedSinceRest = useSetAtom(skillsProgressedSinceRestAtom);
   const [isAddConditionModalOpen, setIsAddConditionModalOpen] = useState(false);
   const [isDefeatModalOpen, setIsDefeatModalOpen] = useState(false);
   const [isConditionGainedModalOpen, setIsConditionGainedModalOpen] =
@@ -63,6 +66,7 @@ export const HealthCard = ({ className }: Props) => {
     setCurrentMind(calculateRestHealthValue(mind, staminaPercentage));
     setCurrentStamina(stamina.max);
     setConditions([]);
+    setSkillsProgressedSinceRest(new Set<SkillType>());
   };
 
   const handleRemoveCondition = (conditionName: string) => {

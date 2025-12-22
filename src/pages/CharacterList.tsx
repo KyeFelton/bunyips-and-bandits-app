@@ -152,7 +152,8 @@ export function CharactersPage() {
               <CardFooter className="flex flex-col items-start p-4">
                 <h3 className="font-semibold text-lg">{character.name}</h3>
                 <div className="text-sm text-muted-foreground">
-                  Level {character.level} {character.species}
+                  {character.origin} {character.species}
+                  {character.class ? ` | ${character.class}` : ""}
                 </div>
               </CardFooter>
             </Card>

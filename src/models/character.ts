@@ -4,7 +4,6 @@ import { DamageType } from "../enums/DamageType";
 import { SenseType } from "../enums/SenseType";
 import { SpeedRating } from "../enums/SpeedRating";
 import { CharacterItem } from "./items";
-import { Path } from "./paths";
 
 export type Character = {
   name: string;
@@ -16,7 +15,7 @@ export type Character = {
   background: string;
   personality: string;
   image?: string;
-  level: number;
+  class: string;
   body: {
     max: number;
     current: number;
@@ -44,7 +43,6 @@ export type Character = {
     [DamageType.Force]: number;
   };
   weapon: number;
-  paths: Path[];
   items: CharacterItem[];
   money: number;
   skills: {

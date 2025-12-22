@@ -1,6 +1,6 @@
 import { useAtomValue, useAtom } from "jotai";
 import {
-  pathsAtom,
+  actionsAtom,
   currentStaminaAtom,
   skillRollValuesAtom,
 } from "./../state/character";
@@ -45,31 +45,16 @@ const AreaIcon = ({ type }: { type: AreaOfEffect }) => {
 };
 
 export const ActionsList = () => {
-  const paths = useAtomValue(pathsAtom);
+  const unlockedActions = useAtomValue(actionsAtom);
   const [stamina, setStamina] = useAtom(currentStaminaAtom);
   const skillRollValues = useAtomValue(skillRollValuesAtom);
   const showRollToast = useRollToast();
 
   // Basic actions available to all characters
-  const basicActions: (Action & { path: string })[] = [
-    { ...Brawl, path: "Basic" },
-    { ...Dash, path: "Basic" },
-  ];
-
-  // Path-unlocked actions
-  const pathActions: (Action & { path: string })[] = paths.flatMap((path) =>
-    path.unlockables
-      .filter((unlock) => unlock.level <= path.level)
-      .flatMap((unlock) =>
-        unlock.actions.map((action) => ({
-          ...action,
-          path: path.name,
-        }))
-      )
-  );
+  const basicActions: Action[] = [Brawl, Dash];
 
   // Combine and sort all actions
-  const actions = [...basicActions, ...pathActions].sort((a, b) =>
+  const actions = [...basicActions, ...unlockedActions].sort((a, b) =>
     a.name.localeCompare(b.name)
   );
 
@@ -85,6 +70,7 @@ export const ActionsList = () => {
         const rollValues = skillRollValues[action.skillType];
         showRollToast({
           name: `${action.name} (${action.skillType})`,
+          type: action.skillType,
           dice: rollValues.dice,
           modifier: rollValues.modifier,
           hasAdvantage: rollValues.hasAdvantage,
@@ -109,7 +95,7 @@ export const ActionsList = () => {
         </TableHeader>
         <TableBody>
           {actions.map((action) => (
-            <TableRow key={`${action.path}-${action.name}`} className="group">
+            <TableRow key={action.name} className="group">
               <TableCell>
                 <div className="flex items-center gap-1">
                   {action.name}

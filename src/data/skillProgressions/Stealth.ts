@@ -1,23 +1,18 @@
 import { SkillType } from "../../enums/SkillType";
-import { Path } from "../../models/paths";
+import { SkillProgression } from "../../models/skillProgression";
 import { QuickDraw } from "../actions";
 import {
   Archer,
   Tracker,
-  Fletcher,
   Sleuth,
   Assassin,
   Trapper,
   Sharpshooter,
   ClaimTheHunt,
-  ArcherII,
 } from "../traits";
 
-export const Hunter: Path = {
-  name: "Hunter",
-  skillTypes: [SkillType.Stealth, SkillType.Dexterity],
-  description:
-    "Hunters are masters of tracking, stealth, and precision strikes. They excel at ranged combat and can pursue their prey relentlessly through any terrain.",
+export const StealthProgression: SkillProgression = {
+  skill: SkillType.Stealth,
   unlockables: [
     {
       level: 1,
@@ -32,7 +27,7 @@ export const Hunter: Path = {
     {
       level: 3,
       actions: [],
-      traits: [Fletcher],
+      traits: [],
     },
     {
       level: 4,
@@ -67,7 +62,7 @@ export const Hunter: Path = {
     {
       level: 10,
       actions: [],
-      traits: [ArcherII],
+      traits: [],
     },
   ],
 };

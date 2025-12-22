@@ -10,23 +10,14 @@ import {
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "./ui/select";
 import { Image as ImageIcon } from "lucide-react";
 import {
   nameAtom,
   imageAtom,
   speciesAtom,
   originAtom,
-  levelAtom,
 } from "../state/character";
 import { getSpeciesImage } from "../utils/speciesImages";
-import { LevelUpModal } from "./LevelUpModal";
 
 type Props = {
   isOpen: boolean;
@@ -38,35 +29,24 @@ export const EditNameDialog = ({ isOpen, onClose }: Props) => {
   const [image, setImage] = useAtom(imageAtom);
   const [species] = useAtom(speciesAtom);
   const [origin] = useAtom(originAtom);
-  const [level, setLevel] = useAtom(levelAtom);
 
   const [pendingName, setPendingName] = useState("");
   const [pendingImage, setPendingImage] = useState<string | undefined>(
     undefined
   );
-  const [pendingLevel, setPendingLevel] = useState(level);
-  const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
       setPendingName(name);
       setPendingImage(image);
-      setPendingLevel(level);
     }
-  }, [isOpen, name, image, level]);
+  }, [isOpen, name, image]);
 
   const handleSave = () => {
     const finalName = pendingName.trim() === "" ? "No name" : pendingName;
     setName(finalName);
     setImage(pendingImage);
-
-    // If level changed, open level up modal
-    if (pendingLevel > level) {
-      setLevel(pendingLevel);
-      setIsLevelUpModalOpen(true);
-    } else {
-      onClose();
-    }
+    onClose();
   };
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,14 +59,6 @@ export const EditNameDialog = ({ isOpen, onClose }: Props) => {
       };
       reader.readAsDataURL(file);
     }
-  };
-
-  const handleLevelUpModalClose = (success: boolean) => {
-    if (!success) {
-      setLevel(level);
-    }
-    setIsLevelUpModalOpen(false);
-    onClose();
   };
 
   return (
@@ -104,31 +76,6 @@ export const EditNameDialog = ({ isOpen, onClose }: Props) => {
               onChange={(e) => setPendingName(e.target.value)}
               placeholder="Enter character name"
             />
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="level">Level</Label>
-            <Select
-              value={pendingLevel.toString()}
-              onValueChange={(value) => setPendingLevel(parseInt(value))}
-            >
-              <SelectTrigger className="w-[120px]" id="level">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {Array.from(
-                  { length: 10 - level + 1 },
-                  (_, i) => level + i
-                ).map((lvl) => (
-                  <SelectItem key={lvl} value={lvl.toString()}>
-                    {lvl}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <p className="text-xs text-muted-foreground">
-              You cannot go back a level.
-            </p>
           </div>
 
           <div className="space-y-2">
@@ -166,11 +113,6 @@ export const EditNameDialog = ({ isOpen, onClose }: Props) => {
           <Button onClick={handleSave}>Save</Button>
         </DialogFooter>
       </DialogContent>
-      <LevelUpModal
-        open={isLevelUpModalOpen}
-        onClose={handleLevelUpModalClose}
-        preventCancel={true}
-      />
     </Dialog>
   );
 };

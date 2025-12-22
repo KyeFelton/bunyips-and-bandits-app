@@ -1,5 +1,5 @@
 import { SkillType } from "../../enums/SkillType";
-import { Path } from "../../models/paths";
+import { SkillProgression } from "../../models/skillProgression";
 import {
   Vex,
   Scourge,
@@ -9,64 +9,74 @@ import {
   Broadcast,
   Implant,
   Pandemonium,
+  Insight,
+  Reveal,
+  MindRead,
+  Envisage,
+  Meditate,
 } from "../actions";
-import { Psychotic, Unrelenting } from "../traits";
+import {
+  Psychotic,
+  Unrelenting,
+  PsychicSense,
+  Unbending,
+  Foresight,
+  Detector,
+  Omnipresent,
+} from "../traits";
 
-export const Hypnotist: Path = {
-  name: "Hypnotist",
-  skillTypes: [SkillType.Psychic],
-  description:
-    "Hypnotists are the puppeteers of the mind, bending reality through suggestion and illusion. With a mere whisper or a piercing gaze, they can lull enemies into a trance, distort perceptions, or even command others to act against their own will.",
+export const PsychicProgression: SkillProgression = {
+  skill: SkillType.Psychic,
   unlockables: [
     {
       level: 1,
       actions: [Message],
-      traits: [],
+      traits: [PsychicSense],
     },
     {
       level: 2,
-      actions: [Scourge],
+      actions: [Scourge, Insight],
       traits: [],
     },
     {
       level: 3,
-      actions: [Vex],
+      actions: [Vex, Meditate],
       traits: [],
     },
     {
       level: 4,
       actions: [],
-      traits: [Unrelenting],
+      traits: [Unrelenting, Detector],
     },
     {
       level: 5,
-      actions: [Broadcast],
+      actions: [Broadcast, Reveal],
       traits: [],
     },
     {
       level: 6,
       actions: [Hypnotise],
-      traits: [],
+      traits: [Foresight],
     },
     {
       level: 7,
       actions: [Purge],
-      traits: [],
+      traits: [Omnipresent],
     },
     {
       level: 8,
-      actions: [],
+      actions: [MindRead],
       traits: [Psychotic],
     },
     {
       level: 9,
-      actions: [Implant],
+      actions: [Implant, Envisage],
       traits: [],
     },
     {
       level: 10,
       actions: [Pandemonium],
-      traits: [],
+      traits: [Unbending],
     },
   ],
 };

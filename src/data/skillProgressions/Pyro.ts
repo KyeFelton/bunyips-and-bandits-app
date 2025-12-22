@@ -1,5 +1,5 @@
 import { SkillType } from "../../enums/SkillType";
-import { Path } from "../../models/paths";
+import { SkillProgression } from "../../models/skillProgression";
 import {
   Heat,
   Flamethrower,
@@ -10,11 +10,8 @@ import {
 } from "../actions";
 import { InfraredSight, FriendlyFire, FireResistance, Ablaze } from "../traits";
 
-export const Pyromaniac: Path = {
-  name: "Pyromaniac",
-  skillTypes: [SkillType.Pyro],
-  description:
-    "Pyromaniacs are the masters of controlled chaos, using flames to disrupt and destroy their enemies. This specialty uses a combination of sorcery and morphing to produce fire at will.",
+export const PyroProgression: SkillProgression = {
+  skill: SkillType.Pyro,
   unlockables: [
     {
       level: 1,
@@ -23,13 +20,13 @@ export const Pyromaniac: Path = {
     },
     {
       level: 2,
-      actions: [Flamethrower],
-      traits: [],
+      actions: [],
+      traits: [InfraredSight],
     },
     {
       level: 3,
-      actions: [],
-      traits: [InfraredSight],
+      actions: [Flamethrower],
+      traits: [],
     },
     {
       level: 4,

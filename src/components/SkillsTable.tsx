@@ -11,16 +11,28 @@ import { SkillIcon } from "./icons/SkillIcon";
 import { HelpCircle } from "lucide-react";
 import { SkillType } from "./../enums/SkillType";
 import * as Skills from "./../models/skills";
-import { skillLevelsAtom, skillRollValuesAtom } from "./../state/character";
+import {
+  skillLevelsAtom,
+  skillRollValuesAtom,
+  criticalSuccessesAtom,
+} from "./../state/character";
 import { useRollToast } from "./RollToast";
 import { Button } from "./ui/button";
 import { SkillForm } from "./../enums/SkillForm";
 import { RollText } from "./RollText";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { CriticalSuccessIndicator } from "./CriticalSuccessIndicator";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 
 export const SkillsTable = () => {
   const skillLevels = useAtomValue(skillLevelsAtom);
   const skillRollValues = useAtomValue(skillRollValuesAtom);
+  const criticalSuccesses = useAtomValue(criticalSuccessesAtom);
   const showRollToast = useRollToast();
 
   const handleRoll = (skill: {
@@ -32,7 +44,11 @@ export const SkillsTable = () => {
   }) => {
     showRollToast({
       name: skill.type,
-      ...skill,
+      type: skill.type,
+      dice: skill.dice,
+      modifier: skill.modifier,
+      hasAdvantage: skill.hasAdvantage,
+      hasDisadvantage: skill.hasDisadvantage,
     });
   };
 
@@ -58,6 +74,7 @@ export const SkillsTable = () => {
           <TableRow>
             <TableHead>Skill</TableHead>
             <TableHead className="text-center">Level</TableHead>
+            <TableHead className="text-center w-20">Progress</TableHead>
             <TableHead className="text-left w-24">Roll</TableHead>
           </TableRow>
         </TableHeader>
@@ -94,6 +111,25 @@ export const SkillsTable = () => {
                     </div>
                   </TableCell>
                   <TableCell className="text-center">{skill.level}</TableCell>
+                  <TableCell className="text-center">
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <CriticalSuccessIndicator
+                            count={criticalSuccesses[skill.type] || 0}
+                          />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p className="text-xs">
+                            {criticalSuccesses[skill.type] || 0} critical
+                            success
+                            {criticalSuccesses[skill.type] === 1 ? "" : "es"}.
+                            Every 2 levels up the skill.
+                          </p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </TableCell>
                   <TableCell className="text-left font-mono">
                     {skill.dice ? (
                       <div className="flex items-center gap-1">

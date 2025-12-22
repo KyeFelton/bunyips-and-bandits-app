@@ -4,7 +4,7 @@ import { useAtomValue, useSetAtom } from "jotai";
 import { saveFileAtom, focalCharacterIdAtom } from "../state/saveFile";
 import {
   nameAtom,
-  levelAtom,
+  classAtom,
   currentBodyAtom,
   bodyUpgradesAtom,
   currentMindAtom,
@@ -21,9 +21,8 @@ import {
   imageAtom,
   moneyAtom,
   itemsAtom,
-  pathsAtom,
   customTraitsAtom,
-  skillLevelUpgradesAtom,
+  criticalSuccessesAtom,
   conditionsAtom,
 } from "../state/character";
 
@@ -36,7 +35,7 @@ export const useLoadCharacterFromUrl = () => {
   const saveFile = useAtomValue(saveFileAtom);
   const setFocalCharacterId = useSetAtom(focalCharacterIdAtom);
   const setName = useSetAtom(nameAtom);
-  const setLevel = useSetAtom(levelAtom);
+  const setClass = useSetAtom(classAtom);
   const setCurrentBody = useSetAtom(currentBodyAtom);
   const setBodyUpgrades = useSetAtom(bodyUpgradesAtom);
   const setCurrentMind = useSetAtom(currentMindAtom);
@@ -53,9 +52,8 @@ export const useLoadCharacterFromUrl = () => {
   const setImage = useSetAtom(imageAtom);
   const setMoney = useSetAtom(moneyAtom);
   const setItems = useSetAtom(itemsAtom);
-  const setPaths = useSetAtom(pathsAtom);
   const setCustomTraits = useSetAtom(customTraitsAtom);
-  const setSkillLevelUpgrades = useSetAtom(skillLevelUpgradesAtom);
+  const setCriticalSuccesses = useSetAtom(criticalSuccessesAtom);
   const setConditions = useSetAtom(conditionsAtom);
 
   useEffect(() => {
@@ -63,7 +61,7 @@ export const useLoadCharacterFromUrl = () => {
       const character = saveFile.characters[id];
       setFocalCharacterId(id);
       setName(character.name);
-      setLevel(character.level);
+      setClass(character.class);
       setCurrentBody(character.currentBody);
       setBodyUpgrades(character.bodyUpgrades);
       setCurrentMind(character.currentMind);
@@ -80,9 +78,8 @@ export const useLoadCharacterFromUrl = () => {
       setImage(character.image);
       setMoney(character.money);
       setItems(character.items);
-      setPaths(character.paths);
       setCustomTraits(character.customTraits);
-      setSkillLevelUpgrades(character.skillLevelUpgrades);
+      setCriticalSuccesses(character.criticalSuccesses);
       setConditions(character.conditions || []);
     }
   }, [
@@ -90,7 +87,7 @@ export const useLoadCharacterFromUrl = () => {
     saveFile,
     setFocalCharacterId,
     setName,
-    setLevel,
+    setClass,
     setCurrentBody,
     setBodyUpgrades,
     setCurrentMind,
@@ -107,9 +104,8 @@ export const useLoadCharacterFromUrl = () => {
     setImage,
     setMoney,
     setItems,
-    setPaths,
     setCustomTraits,
-    setSkillLevelUpgrades,
+    setCriticalSuccesses,
     setConditions,
   ]);
 };

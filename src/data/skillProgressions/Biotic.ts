@@ -1,38 +1,51 @@
 import { SkillType } from "../../enums/SkillType";
-import { Path } from "../../models/paths";
-import { PoisonSpray, Stench, Resuscitate, DeathCloud, Heal } from "../actions";
+import { SkillProgression } from "../../models/skillProgression";
+import {
+  PoisonSpray,
+  Stench,
+  Resuscitate,
+  DeathCloud,
+  Heal,
+  Regenerate,
+  Mask,
+  Mutate,
+  Morph,
+  Absorb,
+  Burst,
+} from "../actions";
 import {
   QuickRecovery,
   ToxicResistance,
   Medic,
   Pharmacist,
   Undying,
+  SharpSenses,
+  RapidShift,
+  Poisonous,
+  ThickSkin,
 } from "../traits";
 
-export const Doctor: Path = {
-  name: "Doctor",
-  skillTypes: [SkillType.Biotic],
-  description:
-    "Through years of study, doctors have mastered the delicate balance between healing and harm. Their knowledge of poisons allows them to weaken powerful enemies, whilst their expertise in healing makes them indispensable during the toughest times.",
+export const BioticProgression: SkillProgression = {
+  skill: SkillType.Biotic,
   unlockables: [
     {
       level: 1,
-      actions: [Heal],
+      actions: [Heal, Regenerate],
       traits: [],
     },
     {
       level: 2,
-      actions: [],
+      actions: [Mask],
       traits: [Medic],
     },
     {
       level: 3,
       actions: [],
-      traits: [ToxicResistance],
+      traits: [ToxicResistance, SharpSenses],
     },
     {
       level: 4,
-      actions: [PoisonSpray],
+      actions: [PoisonSpray, Mutate],
       traits: [],
     },
     {
@@ -42,28 +55,28 @@ export const Doctor: Path = {
     },
     {
       level: 6,
-      actions: [Stench],
+      actions: [Stench, Morph],
       traits: [],
     },
     {
       level: 7,
       actions: [],
-      traits: [QuickRecovery],
+      traits: [QuickRecovery, RapidShift],
     },
     {
       level: 8,
-      actions: [],
+      actions: [Absorb, Burst],
       traits: [Pharmacist],
     },
     {
       level: 9,
       actions: [],
-      traits: [Undying],
+      traits: [Undying, Poisonous],
     },
     {
       level: 10,
       actions: [DeathCloud],
-      traits: [],
+      traits: [ThickSkin],
     },
   ],
 };

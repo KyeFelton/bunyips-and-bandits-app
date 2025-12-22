@@ -150,24 +150,18 @@ const content = (
           involved in the story.
         </li>
         <li>
-          <b>Choose your paths</b>: Paths define a unique set of traits and
-          actions that your character has acquired and mastered. At level 1, you
-          can choose one path to start with. You'll be able to progress this
-          path or unlock new ones to develop your character's abilities as you
-          level up.
-        </li>
-        <li>
-          <b>Upgrade your skills</b>: Every character has a set of skills that
-          define their physical and mental abilities. At the start, you'll have
-          some default skills from your species, plus two skill upgrades to
-          improve any abilities you like. After each level, you can upgrade one
-          additional skill.
+          <b>Choose your class</b>: Your class represents your character's
+          background, training, and experience. It determines which skills you
+          excel at beyond your species' natural abilities, and may grant you
+          additional traits or actions. For example, a pyromaniac starts with
+          higher pyro skill, while a hunter gains bonuses to stealth and
+          dexterity along with archery proficiency.
         </li>
         <li>
           <b>Create a unique trait</b>: Every adventurer has something special
           about them—something that sets them apart. A performer may be better
           at winning the crowd. An assassin may be skilled at blending into the
-          shadows. A hunter may be better at tracking animals. This is where you
+          shadows. A merchant may have contacts in every town. This is where you
           and the GM get creative. Your unique trait is linked to your backstory
           and gives your character an advantage in certain situations.
         </li>
@@ -182,18 +176,40 @@ const content = (
         both in terms of game mechanics and role-playing opportunities.
       </p>
     </Body>
-    <H3>Levelling</H3>
+    <H3>Progression</H3>
     <Body>
       <p>
-        As you adventure, your character gains experience and improves over
-        time. Levels indicate a character's skill and capability, unlocking
-        stronger abilities, improved stats, and new paths to explore. Characters
-        start at level 1 and can work their way up to level 10 by completing
-        missions and overcoming difficult encounters. The GM decides when
-        levelling up happens—usually after completing a major milestone. Each
-        time you level up, you may choose to progress one path and upgrade one
-        skill, allowing you to tailor your character's growth to your playstyle
-        and strategy.
+        As you adventure, your character improves through practice and
+        experience. Unlike traditional levelling systems, your character grows
+        by actively using their skills in challenging situations. When you push
+        your abilities to their limits and achieve exceptional results, you
+        become better at that skill.
+      </p>
+      <p>
+        Each time you perform a skill check and roll the maximum value on your
+        die (a critical success), mark it down on your character sheet. Once you
+        achieve two critical successes with the same skill, you can upgrade that
+        skill by one level. This ensures that the skills you actually use in
+        play are the ones that improve, making your character's development
+        organic and tied to your adventures.
+      </p>
+      <p>
+        To prevent rapid skill progression through repeated use, each skill can
+        only progress once between rests. If you roll a critical success on a
+        skill that has already progressed since your last rest, it still counts
+        as a critical success for the purposes of that action, but it won't
+        contribute toward leveling up that skill until you rest.
+      </p>
+      <p>
+        Each skill can be improved by up to 5 levels from its starting value.
+        For example, if you begin with level 3 strength, you can progress it to
+        a maximum of level 8. Once you reach your maximum potential in a skill,
+        further critical successes with that skill won't increase it further.
+      </p>
+      <p>
+        As your skills improve, you may unlock new abilities. For instance,
+        advancing your pyro skill can unlock the infrared sight trait or the
+        flamethrower action.
       </p>
     </Body>
     <H3>Skills</H3>
@@ -201,13 +217,25 @@ const content = (
       <p>
         Skills determine how well your character performs various actions. Each
         skill is categorized as either physical or mental, which affects how
-        your character’s health impacts their performance.
+        your character's health impacts their performance.
       </p>
       <p>
-        Skills range from level 1 to level 10, with higher levels granting
-        better rolls and stronger effects. At level 1, you start with two skill
-        upgrades, and each time you level up thereafter, you can upgrade another
-        skill.
+        Your starting skill levels are determined by your species and class.
+        Your species provides base skill levels reflecting natural abilities,
+        while your class adds bonuses based on your background and training.
+        Skills can then be improved through play by achieving critical
+        successes.
+      </p>
+      <p>
+        The skills pyro, radiant, sonic, kinetic, electric, biotic, psychic and
+        spirit are not innate to most species and must be learned. To unlock one
+        of these skills, you must either choose a class that starts with that
+        skill, or seek out training in the world. Training requires spending one
+        month of in-game time with a mentor or at an institution such as a magic
+        school, guild, or dojo. The GM will determine what training
+        opportunities exist in the setting. You can only train one magical skill
+        at a time, and successfully completing the training unlocks that skill
+        at level 1.
       </p>
       <h4>Physical Skills</h4>
       <table className="md:mx-4">
@@ -450,16 +478,18 @@ const content = (
         </tbody>
       </table>
     </Body>
-    <H3>Paths</H3>
+    <H3>Classes</H3>
     <Body>
       <p>
-        Paths define a set of learnings in a field of sorcery, morphing,
-        psionics, evocation or martial arts. Consider them as specialisations
-        that define what your character excels at. Each path unlocks new skills,
-        actions, and passive traits that can give you the edge in combat or
-        social encounters. You start with one path at level 1. After each level
-        up, you can progress an existing, trained path or choose to learn a new
-        one.
+        Your class represents your character's upbringing, training, and past
+        experience. Classes modify your starting skill levels and may grant
+        additional traits or actions that reflect your specialized knowledge.
+      </p>
+      <p>
+        For example, the pyromaniac class grants +3 levels to your pyro skill,
+        giving you access to fire magic from the start, whilst the hunter class
+        provides +2 levels to stealth, +1 to dexterity, and the archery trait
+        that allows you to use bows proficiently.
       </p>
     </Body>
     <H3>Health</H3>
@@ -926,16 +956,18 @@ const content = (
       </div>
       <h4>When to Roll</h4>
       <p>
-        The GM decides when a skill check is needed. If something is
-        challenging, risky, or uncertain, you’ll likely need to roll for it. For
+        The GM decides when a skill check is needed. Skill checks should be
+        reserved for challenging situations where characters are pushing their
+        abilities and testing their limits. The GM shouldn't call for rolls on
+        easy or mundane tasks where the character would normally succeed at. For
         example, if you say:
       </p>
       <ul className="list-disc ml-4">
         <li>
-          <i>“I walk across the room.”</i> → No roll needed.
+          <i>"I walk across the room."</i> → No roll needed.
         </li>
         <li>
-          <i>“I sprint across a crumbling rope bridge while dodging arrows.”</i>{" "}
+          <i>"I sprint across a crumbling rope bridge while dodging arrows."</i>{" "}
           → Definitely a roll.
         </li>
       </ul>

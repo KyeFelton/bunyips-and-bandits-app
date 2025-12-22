@@ -1,5 +1,5 @@
 import { SkillType } from "../../enums/SkillType";
-import { Path } from "../../models/paths";
+import { SkillProgression } from "../../models/skillProgression";
 import {
   Telekinesis,
   Gust,
@@ -11,11 +11,8 @@ import {
 } from "../actions";
 import { Boomerang, Telekinetic, WindShield } from "../traits";
 
-export const Stormcaller: Path = {
-  name: "Stormcaller",
-  skillTypes: [SkillType.Kinetic],
-  description:
-    "Stormcallers harness the raw power of wind and telekinetic force to dominate the battlefield. They excel at manipulating objects, controlling movement, and unleashing devastating aerial assaults.",
+export const KineticProgression: SkillProgression = {
+  skill: SkillType.Kinetic,
   unlockables: [
     {
       level: 1,

@@ -2,7 +2,6 @@ import { startingSpecies } from "../data/species";
 import { startingOrigin } from "../data/origins";
 import { SkillType } from "../enums/SkillType";
 import { ItemDictionary } from "./items";
-import { PathProgression } from "./paths";
 import { Trait } from "./traits";
 import { Condition } from "./conditions";
 
@@ -15,10 +14,9 @@ export type CharacterSaveFile = {
   personality: string;
   background: string;
   languages: string[];
-  level: number;
-  paths: PathProgression[];
+  class: string;
   customTraits: Trait[];
-  skillLevelUpgrades: Partial<Record<SkillType, number>>;
+  criticalSuccesses: Partial<Record<SkillType, number>>;
   currentBody: number;
   bodyUpgrades: number;
   currentMind: number;
@@ -40,10 +38,9 @@ export const defaultCharacter: CharacterSaveFile = {
   personality: "",
   background: "",
   languages: ["Dharrigal", "Englorian"],
-  level: 1,
-  paths: [],
+  class: "",
   customTraits: [],
-  skillLevelUpgrades: {},
+  criticalSuccesses: {},
   currentBody: startingSpecies.body,
   bodyUpgrades: 0,
   currentMind: startingSpecies.mind,

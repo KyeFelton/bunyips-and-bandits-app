@@ -1,23 +1,17 @@
 import { SkillType } from "../../enums/SkillType";
-import { Path } from "../../models/paths";
+import { SkillProgression } from "../../models/skillProgression";
 import { Sweep } from "../actions";
 import {
   Fighter,
-  Vigilant,
   GuardTrait,
   Bulldozer,
-  Swift,
   Rage,
   Taunt,
-  Opportunist,
   FighterII,
 } from "../traits";
 
-export const Warrior: Path = {
-  name: "Warrior",
-  skillTypes: [SkillType.Strength, SkillType.Agility],
-  description:
-    "Warriors are trained fighters who excel in melee combat. They have learnt the techniques of martial arts to perfect their combat, and studied morphing to push their physical capabilities to the limit.",
+export const StrengthProgression: SkillProgression = {
+  skill: SkillType.Strength,
   unlockables: [
     {
       level: 1,
@@ -27,7 +21,7 @@ export const Warrior: Path = {
     {
       level: 2,
       actions: [],
-      traits: [Vigilant],
+      traits: [],
     },
     {
       level: 3,
@@ -47,7 +41,7 @@ export const Warrior: Path = {
     {
       level: 6,
       actions: [],
-      traits: [Swift],
+      traits: [],
     },
     {
       level: 7,
@@ -62,7 +56,7 @@ export const Warrior: Path = {
     {
       level: 9,
       actions: [],
-      traits: [Opportunist],
+      traits: [],
     },
     {
       level: 10,

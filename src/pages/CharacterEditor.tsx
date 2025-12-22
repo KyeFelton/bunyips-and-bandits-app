@@ -9,16 +9,14 @@ import { saveFileAtom, focalCharacterIdAtom } from "../state/saveFile";
 import { nameAtom } from "../state/character";
 import { FolkStep } from "../components/FolkStep";
 import { DescriptionStep } from "../components/DescriptionStep";
-import { PathsStep } from "../components/PathsStep";
-import { SkillsStep } from "../components/SkillsStep";
+import { ClassStep } from "../components/ClassStep";
 import { CustomTraitsStep } from "../components/CustomTraitsStep";
 import { useLoadCharacterFromUrl } from "../hooks/useLoadCharacterFromUrl";
 
 const steps = [
   { title: "Folk", component: FolkStep },
   { title: "Description", component: DescriptionStep },
-  { title: "Paths", component: PathsStep },
-  { title: "Skills", component: SkillsStep },
+  { title: "Class", component: ClassStep },
   { title: "Traits", component: CustomTraitsStep },
 ];
 

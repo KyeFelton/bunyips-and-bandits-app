@@ -1,5 +1,5 @@
 import { SkillType } from "../../enums/SkillType";
-import { Path } from "../../models/paths";
+import { SkillProgression } from "../../models/skillProgression";
 import {
   Taser,
   ElectricCharge,
@@ -11,11 +11,8 @@ import {
 } from "../actions";
 import { ElectricResistance, LightningRod, StaticSkin } from "../traits";
 
-export const Electrician: Path = {
-  name: "Electrician",
-  skillTypes: [SkillType.Electric],
-  description:
-    "Masters of electricity, electrcians can manipulate electrical and magnetic forces to devastating effect. Their powers range from subtle magnetic control to unleashing deadly bolts of lightning.",
+export const ElectricProgression: SkillProgression = {
+  skill: SkillType.Electric,
   unlockables: [
     {
       level: 1,

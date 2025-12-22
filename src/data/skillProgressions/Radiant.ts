@@ -1,5 +1,5 @@
 import { SkillType } from "../../enums/SkillType";
-import { Path } from "../../models/paths";
+import { SkillProgression } from "../../models/skillProgression";
 import {
   GlowingOrb,
   Disguise,
@@ -12,11 +12,8 @@ import {
 } from "../actions";
 import { Photosynthetic, RadiantAura } from "../traits";
 
-export const Lightbender: Path = {
-  name: "Lightbender",
-  skillTypes: [SkillType.Radiant],
-  description:
-    "Lightbenders are the artisans of light. Whether crafting dazzling illusions or blinding adversaries with radiant bursts, lightbenders are a versatile ally to any team.",
+export const RadiantProgression: SkillProgression = {
+  skill: SkillType.Radiant,
   unlockables: [
     {
       level: 1,
