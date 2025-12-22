@@ -154,10 +154,7 @@ export const LevelUpModal = ({
     .sort((a, b) => a.name.localeCompare(b.name));
 
   const remainingHealthUpgrades =
-    availableHealthUpgrades -
-    bodyUpgrades -
-    mindUpgrades -
-    staminaUpgrades;
+    availableHealthUpgrades - bodyUpgrades - mindUpgrades - staminaUpgrades;
 
   const remainingSkillUpgrades =
     availableSkillPoints -
@@ -298,7 +295,7 @@ export const LevelUpModal = ({
 
   return (
     <Dialog open={open} onOpenChange={preventCancel ? undefined : handleCancel}>
-      <DialogContent className="max-w-2xl h-[800px] flex flex-col">
+      <DialogContent className="max-w-3xl h-[800px] flex flex-col">
         <DialogHeader className="flex-none px-2">
           <DialogTitle className="text-2xl">Level Up</DialogTitle>
         </DialogHeader>
