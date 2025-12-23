@@ -1,7 +1,7 @@
 import { useToast } from "./../utils/use-toast";
 import { playDiceRollSound } from "./../utils/sound";
 import { RollText } from "./RollText";
-import { useAtom, useSetAtom } from "jotai";
+import { useAtom } from "jotai";
 import {
   criticalSuccessesAtom,
   skillsProgressedSinceRestAtom,
@@ -23,7 +23,9 @@ interface RollToastProps {
 
 export const useRollToast = () => {
   const { toast } = useToast();
-  const setCriticalSuccesses = useSetAtom(criticalSuccessesAtom);
+  const [criticalSuccesses, setCriticalSuccesses] = useAtom(
+    criticalSuccessesAtom
+  );
   const [skillsProgressedSinceRest, setSkillsProgressedSinceRest] = useAtom(
     skillsProgressedSinceRestAtom
   );
@@ -62,22 +64,19 @@ export const useRollToast = () => {
     // Check if skill has already progressed since rest
     const alreadyProgressed = skillsProgressedSinceRest.has(type);
 
-    // Track critical success (only if not already progressed since rest)
-    let progressBlocked = false;
+    // Track critical success
     if (isCriticalSuccess && !alreadyProgressed) {
-      setCriticalSuccesses((prev) => {
-        const currentCrits = prev[type] || 0;
-        const newCrits = currentCrits + 1;
+      const currentCrits = criticalSuccesses[type] || 0;
+      const newCrits = currentCrits + 1;
 
-        return {
-          ...prev,
-          [type]: newCrits,
-        };
+      setCriticalSuccesses({
+        ...criticalSuccesses,
+        [type]: newCrits,
       });
       // Mark this skill as progressed since rest
-      setSkillsProgressedSinceRest(new Set([...skillsProgressedSinceRest, type]));
-    } else if (isCriticalSuccess && alreadyProgressed) {
-      progressBlocked = true;
+      setSkillsProgressedSinceRest(
+        new Set([...skillsProgressedSinceRest, type])
+      );
     }
 
     setTimeout(
@@ -87,20 +86,9 @@ export const useRollToast = () => {
           description: (
             <div className="font-mono space-y-1">
               <div className="">
-                <span
-                  className={`text-xl font-bold ${isCriticalSuccess ? "text-yellow-500" : ""}`}
-                >
-                  {roll}
-                </span>
-                {isCriticalSuccess && !progressBlocked && (
-                  <span className="ml-2 text-sm text-yellow-500">
-                    Critical!
-                  </span>
-                )}
-                {progressBlocked && (
-                  <span className="ml-2 text-sm text-muted-foreground">
-                    Critical! (Already progressed - rest required)
-                  </span>
+                <span className="text-xl font-bold">{roll}</span>
+                {isCriticalSuccess && (
+                  <span className="ml-2 text-sm">Critical!</span>
                 )}
                 {extraText && (
                   <span className="text-lg text-muted-foreground">

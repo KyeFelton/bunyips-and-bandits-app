@@ -1,4 +1,4 @@
-import { useAtomValue } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import {
   Table,
   TableBody,
@@ -15,24 +15,30 @@ import {
   skillLevelsAtom,
   skillRollValuesAtom,
   criticalSuccessesAtom,
+  classDataAtom,
+  speciesDataAtom,
+  MAX_SKILL_PROGRESSION,
+  skillsProgressedSinceRestAtom,
 } from "./../state/character";
 import { useRollToast } from "./RollToast";
 import { Button } from "./ui/button";
 import { SkillForm } from "./../enums/SkillForm";
 import { RollText } from "./RollText";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { CriticalSuccessIndicator } from "./CriticalSuccessIndicator";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./ui/tooltip";
+import { SkillLevelProgressBar } from "./SkillLevelProgressBar";
+import { CircleCheckbox } from "./ui/checkbox";
 
 export const SkillsTable = () => {
   const skillLevels = useAtomValue(skillLevelsAtom);
   const skillRollValues = useAtomValue(skillRollValuesAtom);
   const criticalSuccesses = useAtomValue(criticalSuccessesAtom);
+  const setCriticalSuccesses = useSetAtom(criticalSuccessesAtom);
+  const speciesData = useAtomValue(speciesDataAtom);
+  const classData = useAtomValue(classDataAtom);
+  const skillsProgressedSinceRest = useAtomValue(skillsProgressedSinceRestAtom);
+  const setSkillsProgressedSinceRest = useSetAtom(
+    skillsProgressedSinceRestAtom
+  );
   const showRollToast = useRollToast();
 
   const handleRoll = (skill: {
@@ -50,6 +56,38 @@ export const SkillsTable = () => {
       hasAdvantage: skill.hasAdvantage,
       hasDisadvantage: skill.hasDisadvantage,
     });
+  };
+
+  const handleCriticalSuccessChange = (
+    skillType: SkillType,
+    newCount: number
+  ) => {
+    setCriticalSuccesses({
+      ...criticalSuccesses,
+      [skillType]: newCount,
+    });
+  };
+
+  const handleRestToggle = (skillType: SkillType) => {
+    const newSet = new Set(skillsProgressedSinceRest);
+    if (newSet.has(skillType)) {
+      newSet.delete(skillType);
+    } else {
+      newSet.add(skillType);
+    }
+    setSkillsProgressedSinceRest(newSet);
+  };
+
+  const getStartingLevel = (skillType: SkillType): number => {
+    const speciesLevel =
+      (speciesData.skillLevels as Partial<Record<SkillType, number>>)?.[
+        skillType
+      ] || 0;
+    const classBonus =
+      (classData?.skillBonuses as Partial<Record<SkillType, number>>)?.[
+        skillType
+      ] || 0;
+    return speciesLevel + classBonus;
   };
 
   const skillsArray = Object.values(SkillType).map((skillType) => ({
@@ -73,8 +111,8 @@ export const SkillsTable = () => {
         <TableHeader>
           <TableRow>
             <TableHead>Skill</TableHead>
-            <TableHead className="text-center">Level</TableHead>
-            <TableHead className="text-center w-20">Progress</TableHead>
+            <TableHead className="text-left">Progression</TableHead>
+            <TableHead className="text-center w-16">Rest</TableHead>
             <TableHead className="text-left w-24">Roll</TableHead>
           </TableRow>
         </TableHeader>
@@ -110,25 +148,24 @@ export const SkillsTable = () => {
                       </Popover>
                     </div>
                   </TableCell>
-                  <TableCell className="text-center">{skill.level}</TableCell>
+                  <TableCell>
+                    <SkillLevelProgressBar
+                      startingLevel={getStartingLevel(skill.type)}
+                      currentLevel={skill.level || 0}
+                      criticalSuccesses={criticalSuccesses[skill.type] || 0}
+                      maxAllowedLevel={
+                        getStartingLevel(skill.type) + MAX_SKILL_PROGRESSION
+                      }
+                      onCriticalSuccessChange={(newCount) =>
+                        handleCriticalSuccessChange(skill.type, newCount)
+                      }
+                    />
+                  </TableCell>
                   <TableCell className="text-center">
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger>
-                          <CriticalSuccessIndicator
-                            count={criticalSuccesses[skill.type] || 0}
-                          />
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p className="text-xs">
-                            {criticalSuccesses[skill.type] || 0} critical
-                            success
-                            {criticalSuccesses[skill.type] === 1 ? "" : "es"}.
-                            Every 2 levels up the skill.
-                          </p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
+                    <CircleCheckbox
+                      checked={skillsProgressedSinceRest.has(skill.type)}
+                      onChange={() => handleRestToggle(skill.type)}
+                    />
                   </TableCell>
                   <TableCell className="text-left font-mono">
                     {skill.dice ? (

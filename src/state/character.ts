@@ -18,6 +18,7 @@ import { Condition } from "../models/conditions";
 // Constants
 export const MAX_SKILL_LEVEL = 10;
 export const MAX_SKILL_PROGRESSION = 5;
+export const CRIT_TO_LEVEL_UP = 2;
 
 // Basic character info
 export const nameAtom = atom<string>("");
@@ -95,7 +96,7 @@ export const skillLevelsAtom = atom((get) => {
 
   // Add critical success upgrades
   Object.entries(criticalSuccesses).forEach(([skill, count]) => {
-    const levelUps = Math.floor((count || 0) / 2);
+    const levelUps = Math.floor((count || 0) / CRIT_TO_LEVEL_UP);
     skills[skill as SkillType] = (skills[skill as SkillType] || 0) + levelUps;
   });
 
@@ -261,7 +262,7 @@ export const staminaAtom = atom((get) => {
 // Evasions
 export const evasionsCountAtom = atom((get) => {
   const effects = get(effectsAtom);
-  const baseEvasions = 2;
+  const baseEvasions = 1;
 
   return effects.reduce((total, effect) => {
     if (effect.evasions?.bonus) {

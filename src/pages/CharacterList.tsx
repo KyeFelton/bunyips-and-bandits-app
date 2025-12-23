@@ -153,7 +153,6 @@ export function CharactersPage() {
                 <h3 className="font-semibold text-lg">{character.name}</h3>
                 <div className="text-sm text-muted-foreground">
                   {character.origin} {character.species}
-                  {character.class ? ` | ${character.class}` : ""}
                 </div>
               </CardFooter>
             </Card>

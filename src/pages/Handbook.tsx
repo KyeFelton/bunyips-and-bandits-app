@@ -176,42 +176,6 @@ const content = (
         both in terms of game mechanics and role-playing opportunities.
       </p>
     </Body>
-    <H3>Progression</H3>
-    <Body>
-      <p>
-        As you adventure, your character improves through practice and
-        experience. Unlike traditional levelling systems, your character grows
-        by actively using their skills in challenging situations. When you push
-        your abilities to their limits and achieve exceptional results, you
-        become better at that skill.
-      </p>
-      <p>
-        Each time you perform a skill check and roll the maximum value on your
-        die (a critical success), mark it down on your character sheet. Once you
-        achieve two critical successes with the same skill, you can upgrade that
-        skill by one level. This ensures that the skills you actually use in
-        play are the ones that improve, making your character's development
-        organic and tied to your adventures.
-      </p>
-      <p>
-        To prevent rapid skill progression through repeated use, each skill can
-        only progress once between rests. If you roll a critical success on a
-        skill that has already progressed since your last rest, it still counts
-        as a critical success for the purposes of that action, but it won't
-        contribute toward leveling up that skill until you rest.
-      </p>
-      <p>
-        Each skill can be improved by up to 5 levels from its starting value.
-        For example, if you begin with level 3 strength, you can progress it to
-        a maximum of level 8. Once you reach your maximum potential in a skill,
-        further critical successes with that skill won't increase it further.
-      </p>
-      <p>
-        As your skills improve, you may unlock new abilities. For instance,
-        advancing your pyro skill can unlock the infrared sight trait or the
-        flamethrower action.
-      </p>
-    </Body>
     <H3>Skills</H3>
     <Body>
       <p>
@@ -490,6 +454,40 @@ const content = (
         giving you access to fire magic from the start, whilst the hunter class
         provides +2 levels to stealth, +1 to dexterity, and the archery trait
         that allows you to use bows proficiently.
+      </p>
+    </Body>
+    <H3>Progression</H3>
+    <Body>
+      <p>
+        As you adventure, your character improves through practice and
+        experience. Unlike traditional levelling systems, your character grows
+        by actively using their skills in challenging situations. When you push
+        your abilities to their limits and achieve exceptional results, you
+        become better at that skill.
+      </p>
+      <p>
+        Each time you perform a skill check and roll the maximum value on your
+        die (a critical success, abbreviated as crit), mark it down on your
+        character sheet. Once you achieve two critical successes with the same
+        skill, you can upgrade that skill by one level.
+      </p>
+      <p>
+        To prevent rapid skill progression through repeated use, each skill can
+        only progress once between rests. If you roll a second critical success
+        on a skill that has already had a critical success since your last rest,
+        it still counts as a critical success for the purposes of that action,
+        but it won't contribute toward leveling up that skill.
+      </p>
+      <p>
+        Each skill can be improved by up to 5 levels from its starting value.
+        For example, if you begin with level 3 strength, you can progress it to
+        a maximum of level 8. Once you reach your maximum potential in a skill,
+        further critical successes with that skill won't increase it further.
+      </p>
+      <p>
+        As your skills improve, you may unlock new abilities. For instance,
+        advancing your pyro skill can unlock the infrared sight trait or the
+        flamethrower action.
       </p>
     </Body>
     <H3>Health</H3>
@@ -1144,8 +1142,10 @@ const content = (
     <Body>
       <p>
         On their turn, each character may perform as many actions as specified
-        by the action count on their character sheet. Actions may incur damage,
-        inflict statuses, or provide buffs.
+        by the action count on their character sheet. Most characters can
+        perform two actions per turn, but some may be able to perform more or
+        less based on their traits and items. Actions may incur damage, inflict
+        statuses, or provide buffs.
       </p>
       <p>
         Every character has a list of actions that they have mastered, and can
@@ -1307,7 +1307,8 @@ const content = (
       <p>
         Every character has an evasions count on their character sheet. The
         evasions count determines the number of attacks they can attempt to
-        evade in one round of combat.
+        evade in one round of combat. Characters start off with an evasion count
+        of 1, but can increase it with some traits and items.
       </p>
     </Body>
     <H3>Statuses</H3>
