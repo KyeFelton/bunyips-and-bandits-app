@@ -6,24 +6,13 @@ import {
   Purge,
   Hypnotise,
   Message,
-  Broadcast,
   Implant,
   Pandemonium,
   Insight,
-  Reveal,
   MindRead,
   Envisage,
-  Meditate,
 } from "../actions";
-import {
-  Psychotic,
-  Unrelenting,
-  PsychicSense,
-  Unbending,
-  Foresight,
-  Detector,
-  Omnipresent,
-} from "../traits";
+import { PsychicSense } from "../traits";
 
 export const PsychicProgression: SkillProgression = {
   skill: SkillType.Psychic,
@@ -35,48 +24,48 @@ export const PsychicProgression: SkillProgression = {
     },
     {
       level: 2,
-      actions: [Scourge, Insight],
+      actions: [Scourge],
       traits: [],
     },
     {
       level: 3,
-      actions: [Vex, Meditate],
+      actions: [Insight],
       traits: [],
     },
     {
       level: 4,
-      actions: [],
-      traits: [Unrelenting, Detector],
+      actions: [Vex],
+      traits: [],
     },
     {
       level: 5,
-      actions: [Broadcast, Reveal],
+      actions: [MindRead],
       traits: [],
     },
     {
       level: 6,
-      actions: [Hypnotise],
-      traits: [Foresight],
+      actions: [Purge],
+      traits: [],
     },
     {
       level: 7,
-      actions: [Purge],
-      traits: [Omnipresent],
+      actions: [Hypnotise],
+      traits: [],
     },
     {
       level: 8,
-      actions: [MindRead],
-      traits: [Psychotic],
+      actions: [Envisage],
+      traits: [],
     },
     {
       level: 9,
-      actions: [Implant, Envisage],
+      actions: [Implant],
       traits: [],
     },
     {
       level: 10,
       actions: [Pandemonium],
-      traits: [Unbending],
+      traits: [],
     },
   ],
 };

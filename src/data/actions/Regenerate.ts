@@ -9,5 +9,5 @@ export const Regenerate: Action = {
   skillType: SkillType.Biotic,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.SingleTarget,
-  staminaCost: 1,
+  staminaCost: 2,
 };

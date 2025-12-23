@@ -3,80 +3,67 @@ import { SkillProgression } from "../../models/skillProgression";
 import {
   PoisonSpray,
   Stench,
-  Resuscitate,
   DeathCloud,
-  Heal,
   Regenerate,
-  Mask,
   Mutate,
   Morph,
   Absorb,
   Burst,
 } from "../actions";
-import {
-  QuickRecovery,
-  ToxicResistance,
-  Medic,
-  Pharmacist,
-  Undying,
-  SharpSenses,
-  RapidShift,
-  Poisonous,
-  ThickSkin,
-} from "../traits";
+import { ToxicResistance, Poisonous, ThickSkin } from "../traits";
 
 export const BioticProgression: SkillProgression = {
   skill: SkillType.Biotic,
   unlockables: [
     {
       level: 1,
-      actions: [Heal, Regenerate],
+      actions: [Regenerate],
       traits: [],
     },
     {
       level: 2,
-      actions: [Mask],
-      traits: [Medic],
+      actions: [Stench],
+      traits: [],
     },
     {
       level: 3,
       actions: [],
-      traits: [ToxicResistance, SharpSenses],
+      traits: [ToxicResistance],
     },
     {
       level: 4,
-      actions: [PoisonSpray, Mutate],
+      actions: [Mutate],
       traits: [],
     },
     {
       level: 5,
-      actions: [Resuscitate],
+      actions: [PoisonSpray],
       traits: [],
     },
     {
       level: 6,
-      actions: [Stench, Morph],
+      actions: [Morph],
       traits: [],
     },
     {
       level: 7,
       actions: [],
-      traits: [QuickRecovery, RapidShift],
+      traits: [ThickSkin],
     },
     {
       level: 8,
-      actions: [Absorb, Burst],
-      traits: [Pharmacist],
+      actions: [DeathCloud],
+      traits: [],
     },
     {
       level: 9,
       actions: [],
-      traits: [Undying, Poisonous],
+      traits: [Poisonous],
     },
     {
       level: 10,
-      actions: [DeathCloud],
-      traits: [ThickSkin],
+      actions: [Absorb, Burst],
+      traits: [],
     },
   ],
 };
