@@ -1,4 +1,4 @@
-import { CRIT_TO_LEVEL_UP, MAX_SKILL_LEVEL } from "../state/character";
+import { CRIT_TO_LEVEL_UP } from "../state/character";
 import { cn } from "../utils/cn";
 import {
   Tooltip,
@@ -36,9 +36,8 @@ export const SkillLevelProgressBar = ({
 
   const getCircleState = (
     level: number
-  ): "starting" | "completed" | "half" | "empty" | "disabled" => {
+  ): "starting" | "completed" | "half" | "empty" => {
     if (level <= startingLevel) return "starting";
-    if (level > maxAllowedLevel) return "disabled";
 
     const progressedLevels = currentLevel - startingLevel;
     if (level <= startingLevel + progressedLevels) return "completed";
@@ -69,7 +68,7 @@ export const SkillLevelProgressBar = ({
     <TooltipProvider>
       <div className="flex items-center w-full py-1">
         <div className="flex items-center gap-0 relative max-w-full overflow-x-auto">
-          {Array.from({ length: MAX_SKILL_LEVEL }).map((_, index) => {
+          {Array.from({ length: maxAllowedLevel }).map((_, index) => {
             const level = index + 1;
             const state = getCircleState(level);
             const isClickable =
@@ -120,12 +119,9 @@ export const SkillLevelProgressBar = ({
                 </Tooltip>
 
                 {/* Connecting line */}
-                {level < MAX_SKILL_LEVEL && (
+                {level < maxAllowedLevel && (
                   <div
-                    className={cn(
-                      "h-1 w-2 flex-shrink-0",
-                      getLineColor(level)
-                    )}
+                    className={cn("h-1 w-2 flex-shrink-0", getLineColor(level))}
                   />
                 )}
               </div>
