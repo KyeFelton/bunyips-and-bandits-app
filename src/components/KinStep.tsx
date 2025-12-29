@@ -1,7 +1,7 @@
 import { useAtom, useSetAtom, useAtomValue } from "jotai";
 import {
-  originAtom,
-  originDataAtom,
+  ancestryAtom,
+  ancestryDataAtom,
   speciesAtom,
   speciesDataAtom,
   currentBodyAtom,
@@ -10,7 +10,7 @@ import {
   languagesAtom,
 } from "../state/character";
 import { AllSpecies } from "../data/species";
-import { AllOrigins } from "../data/origins";
+import { AllAncestries } from "../data/ancestries";
 import { Heart, ChartNoAxesColumn, ArrowLeftRight, Radio } from "lucide-react";
 import { SkillIcon } from "./icons/SkillIcon";
 import { Locomotion } from "../enums/Locomotion";
@@ -34,7 +34,7 @@ import { Card } from "./ui/card";
 import { SpeedRating } from "../enums/SpeedRating";
 import { Human } from "../data/species/Human";
 
-// Folk descriptions by origin and species
+// Folk descriptions by ancestry and species
 const FOLK_DESCRIPTIONS: Record<
   string,
   Record<string, { name: string; description: string }>
@@ -43,7 +43,7 @@ const FOLK_DESCRIPTIONS: Record<
     Reptilian: {
       name: "Birim",
       description:
-        "The Birim are a reptilian folk originating from the deserts of Downunda. They are distinguished by their tall and slender physique, with features resembling goannas.",
+        "The Birim are a reptilian folk ancestryating from the deserts of Downunda. They are distinguished by their tall and slender physique, with features resembling goannas.",
     },
     Avian: {
       name: "Karrakan",
@@ -90,7 +90,7 @@ const FOLK_DESCRIPTIONS: Record<
     Delver: {
       name: "Gnome",
       description:
-        "Gnomes are delvers originating from the underground regions of Engloria. They are small in stature and are recognised by their sky-blue skin, white hair, and glowing yellow eyes.",
+        "Gnomes are delvers ancestryating from the underground regions of Engloria. They are small in stature and are recognised by their sky-blue skin, white hair, and glowing yellow eyes.",
     },
     Human: {
       name: "Englorian",
@@ -101,8 +101,8 @@ const FOLK_DESCRIPTIONS: Record<
 };
 
 export const KinStep = () => {
-  const [selectedOrigin, setOrigin] = useAtom(originAtom);
-  const originData = useAtomValue(originDataAtom);
+  const [selectedAncestry, setAncestry] = useAtom(ancestryAtom);
+  const ancestryData = useAtomValue(ancestryDataAtom);
   const [selectedSpecies, setSpecies] = useAtom(speciesAtom);
   const speciesData = useAtomValue(speciesDataAtom);
   const setCurrentBody = useSetAtom(currentBodyAtom);
@@ -112,36 +112,37 @@ export const KinStep = () => {
   const [api, setApi] = useState<CarouselApi>();
 
   // Get available ancestries for selected species
-  const availableOrigins = useMemo(() => {
-    if (!selectedSpecies) return Object.keys(AllOrigins);
+  const availableAncestries = useMemo(() => {
+    if (!selectedSpecies) return Object.keys(AllAncestries);
 
-    return Object.entries(AllOrigins)
-      .filter(([, origin]) => origin.species.includes(selectedSpecies))
+    return Object.entries(AllAncestries)
+      .filter(([, ancestry]) => ancestry.species.includes(selectedSpecies))
       .map(([name]) => name);
   }, [selectedSpecies]);
 
-  // Get available species for selected origin
+  // Get available species for selected ancestry
   const availableSpecies = useMemo(() => {
-    if (!selectedOrigin) return Object.keys(AllSpecies);
+    if (!selectedAncestry) return Object.keys(AllSpecies);
 
-    const originData = AllOrigins[selectedOrigin as keyof typeof AllOrigins];
-    if (!originData) return Object.keys(AllSpecies);
+    const ancestryData =
+      AllAncestries[selectedAncestry as keyof typeof AllAncestries];
+    if (!ancestryData) return Object.keys(AllSpecies);
 
     return Object.keys(AllSpecies).filter((speciesName) =>
-      originData.species.includes(speciesName)
+      ancestryData.species.includes(speciesName)
     );
-  }, [selectedOrigin]);
+  }, [selectedAncestry]);
 
-  const handleOriginChange = useCallback(
-    (originName: string) => {
-      setOrigin(originName);
-      if (originName === "Downunda") {
+  const handleAncestryChange = useCallback(
+    (ancestryName: string) => {
+      setAncestry(ancestryName);
+      if (ancestryName === "Downunda") {
         setLanguages(["Dharrigal", "Englorian"]);
-      } else if (originName === "Engloria") {
+      } else if (ancestryName === "Engloria") {
         setLanguages(["Englorian"]);
       }
     },
-    [setOrigin, setLanguages]
+    [setAncestry, setLanguages]
   );
 
   const handleSpeciesChange = useCallback(
@@ -187,37 +188,39 @@ export const KinStep = () => {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 text-md text-muted-foreground">
         <div className="flex-1 sm:whitespace-nowrap">
-          Choose your species and origin to shape your character's heritage and
+          Choose an ancestry and species to shape your character's heritage and
           abilities.
         </div>
       </div>
 
-      {/* Origin Selection */}
+      {/* Ancestry Selection */}
       <div className="">
-        <h3 className="font-semibold mb-4 text-lg">Origin</h3>
+        <h3 className="font-semibold mb-4 text-lg">Ancestry</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {Object.values(AllOrigins).map((origin) => {
-            const isAvailable = availableOrigins.includes(origin.name);
+          {Object.values(AllAncestries).map((ancestry) => {
+            const isAvailable = availableAncestries.includes(ancestry.name);
             return (
               <Card
-                key={origin.name}
+                key={ancestry.name}
                 className={cn(
                   "p-4 transition-all duration-200 border-2",
                   isAvailable
                     ? "cursor-pointer hover:shadow-lg"
                     : "cursor-not-allowed opacity-50",
-                  selectedOrigin === origin.name
+                  selectedAncestry === ancestry.name
                     ? "border-primary bg-primary/5"
                     : isAvailable
                     ? "border-muted hover:border-primary/50"
                     : "border-muted"
                 )}
-                onClick={() => isAvailable && handleOriginChange(origin.name)}
+                onClick={() =>
+                  isAvailable && handleAncestryChange(ancestry.name)
+                }
               >
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-lg">{origin.name}</h4>
+                  <h4 className="font-semibold text-lg">{ancestry.name}</h4>
                   <p className="text-sm text-muted-foreground">
-                    {origin.description}
+                    {ancestry.description}
                   </p>
                 </div>
               </Card>
@@ -270,7 +273,7 @@ export const KinStep = () => {
                         )}
                       >
                         <img
-                          src={getSpeciesImage(speciesName, selectedOrigin)}
+                          src={getSpeciesImage(speciesName, selectedAncestry)}
                           alt={speciesName}
                           className="w-full h-full object-contain rounded-lg"
                         />
@@ -297,10 +300,10 @@ export const KinStep = () => {
 
         {/* Description */}
         {selectedSpecies &&
-          selectedOrigin &&
+          selectedAncestry &&
           (() => {
             const folkInfo =
-              FOLK_DESCRIPTIONS[selectedOrigin]?.[selectedSpecies];
+              FOLK_DESCRIPTIONS[selectedAncestry]?.[selectedSpecies];
             if (!folkInfo) return null;
 
             return (
@@ -318,8 +321,8 @@ export const KinStep = () => {
           })()}
       </div>
 
-      {/* Stats Display (only show if both origin and species are selected) */}
-      {speciesData && originData && (
+      {/* Stats Display (only show if both ancestry and species are selected) */}
+      {speciesData && ancestryData && (
         <div className="space-y-6 pt-6 border-t border-muted-foreground/20">
           {/* Base Stats */}
           <div>

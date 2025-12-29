@@ -5,7 +5,7 @@ import { Badge } from "./ui/badge";
 import { Edit2 } from "lucide-react";
 import { useState } from "react";
 import {
-  originAtom,
+  ancestryAtom,
   speciesDataAtom,
   genderAtom,
   ageAtom,
@@ -18,7 +18,7 @@ import {
 import { EditDescriptionDialog } from "./EditDescriptionDialog";
 
 export const DescriptionCard = () => {
-  const origin = useAtomValue(originAtom);
+  const ancestry = useAtomValue(ancestryAtom);
   const species = useAtomValue(speciesDataAtom);
   const gender = useAtomValue(genderAtom);
   const age = useAtomValue(ageAtom);
@@ -47,9 +47,9 @@ export const DescriptionCard = () => {
       <CardContent className="space-y-4 flex-grow min-h-0 overflow-auto">
         <div>
           <div className="text-sm font-medium text-muted-foreground mb-1">
-            Origin
+            Ancestry
           </div>
-          <div className="text-sm">{origin || "-"}</div>
+          <div className="text-sm">{ancestry || "-"}</div>
         </div>
 
         <div>

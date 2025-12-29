@@ -15,7 +15,7 @@ import {
   nameAtom,
   imageAtom,
   speciesAtom,
-  originAtom,
+  ancestryAtom,
 } from "../state/character";
 import { getSpeciesImage } from "../utils/speciesImages";
 
@@ -28,7 +28,7 @@ export const EditNameDialog = ({ isOpen, onClose }: Props) => {
   const [name, setName] = useAtom(nameAtom);
   const [image, setImage] = useAtom(imageAtom);
   const [species] = useAtom(speciesAtom);
-  const [origin] = useAtom(originAtom);
+  const [ancestry] = useAtom(ancestryAtom);
 
   const [pendingName, setPendingName] = useState("");
   const [pendingImage, setPendingImage] = useState<string | undefined>(
@@ -84,7 +84,7 @@ export const EditNameDialog = ({ isOpen, onClose }: Props) => {
               <label htmlFor="image-upload" className="cursor-pointer">
                 <img
                   src={
-                    pendingImage ?? image ?? getSpeciesImage(species, origin)
+                    pendingImage ?? image ?? getSpeciesImage(species, ancestry)
                   }
                   alt="character"
                   className="w-64 h-64 rounded-lg object-cover"

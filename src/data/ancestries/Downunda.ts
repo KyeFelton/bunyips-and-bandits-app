@@ -1,6 +1,6 @@
-import { Origin } from "../../models/origin";
+import { Ancestry } from "../../models/ancestry";
 
-export const Downunda: Origin = {
+export const Downunda: Ancestry = {
   name: "Downunda",
   description: "First peoples of Downunda with a deep connection to the land.",
   species: ["Avian", "Giant", "Goblin", "Human", "Reptilian", "Delver"],

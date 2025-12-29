@@ -11,7 +11,7 @@ import {
   mindUpgradesAtom,
   currentStaminaAtom,
   staminaUpgradesAtom,
-  originAtom,
+  ancestryAtom,
   speciesAtom,
   genderAtom,
   ageAtom,
@@ -43,7 +43,7 @@ export const useLoadCharacterFromUrl = () => {
   const setMindUpgrades = useSetAtom(mindUpgradesAtom);
   const setCurrentStamina = useSetAtom(currentStaminaAtom);
   const setStaminaUpgrades = useSetAtom(staminaUpgradesAtom);
-  const setOrigin = useSetAtom(originAtom);
+  const setAncestry = useSetAtom(ancestryAtom);
   const setSpecies = useSetAtom(speciesAtom);
   const setGender = useSetAtom(genderAtom);
   const setAge = useSetAtom(ageAtom);
@@ -70,7 +70,7 @@ export const useLoadCharacterFromUrl = () => {
       setMindUpgrades(character.mindUpgrades);
       setCurrentStamina(character.currentStamina);
       setStaminaUpgrades(character.staminaUpgrades);
-      setOrigin(character.origin);
+      setAncestry(character.ancestry);
       setSpecies(character.species);
       setGender(character.gender);
       setAge(character.age);
@@ -97,7 +97,7 @@ export const useLoadCharacterFromUrl = () => {
     setMindUpgrades,
     setCurrentStamina,
     setStaminaUpgrades,
-    setOrigin,
+    setAncestry,
     setSpecies,
     setGender,
     setAge,

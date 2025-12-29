@@ -27,7 +27,7 @@ import {
   languagesAtom,
   ageAtom,
   genderAtom,
-  originAtom,
+  ancestryAtom,
   speciesDataAtom,
 } from "../state/character";
 import { AllBackgrounds } from "../data/backgrounds";
@@ -47,7 +47,7 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
   const [selectedLanguages, setLanguages] = useAtom(languagesAtom);
   const [age, setAge] = useAtom(ageAtom);
   const [gender, setGender] = useAtom(genderAtom);
-  const origin = useAtomValue(originAtom);
+  const ancestry = useAtomValue(ancestryAtom);
   const species = useAtomValue(speciesDataAtom);
 
   const [pendingBackground, setPendingBackground] = useState("");
@@ -82,7 +82,15 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
         setCustomGenderValue("");
       }
     }
-  }, [isOpen, background, biography, personality, selectedLanguages, age, gender]);
+  }, [
+    isOpen,
+    background,
+    biography,
+    personality,
+    selectedLanguages,
+    age,
+    gender,
+  ]);
 
   const handleSave = () => {
     const finalGender = isCustomGender ? customGenderValue : pendingGender;
@@ -135,10 +143,10 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
           {/* Read-only fields */}
           <div className="grid grid-cols-3 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="origin">Origin</Label>
+              <Label htmlFor="ancestry">Ancestry</Label>
               <Input
-                id="origin"
-                value={origin}
+                id="ancestry"
+                value={ancestry}
                 disabled
                 className="bg-muted cursor-not-allowed text-sm"
               />
@@ -163,7 +171,7 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
             </div>
           </div>
           <p className="text-xs text-muted-foreground -mt-2">
-            Origin, Species, and Size are set during character creation and
+            Ancestry, Species, and Size are set during character creation and
             cannot be changed.
           </p>
 
@@ -252,7 +260,10 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
 
           <div className="space-y-2">
             <Label htmlFor="background">Background</Label>
-            <Select value={pendingBackground} onValueChange={setPendingBackground}>
+            <Select
+              value={pendingBackground}
+              onValueChange={setPendingBackground}
+            >
               <SelectTrigger id="background">
                 <SelectValue placeholder="Select a background" />
               </SelectTrigger>
@@ -264,15 +275,24 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
                 ))}
               </SelectContent>
             </Select>
-            {pendingBackground && AllBackgrounds[pendingBackground as keyof typeof AllBackgrounds] && (
-              <p className="text-xs text-muted-foreground">
-                {AllBackgrounds[pendingBackground as keyof typeof AllBackgrounds].description}
-                {" "}
-                <span className="font-semibold">
-                  Expertise: {AllBackgrounds[pendingBackground as keyof typeof AllBackgrounds].expertiseSkills.join(", ")}
-                </span>
-              </p>
-            )}
+            {pendingBackground &&
+              AllBackgrounds[
+                pendingBackground as keyof typeof AllBackgrounds
+              ] && (
+                <p className="text-xs text-muted-foreground">
+                  {
+                    AllBackgrounds[
+                      pendingBackground as keyof typeof AllBackgrounds
+                    ].description
+                  }{" "}
+                  <span className="font-semibold">
+                    Expertise:{" "}
+                    {AllBackgrounds[
+                      pendingBackground as keyof typeof AllBackgrounds
+                    ].expertiseSkills.join(", ")}
+                  </span>
+                </p>
+              )}
           </div>
 
           <div className="space-y-2">

@@ -7,7 +7,7 @@ import {
   classAtom,
   imageAtom,
   speciesAtom,
-  originAtom,
+  ancestryAtom,
 } from "./../state/character";
 import { EditNameDialog } from "./EditNameDialog";
 import { useState } from "react";
@@ -18,7 +18,7 @@ export const NameCard = () => {
   const className = useAtomValue(classAtom);
   const image = useAtomValue(imageAtom);
   const species = useAtomValue(speciesAtom);
-  const origin = useAtomValue(originAtom);
+  const ancestry = useAtomValue(ancestryAtom);
 
   const [isEditNameDialogOpen, setIsEditNameDialogOpen] = useState(false);
 
@@ -44,7 +44,7 @@ export const NameCard = () => {
       </CardHeader>
       <CardContent className="flex-grow min-h-0 flex justify-center">
         <img
-          src={image ?? getSpeciesImage(species, origin)}
+          src={image ?? getSpeciesImage(species, ancestry)}
           alt="character"
           className="w-full max-w-[250px] h-full max-h-[250px] rounded-md object-cover"
         />

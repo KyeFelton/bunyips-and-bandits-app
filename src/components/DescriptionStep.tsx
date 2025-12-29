@@ -22,7 +22,7 @@ import {
   languagesAtom,
   imageAtom,
   speciesAtom,
-  originAtom,
+  ancestryAtom,
 } from "./../state/character";
 import { getSpeciesImage } from "./../utils/speciesImages";
 
@@ -32,7 +32,7 @@ const CUSTOM_GENDER_OPTION = "Let me type...";
 export const DescriptionStep = () => {
   const [name, setName] = useAtom(nameAtom);
   const species = useAtomValue(speciesAtom);
-  const origin = useAtomValue(originAtom);
+  const ancestry = useAtomValue(ancestryAtom);
   const [gender, setGender] = useAtom(genderAtom);
   const [age, setAge] = useAtom(ageAtom);
   const [biography, setBiography] = useAtom(biographyAtom);
@@ -117,7 +117,7 @@ export const DescriptionStep = () => {
             <div className="relative group w-full aspect-square max-w-[300px]">
               <label htmlFor="image-upload" className="cursor-pointer">
                 <img
-                  src={image ?? getSpeciesImage(species, origin)}
+                  src={image ?? getSpeciesImage(species, ancestry)}
                   alt="character"
                   className="w-full h-full rounded-lg object-cover"
                 />

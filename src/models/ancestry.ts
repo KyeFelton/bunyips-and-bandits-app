@@ -1,5 +1,5 @@
 import { Trait } from "./traits";
 
-export type Origin = Trait & {
+export type Ancestry = Trait & {
   species: string[];
 };

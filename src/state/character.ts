@@ -2,7 +2,7 @@ import { atom } from "jotai";
 import { SkillType } from "../enums/SkillType";
 import { ItemDictionary } from "../models/items";
 import { AllSpecies, startingSpecies } from "../data/species";
-import { AllOrigins, startingOrigin } from "../data/origins";
+import { AllAncestries, startingAncestry } from "../data/ancestries";
 import { AllClasses } from "../data/classes";
 import { AllSkillProgressions } from "../data/skillProgressions";
 import { AllBackgrounds } from "../data/backgrounds";
@@ -23,7 +23,7 @@ export const CRIT_TO_LEVEL_UP = 2;
 
 // Basic character info
 export const nameAtom = atom<string>("");
-export const originAtom = atom<string>(startingOrigin.name);
+export const ancestryAtom = atom<string>(startingAncestry.name);
 export const speciesAtom = atom<string>(startingSpecies.name);
 export const genderAtom = atom<string>("");
 export const ageAtom = atom<number>(0);
@@ -64,11 +64,11 @@ export const speciesDataAtom = atom((get) => {
   return AllSpecies[speciesName as keyof typeof AllSpecies];
 });
 
-// Get origin data
-export const originDataAtom = atom((get) => {
-  const originName = get(originAtom);
-  if (!originName) return null;
-  return AllOrigins[originName as keyof typeof AllOrigins] || null;
+// Get ancestry data
+export const ancestryDataAtom = atom((get) => {
+  const ancestryName = get(ancestryAtom);
+  if (!ancestryName) return null;
+  return AllAncestries[ancestryName as keyof typeof AllAncestries] || null;
 });
 
 // Get class data
@@ -187,15 +187,15 @@ export const traitsAtom = atom((get) => {
 
 // Effects atom
 export const effectsAtom = atom((get) => {
-  const origin = get(originDataAtom);
+  const ancestry = get(ancestryDataAtom);
   const items = get(itemsAtom);
   const conditions = get(conditionsAtom);
   const traits = get(traitsAtom);
   const effects: Effect[] = [];
 
-  // Collect effects from origin
-  if (origin?.effects) {
-    effects.push(...origin.effects);
+  // Collect effects from ancestry
+  if (ancestry?.effects) {
+    effects.push(...ancestry.effects);
   }
 
   // Collect effects from traits

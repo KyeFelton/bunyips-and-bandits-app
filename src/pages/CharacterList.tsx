@@ -141,7 +141,7 @@ export function CharactersPage() {
                     <img
                       src={
                         character.image ??
-                        getSpeciesImage(character.species, character.origin)
+                        getSpeciesImage(character.species, character.ancestry)
                       }
                       alt={character.name}
                       className="w-full h-48 object-cover rounded-t-lg"
@@ -152,7 +152,7 @@ export function CharactersPage() {
               <CardFooter className="flex flex-col items-start p-4">
                 <h3 className="font-semibold text-lg">{character.name}</h3>
                 <div className="text-sm text-muted-foreground">
-                  {character.origin} {character.species}
+                  {character.ancestry} {character.species}
                 </div>
               </CardFooter>
             </Card>

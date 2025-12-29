@@ -33,11 +33,11 @@ const speciesImages: Record<string, Record<string, string>> = {
 
 export const getSpeciesImage = (
   speciesName: string,
-  origin: string
+  ancestry: string
 ): string => {
-  const originImages = speciesImages[origin];
-  if (!originImages) {
+  const ancestryImages = speciesImages[ancestry];
+  if (!ancestryImages) {
     return speciesImages.Downunda.Human;
   }
-  return originImages[speciesName] || speciesImages.Downunda.Human;
+  return ancestryImages[speciesName] || speciesImages.Downunda.Human;
 };

@@ -7,7 +7,7 @@ import { CharacterItem } from "./items";
 
 export type Character = {
   name: string;
-  origin: string;
+  ancestry: string;
   species: string;
   gender: string;
   age: number;
