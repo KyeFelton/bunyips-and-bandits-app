@@ -7,7 +7,7 @@ import { Button } from "../components/ui/button";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { saveFileAtom, focalCharacterIdAtom } from "../state/saveFile";
 import { nameAtom } from "../state/character";
-import { FolkStep } from "../components/FolkStep";
+import { KinStep } from "../components/KinStep";
 import { DescriptionStep } from "../components/DescriptionStep";
 import { ClassStep } from "../components/ClassStep";
 import { BackgroundStep } from "../components/BackgroundStep";
@@ -15,7 +15,7 @@ import { CustomTraitsStep } from "../components/CustomTraitsStep";
 import { useLoadCharacterFromUrl } from "../hooks/useLoadCharacterFromUrl";
 
 const steps = [
-  { title: "Folk", component: FolkStep },
+  { title: "Kin", component: KinStep },
   { title: "Class", component: ClassStep },
   { title: "Background", component: BackgroundStep },
   { title: "Traits", component: CustomTraitsStep },

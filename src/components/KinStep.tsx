@@ -8,17 +8,17 @@ import {
   currentMindAtom,
   currentStaminaAtom,
   languagesAtom,
-} from "./../state/character";
-import { AllSpecies } from "./../data/species";
+} from "../state/character";
+import { AllSpecies } from "../data/species";
 import { AllOrigins } from "../data/origins";
 import { Heart, ChartNoAxesColumn, ArrowLeftRight, Radio } from "lucide-react";
 import { SkillIcon } from "./icons/SkillIcon";
-import { Locomotion } from "./../enums/Locomotion";
+import { Locomotion } from "../enums/Locomotion";
 import { SpeedIcon } from "./icons/SpeedIcon";
 import { SenseIcon } from "./icons/SenseIcon";
-import { SenseType } from "./../enums/SenseType";
-import { SkillType } from "./../enums/SkillType";
-import { getSpeciesImage } from "./../utils/speciesImages";
+import { SenseType } from "../enums/SenseType";
+import { SkillType } from "../enums/SkillType";
+import { getSpeciesImage } from "../utils/speciesImages";
 import { SpeciesHealthBar } from "./SpeciesHealthBar";
 import {
   Carousel,
@@ -28,7 +28,7 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "./ui/carousel";
-import { cn } from "./../utils/cn";
+import { cn } from "../utils/cn";
 import { useCallback, useEffect, useState, useMemo } from "react";
 import { Card } from "./ui/card";
 import { SpeedRating } from "../enums/SpeedRating";
@@ -100,7 +100,7 @@ const FOLK_DESCRIPTIONS: Record<
   },
 };
 
-export const FolkStep = () => {
+export const KinStep = () => {
   const [selectedOrigin, setOrigin] = useAtom(originAtom);
   const originData = useAtomValue(originDataAtom);
   const [selectedSpecies, setSpecies] = useAtom(speciesAtom);
@@ -295,7 +295,7 @@ export const FolkStep = () => {
           </div>
         </div>
 
-        {/* Folk Description */}
+        {/* Description */}
         {selectedSpecies &&
           selectedOrigin &&
           (() => {
