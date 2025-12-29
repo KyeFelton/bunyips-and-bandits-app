@@ -6,7 +6,7 @@ import { Action } from "../../models/actions";
 export const Torrent: Action = {
   name: "Torrent",
   effect:
-    "You manifest a powerful torrent of wind. Targets become anosmic and must pass a hard strength check otherwise be pushed back a near distance and take 3 force damage from the impact.",
+    "You manifest a powerful torrent of wind. Targets become anosmic, blinded and must pass a hard strength check otherwise be pushed back a near distance and take 3 force damage from the impact.",
   skillType: SkillType.Kinetic,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.Near,
