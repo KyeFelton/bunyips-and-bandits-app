@@ -136,11 +136,9 @@ export const KinStep = () => {
   const handleAncestryChange = useCallback(
     (ancestryName: string) => {
       setAncestry(ancestryName);
-      if (ancestryName === "Downunda") {
-        setLanguages(["Dharrigal", "Englorian"]);
-      } else if (ancestryName === "Engloria") {
-        setLanguages(["Englorian"]);
-      }
+      const newAncestryData =
+        AllAncestries[ancestryName as keyof typeof AllAncestries];
+      setLanguages(newAncestryData.languages);
     },
     [setAncestry, setLanguages]
   );
