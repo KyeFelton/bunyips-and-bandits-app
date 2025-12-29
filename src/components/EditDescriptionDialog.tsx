@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtom } from "jotai";
 import {
   Dialog,
   DialogContent,
@@ -27,8 +27,6 @@ import {
   languagesAtom,
   ageAtom,
   genderAtom,
-  ancestryAtom,
-  speciesDataAtom,
 } from "../state/character";
 import { AllBackgrounds } from "../data/backgrounds";
 
@@ -47,8 +45,6 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
   const [selectedLanguages, setLanguages] = useAtom(languagesAtom);
   const [age, setAge] = useAtom(ageAtom);
   const [gender, setGender] = useAtom(genderAtom);
-  const ancestry = useAtomValue(ancestryAtom);
-  const species = useAtomValue(speciesDataAtom);
 
   const [pendingBackground, setPendingBackground] = useState("");
   const [pendingBiography, setPendingBiography] = useState("");
@@ -140,41 +136,6 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
           <DialogTitle>Edit Description</DialogTitle>
         </DialogHeader>
         <div className="space-y-6 py-4">
-          {/* Read-only fields */}
-          <div className="grid grid-cols-3 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="ancestry">Ancestry</Label>
-              <Input
-                id="ancestry"
-                value={ancestry}
-                disabled
-                className="bg-muted cursor-not-allowed text-sm"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="species">Species</Label>
-              <Input
-                id="species"
-                value={species.name}
-                disabled
-                className="bg-muted cursor-not-allowed text-sm"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="size">Size</Label>
-              <Input
-                id="size"
-                value={species.size || "-"}
-                disabled
-                className="bg-muted cursor-not-allowed text-sm"
-              />
-            </div>
-          </div>
-          <p className="text-xs text-muted-foreground -mt-2">
-            Ancestry, Species, and Size are set during character creation and
-            cannot be changed.
-          </p>
-
           {/* Editable fields */}
           <div className="space-y-2">
             <Label htmlFor="gender">Gender</Label>

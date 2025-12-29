@@ -3,7 +3,6 @@ import { SkillType } from "../enums/SkillType";
 import { ItemDictionary } from "../models/items";
 import { AllSpecies, startingSpecies } from "../data/species";
 import { AllAncestries, startingAncestry } from "../data/ancestries";
-import { AllClasses } from "../data/classes";
 import { AllSkillProgressions } from "../data/skillProgressions";
 import { AllBackgrounds } from "../data/backgrounds";
 import { Effect } from "../models/effect";
@@ -34,7 +33,7 @@ export const languagesAtom = atom<string[]>(["Dharrigal", "Englorian"]);
 export const imageAtom = atom<string | undefined>(undefined);
 
 // Character progression
-export const classAtom = atom<string>("");
+export const magicSkillsAtom = atom<string[]>(["Biotic"]);
 export const criticalSuccessesAtom = atom<Partial<Record<SkillType, number>>>(
   {}
 );
@@ -71,13 +70,6 @@ export const ancestryDataAtom = atom((get) => {
   return AllAncestries[ancestryName as keyof typeof AllAncestries] || null;
 });
 
-// Get class data
-export const classDataAtom = atom((get) => {
-  const className = get(classAtom);
-  if (!className) return null;
-  return AllClasses[className] || null;
-});
-
 // Get background data
 export const backgroundDataAtom = atom((get) => {
   const backgroundName = get(backgroundAtom);
@@ -87,33 +79,30 @@ export const backgroundDataAtom = atom((get) => {
 
 // Skill levels
 export const skillLevelsAtom = atom((get) => {
-  const classData = get(classDataAtom);
+  const magicSkills = get(magicSkillsAtom);
   const backgroundData = get(backgroundDataAtom);
   const criticalSuccesses = get(criticalSuccessesAtom);
 
   const skills: Partial<Record<SkillType, number>> = {};
 
-  // Initialize base skills to level 1, path skills to 0
+  // Initialize skills
   Object.values(Skills).forEach((skill) => {
     if (skill.magicSkill) {
-      skills[skill.type] = 0; // Path skills start at 0
+      skills[skill.type] = 0;
     } else {
-      skills[skill.type] = 1; // Base skills start at 1
+      skills[skill.type] = 1;
     }
   });
 
-  // Add class granted path skills (set from 0 to 1)
-  if (classData?.skillBonuses) {
-    Object.keys(classData.skillBonuses).forEach((skillType) => {
-      const skill = skillType as SkillType;
-      // If it's a path skill (currently at 0), set it to 1
-      if (skills[skill] === 0) {
-        skills[skill] = 1;
-      }
-    });
-  }
+  // Add selected magic skills
+  magicSkills.forEach((skillName) => {
+    const skillType = skillName as SkillType;
+    if (skills[skillType] === 0) {
+      skills[skillType] = 1;
+    }
+  });
 
-  // Apply background expertise (set to level 5)
+  // Apply background expertise
   if (backgroundData?.expertiseSkills) {
     backgroundData.expertiseSkills.forEach((skillType) => {
       skills[skillType] = 5;
@@ -129,16 +118,10 @@ export const skillLevelsAtom = atom((get) => {
   return skills;
 });
 
-// Actions atom - includes class starting actions and skill progression unlocked actions
+// Actions atom - includes skill progression unlocked actions
 export const actionsAtom = atom((get) => {
   const skillLevels = get(skillLevelsAtom);
-  const classData = get(classDataAtom);
   const actions: Action[] = [];
-
-  // Add class starting actions
-  if (classData?.startingActions) {
-    actions.push(...classData.startingActions);
-  }
 
   // Add skill progression unlocked actions
   Object.entries(skillLevels).forEach(([skillType, level]) => {
@@ -155,17 +138,11 @@ export const actionsAtom = atom((get) => {
   return actions;
 });
 
-// Traits atom - includes class starting traits, skill progression unlocked traits, and custom traits
+// Traits atom - includes skill progression unlocked traits and custom traits
 export const traitsAtom = atom((get) => {
   const skillLevels = get(skillLevelsAtom);
-  const classData = get(classDataAtom);
   const customTraits = get(customTraitsAtom);
   const traits: Trait[] = [];
-
-  // Add class starting traits
-  if (classData?.startingTraits) {
-    traits.push(...classData.startingTraits);
-  }
 
   // Add skill progression unlocked traits
   Object.entries(skillLevels).forEach(([skillType, level]) => {

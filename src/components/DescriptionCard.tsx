@@ -5,26 +5,22 @@ import { Badge } from "./ui/badge";
 import { Edit2 } from "lucide-react";
 import { useState } from "react";
 import {
-  ancestryAtom,
   speciesDataAtom,
   genderAtom,
   ageAtom,
   languagesAtom,
   backgroundAtom,
-  backgroundDataAtom,
   biographyAtom,
   personalityAtom,
 } from "./../state/character";
 import { EditDescriptionDialog } from "./EditDescriptionDialog";
 
 export const DescriptionCard = () => {
-  const ancestry = useAtomValue(ancestryAtom);
   const species = useAtomValue(speciesDataAtom);
   const gender = useAtomValue(genderAtom);
   const age = useAtomValue(ageAtom);
   const selectedLanguages = useAtomValue(languagesAtom);
   const background = useAtomValue(backgroundAtom);
-  const backgroundData = useAtomValue(backgroundDataAtom);
   const biography = useAtomValue(biographyAtom);
   const personality = useAtomValue(personalityAtom);
 
@@ -45,20 +41,6 @@ export const DescriptionCard = () => {
         </Button>
       </CardHeader>
       <CardContent className="space-y-4 flex-grow min-h-0 overflow-auto">
-        <div>
-          <div className="text-sm font-medium text-muted-foreground mb-1">
-            Ancestry
-          </div>
-          <div className="text-sm">{ancestry || "-"}</div>
-        </div>
-
-        <div>
-          <div className="text-sm font-medium text-muted-foreground mb-1">
-            Species
-          </div>
-          <div className="text-sm">{species.name}</div>
-        </div>
-
         <div>
           <div className="text-sm font-medium text-muted-foreground mb-1">
             Gender
@@ -82,6 +64,13 @@ export const DescriptionCard = () => {
 
         <div>
           <div className="text-sm font-medium text-muted-foreground mb-1">
+            Background
+          </div>
+          <div className="text-sm">{background || "-"}</div>
+        </div>
+
+        <div>
+          <div className="text-sm font-medium text-muted-foreground mb-1">
             Languages
           </div>
           <div className="flex flex-wrap gap-2">
@@ -99,30 +88,12 @@ export const DescriptionCard = () => {
 
         <div>
           <div className="text-sm font-medium text-muted-foreground mb-1">
-            Background
+            Biography
           </div>
-          <div className="text-sm">
-            {backgroundData ? (
-              <div>
-                <div className="font-semibold">{backgroundData.name}</div>
-                <div className="text-xs text-muted-foreground mt-1">
-                  Expertise: {backgroundData.expertiseSkills.join(", ")}
-                </div>
-              </div>
-            ) : (
-              <div>{background || "-"}</div>
-            )}
+          <div className="text-sm flex">
+            <div className="flex-1">{biography || "-"}</div>
           </div>
         </div>
-
-        {biography && (
-          <div>
-            <div className="text-sm font-medium text-muted-foreground mb-1">
-              Biography
-            </div>
-            <div className="text-sm whitespace-pre-wrap">{biography}</div>
-          </div>
-        )}
 
         <div>
           <div className="text-sm font-medium text-muted-foreground mb-1">

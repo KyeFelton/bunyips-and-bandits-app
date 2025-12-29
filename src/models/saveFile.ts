@@ -15,7 +15,7 @@ export type CharacterSaveFile = {
   background: string;
   biography: string;
   languages: string[];
-  class: string;
+  magicSkills: string[];
   customTraits: Trait[];
   criticalSuccesses: Partial<Record<SkillType, number>>;
   currentBody: number;
@@ -37,10 +37,10 @@ export const defaultCharacter: CharacterSaveFile = {
   gender: "",
   age: 0,
   personality: "",
-  background: "",
+  background: "Merchant",
   biography: "",
   languages: ["Dharrigal", "Englorian"],
-  class: "",
+  magicSkills: ["Biotic"],
   customTraits: [],
   criticalSuccesses: {},
   currentBody: startingSpecies.body,

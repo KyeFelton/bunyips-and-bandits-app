@@ -9,7 +9,7 @@ import { saveFileAtom, focalCharacterIdAtom } from "../state/saveFile";
 import { nameAtom } from "../state/character";
 import { KinStep } from "../components/KinStep";
 import { DescriptionStep } from "../components/DescriptionStep";
-import { ClassStep } from "../components/ClassStep";
+import { MagicStep } from "../components/MagicStep";
 import { BackgroundStep } from "../components/BackgroundStep";
 import { CustomTraitsStep } from "../components/CustomTraitsStep";
 import { useLoadCharacterFromUrl } from "../hooks/useLoadCharacterFromUrl";
@@ -17,7 +17,7 @@ import { useLoadCharacterFromUrl } from "../hooks/useLoadCharacterFromUrl";
 const steps = [
   { title: "Kin", component: KinStep },
   { title: "Background", component: BackgroundStep },
-  { title: "Class", component: ClassStep },
+  { title: "Magic", component: MagicStep },
   { title: "Traits", component: CustomTraitsStep },
   { title: "Description", component: DescriptionStep },
 ];

@@ -91,28 +91,32 @@ export const Perception: Skill = {
 export const Pyro: Skill = {
   type: SkillType.Pyro,
   magicSkill: true,
-  description: "Fire sorcery, such as igniting a creature on fire.",
+  description:
+    "Fire sorcery, such as igniting a campfire or stunning an enemy with fireworks.",
   form: SkillForm.Physical,
 };
 
 export const Electric: Skill = {
   type: SkillType.Electric,
   magicSkill: true,
-  description: "Electric sorcery, such as casting a lightning bolt.",
+  description:
+    "Electric sorcery, such as casting a lightning bolt or attracting nearby magnetic objects.",
   form: SkillForm.Physical,
 };
 
 export const Kinetic: Skill = {
   type: SkillType.Kinetic,
   magicSkill: true,
-  description: "Kinetic sorcery, such as telekinesis.",
+  description:
+    "Kinetic sorcery, such as levitating an object or manifesting a powerful windstorms.",
   form: SkillForm.Physical,
 };
 
 export const Radiant: Skill = {
   type: SkillType.Radiant,
   magicSkill: true,
-  description: "Light sorcery, such as illuminating a room.",
+  description:
+    "Light sorcery, such as blinding an enemy or crafting a visual illusion.",
   form: SkillForm.Physical,
 };
 
@@ -120,14 +124,15 @@ export const Sonic: Skill = {
   type: SkillType.Sonic,
   magicSkill: true,
   description:
-    "Sound sorcery, such as producing a terrifying shriek in the distance.",
+    "Sound sorcery, such as casting an audial illusion or blasting a foe with sonic waves.",
   form: SkillForm.Physical,
 };
 
 export const Psychic: Skill = {
   type: SkillType.Psychic,
   magicSkill: true,
-  description: "Psionics, such as mind reading.",
+  description:
+    "Psionics, such as mind reading or hypnotising another creature.",
   form: SkillForm.Mental,
 };
 
@@ -135,13 +140,14 @@ export const Biotic: Skill = {
   type: SkillType.Biotic,
   magicSkill: true,
   description:
-    "Manipulating living matter, such as healing wounds, shapeshifting and producing poisons.",
+    "Manipulating living matter, such as healing wounds, shapeshifting or producing poisons.",
   form: SkillForm.Physical,
 };
 
 export const Spirit: Skill = {
   type: SkillType.Spirit,
   magicSkill: true,
-  description: "Evocation, such as speaking to the dead.",
+  description:
+    "Evocation, such as speaking to the dead or summoning spirits to your aid.",
   form: SkillForm.Mental,
 };

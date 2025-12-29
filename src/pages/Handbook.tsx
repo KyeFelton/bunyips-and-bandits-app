@@ -142,11 +142,11 @@ const content = (
           movement, senses, size, armour, and skill modifiers.
         </li>
         <li>
-          <b>Choose your class</b>: Your class represents your character's
-          training and experience. It determines which magic skills you unlock
-          and may grant you additional traits or actions. For example, a
-          pyromaniac unlocks the pyro skill, while a hunter gains traits that
-          improve stealth and dexterity along with archery proficiency.
+          <b>Choose a magic skill</b>: Select one magic skill you have been
+          trained in. This skill starts at level 1, allowing you to use basic
+          abilities. As you progress, you'll unlock more powerful traits and
+          actions. Magic skills include pyro, electric, sonic, radiant, kinetic,
+          biotic, psychic, and spirit.
         </li>
         <li>
           <b>Choose your background</b>: Your background represents your
@@ -192,12 +192,10 @@ const content = (
         your character's health impacts their performance.
       </p>
       <p>
-        Your skill levels range from 1 to 10. Base skills (like strength,
-        agility, intelligence) start at level 1 for all characters. Magic skills
-        (like pyro, electric, psychic) start at level 0 and must be unlocked by
-        choosing a class that grants them, at which point they begin at level 1.
-        Your background grants expertise in specific skills, starting them at
-        level 5 instead of level 1.
+        Your skill levels range from 1 to 10. All base skills (like strength,
+        agility, intelligence) start at level 1 for all characters. Your
+        background grants expertise in specific skills, starting them at level 5
+        instead of level 1.
       </p>
       <p>
         Skill modifiers are separate from skill levels. Your species provides
@@ -207,15 +205,14 @@ const content = (
         skill level.
       </p>
       <p>
-        Magic skills (pyro, radiant, sonic, kinetic, electric, biotic, psychic,
-        and spirit) are not innate to most species and must be unlocked. To
-        unlock one of these skills, you must either choose a class that grants
-        that skill, or seek out training in the world. Training requires
-        spending one month of in-game time with a mentor or at an institution
-        such as a magic school, guild, or dojo. The GM will determine what
-        training opportunities exist in the setting. You can only train one
-        magic skill at a time, and successfully completing the training unlocks
-        that skill at level 1.
+        Magic skills are not innate to most species and must be unlocked. To
+        unlock one of these skills, you must either choose it as a starting
+        skill or seek out training in the world. Training requires spending one
+        month of in-game time with a mentor or at an institution such as a magic
+        school, guild, or dojo. The GM will determine what training
+        opportunities exist in the setting. You can only train one magic skill
+        at a time, and successfully completing the training unlocks that skill
+        at level 1.
       </p>
       <h4>Physical Skills</h4>
       <table className="md:mx-4">
@@ -472,21 +469,6 @@ const content = (
         representing extensive study and academic training. The merchant
         background grants expertise in charisma and perception, useful for
         negotiation and assessing value.
-      </p>
-    </Body>
-    <H3>Classes</H3>
-    <Body>
-      <p>
-        Your class represents your character's training and specialized
-        experience. Classes unlock magic skills (like pyro or psychic) and may
-        grant additional traits or actions that reflect your specialized
-        knowledge.
-      </p>
-      <p>
-        For example, the pyromaniac class unlocks the pyro skill at level 1,
-        giving you access to fire magic from the start. The hunter class unlocks
-        no magic skills but provides traits that improve stealth and dexterity,
-        along with the archery trait that allows you to use bows proficiently.
       </p>
     </Body>
     <H3>Progression</H3>

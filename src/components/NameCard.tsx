@@ -4,7 +4,6 @@ import { Button } from "./ui/button";
 import { Edit2 } from "lucide-react";
 import {
   nameAtom,
-  classAtom,
   imageAtom,
   speciesAtom,
   ancestryAtom,
@@ -15,7 +14,6 @@ import { getSpeciesImage } from "./../utils/speciesImages";
 
 export const NameCard = () => {
   const name = useAtomValue(nameAtom);
-  const className = useAtomValue(classAtom);
   const image = useAtomValue(imageAtom);
   const species = useAtomValue(speciesAtom);
   const ancestry = useAtomValue(ancestryAtom);
@@ -30,7 +28,7 @@ export const NameCard = () => {
             {name || "No name"}
           </h3>
           <span className="text-md text-muted-foreground">
-            {className || "No class"}
+            {ancestry} {species}
           </span>
           <Button
             variant="ghost"

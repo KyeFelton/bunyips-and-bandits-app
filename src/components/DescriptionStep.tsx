@@ -102,7 +102,7 @@ export const DescriptionStep = () => {
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-muted-foreground">
+      <p className="text-md text-muted-foreground">
         Define your character's name, appearance, attributes and backstory to
         bring them to life.
       </p>

@@ -4,7 +4,7 @@ import { useAtomValue, useSetAtom } from "jotai";
 import { saveFileAtom, focalCharacterIdAtom } from "../state/saveFile";
 import {
   nameAtom,
-  classAtom,
+  magicSkillsAtom,
   currentBodyAtom,
   bodyUpgradesAtom,
   currentMindAtom,
@@ -36,7 +36,7 @@ export const useLoadCharacterFromUrl = () => {
   const saveFile = useAtomValue(saveFileAtom);
   const setFocalCharacterId = useSetAtom(focalCharacterIdAtom);
   const setName = useSetAtom(nameAtom);
-  const setClass = useSetAtom(classAtom);
+  const setMagicSkills = useSetAtom(magicSkillsAtom);
   const setCurrentBody = useSetAtom(currentBodyAtom);
   const setBodyUpgrades = useSetAtom(bodyUpgradesAtom);
   const setCurrentMind = useSetAtom(currentMindAtom);
@@ -63,7 +63,7 @@ export const useLoadCharacterFromUrl = () => {
       const character = saveFile.characters[id];
       setFocalCharacterId(id);
       setName(character.name);
-      setClass(character.class);
+      setMagicSkills(character.magicSkills || []);
       setCurrentBody(character.currentBody);
       setBodyUpgrades(character.bodyUpgrades);
       setCurrentMind(character.currentMind);
@@ -90,7 +90,7 @@ export const useLoadCharacterFromUrl = () => {
     saveFile,
     setFocalCharacterId,
     setName,
-    setClass,
+    setMagicSkills,
     setCurrentBody,
     setBodyUpgrades,
     setCurrentMind,

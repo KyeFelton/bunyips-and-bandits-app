@@ -65,8 +65,7 @@ export const BackgroundStep = () => {
       <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 text-md text-muted-foreground">
         <div className="flex-1">
           Choose your background to represent your character's past profession
-          and training. Your background grants expertise in specific skills,
-          starting them at level 5.
+          and training.
         </div>
       </div>
 
