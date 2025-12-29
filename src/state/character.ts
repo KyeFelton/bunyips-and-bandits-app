@@ -138,11 +138,17 @@ export const actionsAtom = atom((get) => {
   return actions;
 });
 
-// Traits atom - includes skill progression unlocked traits and custom traits
+// Traits atom - includes background traits, skill progression unlocked traits, and custom traits
 export const traitsAtom = atom((get) => {
   const skillLevels = get(skillLevelsAtom);
   const customTraits = get(customTraitsAtom);
+  const backgroundData = get(backgroundDataAtom);
   const traits: Trait[] = [];
+
+  // Add background traits
+  if (backgroundData?.traits) {
+    traits.push(...backgroundData.traits);
+  }
 
   // Add skill progression unlocked traits
   Object.entries(skillLevels).forEach(([skillType, level]) => {

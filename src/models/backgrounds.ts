@@ -1,7 +1,9 @@
 import { SkillType } from "../enums/SkillType";
+import { Trait } from "./traits";
 
 export type Background = {
   name: string;
   description: string;
-  expertiseSkills: SkillType[]; // Skills that start at level 5
+  expertiseSkills: SkillType[];
+  traits: Trait[];
 };

@@ -152,8 +152,11 @@ const content = (
           <b>Choose your background</b>: Your background represents your
           character's past profession and upbringing. It grants expertise in
           specific skills, starting them at level 5 instead of the usual level
-          1. For example, a labourer has expertise in strength and willpower,
-          while a scholar has expertise in intelligence and nature.
+          1, and provides special traits related to your profession. For
+          example, a farmer has expertise in strength and nature and gains
+          advantage on animal and plant handling checks, while a medic has
+          expertise in intelligence and psychology and can attempt to
+          resuscitate the recently dead.
         </li>
         <li>
           <b>Describe your character</b>: Think about who they are beyond the
@@ -461,14 +464,16 @@ const content = (
         Your background represents your character's past profession and
         upbringing before becoming an adventurer. Backgrounds grant expertise in
         specific skills, starting them at level 5 instead of the usual level 1.
+        Each background also provides special traits that give you advantages in
+        situations related to your past profession.
       </p>
       <p>
-        For example, the labourer background grants expertise in strength and
-        willpower, reflecting years of physical work and perseverance. The
-        scholar background grants expertise in intelligence and nature,
-        representing extensive study and academic training. The merchant
-        background grants expertise in charisma and perception, useful for
-        negotiation and assessing value.
+        For example, the farmer background grants expertise in strength and
+        nature, reflecting years of physical labor and working with animals and
+        crops. Farmers also have advantage on checks involving animal and plant
+        handling. The medic background grants expertise in intelligence and
+        psychology, along with advantage on medical checks and the ability to
+        resuscitate creatures who have recently died.
       </p>
     </Body>
     <H3>Progression</H3>
@@ -1089,6 +1094,18 @@ const content = (
         of breaking down the door, maybe you hurt your shoulder. Instead of
         sneaking past the guards, maybe you step on a creaky floorboard. This is
         where the GM gets to have some fun.
+      </p>
+      <h4>Advantage and Disadvantage</h4>
+      <p>
+        Some abilities, traits, or circumstances give you advantage or
+        disadvantage on a skill check. When you have advantage, roll your skill
+        die twice and use the higher result before adding modifiers. When you
+        have disadvantage, roll twice and use the lower result.
+      </p>
+      <p>
+        If you have both advantage and disadvantage on the same roll, they
+        cancel out and you roll normally. Multiple sources of advantage don't
+        stack—you still only roll twice.
       </p>
     </Body>
     <H2>Luck</H2>

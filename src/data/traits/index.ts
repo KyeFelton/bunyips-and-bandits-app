@@ -72,6 +72,20 @@ import { ThickSkin } from "./ThickSkin";
 import { Nimble } from "./Nimble";
 import { Dexterous } from "./Dexterous";
 import { Stealthy } from "./Stealthy";
+import { Artisan } from "./Artisan";
+import { Bandit } from "./Bandit";
+import { Drifter } from "./Drifter";
+import { Farmer } from "./Farmer";
+import { Herbalist } from "./Herbalist";
+import { Hunter } from "./Hunter";
+import { Labourer } from "./Labourer";
+import { Leader } from "./Leader";
+import { Medic as MedicTrait } from "./Medic";
+import { Merchant } from "./Merchant";
+import { Monk } from "./Monk";
+import { Performer } from "./Performer";
+import { Soldier } from "./Soldier";
+import { Spy } from "./Spy";
 
 export {
   Ablaze,
@@ -148,4 +162,18 @@ export {
   ClaimTheHunt,
   ArcherII,
   ThickSkin,
+  Artisan,
+  Bandit,
+  Drifter,
+  Farmer,
+  Herbalist,
+  Hunter,
+  Labourer,
+  Leader,
+  MedicTrait,
+  Merchant,
+  Monk,
+  Performer,
+  Soldier,
+  Spy,
 };
