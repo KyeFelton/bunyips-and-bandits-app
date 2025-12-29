@@ -1,5 +1,4 @@
 import { CreatureSize } from "../../enums/CreatureSize";
-import { DamageType } from "../../enums/DamageType";
 import { Locomotion } from "../../enums/Locomotion";
 import { SenseType } from "../../enums/SenseType";
 import { SkillType } from "../../enums/SkillType";
@@ -22,23 +21,10 @@ export const Avian: Species = {
     primary: [SenseType.Sight, SenseType.Hearing],
     secondary: [SenseType.Smell],
   },
-  armour: {
-    [DamageType.Fire]: 0,
-    [DamageType.Electric]: 0,
-    [DamageType.Toxic]: 0,
-    [DamageType.Slash]: 0,
-    [DamageType.Force]: 0,
-  },
-  skillLevels: {
-    [SkillType.Strength]: 3,
-    [SkillType.Agility]: 3,
-    [SkillType.Dexterity]: 3,
-    [SkillType.Intelligence]: 2,
-    [SkillType.Nature]: 2,
-    [SkillType.Willpower]: 3,
-    [SkillType.Charisma]: 4,
-    [SkillType.Psychology]: 4,
-    [SkillType.Stealth]: 3,
-    [SkillType.Perception]: 4,
+  armour: {},
+  skillModifiers: {
+    [SkillType.Willpower]: -1,
+    [SkillType.Charisma]: 1,
+    [SkillType.Perception]: 1,
   },
 };

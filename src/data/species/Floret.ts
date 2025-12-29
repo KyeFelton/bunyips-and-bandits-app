@@ -23,22 +23,12 @@ export const Floret: Species = {
     secondary: [],
   },
   armour: {
-    [DamageType.Fire]: 0,
-    [DamageType.Electric]: 0,
     [DamageType.Toxic]: 2,
-    [DamageType.Slash]: 0,
-    [DamageType.Force]: 0,
   },
-  skillLevels: {
-    [SkillType.Strength]: 2,
-    [SkillType.Agility]: 3,
-    [SkillType.Dexterity]: 3,
-    [SkillType.Intelligence]: 3,
-    [SkillType.Nature]: 3,
-    [SkillType.Willpower]: 4,
-    [SkillType.Charisma]: 3,
-    [SkillType.Psychology]: 3,
-    [SkillType.Stealth]: 3,
-    [SkillType.Perception]: 3,
+  skillModifiers: {
+    [SkillType.Strength]: -1,
+    [SkillType.Charisma]: -1,
+    [SkillType.Willpower]: 1,
+    [SkillType.Nature]: 1,
   },
 };

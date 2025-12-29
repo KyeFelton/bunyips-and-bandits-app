@@ -29,8 +29,10 @@ export const SkillLevelProgressBar = ({
       onCriticalSuccessChange(criticalSuccesses - 2);
     } else if (level === currentLevel + 1 && remainingCrits === 0) {
       onCriticalSuccessChange(criticalSuccesses + 1);
-    } else if (level > startingLevel && level <= maxAllowedLevel) {
-      onCriticalSuccessChange((level - startingLevel) * CRIT_TO_LEVEL_UP);
+    } else if (level >= startingLevel && level <= maxAllowedLevel) {
+      // Calculate crits needed to reach this level from starting level
+      const levelsFromStart = level - startingLevel;
+      onCriticalSuccessChange(levelsFromStart * CRIT_TO_LEVEL_UP);
     }
   };
 

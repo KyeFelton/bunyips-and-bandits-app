@@ -69,6 +69,9 @@ import { Sharpshooter } from "./Sharpshooter";
 import { ClaimTheHunt } from "./ClaimTheHunt";
 import { ArcherII } from "./ArcherII";
 import { ThickSkin } from "./ThickSkin";
+import { Nimble } from "./Nimble";
+import { Dexterous } from "./Dexterous";
+import { Stealthy } from "./Stealthy";
 
 export {
   Ablaze,
@@ -77,6 +80,9 @@ export {
   Pharmacist,
   Medic,
   Agile,
+  Nimble,
+  Dexterous,
+  Stealthy,
   Arsonist,
   Bard,
   Bellow,

@@ -14,10 +14,8 @@ import * as Skills from "./../models/skills";
 import {
   skillLevelsAtom,
   skillRollValuesAtom,
+  skillModifiersAtom,
   criticalSuccessesAtom,
-  classDataAtom,
-  speciesDataAtom,
-  MAX_SKILL_PROGRESSION,
   skillsProgressedSinceRestAtom,
 } from "./../state/character";
 import { useRollToast } from "./RollToast";
@@ -31,10 +29,9 @@ import { CircleCheckbox } from "./ui/checkbox";
 export const SkillsTable = () => {
   const skillLevels = useAtomValue(skillLevelsAtom);
   const skillRollValues = useAtomValue(skillRollValuesAtom);
+  const skillModifiers = useAtomValue(skillModifiersAtom);
   const criticalSuccesses = useAtomValue(criticalSuccessesAtom);
   const setCriticalSuccesses = useSetAtom(criticalSuccessesAtom);
-  const speciesData = useAtomValue(speciesDataAtom);
-  const classData = useAtomValue(classDataAtom);
   const skillsProgressedSinceRest = useAtomValue(skillsProgressedSinceRestAtom);
   const setSkillsProgressedSinceRest = useSetAtom(
     skillsProgressedSinceRestAtom
@@ -76,18 +73,6 @@ export const SkillsTable = () => {
       newSet.add(skillType);
     }
     setSkillsProgressedSinceRest(newSet);
-  };
-
-  const getStartingLevel = (skillType: SkillType): number => {
-    const speciesLevel =
-      (speciesData.skillLevels as Partial<Record<SkillType, number>>)?.[
-        skillType
-      ] || 0;
-    const classBonus =
-      (classData?.skillBonuses as Partial<Record<SkillType, number>>)?.[
-        skillType
-      ] || 0;
-    return speciesLevel + classBonus;
   };
 
   const skillsArray = Object.values(SkillType).map((skillType) => ({
@@ -149,17 +134,27 @@ export const SkillsTable = () => {
                     </div>
                   </TableCell>
                   <TableCell>
-                    <SkillLevelProgressBar
-                      startingLevel={getStartingLevel(skill.type)}
-                      currentLevel={skill.level || 0}
-                      criticalSuccesses={criticalSuccesses[skill.type] || 0}
-                      maxAllowedLevel={
-                        getStartingLevel(skill.type) + MAX_SKILL_PROGRESSION
-                      }
-                      onCriticalSuccessChange={(newCount) =>
-                        handleCriticalSuccessChange(skill.type, newCount)
-                      }
-                    />
+                    <div className="flex items-center gap-2">
+                      <div className="text-sm font-medium">
+                        Lv {skill.level || 0}
+                      </div>
+                      {skillModifiers[skill.type] !== undefined &&
+                        skillModifiers[skill.type]! !== 0 && (
+                          <div className="text-xs text-muted-foreground">
+                            ({skillModifiers[skill.type]! > 0 ? "+" : ""}
+                            {skillModifiers[skill.type]} mod)
+                          </div>
+                        )}
+                      <SkillLevelProgressBar
+                        startingLevel={1}
+                        currentLevel={skill.level || 0}
+                        criticalSuccesses={criticalSuccesses[skill.type] || 0}
+                        maxAllowedLevel={10}
+                        onCriticalSuccessChange={(newCount) =>
+                          handleCriticalSuccessChange(skill.type, newCount)
+                        }
+                      />
+                    </div>
                   </TableCell>
                   <TableCell className="text-center">
                     <CircleCheckbox

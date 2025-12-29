@@ -22,6 +22,7 @@ import {
 import { X, Plus } from "lucide-react";
 import {
   backgroundAtom,
+  biographyAtom,
   personalityAtom,
   languagesAtom,
   ageAtom,
@@ -29,6 +30,7 @@ import {
   originAtom,
   speciesDataAtom,
 } from "../state/character";
+import { AllBackgrounds } from "../data/backgrounds";
 
 const genders = ["Male", "Female", "Non-binary"];
 const CUSTOM_GENDER_OPTION = "Let me type...";
@@ -40,6 +42,7 @@ type Props = {
 
 export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
   const [background, setBackground] = useAtom(backgroundAtom);
+  const [biography, setBiography] = useAtom(biographyAtom);
   const [personality, setPersonality] = useAtom(personalityAtom);
   const [selectedLanguages, setLanguages] = useAtom(languagesAtom);
   const [age, setAge] = useAtom(ageAtom);
@@ -48,6 +51,7 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
   const species = useAtomValue(speciesDataAtom);
 
   const [pendingBackground, setPendingBackground] = useState("");
+  const [pendingBiography, setPendingBiography] = useState("");
   const [pendingPersonality, setPendingPersonality] = useState("");
   const [pendingLanguages, setPendingLanguages] = useState<string[]>([]);
   const [pendingAge, setPendingAge] = useState(0);
@@ -59,6 +63,7 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
   useEffect(() => {
     if (isOpen) {
       setPendingBackground(background);
+      setPendingBiography(biography);
       setPendingPersonality(personality);
       setPendingLanguages([...selectedLanguages]);
       setPendingAge(age);
@@ -77,12 +82,13 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
         setCustomGenderValue("");
       }
     }
-  }, [isOpen, background, personality, selectedLanguages, age, gender]);
+  }, [isOpen, background, biography, personality, selectedLanguages, age, gender]);
 
   const handleSave = () => {
     const finalGender = isCustomGender ? customGenderValue : pendingGender;
 
     setBackground(pendingBackground);
+    setBiography(pendingBiography);
     setPersonality(pendingPersonality);
     setLanguages(pendingLanguages);
     setAge(pendingAge);
@@ -246,11 +252,36 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
 
           <div className="space-y-2">
             <Label htmlFor="background">Background</Label>
+            <Select value={pendingBackground} onValueChange={setPendingBackground}>
+              <SelectTrigger id="background">
+                <SelectValue placeholder="Select a background" />
+              </SelectTrigger>
+              <SelectContent>
+                {Object.values(AllBackgrounds).map((bg) => (
+                  <SelectItem key={bg.name} value={bg.name}>
+                    {bg.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            {pendingBackground && AllBackgrounds[pendingBackground as keyof typeof AllBackgrounds] && (
+              <p className="text-xs text-muted-foreground">
+                {AllBackgrounds[pendingBackground as keyof typeof AllBackgrounds].description}
+                {" "}
+                <span className="font-semibold">
+                  Expertise: {AllBackgrounds[pendingBackground as keyof typeof AllBackgrounds].expertiseSkills.join(", ")}
+                </span>
+              </p>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="biography">Biography</Label>
             <Textarea
-              id="background"
-              value={pendingBackground}
-              onChange={(e) => setPendingBackground(e.target.value)}
-              placeholder="Describe your character's background and history..."
+              id="biography"
+              value={pendingBiography}
+              onChange={(e) => setPendingBiography(e.target.value)}
+              placeholder="Describe your character's backstory and history..."
               className="min-h-[120px]"
             />
           </div>

@@ -16,6 +16,7 @@ import {
   genderAtom,
   ageAtom,
   backgroundAtom,
+  biographyAtom,
   personalityAtom,
   languagesAtom,
   imageAtom,
@@ -47,6 +48,7 @@ export const useLoadCharacterFromUrl = () => {
   const setGender = useSetAtom(genderAtom);
   const setAge = useSetAtom(ageAtom);
   const setBackground = useSetAtom(backgroundAtom);
+  const setBiography = useSetAtom(biographyAtom);
   const setPersonality = useSetAtom(personalityAtom);
   const setLanguages = useSetAtom(languagesAtom);
   const setImage = useSetAtom(imageAtom);
@@ -73,6 +75,7 @@ export const useLoadCharacterFromUrl = () => {
       setGender(character.gender);
       setAge(character.age);
       setBackground(character.background);
+      setBiography(character.biography || "");
       setPersonality(character.personality);
       setLanguages(character.languages);
       setImage(character.image);
@@ -99,6 +102,7 @@ export const useLoadCharacterFromUrl = () => {
     setGender,
     setAge,
     setBackground,
+    setBiography,
     setPersonality,
     setLanguages,
     setImage,

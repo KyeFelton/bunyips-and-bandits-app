@@ -21,23 +21,6 @@ export type Species = {
     primary: SenseType[];
     secondary: SenseType[];
   };
-  armour: {
-    [DamageType.Fire]: number;
-    [DamageType.Electric]: number;
-    [DamageType.Toxic]: number;
-    [DamageType.Slash]: number;
-    [DamageType.Force]: number;
-  };
-  skillLevels: {
-    [SkillType.Agility]: number;
-    [SkillType.Charisma]: number;
-    [SkillType.Dexterity]: number;
-    [SkillType.Intelligence]: number;
-    [SkillType.Nature]: number;
-    [SkillType.Perception]: number;
-    [SkillType.Psychology]: number;
-    [SkillType.Stealth]: number;
-    [SkillType.Strength]: number;
-    [SkillType.Willpower]: number;
-  };
+  armour: Partial<Record<DamageType, number>>;
+  skillModifiers: Partial<Record<SkillType, number>>;
 };

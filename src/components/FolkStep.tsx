@@ -426,19 +426,27 @@ export const FolkStep = () => {
           <div className="space-y-4 pt-6 border-t border-muted-foreground/20">
             <h3 className="font-semibold mb-4 flex items-center gap-2">
               <ChartNoAxesColumn className="h-5 w-5" />
-              Skills
+              Skill Modifiers
             </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4">
-              {Object.entries(speciesData.skillLevels).map(([skill, value]) => (
-                <div key={skill} className="flex items-center gap-2">
-                  <SkillIcon type={skill as SkillType} />
-                  <div>
-                    <div className="text-sm font-medium">{skill}</div>
-                    <div>{value === 0 ? "-" : String(value)}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
+            {Object.keys(speciesData.skillModifiers).length > 0 ? (
+              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4">
+                {Object.entries(speciesData.skillModifiers).map(
+                  ([skill, value]) => (
+                    <div key={skill} className="flex items-center gap-2">
+                      <SkillIcon type={skill as SkillType} />
+                      <div>
+                        <div className="text-sm font-medium">{skill}</div>
+                        <div>{value > 0 ? `+${value}` : String(value)}</div>
+                      </div>
+                    </div>
+                  )
+                )}
+              </div>
+            ) : (
+              <p className="text-muted-foreground h-[48px]">
+                No skill modifiers
+              </p>
+            )}
           </div>
 
           {/* Armour */}

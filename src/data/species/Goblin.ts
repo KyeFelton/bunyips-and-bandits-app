@@ -1,5 +1,4 @@
 import { CreatureSize } from "../../enums/CreatureSize";
-import { DamageType } from "../../enums/DamageType";
 import { Locomotion } from "../../enums/Locomotion";
 import { SenseType } from "../../enums/SenseType";
 import { SkillType } from "../../enums/SkillType";
@@ -22,23 +21,12 @@ export const Goblin: Species = {
     primary: [SenseType.Sight, SenseType.Hearing],
     secondary: [SenseType.Smell],
   },
-  armour: {
-    [DamageType.Fire]: 0,
-    [DamageType.Electric]: 0,
-    [DamageType.Toxic]: 0,
-    [DamageType.Slash]: 0,
-    [DamageType.Force]: 0,
-  },
-  skillLevels: {
-    [SkillType.Strength]: 3,
-    [SkillType.Agility]: 4,
-    [SkillType.Dexterity]: 4,
-    [SkillType.Intelligence]: 2,
-    [SkillType.Nature]: 2,
-    [SkillType.Willpower]: 2,
-    [SkillType.Charisma]: 4,
-    [SkillType.Psychology]: 4,
-    [SkillType.Stealth]: 4,
-    [SkillType.Perception]: 3,
+  armour: {},
+  skillModifiers: {
+    [SkillType.Agility]: 1,
+    [SkillType.Dexterity]: 1,
+    [SkillType.Intelligence]: -1,
+    [SkillType.Willpower]: -1,
+    [SkillType.Stealth]: 1,
   },
 };

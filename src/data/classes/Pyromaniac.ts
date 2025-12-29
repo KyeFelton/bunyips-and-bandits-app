@@ -6,6 +6,6 @@ export const Pyromaniac: Class = {
   description:
     "Pyromaniacs are the masters of controlled chaos, using flames to disrupt and destroy their enemies. This specialty uses a combination of sorcery and morphing to produce fire at will.",
   skillBonuses: {
-    [SkillType.Pyro]: 3,
+    [SkillType.Pyro]: 1, // Grants Pyro skill at level 1
   },
 };

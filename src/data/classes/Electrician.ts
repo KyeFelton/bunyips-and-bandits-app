@@ -6,6 +6,6 @@ export const Electrician: Class = {
   description:
     "Masters of electricity, electricians can manipulate electrical and magnetic forces to devastating effect. Their powers range from subtle magnetic control to unleashing deadly bolts of lightning.",
   skillBonuses: {
-    [SkillType.Electric]: 3,
+    [SkillType.Electric]: 1, // Grants Electric skill at level 1
   },
 };

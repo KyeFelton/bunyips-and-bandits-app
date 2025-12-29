@@ -10,12 +10,14 @@ import { nameAtom } from "../state/character";
 import { FolkStep } from "../components/FolkStep";
 import { DescriptionStep } from "../components/DescriptionStep";
 import { ClassStep } from "../components/ClassStep";
+import { BackgroundStep } from "../components/BackgroundStep";
 import { CustomTraitsStep } from "../components/CustomTraitsStep";
 import { useLoadCharacterFromUrl } from "../hooks/useLoadCharacterFromUrl";
 
 const steps = [
   { title: "Folk", component: FolkStep },
   { title: "Class", component: ClassStep },
+  { title: "Background", component: BackgroundStep },
   { title: "Traits", component: CustomTraitsStep },
   { title: "Description", component: DescriptionStep },
 ];

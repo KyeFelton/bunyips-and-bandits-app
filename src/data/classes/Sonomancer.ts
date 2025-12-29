@@ -6,6 +6,6 @@ export const Sonomancer: Class = {
   description:
     "Sonomancers are attuned to the rhythms and sounds of their environment. They can weave soundwaves to conjure enchantments and blast their enemies with devastating force.",
   skillBonuses: {
-    [SkillType.Sonic]: 3,
+    [SkillType.Sonic]: 1, // Grants Sonic skill at level 1
   },
 };

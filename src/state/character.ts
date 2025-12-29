@@ -5,11 +5,12 @@ import { AllSpecies, startingSpecies } from "../data/species";
 import { AllOrigins, startingOrigin } from "../data/origins";
 import { AllClasses } from "../data/classes";
 import { AllSkillProgressions } from "../data/skillProgressions";
+import { AllBackgrounds } from "../data/backgrounds";
 import { Effect } from "../models/effect";
 import * as Skills from "../models/skills";
 import { Trait } from "../models/traits";
 import { Action } from "../models/actions";
-import { getDiceBonusForLevel, getDiceForLevel } from "../utils/dice";
+import { getDiceForLevel } from "../utils/dice";
 import { SkillForm } from "../enums/SkillForm";
 import { Locomotion } from "../enums/Locomotion";
 import { SpeedRating } from "../enums/SpeedRating";
@@ -27,6 +28,7 @@ export const speciesAtom = atom<string>(startingSpecies.name);
 export const genderAtom = atom<string>("");
 export const ageAtom = atom<number>(0);
 export const backgroundAtom = atom<string>("");
+export const biographyAtom = atom<string>("");
 export const personalityAtom = atom<string>("");
 export const languagesAtom = atom<string[]>(["Dharrigal", "Englorian"]);
 export const imageAtom = atom<string | undefined>(undefined);
@@ -76,21 +78,45 @@ export const classDataAtom = atom((get) => {
   return AllClasses[className] || null;
 });
 
+// Get background data
+export const backgroundDataAtom = atom((get) => {
+  const backgroundName = get(backgroundAtom);
+  if (!backgroundName) return null;
+  return AllBackgrounds[backgroundName as keyof typeof AllBackgrounds] || null;
+});
+
 // Skill levels
 export const skillLevelsAtom = atom((get) => {
-  const speciesData = get(speciesDataAtom);
   const classData = get(classDataAtom);
+  const backgroundData = get(backgroundDataAtom);
   const criticalSuccesses = get(criticalSuccessesAtom);
 
-  const skills: Partial<Record<SkillType, number>> = {
-    ...speciesData.skillLevels,
-  };
+  const skills: Partial<Record<SkillType, number>> = {};
 
-  // Add class bonuses
+  // Initialize base skills to level 1, path skills to 0
+  Object.values(Skills).forEach((skill) => {
+    if (skill.pathSkill) {
+      skills[skill.type] = 0; // Path skills start at 0
+    } else {
+      skills[skill.type] = 1; // Base skills start at 1
+    }
+  });
+
+  // Add class granted path skills (set from 0 to 1)
   if (classData?.skillBonuses) {
-    Object.entries(classData.skillBonuses).forEach(([skill, bonus]) => {
-      skills[skill as SkillType] =
-        (skills[skill as SkillType] || 0) + (bonus || 0);
+    Object.keys(classData.skillBonuses).forEach((skillType) => {
+      const skill = skillType as SkillType;
+      // If it's a path skill (currently at 0), set it to 1
+      if (skills[skill] === 0) {
+        skills[skill] = 1;
+      }
+    });
+  }
+
+  // Apply background expertise (set to level 5)
+  if (backgroundData?.expertiseSkills) {
+    backgroundData.expertiseSkills.forEach((skillType) => {
+      skills[skillType] = 5;
     });
   }
 
@@ -196,6 +222,25 @@ export const effectsAtom = atom((get) => {
   });
 
   return effects;
+});
+
+// Skill modifiers atom - aggregates all modifier sources
+export const skillModifiersAtom = atom((get) => {
+  const speciesData = get(speciesDataAtom);
+  const effects = get(effectsAtom);
+  const modifiers: Partial<Record<SkillType, number>> = {
+    ...speciesData.skillModifiers,
+  };
+
+  // Add effect modifiers (traits, items, conditions)
+  effects.forEach((effect) => {
+    if (effect.skill?.skillType) {
+      const type = effect.skill.skillType;
+      modifiers[type] = (modifiers[type] || 0) + (effect.skill.bonus || 0);
+    }
+  });
+
+  return modifiers;
 });
 
 // Body
@@ -394,22 +439,14 @@ type RollValues = {
 };
 
 export const skillRollValuesAtom = atom((get) => {
-  const effects = get(effectsAtom);
   const skillLevels = get(skillLevelsAtom);
+  const skillModifiers = get(skillModifiersAtom);
   const body = get(bodyAtom);
   const mind = get(mindAtom);
-  const modifiers: Record<SkillType, number> = {} as Record<SkillType, number>;
   const rollValues: Record<SkillType, RollValues> = {} as Record<
     SkillType,
     RollValues
   >;
-
-  effects.forEach((effect) => {
-    if (effect.skill?.skillType) {
-      const type = effect.skill.skillType;
-      modifiers[type] = (modifiers[type] || 0) + (effect.skill.bonus || 0);
-    }
-  });
 
   Object.values(Skills).forEach((skill) => {
     const level = skillLevels[skill.type] || 0;
@@ -418,7 +455,7 @@ export const skillRollValuesAtom = atom((get) => {
       (skill.form === SkillForm.Mental && mind.current <= 1);
     rollValues[skill.type] = {
       dice: weakHealth ? 0 : getDiceForLevel(level),
-      modifier: (modifiers[skill.type] || 0) + getDiceBonusForLevel(level),
+      modifier: skillModifiers[skill.type] || 0,
       hasAdvantage: false,
       hasDisadvantage:
         skill.form === SkillForm.Physical

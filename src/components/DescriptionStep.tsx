@@ -17,7 +17,7 @@ import {
   nameAtom,
   genderAtom,
   ageAtom,
-  backgroundAtom,
+  biographyAtom,
   personalityAtom,
   languagesAtom,
   imageAtom,
@@ -35,7 +35,7 @@ export const DescriptionStep = () => {
   const origin = useAtomValue(originAtom);
   const [gender, setGender] = useAtom(genderAtom);
   const [age, setAge] = useAtom(ageAtom);
-  const [background, setBackground] = useAtom(backgroundAtom);
+  const [biography, setBiography] = useAtom(biographyAtom);
   const [personality, setPersonality] = useAtom(personalityAtom);
   const [selectedLanguages, setLanguages] = useAtom(languagesAtom);
   const [image, setImage] = useAtom(imageAtom);
@@ -237,16 +237,16 @@ export const DescriptionStep = () => {
           </div>
         </div>
 
-        {/* Right column: Background and personality */}
+        {/* Right column: Biography and personality */}
         <div className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="background">Background</Label>
+            <Label htmlFor="biography">Biography</Label>
             <Textarea
-              id="background"
-              value={background}
-              onChange={(e) => setBackground(e.target.value)}
-              placeholder="Describe your character's background and history..."
-              className="min-h-[180px] lg:min-h-[256px]"
+              id="biography"
+              value={biography}
+              onChange={(e) => setBiography(e.target.value)}
+              placeholder="Describe your character's backstory and history..."
+              className="min-h-[140px] lg:min-h-[180px]"
             />
           </div>
 
@@ -257,7 +257,7 @@ export const DescriptionStep = () => {
               value={personality}
               onChange={(e) => setPersonality(e.target.value)}
               placeholder="Describe your character's personality and motivations..."
-              className="min-h-[180px] lg:min-h-[256px]"
+              className="min-h-[140px] lg:min-h-[180px]"
             />
           </div>
         </div>
