@@ -139,23 +139,29 @@ const content = (
           <b>Choose a species</b>: You can play as one of many different
           creatures, each with their own strengths, weaknesses, and unique
           traits. Your species affects your base stats, including health,
-          movement, senses, size, armour, and skills.
-        </li>
-        <li>
-          <b>Describe your character</b>: Think about who they are beyond the
-          numbers on the sheet. What's their name? What do they look like? Where
-          do they come from? Why have they taken to the adventuring life instead
-          of settling down somewhere safe? The GM will work with you to weave
-          your character into the world, ensuring they have a reason to be
-          involved in the story.
+          movement, senses, size, armour, and skill modifiers.
         </li>
         <li>
           <b>Choose your class</b>: Your class represents your character's
-          background, training, and experience. It determines which skills you
-          excel at beyond your species' natural abilities, and may grant you
-          additional traits or actions. For example, a pyromaniac starts with
-          higher pyro skill, while a hunter gains bonuses to stealth and
-          dexterity along with archery proficiency.
+          training and experience. It determines which magic skills you unlock
+          and may grant you additional traits or actions. For example, a
+          pyromaniac unlocks the pyro skill, while a hunter gains traits that
+          improve stealth and dexterity along with archery proficiency.
+        </li>
+        <li>
+          <b>Choose your background</b>: Your background represents your
+          character's past profession and upbringing. It grants expertise in
+          specific skills, starting them at level 5 instead of the usual level
+          1. For example, a labourer has expertise in strength and willpower,
+          while a scholar has expertise in intelligence and nature.
+        </li>
+        <li>
+          <b>Describe your character</b>: Think about who they are beyond the
+          numbers on the sheet. What's their name? What do they look like?
+          What's their biography and personality? Why have they taken to the
+          adventuring life instead of settling down somewhere safe? The GM will
+          work with you to weave your character into the world, ensuring they
+          have a reason to be involved in the story.
         </li>
         <li>
           <b>Create a unique trait</b>: Every adventurer has something special
@@ -170,10 +176,12 @@ const content = (
     <H3>Species</H3>
     <Body>
       <p>
-        Your species affects your character’s base stats and natural abilities.
+        Your species affects your character's base stats and natural abilities.
         Some species are tougher, others are faster, and some have heightened
-        senses. What you choose will influence how you experience the world,
-        both in terms of game mechanics and role-playing opportunities.
+        senses. Each species also provides skill modifiers that reflect their
+        natural strengths and weaknesses. What you choose will influence how you
+        experience the world, both in terms of game mechanics and role-playing
+        opportunities.
       </p>
     </Body>
     <H3>Skills</H3>
@@ -184,22 +192,30 @@ const content = (
         your character's health impacts their performance.
       </p>
       <p>
-        Your starting skill levels are determined by your species and class.
-        Your species provides base skill levels reflecting natural abilities,
-        while your class adds bonuses based on your background and training.
-        Skills can then be improved through play by achieving critical
-        successes.
+        Your skill levels range from 1 to 10. Base skills (like strength,
+        agility, intelligence) start at level 1 for all characters. Magic skills
+        (like pyro, electric, psychic) start at level 0 and must be unlocked by
+        choosing a class that grants them, at which point they begin at level 1.
+        Your background grants expertise in specific skills, starting them at
+        level 5 instead of level 1.
       </p>
       <p>
-        The skills pyro, radiant, sonic, kinetic, electric, biotic, psychic and
-        spirit are not innate to most species and must be learned. To unlock one
-        of these skills, you must either choose a class that starts with that
-        skill, or seek out training in the world. Training requires spending one
-        month of in-game time with a mentor or at an institution such as a magic
-        school, guild, or dojo. The GM will determine what training
-        opportunities exist in the setting. You can only train one magical skill
-        at a time, and successfully completing the training unlocks that skill
-        at level 1.
+        Skill modifiers are separate from skill levels. Your species provides
+        skill modifiers reflecting natural abilities—for example, giants have +3
+        to strength but -2 to agility. Traits and items can also provide skill
+        modifiers. These modifiers are added to your roll but do not affect your
+        skill level.
+      </p>
+      <p>
+        Magic skills (pyro, radiant, sonic, kinetic, electric, biotic, psychic,
+        and spirit) are not innate to most species and must be unlocked. To
+        unlock one of these skills, you must either choose a class that grants
+        that skill, or seek out training in the world. Training requires
+        spending one month of in-game time with a mentor or at an institution
+        such as a magic school, guild, or dojo. The GM will determine what
+        training opportunities exist in the setting. You can only train one
+        magic skill at a time, and successfully completing the training unlocks
+        that skill at level 1.
       </p>
       <h4>Physical Skills</h4>
       <table className="md:mx-4">
@@ -442,18 +458,35 @@ const content = (
         </tbody>
       </table>
     </Body>
+    <H3>Backgrounds</H3>
+    <Body>
+      <p>
+        Your background represents your character's past profession and
+        upbringing before becoming an adventurer. Backgrounds grant expertise in
+        specific skills, starting them at level 5 instead of the usual level 1.
+      </p>
+      <p>
+        For example, the labourer background grants expertise in strength and
+        willpower, reflecting years of physical work and perseverance. The
+        scholar background grants expertise in intelligence and nature,
+        representing extensive study and academic training. The merchant
+        background grants expertise in charisma and perception, useful for
+        negotiation and assessing value.
+      </p>
+    </Body>
     <H3>Classes</H3>
     <Body>
       <p>
-        Your class represents your character's upbringing, training, and past
-        experience. Classes modify your starting skill levels and may grant
-        additional traits or actions that reflect your specialized knowledge.
+        Your class represents your character's training and specialized
+        experience. Classes unlock magic skills (like pyro or psychic) and may
+        grant additional traits or actions that reflect your specialized
+        knowledge.
       </p>
       <p>
-        For example, the pyromaniac class grants +3 levels to your pyro skill,
-        giving you access to fire magic from the start, whilst the hunter class
-        provides +2 levels to stealth, +1 to dexterity, and the archery trait
-        that allows you to use bows proficiently.
+        For example, the pyromaniac class unlocks the pyro skill at level 1,
+        giving you access to fire magic from the start. The hunter class unlocks
+        no magic skills but provides traits that improve stealth and dexterity,
+        along with the archery trait that allows you to use bows proficiently.
       </p>
     </Body>
     <H3>Progression</H3>
@@ -479,10 +512,10 @@ const content = (
         but it won't contribute toward leveling up that skill.
       </p>
       <p>
-        Each skill can be improved by up to 5 levels from its starting value.
-        For example, if you begin with level 3 strength, you can progress it to
-        a maximum of level 8. Once you reach your maximum potential in a skill,
-        further critical successes with that skill won't increase it further.
+        All skills have a maximum level of 10. Once you reach level 10 in a
+        skill, further critical successes with that skill won't increase it
+        further, though they still count as critical successes for the purposes
+        of that action.
       </p>
       <p>
         As your skills improve, you may unlock new abilities. For instance,
@@ -990,73 +1023,47 @@ const content = (
       <h4>Determining the Outcome</h4>
       <p>
         To perform a skill check, roll the die that corresponds to your skill
-        level and add the modifier:
+        level and add any modifiers from your species, traits, or items:
       </p>
       <table className="ml-8 mt-0 w-auto text-center border-collapse">
         <thead>
           <tr>
             <th>Level</th>
             <th>Die</th>
-            <th>Modifier</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>1</td>
+            <td>1-2</td>
             <td>d4</td>
-            <td>-</td>
           </tr>
           <tr>
-            <td>2</td>
+            <td>3-4</td>
             <td>d6</td>
-            <td>-</td>
           </tr>
           <tr>
-            <td>3</td>
+            <td>5-6</td>
             <td>d8</td>
-            <td>-</td>
           </tr>
           <tr>
-            <td>4</td>
+            <td>7-8</td>
             <td>d10</td>
-            <td>-</td>
           </tr>
           <tr>
-            <td>5</td>
+            <td>9-10</td>
             <td>d12</td>
-            <td>-</td>
-          </tr>
-          <tr>
-            <td>6</td>
-            <td>d12</td>
-            <td>+1</td>
-          </tr>
-          <tr>
-            <td>7</td>
-            <td>d12</td>
-            <td>+2</td>
-          </tr>
-          <tr>
-            <td>8</td>
-            <td>d12</td>
-            <td>+3</td>
-          </tr>
-          <tr>
-            <td>9</td>
-            <td>d12</td>
-            <td>+4</td>
-          </tr>
-          <tr>
-            <td>10</td>
-            <td>d12</td>
-            <td>+5</td>
           </tr>
         </tbody>
       </table>
       <p>
-        If you have any bonuses (or penalties), add (or subtract) them from your
-        roll. If you don’t have a level for the required skill, then you take 1
-        as the result.
+        Your skill level determines which die you roll. Then add any skill
+        modifiers you have from your based on your species selection, traits, or
+        held items. For example, if you have level 5 strength and a +3 strength
+        modifier, you would roll 1d8+3.
+      </p>
+      <p>
+        If you don't have a level for the required skill (such as attempting to
+        use a magic skill you haven't unlocked), you cannot perform that action.
       </p>
       <p>
         The GM chooses difficulty rating for the task that feels reasonable.
@@ -1149,13 +1156,13 @@ const content = (
       </p>
       <p>
         Every character has a list of actions that they have mastered, and can
-        unlock more as they progress their paths. You can perform the actions
-        you’ve learnt on your turn, or you can get creative and try something
-        different. For example, you could try burning a bridge before your
-        opponent crosses, or lasso a charging creature with your rope. In that
-        case, describe your action to the GM and make a skill check to see if
-        you succeed on it. GM will decide the outcome of your action based on
-        your description and skill check result.
+        unlock more as they develop. You can perform the actions you’ve learnt
+        on your turn, or you can get creative and try something different. For
+        example, you could try burning a bridge before your opponent crosses, or
+        lasso a charging creature with your rope. In that case, describe your
+        action to the GM and make a skill check to see if you succeed on it. GM
+        will decide the outcome of your action based on your description and
+        skill check result.
       </p>
       <p>
         Some actions cost stamina, while others don't. Be mindful—if you burn

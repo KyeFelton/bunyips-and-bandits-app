@@ -81,9 +81,9 @@ export const SkillsTable = () => {
     description:
       Object.values(Skills).find((skill) => skill.type === skillType)
         ?.description || "",
-    pathSkill:
+    magicSkill:
       Object.values(Skills).find((skill) => skill.type === skillType)
-        ?.pathSkill || false,
+        ?.magicSkill || false,
     form:
       Object.values(Skills).find((skill) => skill.type === skillType)?.form ||
       SkillForm.Physical,
@@ -104,7 +104,7 @@ export const SkillsTable = () => {
         <TableBody>
           {skillsArray
             .filter(
-              (skill) => !skill.pathSkill || (skill.level && skill.level > 0)
+              (skill) => !skill.magicSkill || (skill.level && skill.level > 0)
             )
             .map((skill) => {
               return (

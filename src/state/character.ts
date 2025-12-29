@@ -95,7 +95,7 @@ export const skillLevelsAtom = atom((get) => {
 
   // Initialize base skills to level 1, path skills to 0
   Object.values(Skills).forEach((skill) => {
-    if (skill.pathSkill) {
+    if (skill.magicSkill) {
       skills[skill.type] = 0; // Path skills start at 0
     } else {
       skills[skill.type] = 1; // Base skills start at 1

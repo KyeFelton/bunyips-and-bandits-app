@@ -16,8 +16,8 @@ import { useLoadCharacterFromUrl } from "../hooks/useLoadCharacterFromUrl";
 
 const steps = [
   { title: "Kin", component: KinStep },
-  { title: "Class", component: ClassStep },
   { title: "Background", component: BackgroundStep },
+  { title: "Class", component: ClassStep },
   { title: "Traits", component: CustomTraitsStep },
   { title: "Description", component: DescriptionStep },
 ];
