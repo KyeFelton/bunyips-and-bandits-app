@@ -21,7 +21,7 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import { X, Coins, Weight, HelpCircle } from "lucide-react";
+import { Trash2, Coins, Weight, HelpCircle } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -29,6 +29,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "./ui/dialog";
 import { AddItemDialog } from "./AddItemDialog";
 import { SkillType } from "./../enums/SkillType";
 import { useState } from "react";
@@ -58,6 +66,7 @@ export const ItemsTable = () => {
   const [items, setItems] = useAtom(itemsAtom);
   const [money, setMoney] = useAtom(moneyAtom);
   const [isEditingMoney, setIsEditingMoney] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState<string | null>(null);
   const skillLevels = useAtomValue(skillLevelsAtom);
   const [conditions, setConditions] = useAtom(conditionsAtom);
   const setCurrentBody = useSetAtom(currentBodyAtom);
@@ -97,9 +106,7 @@ export const ItemsTable = () => {
 
         // Apply stat increases (capped at max)
         if (bodyBonus) {
-          setCurrentBody((prev) =>
-            Math.min(prev + bodyBonus, body.max)
-          );
+          setCurrentBody((prev) => Math.min(prev + bodyBonus, body.max));
         }
         if (mindBonus) {
           setCurrentMind((prev) => Math.min(prev + mindBonus, mind.max));
@@ -164,12 +171,20 @@ export const ItemsTable = () => {
     }
   };
 
-  const handleRemoveItem = (itemName: string) => {
+  const handleDeleteItem = (itemName: string) => {
+    setItemToDelete(itemName);
+  };
+
+  const confirmDeleteItem = () => {
+    if (!itemToDelete) return;
+
     setItems((prev) => {
       const newItems = { ...prev };
-      delete newItems[itemName];
+      delete newItems[itemToDelete];
       return newItems;
     });
+
+    setItemToDelete(null);
   };
 
   const handleQuantityChange = (itemName: string, value: string) => {
@@ -338,9 +353,9 @@ export const ItemsTable = () => {
                   <Button
                     variant="ghost"
                     size="icon"
-                    onClick={() => handleRemoveItem(name)}
+                    onClick={() => handleDeleteItem(name)}
                   >
-                    <X className="h-4 w-4" />
+                    <Trash2 className="h-4 w-4" />
                   </Button>
                 </div>
               </TableCell>
@@ -367,6 +382,28 @@ export const ItemsTable = () => {
           </p>
         )}
       </div>
+
+      <Dialog
+        open={itemToDelete !== null}
+        onOpenChange={(open) => !open && setItemToDelete(null)}
+      >
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Delete Item</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to delete <strong>{itemToDelete}</strong>?
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="destructive" onClick={confirmDeleteItem}>
+              Delete
+            </Button>
+            <Button variant="outline" onClick={() => setItemToDelete(null)}>
+              Cancel
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
