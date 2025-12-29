@@ -37,7 +37,7 @@ export const defaultCharacter: CharacterSaveFile = {
   gender: "",
   age: 0,
   personality: "",
-  background: "Merchant",
+  background: "Artisan",
   biography: "",
   languages: ["Dharrigal", "Englorian"],
   magicSkills: ["Biotic"],

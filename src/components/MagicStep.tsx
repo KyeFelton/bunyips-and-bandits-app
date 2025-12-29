@@ -190,10 +190,7 @@ export const MagicStep = () => {
                       return (
                         <div
                           key={level}
-                          className={cn(
-                            "p-3 rounded-lg border transition-all",
-                            "bg-primary/10 border-primary/30"
-                          )}
+                          className="p-3 rounded-lg border transition-all border-primary/30"
                         >
                           <div className="space-y-4">
                             {allItems.map((item, index) => {
@@ -208,12 +205,7 @@ export const MagicStep = () => {
                                         {trait.name}
                                       </div>
                                       {isFirstItem && (
-                                        <div
-                                          className={cn(
-                                            "text-sm px-2 py-1 rounded text-center flex-shrink-0",
-                                            "bg-primary/20 text-primary"
-                                          )}
-                                        >
+                                        <div className="text-sm px-2 py-1 rounded text-center flex-shrink-0 bg-primary/20 text-primary">
                                           Level {level}
                                         </div>
                                       )}
@@ -232,12 +224,7 @@ export const MagicStep = () => {
                                         {action.name}
                                       </div>
                                       {isFirstItem && (
-                                        <div
-                                          className={cn(
-                                            "text-sm px-2 py-1 rounded text-center flex-shrink-0",
-                                            "bg-primary/20 text-primary"
-                                          )}
-                                        >
+                                        <div className="text-sm px-2 py-1 rounded text-center flex-shrink-0 bg-primary/20 text-primary">
                                           Level {level}
                                         </div>
                                       )}

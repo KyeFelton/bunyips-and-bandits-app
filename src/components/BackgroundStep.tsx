@@ -1,7 +1,7 @@
 import { useAtom, useAtomValue } from "jotai";
 import { backgroundAtom, backgroundDataAtom } from "./../state/character";
 import { AllBackgrounds } from "./../data/backgrounds";
-import { GraduationCap } from "lucide-react";
+import { GraduationCap, Star } from "lucide-react";
 import { SkillIcon } from "./icons/SkillIcon";
 import { SkillType } from "./../enums/SkillType";
 import {
@@ -145,7 +145,7 @@ export const BackgroundStep = () => {
 
         {/* Background Description */}
         {backgroundData && (
-          <div className="p-4 bg-primary/10 rounded-lg">
+          <div className="p-4 bg-primary/10 rounded-lg mt-4">
             <h4 className="font-semibold text-lg mb-2">
               {backgroundData.name}
             </h4>
@@ -163,23 +163,39 @@ export const BackgroundStep = () => {
           <div>
             <h3 className="font-semibold mb-4 flex items-center gap-2">
               <GraduationCap className="h-5 w-5" />
-              Expertise Skills (Start at Level 5)
+              Expertise
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
               {backgroundData.expertiseSkills.map((skill) => (
-                <div
-                  key={skill}
-                  className="p-4 bg-primary/10 rounded-lg flex items-center gap-3"
-                >
+                <div key={skill} className="flex items-center gap-2">
                   <SkillIcon type={skill as SkillType} />
                   <div>
                     <div className="text-sm font-medium">{skill}</div>
-                    <div className="text-lg font-bold">Lv 5</div>
+                    <div>Level 5</div>
                   </div>
                 </div>
               ))}
             </div>
           </div>
+
+          {/* Traits */}
+          {backgroundData.traits && backgroundData.traits.length > 0 && (
+            <div className="space-y-4 pt-6 border-t border-muted-foreground/20">
+              <h3 className="font-semibold mb-4 flex items-center gap-2">
+                <Star className="h-5 w-5" />
+                Trait
+              </h3>
+              <div className="space-y-3">
+                {backgroundData.traits.map((trait, index) => (
+                  <div key={index}>
+                    <p className="text-sm text-muted-foreground">
+                      {trait.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>

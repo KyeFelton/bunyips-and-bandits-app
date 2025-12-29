@@ -444,7 +444,7 @@ export const KinStep = () => {
                 )}
               </div>
             ) : (
-              <p className="text-muted-foreground h-[48px]">
+              <p className="text-sm text-muted-foreground h-[48px]">
                 No skill modifiers
               </p>
             )}
