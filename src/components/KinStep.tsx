@@ -39,7 +39,7 @@ const FOLK_DESCRIPTIONS: Record<
   string,
   Record<string, { name: string; description: string }>
 > = {
-  Downunda: {
+  Dharrigal: {
     Reptilian: {
       name: "Birim",
       description:
