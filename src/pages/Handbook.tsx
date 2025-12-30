@@ -142,13 +142,6 @@ const content = (
           movement, senses, size, armour, and skill modifiers.
         </li>
         <li>
-          <b>Choose a magic skill</b>: Select one magic skill you have been
-          trained in. This skill starts at level 1, allowing you to use basic
-          abilities. As you progress, you'll unlock more powerful traits and
-          actions. Magic skills include pyro, electric, sonic, radiant, kinetic,
-          biotic, psychic, and spirit.
-        </li>
-        <li>
           <b>Choose your background</b>: Your background represents your
           character's past profession and upbringing. It grants expertise in
           specific skills, starting them at level 5 instead of the usual level
@@ -159,20 +152,19 @@ const content = (
           resuscitate the recently dead.
         </li>
         <li>
+          <b>Choose a magic skill</b>: Select one magic skill you have been
+          trained in. This skill starts at level 1, allowing you to use basic
+          abilities. As you progress, you'll unlock more powerful traits and
+          actions. Magic skills include pyro, electric, sonic, radiant, kinetic,
+          biotic, psychic, and spirit.
+        </li>
+        <li>
           <b>Describe your character</b>: Think about who they are beyond the
           numbers on the sheet. What's their name? What do they look like?
           What's their biography and personality? Why have they taken to the
           adventuring life instead of settling down somewhere safe? The GM will
           work with you to weave your character into the world, ensuring they
           have a reason to be involved in the story.
-        </li>
-        <li>
-          <b>Create a unique trait</b>: Every adventurer has something special
-          about them—something that sets them apart. A performer may be better
-          at winning the crowd. An assassin may be skilled at blending into the
-          shadows. A merchant may have contacts in every town. This is where you
-          and the GM get creative. Your unique trait is linked to your backstory
-          and gives your character an advantage in certain situations.
         </li>
       </ol>
     </Body>

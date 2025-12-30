@@ -11,14 +11,12 @@ import { KinStep } from "../components/KinStep";
 import { DescriptionStep } from "../components/DescriptionStep";
 import { MagicStep } from "../components/MagicStep";
 import { BackgroundStep } from "../components/BackgroundStep";
-import { CustomTraitsStep } from "../components/CustomTraitsStep";
 import { useLoadCharacterFromUrl } from "../hooks/useLoadCharacterFromUrl";
 
 const steps = [
   { title: "Kin", component: KinStep },
   { title: "Background", component: BackgroundStep },
   { title: "Magic", component: MagicStep },
-  { title: "Traits", component: CustomTraitsStep },
   { title: "Description", component: DescriptionStep },
 ];
 
