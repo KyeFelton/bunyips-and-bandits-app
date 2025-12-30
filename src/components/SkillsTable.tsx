@@ -1,4 +1,4 @@
-import { useAtomValue, useSetAtom } from "jotai";
+import { useAtomValue } from "jotai";
 import {
   Table,
   TableBody,
@@ -8,14 +8,12 @@ import {
   TableRow,
 } from "./ui/table";
 import { SkillIcon } from "./icons/SkillIcon";
-import { HelpCircle } from "lucide-react";
+import { HelpCircle, Lock } from "lucide-react";
 import { SkillType } from "./../enums/SkillType";
 import * as Skills from "./../models/skills";
 import {
   skillLevelsAtom,
   skillRollValuesAtom,
-  skillModifiersAtom,
-  criticalSuccessesAtom,
   skillsProgressedSinceRestAtom,
 } from "./../state/character";
 import { useRollToast } from "./RollToast";
@@ -23,19 +21,11 @@ import { Button } from "./ui/button";
 import { SkillForm } from "./../enums/SkillForm";
 import { RollText } from "./RollText";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { SkillLevelProgressBar } from "./SkillLevelProgressBar";
-import { CircleCheckbox } from "./ui/checkbox";
 
 export const SkillsTable = () => {
   const skillLevels = useAtomValue(skillLevelsAtom);
   const skillRollValues = useAtomValue(skillRollValuesAtom);
-  const skillModifiers = useAtomValue(skillModifiersAtom);
-  const criticalSuccesses = useAtomValue(criticalSuccessesAtom);
-  const setCriticalSuccesses = useSetAtom(criticalSuccessesAtom);
   const skillsProgressedSinceRest = useAtomValue(skillsProgressedSinceRestAtom);
-  const setSkillsProgressedSinceRest = useSetAtom(
-    skillsProgressedSinceRestAtom
-  );
   const showRollToast = useRollToast();
 
   const handleRoll = (skill: {
@@ -53,26 +43,6 @@ export const SkillsTable = () => {
       hasAdvantage: skill.hasAdvantage,
       hasDisadvantage: skill.hasDisadvantage,
     });
-  };
-
-  const handleCriticalSuccessChange = (
-    skillType: SkillType,
-    newCount: number
-  ) => {
-    setCriticalSuccesses({
-      ...criticalSuccesses,
-      [skillType]: newCount,
-    });
-  };
-
-  const handleRestToggle = (skillType: SkillType) => {
-    const newSet = new Set(skillsProgressedSinceRest);
-    if (newSet.has(skillType)) {
-      newSet.delete(skillType);
-    } else {
-      newSet.add(skillType);
-    }
-    setSkillsProgressedSinceRest(newSet);
   };
 
   const skillsArray = Object.values(SkillType).map((skillType) => ({
@@ -96,8 +66,7 @@ export const SkillsTable = () => {
         <TableHeader>
           <TableRow>
             <TableHead>Skill</TableHead>
-            <TableHead className="text-left">Progression</TableHead>
-            <TableHead className="text-center w-16">Rest</TableHead>
+            <TableHead className="text-left w-20">Level</TableHead>
             <TableHead className="text-left w-24">Roll</TableHead>
           </TableRow>
         </TableHeader>
@@ -133,34 +102,15 @@ export const SkillsTable = () => {
                       </Popover>
                     </div>
                   </TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-2">
+                  <TableCell className="text-left">
+                    <div className="flex items-center justify-start gap-1">
                       <div className="text-sm font-medium">
-                        Lv {skill.level || 0}
+                        {skill.level || 0}
                       </div>
-                      {skillModifiers[skill.type] !== undefined &&
-                        skillModifiers[skill.type]! !== 0 && (
-                          <div className="text-xs text-muted-foreground">
-                            ({skillModifiers[skill.type]! > 0 ? "+" : ""}
-                            {skillModifiers[skill.type]} mod)
-                          </div>
-                        )}
-                      <SkillLevelProgressBar
-                        startingLevel={1}
-                        currentLevel={skill.level || 0}
-                        criticalSuccesses={criticalSuccesses[skill.type] || 0}
-                        maxAllowedLevel={10}
-                        onCriticalSuccessChange={(newCount) =>
-                          handleCriticalSuccessChange(skill.type, newCount)
-                        }
-                      />
+                      {skillsProgressedSinceRest.has(skill.type) && (
+                        <Lock className="h-3 w-3 text-muted-foreground" />
+                      )}
                     </div>
-                  </TableCell>
-                  <TableCell className="text-center">
-                    <CircleCheckbox
-                      checked={skillsProgressedSinceRest.has(skill.type)}
-                      onChange={() => handleRestToggle(skill.type)}
-                    />
                   </TableCell>
                   <TableCell className="text-left font-mono">
                     {skill.dice ? (
@@ -187,6 +137,13 @@ export const SkillsTable = () => {
             })}
         </TableBody>
       </Table>
+      <div className="text-xs text-muted-foreground mt-2 px-1">
+        <span className="inline-flex items-center gap-1">
+          <Lock className="h-3 w-3" />
+          indicates a skill has recently leveled up, and you need to rest before
+          you can level up again.
+        </span>
+      </div>
     </div>
   );
 };

@@ -18,7 +18,7 @@ import { Condition } from "../models/conditions";
 // Constants
 export const MAX_SKILL_LEVEL = 10;
 export const MAX_SKILL_PROGRESSION = 5;
-export const CRIT_TO_LEVEL_UP = 2;
+export const CRIT_TO_LEVEL_UP = 1;
 
 // Basic character info
 export const nameAtom = atom<string>("");
