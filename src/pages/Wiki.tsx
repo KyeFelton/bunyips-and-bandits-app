@@ -33,7 +33,7 @@ export function Wiki() {
     content = <WikiHome />;
   }
 
-  return <main className="w-full max-w-5xl mx-auto">{content}</main>;
+  return <main className="w-full max-w-5xl mx-auto min-h-full flex flex-col">{content}</main>;
 }
 
 function formatCategoryName(category: string): string {

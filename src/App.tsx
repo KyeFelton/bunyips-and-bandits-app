@@ -65,6 +65,7 @@ function App() {
       ))}
 
       <div className="h-dvh pt-16 overflow-auto">
+        <div className="h-full">
         <Routes>
           <Route path={HomeRoute} element={<Home />} />
           <Route path={CharacterListRoute} element={<CharactersPage />} />
@@ -77,6 +78,7 @@ function App() {
           <Route path={WikiCategoryRoute} element={<Wiki />} />
           <Route path={WikiRoute} element={<Wiki />} />
         </Routes>
+        </div>
       </div>
 
       <Toaster />

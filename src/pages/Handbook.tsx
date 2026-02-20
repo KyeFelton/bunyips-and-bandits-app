@@ -80,8 +80,10 @@ export function Handbook() {
   return (
     <div className="flex min-h-full">
       <HandbookSidebar activeId={activeId} />
-      <div className="md:ml-48 flex-1 min-w-0">
-        <SectionComponent />
+      <div className="md:ml-48 flex-1 min-w-0 flex flex-col">
+        <div className="max-w-5xl mx-auto flex-1 flex flex-col">
+          <SectionComponent />
+        </div>
       </div>
     </div>
   );
