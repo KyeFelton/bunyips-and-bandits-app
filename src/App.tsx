@@ -56,6 +56,13 @@ function App() {
             objectFit: "cover",
           }}
         />
+        {/* Dimmed background overlay */}
+        <div className="absolute inset-0 bg-black/20" />
+        {/* Side vignette */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: "linear-gradient(to right, rgba(0,0,0,0.5) 0%, transparent 28%, transparent 72%, rgba(0,0,0,0.5) 100%)" }}
+        />
       </div>
 
       <NavBar className="h-16" />
