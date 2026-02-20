@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import { HandbookRoute, CharacterListRoute } from "../routes";
 import { Book, Play } from "lucide-react";
-import { motion } from "framer-motion";
+
 import { Logo } from "../components/Logo";
 import "./Home.sass";
 
@@ -18,12 +18,8 @@ export function Home() {
   };
 
   return (
-    <motion.div
+    <div
       className="h-full container mx-auto py-8 px-4 relative"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0 }}
     >
       <div className="relative w-full max-w-xl min-w-[300px] flex flex-col items-center left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
         <div className="logo-animation absolute top-8 z-30 flex justify-center">
@@ -56,6 +52,6 @@ export function Home() {
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

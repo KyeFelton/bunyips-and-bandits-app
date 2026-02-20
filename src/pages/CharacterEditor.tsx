@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAtom, useSetAtom } from "jotai";
-import { motion } from "framer-motion";
 import { Card } from "../components/ui/card";
 import { Button } from "../components/ui/button";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
@@ -69,12 +68,8 @@ export const CharacterEditor = () => {
   };
 
   return (
-    <motion.div
+    <div
       className="h-full p-6 sm:p-8 bg-background sm:bg-gray-500/15"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
     >
       <div className="max-w-4xl mx-auto space-y-4 sm:space-y-8 h-full flex flex-col">
         <div>
@@ -160,6 +155,6 @@ export const CharacterEditor = () => {
           </Button>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };

@@ -5,7 +5,6 @@ import { useAtom } from "jotai";
 import { downloadSaveFile, loadSaveFile } from "../utils/saveFile";
 import { getCharacterEditorRoute, getCharacterSheetRoute } from "../routes";
 import { Upload, MoreVertical, CirclePlus, Download } from "lucide-react";
-import { motion } from "framer-motion";
 import { useState } from "react";
 import {
   DropdownMenu,
@@ -81,12 +80,8 @@ export function CharactersPage() {
   };
 
   return (
-    <motion.div
+    <div
       className="min-h-full container mx-auto py-8 px-4 relative"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
     >
       <div className="flex justify-between items-center pb-8">
         <h1 className="text-3xl font-bold text-primary-foreground">
@@ -202,6 +197,6 @@ export function CharactersPage() {
         title={errorTitle}
         description={errorMessage}
       />
-    </motion.div>
+    </div>
   );
 }

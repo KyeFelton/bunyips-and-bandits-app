@@ -4,7 +4,7 @@ import { WikiPage } from "../components/WikiPage";
 import { WikiHome } from "../components/WikiHome";
 import { WikiCategoryPage } from "../components/WikiCategoryPage";
 import { getWikiCategoryRoute } from "../routes";
-import { motion } from "framer-motion";
+
 
 export function Wiki() {
   const { category, id } = useParams();
@@ -33,16 +33,7 @@ export function Wiki() {
     content = <WikiHome />;
   }
 
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
-    >
-      <main className="w-full max-w-5xl mx-auto">{content}</main>
-    </motion.div>
-  );
+  return <main className="w-full max-w-5xl mx-auto">{content}</main>;
 }
 
 function formatCategoryName(category: string): string {

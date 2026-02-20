@@ -1,5 +1,4 @@
-import { Routes, Route, useLocation } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
+import { Routes, Route } from "react-router-dom";
 import { CharacterSheet } from "./pages/CharacterSheet";
 import { CharacterEditor } from "./pages/CharacterEditor";
 import { Handbook } from "./pages/Handbook";
@@ -13,7 +12,6 @@ import {
   CharacterSheetRoute,
   CharacterEditorRoute,
   HandbookRoute,
-  HandbookSectionRoute,
   CharacterListRoute,
   HomeRoute,
   WikiRoute,
@@ -26,19 +24,9 @@ import { useImagePreloader } from "./hooks/useImagePreloader";
 import { useSyncFocalCharacter } from "./state/saveFile";
 
 function App() {
-  const location = useLocation();
   const isLoading = useImagePreloader([background, frame]);
 
   useSyncFocalCharacter();
-
-  // Get main section for animation key (only animate between main sections)
-  const getMainSection = (pathname: string) => {
-    if (pathname === HomeRoute) return "home";
-    if (pathname.includes("/character")) return "character";
-    if (pathname.includes("/handbook")) return "handbook";
-    if (pathname.includes("/wiki")) return "wiki";
-    return "home";
-  };
 
   // Show loading state while images are preloading
   if (isLoading) {
@@ -77,19 +65,18 @@ function App() {
       ))}
 
       <div className="h-dvh pt-16 overflow-auto">
-        <AnimatePresence mode="wait">
-          <Routes location={location} key={getMainSection(location.pathname)}>
-            <Route path={HomeRoute} element={<Home />} />
-            <Route path={CharacterListRoute} element={<CharactersPage />} />
-            <Route path={CharacterSheetRoute} element={<CharacterSheet />} />
-            <Route path={CharacterEditorRoute} element={<CharacterEditor />} />
-            <Route path={HandbookRoute} element={<Handbook />} />
-            <Route path={HandbookSectionRoute} element={<Handbook />} />
-            <Route path={WikiArticleRoute} element={<Wiki />} />
-            <Route path={WikiCategoryRoute} element={<Wiki />} />
-            <Route path={WikiRoute} element={<Wiki />} />
-          </Routes>
-        </AnimatePresence>
+        <Routes>
+          <Route path={HomeRoute} element={<Home />} />
+          <Route path={CharacterListRoute} element={<CharactersPage />} />
+          <Route path={CharacterSheetRoute} element={<CharacterSheet />} />
+          <Route path={CharacterEditorRoute} element={<CharacterEditor />} />
+          <Route path={HandbookRoute} element={<Handbook />}>
+            <Route path=":section" element={null} />
+          </Route>
+          <Route path={WikiArticleRoute} element={<Wiki />} />
+          <Route path={WikiCategoryRoute} element={<Wiki />} />
+          <Route path={WikiRoute} element={<Wiki />} />
+        </Routes>
       </div>
 
       <Toaster />
