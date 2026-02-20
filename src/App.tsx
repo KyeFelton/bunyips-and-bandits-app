@@ -13,6 +13,7 @@ import {
   CharacterSheetRoute,
   CharacterEditorRoute,
   HandbookRoute,
+  HandbookSectionRoute,
   CharacterListRoute,
   HomeRoute,
   WikiRoute,
@@ -83,6 +84,7 @@ function App() {
             <Route path={CharacterSheetRoute} element={<CharacterSheet />} />
             <Route path={CharacterEditorRoute} element={<CharacterEditor />} />
             <Route path={HandbookRoute} element={<Handbook />} />
+            <Route path={HandbookSectionRoute} element={<Handbook />} />
             <Route path={WikiArticleRoute} element={<Wiki />} />
             <Route path={WikiCategoryRoute} element={<Wiki />} />
             <Route path={WikiRoute} element={<Wiki />} />

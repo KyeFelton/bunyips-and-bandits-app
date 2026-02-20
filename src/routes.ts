@@ -5,6 +5,8 @@ export const getCharacterSheetRoute = (id: string) => `/character/${id}`;
 export const CharacterEditorRoute = `/character/:id/edit`;
 export const getCharacterEditorRoute = (id: string) => `/character/${id}/edit`;
 export const HandbookRoute = `/handbook`;
+export const HandbookSectionRoute = `/handbook/:section`;
+export const getHandbookSectionRoute = (section: string) => `/handbook/${section}`;
 export const WikiRoute = `/wiki`;
 export const WikiCategoryRoute = `/wiki/:category`;
 export const getWikiCategoryRoute = (category: string) => `/wiki/${category}`;
