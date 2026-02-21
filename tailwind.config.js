@@ -27,25 +27,13 @@ export default {
         },
         accent: {
           DEFAULT: "hsl(var(--accent))",
-          medium: "hsl(var(--accent-medium))",
+          subtle: "hsl(var(--accent-subtle))",
           foreground: "hsl(var(--accent-foreground))",
         },
-        green: {
-          DEFAULT: "hsl(var(--green))",
-          foreground: "hsl(var(--green-foreground))",
-        },
-        blue: {
-          DEFAULT: "hsl(var(--blue))",
-          foreground: "hsl(var(--blue-foreground))",
-        },
-        red: {
-          DEFAULT: "hsl(var(--red))",
-          foreground: "hsl(var(--red-foreground))",
-        },
-        yellow: {
-          DEFAULT: "hsl(var(--yellow))",
-          foreground: "hsl(var(--yellow-foreground))",
-        },
+        good: "hsl(var(--good))",
+        warning: "hsl(var(--warning))",
+        danger: "hsl(var(--danger))",
+        info: "hsl(var(--info))",
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
@@ -54,6 +42,7 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        surface: "hsl(var(--surface))",
       },
       borderRadius: {
         lg: "var(--radius)",

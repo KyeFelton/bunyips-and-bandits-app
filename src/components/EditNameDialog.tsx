@@ -89,8 +89,8 @@ export const EditNameDialog = ({ isOpen, onClose }: Props) => {
                   alt="character"
                   className="w-64 h-64 rounded-lg object-cover"
                 />
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/50 rounded-lg">
-                  <div className="flex items-center justify-center px-4 py-2 rounded-md text-white transition-colors">
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-foreground/50 rounded-lg">
+                  <div className="flex items-center justify-center px-4 py-2 rounded-md text-primary-foreground transition-colors">
                     <ImageIcon className="h-5 w-5 mr-2" />
                     Change image
                   </div>

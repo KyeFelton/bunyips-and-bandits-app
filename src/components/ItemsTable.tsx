@@ -282,7 +282,7 @@ export const ItemsTable = () => {
                 <div className="flex items-center gap-1">
                   {name}
                   <Popover>
-                    <PopoverTrigger className="w-6 h-6 flex items-center justify-center text-muted-foreground text-left hover:bg-accent hover:text-accent-foreground rounded-full">
+                    <PopoverTrigger className="w-6 h-6 flex items-center justify-center text-muted-foreground text-left hover:bg-accent-subtle hover:text-accent-foreground rounded-full">
                       <HelpCircle className="h-4 w-4 text-muted-foreground" />
                     </PopoverTrigger>
                     <PopoverContent

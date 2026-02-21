@@ -17,7 +17,7 @@ export function WikiHome() {
     ? Articles.filter(
         (article) =>
           article.title.toLowerCase().includes(trimmedSearch.toLowerCase()) ||
-          article.subTitle?.toLowerCase().includes(trimmedSearch.toLowerCase())
+          article.subTitle?.toLowerCase().includes(trimmedSearch.toLowerCase()),
       )
     : [];
 
@@ -27,19 +27,21 @@ export function WikiHome() {
       <div className="prose max-w-none text-sm md:text-base">
         <p>
           Welcome to the wiki for Bunyips and Bandits, a tabletop role-playing
-          game set in a fictional world inspired by Australian and British folklore.
-          Explore the rich lore, cultures, and creatures that inhabit this unique
+          game set in a fictional world inspired by Australian folklore. Explore
+          the rich lore, cultures, and creatures that inhabit this unique
           fantasy setting.
         </p>
         <p>
-          This wiki is your guide to the people, places, and mysteries of the world.
-          Browse by category below to discover more about the setting.
+          This wiki is your guide to the people, places, and mysteries of the
+          world. Browse by category below to discover more about the setting.
         </p>
       </div>
 
       {/* Category grid */}
       <div>
-        <h2 className="text-xl md:text-2xl font-semibold mb-4">Explore the Wiki</h2>
+        <h2 className="text-xl md:text-2xl font-semibold mb-4">
+          Explore the Wiki
+        </h2>
 
         {/* Search bar */}
         <div className="mb-6">
@@ -69,7 +71,7 @@ export function WikiHome() {
                   key={`${article.category}-${article.id}`}
                   to={getWikiArticleRoute(article.category!, article.id)}
                 >
-                  <div className="p-4 md:p-6 border rounded-lg hover:bg-accent transition-colors h-full">
+                  <div className="p-4 md:p-6 border rounded-lg hover:bg-accent-subtle transition-colors h-full">
                     <h3 className="text-lg md:text-xl font-semibold mb-1">
                       {article.title}
                     </h3>
@@ -78,7 +80,7 @@ export function WikiHome() {
                         {article.subTitle}
                       </p>
                     )}
-                    <span className="text-xs text-muted-foreground bg-accent px-2 py-1 rounded">
+                    <span className="text-xs text-muted-foreground bg-accent-subtle px-2 py-1 rounded">
                       {formatCategoryName(article.category!)}
                     </span>
                   </div>
@@ -91,7 +93,7 @@ export function WikiHome() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {categories.map((cat) => (
               <Link key={cat} to={getWikiCategoryRoute(cat)}>
-                <div className="p-4 md:p-6 border rounded-lg hover:bg-accent transition-colors h-full">
+                <div className="p-4 md:p-6 border rounded-lg hover:bg-accent-subtle transition-colors h-full">
                   <h3 className="text-lg md:text-xl font-semibold mb-2">
                     {formatCategoryName(cat)}
                   </h3>
@@ -116,13 +118,15 @@ function formatCategoryName(category: string): string {
 // Helper to get category descriptions
 function getCategoryDescription(category: string): string {
   const descriptions: Record<string, string> = {
-    [WikiCategory.Characters]: "Notable individuals and key figures in the world",
+    [WikiCategory.Characters]:
+      "Notable individuals and key figures in the world",
     [WikiCategory.Continents]: "The major landmasses and their geography",
     [WikiCategory.Cultures]: "Societies, traditions, and ways of life",
     [WikiCategory.Factions]: "Organizations, groups, and political powers",
     [WikiCategory.Fauna]: "Creatures and animals of the world",
     [WikiCategory.Flora]: "Plants, trees, and vegetation",
-    [WikiCategory.Folk]: "The various peoples and species that inhabit the world",
+    [WikiCategory.Folk]:
+      "The various peoples and species that inhabit the world",
     [WikiCategory.Items]: "Artifacts, equipment, and notable objects",
     [WikiCategory.Regions]: "Geographic areas and territories",
     [WikiCategory.Sites]: "Landmarks, ruins, and points of interest",

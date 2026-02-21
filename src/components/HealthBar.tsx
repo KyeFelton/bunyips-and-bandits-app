@@ -2,14 +2,14 @@ import { Button } from "./ui/button";
 import { Minus, Plus } from "lucide-react";
 import { useMemo } from "react";
 
-type Colour = "green" | "blue" | "lightBlue" | "red" | "yellow";
+type Colour = "good" | "info" | "lightInfo" | "danger" | "warning";
 
 const colourMap: Record<Colour, string> = {
-  green: "bg-green-foreground",
-  blue: "bg-blue-foreground",
-  lightBlue: "bg-blue",
-  red: "bg-red-foreground",
-  yellow: "bg-yellow-foreground",
+  good: "bg-good",
+  info: "bg-info",
+  lightInfo: "bg-info/60",
+  danger: "bg-danger",
+  warning: "bg-warning",
 };
 
 type Props = {
@@ -45,8 +45,8 @@ export const HealthBar = ({
       return (
         <div
           key={index}
-          className={`h-6 w-full border border-black first:rounded-l-sm last:rounded-r-sm border-r-0 last:border-r ${
-            isFilled ? colour : "bg-gray-200"
+          className={`h-6 w-full border border-foreground first:rounded-l-sm last:rounded-r-sm border-r-0 last:border-r ${
+            isFilled ? colour : "bg-muted"
           }`}
         />
       );

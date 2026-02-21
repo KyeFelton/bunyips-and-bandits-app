@@ -19,8 +19,8 @@ export function WikiDropdown() {
     <DropdownMenu>
       <DropdownMenuTrigger
         className={cn(
-          "hidden md:inline-flex items-center text-primary-foreground hover:text-accent-medium transition-colors focus:outline-none",
-          isWikiActive ? "text-accent-medium" : ""
+          "hidden md:inline-flex items-center text-primary-foreground hover:text-accent transition-colors focus:outline-none",
+          isWikiActive ? "text-accent" : ""
         )}
       >
         <Library className="h-5 w-5 mr-2" />

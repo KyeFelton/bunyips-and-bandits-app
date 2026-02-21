@@ -1,18 +1,18 @@
 type Props = {
   value: number;
   maxValue: number;
-  color?: "red" | "green" | "blue";
+  color?: "danger" | "good" | "info";
 };
 
 export const SpeciesHealthBar = ({
   value,
   maxValue,
-  color = "green",
+  color = "good",
 }: Readonly<Props>) => {
   const colorClass = {
-    red: "bg-red-foreground",
-    green: "bg-green-foreground",
-    blue: "bg-blue-foreground",
+    danger: "bg-danger",
+    good: "bg-good",
+    info: "bg-info",
   }[color];
 
   return (
@@ -22,7 +22,7 @@ export const SpeciesHealthBar = ({
           return (
             <div
               key={index}
-              className={`h-6 w-full border border-black first:rounded-l-sm last:rounded-r-sm border-r-0 last:border-r ${colorClass}`}
+              className={`h-6 w-full border border-foreground first:rounded-l-sm last:rounded-r-sm border-r-0 last:border-r ${colorClass}`}
             />
           );
         })}

@@ -40,21 +40,23 @@ export const HealthCard = ({ className }: Props) => {
   const setCurrentBody = useSetAtom(currentBodyAtom);
   const setCurrentMind = useSetAtom(currentMindAtom);
   const setCurrentStamina = useSetAtom(currentStaminaAtom);
-  const setSkillsProgressedSinceRest = useSetAtom(skillsProgressedSinceRestAtom);
+  const setSkillsProgressedSinceRest = useSetAtom(
+    skillsProgressedSinceRestAtom,
+  );
   const [isAddConditionModalOpen, setIsAddConditionModalOpen] = useState(false);
   const [isDefeatModalOpen, setIsDefeatModalOpen] = useState(false);
   const [isConditionGainedModalOpen, setIsConditionGainedModalOpen] =
     useState(false);
   const [gainedCondition, setGainedCondition] = useState<Condition | null>(
-    null
+    null,
   );
   const [selectedCondition, setSelectedCondition] = useState<Condition | null>(
-    null
+    null,
   );
 
   const calculateRestHealthValue = (
     health: { current: number; max: number },
-    staminaPercentage: number
+    staminaPercentage: number,
   ) => {
     const increase = Math.ceil(staminaPercentage / 0.5);
     return Math.min(health.current + increase, health.max);
@@ -75,7 +77,7 @@ export const HealthCard = ({ className }: Props) => {
 
   const handleHealthChange = (
     value: number,
-    setter: (value: number) => void
+    setter: (value: number) => void,
   ) => {
     setter(value);
     if (value === 0 && setter === setCurrentBody) {
@@ -105,21 +107,21 @@ export const HealthCard = ({ className }: Props) => {
       </CardHeader>
       <CardContent className="space-y-4 pt-4">
         <HealthBar
-          colours={{ good: "green", warning: "yellow", bad: "red" }}
+          colours={{ good: "good", warning: "warning", bad: "danger" }}
           max={body.max}
           name="Body"
           onChange={(value) => handleHealthChange(value, setCurrentBody)}
           value={body.current}
         />
         <HealthBar
-          colours={{ good: "green", warning: "yellow", bad: "red" }}
+          colours={{ good: "good", warning: "warning", bad: "danger" }}
           max={mind.max}
           name="Mind"
           onChange={(value) => handleHealthChange(value, setCurrentMind)}
           value={mind.current}
         />
         <HealthBar
-          colours={{ good: "blue", warning: "lightBlue", bad: "lightBlue" }}
+          colours={{ good: "info", warning: "lightInfo", bad: "lightInfo" }}
           max={stamina.max}
           name="Stamina"
           onChange={setCurrentStamina}
@@ -140,10 +142,13 @@ export const HealthCard = ({ className }: Props) => {
           <div className="flex flex-wrap gap-2">
             {conditions?.length > 0 ? (
               Object.entries(
-                conditions.reduce((acc, condition) => {
-                  acc[condition.name] = (acc[condition.name] || 0) + 1;
-                  return acc;
-                }, {} as Record<string, number>)
+                conditions.reduce(
+                  (acc, condition) => {
+                    acc[condition.name] = (acc[condition.name] || 0) + 1;
+                    return acc;
+                  },
+                  {} as Record<string, number>,
+                ),
               ).map(([name, count]) => {
                 const condition = conditions.find((c) => c.name === name);
                 return (

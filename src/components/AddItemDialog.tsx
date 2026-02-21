@@ -441,7 +441,7 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
                   <button
                     key={item.name}
                     onClick={() => handleSelectItem(item)}
-                    className="w-full text-left px-2 py-2 rounded-md hover:bg-accent text-sm transition-colors"
+                    className="w-full text-left px-2 py-2 rounded-md hover:bg-accent-subtle text-sm transition-colors"
                   >
                     {item.name}
                   </button>

@@ -25,7 +25,7 @@ export function Home() {
         <div className="logo-animation absolute top-8 z-30 flex justify-center">
           <Logo className="w-[90%] h-16" />
         </div>
-        <div className="banner-animation w-full flex flex-col justify-center items-center p-8 space-y-8 rounded-lg shadow-2xl backdrop-blur-sm border border-white/100 bg-black/95 z-20">
+        <div className="banner-animation w-full flex flex-col justify-center items-center p-8 space-y-8 rounded-lg shadow-2xl backdrop-blur-sm border border-primary-foreground bg-foreground/95 z-20">
           <div className="invisible">
             <Logo className="w-full h-16" />
           </div>

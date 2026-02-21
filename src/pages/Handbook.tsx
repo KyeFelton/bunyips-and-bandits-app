@@ -40,8 +40,8 @@ const SECTION_COMPONENTS: Record<SectionId, React.ComponentType> = {
 
 function HandbookSidebar({ activeId }: { activeId: SectionId }) {
   return (
-    <aside className="hidden md:flex fixed left-0 top-16 h-[calc(100dvh-4rem)] w-48 flex-col py-6 px-3 bg-zinc-900 shadow-sm z-10 overflow-y-auto">
-      <p className="text-xs uppercase tracking-widest text-white/40 mb-3 px-2">
+    <aside className="hidden md:flex fixed left-0 top-16 h-[calc(100dvh-4rem)] w-48 flex-col py-6 px-3 bg-surface shadow-sm z-10 overflow-y-auto">
+      <p className="text-xs uppercase tracking-widest text-primary-foreground/40 mb-3 px-2">
         Handbook
       </p>
       <nav className="flex flex-col gap-0.5">
@@ -54,8 +54,8 @@ function HandbookSidebar({ activeId }: { activeId: SectionId }) {
               className={cn(
                 "rounded-md px-3 py-1.5 text-sm transition-colors",
                 isActive
-                  ? "text-accent-medium font-medium"
-                  : "text-primary-foreground hover:text-accent-medium"
+                  ? "text-accent font-medium"
+                  : "text-primary-foreground hover:text-accent"
               )}
             >
               {section.label}

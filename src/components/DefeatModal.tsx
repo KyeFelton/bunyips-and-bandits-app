@@ -73,7 +73,7 @@ export const DefeatModal = ({ isOpen, onClose }: Props) => {
             </>
           ) : (
             <>
-              <HeartPulse className="h-16 w-16 text-red-foreground" />
+              <HeartPulse className="h-16 w-16 text-danger" />
               <p>...but only just</p>
               <p>
                 You regain consciousness, but are still weak. If you take any

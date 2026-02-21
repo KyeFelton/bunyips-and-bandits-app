@@ -69,7 +69,7 @@ export const CharacterEditor = () => {
 
   return (
     <div
-      className="h-full p-6 sm:p-8 bg-background sm:bg-gray-500/15"
+      className="h-full p-6 sm:p-8 bg-background sm:bg-foreground/10"
     >
       <div className="max-w-4xl mx-auto space-y-4 sm:space-y-8 h-full flex flex-col">
         <div>
@@ -77,7 +77,7 @@ export const CharacterEditor = () => {
             <Button
               variant="ghost"
               size="icon"
-              className="absolute right-0 top-0 text-foreground sm:text-background hover:text-foreground/80 hover:bg-white/10"
+              className="absolute right-0 top-0 text-foreground sm:text-background hover:text-foreground/80 hover:bg-primary-foreground/10"
               onClick={handleClose}
             >
               <X className="h-6 w-6" />

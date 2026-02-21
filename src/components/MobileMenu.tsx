@@ -33,11 +33,11 @@ export function MobileMenu() {
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger className="md:hidden p-2 text-primary-foreground hover:text-accent-medium transition-colors">
+      <SheetTrigger className="md:hidden p-2 text-primary-foreground hover:text-accent transition-colors">
         <Menu className="h-6 w-6" />
         <span className="sr-only">Open menu</span>
       </SheetTrigger>
-      <SheetContent side="left" className="bg-black text-primary-foreground border-accent/20">
+      <SheetContent side="left" className="bg-surface text-primary-foreground border-accent-subtle/20">
         <SheetHeader>
           <Logo className="h-10" />
         </SheetHeader>
@@ -46,8 +46,8 @@ export function MobileMenu() {
             to={CharacterListRoute}
             onClick={() => setOpen(false)}
             className={cn(
-              "flex items-center gap-3 px-4 py-3 rounded-md hover:bg-accent/20 transition-colors",
-              isCharacterActive ? "bg-accent-medium/20 text-accent-medium" : ""
+              "flex items-center gap-3 px-4 py-3 rounded-md hover:bg-accent-subtle/20 transition-colors",
+              isCharacterActive ? "bg-accent/20 text-accent" : ""
             )}
           >
             <User className="h-5 w-5" />
@@ -58,8 +58,8 @@ export function MobileMenu() {
             to={HandbookRoute}
             onClick={() => setOpen(false)}
             className={cn(
-              "flex items-center gap-3 px-4 py-3 rounded-md hover:bg-accent/20 transition-colors",
-              isHandbookActive ? "bg-accent-medium/20 text-accent-medium" : ""
+              "flex items-center gap-3 px-4 py-3 rounded-md hover:bg-accent-subtle/20 transition-colors",
+              isHandbookActive ? "bg-accent/20 text-accent" : ""
             )}
           >
             <Book className="h-5 w-5" />
@@ -69,8 +69,8 @@ export function MobileMenu() {
           <Collapsible open={wikiOpen} onOpenChange={setWikiOpen}>
             <CollapsibleTrigger
               className={cn(
-                "flex items-center justify-between w-full gap-3 px-4 py-3 rounded-md hover:bg-accent/20 transition-colors",
-                isWikiActive ? "bg-accent-medium/20 text-accent-medium" : ""
+                "flex items-center justify-between w-full gap-3 px-4 py-3 rounded-md hover:bg-accent-subtle/20 transition-colors",
+                isWikiActive ? "bg-accent/20 text-accent" : ""
               )}
             >
               <div className="flex items-center gap-3">
@@ -90,7 +90,7 @@ export function MobileMenu() {
                   key={category}
                   to={getWikiCategoryRoute(category)}
                   onClick={() => setOpen(false)}
-                  className="px-4 py-2 rounded-md hover:bg-accent/20 transition-colors text-sm"
+                  className="px-4 py-2 rounded-md hover:bg-accent-subtle/20 transition-colors text-sm"
                 >
                   {formatCategoryName(category)}
                 </Link>

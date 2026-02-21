@@ -129,7 +129,7 @@ export const KinStep = () => {
     if (!ancestryData) return Object.keys(AllSpecies);
 
     return Object.keys(AllSpecies).filter((speciesName) =>
-      ancestryData.species.includes(speciesName)
+      ancestryData.species.includes(speciesName),
     );
   }, [selectedAncestry]);
 
@@ -140,7 +140,7 @@ export const KinStep = () => {
         AllAncestries[ancestryName as keyof typeof AllAncestries];
       setLanguages(newAncestryData.languages);
     },
-    [setAncestry, setLanguages]
+    [setAncestry, setLanguages],
   );
 
   const handleSpeciesChange = useCallback(
@@ -151,7 +151,7 @@ export const KinStep = () => {
       setCurrentStamina(newSpeciesData.stamina);
       setSpecies(value);
     },
-    [setCurrentMind, setCurrentBody, setCurrentStamina, setSpecies]
+    [setCurrentMind, setCurrentBody, setCurrentStamina, setSpecies],
   );
 
   const onSelect = useCallback(
@@ -163,7 +163,7 @@ export const KinStep = () => {
         handleSpeciesChange(selectedSpeciesName);
       }
     },
-    [handleSpeciesChange, availableSpecies]
+    [handleSpeciesChange, availableSpecies],
   );
 
   useEffect(() => {
@@ -208,8 +208,8 @@ export const KinStep = () => {
                   selectedAncestry === ancestry.name
                     ? "border-primary bg-primary/5"
                     : isAvailable
-                    ? "border-muted hover:border-primary/50"
-                    : "border-muted"
+                      ? "border-muted hover:border-primary/50"
+                      : "border-muted",
                 )}
                 onClick={() =>
                   isAvailable && handleAncestryChange(ancestry.name)
@@ -267,7 +267,7 @@ export const KinStep = () => {
                           "transition-all duration-300 ease-in-out",
                           speciesName === selectedSpecies
                             ? "h-40 w-40 lg:h-48 lg:w-48 opacity-100"
-                            : "h-36 w-36 lg:h-44 lg:w-44 opacity-50"
+                            : "h-36 w-36 lg:h-44 lg:w-44 opacity-50",
                         )}
                       >
                         <img
@@ -281,7 +281,7 @@ export const KinStep = () => {
                           "font-medium",
                           speciesName !== selectedSpecies
                             ? `text-md text-muted-foreground/50`
-                            : "text-lg"
+                            : "text-lg",
                         )}
                       >
                         {speciesName}
@@ -325,11 +325,11 @@ export const KinStep = () => {
           {/* Base Stats */}
           <div>
             <h3 className="font-semibold mb-4 flex items-center gap-2">
-              <Heart className="h-5 w-5 text-red-foreground" />
+              <Heart className="h-5 w-5 text-danger" />
               Health
             </h3>
             <div className="grid sm:grid-cols-3 gap-6">
-              <div className="p-4 bg-red/10 rounded-lg">
+              <div className="p-4 bg-danger/10 rounded-lg">
                 <div className="flex items-center justify-between mb-2">
                   <div className="text-sm font-medium">Body</div>
                   <div className="text-xl font-semibold">
@@ -339,10 +339,10 @@ export const KinStep = () => {
                 <SpeciesHealthBar
                   value={speciesData.body}
                   maxValue={10}
-                  color="red"
+                  color="danger"
                 />
               </div>
-              <div className="p-4 bg-green/10 rounded-lg">
+              <div className="p-4 bg-good/10 rounded-lg">
                 <div className="flex items-center justify-between mb-2">
                   <div className="text-sm font-medium">Mind</div>
                   <div className="text-xl font-semibold">
@@ -352,10 +352,10 @@ export const KinStep = () => {
                 <SpeciesHealthBar
                   value={speciesData.mind}
                   maxValue={10}
-                  color="green"
+                  color="good"
                 />
               </div>
-              <div className="p-4 bg-blue/10 rounded-lg">
+              <div className="p-4 bg-info/10 rounded-lg">
                 <div className="flex items-center justify-between mb-2">
                   <div className="text-sm font-medium">Stamina</div>
                   <div className="text-xl font-semibold">
@@ -365,7 +365,7 @@ export const KinStep = () => {
                 <SpeciesHealthBar
                   value={speciesData.stamina}
                   maxValue={10}
-                  color="blue"
+                  color="info"
                 />
               </div>
             </div>
@@ -401,7 +401,7 @@ export const KinStep = () => {
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
               {[
                 { type: SenseType.Sight, label: "Sight" },
-                { type: SenseType.InfraredSight, label: "Infrared" },
+                { type: SenseType.InfraredSight, label: "Infradanger" },
                 { type: SenseType.Hearing, label: "Hearing" },
                 { type: SenseType.TremorHearing, label: "Tremor" },
                 { type: SenseType.Smell, label: "Smell" },
@@ -414,8 +414,8 @@ export const KinStep = () => {
                       {speciesData.senses.primary.includes(type)
                         ? "Primary"
                         : speciesData.senses.secondary.includes(type)
-                        ? "Secondary"
-                        : "-"}
+                          ? "Secondary"
+                          : "-"}
                     </div>
                   </div>
                 </div>
@@ -440,7 +440,7 @@ export const KinStep = () => {
                         <div>{value > 0 ? `+${value}` : String(value)}</div>
                       </div>
                     </div>
-                  )
+                  ),
                 )}
               </div>
             ) : (

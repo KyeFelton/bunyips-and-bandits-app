@@ -10,9 +10,10 @@ const fgVariants = cva("", {
   variants: {
     colour: {
       primary: "bg-primary",
-      green: "bg-green-foreground",
-      blue: "bg-blue-foreground",
-      red: "bg-red-foreground",
+      good: "bg-good",
+      info: "bg-info",
+      danger: "bg-danger",
+      warning: "bg-warning",
     },
   },
   defaultVariants: {
@@ -38,7 +39,7 @@ const Progress = React.forwardRef<
   >
     <ProgressPrimitive.Indicator
       className={cn(
-        "h-full w-full flex-1 transition-all bg-green-foreground",
+        "h-full w-full flex-1 transition-all bg-good",
         fgVariants({ colour })
       )}
       style={{ transform: `translateX(-${100 - (value || 0)}%)` }}

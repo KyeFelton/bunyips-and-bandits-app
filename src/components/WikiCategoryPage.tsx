@@ -61,7 +61,7 @@ export function WikiCategoryPage() {
               key={`${article.category}-${article.id}`}
               to={getWikiArticleRoute(category!, article.id)}
             >
-              <div className="p-4 md:p-6 border rounded-lg hover:bg-accent transition-colors h-full">
+              <div className="p-4 md:p-6 border rounded-lg hover:bg-accent-subtle transition-colors h-full">
                 <h3 className="text-lg md:text-xl font-semibold mb-1">
                   {article.title}
                 </h3>

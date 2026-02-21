@@ -50,7 +50,7 @@ export function CharacterSheetGridNav({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="fixed inset-0 z-40 bg-black/90 flex items-center justify-center p-4"
+          className="fixed inset-0 z-40 bg-foreground/90 flex items-center justify-center p-4"
           onClick={onClose}
         >
           <motion.div
@@ -64,7 +64,7 @@ export function CharacterSheetGridNav({
             {/* Close button */}
             <button
               onClick={onClose}
-              className="absolute -top-12 right-0 p-2 text-primary-foreground hover:text-accent-medium transition-colors"
+              className="absolute -top-12 right-0 p-2 text-primary-foreground hover:text-accent transition-colors"
             >
               <X className="h-8 w-8" />
               <span className="sr-only">Close navigation</span>
@@ -84,8 +84,8 @@ export function CharacterSheetGridNav({
                       aspect-square rounded-lg border-2 flex flex-col items-center justify-center gap-3 transition-all
                       ${
                         isActive
-                          ? "bg-accent-medium/20 border-accent-medium text-accent-medium"
-                          : "bg-black/50 border-accent/30 text-primary-foreground hover:bg-accent/10 hover:border-accent-medium/50"
+                          ? "bg-accent/20 border-accent text-accent"
+                          : "bg-foreground/50 border-accent-subtle/30 text-primary-foreground hover:bg-accent-subtle/10 hover:border-accent/50"
                       }
                     `}
                   >

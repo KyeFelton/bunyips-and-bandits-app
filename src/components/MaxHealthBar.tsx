@@ -49,7 +49,7 @@ export const MaxHealthBar = ({
             return (
               <div
                 key={index}
-                className="h-6 w-full border border-black first:rounded-l-sm last:rounded-r-sm border-r-0 last:border-r bg-green-foreground"
+                className="h-6 w-full border border-foreground first:rounded-l-sm last:rounded-r-sm border-r-0 last:border-r bg-good"
               />
             );
           })}

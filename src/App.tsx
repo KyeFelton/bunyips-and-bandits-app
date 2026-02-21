@@ -31,13 +31,13 @@ function App() {
   // Show loading state while images are preloading
   if (isLoading) {
     return (
-      <div className="min-h-dvh bg-gradient-to-bl from-slate-900 to-slate-950" />
+      <div className="min-h-dvh bg-surface" />
     );
   }
 
   return (
     <div className="min-h-dvh relative overflow-hidden">
-      <div className="absolute inset-0 -z-10 bg-gradient-to-bl from-slate-900 to-slate-950">
+      <div className="absolute inset-0 -z-10 bg-surface">
         <img
           src={frame}
           className="absolute inset-0 frame-animation"
@@ -57,7 +57,7 @@ function App() {
           }}
         />
         {/* Dimmed background overlay */}
-        <div className="absolute inset-0 bg-black/20" />
+        <div className="absolute inset-0 bg-foreground/20" />
         {/* Side vignette */}
         <div
           className="absolute inset-0 pointer-events-none"

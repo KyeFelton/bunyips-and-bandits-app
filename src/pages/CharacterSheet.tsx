@@ -35,7 +35,7 @@ export function CharacterSheet() {
         {/* Mobile Grid Navigation Button */}
         <button
           onClick={() => setGridNavOpen(true)}
-          className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-20 bg-accent-medium hover:bg-accent-medium/80 text-black rounded-full p-4 shadow-lg transition-all"
+          className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-20 bg-accent hover:bg-accent/80 text-foreground rounded-full p-4 shadow-lg transition-all"
         >
           <LayoutGrid className="h-6 w-6" />
           <span className="sr-only">Open navigation</span>

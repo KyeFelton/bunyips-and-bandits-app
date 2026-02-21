@@ -26,7 +26,7 @@ export function NavBar({ className }: NavBarProps) {
   return (
     <div
       className={cn(
-        "fixed z-50 bg-black shadow-sm w-full top-0 left-0 right-0",
+        "fixed z-50 bg-surface shadow-sm w-full top-0 left-0 right-0",
         className
       )}
     >
@@ -49,8 +49,8 @@ export function NavBar({ className }: NavBarProps) {
           <Link
             to={CharacterListRoute}
             className={cn(
-              "text-primary-foreground hover:text-accent-medium transition-colors flex items-center",
-              isCharacterActive ? "text-accent-medium" : ""
+              "text-primary-foreground hover:text-accent transition-colors flex items-center",
+              isCharacterActive ? "text-accent" : ""
             )}
           >
             <User className="h-5 w-5 mr-2" />
@@ -59,8 +59,8 @@ export function NavBar({ className }: NavBarProps) {
           <Link
             to={HandbookRoute}
             className={cn(
-              "text-primary-foreground hover:text-accent-medium transition-colors flex items-center",
-              isHandbookActive ? "text-accent-medium" : ""
+              "text-primary-foreground hover:text-accent transition-colors flex items-center",
+              isHandbookActive ? "text-accent" : ""
             )}
           >
             <Book className="h-5 w-5 mr-2" />

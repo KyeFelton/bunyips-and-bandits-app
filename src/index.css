@@ -25,24 +25,22 @@
     --secondary: 92 14% 90%;
     --secondary-foreground: 30 15% 18%;
 
-    --accent: 160 46% 90%;
-    --accent-medium: 142 48% 72%;
+    --accent: 142 48% 72%;
+    --accent-subtle: 160 46% 90%;
     --accent-foreground: 131 41% 30%;
 
     --destructive: 5 65% 44%;
     --destructive-foreground: 5 70% 98%;
 
-    --green: 142 28% 72%;
-    --green-foreground: 131 51% 30%;
+    --good: 131 51% 30%;
 
-    --blue: 210 50% 65%;
-    --blue-foreground: 217 61% 45%;
+    --info: 217 61% 45%;
 
-    --red: 5 70% 76%;
-    --red-foreground: 5 65% 44%;
+    --danger: 5 65% 44%;
 
-    --yellow: 45 100% 88%;
-    --yellow-foreground: 40 100% 55%;
+    --warning: 40 100% 55%;
+
+    --surface: 25 25% 8%;
 
     --ring: 30 25% 50%;
 
