@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAtom, useSetAtom } from "jotai";
 import { Card } from "../components/ui/card";
@@ -21,8 +21,13 @@ const steps = [
 
 export const CharacterEditor = () => {
   const [currentStep, setCurrentStep] = useState(0);
+  const cardRef = useRef<HTMLDivElement>(null);
   const isLastStep = currentStep === steps.length - 1;
   const isFirstStep = currentStep === 0;
+
+  useEffect(() => {
+    cardRef.current?.scrollTo(0, 0);
+  }, [currentStep]);
   const navigate = useNavigate();
   const StepComponent = steps[currentStep].component;
   const setSaveFile = useSetAtom(saveFileAtom);
@@ -131,7 +136,7 @@ export const CharacterEditor = () => {
             ))}
           </div>
         </div>
-        <Card className="h-full px-1 sm:py-6 sm:px-9 lg:py-8 lg:px-12 overflow-auto shadow-none">
+        <Card ref={cardRef} className="h-full px-1 sm:py-6 sm:px-9 lg:py-8 lg:px-12 overflow-auto shadow-none">
           {/* Step Content */}
           <h2 className="hidden sm:flex text-2xl my-3 font-bold text-foreground tracking-tight">
             {steps[currentStep].title}

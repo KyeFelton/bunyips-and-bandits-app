@@ -1,4 +1,4 @@
-
+import { useEffect, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import { cn } from "../utils/cn";
 import { HandbookRoute, getHandbookSectionRoute } from "../routes";
@@ -14,28 +14,48 @@ import { Places } from "./handbook/Places";
 
 const SECTIONS = [
   { id: "introduction", label: "Introduction", route: HandbookRoute },
-  { id: "core-rules", label: "Core Rules", route: getHandbookSectionRoute("core-rules") },
-  { id: "characters", label: "Characters", route: getHandbookSectionRoute("characters") },
-  { id: "skill-checks", label: "Skill Checks", route: getHandbookSectionRoute("skill-checks") },
+  {
+    id: "core-rules",
+    label: "Core Rules",
+    route: getHandbookSectionRoute("core-rules"),
+  },
+  {
+    id: "characters",
+    label: "Characters",
+    route: getHandbookSectionRoute("characters"),
+  },
+  {
+    id: "skill-checks",
+    label: "Skill Checks",
+    route: getHandbookSectionRoute("skill-checks"),
+  },
   { id: "combat", label: "Combat", route: getHandbookSectionRoute("combat") },
-  { id: "religion", label: "Religion", route: getHandbookSectionRoute("religion") },
+  {
+    id: "religion",
+    label: "Religion",
+    route: getHandbookSectionRoute("religion"),
+  },
   { id: "magic", label: "Magic", route: getHandbookSectionRoute("magic") },
   { id: "places", label: "Places", route: getHandbookSectionRoute("places") },
-  { id: "languages", label: "Languages", route: getHandbookSectionRoute("languages") },
+  {
+    id: "languages",
+    label: "Languages",
+    route: getHandbookSectionRoute("languages"),
+  },
 ] as const;
 
 type SectionId = (typeof SECTIONS)[number]["id"];
 
 const SECTION_COMPONENTS: Record<SectionId, React.ComponentType> = {
-  "introduction": Introduction,
+  introduction: Introduction,
   "core-rules": CoreRules,
-  "characters": Characters,
+  characters: Characters,
   "skill-checks": SkillChecks,
-  "combat": Combat,
-  "religion": Religion,
-  "magic": Magic,
-  "places": Places,
-  "languages": Languages,
+  combat: Combat,
+  religion: Religion,
+  magic: Magic,
+  places: Places,
+  languages: Languages,
 };
 
 function HandbookSidebar({ activeId }: { activeId: SectionId }) {
@@ -55,7 +75,7 @@ function HandbookSidebar({ activeId }: { activeId: SectionId }) {
                 "rounded-md px-3 py-1.5 text-sm transition-colors",
                 isActive
                   ? "text-accent font-medium"
-                  : "text-primary-foreground hover:text-accent"
+                  : "text-primary-foreground hover:text-accent",
               )}
             >
               {section.label}
@@ -69,6 +89,7 @@ function HandbookSidebar({ activeId }: { activeId: SectionId }) {
 
 export function Handbook() {
   const { section } = useParams<{ section?: string }>();
+  const contentRef = useRef<HTMLDivElement>(null);
 
   const activeId: SectionId =
     section && section in SECTION_COMPONENTS
@@ -77,11 +98,15 @@ export function Handbook() {
 
   const SectionComponent = SECTION_COMPONENTS[activeId];
 
+  useEffect(() => {
+    contentRef.current?.scrollTo(0, 0);
+  }, [activeId]);
+
   return (
-    <div className="flex min-h-full">
+    <div className="flex h-[calc(100dvh-4rem)]">
       <HandbookSidebar activeId={activeId} />
-      <div className="md:ml-48 flex-1 min-w-0 flex flex-col">
-        <div className="max-w-5xl mx-auto flex-1 flex flex-col">
+      <div ref={contentRef} className="md:ml-48 flex-1 min-w-0 overflow-auto flex flex-col">
+        <div className="max-w-5xl mx-auto w-full flex-1 flex flex-col">
           <SectionComponent />
         </div>
       </div>
