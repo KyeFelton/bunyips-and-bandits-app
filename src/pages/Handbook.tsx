@@ -9,6 +9,7 @@ import { SkillChecks } from "./handbook/SkillChecks";
 import { Combat } from "./handbook/Combat";
 import { Religion } from "./handbook/Religion";
 import { Magic } from "./handbook/Magic";
+import { Homebrew } from "./handbook/Homebrew";
 import { Languages } from "./handbook/Languages";
 import { Places } from "./handbook/Places";
 
@@ -42,6 +43,11 @@ const SECTIONS = [
     label: "Languages",
     route: getHandbookSectionRoute("languages"),
   },
+  {
+    id: "homebrew",
+    label: "Homebrew",
+    route: getHandbookSectionRoute("homebrew"),
+  },
 ] as const;
 
 type SectionId = (typeof SECTIONS)[number]["id"];
@@ -56,11 +62,12 @@ const SECTION_COMPONENTS: Record<SectionId, React.ComponentType> = {
   magic: Magic,
   places: Places,
   languages: Languages,
+  homebrew: Homebrew,
 };
 
 function HandbookSidebar({ activeId }: { activeId: SectionId }) {
   return (
-    <aside className="hidden md:flex fixed left-0 top-16 h-[calc(100dvh-4rem)] w-48 flex-col py-6 px-3 bg-surface shadow-sm z-10 overflow-y-auto">
+    <aside className="hidden md:flex fixed left-0 top-16 h-[calc(100dvh-4rem)] w-48 flex-col py-6 px-3 bg-surface shadow-sm z-10 overflow-y-auto border-t border-primary-foreground/20">
       <p className="text-xs uppercase tracking-widest text-primary-foreground/40 mb-3 px-2">
         Handbook
       </p>
@@ -105,7 +112,10 @@ export function Handbook() {
   return (
     <div className="flex h-[calc(100dvh-4rem)]">
       <HandbookSidebar activeId={activeId} />
-      <div ref={contentRef} className="md:ml-48 flex-1 min-w-0 overflow-auto flex flex-col">
+      <div
+        ref={contentRef}
+        className="md:ml-48 flex-1 min-w-0 overflow-auto flex flex-col"
+      >
         <div className="max-w-5xl mx-auto w-full flex-1 flex flex-col">
           <SectionComponent />
         </div>

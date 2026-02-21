@@ -1,4 +1,4 @@
-import { Body, H2, H3, WikiPage } from "../../components/WikiPage";
+import { Body, H3, WikiPage } from "../../components/WikiPage";
 import { SkillIcon } from "../../components/icons/SkillIcon";
 import { ArmourIcon } from "../../components/icons/ArmourIcon";
 import { SpeedIcon } from "../../components/icons/SpeedIcon";
@@ -13,7 +13,6 @@ import bunyipImage from "../../images/handbook/bunyip.png";
 
 const main = (
   <>
-    <H2>Characters</H2>
     <Body>
       <p>
         At the heart of Bunyips and Bandits are the characters you create and

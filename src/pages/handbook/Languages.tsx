@@ -1,8 +1,7 @@
-import { Body, H3, WikiPage } from "../../components/WikiPage";
+import { Body, WikiPage } from "../../components/WikiPage";
 
 const main = (
   <>
-    <H3>Languages</H3>
     <Body>
       <p>
         People across the world communicate through different languages that

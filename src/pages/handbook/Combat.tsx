@@ -1,9 +1,8 @@
-import { Body, H2, H3, WikiPage } from "../../components/WikiPage";
+import { Body, H3, WikiPage } from "../../components/WikiPage";
 import dropbearImage from "../../images/handbook/dropbear.png";
 
 const main = (
   <>
-    <H2>Combat</H2>
     <Body>
       <p>
         Sometimes, words fail. And when they do, there's always combat. Combat
@@ -169,33 +168,34 @@ const main = (
     <H3>Hitting a target</H3>
     <Body>
       <p>
-        Landing an attack isn't always guaranteed—opponents can counter, dodge
-        or resist attacks:
+        Only players roll dice. Every NPC has a static difficulty class for each
+        stat in their stat block. When you attack an NPC, roll your attack skill
+        and beat their defence class. When an NPC attacks you, roll to evade and
+        beat their attack class.
       </p>
+      <p>There are three ways to evade an incoming attack:</p>
       <ul className="list-disc ml-4">
         <li>
-          <b>Counter</b>: The defender rolls the same skill check as the
-          attacker to counter the attack.
+          <b>Counter</b>: Roll the same skill as the attacker used.
         </li>
         <li>
-          <b>Dodge</b>: If the attack is physical and doesn't cover a large
-          area, the defender can roll an agility check to dodge it.
+          <b>Dodge</b>: Roll an agility check. Only works against physical
+          attacks that don't cover a large area.
         </li>
         <li>
-          <b>Resist</b>: If it is a psychic attack, the defender can roll a
-          willpower check to resist the effect.
+          <b>Resist</b>: Roll a willpower check. Only works against psychic
+          attacks.
         </li>
       </ul>
       <p>
-        If the attacker rolls higher than the defender, the attack hits and the
-        defender takes the effect of the action. If the defender rolls equal to
-        or higher, they avoid the attack.
+        If you roll above the opposing class, the attack or evasion succeeds.
+        Equal or lower, it fails.
       </p>
       <p>
-        Every character has an evasions count on their character sheet. The
-        evasions count determines the number of attacks they can attempt to
-        evade in one round of combat. Characters start off with an evasion count
-        of 1, but can increase it with some traits and items.
+        Every character has an evasions count on their character sheet.
+        Characters start with one evasion per round. You can forgo one of your
+        actions on your turn to gain an extra evasion for that round. Some
+        traits and items can also increase your evasion count.
       </p>
     </Body>
     <H3>Statuses</H3>

@@ -1,17 +1,7 @@
-import { Body, H2, H3, WikiPage } from "../../components/WikiPage";
+import { Body, WikiPage } from "../../components/WikiPage";
 
 const main = (
   <>
-    <H2>The World</H2>
-    <Body>
-      <p>
-        Beyond the game mechanics lies a rich world shaped by ancient beings,
-        diverse cultures, and powerful magic. Understanding the basics of this
-        setting will help you create characters that feel at home in the world
-        and give you context for the adventures you'll face.
-      </p>
-    </Body>
-    <H3>Deities and Religion</H3>
     <Body>
       <p>
         Many cultures across the world believe in one or more omnipotent gods

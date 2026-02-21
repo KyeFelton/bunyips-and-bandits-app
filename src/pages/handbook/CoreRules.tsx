@@ -34,25 +34,65 @@ const main = (
         not be favourable).
       </p>
       <p>
-        This handbook should be viewed as framework to align everyone, rather
+        This handbook should be viewed as a framework to align everyone, rather
         than a rigid rule system. If anything is unclear, discuss it with your
         party and agree on a ruling. If something doesn't quite fit your
         playstyle, discuss that too and potentially tweak it. The game is meant
         to be adaptable. The only rule is that everyone at the table has fun.
       </p>
     </Body>
-    <H2>What You'll Need</H2>
+    <H2>Core Mechanics</H2>
     <Body>
       <p>
-        Your game setup depends on your style. This website has been created to
-        enhance and streamline the playing experience, but it's not required. If
-        you prefer a more tactile experience, you can play with paper, pens and
-        dice. The game uses polyhedral dice sets, including d4, d6, d8, d12, and
-        d20. The GM may also want a board to track character positions in
-        combat, but if you're a fan of Theatre of the Mind, let your imagination
-        do the work. At the end of the day, all you really need is a good group
-        of friends and a sense of adventure.
+        These are the systems you'll use during play. Each is covered in detail
+        in the relevant section of the handbook.
       </p>
+      <ul className="list-disc ml-4">
+        <li>
+          <b>Skills.</b> Everything resolves through skill checks—there are no
+          separate attribute blocks. Skills are split into physical, mental, and
+          magic categories. Magic skills must be unlocked before they can be
+          used.
+        </li>
+        <li>
+          <b>Dice ladder.</b> Your skill level determines which die you roll:
+          d4 at levels 1–2, d6 at 3–4, d8 at 5–6, d10 at 7–8, d12 at 9–10.
+          Rolling the maximum on your die is a critical success.
+        </li>
+        <li>
+          <b>Difficulty.</b> The GM sets a target number based on the task.
+          Four tiers: Easy (2+), Moderate (4+), Hard (6+), Extreme (10+).
+        </li>
+        <li>
+          <b>Only players roll.</b> NPCs have static difficulty classes. When
+          an NPC attacks you, you roll to evade. When you attack, you roll to
+          hit. The GM never rolls dice.
+        </li>
+        <li>
+          <b>Advantage and disadvantage.</b> Roll your die twice and keep the
+          higher (advantage) or lower (disadvantage) result. Multiple sources
+          don't stack, and one of each cancels out.
+        </li>
+        <li>
+          <b>Progression.</b> No experience points or milestones. Two critical
+          successes with the same skill levels it up by one—capped at once per
+          rest. Skills cap at level 10.
+        </li>
+        <li>
+          <b>Health.</b> Three independent tracks: Body (physical resilience),
+          Mind (mental fortitude), and Stamina (resource for costly actions).
+        </li>
+        <li>
+          <b>Action economy.</b> Each turn you have two actions and one
+          evasion. You can forgo one action to gain an extra evasion for that
+          round.
+        </li>
+        <li>
+          <b>Initiative.</b> No roll. The side that starts the fight acts
+          first. Player turns go clockwise around the table. Each round
+          represents roughly 5 seconds.
+        </li>
+      </ul>
     </Body>
   </>
 );

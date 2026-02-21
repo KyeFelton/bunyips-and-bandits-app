@@ -1,8 +1,9 @@
+import { ArrowLeft } from "lucide-react";
 import { PropsWithChildren, ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "./ui/button";
+import { cn } from "../utils/cn";
 import { WikiContent } from "../models/wikiContent";
-import { ArrowLeft } from "lucide-react";
+import { Button } from "./ui/button";
 
 type Props = Partial<WikiContent> & {
   backTo?: { label: string; path: string };
@@ -56,25 +57,44 @@ export const Body = ({ children }: PropsWithChildren) => (
   <section className="prose max-w-none mb-8">{children}</section>
 );
 
-export function TornPaper({ children }: PropsWithChildren) {
+type CalloutVariant = "tip" | "note" | "warning" | "danger";
+type CalloutFloat = "left" | "right";
+
+const calloutVariantClasses: Record<CalloutVariant, string> = {
+  tip: "border-accent-foreground bg-accent-subtle text-foreground",
+  note: "border-info bg-info/10 text-foreground",
+  warning: "border-warning bg-warning/10 text-foreground",
+  danger: "border-danger bg-danger/10 text-foreground",
+};
+
+const calloutFloatClasses: Record<CalloutFloat, string> = {
+  left: "float-left mr-6 mb-2 clear-left",
+  right: "float-right ml-6 mb-2 clear-right",
+};
+
+type CalloutProps = PropsWithChildren<{
+  variant?: CalloutVariant;
+  float?: CalloutFloat;
+}>;
+
+export function Callout({ variant = "tip", float, children }: CalloutProps) {
   return (
     <div
-      className={`
-        relative bg-[#fdf6e3] border-4 border-[#bfa76a] rounded-lg shadow-lg
-        px-8 py-6 my-8
-        font-serif
-        before:absolute before:inset-x-0 before:-top-4 before:h-4
-        before:bg-[url('/images/torn-edge-top.png')] before:bg-repeat-x
-        after:absolute after:inset-x-0 after:-bottom-4 after:h-4
-        after:bg-[url('/images/torn-edge-bottom.png')] after:bg-repeat-x
-      `}
-      style={{
-        // Optional: Add a subtle paper texture if you have one
-        backgroundImage: "url('/images/paper-texture.png')",
-        backgroundBlendMode: "multiply",
-      }}
+      className={cn(
+        "border-l-4 rounded-r-lg px-4 py-3 my-4",
+        calloutVariantClasses[variant],
+        float && calloutFloatClasses[float],
+      )}
     >
-      <div className="relative z-10">{children}</div>
+      {children}
     </div>
+  );
+}
+
+export function Blockquote({ children }: PropsWithChildren) {
+  return (
+    <blockquote className="border-l-4 border-primary pl-4 py-1 my-4 italic text-muted-foreground">
+      {children}
+    </blockquote>
   );
 }

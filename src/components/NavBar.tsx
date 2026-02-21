@@ -1,9 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import {
-  CharacterListRoute,
-  HandbookRoute,
-  HomeRoute,
-} from "../routes";
+import { CharacterListRoute, HandbookRoute, HomeRoute } from "../routes";
 import { Logo } from "./Logo";
 import { cn } from "../utils/cn";
 import { User, Book } from "lucide-react";
@@ -27,7 +23,7 @@ export function NavBar({ className }: NavBarProps) {
     <div
       className={cn(
         "fixed z-50 bg-surface shadow-sm w-full top-0 left-0 right-0",
-        className
+        className,
       )}
     >
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
@@ -50,7 +46,7 @@ export function NavBar({ className }: NavBarProps) {
             to={CharacterListRoute}
             className={cn(
               "text-primary-foreground hover:text-accent transition-colors flex items-center",
-              isCharacterActive ? "text-accent" : ""
+              isCharacterActive ? "text-accent" : "",
             )}
           >
             <User className="h-5 w-5 mr-2" />
@@ -60,7 +56,7 @@ export function NavBar({ className }: NavBarProps) {
             to={HandbookRoute}
             className={cn(
               "text-primary-foreground hover:text-accent transition-colors flex items-center",
-              isHandbookActive ? "text-accent" : ""
+              isHandbookActive ? "text-accent" : "",
             )}
           >
             <Book className="h-5 w-5 mr-2" />

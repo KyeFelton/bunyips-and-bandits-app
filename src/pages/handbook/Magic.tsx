@@ -2,7 +2,6 @@ import { Body, H3, WikiPage } from "../../components/WikiPage";
 
 const main = (
   <>
-    <H3>Magic</H3>
     <Body>
       <p>
         Magic refers to the powers and phenomena that exist beyond the natural
@@ -13,7 +12,7 @@ const main = (
         significant effort and practice. Some creatures may also be naturally
         better at performing some forms of magic than others.
       </p>
-      <h4>Spirits</h4>
+      <H3>Spirits</H3>
       <p>
         Every living creature has a spirit residing within them. A creature's
         body is a vessel for the spirit that allows the spirit to tangibly
@@ -29,7 +28,7 @@ const main = (
         observe events in the physical world and interact with living creatures
         by influencing their dreams and instincts.
       </p>
-      <h4>Mana</h4>
+      <H3>Mana</H3>
       <p>
         Living spirits possess a life force called mana. This force enables
         creatures to create and control the flow of energy outside of the
@@ -42,7 +41,7 @@ const main = (
         pass out. When a creature's body dies, all mana is lost and cannot be
         regained.
       </p>
-      <h4>Psychic Waves</h4>
+      <H3>Psychic Waves</H3>
       <p>
         Cognitive thought produces a phenomenon called psychic waves. These
         waves permeate through space without a medium and are unimpeded by
@@ -51,7 +50,7 @@ const main = (
         waves that interfere with other minds, influencing their thoughts,
         perceptions and feelings.
       </p>
-      <h4>Portal Stones</h4>
+      <H3>Portal Stones</H3>
       <p>
         Although no creatures possess the power to teleport, there exists some
         rare minerals called portal stones that contain this ability. When a
@@ -66,7 +65,7 @@ const main = (
         on, whilst others teleport in a random direction. Stones will never
         teleport below ground.
       </p>
-      <h4>Branches of Magic</h4>
+      <H3>Branches of Magic</H3>
       <p>
         The study and training in magical arts is broken into four main branches
         of teaching:

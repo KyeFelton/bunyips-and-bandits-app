@@ -3,7 +3,6 @@ import apothecaryImage from "../../images/handbook/apothecary.png";
 
 const main = (
   <>
-    <H2>Skill Checks</H2>
     <Body>
       <p>
         As you step into the game, the GM will present various scenarios and
@@ -127,10 +126,6 @@ const main = (
           <tr>
             <td>Extreme</td>
             <td>10+</td>
-          </tr>
-          <tr>
-            <td>Deadly</td>
-            <td>16+</td>
           </tr>
         </tbody>
       </table>

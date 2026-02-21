@@ -2,7 +2,6 @@ import { Body, H3, WikiPage } from "../../components/WikiPage";
 
 const main = (
   <>
-    <H3>Continents and Cultures</H3>
     <Body>
       <p>
         The world is vast, containing many continents and cultures. Your
@@ -10,7 +9,7 @@ const main = (
         the wider world helps you understand where different peoples come from
         and how they ended up where they are today.
       </p>
-      <h4>Downunda</h4>
+      <H3>Downunda</H3>
       <p>
         Downunda is an expansive island located to the east of the Continent,
         characterised by tropical coasts, arid deserts, and dense interior
@@ -102,7 +101,7 @@ const main = (
         church, where sermons pay reverence to the gods and recount the deeds of
         legendary heroes as lessons in courage, fairness, and perseverance.
       </p>
-      <h4>Engloria</h4>
+      <H3>Engloria</H3>
       <p>
         Engloria is a temperate region in the east known for its rolling hills,
         misty forests, and fertile river valleys. The landscape is shaped by
@@ -113,7 +112,7 @@ const main = (
         a highly sophisticated empire, with many major cities and countless
         towns.
       </p>
-      <h4>Other Lands</h4>
+      <H3>Other Lands</H3>
       <p>
         Beyond Downunda and Engloria lie other distant lands, each with their
         own peoples and traditions:
