@@ -5,11 +5,12 @@ export const getCharacterSheetRoute = (id: string) => `/character/${id}`;
 export const CharacterEditorRoute = `/character/:id/edit`;
 export const getCharacterEditorRoute = (id: string) => `/character/${id}/edit`;
 export const HandbookRoute = `/handbook`;
-export const HandbookSectionRoute = `/handbook/:section`;
-export const getHandbookSectionRoute = (section: string) => `/handbook/${section}`;
-export const WikiRoute = `/wiki`;
-export const WikiCategoryRoute = `/wiki/:category`;
-export const getWikiCategoryRoute = (category: string) => `/wiki/${category}`;
-export const WikiArticleRoute = `/wiki/:category/:id`;
-export const getWikiArticleRoute = (category: string, id: string) =>
-  `/wiki/${category}/${id}`;
+export const HandbookPageRoute = `/handbook/:section/:page`;
+export const getHandbookPageRoute = (section: string, page: string) =>
+  `/handbook/${section}/${page}`;
+export const HandbookSubsectionPageRoute = `/handbook/:section/:subsection/:page`;
+export const getHandbookSubsectionPageRoute = (
+  section: string,
+  subsection: string,
+  page: string,
+) => `/handbook/${section}/${subsection}/${page}`;

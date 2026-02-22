@@ -1,10 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
-import { CharacterListRoute, HandbookRoute, HomeRoute } from "../routes";
+import { CharacterListRoute, HandbookRoute } from "../routes";
 import { Logo } from "./Logo";
 import { cn } from "../utils/cn";
 import { User, Book } from "lucide-react";
 import { MobileMenu } from "./MobileMenu";
-import { WikiDropdown } from "./WikiDropdown";
 
 interface NavBarProps {
   className?: string;
@@ -30,13 +29,13 @@ export function NavBar({ className }: NavBarProps) {
         {/* Mobile: Burger menu + Logo */}
         <div className="flex items-center gap-3 md:hidden">
           <MobileMenu />
-          <Link to={HomeRoute} className="flex items-center">
+          <Link to="/" className="flex items-center">
             <Logo className="h-8" />
           </Link>
         </div>
 
         {/* Desktop: Logo */}
-        <Link to={HomeRoute} className="hidden md:flex items-center">
+        <Link to="/" className="hidden md:flex items-center">
           <Logo className="h-10 mr-2" />
         </Link>
 
@@ -55,14 +54,13 @@ export function NavBar({ className }: NavBarProps) {
           <Link
             to={HandbookRoute}
             className={cn(
-              "text-primary-foreground hover:text-accent transition-colors flex items-center",
+              "text-primary-foreground transition-colors flex items-center",
               isHandbookActive ? "text-accent" : "",
             )}
           >
             <Book className="h-5 w-5 mr-2" />
             <span className="text-base">Handbook</span>
           </Link>
-          <WikiDropdown />
         </nav>
       </div>
     </div>

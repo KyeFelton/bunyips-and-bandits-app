@@ -14,12 +14,8 @@ import {
   HandbookRoute,
   CharacterListRoute,
   HomeRoute,
-  WikiRoute,
-  WikiCategoryRoute,
-  WikiArticleRoute,
 } from "./routes";
 import "./App.sass";
-import { Wiki } from "./pages/Wiki";
 import { useImagePreloader } from "./hooks/useImagePreloader";
 import { useSyncFocalCharacter } from "./state/saveFile";
 
@@ -79,11 +75,9 @@ function App() {
           <Route path={CharacterSheetRoute} element={<CharacterSheet />} />
           <Route path={CharacterEditorRoute} element={<CharacterEditor />} />
           <Route path={HandbookRoute} element={<Handbook />}>
-            <Route path=":section" element={null} />
+            <Route path=":section/:page" />
+            <Route path=":section/:subsection/:page" />
           </Route>
-          <Route path={WikiArticleRoute} element={<Wiki />} />
-          <Route path={WikiCategoryRoute} element={<Wiki />} />
-          <Route path={WikiRoute} element={<Wiki />} />
         </Routes>
         </div>
       </div>

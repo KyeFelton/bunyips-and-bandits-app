@@ -1,123 +1,208 @@
 import { useEffect, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
+import { ChevronRight } from "lucide-react";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "../components/ui/collapsible";
 import { cn } from "../utils/cn";
-import { HandbookRoute, getHandbookSectionRoute } from "../routes";
-import { Introduction } from "./handbook/Introduction";
-import { CoreRules } from "./handbook/CoreRules";
-import { Characters } from "./handbook/Characters";
-import { SkillChecks } from "./handbook/SkillChecks";
-import { Combat } from "./handbook/Combat";
-import { Religion } from "./handbook/Religion";
-import { Magic } from "./handbook/Magic";
-import { Homebrew } from "./handbook/Homebrew";
-import { Languages } from "./handbook/Languages";
-import { Places } from "./handbook/Places";
+import { getHandbookSubsectionPageRoute } from "../routes";
+import { WikiPage } from "../components/WikiPage";
+import { Introduction } from "./handbook/rules/Introduction";
+import {
+  HANDBOOK_SECTIONS,
+  HandbookSubsection,
+} from "./handbook/handbookSections";
 
-const SECTIONS = [
-  { id: "introduction", label: "Introduction", route: HandbookRoute },
-  {
-    id: "core-rules",
-    label: "Core Rules",
-    route: getHandbookSectionRoute("core-rules"),
-  },
-  {
-    id: "characters",
-    label: "Characters",
-    route: getHandbookSectionRoute("characters"),
-  },
-  {
-    id: "skill-checks",
-    label: "Skill Checks",
-    route: getHandbookSectionRoute("skill-checks"),
-  },
-  { id: "combat", label: "Combat", route: getHandbookSectionRoute("combat") },
-  {
-    id: "religion",
-    label: "Religion",
-    route: getHandbookSectionRoute("religion"),
-  },
-  { id: "magic", label: "Magic", route: getHandbookSectionRoute("magic") },
-  { id: "places", label: "Places", route: getHandbookSectionRoute("places") },
-  {
-    id: "languages",
-    label: "Languages",
-    route: getHandbookSectionRoute("languages"),
-  },
-  {
-    id: "homebrew",
-    label: "Homebrew",
-    route: getHandbookSectionRoute("homebrew"),
-  },
-] as const;
+function SectionHeader({
+  label,
+  isFirst,
+}: {
+  label: string;
+  isFirst?: boolean;
+}) {
+  return (
+    <>
+      {!isFirst && (
+        <div className="border-t border-primary-foreground/20 mt-3 mb-2" />
+      )}
+      <p className="text-xs uppercase tracking-widest text-primary-foreground/40 mb-2 px-2">
+        {label}
+      </p>
+    </>
+  );
+}
 
-type SectionId = (typeof SECTIONS)[number]["id"];
+function SidebarLink({
+  to,
+  isActive,
+  children,
+}: {
+  to: string;
+  isActive: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <Link
+      to={to}
+      className={cn(
+        "rounded-md px-3 py-1.5 text-sm transition-colors",
+        isActive ? "text-accent font-medium" : "text-primary-foreground",
+      )}
+    >
+      {children}
+    </Link>
+  );
+}
 
-const SECTION_COMPONENTS: Record<SectionId, React.ComponentType> = {
-  introduction: Introduction,
-  "core-rules": CoreRules,
-  characters: Characters,
-  "skill-checks": SkillChecks,
-  combat: Combat,
-  religion: Religion,
-  magic: Magic,
-  places: Places,
-  languages: Languages,
-  homebrew: Homebrew,
-};
+function SidebarSubpageLink({
+  to,
+  isActive,
+  children,
+}: {
+  to: string;
+  isActive: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <Link
+      to={to}
+      className={cn(
+        "rounded-md px-3 py-1 text-sm transition-colors",
+        isActive ? "text-accent font-medium" : "text-primary-foreground/80",
+      )}
+    >
+      {children}
+    </Link>
+  );
+}
 
-function HandbookSidebar({ activeId }: { activeId: SectionId }) {
+function HandbookSidebar({
+  section,
+  subsection,
+  page,
+}: {
+  section: string | undefined;
+  subsection: string | undefined;
+  page: string | undefined;
+}) {
   return (
     <aside className="hidden md:flex fixed left-0 top-16 h-[calc(100dvh-4rem)] w-48 flex-col py-6 px-3 bg-surface shadow-sm z-10 overflow-y-auto border-t border-primary-foreground/20">
-      <p className="text-xs uppercase tracking-widest text-primary-foreground/40 mb-3 px-2">
-        Handbook
-      </p>
       <nav className="flex flex-col gap-0.5">
-        {SECTIONS.map((section) => {
-          const isActive = section.id === activeId;
-          return (
-            <Link
-              key={section.id}
-              to={section.route}
-              className={cn(
-                "rounded-md px-3 py-1.5 text-sm transition-colors",
-                isActive
-                  ? "text-accent font-medium"
-                  : "text-primary-foreground hover:text-accent",
-              )}
-            >
-              {section.label}
-            </Link>
-          );
-        })}
+        {HANDBOOK_SECTIONS.map((sec, i) => (
+          <div key={sec.id} className="flex flex-col gap-0.5">
+            <SectionHeader label={sec.label} isFirst={i === 0} />
+            {sec.items.map((item) => {
+              if (item.kind === "subsection") {
+                const isSubsectionActive =
+                  section === sec.id &&
+                  (subsection === item.id || (!subsection && page === item.id));
+                return (
+                  <Collapsible
+                    key={item.id}
+                    defaultOpen={subsection === item.id}
+                  >
+                    <CollapsibleTrigger
+                      className={cn(
+                        "group w-full flex items-center justify-between rounded-md px-3 py-1.5 text-sm transition-colors text-left",
+                        isSubsectionActive
+                          ? "text-accent font-medium"
+                          : "text-primary-foreground",
+                      )}
+                    >
+                      {item.label}
+                      <ChevronRight className="h-3 w-3 shrink-0 transition-transform group-data-[state=open]:rotate-90" />
+                    </CollapsibleTrigger>
+                    <CollapsibleContent className="flex flex-col gap-0.5 ml-3 mt-0.5">
+                      {item.pages.map((subPage) => (
+                        <SidebarSubpageLink
+                          key={subPage.id}
+                          to={getHandbookSubsectionPageRoute(
+                            sec.id,
+                            item.id,
+                            subPage.id,
+                          )}
+                          isActive={
+                            section === sec.id &&
+                            subsection === item.id &&
+                            page === subPage.id
+                          }
+                        >
+                          {subPage.title}
+                        </SidebarSubpageLink>
+                      ))}
+                    </CollapsibleContent>
+                  </Collapsible>
+                );
+              }
+
+              const isActive =
+                section === sec.id && page === item.id && !subsection;
+              return (
+                <SidebarLink
+                  key={item.id}
+                  to={`/handbook/${sec.id}/${item.id}`}
+                  isActive={isActive}
+                >
+                  {item.label}
+                </SidebarLink>
+              );
+            })}
+          </div>
+        ))}
       </nav>
     </aside>
   );
 }
 
 export function Handbook() {
-  const { section } = useParams<{ section?: string }>();
+  const { section, subsection, page } = useParams<{
+    section?: string;
+    subsection?: string;
+    page?: string;
+  }>();
   const contentRef = useRef<HTMLDivElement>(null);
-
-  const activeId: SectionId =
-    section && section in SECTION_COMPONENTS
-      ? (section as SectionId)
-      : "introduction";
-
-  const SectionComponent = SECTION_COMPONENTS[activeId];
 
   useEffect(() => {
     contentRef.current?.scrollTo(0, 0);
-  }, [activeId]);
+  }, [section, subsection, page]);
+
+  function renderContent() {
+    const sec = section
+      ? HANDBOOK_SECTIONS.find((s) => s.id === section)
+      : undefined;
+
+    if (sec && subsection && page) {
+      const subsec = sec.items.find(
+        (i) => i.id === subsection && i.kind === "subsection",
+      ) as HandbookSubsection | undefined;
+      const subPage = subsec?.pages.find((i) => i.id === page);
+      if (subPage) {
+        return <WikiPage {...subPage} />;
+      }
+    }
+
+    if (sec && page) {
+      const item = sec.items.find((i) => i.id === page);
+      if (item?.kind === "page") {
+        const Component = item.component;
+        return <Component />;
+      }
+    }
+
+    return <Introduction />;
+  }
 
   return (
     <div className="flex h-[calc(100dvh-4rem)]">
-      <HandbookSidebar activeId={activeId} />
+      <HandbookSidebar section={section} subsection={subsection} page={page} />
       <div
         ref={contentRef}
         className="md:ml-48 flex-1 min-w-0 overflow-auto flex flex-col"
       >
         <div className="max-w-5xl mx-auto w-full flex-1 flex flex-col">
-          <SectionComponent />
+          {renderContent()}
         </div>
       </div>
     </div>
