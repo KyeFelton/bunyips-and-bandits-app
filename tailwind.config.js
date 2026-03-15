@@ -42,7 +42,6 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        surface: "hsl(var(--surface))",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -84,12 +83,31 @@ export default {
             },
             h2: {
               color: "hsl(var(--foreground))",
+              "margin-top": "2.5rem",
+              "border-bottom-width": "1px",
+              "border-bottom-style": "solid",
+              "border-bottom-color": "hsl(var(--border))",
+              "padding-bottom": "0.5rem",
             },
             h3: {
               color: "hsl(var(--foreground))",
+              "margin-top": "2rem",
+              "border-bottom-width": "1px",
+              "border-bottom-style": "solid",
+              "border-bottom-color": "hsl(var(--border))",
+              "padding-bottom": "0.5rem",
             },
             h4: {
               color: "hsl(var(--foreground))",
+              "margin-top": "1.5rem",
+            },
+            h5: {
+              color: "hsl(var(--foreground))",
+              "margin-top": "1.25rem",
+            },
+            h6: {
+              color: "hsl(var(--foreground))",
+              "margin-top": "1rem",
             },
             strong: {
               color: "hsl(var(--foreground))",

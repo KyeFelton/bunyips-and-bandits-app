@@ -13,7 +13,7 @@ export type Character = {
   age: number;
   languages: string[];
   background: string;
-  biography: string;
+  backstory: string;
   personality: string;
   image?: string;
   class: string;

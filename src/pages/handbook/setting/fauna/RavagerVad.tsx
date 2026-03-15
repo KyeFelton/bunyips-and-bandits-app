@@ -1,7 +1,6 @@
 import { WikiContent } from "../../../../models/wikiContent";
 import { WikiId } from "../../../../enums/WikiId";
 import { WikiCategory } from "../../../../enums/WikiCategory";
-import { H2, Body } from "../../../../components/WikiPage";
 
 const summary = (
   <p>
@@ -15,31 +14,28 @@ const summary = (
 
 const content = (
   <>
-    <H2>Description</H2>
-    <Body>
-      <p>
-        Ravager vads are large, heavily built arthropods covered in sharp
-        spines. They possess four legs for locomotion, two powerful arms tipped
-        with single curved claws, and a long segmented tail ending in a venomous
-        barb. Their heads are circular and ringed by petal-like appendages
-        surrounding a worm-like mouth filled with sharp teeth. The petals serve
-        as sensory and psychic organs, constantly vibrating with hive
-        transmissions. Ravagers have no visual organs and navigate entirely
-        through psychic perception.
-      </p>
-    </Body>
+    <h2>Description</h2>
 
-    <H2>Behaviour</H2>
-    <Body>
-      <p>
-        Ravagers are fiercely territorial and serve as the hive's primary
-        defense. They remain dormant until commanded to act, then attack with
-        speed and ferocity disproportionate to their size. Their barbed tails
-        deliver a paralytic venom, and they use their claws to dismember prey or
-        intruders. Ravagers also act as psychic amplifiers within the hive,
-        transmitting Malvada's will to nearby vads.
-      </p>
-    </Body>
+    <p>
+      Ravager vads are large, heavily built arthropods covered in sharp spines.
+      They possess four legs for locomotion, two powerful arms tipped with
+      single curved claws, and a long segmented tail ending in a venomous barb.
+      Their heads are circular and ringed by petal-like appendages surrounding a
+      worm-like mouth filled with sharp teeth. The petals serve as sensory and
+      psychic organs, constantly vibrating with hive transmissions. Ravagers
+      have no visual organs and navigate entirely through psychic perception.
+    </p>
+
+    <h2>Behaviour</h2>
+
+    <p>
+      Ravagers are fiercely territorial and serve as the hive's primary defense.
+      They remain dormant until commanded to act, then attack with speed and
+      ferocity disproportionate to their size. Their barbed tails deliver a
+      paralytic venom, and they use their claws to dismember prey or intruders.
+      Ravagers also act as psychic amplifiers within the hive, transmitting
+      Malvada's will to nearby vads.
+    </p>
   </>
 );
 

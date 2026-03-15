@@ -1,7 +1,6 @@
 import { WikiContent } from "../../../../models/wikiContent";
 import { WikiId } from "../../../../enums/WikiId";
 import { WikiCategory } from "../../../../enums/WikiCategory";
-import { H2, Body } from "../../../../components/WikiPage";
 
 const summary = (
   <p>
@@ -15,28 +14,25 @@ const summary = (
 
 const content = (
   <>
-    <H2>Description</H2>
-    <Body>
-      <p>
-        Worker vads stand approximately half a metre tall and possess six
-        limbs—two legs, four arms—and a pair of translucent wings folded along
-        their back. Their heads bear compound eyes, a pair of antennae, and a
-        jaw lined with sharp teeth accompanied by tusk-like mandibles. Their
-        exoskeletons are dull grey or brown, often coated with mud from hive
-        maintenance.
-      </p>
-    </Body>
+    <h2>Description</h2>
 
-    <H2>Behaviour</H2>
-    <Body>
-      <p>
-        Worker vads are industrious, cooperative, and entirely subservient to
-        the hive mind. They maintain constant psychic communication with nearby
-        vads, coordinating tasks in unison. When threatened, they can defend
-        themselves with their mandibles but typically retreat to alert ravager
-        vads.
-      </p>
-    </Body>
+    <p>
+      Worker vads stand approximately half a metre tall and possess six
+      limbs—two legs, four arms—and a pair of translucent wings folded along
+      their back. Their heads bear compound eyes, a pair of antennae, and a jaw
+      lined with sharp teeth accompanied by tusk-like mandibles. Their
+      exoskeletons are dull grey or brown, often coated with mud from hive
+      maintenance.
+    </p>
+
+    <h2>Behaviour</h2>
+
+    <p>
+      Worker vads are industrious, cooperative, and entirely subservient to the
+      hive mind. They maintain constant psychic communication with nearby vads,
+      coordinating tasks in unison. When threatened, they can defend themselves
+      with their mandibles but typically retreat to alert ravager vads.
+    </p>
   </>
 );
 

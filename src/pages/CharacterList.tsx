@@ -80,9 +80,7 @@ export function CharactersPage() {
   };
 
   return (
-    <div
-      className="min-h-full container mx-auto py-8 px-4 relative"
-    >
+    <div className="min-h-full container mx-auto py-8 px-4 relative">
       <div className="flex justify-between items-center pb-8">
         <h1 className="text-3xl font-bold text-primary-foreground">
           Characters

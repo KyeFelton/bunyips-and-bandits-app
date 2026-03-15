@@ -55,7 +55,7 @@ export const ActionsList = () => {
 
   // Combine and sort all actions
   const actions = [...basicActions, ...unlockedActions].sort((a, b) =>
-    a.name.localeCompare(b.name)
+    a.name.localeCompare(b.name),
   );
 
   const handlePerformAction = (action: Action) => {
@@ -90,6 +90,7 @@ export const ActionsList = () => {
             <TableHead>Range</TableHead>
             <TableHead className="text-center">Area</TableHead>
             <TableHead className="text-center">Stamina</TableHead>
+            <TableHead>Duration</TableHead>
             <TableHead className="text-right"></TableHead>
           </TableRow>
         </TableHeader>
@@ -147,6 +148,11 @@ export const ActionsList = () => {
                 {typeof action.staminaCost === "number"
                   ? action.staminaCost
                   : "X"}
+              </TableCell>
+              <TableCell>
+                {action.duration ?? (
+                  <span className="text-muted-foreground">-</span>
+                )}
               </TableCell>
               <TableCell className="text-right">
                 <Button

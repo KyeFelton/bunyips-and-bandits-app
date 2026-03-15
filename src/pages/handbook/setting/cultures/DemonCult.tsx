@@ -1,7 +1,6 @@
 import { WikiContent } from "../../../../models/wikiContent";
 import { WikiId } from "../../../../enums/WikiId";
 import { WikiCategory } from "../../../../enums/WikiCategory";
-import { Body } from "../../../../components/WikiPage";
 
 const summary = (
   <p>
@@ -14,14 +13,12 @@ const summary = (
 
 const content = (
   <>
-    <Body>
-      <p>
-        The principal goal of Demon Cultists is to revive their fallen leader.
-        With the return of Azmiorth, they can rid the world of evil and create a
-        new utopia. Some believe Teacher is the trapped soul of Azmiorth and the
-        Idol is the key to resurrecting their leader.
-      </p>
-    </Body>
+    <p>
+      The principal goal of Demon Cultists is to revive their fallen leader.
+      With the return of Azmiorth, they can rid the world of evil and create a
+      new utopia. Some believe Teacher is the trapped soul of Azmiorth and the
+      Idol is the key to resurrecting their leader.
+    </p>
   </>
 );
 

@@ -6,9 +6,10 @@ import { Action } from "../../models/actions";
 export const Invisibility: Action = {
   name: "Invisibility",
   effect:
-    "Light passes through you or a target of your choice, making them invisible until your next turn.",
+    "Light passes through you or a target of your choice, making them invisible.",
   skillType: SkillType.Radiant,
   range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 0,
+  duration: "1 round",
 };

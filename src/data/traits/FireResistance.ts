@@ -9,7 +9,7 @@ export const FireResistance: Trait = {
     {
       armour: {
         damageType: DamageType.Fire,
-        bonus: 3,
+        bonus: 2,
       },
     },
   ],

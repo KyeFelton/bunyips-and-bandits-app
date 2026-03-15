@@ -15,6 +15,7 @@ export const DefeatModal = ({ isOpen, onClose }: Props) => {
 
   useEffect(() => {
     if (isOpen) {
+      setIsRevealed(false);
       playHeartbeatSound();
     }
   }, [isOpen]);
@@ -31,13 +32,8 @@ export const DefeatModal = ({ isOpen, onClose }: Props) => {
     }
   };
 
-  const handleClose = () => {
-    setIsRevealed(false);
-    onClose();
-  };
-
   return (
-    <Dialog open={isOpen} onOpenChange={handleClose}>
+    <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-sm">
         <DialogHeader>
           <DialogTitle className="text-center">
@@ -67,20 +63,20 @@ export const DefeatModal = ({ isOpen, onClose }: Props) => {
               </Button>
             </>
           ) : isDead ? (
-            <>
-              <Skull className="h-16 w-16" />
+            <div className="fate-content flex flex-col items-center space-y-4">
+              <Skull className="fate-dead-icon h-16 w-16" />
               <p>Your journey has come to an end...</p>
-            </>
+            </div>
           ) : (
-            <>
-              <HeartPulse className="h-16 w-16 text-danger" />
+            <div className="fate-content flex flex-col items-center space-y-4">
+              <HeartPulse className="fate-alive-icon h-16 w-16 text-danger" />
               <p>...but only just</p>
               <p>
                 You regain consciousness, but are still weak. If you take any
                 more damage whilst your body is at zero health, you will fall
                 back unconscious and test your chances of survival again.
               </p>
-            </>
+            </div>
           )}
         </div>
       </DialogContent>

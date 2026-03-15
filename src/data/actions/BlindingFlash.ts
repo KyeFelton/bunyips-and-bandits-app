@@ -6,9 +6,9 @@ import { Action } from "../../models/actions";
 export const BlindingFlash: Action = {
   name: "Blinding flash",
   effect:
-    "You emit a bright light that scars the eyes of your targets. Targets with sight sense are blinded, stunned and take 2 psychic damage.",
+    "You emit a bright light that scars the eyes of your targets. Targets with sight sense are blinded for one round and stunned.",
   skillType: SkillType.Radiant,
   range: Range.Near,
   areaOfEffect: AreaOfEffect.Close,
-  staminaCost: 2,
+  staminaCost: 1,
 };

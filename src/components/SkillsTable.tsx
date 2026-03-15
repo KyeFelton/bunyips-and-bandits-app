@@ -1,4 +1,4 @@
-import { useAtomValue } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import {
   Table,
   TableBody,
@@ -8,10 +8,12 @@ import {
   TableRow,
 } from "./ui/table";
 import { SkillIcon } from "./icons/SkillIcon";
-import { HelpCircle, Lock } from "lucide-react";
+import { HelpCircle, Lock, Minus, Plus } from "lucide-react";
 import { SkillType } from "./../enums/SkillType";
 import * as Skills from "./../models/skills";
 import {
+  criticalSuccessesAtom,
+  MAX_SKILL_LEVEL,
   skillLevelsAtom,
   skillRollValuesAtom,
   skillsProgressedSinceRestAtom,
@@ -26,7 +28,15 @@ export const SkillsTable = () => {
   const skillLevels = useAtomValue(skillLevelsAtom);
   const skillRollValues = useAtomValue(skillRollValuesAtom);
   const skillsProgressedSinceRest = useAtomValue(skillsProgressedSinceRestAtom);
+  const setCriticalSuccesses = useSetAtom(criticalSuccessesAtom);
   const showRollToast = useRollToast();
+
+  const adjustLevel = (type: SkillType, delta: number) => {
+    setCriticalSuccesses((prev) => ({
+      ...prev,
+      [type]: (prev[type] || 0) + delta,
+    }));
+  };
 
   const handleRoll = (skill: {
     type: SkillType;
@@ -73,7 +83,7 @@ export const SkillsTable = () => {
         <TableBody>
           {skillsArray
             .filter(
-              (skill) => !skill.magicSkill || (skill.level && skill.level > 0)
+              (skill) => !skill.magicSkill || (skill.level && skill.level > 0),
             )
             .map((skill) => {
               return (
@@ -104,9 +114,27 @@ export const SkillsTable = () => {
                   </TableCell>
                   <TableCell className="text-left">
                     <div className="flex items-center justify-start gap-1">
-                      <div className="text-sm font-medium">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-6 w-6"
+                        disabled={(skill.level || 0) <= 1}
+                        onClick={() => adjustLevel(skill.type, -1)}
+                      >
+                        <Minus className="h-3 w-3" />
+                      </Button>
+                      <div className="text-sm font-medium w-4 text-center">
                         {skill.level || 0}
                       </div>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-6 w-6"
+                        disabled={(skill.level || 0) >= MAX_SKILL_LEVEL}
+                        onClick={() => adjustLevel(skill.type, 1)}
+                      >
+                        <Plus className="h-3 w-3" />
+                      </Button>
                       {skillsProgressedSinceRest.has(skill.type) && (
                         <Lock className="h-3 w-3 text-muted-foreground" />
                       )}
@@ -129,7 +157,7 @@ export const SkillsTable = () => {
                         </Button>
                       </div>
                     ) : (
-                      <div className="ml-3">-</div>
+                      <div className="ml-3">Fail</div>
                     )}
                   </TableCell>
                 </TableRow>

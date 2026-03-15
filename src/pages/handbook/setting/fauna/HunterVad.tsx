@@ -1,7 +1,6 @@
 import { WikiContent } from "../../../../models/wikiContent";
 import { WikiId } from "../../../../enums/WikiId";
 import { WikiCategory } from "../../../../enums/WikiCategory";
-import { H2, Body } from "../../../../components/WikiPage";
 
 const summary = (
   <p>
@@ -16,28 +15,25 @@ const summary = (
 
 const content = (
   <>
-    <H2>Description</H2>
-    <Body>
-      <p>
-        Hunter vads resemble large, chitinous canines with six limbs—four
-        adapted for running and two for grasping or pouncing. Their exoskeleton
-        is black with orange streams. Their elongated heads bear compound eyes
-        and sharp mandibles capable of rending flesh. A row of sensory spines
-        runs along their back, vibrating faintly when receiving psychic
-        commands.
-      </p>
-    </Body>
+    <h2>Description</h2>
 
-    <H2>Behaviour</H2>
-    <Body>
-      <p>
-        Hunter vads are pack-oriented, hunting in coordinated units under direct
-        psychic guidance. They rely on speed and ambush tactics to capture prey.
-        While individually intelligent, their will is fully bound to Malvada,
-        acting only in service to her commands. When not hunting, they patrol
-        hive perimeters and scout for new resources or threats.
-      </p>
-    </Body>
+    <p>
+      Hunter vads resemble large, chitinous canines with six limbs—four adapted
+      for running and two for grasping or pouncing. Their exoskeleton is black
+      with orange streams. Their elongated heads bear compound eyes and sharp
+      mandibles capable of rending flesh. A row of sensory spines runs along
+      their back, vibrating faintly when receiving psychic commands.
+    </p>
+
+    <h2>Behaviour</h2>
+
+    <p>
+      Hunter vads are pack-oriented, hunting in coordinated units under direct
+      psychic guidance. They rely on speed and ambush tactics to capture prey.
+      While individually intelligent, their will is fully bound to Malvada,
+      acting only in service to her commands. When not hunting, they patrol hive
+      perimeters and scout for new resources or threats.
+    </p>
   </>
 );
 

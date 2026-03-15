@@ -18,8 +18,8 @@ export const Human: Species = {
     [Locomotion.Fly]: SpeedRating.None,
   },
   senses: {
-    primary: [SenseType.Sight, SenseType.Hearing],
-    secondary: [SenseType.Smell],
+    keen: [SenseType.Sight, SenseType.Hearing],
+    poor: [SenseType.Smell],
   },
   armour: {
     [DamageType.Fire]: 0,

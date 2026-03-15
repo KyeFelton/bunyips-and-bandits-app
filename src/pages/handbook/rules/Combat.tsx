@@ -1,372 +1,221 @@
-import { Body, H3, WikiPage } from "../../../components/WikiPage";
+import { Callout, WikiPage } from "../../../components/WikiPage";
 import dropbearImage from "../../../images/handbook/dropbear.png";
+import { getHandbookPageRoute } from "../../../routes";
+import { Link } from "react-router-dom";
 
 const main = (
   <>
-    <Body>
-      <p>
-        Sometimes, words fail. And when they do, there's always combat. Combat
-        can be initiated by anyone, including the GM. When a battle takes place,
-        combat rules are applied.
-      </p>
-      <div className="md:w-[35%] md:float-right px-6 bg-card">
-        <img
-          src={dropbearImage}
-          alt={"dropbear fighter"}
-          className="object-contain rounded-lg mt-0"
-        />
-      </div>
-      <p>
-        Combat follows a structured turn-based system, but it's intended to be
-        quick and flexible, encouraging creativity. The party that initiated the
-        combat acts first, and then the opposing party goes next. Player turns
-        go clockwise around the table, while the GM controls enemies on their
-        turn. Each round represents about 5 seconds in the game world.
-      </p>
-    </Body>
-    <H3>Actions</H3>
-    <Body>
-      <p>
-        On their turn, each character may perform as many actions as specified
-        by the action count on their character sheet. Most characters can
-        perform two actions per turn, but some may be able to perform more or
-        less based on their traits and items. Actions may incur damage, inflict
-        statuses, or provide buffs.
-      </p>
-      <p>
-        Every character has a list of actions that they have mastered, and can
-        unlock more as they develop. You can perform the actions you've learnt
-        on your turn, or you can get creative and try something different. For
-        example, you could try burning a bridge before your opponent crosses, or
-        lasso a charging creature with your rope. In that case, describe your
-        action to the GM and make a skill check to see if you succeed on it. GM
-        will decide the outcome of your action based on your description and
-        skill check result.
-      </p>
-      <p>
-        Some actions cost stamina, while others don't. Be mindful—if you burn
-        through all your stamina, you might find yourself too exhausted to fight
-        when it really matters.
-      </p>
-      <h4 className="font-bold mt-4 mb-2">Basic Actions</h4>
-      <p>
-        All characters can perform these basic actions without needing to unlock
-        them:
-      </p>
-      <ul className="list-disc ml-6 mb-4">
-        <li>
-          <b>Brawl</b> - You strike your opponent with your fists to deal 1
-          force damage.
-        </li>
-        <li>
-          <b>Dash</b> - Move at one speed tier higher than normal. Slow
-          creatures reach close distance, moderate reach near, and fast reach
-          far. Costs 1 stamina.
-        </li>
-      </ul>
-    </Body>
-    <H3>Movement</H3>
-    <Body>
-      <p>
-        Moving is a basic action available to all characters. The distance you
-        can reach in one turn is determined by your speed rating for the
-        locomotion type you're using (walk, swim, climb, or fly). To move
-        faster, use the Dash action, which costs 1 stamina and moves you one
-        speed tier higher (see Speed section).
-      </p>
-      <p>
-        Some terrain slows movement (mud, dense bush), while others make it
-        risky (unstable bridges, slippery surfaces). The GM will let you know if
-        the ground under your feet is about to betray you.
-      </p>
-    </Body>
-    <H3>Range and area of effect</H3>
-    <Body>
-      <p>
-        An action may specify a range, which determines how far the target point
-        can be located. To target a location or creature, it must be within your
-        perception:
-      </p>
-      <table className="md:mx-4">
-        <thead>
-          <tr>
-            <th>Range</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <b>Close</b>
-            </td>
-            <td>Within 2m</td>
-          </tr>
-          <tr>
-            <td>
-              <b>Near</b>
-            </td>
-            <td>Within 10m</td>
-          </tr>
-          <tr>
-            <td>
-              <b>Far</b>
-            </td>
-            <td>Within 50m</td>
-          </tr>
-        </tbody>
-      </table>
-      <p>
-        Some actions can also hit multiple targets. An action's area of effect
-        determines the maximum size of the area that targets can be affected by
-        the action:
-      </p>
-      <table className="md:mx-4">
-        <thead>
-          <tr>
-            <th>Area Type</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <b>Close area</b>
-            </td>
-            <td>Affects a close-sized area from the target point</td>
-          </tr>
-          <tr>
-            <td>
-              <b>Near area</b>
-            </td>
-            <td>Affects a near-sized area from the target point</td>
-          </tr>
-          <tr>
-            <td>
-              <b>Far area</b>
-            </td>
-            <td>Affects a far-sized area from the target point</td>
-          </tr>
-        </tbody>
-      </table>
-      <p>
-        When using an action with an area of effect, the caster chooses the
-        shape of the affected area (such as a circle, cone, line, or square).
-        The shape must be regular and enclosed. All creatures within that area
-        are affected, including both allies and foes. The size of the shaped
-        area cannot exceed the maximum size specified by the action's area of
-        effect.
-      </p>
-      <p>
-        Obstructions can block attacks—if a wall, tree, or sturdy shield is in
-        the way, the GM may rule that your action doesn't hit as expected.
-      </p>
-      <p>
-        Hidden enemies can't be directly targeted, but they can be hit by area
-        of effects if you're lucky enough to guess their location.
-      </p>
-    </Body>
-    <H3>Hitting a target</H3>
-    <Body>
-      <p>
-        Only players roll dice. Every NPC has a static difficulty class for each
-        stat in their stat block. When you attack an NPC, roll your attack skill
-        and beat their defence class. When an NPC attacks you, roll to evade and
-        beat their attack class.
-      </p>
-      <p>There are three ways to evade an incoming attack:</p>
-      <ul className="list-disc ml-4">
-        <li>
-          <b>Counter</b>: Roll the same skill as the attacker used.
-        </li>
-        <li>
-          <b>Dodge</b>: Roll an agility check. Only works against physical
-          attacks that don't cover a large area.
-        </li>
-        <li>
-          <b>Resist</b>: Roll a willpower check. Only works against psychic
-          attacks.
-        </li>
-      </ul>
-      <p>
-        If you roll above the opposing class, the attack or evasion succeeds.
-        Equal or lower, it fails.
-      </p>
-      <p>
-        Every character has an evasions count on their character sheet.
-        Characters start with one evasion per round. You can forgo one of your
-        actions on your turn to gain an extra evasion for that round. Some
-        traits and items can also increase your evasion count.
-      </p>
-    </Body>
-    <H3>Statuses</H3>
-    <Body>
-      <p>
-        Some actions inflict statuses upon their foes. All statuses, except for
-        burning, last only one round.
-      </p>
-      <table className="md:mx-4 mb-8">
-        <thead>
-          <tr>
-            <th>Status</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <b>Stunned</b>
-            </td>
-            <td>
-              Loses an evasion until next turn. If no evasions, loses an action.
-              Can be stacked.
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <b>Empowered</b>
-            </td>
-            <td>Gains an evasion until next turn. Can be stacked.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>Protected</b>
-            </td>
-            <td>
-              Armour increases by specified amount/type until next turn. Can be
-              stacked.
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <b>Restrained</b>
-            </td>
-            <td>Cannot dodge attacks or move until end of next turn.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>Burning</b>
-            </td>
-            <td>
-              Takes 1d8 fire damage at start of turn. Can use action to douse
-              flame.
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <b>Invisible</b>
-            </td>
-            <td>
-              Cannot be detected through sight or infrared sight until next
-              turn.
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <b>Silent</b>
-            </td>
-            <td>
-              Cannot be detected through hearing or tremor hearing until next
-              turn.
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <b>Odourless</b>
-            </td>
-            <td>Cannot be detected through smell until next turn.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>Composed</b>
-            </td>
-            <td>Cannot be detected by psychic sense until end of next turn.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>Blinded</b>
-            </td>
-            <td>
-              Cannot see visible or infrared light until end of next turn.
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <b>Deafened</b>
-            </td>
-            <td>
-              Cannot hear sounds in air or tremors until end of next turn.
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <b>Anosmic</b>
-            </td>
-            <td>Cannot smell until end of next turn.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>Blocked</b>
-            </td>
-            <td>Cannot psychic sense until end of next turn.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>Disoriented</b>
-            </td>
-            <td>Blind, deaf, anosmic and blocked.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>Deluded</b>
-            </td>
-            <td>Caster controls perception to alter reality for target.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>Hypnotised</b>
-            </td>
-            <td>
-              Target cannot harm caster, must obey commands. Removed if attacked
-              by opposing side.
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <b>Frightened</b>
-            </td>
-            <td>Immobilised with fear, turn is skipped.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>Madness</b>
-            </td>
-            <td>Can only attack the closest creature.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>Provoked</b>
-            </td>
-            <td>Must use at least one action to attempt to harm the caster.</td>
-          </tr>
-        </tbody>
-      </table>
-    </Body>
-    <H3>Resolving Combat</H3>
-    <Body>
-      <p>
-        When a character loses all of their physical or mental health, they are
-        out of the combat. Once all characters in the same party have been
-        defeated or surrender, they lose the combat. The victorious party
-        chooses whether to kill, capture or leave the losers in their place. If
-        the players lose the combat, it's up to the GM to decide their fate.
-      </p>
-      <p>
-        At any point during their turn, a character can attempt to flee. It is
-        up to the GM discretion to determine whether a character has
-        successfully fled the combat. If successful, then the character is out
-        of the combat and their fate isn't determined by their opponents.
-      </p>
-    </Body>
+    <p>When a fight begins, combat rules apply.</p>
+    <div className="md:w-[35%] md:float-right px-6 bg-card">
+      <img
+        src={dropbearImage}
+        alt={"dropbear fighter"}
+        className="object-contain rounded-lg mt-0"
+      />
+    </div>
+    <p>
+      Combat follows a structured turn-based system, intended to be quick and
+      flexible. Anyone can initiate combat. The party that initiated the battle
+      acts first, and then the opposing party goes next. Player turns go
+      clockwise around the table, while the GM controls enemies on their turn.
+      Each round represents about five seconds in the game world.
+    </p>
+    <h2>Actions</h2>
+    <p>
+      You can do up to three actions on your turn. An action is any quick thing
+      your character can realistically do. It may be running to your enemy,
+      throwing an axe, or dodging an attack.
+    </p>
+    <p>
+      Some actions have a stamina cost. Performing these action depletes your
+      stamina. If the stamina cost is higher than your remaining stamina, you
+      cannot do it.
+    </p>
+    <p>
+      Every character has a list of standard actions they can do based on their
+      abilities and skills. The actions can be basic, magic or item-based.
+    </p>
+    <ul className="list-disc ml-6 mb-4">
+      <li>
+        <b>Basic</b>: Actions common to all humanoid creatures.
+        <ul>
+          <li>
+            <b>Brawl</b>: You strike your opponent with your fists or feet to
+            deal 1 force damage.
+          </li>
+          <li>
+            <b>Aim</b>: You focus on hitting your next target. You have
+            advantage on your next attack.
+          </li>
+          <li>
+            <b>Assess</b>: You study a target within sight. The GM reveals one
+            piece of useful information about it, such as its DR, an armour
+            type, or a special trait.
+          </li>
+          <li>
+            <b>Move</b>: You move to a new position. If your speed is medium,
+            move a close distance. If fast, move near.
+          </li>
+          <li>
+            <b>Dash</b>: You move further than a standard Move action. Slow
+            creatures move a close distance, moderate moves near, and fast moves
+            far. Costs 1 stamina.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b>Magic</b>: Actions unlocked by levelling up{" "}
+        <Link to={getHandbookPageRoute("rules", "characters")}>
+          magic skills
+        </Link>
+        .
+      </li>
+      <li>
+        <b>Item</b>: Actions unlocked by eqipping items.
+      </li>
+    </ul>
+    <p>
+      These standard actions are a guide on what you can do, what the
+      requirements and what the outcome may be. You don't have to do an action
+      from the list. Instead, you can describe an action and your intent to the
+      GM. You could try to trip, grapple or disarm an enemy, mount a creature,
+      or shout an insult to provoke your foe. Whatever you do, the GM will
+      decide whether a check is required, and the outcome based on the situation
+      and check result.
+    </p>
+    <h2>Duration</h2>
+    <p>
+      Duration defines how long it takes to do an action and how long its effect
+      lasts. If no duration is specified, the action is instant. An action with
+      a duration of one round lasts from when you begin the action until the
+      start of your next turn in combat.
+    </p>
+    <p>
+      To maintain the action, you must focus. While focusing, you can't perform
+      any other actions. If you do, or if you lose all your health, you lose
+      focus and the effect ends immediately.
+    </p>
+    <h2>Range and Area of Effect</h2>
+    <p>
+      An action may specify a range and an area of effect. Range determines how
+      far the target point can be located from you. Area of effect determines
+      how big of an area the action can impact. You choose the size (not
+      exceeding the maximum) and shape (circle, cone or line) of the affected
+      area. All things within the area are affected, friend or foe. If range or
+      area of effect is not stated, then you can only target a single thing that
+      is within reach to you.
+    </p>
+    <p></p>
+    <p>
+      Whatever your intended target is, you must be able to detect it with at
+      least one of your keen senses. If not, it is hidden from you and cannot be
+      targeted directly. You can however guess its location and hope that you
+      land the hit. There must also be no obstructions blocking you from the
+      intended target in order to hit.
+    </p>
+    <h2>Movement</h2>
+    <p>
+      You can move by doing a Move and Dash action. The amount of distance
+      traversed is dependent on your speed and action chosen.
+    </p>
+    <p>
+      Some terrain may hinder your movement (mud, dense bush). Other
+      environments may include hazards (unstable bridges, slippery surfaces)
+      which require a check. The GM should decide and disclose when these
+      conditions apply based on the scenario.
+    </p>
+    <h2>Hitting Your Target</h2>
+    <p>
+      Most actions are linked to a skill. To use that action, you do a check for
+      that skill. If you target an opponet and they attempt to evade, you must
+      beat the opponent's{" "}
+      <Link to={getHandbookPageRoute("rules", "checks")}>DR</Link> to land the
+      hit. If not, any roll above a one succeeds.
+    </p>
+    <p>
+      Rolling more than half your maximum die value is called a strong hit.
+      Strong hits deal double damage.
+    </p>
+    <Callout variant="tip">
+      You attempt to Brawl a bandit with a Moderate DR. Your Strength is level
+      5, so you roll a d8. If you roll five or above, you succeed a strong hit
+      and deal 2 force damage instead of 1. A roll of 4 meets the difficulty and
+      hits normally for 1 force damage. A roll of 3 or less misses.
+    </Callout>
+    <h2>Reactions</h2>
+    <p>
+      A reaction is a quick response to something that directly affects you.
+      Like any action, describe what you do and the GM determines whether a
+      check applies.
+    </p>
+    <p>
+      Most often, you use a reaction to evade an attack. Roll the relevant skill
+      and meet or beat the attacker's DR to avoid the attack and its effects.
+      There are three standard evasions.
+    </p>
+    <ul className="list-disc ml-4">
+      <li>
+        <b>Counter</b>: Roll the same skill the attacker used.
+      </li>
+      <li>
+        <b>Dodge</b>: Roll an Agility check. Only works against physical attacks
+        that don't cover a large area.
+      </li>
+      <li>
+        <b>Resist</b>: Roll a Willpower check. Only works against psychic
+        attacks.
+      </li>
+    </ul>
+    <p>You can also Counter an attack targeting an adjacent ally.</p>
+    <p>
+      Each reaction costs you one action on your next turn. If all your actions
+      are spent on reactions, your next turn is skipped. You can't perform more
+      reactions than you have actions.
+    </p>
+    <h2>Fire</h2>
+    <p>
+      Flammable objects and creatures can catch fire. Whilst on fire, you take
+      one fire damage at the start of your turn. You can spend an action to
+      douse the flames and remove the infliction.
+    </p>
+    <p>
+      Fire spreads. If a burning creature moves through flammable terrain or
+      makes contact with a flammable object, the GM may rule that the fire
+      spreads.
+    </p>
+    <h2>Stun</h2>
+    <p>
+      Some actions may stun your opponents. A stunned creature cannot react to
+      the next action that targets them. The stun clears after that action
+      resolves, whether or not it hits.
+    </p>
+    <h2>Morale</h2>
+    <p>
+      Most foes won't fight to the death. When an opponent drops to half their
+      health, sees their leader fall, or finds themselves clearly outnumbered,
+      they look for a way out. If there's a path to flee, they'll take it. A
+      person who is surrounded with no escape will throw down their weapons and
+      surrender. A beast will bare its teeth and hold its ground, but won't
+      press the attack unless provoked.
+    </p>
+    <p>
+      The GM decides which opponents have wavering morale. It works best for
+      common thugs and wild animals, whereas an enemy boss devoted to their
+      cause or a creature guarding its young tend not to back out of the fight.
+    </p>
+    <h2>Resolving Combat</h2>
+    <p>
+      When a character loses all of their physical or mental health, they are
+      out of the combat. Once all characters in the same party have either been
+      defeated, fled or surrendered, they lose the combat. The victorious party
+      can decide the fate of their opponents that remain. They may kill, capture
+      or leave the losers in their place. If you lose the combat, then the GM
+      decides your fate.
+    </p>
+    <p>
+      You may attempt to flee the combat. It is up to the GM to determine the
+      requirements to successfully flee.
+    </p>
   </>
 );
 

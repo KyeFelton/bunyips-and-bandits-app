@@ -45,7 +45,7 @@ export function MobileMenu() {
       </SheetTrigger>
       <SheetContent
         side="left"
-        className="bg-surface text-primary-foreground border-accent-subtle/20 overflow-y-auto"
+        className="bg-foreground text-primary-foreground border-accent-subtle/20 overflow-y-auto"
       >
         <SheetHeader>
           <Logo className="h-10" />

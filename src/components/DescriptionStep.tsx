@@ -12,22 +12,134 @@ import {
 } from "./ui/select";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
-import { X, Image, Plus } from "lucide-react";
+import { Image, Plus, Shuffle, X } from "lucide-react";
 import {
-  nameAtom,
-  genderAtom,
   ageAtom,
-  biographyAtom,
-  personalityAtom,
-  languagesAtom,
-  imageAtom,
-  speciesAtom,
   ancestryAtom,
+  backstoryAtom,
+  genderAtom,
+  imageAtom,
+  languagesAtom,
+  nameAtom,
+  personalityAtom,
+  speciesAtom,
 } from "./../state/character";
 import { getSpeciesImage } from "./../utils/speciesImages";
 
 const genders = ["Male", "Female", "Non-binary"];
 const CUSTOM_GENDER_OPTION = "Let me type...";
+
+const personalities = [
+  "Quiet and watchful",
+  "Loud and boisterous",
+  "Warm and welcoming",
+  "Cold and calculating",
+  "Endlessly curious",
+  "Deeply suspicious",
+  "Relentlessly optimistic",
+  "Dry and deadpan",
+  "Impulsive and excitable",
+  "Calm under pressure",
+  "Fiercely loyal",
+  "Charmingly unreliable",
+  "Blunt to a fault",
+  "Gentle and patient",
+  "Easily distracted",
+  "Intensely competitive",
+  "Laid-back and unbothered",
+  "Anxious but capable",
+  "Secretive and guarded",
+  "Infectiously enthusiastic",
+];
+
+const virtues = [
+  "Brave",
+  "Honest",
+  "Loyal",
+  "Compassionate",
+  "Patient",
+  "Generous",
+  "Wise",
+  "Resourceful",
+  "Humble",
+  "Resilient",
+  "Fair-minded",
+  "Protective",
+  "Disciplined",
+  "Adaptable",
+  "Dependable",
+  "Empathetic",
+  "Creative",
+  "Courageous",
+  "Tenacious",
+  "Selfless",
+];
+
+const flaws = [
+  "Reckless",
+  "Stubborn",
+  "Jealous",
+  "Cowardly",
+  "Dishonest",
+  "Greedy",
+  "Hot-tempered",
+  "Holds grudges",
+  "Overconfident",
+  "Impulsive",
+  "Self-destructive",
+  "Manipulative",
+  "Avoids conflict",
+  "Chronically unlucky",
+  "Can't ask for help",
+  "Easily distracted",
+  "Overly suspicious",
+  "Cruel streak",
+  "Compulsive liar",
+  "Drinks too much",
+];
+
+const motivations = [
+  "Revenge",
+  "Redemption",
+  "Wealth",
+  "Fame",
+  "Love",
+  "Justice",
+  "Survival",
+  "Belonging",
+  "Knowledge",
+  "Power",
+  "Freedom",
+  "Protecting family",
+  "Keeping a promise",
+  "Proving themselves",
+  "Finding the truth",
+  "Atoning for the past",
+  "Adventure",
+  "Duty",
+  "Legacy",
+  "Pure stubbornness",
+];
+
+const pickRandom = <T,>(arr: T[]): T =>
+  arr[Math.floor(Math.random() * arr.length)];
+
+const composePersonality = (
+  personality: string,
+  virtue: string,
+  flaw: string,
+  motivation: string,
+): string =>
+  [
+    personality && `${personality}`,
+    virtue && `${virtue}`,
+    flaw && `${flaw}`,
+    motivation && `Motivated by ${motivation.toLocaleLowerCase()}.`,
+  ]
+    .filter(Boolean)
+    .join(". ");
+
+type PersonalityMode = "write" | "pick";
 
 export const DescriptionStep = () => {
   const [name, setName] = useAtom(nameAtom);
@@ -35,7 +147,7 @@ export const DescriptionStep = () => {
   const ancestry = useAtomValue(ancestryAtom);
   const [gender, setGender] = useAtom(genderAtom);
   const [age, setAge] = useAtom(ageAtom);
-  const [biography, setBiography] = useAtom(biographyAtom);
+  const [backstory, setBackstory] = useAtom(backstoryAtom);
   const [personality, setPersonality] = useAtom(personalityAtom);
   const [selectedLanguages, setLanguages] = useAtom(languagesAtom);
   const [image, setImage] = useAtom(imageAtom);
@@ -43,6 +155,13 @@ export const DescriptionStep = () => {
   const [isCustomGender, setIsCustomGender] = useState(false);
   const [customGenderValue, setCustomGenderValue] = useState("");
   const [customLanguageInput, setCustomLanguageInput] = useState("");
+
+  const [personalityMode, setPersonalityMode] =
+    useState<PersonalityMode>("write");
+  const [pickedPersonality, setPickedPersonality] = useState("");
+  const [pickedVirtue, setPickedVirtue] = useState("");
+  const [pickedFlaw, setPickedFlaw] = useState("");
+  const [pickedMotivation, setPickedMotivation] = useState("");
 
   // Initialize custom gender state if character has a custom gender value
   useEffect(() => {
@@ -70,7 +189,6 @@ export const DescriptionStep = () => {
 
   const handleCustomGenderChange = (value: string) => {
     setCustomGenderValue(value);
-    // Only update the main gender atom if there's a value, otherwise keep "Let me type..."
     if (value.trim()) {
       setGender(value);
     }
@@ -97,6 +215,53 @@ export const DescriptionStep = () => {
         setImage(image);
       };
       reader.readAsDataURL(file);
+    }
+  };
+
+  const handlePickChange = (
+    field: "personality" | "virtue" | "flaw" | "motivation",
+    value: string,
+  ) => {
+    const next = {
+      personality: pickedPersonality,
+      virtue: pickedVirtue,
+      flaw: pickedFlaw,
+      motivation: pickedMotivation,
+      [field]: value,
+    };
+    if (field === "personality") setPickedPersonality(value);
+    if (field === "virtue") setPickedVirtue(value);
+    if (field === "flaw") setPickedFlaw(value);
+    if (field === "motivation") setPickedMotivation(value);
+    setPersonality(
+      composePersonality(
+        next.personality,
+        next.virtue,
+        next.flaw,
+        next.motivation,
+      ),
+    );
+  };
+
+  const handleRandomise = () => {
+    const p = pickRandom(personalities);
+    const v = pickRandom(virtues);
+    const f = pickRandom(flaws);
+    const m = pickRandom(motivations);
+    setPickedPersonality(p);
+    setPickedVirtue(v);
+    setPickedFlaw(f);
+    setPickedMotivation(m);
+    setPersonality(composePersonality(p, v, f, m));
+  };
+
+  const handleModeChange = (mode: PersonalityMode) => {
+    setPersonalityMode(mode);
+    if (mode === "pick") {
+      setPickedPersonality("");
+      setPickedVirtue("");
+      setPickedFlaw("");
+      setPickedMotivation("");
     }
   };
 
@@ -237,28 +402,163 @@ export const DescriptionStep = () => {
           </div>
         </div>
 
-        {/* Right column: Biography and personality */}
-        <div className="space-y-4">
+        {/* Right column: Backstory and personality */}
+        <div className="space-y-4 md:space-y-8">
           <div className="space-y-2">
-            <Label htmlFor="biography">Biography</Label>
+            <Label htmlFor="backstory">Backstory</Label>
             <Textarea
-              id="biography"
-              value={biography}
-              onChange={(e) => setBiography(e.target.value)}
+              id="backstory"
+              value={backstory}
+              onChange={(e) => setBackstory(e.target.value)}
               placeholder="Describe your character's backstory and history..."
               className="min-h-[140px] lg:min-h-[180px]"
             />
           </div>
 
+          {/* Personality & Motivation */}
           <div className="space-y-2">
-            <Label htmlFor="personality">Personality & Motivation</Label>
-            <Textarea
-              id="personality"
-              value={personality}
-              onChange={(e) => setPersonality(e.target.value)}
-              placeholder="Describe your character's personality and motivations..."
-              className="min-h-[140px] lg:min-h-[180px]"
-            />
+            <div className="flex items-center justify-between gap-2">
+              <Label>Personality & Motive</Label>
+              <div className="flex rounded-md border border-input overflow-hidden shrink-0">
+                <button
+                  type="button"
+                  onClick={() => handleModeChange("pick")}
+                  className={`px-3 py-1 text-sm transition-colors ${
+                    personalityMode === "pick"
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-card text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  Select
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleModeChange("write")}
+                  className={`px-3 py-1 text-sm transition-colors ${
+                    personalityMode === "write"
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-card text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  Custom
+                </button>
+              </div>
+            </div>
+
+            {personalityMode === "write" ? (
+              <Textarea
+                id="personality"
+                value={personality}
+                onChange={(e) => setPersonality(e.target.value)}
+                placeholder="Describe your character's personality and motivations..."
+                className="min-h-[140px] lg:min-h-[180px]"
+              />
+            ) : (
+              <div className="space-y-3">
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-1">
+                    <Label className="text-xs text-muted-foreground">
+                      Personality
+                    </Label>
+                    <Select
+                      value={pickedPersonality}
+                      onValueChange={(v) => handlePickChange("personality", v)}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {personalities.map((p) => (
+                          <SelectItem key={p} value={p}>
+                            {p}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-1">
+                    <Label className="text-xs text-muted-foreground">
+                      Virtue
+                    </Label>
+                    <Select
+                      value={pickedVirtue}
+                      onValueChange={(v) => handlePickChange("virtue", v)}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {virtues.map((v) => (
+                          <SelectItem key={v} value={v}>
+                            {v}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-1">
+                    <Label className="text-xs text-muted-foreground">
+                      Flaw
+                    </Label>
+                    <Select
+                      value={pickedFlaw}
+                      onValueChange={(v) => handlePickChange("flaw", v)}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {flaws.map((f) => (
+                          <SelectItem key={f} value={f}>
+                            {f}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-1">
+                    <Label className="text-xs text-muted-foreground">
+                      Motive
+                    </Label>
+                    <Select
+                      value={pickedMotivation}
+                      onValueChange={(v) => handlePickChange("motivation", v)}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {motivations.map((m) => (
+                          <SelectItem key={m} value={m}>
+                            {m}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={handleRandomise}
+                  className="gap-2"
+                >
+                  <Shuffle className="h-4 w-4" />
+                  Randomise
+                </Button>
+
+                {personality && (
+                  <p className="text-sm text-muted-foreground italic border-l-2 border-border pl-3">
+                    {personality}
+                  </p>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>

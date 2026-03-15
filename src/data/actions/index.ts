@@ -68,6 +68,8 @@ import { QuickDraw } from "./QuickDraw";
 import { Amplify } from "./Amplify";
 import { DistantNoise } from "./DistantNoise";
 import { Mimic } from "./Mimic";
+import { Commune } from "./Commune";
+import { SpiritLink } from "./SpiritLink";
 
 export {
   Meditate,
@@ -140,4 +142,6 @@ export {
   Amplify,
   DistantNoise,
   Mimic,
+  Commune,
+  SpiritLink,
 };

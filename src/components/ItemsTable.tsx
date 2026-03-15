@@ -78,7 +78,7 @@ export const ItemsTable = () => {
 
   const totalWeight = Object.values(items).reduce(
     (sum, item) => sum + item.weight * item.quantity,
-    0
+    0,
   );
   const weightLimit = getWeightLimit(skillLevels[SkillType.Strength] || 1);
 
@@ -113,7 +113,7 @@ export const ItemsTable = () => {
         }
         if (staminaBonus) {
           setCurrentStamina((prev) =>
-            Math.min(prev + staminaBonus, stamina.max)
+            Math.min(prev + staminaBonus, stamina.max),
           );
         }
 
@@ -123,12 +123,12 @@ export const ItemsTable = () => {
           if (conditionData) {
             // Check if character already has this condition
             const existingConditionCount = conditions.filter(
-              (c) => c.name === condition
+              (c) => c.name === condition,
             ).length;
 
             // Apply damage if consuming repeatedly (already has the condition)
             if (existingConditionCount > 0) {
-              setCurrentPhysique((prev) => Math.max(0, prev - 2));
+              setCurrentBody((prev) => Math.max(0, prev - 2));
             }
 
             setConditions((prev) => {
@@ -319,12 +319,12 @@ export const ItemsTable = () => {
                       // Cap at 20 for practical reasons
                       const cappedMaxQuantity = Math.min(
                         Math.max(1, maxQuantity),
-                        20
+                        20,
                       );
 
                       return Array.from(
                         { length: cappedMaxQuantity },
-                        (_, i) => i + 1
+                        (_, i) => i + 1,
                       ).map((qty) => (
                         <SelectItem key={qty} value={qty.toString()}>
                           {qty}
@@ -347,8 +347,8 @@ export const ItemsTable = () => {
                     {item.singleUse
                       ? "Use"
                       : item.equipped
-                      ? "Unequip"
-                      : "Equip"}
+                        ? "Unequip"
+                        : "Equip"}
                   </Button>
                   <Button
                     variant="ghost"

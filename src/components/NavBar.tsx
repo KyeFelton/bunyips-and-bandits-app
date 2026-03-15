@@ -21,7 +21,7 @@ export function NavBar({ className }: NavBarProps) {
   return (
     <div
       className={cn(
-        "fixed z-50 bg-surface shadow-sm w-full top-0 left-0 right-0",
+        "fixed z-50 bg-foreground shadow-sm w-full top-0 left-0 right-0",
         className,
       )}
     >

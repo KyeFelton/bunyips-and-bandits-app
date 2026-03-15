@@ -9,8 +9,10 @@ import {
   Sanctuary,
   Resurrect,
   GraspOfDeath,
+  Commune,
+  SpiritLink,
 } from "../actions";
-import { ParanormalSense, Medium, SuperiorMedium } from "../traits";
+import { ParanormalSense } from "../traits";
 
 export const SpiritProgression: SkillProgression = {
   skill: SkillType.Spirit,
@@ -22,8 +24,8 @@ export const SpiritProgression: SkillProgression = {
     },
     {
       level: 2,
-      actions: [],
-      traits: [Medium],
+      actions: [Commune],
+      traits: [],
     },
     {
       level: 3,
@@ -42,8 +44,8 @@ export const SpiritProgression: SkillProgression = {
     },
     {
       level: 6,
-      actions: [],
-      traits: [SuperiorMedium],
+      actions: [SpiritLink],
+      traits: [],
     },
     {
       level: 7,

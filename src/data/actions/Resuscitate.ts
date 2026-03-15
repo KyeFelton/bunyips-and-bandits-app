@@ -11,4 +11,5 @@ export const Resuscitate: Action = {
   range: Range.Close,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 4,
+  duration: "1 round",
 };

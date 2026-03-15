@@ -6,7 +6,7 @@ import { Action } from "../../models/actions";
 export const SpectralHands: Action = {
   name: "Spectral hands",
   effect:
-    "Shadowy hands emerge from the ground and grapple your target. They are now restrained.",
+    "Shadowy hands emerge from the ground and grapple your target. They are held in place and cannot move or dodge for one round.",
   skillType: SkillType.Spirit,
   range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,

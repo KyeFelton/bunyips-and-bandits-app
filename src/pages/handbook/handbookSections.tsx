@@ -1,17 +1,18 @@
 import { Characters } from "./rules/Characters";
 import { Combat } from "./rules/Combat";
-import { CoreRules } from "./rules/CoreRules";
+import { TheBasics } from "./rules/TheBasics";
 import { Homebrew } from "./rules/Homebrew";
 import { Introduction } from "./rules/Introduction";
+import { RunningTheGame } from "./rules/RunningTheGame";
 import { Languages } from "./setting/Languages";
 import { Magic } from "./setting/Magic";
 import { Religion } from "./setting/Religion";
-import { SkillChecks } from "./rules/SkillChecks";
+import { Checks } from "./rules/Checks";
 import { WikiContent } from "../../models/wikiContent";
 import Continents from "./setting/continents";
 import Cultures from "./setting/cultures";
 import Fauna from "./setting/fauna";
-import Folk from "./setting/folk";
+import Kin from "./rules/kin";
 
 export type HandbookPage = {
   kind: "page";
@@ -48,9 +49,9 @@ export const HANDBOOK_SECTIONS: HandbookSection[] = [
       },
       {
         kind: "page",
-        id: "core-rules",
-        label: "Core Rules",
-        component: CoreRules,
+        id: "the-basics",
+        label: "The Basics",
+        component: TheBasics,
       },
       {
         kind: "page",
@@ -58,20 +59,40 @@ export const HANDBOOK_SECTIONS: HandbookSection[] = [
         label: "Characters",
         component: Characters,
       },
+      { kind: "subsection", id: "kin", label: "Kin", pages: Kin },
       {
         kind: "page",
-        id: "skill-checks",
-        label: "Skill Checks",
-        component: SkillChecks,
+        id: "checks",
+        label: "Checks",
+        component: Checks,
       },
       { kind: "page", id: "combat", label: "Combat", component: Combat },
-      { kind: "page", id: "homebrew", label: "Homebrew", component: Homebrew },
+      // {
+      //   kind: "page",
+      //   id: "running-the-game",
+      //   label: "Running the Game",
+      //   component: RunningTheGame,
+      // },
+      // { kind: "page", id: "homebrew", label: "Homebrew", component: Homebrew },
     ],
   },
   {
     id: "setting",
     label: "Setting",
     items: [
+      // {
+      //   kind: "subsection",
+      //   id: "continents",
+      //   label: "Continents",
+      //   pages: Continents,
+      // },
+      // {
+      //   kind: "subsection",
+      //   id: "cultures",
+      //   label: "Cultures",
+      //   pages: Cultures,
+      // },
+      // { kind: "subsection", id: "fauna", label: "Fauna", pages: Fauna },
       {
         kind: "page",
         id: "languages",
@@ -80,10 +101,6 @@ export const HANDBOOK_SECTIONS: HandbookSection[] = [
       },
       { kind: "page", id: "magic", label: "Magic", component: Magic },
       { kind: "page", id: "religion", label: "Religions", component: Religion },
-      { kind: "subsection", id: "continents", label: "Continents", pages: Continents },
-      { kind: "subsection", id: "cultures", label: "Cultures", pages: Cultures },
-      { kind: "subsection", id: "fauna", label: "Fauna", pages: Fauna },
-      { kind: "subsection", id: "folk", label: "Folk", pages: Folk },
     ],
   },
 ];

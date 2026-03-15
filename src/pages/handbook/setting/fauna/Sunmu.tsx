@@ -1,7 +1,6 @@
 import { WikiContent } from "../../../../models/wikiContent";
 import { WikiId } from "../../../../enums/WikiId";
 import { WikiCategory } from "../../../../enums/WikiCategory";
-import { H2, Body } from "../../../../components/WikiPage";
 
 const summary = (
   <p>
@@ -15,62 +14,57 @@ const summary = (
 
 const content = (
   <>
-    <H2>Description</H2>
-    <Body>
-      <p>
-        Sunmus stand between 1.5 and 2 metres tall, with long legs adapted for
-        endurance running across open terrain. Their bodies are covered in
-        coarse, grey-brown feathers that blend with the arid environment, while
-        their necks and heads are lightly feathered. A dense mane of long
-        feathers runs around the neck. When relaxed, the feathers lie flat, but
-        when threatened, they fan outward in a striking display. Sunmus can
-        release a sudden flash of intense light from specialized reflective
-        plumage within the mane, temporarily stunning predators.
-      </p>
-    </Body>
+    <h2>Description</h2>
 
-    <H2>Habit</H2>
-    <Body>
-      <p>
-        Sunmus inhabit open plains, semi-arid deserts, and grasslands across
-        Downunda. They favour regions with scattered scrub or low trees for
-        shade and nesting. Wild groups are nomadic, roaming in search of water
-        and vegetation, while domesticated populations live near Dharrigal
-        settlements and waterholes.
-      </p>
-    </Body>
+    <p>
+      Sunmus stand between 1.5 and 2 metres tall, with long legs adapted for
+      endurance running across open terrain. Their bodies are covered in coarse,
+      grey-brown feathers that blend with the arid environment, while their
+      necks and heads are lightly feathered. A dense mane of long feathers runs
+      around the neck. When relaxed, the feathers lie flat, but when threatened,
+      they fan outward in a striking display. Sunmus can release a sudden flash
+      of intense light from specialized reflective plumage within the mane,
+      temporarily stunning predators.
+    </p>
 
-    <H2>Diet</H2>
-    <Body>
-      <p>
-        Omnivorous in diet, sunmus feed mainly on grasses, seeds, fruits, and
-        small insects. They use their strong legs and claws to dig for roots and
-        tubers during dry periods. Domesticated sunmus are often fed cultivated
-        grains and scraps.
-      </p>
-    </Body>
+    <h2>Habit</h2>
 
-    <H2>Behaviour</H2>
-    <Body>
-      <p>
-        Sunmus are generally peaceful and social, forming loose flocks of up to
-        a dozen individuals. They are diurnal, relying on their keen eyesight to
-        spot threats. When threatened, they raise their feather manes and emit
-        flashes of light before fleeing at high speed. Breeding pairs construct
-        ground nests and share incubation duties. Chicks are precocial and
-        capable of running shortly after hatching.
-      </p>
-    </Body>
+    <p>
+      Sunmus inhabit open plains, semi-arid deserts, and grasslands across
+      Downunda. They favour regions with scattered scrub or low trees for shade
+      and nesting. Wild groups are nomadic, roaming in search of water and
+      vegetation, while domesticated populations live near Dharrigal settlements
+      and waterholes.
+    </p>
 
-    <H2>Domestication</H2>
-    <Body>
-      <p>
-        The Dharrigal people have semi-domesticated the sunmu for its large,
-        nutritious eggs and lean meat. Feathers from the mane are also used for
-        ceremonial attire and trade. Domesticated flocks are kept near camps or
-        along migratory routes and are herded similarly to livestock.
-      </p>
-    </Body>
+    <h2>Diet</h2>
+
+    <p>
+      Omnivorous in diet, sunmus feed mainly on grasses, seeds, fruits, and
+      small insects. They use their strong legs and claws to dig for roots and
+      tubers during dry periods. Domesticated sunmus are often fed cultivated
+      grains and scraps.
+    </p>
+
+    <h2>Behaviour</h2>
+
+    <p>
+      Sunmus are generally peaceful and social, forming loose flocks of up to a
+      dozen individuals. They are diurnal, relying on their keen eyesight to
+      spot threats. When threatened, they raise their feather manes and emit
+      flashes of light before fleeing at high speed. Breeding pairs construct
+      ground nests and share incubation duties. Chicks are precocial and capable
+      of running shortly after hatching.
+    </p>
+
+    <h2>Domestication</h2>
+
+    <p>
+      The Dharrigal people have semi-domesticated the sunmu for its large,
+      nutritious eggs and lean meat. Feathers from the mane are also used for
+      ceremonial attire and trade. Domesticated flocks are kept near camps or
+      along migratory routes and are herded similarly to livestock.
+    </p>
   </>
 );
 

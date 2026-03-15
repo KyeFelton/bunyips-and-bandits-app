@@ -13,7 +13,7 @@ export type CharacterSaveFile = {
   age: number;
   personality: string;
   background: string;
-  biography: string;
+  backstory: string;
   languages: string[];
   magicSkills: string[];
   customTraits: Trait[];
@@ -38,7 +38,7 @@ export const defaultCharacter: CharacterSaveFile = {
   age: 0,
   personality: "",
   background: "Artisan",
-  biography: "",
+  backstory: "",
   languages: ["Dharrigal", "Englorian"],
   magicSkills: ["Biotic"],
   customTraits: [],

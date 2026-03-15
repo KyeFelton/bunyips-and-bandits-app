@@ -11,4 +11,5 @@ export const Silence: Action = {
   range: Range.Self,
   areaOfEffect: AreaOfEffect.Near,
   staminaCost: 1,
+  duration: "1 round",
 };

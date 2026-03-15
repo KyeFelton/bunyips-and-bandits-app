@@ -1,7 +1,6 @@
 import { WikiContent } from "../../../../models/wikiContent";
 import { WikiId } from "../../../../enums/WikiId";
 import { WikiCategory } from "../../../../enums/WikiCategory";
-import { Body } from "../../../../components/WikiPage";
 
 const summary = (
   <p>
@@ -14,17 +13,15 @@ const summary = (
 
 const content = (
   <>
-    <Body>
-      <p>
-        The region's flora and fauna are unique, with many species found nowhere
-        else in the world.
-      </p>
-      <p>
-        Downunda was once connected to the Continent by a land bridge until the
-        Great Storm flooded the crossing, transforming the crossing to the
-        Fireridge archipelago.
-      </p>
-    </Body>
+    <p>
+      The region's flora and fauna are unique, with many species found nowhere
+      else in the world.
+    </p>
+    <p>
+      Downunda was once connected to the Continent by a land bridge until the
+      Great Storm flooded the crossing, transforming the crossing to the
+      Fireridge archipelago.
+    </p>
   </>
 );
 

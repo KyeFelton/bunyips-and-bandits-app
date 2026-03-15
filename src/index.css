@@ -5,7 +5,7 @@
 @layer base {
   :root {
     --background: 37 76% 99%;
-    --foreground: 30 15% 18%;
+    --foreground: 25 25% 6%;
 
     --muted: 60 30% 92%;
     --muted-foreground: 40 15% 40%;
@@ -40,8 +40,6 @@
 
     --warning: 40 100% 55%;
 
-    --surface: 25 25% 8%;
-
     --ring: 30 25% 50%;
 
     --radius: 0.5rem;
@@ -56,4 +54,49 @@
     @apply bg-background text-foreground;
     font-family: sans-serif;
   }
+}
+
+/* DefeatModal fate reveal */
+.fate-content {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+
+  @starting-style {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+@keyframes fate-dead-icon {
+  0% {
+    opacity: 0;
+    transform: scale(2) rotate(20deg);
+    filter: blur(6px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(0.92) rotate(-3deg);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    filter: blur(0);
+  }
+}
+
+@keyframes fate-alive-icon {
+  0%  { opacity: 0; transform: scale(0.1); }
+  55% { transform: scale(1.25); }
+  75% { transform: scale(0.92); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.fate-dead-icon {
+  animation: fate-dead-icon 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.fate-alive-icon {
+  animation: fate-alive-icon 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }

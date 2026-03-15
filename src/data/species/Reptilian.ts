@@ -18,8 +18,8 @@ export const Reptilian: Species = {
     [Locomotion.Fly]: SpeedRating.None,
   },
   senses: {
-    primary: [SenseType.Sight, SenseType.InfraredSight, SenseType.Smell],
-    secondary: [SenseType.Hearing],
+    keen: [SenseType.Sight, SenseType.InfraredSight, SenseType.Smell],
+    poor: [SenseType.Hearing],
   },
   armour: {},
   skillModifiers: {

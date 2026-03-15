@@ -10,7 +10,7 @@ import {
   ageAtom,
   languagesAtom,
   backgroundAtom,
-  biographyAtom,
+  backstoryAtom,
   personalityAtom,
 } from "./../state/character";
 import { EditDescriptionDialog } from "./EditDescriptionDialog";
@@ -21,7 +21,7 @@ export const DescriptionCard = () => {
   const age = useAtomValue(ageAtom);
   const selectedLanguages = useAtomValue(languagesAtom);
   const background = useAtomValue(backgroundAtom);
-  const biography = useAtomValue(biographyAtom);
+  const backstory = useAtomValue(backstoryAtom);
   const personality = useAtomValue(personalityAtom);
 
   const [isEditDescriptionDialogOpen, setIsEditDescriptionDialogOpen] =
@@ -88,10 +88,10 @@ export const DescriptionCard = () => {
 
         <div>
           <div className="text-sm font-medium text-muted-foreground mb-1">
-            Biography
+            Backstory
           </div>
           <div className="text-sm flex">
-            <div className="flex-1">{biography || "-"}</div>
+            <div className="flex-1">{backstory || "-"}</div>
           </div>
         </div>
 

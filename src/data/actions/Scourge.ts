@@ -5,9 +5,9 @@ import { Action } from "../../models/actions";
 
 export const Scourge: Action = {
   name: "Scourge",
-  effect: "Your target takes 3 psychic damage as you scourge their mind.",
+  effect: "Your target is stunned as you scourge their mind.",
   skillType: SkillType.Psychic,
   range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
-  staminaCost: 3,
+  staminaCost: 1,
 };

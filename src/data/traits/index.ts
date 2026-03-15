@@ -20,7 +20,6 @@ import { IronHearing } from "./IronHearing";
 import { IronVision } from "./IronVision";
 import { Lethal } from "./Lethal";
 import { LightningRod } from "./LightningRod";
-import { Medium } from "./Medium";
 import { Opportunist } from "./Opportunist";
 import { ParanormalSense } from "./ParanormalSense";
 import { Photosynthetic } from "./Photosynthetic";
@@ -35,7 +34,6 @@ import { SharpEyes } from "./SharpEyes";
 import { SharpNose } from "./SharpNose";
 import { StaticSkin } from "./StaticSkin";
 import { Strong } from "./Strong";
-import { SuperiorMedium } from "./SuperiorMedium";
 import { Swift } from "./Swift";
 import { ThunderBuddy } from "./ThunderBuddy";
 import { ToxicResistance } from "./ToxicResistance";
@@ -117,7 +115,6 @@ export {
   IronVision,
   Lethal,
   LightningRod,
-  Medium,
   Opportunist,
   ParanormalSense,
   Photosynthetic,
@@ -132,7 +129,6 @@ export {
   SharpNose,
   StaticSkin,
   Strong,
-  SuperiorMedium,
   Swift,
   ThunderBuddy,
   ToxicResistance,

@@ -27,7 +27,7 @@ export const speciesAtom = atom<string>(startingSpecies.name);
 export const genderAtom = atom<string>("");
 export const ageAtom = atom<number>(0);
 export const backgroundAtom = atom<string>("");
-export const biographyAtom = atom<string>("");
+export const backstoryAtom = atom<string>("");
 export const personalityAtom = atom<string>("");
 export const languagesAtom = atom<string[]>(["Dharrigal", "Englorian"]);
 export const imageAtom = atom<string | undefined>(undefined);
@@ -35,10 +35,10 @@ export const imageAtom = atom<string | undefined>(undefined);
 // Character progression
 export const magicSkillsAtom = atom<string[]>(["Biotic"]);
 export const criticalSuccessesAtom = atom<Partial<Record<SkillType, number>>>(
-  {}
+  {},
 );
 export const skillsProgressedSinceRestAtom = atom<Set<SkillType>>(
-  new Set<SkillType>()
+  new Set<SkillType>(),
 );
 export const bodyUpgradesAtom = atom<number>(0);
 export const mindUpgradesAtom = atom<number>(0);
@@ -113,6 +113,14 @@ export const skillLevelsAtom = atom((get) => {
   Object.entries(criticalSuccesses).forEach(([skill, count]) => {
     const levelUps = Math.floor((count || 0) / CRIT_TO_LEVEL_UP);
     skills[skill as SkillType] = (skills[skill as SkillType] || 0) + levelUps;
+  });
+
+  // Clamp all skill levels to [0, MAX_SKILL_LEVEL]
+  Object.keys(skills).forEach((skill) => {
+    skills[skill as SkillType] = Math.max(
+      1,
+      Math.min(MAX_SKILL_LEVEL, skills[skill as SkillType] || 1),
+    );
   });
 
   return skills;
@@ -373,7 +381,7 @@ export const speedAtom = atom((get) => {
     if (body.current / body.max <= 0.5) {
       // Reduce speed rating by 1 level
       baseSpeed[locomotion as Locomotion] = numberToRating(
-        Math.max(0, currentValue - 1)
+        Math.max(0, currentValue - 1),
       );
     }
   });
@@ -387,30 +395,30 @@ export const sensesAtom = atom((get) => {
   const effects = get(effectsAtom);
 
   // Start with species senses
-  const primary = [...speciesData.senses.primary];
-  const secondary = [...speciesData.senses.secondary];
+  const keen = [...speciesData.senses.keen];
+  const poor = [...speciesData.senses.poor];
 
   // Apply effects that modify senses
   effects.forEach((effect) => {
     if (effect.sense?.gain) {
-      // Add to primary if not already in primary or secondary
+      // Add to keen if not already in keen or poor
       if (
-        !primary.includes(effect.sense.gain) &&
-        !secondary.includes(effect.sense.gain)
+        !keen.includes(effect.sense.gain) &&
+        !poor.includes(effect.sense.gain)
       ) {
-        primary.push(effect.sense.gain);
+        keen.push(effect.sense.gain);
       }
     }
     if (effect.sense?.lose) {
-      // Remove from both primary and secondary
-      const primaryIndex = primary.indexOf(effect.sense.lose);
-      if (primaryIndex > -1) primary.splice(primaryIndex, 1);
-      const secondaryIndex = secondary.indexOf(effect.sense.lose);
-      if (secondaryIndex > -1) secondary.splice(secondaryIndex, 1);
+      // Remove from both keen and poor
+      const keenIndex = keen.indexOf(effect.sense.lose);
+      if (keenIndex > -1) keen.splice(keenIndex, 1);
+      const poorIndex = poor.indexOf(effect.sense.lose);
+      if (poorIndex > -1) poor.splice(poorIndex, 1);
     }
   });
 
-  return { primary, secondary };
+  return { keen, poor };
 });
 
 // Skill roll values
@@ -459,7 +467,7 @@ export const armourAtom = atom((get) => {
   effects.forEach((effect) => {
     if (effect.armour?.damageType) {
       const type = effect.armour.damageType;
-      armour[type] += effect.armour.bonus || 0;
+      armour[type] = (armour[type] || 0) + (effect.armour.bonus || 0);
     }
   });
 

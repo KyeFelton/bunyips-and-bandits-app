@@ -411,10 +411,10 @@ export const KinStep = () => {
                   <div>
                     <div className="text-sm font-medium">{label}</div>
                     <div>
-                      {speciesData.senses.primary.includes(type)
-                        ? "Primary"
-                        : speciesData.senses.secondary.includes(type)
-                          ? "Secondary"
+                      {speciesData.senses.keen.includes(type)
+                        ? "Keen"
+                        : speciesData.senses.poor.includes(type)
+                          ? "Poor"
                           : "-"}
                     </div>
                   </div>

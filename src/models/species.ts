@@ -18,8 +18,8 @@ export type Species = {
     [Locomotion.Fly]: SpeedRating;
   };
   senses: {
-    primary: SenseType[];
-    secondary: SenseType[];
+    keen: SenseType[];
+    poor: SenseType[];
   };
   armour: Partial<Record<DamageType, number>>;
   skillModifiers: Partial<Record<SkillType, number>>;

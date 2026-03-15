@@ -18,9 +18,7 @@ export function Home() {
   };
 
   return (
-    <div
-      className="h-full container mx-auto py-8 px-4 relative"
-    >
+    <div className="h-full container mx-auto py-8 px-4 relative">
       <div className="relative w-full max-w-xl min-w-[300px] flex flex-col items-center left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
         <div className="logo-animation absolute top-8 z-30 flex justify-center">
           <Logo className="w-[90%] h-16" />

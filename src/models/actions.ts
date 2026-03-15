@@ -9,4 +9,5 @@ export type Action = {
   range: Range;
   areaOfEffect: AreaOfEffect;
   staminaCost: number | "variable";
+  duration?: string;
 };

@@ -88,7 +88,7 @@ function HandbookSidebar({
   page: string | undefined;
 }) {
   return (
-    <aside className="hidden md:flex fixed left-0 top-16 h-[calc(100dvh-4rem)] w-48 flex-col py-6 px-3 bg-surface shadow-sm z-10 overflow-y-auto border-t border-primary-foreground/20">
+    <aside className="hidden md:flex fixed left-0 top-16 h-[calc(100dvh-4rem)] w-48 flex-col py-6 px-3 bg-foreground shadow-sm z-10 overflow-y-auto border-t border-primary-foreground/20">
       <nav className="flex flex-col gap-0.5">
         {HANDBOOK_SECTIONS.map((sec, i) => (
           <div key={sec.id} className="flex flex-col gap-0.5">

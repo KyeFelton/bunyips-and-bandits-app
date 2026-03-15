@@ -22,7 +22,7 @@ import {
 import { X, Plus } from "lucide-react";
 import {
   backgroundAtom,
-  biographyAtom,
+  backstoryAtom,
   personalityAtom,
   languagesAtom,
   ageAtom,
@@ -40,14 +40,14 @@ type Props = {
 
 export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
   const [background, setBackground] = useAtom(backgroundAtom);
-  const [biography, setBiography] = useAtom(biographyAtom);
+  const [backstory, setBackstory] = useAtom(backstoryAtom);
   const [personality, setPersonality] = useAtom(personalityAtom);
   const [selectedLanguages, setLanguages] = useAtom(languagesAtom);
   const [age, setAge] = useAtom(ageAtom);
   const [gender, setGender] = useAtom(genderAtom);
 
   const [pendingBackground, setPendingBackground] = useState("");
-  const [pendingBiography, setPendingBiography] = useState("");
+  const [pendingBackstory, setPendingBackstory] = useState("");
   const [pendingPersonality, setPendingPersonality] = useState("");
   const [pendingLanguages, setPendingLanguages] = useState<string[]>([]);
   const [pendingAge, setPendingAge] = useState(0);
@@ -59,7 +59,7 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
   useEffect(() => {
     if (isOpen) {
       setPendingBackground(background);
-      setPendingBiography(biography);
+      setPendingBackstory(backstory);
       setPendingPersonality(personality);
       setPendingLanguages([...selectedLanguages]);
       setPendingAge(age);
@@ -81,7 +81,7 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
   }, [
     isOpen,
     background,
-    biography,
+    backstory,
     personality,
     selectedLanguages,
     age,
@@ -92,7 +92,7 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
     const finalGender = isCustomGender ? customGenderValue : pendingGender;
 
     setBackground(pendingBackground);
-    setBiography(pendingBiography);
+    setBackstory(pendingBackstory);
     setPersonality(pendingPersonality);
     setLanguages(pendingLanguages);
     setAge(pendingAge);
@@ -257,11 +257,11 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="biography">Biography</Label>
+            <Label htmlFor="backstory">Backstory</Label>
             <Textarea
-              id="biography"
-              value={pendingBiography}
-              onChange={(e) => setPendingBiography(e.target.value)}
+              id="backstory"
+              value={pendingBackstory}
+              onChange={(e) => setPendingBackstory(e.target.value)}
               placeholder="Describe your character's backstory and history..."
               className="min-h-[120px]"
             />

@@ -11,4 +11,5 @@ export const Resurrect: Action = {
   range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 10,
+  duration: "1 round",
 };

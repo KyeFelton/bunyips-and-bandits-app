@@ -4,7 +4,7 @@ import { Item } from "../../models/items";
 export const EnchantedClub: Item = {
   name: "Enchanted club",
   description:
-    "Your weapon attacks deal 2 force damage when wielded and your target takes 2 psychic damage.",
+    "Your weapon attacks deal 2 force damage and stun enemies when wielded.",
   effects: [
     {
       weapon: {

@@ -7,7 +7,7 @@ import { Species } from "../../models/species";
 
 export const Delver: Species = {
   name: "Delver",
-  size: CreatureSize.Tiny,
+  size: CreatureSize.Small,
   body: 4,
   mind: 6,
   stamina: 8,
@@ -18,8 +18,8 @@ export const Delver: Species = {
     [Locomotion.Fly]: SpeedRating.None,
   },
   senses: {
-    primary: [SenseType.Sight, SenseType.Hearing, SenseType.TremorHearing],
-    secondary: [SenseType.Smell],
+    keen: [SenseType.Sight, SenseType.Hearing, SenseType.TremorHearing],
+    poor: [SenseType.Smell],
   },
   armour: {},
   skillModifiers: {

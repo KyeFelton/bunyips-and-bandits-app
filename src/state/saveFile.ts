@@ -10,7 +10,7 @@ import {
   genderAtom,
   ageAtom,
   backgroundAtom,
-  biographyAtom,
+  backstoryAtom,
   personalityAtom,
   languagesAtom,
   magicSkillsAtom,
@@ -33,7 +33,7 @@ import {
 // and load from localStorage on initialization
 export const saveFileAtom = atomWithStorage<SaveFile>(
   "bunyips-and-bandits-save-file",
-  { characters: {} }
+  { characters: {} },
 );
 
 export const focalCharacterIdAtom = atom<string | undefined>(undefined);
@@ -47,7 +47,7 @@ export const focalCharacterAtom = atom<CharacterSaveFile>((get) => ({
   age: get(ageAtom),
   personality: get(personalityAtom),
   background: get(backgroundAtom),
-  biography: get(biographyAtom),
+  backstory: get(backstoryAtom),
   languages: get(languagesAtom),
   magicSkills: get(magicSkillsAtom),
   customTraits: get(customTraitsAtom),

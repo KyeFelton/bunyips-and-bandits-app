@@ -1,7 +1,6 @@
 import { WikiContent } from "../../../../models/wikiContent";
 import { WikiId } from "../../../../enums/WikiId";
 import { WikiCategory } from "../../../../enums/WikiCategory";
-import { H2, Body } from "../../../../components/WikiPage";
 
 const summary = (
   <p>
@@ -14,43 +13,39 @@ const summary = (
 
 const content = (
   <>
-    <H2>Description</H2>
-    <Body>
-      <p>
-        Garkains are hunched humanoid figures with remarkable strength for size,
-        standing at around 1.5m tall. Their facial features are flat, with wide
-        nostrils and large eyes suited for low light. Loose folds of skin hang
-        from their body, which they use to fly and can wrap around prey to
-        restrict movement and airflow.
-      </p>
-    </Body>
+    <h2>Description</h2>
 
-    <H2>Habit</H2>
-    <Body>
-      <p>
-        They inhabit deep rainforest regions, particularly areas with thick
-        canopy cover and permanent humidity.
-      </p>
-    </Body>
+    <p>
+      Garkains are hunched humanoid figures with remarkable strength for size,
+      standing at around 1.5m tall. Their facial features are flat, with wide
+      nostrils and large eyes suited for low light. Loose folds of skin hang
+      from their body, which they use to fly and can wrap around prey to
+      restrict movement and airflow.
+    </p>
 
-    <H2>Diet</H2>
-    <Body>
-      <p>
-        Garkains are carnivorous, feeding primarily on arboreal mammals, large
-        birds, reptiles and people. They rely on ambush tactics, flying from
-        above to envelop prey.
-      </p>
-    </Body>
+    <h2>Habit</h2>
 
-    <H2>Behaviour</H2>
-    <Body>
-      <p>
-        Garkains are solitary and nocturnal. They hunt at night, and during the
-        day they sleep under a pile of leaves. Their hunting method involves
-        silent observation followed by rapid descent and constriction using
-        their body folds.
-      </p>
-    </Body>
+    <p>
+      They inhabit deep rainforest regions, particularly areas with thick canopy
+      cover and permanent humidity.
+    </p>
+
+    <h2>Diet</h2>
+
+    <p>
+      Garkains are carnivorous, feeding primarily on arboreal mammals, large
+      birds, reptiles and people. They rely on ambush tactics, flying from above
+      to envelop prey.
+    </p>
+
+    <h2>Behaviour</h2>
+
+    <p>
+      Garkains are solitary and nocturnal. They hunt at night, and during the
+      day they sleep under a pile of leaves. Their hunting method involves
+      silent observation followed by rapid descent and constriction using their
+      body folds.
+    </p>
   </>
 );
 

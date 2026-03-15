@@ -1,7 +1,6 @@
 import { WikiContent } from "../../../../models/wikiContent";
 import { WikiId } from "../../../../enums/WikiId";
 import { WikiCategory } from "../../../../enums/WikiCategory";
-import { H2, Body } from "../../../../components/WikiPage";
 
 const summary = (
   <p>
@@ -14,57 +13,51 @@ const summary = (
 
 const content = (
   <>
-    <H2>Description</H2>
-    <Body>
-      <p>
-        Sand raptors are small to medium bipedal reptiles with desert-coloured
-        plumage, slender snouts, and curved talons. Their plumage often includes
-        striping or mottled patterns for camouflage in dunes. They communicate
-        using chirps, trills, and hissing calls.
-      </p>
-    </Body>
+    <h2>Description</h2>
 
-    <H2>Habit</H2>
-    <Body>
-      <p>
-        Sand raptors inhabit dunes, rocky outcrops, and arid plains. Wild
-        populations are concentrated near desert oases and rocky shade
-        formations, where small prey animals are abundant.
-      </p>
-    </Body>
+    <p>
+      Sand raptors are small to medium bipedal reptiles with desert-coloured
+      plumage, slender snouts, and curved talons. Their plumage often includes
+      striping or mottled patterns for camouflage in dunes. They communicate
+      using chirps, trills, and hissing calls.
+    </p>
 
-    <H2>Diet</H2>
-    <Body>
-      <p>
-        They are carnivorous, primarily hunting small mammals, lizards, and
-        birds. In domesticated settings they are fed prepared meat or fresh
-        desert game.
-      </p>
-    </Body>
+    <h2>Habit</h2>
 
-    <H2>Behaviour</H2>
-    <Body>
-      <p>
-        Sand raptors are social and form stable pack structures led by dominant
-        breeding pairs. They are alert, energetic, and territorial toward
-        unfamiliar creatures. Packs cooperate in hunting and use coordinated
-        tactics to corner prey. Courtship consists of vocal displays and feather
-        spreading. They are highly responsive to training and form strong bonds
-        with handlers.
-      </p>
-    </Body>
+    <p>
+      Sand raptors inhabit dunes, rocky outcrops, and arid plains. Wild
+      populations are concentrated near desert oases and rocky shade formations,
+      where small prey animals are abundant.
+    </p>
 
-    <H2>Domestication</H2>
-    <Body>
-      <p>
-        The Mennanese have domesticated sand raptors for guarding caravans,
-        hunting, scouting, and companionship. Domesticated individuals are
-        selectively bred for temperament and endurance in extreme desert
-        conditions. They are integral to Mennanese nomadic life, often
-        travelling alongside trunkirds and serving as both working animals and
-        cultural symbols.
-      </p>
-    </Body>
+    <h2>Diet</h2>
+
+    <p>
+      They are carnivorous, primarily hunting small mammals, lizards, and birds.
+      In domesticated settings they are fed prepared meat or fresh desert game.
+    </p>
+
+    <h2>Behaviour</h2>
+
+    <p>
+      Sand raptors are social and form stable pack structures led by dominant
+      breeding pairs. They are alert, energetic, and territorial toward
+      unfamiliar creatures. Packs cooperate in hunting and use coordinated
+      tactics to corner prey. Courtship consists of vocal displays and feather
+      spreading. They are highly responsive to training and form strong bonds
+      with handlers.
+    </p>
+
+    <h2>Domestication</h2>
+
+    <p>
+      The Mennanese have domesticated sand raptors for guarding caravans,
+      hunting, scouting, and companionship. Domesticated individuals are
+      selectively bred for temperament and endurance in extreme desert
+      conditions. They are integral to Mennanese nomadic life, often travelling
+      alongside trunkirds and serving as both working animals and cultural
+      symbols.
+    </p>
   </>
 );
 

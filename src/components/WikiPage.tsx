@@ -16,11 +16,12 @@ export function WikiPage({
   summary,
   tableOfContents,
   main,
+  infoBox,
   backTo,
   children,
 }: Props) {
   return (
-    <div className="py-6 px-4 md:py-8 md:px-12 flex-1 space-y-6 bg-background">
+    <div className="py-6 px-4 md:py-8 md:px-12 flex-1 bg-background space-y-4">
       {backTo && (
         <Link to={backTo.path} className="inline-block">
           <Button variant="ghost" size="sm">
@@ -31,31 +32,30 @@ export function WikiPage({
       )}
       {title && <h1 className="text-3xl md:text-4xl font-bold">{title}</h1>}
       {subTitle && <h2 className="text-2xl font-semibold mb-2">{subTitle}</h2>}
-      {summary && <div className="prose max-w-none mb-8">{summary}</div>}
-      {tableOfContents}
-      {main}
-      {children}
+      <div className="overflow-hidden space-y-6">
+        {infoBox && (
+          <div className="mb-6 sm:float-right sm:clear-right sm:ml-6 sm:mb-4 w-full sm:w-52 lg:w-72 rounded-lg border border-border overflow-hidden bg-card text-sm">
+            {infoBox.imageSrc && (
+              <img src={infoBox.imageSrc} alt="" className="w-full" />
+            )}
+            {infoBox.traits.map((trait, i) => (
+              <div key={i} className="flex border-t border-border">
+                <div className="w-24 shrink-0 px-3 py-1.5 font-medium text-muted-foreground bg-muted/30">
+                  {trait.key}
+                </div>
+                <div className="flex-1 px-3 py-1.5">{trait.value}</div>
+              </div>
+            ))}
+          </div>
+        )}
+        {summary && <div className="prose max-w-none">{summary}</div>}
+        {tableOfContents}
+        {main && <div className="prose max-w-none">{main}</div>}
+        {children}
+      </div>
     </div>
   );
 }
-
-export const H2 = ({ children }: PropsWithChildren) => (
-  <div>
-    <h2 className="text-2xl font-semibold mb-2">{children}</h2>
-    <div className="w-full border-b border-border" />
-  </div>
-);
-
-export const H3 = ({ children }: PropsWithChildren) => (
-  <div>
-    <h3 className="text-xl font-semibold mb-2">{children}</h3>
-    <div className="w-full border-b border-border" />
-  </div>
-);
-
-export const Body = ({ children }: PropsWithChildren) => (
-  <section className="prose max-w-none mb-8">{children}</section>
-);
 
 type CalloutVariant = "tip" | "note" | "warning" | "danger";
 type CalloutFloat = "left" | "right";
@@ -75,15 +75,22 @@ const calloutFloatClasses: Record<CalloutFloat, string> = {
 type CalloutProps = PropsWithChildren<{
   variant?: CalloutVariant;
   float?: CalloutFloat;
+  className?: string;
 }>;
 
-export function Callout({ variant = "tip", float, children }: CalloutProps) {
+export function Callout({
+  variant = "tip",
+  float,
+  className,
+  children,
+}: CalloutProps) {
   return (
     <div
       className={cn(
         "border-l-4 rounded-r-lg px-4 py-3 my-4",
         calloutVariantClasses[variant],
         float && calloutFloatClasses[float],
+        className,
       )}
     >
       {children}

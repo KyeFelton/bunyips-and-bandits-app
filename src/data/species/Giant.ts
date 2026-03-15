@@ -18,8 +18,8 @@ export const Giant: Species = {
     [Locomotion.Fly]: SpeedRating.None,
   },
   senses: {
-    primary: [SenseType.Hearing, SenseType.Smell],
-    secondary: [SenseType.Sight],
+    keen: [SenseType.Hearing, SenseType.Smell],
+    poor: [SenseType.Sight],
   },
   armour: {},
   skillModifiers: {

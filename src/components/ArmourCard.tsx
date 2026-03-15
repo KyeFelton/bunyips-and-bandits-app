@@ -45,6 +45,9 @@ export const ArmourCard = () => {
                 </Tooltip>
               </div>
             ))}
+            {Object.keys(armour).length === 0 ? (
+              <span className="text-muted-foreground text-sm">None</span>
+            ) : null}
           </div>
         </TooltipProvider>
       </CardContent>

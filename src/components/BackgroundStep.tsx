@@ -1,55 +1,20 @@
 import { useAtom, useAtomValue } from "jotai";
 import { backgroundAtom, backgroundDataAtom } from "./../state/character";
 import { AllBackgrounds } from "./../data/backgrounds";
-import {
-  GraduationCap,
-  Star,
-  Hammer,
-  Swords,
-  Sailboat,
-  Wheat,
-  Leaf,
-  BowArrow,
-  Pickaxe,
-  Crown,
-  Heart,
-  Coins,
-  BookOpen,
-  Music,
-  Shield,
-  Eye,
-} from "lucide-react";
+import { GraduationCap, Star } from "lucide-react";
+import { BackgroundIcon } from "./icons/BackgroundIcon";
 import { SkillIcon } from "./icons/SkillIcon";
 import { SkillType } from "./../enums/SkillType";
 import {
+  type CarouselApi,
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-  type CarouselApi,
 } from "./ui/carousel";
 import { cn } from "./../utils/cn";
 import { useCallback, useEffect, useState } from "react";
-import { type LucideIcon } from "lucide-react";
-
-// Icon mapping for each background
-const BACKGROUND_ICONS: Record<string, LucideIcon> = {
-  Artisan: Hammer,
-  Bandit: Swords,
-  Drifter: Sailboat,
-  Farmer: Wheat,
-  Herbalist: Leaf,
-  Hunter: BowArrow,
-  Labourer: Pickaxe,
-  Leader: Crown,
-  Medic: Heart,
-  Merchant: Coins,
-  Monk: BookOpen,
-  Performer: Music,
-  Soldier: Shield,
-  Spy: Eye,
-};
 
 export const BackgroundStep = () => {
   const [selectedBackground, setBackground] = useAtom(backgroundAtom);
@@ -116,9 +81,7 @@ export const BackgroundStep = () => {
             className="w-full"
           >
             <CarouselContent>
-              {backgroundsArray.map((backgroundItem) => {
-                const IconComponent = BACKGROUND_ICONS[backgroundItem.name];
-                return (
+              {backgroundsArray.map((backgroundItem) => (
                   <CarouselItem
                     key={backgroundItem.name}
                     className="basis-3/4 sm:basis-1/2 md:basis-1/3 cursor-pointer flex justify-center items-center"
@@ -141,15 +104,14 @@ export const BackgroundStep = () => {
                             : "h-36 w-36 lg:h-44 lg:w-44 opacity-50"
                         )}
                       >
-                        {IconComponent && (
-                          <IconComponent
-                            className={cn(
-                              backgroundItem.name === selectedBackground
-                                ? "h-16 w-16 lg:h-20 lg:w-20"
-                                : "h-14 w-14 lg:h-16 lg:w-16"
-                            )}
-                          />
-                        )}
+                        <BackgroundIcon
+                          name={backgroundItem.name}
+                          className={cn(
+                            backgroundItem.name === selectedBackground
+                              ? "h-16 w-16 lg:h-20 lg:w-20"
+                              : "h-14 w-14 lg:h-16 lg:w-16"
+                          )}
+                        />
                       </div>
                       <span
                         className={cn(
@@ -163,8 +125,7 @@ export const BackgroundStep = () => {
                       </span>
                     </div>
                   </CarouselItem>
-                );
-              })}
+              ))}
             </CarouselContent>
             <CarouselPrevious />
             <CarouselNext />

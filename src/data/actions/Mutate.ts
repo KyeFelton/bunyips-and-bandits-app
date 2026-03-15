@@ -9,4 +9,5 @@ export const Mutate: Action = {
   range: Range.Self,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 2,
+  duration: "1 round",
 };

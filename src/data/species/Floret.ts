@@ -19,8 +19,8 @@ export const Floret: Species = {
     [Locomotion.Fly]: SpeedRating.None,
   },
   senses: {
-    primary: [SenseType.Smell, SenseType.Hearing, SenseType.TremorHearing],
-    secondary: [],
+    keen: [SenseType.Smell, SenseType.Hearing, SenseType.TremorHearing],
+    poor: [],
   },
   armour: {
     [DamageType.Toxic]: 2,

@@ -14,7 +14,7 @@ import {
 } from "./ui/carousel";
 import { cn } from "../utils/cn";
 import { SkillIcon } from "./icons/SkillIcon";
-import { Badge } from "./ui/badge";
+import { ProgressionItems } from "./ProgressionItems";
 
 const MAGIC_SKILLS = [
   SkillType.Biotic,
@@ -162,7 +162,7 @@ export const MagicStep = () => {
               <div className="space-y-3 pt-2">
                 <h4 className="text-sm font-semibold">Unlockables</h4>
 
-                <div className="space-y-2">
+                <div className="rounded-lg border border-primary/30 divide-y divide-muted">
                   {Array.from({ length: MAX_SKILL_LEVEL }, (_, i) => i + 1).map(
                     (level) => {
                       const unlockable = progression.unlockables.find(
@@ -170,104 +170,10 @@ export const MagicStep = () => {
                       );
                       const traits = unlockable?.traits || [];
                       const actions = unlockable?.actions || [];
-                      const hasContent =
-                        traits.length > 0 || actions.length > 0;
-
-                      if (!hasContent) return null;
-
-                      // Combine traits and actions to determine first item
-                      const allItems = [
-                        ...traits.map((trait) => ({
-                          type: "trait" as const,
-                          data: trait,
-                        })),
-                        ...actions.map((action) => ({
-                          type: "action" as const,
-                          data: action,
-                        })),
-                      ];
-
+                      if (traits.length === 0 && actions.length === 0) return null;
                       return (
-                        <div
-                          key={level}
-                          className="p-3 rounded-lg border transition-all border-primary/30"
-                        >
-                          <div className="space-y-4">
-                            {allItems.map((item, index) => {
-                              const isFirstItem = index === 0;
-
-                              if (item.type === "trait") {
-                                const trait = item.data;
-                                return (
-                                  <div key={trait.name} className="space-y-2">
-                                    <div className="flex items-center justify-between gap-2 mb-1">
-                                      <div className="font-semibold text-sm">
-                                        {trait.name}
-                                      </div>
-                                      {isFirstItem && (
-                                        <div className="text-sm px-2 py-1 rounded text-center flex-shrink-0 bg-primary/20 text-primary">
-                                          Level {level}
-                                        </div>
-                                      )}
-                                    </div>
-                                    <p className="text-sm text-muted-foreground">
-                                      {trait.description}
-                                    </p>
-                                  </div>
-                                );
-                              } else {
-                                const action = item.data;
-                                return (
-                                  <div key={action.name} className="space-y-2">
-                                    <div className="flex items-center justify-between gap-2 mb-1">
-                                      <div className="font-semibold text-sm">
-                                        {action.name}
-                                      </div>
-                                      {isFirstItem && (
-                                        <div className="text-sm px-2 py-1 rounded text-center flex-shrink-0 bg-primary/20 text-primary">
-                                          Level {level}
-                                        </div>
-                                      )}
-                                    </div>
-                                    <p className="text-sm text-muted-foreground mb-2">
-                                      {action.effect}
-                                    </p>
-                                    <div className="flex flex-wrap gap-2 text-xs">
-                                      {action.range !== "Self" && (
-                                        <Badge
-                                          variant="outline"
-                                          className="text-xs"
-                                        >
-                                          Range: {action.range}
-                                        </Badge>
-                                      )}
-                                      {action.areaOfEffect !==
-                                        "Single target" && (
-                                        <Badge
-                                          variant="outline"
-                                          className="text-xs"
-                                        >
-                                          Area: {action.areaOfEffect}
-                                        </Badge>
-                                      )}
-                                      {(action.staminaCost === "variable" ||
-                                        action.staminaCost > 0) && (
-                                        <Badge
-                                          variant="outline"
-                                          className="text-xs"
-                                        >
-                                          Stamina:{" "}
-                                          {action.staminaCost === "variable"
-                                            ? "Variable"
-                                            : action.staminaCost}
-                                        </Badge>
-                                      )}
-                                    </div>
-                                  </div>
-                                );
-                              }
-                            })}
-                          </div>
+                        <div key={level} className="px-3">
+                          <ProgressionItems level={level} actions={actions} traits={traits} />
                         </div>
                       );
                     }

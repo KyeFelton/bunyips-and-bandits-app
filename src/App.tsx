@@ -26,14 +26,12 @@ function App() {
 
   // Show loading state while images are preloading
   if (isLoading) {
-    return (
-      <div className="min-h-dvh bg-surface" />
-    );
+    return <div className="min-h-dvh bg-foreground" />;
   }
 
   return (
     <div className="min-h-dvh relative overflow-hidden">
-      <div className="absolute inset-0 -z-10 bg-surface">
+      <div className="absolute inset-0 -z-10 bg-foreground">
         <img
           src={frame}
           className="absolute inset-0 frame-animation"
@@ -57,7 +55,10 @@ function App() {
         {/* Side vignette */}
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: "linear-gradient(to right, rgba(0,0,0,0.5) 0%, transparent 28%, transparent 72%, rgba(0,0,0,0.5) 100%)" }}
+          style={{
+            background:
+              "linear-gradient(to right, rgba(0,0,0,0.5) 0%, transparent 28%, transparent 72%, rgba(0,0,0,0.5) 100%)",
+          }}
         />
       </div>
 
@@ -69,16 +70,16 @@ function App() {
 
       <div className="h-dvh pt-16 overflow-auto">
         <div className="h-full">
-        <Routes>
-          <Route path={HomeRoute} element={<Home />} />
-          <Route path={CharacterListRoute} element={<CharactersPage />} />
-          <Route path={CharacterSheetRoute} element={<CharacterSheet />} />
-          <Route path={CharacterEditorRoute} element={<CharacterEditor />} />
-          <Route path={HandbookRoute} element={<Handbook />}>
-            <Route path=":section/:page" />
-            <Route path=":section/:subsection/:page" />
-          </Route>
-        </Routes>
+          <Routes>
+            <Route path={HomeRoute} element={<Home />} />
+            <Route path={CharacterListRoute} element={<CharactersPage />} />
+            <Route path={CharacterSheetRoute} element={<CharacterSheet />} />
+            <Route path={CharacterEditorRoute} element={<CharacterEditor />} />
+            <Route path={HandbookRoute} element={<Handbook />}>
+              <Route path=":section/:page" />
+              <Route path=":section/:subsection/:page" />
+            </Route>
+          </Routes>
         </div>
       </div>
 

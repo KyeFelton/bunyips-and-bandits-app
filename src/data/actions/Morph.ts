@@ -9,4 +9,5 @@ export const Morph: Action = {
   range: Range.Self,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 3,
+  duration: "1 round",
 };
