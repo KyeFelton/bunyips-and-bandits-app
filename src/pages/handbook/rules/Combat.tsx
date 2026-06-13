@@ -1,5 +1,5 @@
 import { Callout, WikiPage } from "../../../components/WikiPage";
-import dropbearImage from "../../../images/handbook/dropbear.png";
+import dropbearImage from "../../../images/handbook/drop bear.png";
 import { getHandbookPageRoute } from "../../../routes";
 import { Link } from "react-router-dom";
 

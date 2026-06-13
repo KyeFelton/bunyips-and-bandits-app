@@ -1,4 +1,4 @@
-import imageSrc from "../../images/kin/dropBear.png";
+import imageSrc from "../../images/kin/drop bear.png";
 import { Kin } from "../../models/kin";
 import { Downunda } from "../ancestries";
 import { Goblin } from "../species";
