@@ -3,7 +3,6 @@ import { WikiId } from "../../../../enums/WikiId";
 import { WikiCategory } from "../../../../enums/WikiCategory";
 import { Avian } from "../../../../data/species/Avian";
 import { KinStatsTable } from "../../../../components/KinStatsTable";
-import { getSpeciesImage } from "../../../../utils/speciesImages";
 
 const summary = (
   <p>
@@ -41,10 +40,9 @@ export const Karrakan: WikiContent = {
   summary,
   main: content,
   infoBox: {
-    imageSrc: getSpeciesImage("Avian", "Dharrigal"),
     traits: [
       { key: "Species", value: Avian.name },
-      { key: "Ancestry", value: "Dharrigal" },
+      { key: "Ancestry", value: "Downunda" },
       { key: "Size", value: Avian.size },
     ],
   },

@@ -33,7 +33,7 @@ import {
 // and load from localStorage on initialization
 export const saveFileAtom = atomWithStorage<SaveFile>(
   "bunyips-and-bandits-save-file",
-  { characters: {} },
+  { characters: {} }
 );
 
 export const focalCharacterIdAtom = atom<string | undefined>(undefined);
@@ -41,8 +41,8 @@ export const focalCharacterIdAtom = atom<string | undefined>(undefined);
 // Derived atom that builds the focal character from individual atoms
 export const focalCharacterAtom = atom<CharacterSaveFile>((get) => ({
   name: get(nameAtom),
-  ancestry: get(ancestryAtom),
   species: get(speciesAtom),
+  ancestry: get(ancestryAtom),
   gender: get(genderAtom),
   age: get(ageAtom),
   personality: get(personalityAtom),

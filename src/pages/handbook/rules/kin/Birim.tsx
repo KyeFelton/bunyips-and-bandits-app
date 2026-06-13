@@ -46,10 +46,10 @@ export const Birim: WikiContent = {
   summary,
   main: content,
   infoBox: {
-    imageSrc: getSpeciesImage(Reptilian.name, "Dharrigal"),
+    imageSrc: getSpeciesImage(Reptilian.name, "Downunda"),
     traits: [
       { key: "Species", value: Reptilian.name },
-      { key: "Ancestry", value: "Dharrigal" },
+      { key: "Ancestry", value: "Downunda" },
       { key: "Size", value: Reptilian.size },
     ],
   },

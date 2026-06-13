@@ -48,10 +48,10 @@ export const Joonyar: WikiContent = {
   summary,
   main: content,
   infoBox: {
-    imageSrc: getSpeciesImage("Delver", "Dharrigal"),
+    imageSrc: getSpeciesImage("Delver", "Downunda"),
     traits: [
       { key: "Species", value: Delver.name },
-      { key: "Ancestry", value: "Dharrigal" },
+      { key: "Ancestry", value: "Downunda" },
       { key: "Size", value: Delver.size },
     ],
   },

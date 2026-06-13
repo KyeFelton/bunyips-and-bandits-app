@@ -1,9 +1,9 @@
 import { Engloria } from "./Engloria";
-import { Dharrigal } from "./Dharrigal";
+import { Downunda } from "./Downunda";
 
 export const AllAncestries = {
-  Dharrigal,
+  Downunda,
   Engloria,
 };
 
-export const startingAncestry = AllAncestries.Dharrigal;
+export const startingAncestry = AllAncestries.Downunda;

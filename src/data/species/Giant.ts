@@ -8,6 +8,7 @@ import { Species } from "../../models/species";
 export const Giant: Species = {
   name: "Giant",
   size: CreatureSize.Large,
+  ancestries: ["Downunda", "Engloria"],
   body: 10,
   mind: 5,
   stamina: 4,

@@ -44,10 +44,10 @@ export const Yowie: WikiContent = {
   summary,
   main: content,
   infoBox: {
-    imageSrc: getSpeciesImage("Giant", "Dharrigal"),
+    imageSrc: getSpeciesImage("Giant", "Downunda"),
     traits: [
       { key: "Species", value: Giant.name },
-      { key: "Ancestry", value: "Dharrigal" },
+      { key: "Ancestry", value: "Downunda" },
       { key: "Size", value: Giant.size },
     ],
   },

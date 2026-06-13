@@ -66,7 +66,7 @@ function MagicSkillCards({ skills }: { skills: Skill[] }) {
                   "border-2 rounded-lg overflow-hidden transition-colors duration-200",
                   isOpen
                     ? "border-primary/50"
-                    : "border-muted hover:border-primary/30",
+                    : "border-muted hover:border-primary/30"
                 )}
               >
                 <CollapsibleTrigger className="w-full p-4 flex items-center justify-between gap-4 text-left cursor-pointer">
@@ -85,7 +85,7 @@ function MagicSkillCards({ skills }: { skills: Skill[] }) {
                   <ChevronDown
                     className={cn(
                       "h-4 w-4 flex-shrink-0 text-muted-foreground transition-transform duration-200",
-                      isOpen && "rotate-180",
+                      isOpen && "rotate-180"
                     )}
                   />
                 </CollapsibleTrigger>
@@ -94,7 +94,7 @@ function MagicSkillCards({ skills }: { skills: Skill[] }) {
                     {progression.unlockables
                       .filter(
                         ({ actions, traits }) =>
-                          actions.length > 0 || traits.length > 0,
+                          actions.length > 0 || traits.length > 0
                       )
                       .map(({ level, actions, traits }) => (
                         <ProgressionItems
@@ -178,10 +178,10 @@ function KinCards({ kin }: { kin: WikiContent[] }) {
               <h3 className="font-semibold text-lg">{item.title}</h3>
               {(() => {
                 const species = item.infoBox?.traits.find(
-                  (t) => t.key === "Species",
+                  (t) => t.key === "Species"
                 )?.value;
                 const ancestry = item.infoBox?.traits.find(
-                  (t) => t.key === "Ancestry",
+                  (t) => t.key === "Ancestry"
                 )?.value;
                 return species || ancestry ? (
                   <p className="text-sm text-muted-foreground">
@@ -202,13 +202,13 @@ const main = (
     <p>
       At the heart of Bunyips and Bandits are the characters you create and
       play. While the GM plays the role of everyone and everything else, you are
-      in control of one character each—making their choices, speaking in their
-      voice, and deciding how they handle the dangers and opportunities that
-      come their way.
+      in control of one character each. You make their choices, speak in their
+      voice, and decide how they handle the dangers and opportunities that come
+      their way.
     </p>
     <p>
-      Before setting off on your first adventure, you'll need to create a
-      character. This involves a few simple steps:
+      You begin the game with creating your character. This involves a few
+      simple steps:
     </p>
     <div className="md:w-[35%] md:float-right px-6">
       <img
@@ -272,7 +272,8 @@ const main = (
         aptitude for climbing and tight spaces.
       </li>
       <li>
-        <b>Human</b>: You know them.
+        <b>Human</b>: The most common of all peoples. They are social and
+        versatile.
       </li>
       <li>
         <b>Reptilian</b>: Ancient lizard-like ancestors. Characterised by scaled
@@ -289,7 +290,7 @@ const main = (
       <li>
         <b>Dharrigal</b>: The peoples of Downunda. An island of desert plains,
         dense eucalypt forest and tropical rainforests. Their traditions span
-        tens of thousands of years, grounded in a close relationship with
+        tens of thousands of years, grounded in a close relationship with their
         country, oral history, and the land's creatures.
       </li>
       <li>
@@ -345,10 +346,10 @@ const main = (
     <Callout variant="tip">
       Jackie is quiet and deliberate, green-scaled, with a thin scar across her
       left eye that she won't explain. She served six years in a border garrison
-      before a bad order got her unit killed. Her virtue is steadiness under
+      before a bad order got her unit killed. She's on the road north to find
+      the officer who gave that command. Her virtue is steadiness under
       pressure. Her flaw is that she defers to authority even when she
-      shouldn't. She's on the road north to find the officer who gave that
-      command.
+      shouldn't.
     </Callout>
     <p>
       You don't need every answer before the first session. A lot of the best

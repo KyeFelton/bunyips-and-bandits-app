@@ -42,10 +42,10 @@ export const Dropbear: WikiContent = {
   summary,
   main: content,
   infoBox: {
-    imageSrc: getSpeciesImage("Goblin", "Dharrigal"),
+    imageSrc: getSpeciesImage("Goblin", "Downunda"),
     traits: [
       { key: "Species", value: Goblin.name },
-      { key: "Ancestry", value: "Dharrigal" },
+      { key: "Ancestry", value: "Downunda" },
       { key: "Size", value: Goblin.size },
     ],
   },

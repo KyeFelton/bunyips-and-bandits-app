@@ -6,12 +6,11 @@ import humanEnglorianImage from "../images/species/engloria/human.png";
 import delverEnglorianImage from "../images/species/engloria/delver.png";
 
 // Downunda species images
-import avianDownundaImage from "../images/species/dharrigal/avian.png";
-import giantDownundaImage from "../images/species/dharrigal/giant.png";
-import goblinDownundaImage from "../images/species/dharrigal/goblin.png";
-import humanDownundaImage from "../images/species/dharrigal/human.png";
-import reptilianDownundaImage from "../images/species/dharrigal/reptilian.png";
-import delverDownundaImage from "../images/species/dharrigal/delver.png";
+import giantDownundaImage from "../images/species/downunda/giant.png";
+import goblinDownundaImage from "../images/species/downunda/goblin.png";
+import humanDownundaImage from "../images/species/downunda/human.png";
+import reptilianDownundaImage from "../images/species/downunda/reptilian.png";
+import delverDownundaImage from "../images/species/downunda/delver.png";
 
 const speciesImages: Record<string, Record<string, string>> = {
   Engloria: {
@@ -21,8 +20,7 @@ const speciesImages: Record<string, Record<string, string>> = {
     Human: humanEnglorianImage,
     Delver: delverEnglorianImage,
   },
-  Dharrigal: {
-    Avian: avianDownundaImage,
+  Downunda: {
     Giant: giantDownundaImage,
     Goblin: goblinDownundaImage,
     Human: humanDownundaImage,

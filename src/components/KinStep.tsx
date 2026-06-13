@@ -39,16 +39,11 @@ const FOLK_DESCRIPTIONS: Record<
   string,
   Record<string, { name: string; description: string }>
 > = {
-  Dharrigal: {
+  Downunda: {
     Reptilian: {
       name: "Birim",
       description:
         "The Birim are a reptilian folk ancestryating from the deserts of Downunda. They are distinguished by their tall and slender physique, with features resembling goannas.",
-    },
-    Avian: {
-      name: "Karrakan",
-      description:
-        "The Karrakan are an avian folk with ancestral ties to Downunda. Their feather colours vary widely, with some resembling pink galahs, sulphur-crested cockatoos, or black cockatoos.",
     },
     Giant: {
       name: "Yowie",
@@ -113,25 +108,33 @@ export const KinStep = () => {
 
   // Get available ancestries for selected species
   const availableAncestries = useMemo(() => {
-    if (!selectedSpecies) return Object.keys(AllAncestries);
+    if (!speciesData) return Object.keys(AllAncestries);
 
-    return Object.entries(AllAncestries)
-      .filter(([, ancestry]) => ancestry.species.includes(selectedSpecies))
-      .map(([name]) => name);
-  }, [selectedSpecies]);
+    console.log(speciesData.ancestries);
+    console.log(AllAncestries);
 
-  // Get available species for selected ancestry
-  const availableSpecies = useMemo(() => {
-    if (!selectedAncestry) return Object.keys(AllSpecies);
+    const test = Object.keys(AllAncestries).filter((ancestry) => {
+      console.log(ancestry);
+      console.log(speciesData.ancestries.includes(ancestry));
+      return speciesData.ancestries.includes(ancestry);
+    });
+    console.log(test);
 
-    const ancestryData =
-      AllAncestries[selectedAncestry as keyof typeof AllAncestries];
-    if (!ancestryData) return Object.keys(AllSpecies);
+    return test;
+  }, [speciesData]);
 
-    return Object.keys(AllSpecies).filter((speciesName) =>
-      ancestryData.species.includes(speciesName),
-    );
-  }, [selectedAncestry]);
+  // // Get available species for selected ancestry
+  // const availableSpecies = useMemo(() => {
+  //   if (!selectedAncestry) return Object.keys(AllSpecies);
+
+  //   const ancestryData =
+  //     AllAncestries[selectedAncestry as keyof typeof AllAncestries];
+  //   if (!ancestryData) return Object.keys(AllSpecies);
+
+  //   return Object.keys(AllSpecies).filter((speciesName) =>
+  //     ancestryData.species.includes(speciesName)
+  //   );
+  // }, [selectedAncestry]);
 
   const handleAncestryChange = useCallback(
     (ancestryName: string) => {
@@ -140,7 +143,7 @@ export const KinStep = () => {
         AllAncestries[ancestryName as keyof typeof AllAncestries];
       setLanguages(newAncestryData.languages);
     },
-    [setAncestry, setLanguages],
+    [setAncestry, setLanguages]
   );
 
   const handleSpeciesChange = useCallback(
@@ -149,21 +152,22 @@ export const KinStep = () => {
       setCurrentBody(newSpeciesData.body);
       setCurrentMind(newSpeciesData.mind);
       setCurrentStamina(newSpeciesData.stamina);
+      setAncestry(newSpeciesData.ancestries[0]);
       setSpecies(value);
     },
-    [setCurrentMind, setCurrentBody, setCurrentStamina, setSpecies],
+    [setCurrentBody, setCurrentMind, setCurrentStamina, setSpecies, setAncestry]
   );
 
   const onSelect = useCallback(
     (api: CarouselApi) => {
       if (!api) return;
       const selectedIndex = api.selectedScrollSnap();
-      const selectedSpeciesName = availableSpecies[selectedIndex];
+      const selectedSpeciesName = Object.keys(AllSpecies)[selectedIndex];
       if (selectedSpeciesName) {
         handleSpeciesChange(selectedSpeciesName);
       }
     },
-    [handleSpeciesChange, availableSpecies],
+    [handleSpeciesChange]
   );
 
   useEffect(() => {
@@ -174,13 +178,13 @@ export const KinStep = () => {
     };
   }, [api, onSelect]);
 
-  useEffect(() => {
-    if (!api || !selectedSpecies) return;
-    const selectedIndex = availableSpecies.indexOf(selectedSpecies);
-    if (selectedIndex !== -1) {
-      api.scrollTo(selectedIndex);
-    }
-  }, [api, selectedSpecies, availableSpecies]);
+  // useEffect(() => {
+  //   if (!api || !selectedSpecies) return;
+  //   const selectedIndex = availableSpecies.indexOf(selectedSpecies);
+  //   if (selectedIndex !== -1) {
+  //     api.scrollTo(selectedIndex);
+  //   }
+  // }, [api, selectedSpecies, availableSpecies]);
 
   return (
     <div className="space-y-6">
@@ -191,44 +195,8 @@ export const KinStep = () => {
         </div>
       </div>
 
-      {/* Ancestry Selection */}
-      <div className="">
-        <h3 className="font-semibold mb-4 text-lg">Ancestry</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {Object.values(AllAncestries).map((ancestry) => {
-            const isAvailable = availableAncestries.includes(ancestry.name);
-            return (
-              <Card
-                key={ancestry.name}
-                className={cn(
-                  "p-4 transition-all duration-200 border-2",
-                  isAvailable
-                    ? "cursor-pointer hover:shadow-lg"
-                    : "cursor-not-allowed opacity-50",
-                  selectedAncestry === ancestry.name
-                    ? "border-primary bg-primary/5"
-                    : isAvailable
-                      ? "border-muted hover:border-primary/50"
-                      : "border-muted",
-                )}
-                onClick={() =>
-                  isAvailable && handleAncestryChange(ancestry.name)
-                }
-              >
-                <div className="space-y-2">
-                  <h4 className="font-semibold text-lg">{ancestry.name}</h4>
-                  <p className="text-sm text-muted-foreground">
-                    {ancestry.description}
-                  </p>
-                </div>
-              </Card>
-            );
-          })}
-        </div>
-      </div>
-
       {/* Species Selection */}
-      <div className="pt-6 border-t border-muted-foreground/20">
+      <div className="">
         <h3 className="font-semibold mb-4 text-lg">Species</h3>
         <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 text-md text-muted-foreground mb-4">
           <div className="whitespace-nowrap">
@@ -248,16 +216,17 @@ export const KinStep = () => {
               className="w-full"
             >
               <CarouselContent>
-                {availableSpecies.map((speciesName) => (
+                {Object.values(AllSpecies).map((species) => (
                   <CarouselItem
-                    key={speciesName}
+                    key={species.name}
                     className="basis-3/4 sm:basis-1/2 md:basis-1/3 cursor-pointer flex justify-center items-center"
                     onClick={() => {
-                      const selectedIndex =
-                        availableSpecies.indexOf(speciesName);
+                      const selectedIndex = Object.keys(AllSpecies).indexOf(
+                        species.name
+                      );
                       if (selectedIndex !== -1) {
                         api?.scrollTo(selectedIndex);
-                        handleSpeciesChange(speciesName);
+                        handleSpeciesChange(species.name);
                       }
                     }}
                   >
@@ -265,26 +234,26 @@ export const KinStep = () => {
                       <div
                         className={cn(
                           "transition-all duration-300 ease-in-out",
-                          speciesName === selectedSpecies
+                          species.name === selectedSpecies
                             ? "h-40 w-40 lg:h-48 lg:w-48 opacity-100"
-                            : "h-36 w-36 lg:h-44 lg:w-44 opacity-50",
+                            : "h-36 w-36 lg:h-44 lg:w-44 opacity-50"
                         )}
                       >
                         <img
-                          src={getSpeciesImage(speciesName, selectedAncestry)}
-                          alt={speciesName}
+                          src={getSpeciesImage(species.name, selectedAncestry)}
+                          alt={species.name}
                           className="w-full h-full object-contain rounded-lg"
                         />
                       </div>
                       <span
                         className={cn(
                           "font-medium",
-                          speciesName !== selectedSpecies
+                          species.name !== selectedSpecies
                             ? `text-md text-muted-foreground/50`
-                            : "text-lg",
+                            : "text-lg"
                         )}
                       >
-                        {speciesName}
+                        {species.name}
                       </span>
                     </div>
                   </CarouselItem>
@@ -295,29 +264,65 @@ export const KinStep = () => {
             </Carousel>
           </div>
         </div>
-
-        {/* Description */}
-        {selectedSpecies &&
-          selectedAncestry &&
-          (() => {
-            const folkInfo =
-              FOLK_DESCRIPTIONS[selectedAncestry]?.[selectedSpecies];
-            if (!folkInfo) return null;
-
-            return (
-              <div className="p-4 bg-primary/10 rounded-lg">
-                <h4 className="font-semibold text-lg mb-2">
-                  {selectedSpecies === Human.name
-                    ? `${folkInfo.name} ${selectedSpecies}`
-                    : `${folkInfo.name} (${selectedSpecies})`}
-                </h4>
-                <p className="text-sm text-muted-foreground">
-                  {folkInfo.description}
-                </p>
-              </div>
-            );
-          })()}
       </div>
+
+      {/* Ancestry Selection */}
+      <div className="pt-6 border-t border-muted-foreground/20">
+        <h3 className="font-semibold mb-4 text-lg">Ancestry</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {Object.values(AllAncestries).map((ancestry) => {
+            const isAvailable = availableAncestries.includes(ancestry.name);
+            return (
+              <Card
+                key={ancestry.name}
+                className={cn(
+                  "p-4 transition-all duration-200 border-2",
+                  isAvailable
+                    ? "cursor-pointer hover:shadow-lg"
+                    : "cursor-not-allowed opacity-50",
+                  selectedAncestry === ancestry.name
+                    ? "border-primary bg-primary/5"
+                    : isAvailable
+                    ? "border-muted hover:border-primary/50"
+                    : "border-muted"
+                )}
+                onClick={() =>
+                  isAvailable && handleAncestryChange(ancestry.name)
+                }
+              >
+                <div className="space-y-2">
+                  <h4 className="font-semibold text-lg">{ancestry.name}</h4>
+                  <p className="text-sm text-muted-foreground">
+                    {ancestry.description}
+                  </p>
+                </div>
+              </Card>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Description */}
+      {selectedSpecies &&
+        selectedAncestry &&
+        (() => {
+          const folkInfo =
+            FOLK_DESCRIPTIONS[selectedAncestry]?.[selectedSpecies];
+          if (!folkInfo) return null;
+
+          return (
+            <div className="p-4 bg-primary/10 rounded-lg">
+              <h4 className="font-semibold text-lg mb-2">
+                {selectedSpecies === Human.name
+                  ? `${folkInfo.name} ${selectedSpecies}`
+                  : `${folkInfo.name} (${selectedSpecies})`}
+              </h4>
+              <p className="text-sm text-muted-foreground">
+                {folkInfo.description}
+              </p>
+            </div>
+          );
+        })()}
 
       {/* Stats Display (only show if both ancestry and species are selected) */}
       {speciesData && ancestryData && (
@@ -414,8 +419,8 @@ export const KinStep = () => {
                       {speciesData.senses.keen.includes(type)
                         ? "Keen"
                         : speciesData.senses.poor.includes(type)
-                          ? "Poor"
-                          : "-"}
+                        ? "Poor"
+                        : "-"}
                     </div>
                   </div>
                 </div>
@@ -440,7 +445,7 @@ export const KinStep = () => {
                         <div>{value > 0 ? `+${value}` : String(value)}</div>
                       </div>
                     </div>
-                  ),
+                  )
                 )}
               </div>
             ) : (
