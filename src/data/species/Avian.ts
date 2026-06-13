@@ -8,7 +8,6 @@ import { Species } from "../../models/species";
 export const Avian: Species = {
   name: "Avian",
   size: CreatureSize.Medium,
-  ancestries: ["Engloria"],
   body: 5,
   mind: 6,
   stamina: 7,

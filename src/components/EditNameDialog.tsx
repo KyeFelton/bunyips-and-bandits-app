@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import {
   Dialog,
   DialogContent,
@@ -11,13 +11,7 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Image as ImageIcon } from "lucide-react";
-import {
-  nameAtom,
-  imageAtom,
-  speciesAtom,
-  ancestryAtom,
-} from "../state/character";
-import { getSpeciesImage } from "../utils/speciesImages";
+import { nameAtom, imageAtom, kinAtom } from "../state/character";
 
 type Props = {
   isOpen: boolean;
@@ -27,8 +21,7 @@ type Props = {
 export const EditNameDialog = ({ isOpen, onClose }: Props) => {
   const [name, setName] = useAtom(nameAtom);
   const [image, setImage] = useAtom(imageAtom);
-  const [species] = useAtom(speciesAtom);
-  const [ancestry] = useAtom(ancestryAtom);
+  const kin = useAtomValue(kinAtom);
 
   const [pendingName, setPendingName] = useState("");
   const [pendingImage, setPendingImage] = useState<string | undefined>(
@@ -83,9 +76,7 @@ export const EditNameDialog = ({ isOpen, onClose }: Props) => {
             <div className="relative group w-64 h-64 mx-auto">
               <label htmlFor="image-upload" className="cursor-pointer">
                 <img
-                  src={
-                    pendingImage ?? image ?? getSpeciesImage(species, ancestry)
-                  }
+                  src={pendingImage ?? image ?? kin.imageSrc}
                   alt="character"
                   className="w-64 h-64 rounded-lg object-cover"
                 />

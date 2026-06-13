@@ -5,13 +5,4 @@ import { Human } from "./Human";
 import { Reptilian } from "./Reptilian";
 import { Delver } from "./Delver";
 
-export const AllSpecies = {
-  Human,
-  Reptilian,
-  Avian,
-  Delver,
-  Giant,
-  Goblin,
-};
-
-export const startingSpecies = AllSpecies.Human;
+export { Human, Reptilian, Avian, Delver, Giant, Goblin };

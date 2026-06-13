@@ -1,9 +1,10 @@
 import { WikiContent } from "../../../../models/wikiContent";
 import { WikiId } from "../../../../enums/WikiId";
 import { WikiCategory } from "../../../../enums/WikiCategory";
-import { Reptilian } from "../../../../data/species/Reptilian";
 import { KinStatsTable } from "../../../../components/KinStatsTable";
-import { getSpeciesImage } from "../../../../utils/speciesImages";
+import { AllKin } from "../../../../data/kin";
+
+const kin = AllKin.Birim;
 
 const summary = (
   <p>
@@ -33,7 +34,7 @@ const content = (
       reputation for quiet observation and thoughtful counsel.
     </p>
     <h2>Stats</h2>
-    <KinStatsTable species={Reptilian} />
+    <KinStatsTable kin={kin} />
   </>
 );
 
@@ -46,11 +47,11 @@ export const Birim: WikiContent = {
   summary,
   main: content,
   infoBox: {
-    imageSrc: getSpeciesImage(Reptilian.name, "Downunda"),
+    imageSrc: kin.imageSrc,
     traits: [
-      { key: "Species", value: Reptilian.name },
-      { key: "Ancestry", value: "Downunda" },
-      { key: "Size", value: Reptilian.size },
+      { key: "Species", value: kin.species.name },
+      { key: "Ancestry", value: kin.ancestry.name },
+      { key: "Size", value: kin.species.size },
     ],
   },
 };

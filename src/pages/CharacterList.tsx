@@ -24,7 +24,6 @@ import {
 import { saveFileAtom } from "../state/saveFile";
 import { randomString } from "../utils/randomString";
 import { defaultCharacter } from "../models/saveFile";
-import { getSpeciesImage } from "../utils/speciesImages";
 
 export function CharactersPage() {
   const navigate = useNavigate();
@@ -132,10 +131,7 @@ export function CharactersPage() {
                   </div>
                   {
                     <img
-                      src={
-                        character.image ??
-                        getSpeciesImage(character.species, character.ancestry)
-                      }
+                      src={character.image ?? character.kin.imageSrc}
                       alt={character.name}
                       className="w-full h-48 object-cover rounded-t-lg"
                     />
@@ -145,7 +141,7 @@ export function CharactersPage() {
               <CardFooter className="flex flex-col items-start p-4">
                 <h3 className="font-semibold text-lg">{character.name}</h3>
                 <div className="text-sm text-muted-foreground">
-                  {character.ancestry} {character.species}
+                  {character.kin.name}
                 </div>
               </CardFooter>
             </Card>

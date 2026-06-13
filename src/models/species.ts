@@ -8,7 +8,6 @@ import { SpeedRating } from "../enums/SpeedRating";
 export type Species = {
   name: string;
   size: CreatureSize;
-  ancestries: string[];
   body: number;
   mind: number;
   stamina: number;

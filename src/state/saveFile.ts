@@ -5,8 +5,7 @@ import { useEffect } from "react";
 import { SaveFile, CharacterSaveFile } from "../models/saveFile";
 import {
   nameAtom,
-  ancestryAtom,
-  speciesAtom,
+  kinAtom,
   genderAtom,
   ageAtom,
   backgroundAtom,
@@ -41,8 +40,7 @@ export const focalCharacterIdAtom = atom<string | undefined>(undefined);
 // Derived atom that builds the focal character from individual atoms
 export const focalCharacterAtom = atom<CharacterSaveFile>((get) => ({
   name: get(nameAtom),
-  species: get(speciesAtom),
-  ancestry: get(ancestryAtom),
+  kin: get(kinAtom),
   gender: get(genderAtom),
   age: get(ageAtom),
   personality: get(personalityAtom),

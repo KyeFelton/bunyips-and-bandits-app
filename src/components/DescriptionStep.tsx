@@ -15,16 +15,14 @@ import { Button } from "./ui/button";
 import { Image, Plus, Shuffle, X } from "lucide-react";
 import {
   ageAtom,
-  ancestryAtom,
+  kinAtom,
   backstoryAtom,
   genderAtom,
   imageAtom,
   languagesAtom,
   nameAtom,
   personalityAtom,
-  speciesAtom,
 } from "./../state/character";
-import { getSpeciesImage } from "./../utils/speciesImages";
 
 const genders = ["Male", "Female", "Non-binary"];
 const CUSTOM_GENDER_OPTION = "Let me type...";
@@ -128,7 +126,7 @@ const composePersonality = (
   personality: string,
   virtue: string,
   flaw: string,
-  motivation: string,
+  motivation: string
 ): string =>
   [
     personality && `${personality}`,
@@ -143,8 +141,7 @@ type PersonalityMode = "write" | "pick";
 
 export const DescriptionStep = () => {
   const [name, setName] = useAtom(nameAtom);
-  const species = useAtomValue(speciesAtom);
-  const ancestry = useAtomValue(ancestryAtom);
+  const kin = useAtomValue(kinAtom);
   const [gender, setGender] = useAtom(genderAtom);
   const [age, setAge] = useAtom(ageAtom);
   const [backstory, setBackstory] = useAtom(backstoryAtom);
@@ -220,7 +217,7 @@ export const DescriptionStep = () => {
 
   const handlePickChange = (
     field: "personality" | "virtue" | "flaw" | "motivation",
-    value: string,
+    value: string
   ) => {
     const next = {
       personality: pickedPersonality,
@@ -238,8 +235,8 @@ export const DescriptionStep = () => {
         next.personality,
         next.virtue,
         next.flaw,
-        next.motivation,
-      ),
+        next.motivation
+      )
     );
   };
 
@@ -282,7 +279,7 @@ export const DescriptionStep = () => {
             <div className="relative group w-full aspect-square max-w-[300px]">
               <label htmlFor="image-upload" className="cursor-pointer">
                 <img
-                  src={image ?? getSpeciesImage(species, ancestry)}
+                  src={image ?? kin.imageSrc}
                   alt="character"
                   className="w-full h-full rounded-lg object-cover"
                 />

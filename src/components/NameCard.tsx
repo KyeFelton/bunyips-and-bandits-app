@@ -2,21 +2,14 @@ import { useAtomValue } from "jotai";
 import { Card, CardHeader, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
 import { Edit2 } from "lucide-react";
-import {
-  nameAtom,
-  imageAtom,
-  speciesAtom,
-  ancestryAtom,
-} from "./../state/character";
+import { nameAtom, imageAtom, kinAtom } from "./../state/character";
 import { EditNameDialog } from "./EditNameDialog";
 import { useState } from "react";
-import { getSpeciesImage } from "./../utils/speciesImages";
 
 export const NameCard = () => {
   const name = useAtomValue(nameAtom);
   const image = useAtomValue(imageAtom);
-  const species = useAtomValue(speciesAtom);
-  const ancestry = useAtomValue(ancestryAtom);
+  const kin = useAtomValue(kinAtom);
 
   const [isEditNameDialogOpen, setIsEditNameDialogOpen] = useState(false);
 
@@ -27,9 +20,7 @@ export const NameCard = () => {
           <h3 className="px-8 text-2xl font-semibold text-center line-clamp-2">
             {name || "No name"}
           </h3>
-          <span className="text-md text-muted-foreground">
-            {ancestry} {species}
-          </span>
+          <span className="text-md text-muted-foreground">{kin.name}</span>
           <Button
             variant="ghost"
             size="icon"
@@ -42,7 +33,7 @@ export const NameCard = () => {
       </CardHeader>
       <CardContent className="flex-grow min-h-0 flex justify-center">
         <img
-          src={image ?? getSpeciesImage(species, ancestry)}
+          src={image ?? kin.imageSrc}
           alt="character"
           className="w-full max-w-[250px] h-full max-h-[250px] rounded-md object-cover"
         />

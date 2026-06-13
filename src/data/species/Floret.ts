@@ -9,7 +9,6 @@ import { Species } from "../../models/species";
 export const Floret: Species = {
   name: "Floret",
   size: CreatureSize.Medium,
-  ancestries: ["Downunda", "Engloria"],
   body: 6,
   mind: 7,
   stamina: 5,

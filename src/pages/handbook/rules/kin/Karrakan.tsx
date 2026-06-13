@@ -28,7 +28,7 @@ const content = (
       with many different communities.
     </p>
     <h2>Stats</h2>
-    <KinStatsTable species={Avian} />
+    <KinStatsTable kin={Avian} />
   </>
 );
 

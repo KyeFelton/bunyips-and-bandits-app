@@ -1,14 +1,13 @@
-import { startingSpecies } from "../data/species";
-import { startingAncestry } from "../data/ancestries";
 import { SkillType } from "../enums/SkillType";
 import { ItemDictionary } from "./items";
 import { Trait } from "./traits";
 import { Condition } from "./conditions";
+import { startingKin } from "../data/kin";
+import { Kin } from "./kin";
 
 export type CharacterSaveFile = {
   name: string;
-  ancestry: string;
-  species: string;
+  kin: Kin;
   gender: string;
   age: number;
   personality: string;
@@ -32,8 +31,7 @@ export type CharacterSaveFile = {
 
 export const defaultCharacter: CharacterSaveFile = {
   name: "",
-  ancestry: startingAncestry.name,
-  species: startingSpecies.name,
+  kin: startingKin,
   gender: "",
   age: 0,
   personality: "",
@@ -43,11 +41,11 @@ export const defaultCharacter: CharacterSaveFile = {
   magicSkills: ["Biotic"],
   customTraits: [],
   criticalSuccesses: {},
-  currentBody: startingSpecies.body,
+  currentBody: startingKin.species.body,
   bodyUpgrades: 0,
-  currentMind: startingSpecies.mind,
+  currentMind: startingKin.species.mind,
   mindUpgrades: 0,
-  currentStamina: startingSpecies.stamina,
+  currentStamina: startingKin.species.stamina,
   staminaUpgrades: 0,
   items: {},
   money: 0,

@@ -1,8 +1,6 @@
 import { atom } from "jotai";
 import { SkillType } from "../enums/SkillType";
 import { ItemDictionary } from "../models/items";
-import { AllSpecies, startingSpecies } from "../data/species";
-import { AllAncestries, startingAncestry } from "../data/ancestries";
 import { AllSkillProgressions } from "../data/skillProgressions";
 import { AllBackgrounds } from "../data/backgrounds";
 import { Effect } from "../models/effect";
@@ -14,6 +12,8 @@ import { SkillForm } from "../enums/SkillForm";
 import { Locomotion } from "../enums/Locomotion";
 import { SpeedRating } from "../enums/SpeedRating";
 import { Condition } from "../models/conditions";
+import { startingKin } from "../data/kin";
+import { Kin } from "../models/kin";
 
 // Constants
 export const MAX_SKILL_LEVEL = 10;
@@ -22,8 +22,7 @@ export const CRIT_TO_LEVEL_UP = 1;
 
 // Basic character info
 export const nameAtom = atom<string>("");
-export const ancestryAtom = atom<string>(startingAncestry.name);
-export const speciesAtom = atom<string>(startingSpecies.name);
+export const kinAtom = atom<Kin>(startingKin);
 export const genderAtom = atom<string>("");
 export const ageAtom = atom<number>(0);
 export const backgroundAtom = atom<string>("");
@@ -35,19 +34,19 @@ export const imageAtom = atom<string | undefined>(undefined);
 // Character progression
 export const magicSkillsAtom = atom<string[]>(["Biotic"]);
 export const criticalSuccessesAtom = atom<Partial<Record<SkillType, number>>>(
-  {},
+  {}
 );
 export const skillsProgressedSinceRestAtom = atom<Set<SkillType>>(
-  new Set<SkillType>(),
+  new Set<SkillType>()
 );
 export const bodyUpgradesAtom = atom<number>(0);
 export const mindUpgradesAtom = atom<number>(0);
 export const staminaUpgradesAtom = atom<number>(0);
 
 // Character stats
-export const currentBodyAtom = atom<number>(startingSpecies.body);
-export const currentMindAtom = atom<number>(startingSpecies.mind);
-export const currentStaminaAtom = atom<number>(startingSpecies.stamina);
+export const currentBodyAtom = atom<number>(startingKin.species.body);
+export const currentMindAtom = atom<number>(startingKin.species.mind);
+export const currentStaminaAtom = atom<number>(startingKin.species.stamina);
 export const conditionsAtom = atom<Condition[]>([]);
 
 // Items and equipment
@@ -56,19 +55,6 @@ export const moneyAtom = atom<number>(0);
 
 // Custom traits
 export const customTraitsAtom = atom<Trait[]>([]);
-
-// Get species data
-export const speciesDataAtom = atom((get) => {
-  const speciesName = get(speciesAtom);
-  return AllSpecies[speciesName as keyof typeof AllSpecies];
-});
-
-// Get ancestry data
-export const ancestryDataAtom = atom((get) => {
-  const ancestryName = get(ancestryAtom);
-  if (!ancestryName) return null;
-  return AllAncestries[ancestryName as keyof typeof AllAncestries] || null;
-});
 
 // Get background data
 export const backgroundDataAtom = atom((get) => {
@@ -119,7 +105,7 @@ export const skillLevelsAtom = atom((get) => {
   Object.keys(skills).forEach((skill) => {
     skills[skill as SkillType] = Math.max(
       1,
-      Math.min(MAX_SKILL_LEVEL, skills[skill as SkillType] || 1),
+      Math.min(MAX_SKILL_LEVEL, skills[skill as SkillType] || 1)
     );
   });
 
@@ -178,15 +164,15 @@ export const traitsAtom = atom((get) => {
 
 // Effects atom
 export const effectsAtom = atom((get) => {
-  const ancestry = get(ancestryDataAtom);
+  const kin = get(kinAtom);
   const items = get(itemsAtom);
   const conditions = get(conditionsAtom);
   const traits = get(traitsAtom);
   const effects: Effect[] = [];
 
   // Collect effects from ancestry
-  if (ancestry?.effects) {
-    effects.push(...ancestry.effects);
+  if (kin.ancestry.effects) {
+    effects.push(...kin.ancestry.effects);
   }
 
   // Collect effects from traits
@@ -217,10 +203,10 @@ export const effectsAtom = atom((get) => {
 
 // Skill modifiers atom - aggregates all modifier sources
 export const skillModifiersAtom = atom((get) => {
-  const speciesData = get(speciesDataAtom);
+  const kin = get(kinAtom);
   const effects = get(effectsAtom);
   const modifiers: Partial<Record<SkillType, number>> = {
-    ...speciesData.skillModifiers,
+    ...kin.species.skillModifiers,
   };
 
   // Add effect modifiers (traits, items, conditions)
@@ -236,10 +222,10 @@ export const skillModifiersAtom = atom((get) => {
 
 // Body
 export const bodyAtom = atom((get) => {
-  const speciesData = get(speciesDataAtom);
+  const kin = get(kinAtom);
   const bodyUpgrades = get(bodyUpgradesAtom);
   const effects = get(effectsAtom);
-  const baseMaxBody = speciesData.body + bodyUpgrades;
+  const baseMaxBody = kin.species.body + bodyUpgrades;
 
   const maxBody = effects.reduce((total, effect) => {
     if (effect.body?.bonus) {
@@ -256,10 +242,10 @@ export const bodyAtom = atom((get) => {
 
 // Mind
 export const mindAtom = atom((get) => {
-  const speciesData = get(speciesDataAtom);
+  const kin = get(kinAtom);
   const mindUpgrades = get(mindUpgradesAtom);
   const effects = get(effectsAtom);
-  const baseMaxMind = speciesData.mind + mindUpgrades;
+  const baseMaxMind = kin.species.mind + mindUpgrades;
   const maxMind = effects.reduce((total, effect) => {
     if (effect.mind?.bonus) {
       return total + effect.mind.bonus;
@@ -278,10 +264,10 @@ export const mindAtom = atom((get) => {
 
 // Stamina
 export const staminaAtom = atom((get) => {
-  const speciesData = get(speciesDataAtom);
+  const kin = get(kinAtom);
   const staminaUpgrades = get(staminaUpgradesAtom);
   const effects = get(effectsAtom);
-  const baseMaxStamina = speciesData.stamina + staminaUpgrades;
+  const baseMaxStamina = kin.species.stamina + staminaUpgrades;
   const maxStamina = effects.reduce((total, effect) => {
     if (effect.stamina?.bonus) {
       return total + effect.stamina.bonus;
@@ -326,11 +312,11 @@ export const actionsCountAtom = atom((get) => {
 
 // Speed
 export const speedAtom = atom((get) => {
-  const speciesData = get(speciesDataAtom);
+  const kin = get(kinAtom);
   const effects = get(effectsAtom);
   const body = get(bodyAtom);
   const baseSpeed: Record<Locomotion, SpeedRating> = {
-    ...speciesData.speed,
+    ...kin.species.speed,
   };
 
   // Helper function to convert rating to numeric value for calculations
@@ -381,7 +367,7 @@ export const speedAtom = atom((get) => {
     if (body.current / body.max <= 0.5) {
       // Reduce speed rating by 1 level
       baseSpeed[locomotion as Locomotion] = numberToRating(
-        Math.max(0, currentValue - 1),
+        Math.max(0, currentValue - 1)
       );
     }
   });
@@ -391,12 +377,12 @@ export const speedAtom = atom((get) => {
 
 // Senses
 export const sensesAtom = atom((get) => {
-  const speciesData = get(speciesDataAtom);
+  const kin = get(kinAtom);
   const effects = get(effectsAtom);
 
   // Start with species senses
-  const keen = [...speciesData.senses.keen];
-  const poor = [...speciesData.senses.poor];
+  const keen = [...kin.species.senses.keen];
+  const poor = [...kin.species.senses.poor];
 
   // Apply effects that modify senses
   effects.forEach((effect) => {
@@ -460,9 +446,9 @@ export const skillRollValuesAtom = atom((get) => {
 
 // Armour
 export const armourAtom = atom((get) => {
-  const speciesData = get(speciesDataAtom);
+  const kin = get(kinAtom);
   const effects = get(effectsAtom);
-  const armour = { ...speciesData.armour };
+  const armour = { ...kin.species.armour };
 
   effects.forEach((effect) => {
     if (effect.armour?.damageType) {

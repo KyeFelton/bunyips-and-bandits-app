@@ -1,9 +1,10 @@
 import { WikiContent } from "../../../../models/wikiContent";
 import { WikiId } from "../../../../enums/WikiId";
 import { WikiCategory } from "../../../../enums/WikiCategory";
-import { Human } from "../../../../data/species/Human";
 import { KinStatsTable } from "../../../../components/KinStatsTable";
-import { getSpeciesImage } from "../../../../utils/speciesImages";
+import { AllKin } from "../../../../data/kin";
+
+const kin = AllKin.Dharrigal;
 
 const summary = <p></p>;
 
@@ -11,7 +12,7 @@ const content = (
   <>
     <p></p>
     <h2>Stats</h2>
-    <KinStatsTable species={Human} />
+    <KinStatsTable kin={kin} />
   </>
 );
 
@@ -23,11 +24,11 @@ export const Dharrigal: WikiContent = {
   summary,
   main: content,
   infoBox: {
-    imageSrc: getSpeciesImage("Human", "Downunda"),
+    imageSrc: kin.imageSrc,
     traits: [
-      { key: "Species", value: Human.name },
-      { key: "Ancestry", value: "Downunda" },
-      { key: "Size", value: Human.size },
+      { key: "Species", value: kin.species.name },
+      { key: "Ancestry", value: kin.ancestry.name },
+      { key: "Size", value: kin.species.size },
     ],
   },
 };

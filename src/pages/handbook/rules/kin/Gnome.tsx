@@ -1,9 +1,10 @@
 import { WikiContent } from "../../../../models/wikiContent";
 import { WikiId } from "../../../../enums/WikiId";
 import { WikiCategory } from "../../../../enums/WikiCategory";
-import { Delver } from "../../../../data/species/Delver";
 import { KinStatsTable } from "../../../../components/KinStatsTable";
-import { getSpeciesImage } from "../../../../utils/speciesImages";
+import { AllKin } from "../../../../data/kin";
+
+const kin = AllKin.Gnome;
 
 const summary = (
   <p>
@@ -33,7 +34,7 @@ const content = (
       strong emphasis on collective labour and long-term stability.
     </p>
     <h2>Stats</h2>
-    <KinStatsTable species={Delver} />
+    <KinStatsTable kin={kin} />
   </>
 );
 
@@ -46,11 +47,11 @@ export const Gnome: WikiContent = {
   summary,
   main: content,
   infoBox: {
-    imageSrc: getSpeciesImage("Delver", "Engloria"),
+    imageSrc: kin.imageSrc,
     traits: [
-      { key: "Species", value: Delver.name },
-      { key: "Ancestry", value: "Engloria" },
-      { key: "Size", value: Delver.size },
+      { key: "Species", value: kin.species.name },
+      { key: "Ancestry", value: kin.ancestry.name },
+      { key: "Size", value: kin.species.size },
     ],
   },
 };

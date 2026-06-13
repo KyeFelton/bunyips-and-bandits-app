@@ -20,14 +20,6 @@ const validateSaveFile = (data: unknown): data is SaveFile => {
       error = "Expected a string value for 'name'";
     }
 
-    if (typeof character.species !== "string") {
-      error = "Expected a string value for 'species'";
-    }
-
-    if (typeof character.level !== "number") {
-      error = "Expected a number value for 'level'";
-    }
-
     if (!Array.isArray(character.languages)) {
       error = "Expected an array for 'languages'";
     }
@@ -58,10 +50,6 @@ const validateSaveFile = (data: unknown): data is SaveFile => {
 
     if (typeof character.money !== "number") {
       error = "Expected a number value for 'money'";
-    }
-
-    if (!Array.isArray(character.paths)) {
-      error = "Expected an array for 'paths'";
     }
 
     if (typeof character.items !== "object" || character.items === null) {

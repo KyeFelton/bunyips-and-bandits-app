@@ -8,7 +8,6 @@ import { Species } from "../../models/species";
 export const Delver: Species = {
   name: "Delver",
   size: CreatureSize.Small,
-  ancestries: ["Downunda", "Engloria"],
   body: 4,
   mind: 6,
   stamina: 8,

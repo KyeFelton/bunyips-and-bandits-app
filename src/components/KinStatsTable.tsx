@@ -1,9 +1,9 @@
 import { SenseType } from "../enums/SenseType";
 import { SpeedRating } from "../enums/SpeedRating";
-import { Species } from "../models/species";
+import { Kin } from "../models/kin";
 
 type Props = {
-  species: Species;
+  kin: Kin;
 };
 
 const ALL_SENSES: { type: SenseType; label: string }[] = [
@@ -19,11 +19,11 @@ const groupCellClass =
 const statCellClass = "px-3 border-r border-border";
 const valueCellClass = "px-3";
 
-export function KinStatsTable({ species }: Props) {
-  const speedEntries = Object.entries(species.speed).filter(
-    ([, v]) => v !== SpeedRating.None,
+export function KinStatsTable({ kin }: Props) {
+  const speedEntries = Object.entries(kin.species.speed).filter(
+    ([, v]) => v !== SpeedRating.None
   );
-  const skillEntries = Object.entries(species.skillModifiers);
+  const skillEntries = Object.entries(kin.species.skillModifiers);
 
   return (
     <div className="prose border-t overflow-hidden text-sm">
@@ -31,9 +31,9 @@ export function KinStatsTable({ species }: Props) {
         <tbody className="">
           {/* Health */}
           {[
-            { label: "Body", value: String(species.body) },
-            { label: "Mind", value: String(species.mind) },
-            { label: "Stamina", value: String(species.stamina) },
+            { label: "Body", value: String(kin.species.body) },
+            { label: "Mind", value: String(kin.species.mind) },
+            { label: "Stamina", value: String(kin.species.stamina) },
           ].map((row, i) => (
             <tr key={row.label}>
               {i === 0 && (
@@ -61,11 +61,11 @@ export function KinStatsTable({ species }: Props) {
 
           {/* Senses */}
           {ALL_SENSES.map(({ type, label }, i) => {
-            const value = species.senses.keen.includes(type)
+            const value = kin.species.senses.keen.includes(type)
               ? "Keen"
-              : species.senses.poor.includes(type)
-                ? "Poor"
-                : "—";
+              : kin.species.senses.poor.includes(type)
+              ? "Poor"
+              : "—";
             return (
               <tr key={type}>
                 {i === 0 && (

@@ -1,9 +1,10 @@
 import { WikiContent } from "../../../../models/wikiContent";
 import { WikiId } from "../../../../enums/WikiId";
 import { WikiCategory } from "../../../../enums/WikiCategory";
-import { Goblin } from "../../../../data/species/Goblin";
 import { KinStatsTable } from "../../../../components/KinStatsTable";
-import { getSpeciesImage } from "../../../../utils/speciesImages";
+import { AllKin } from "../../../../data/kin";
+
+const kin = AllKin.DropBear;
 
 const summary = (
   <p>
@@ -29,7 +30,7 @@ const content = (
       them when close enough.
     </p>
     <h2>Stats</h2>
-    <KinStatsTable species={Goblin} />
+    <KinStatsTable kin={kin} />
   </>
 );
 
@@ -42,11 +43,11 @@ export const Dropbear: WikiContent = {
   summary,
   main: content,
   infoBox: {
-    imageSrc: getSpeciesImage("Goblin", "Downunda"),
+    imageSrc: kin.imageSrc,
     traits: [
-      { key: "Species", value: Goblin.name },
-      { key: "Ancestry", value: "Downunda" },
-      { key: "Size", value: Goblin.size },
+      { key: "Species", value: kin.species.name },
+      { key: "Ancestry", value: kin.ancestry.name },
+      { key: "Size", value: kin.species.size },
     ],
   },
 };

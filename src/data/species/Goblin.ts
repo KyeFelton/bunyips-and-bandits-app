@@ -8,7 +8,6 @@ import { Species } from "../../models/species";
 export const Goblin: Species = {
   name: "Goblin",
   size: CreatureSize.Small,
-  ancestries: ["Downunda", "Engloria"],
   body: 6,
   mind: 5,
   stamina: 7,
