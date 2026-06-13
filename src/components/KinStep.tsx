@@ -30,70 +30,93 @@ import {
 } from "./ui/carousel";
 import { cn } from "../utils/cn";
 import { useCallback, useEffect, useState, useMemo } from "react";
-import { Card } from "./ui/card";
 import { SpeedRating } from "../enums/SpeedRating";
-import { Human } from "../data/species/Human";
 
-// Folk descriptions by ancestry and species
-const FOLK_DESCRIPTIONS: Record<
-  string,
-  Record<string, { name: string; description: string }>
-> = {
-  Downunda: {
-    Reptilian: {
-      name: "Birim",
-      description:
-        "The Birim are a reptilian folk ancestryating from the deserts of Downunda. They are distinguished by their tall and slender physique, with features resembling goannas.",
-    },
-    Giant: {
-      name: "Yowie",
-      description:
-        "Yowies are a giant folk found in the highlands of Downunda. They are large, fur-covered humanoids with features resembling marsupials.",
-    },
-    Goblin: {
-      name: "Drop Bear",
-      description:
-        "Drop Bears are a koala-like, goblin folk native to the forests of Downunda. They possess stocky, hunched bodies, with strong arms suited for climbing and wrestling.",
-    },
-    Delver: {
-      name: "Joonyar",
-      description:
-        "The Joonyar are a delver folk that live in the underground regions of Downunda. They are small humanoids with skin in shades of eucalyptus, brown hair, and glowing orange eyes that provide illumination in low-light environments.",
-    },
-    Human: {
-      name: "Dharrigal",
-      description:
-        "Humans of Downunda are diverse in culture, with many tracing their lineage to the Dharrigal peoples who have inhabited these lands for countless generations.",
-    },
-  },
-  Engloria: {
-    Avian: {
-      name: "Skerrig",
-      description:
-        "The Skerrig are an avian folk native to the coasts and rivers of Engloria and Downunda. Their plumage varies widely, often resembling seabirds such as gulls, cormorants, and puffins.",
-    },
-    Giant: {
-      name: "Troll",
-      description:
-        "Trolls are a giant folk native to the swamps and mountains of Engloria. They are large humanoids with broad noses, heavy brows, mossy hair, and enormous hands and feet.",
-    },
-    Goblin: {
-      name: "Hob",
-      description:
-        "Hobs are a goblin folk with ancestral ties to Engloria. They are slightly shorter than humans, with a stocky build, coarse body hair, and facial features often likened to bats, including wide-set eyes, flat nose and pointed ears.",
-    },
-    Delver: {
-      name: "Gnome",
-      description:
-        "Gnomes are delvers ancestryating from the underground regions of Engloria. They are small in stature and are recognised by their sky-blue skin, white hair, and glowing yellow eyes.",
-    },
-    Human: {
-      name: "Englorian",
-      description:
-        "Englorian humans descend from the Englorian settlers who arrived from across the seas. They are the most abundant of all folk in Downunda.",
-    },
-  },
+type KinOption = {
+  ancestry: string;
+  species: string;
+  name: string;
+  description: string;
+  label: string;
 };
+
+const KIN: Omit<KinOption, "label">[] = [
+  {
+    ancestry: "Downunda",
+    species: "Reptilian",
+    name: "Birim",
+    description:
+      "The Birim are a reptilian kin originating from the deserts of Downunda. They are distinguished by their tall and slender physique, with features resembling goannas.",
+  },
+  {
+    ancestry: "Downunda",
+    species: "Giant",
+    name: "Yowie",
+    description:
+      "Yowies are a giant kin found in the highlands of Downunda. They are large, fur-covered humanoids with features resembling marsupials.",
+  },
+  {
+    ancestry: "Downunda",
+    species: "Goblin",
+    name: "Drop Bear",
+    description:
+      "Drop Bears are a koala-like, goblin kin native to the forests of Downunda. They possess stocky, hunched bodies, with strong arms suited for climbing and wrestling.",
+  },
+  {
+    ancestry: "Downunda",
+    species: "Delver",
+    name: "Joonyar",
+    description:
+      "The Joonyar are a delver kin that live in the underground regions of Downunda. They are small humanoids with skin in shades of eucalyptus, brown hair, and glowing orange eyes that provide illumination in low-light environments.",
+  },
+  {
+    ancestry: "Downunda",
+    species: "Human",
+    name: "Dharrigal",
+    description:
+      "Humans of Downunda are diverse in culture, with many tracing their lineage to the Dharrigal peoples who have inhabited these lands for countless generations.",
+  },
+  {
+    ancestry: "Engloria",
+    species: "Avian",
+    name: "Skerrig",
+    description:
+      "The Skerrig are an avian kin native to the coasts and rivers of Engloria and Downunda. Their plumage varies widely, often resembling seabirds such as gulls, cormorants, and puffins.",
+  },
+  {
+    ancestry: "Engloria",
+    species: "Giant",
+    name: "Troll",
+    description:
+      "Trolls are a giant kin native to the swamps and mountains of Engloria. They are large humanoids with broad noses, heavy brows, mossy hair, and enormous hands and feet.",
+  },
+  {
+    ancestry: "Engloria",
+    species: "Goblin",
+    name: "Hob",
+    description:
+      "Hobs are a goblin kin with ancestral ties to Engloria. They are slightly shorter than humans, with a stocky build, coarse body hair, and facial features often likened to bats, including wide-set eyes, flat nose and pointed ears.",
+  },
+  {
+    ancestry: "Engloria",
+    species: "Delver",
+    name: "Gnome",
+    description:
+      "Gnomes are delvers originating from the underground regions of Engloria. They are small in stature and are recognised by their sky-blue skin, white hair, and glowing yellow eyes.",
+  },
+  {
+    ancestry: "Engloria",
+    species: "Human",
+    name: "Englorian",
+    description:
+      "Englorians descend from human settlers who originated in Engloria.",
+  },
+];
+
+const KIN_OPTIONS: KinOption[] = KIN.map((kin) => ({
+  ...kin,
+  label: kin.name,
+})).sort((a, b) => a.label.localeCompare(b.label));
 
 export const KinStep = () => {
   const [selectedAncestry, setAncestry] = useAtom(ancestryAtom);
@@ -106,68 +129,47 @@ export const KinStep = () => {
   const setLanguages = useSetAtom(languagesAtom);
   const [api, setApi] = useState<CarouselApi>();
 
-  // Get available ancestries for selected species
-  const availableAncestries = useMemo(() => {
-    if (!speciesData) return Object.keys(AllAncestries);
-
-    console.log(speciesData.ancestries);
-    console.log(AllAncestries);
-
-    const test = Object.keys(AllAncestries).filter((ancestry) => {
-      console.log(ancestry);
-      console.log(speciesData.ancestries.includes(ancestry));
-      return speciesData.ancestries.includes(ancestry);
-    });
-    console.log(test);
-
-    return test;
-  }, [speciesData]);
-
-  // // Get available species for selected ancestry
-  // const availableSpecies = useMemo(() => {
-  //   if (!selectedAncestry) return Object.keys(AllSpecies);
-
-  //   const ancestryData =
-  //     AllAncestries[selectedAncestry as keyof typeof AllAncestries];
-  //   if (!ancestryData) return Object.keys(AllSpecies);
-
-  //   return Object.keys(AllSpecies).filter((speciesName) =>
-  //     ancestryData.species.includes(speciesName)
-  //   );
-  // }, [selectedAncestry]);
-
-  const handleAncestryChange = useCallback(
-    (ancestryName: string) => {
-      setAncestry(ancestryName);
-      const newAncestryData =
-        AllAncestries[ancestryName as keyof typeof AllAncestries];
-      setLanguages(newAncestryData.languages);
-    },
-    [setAncestry, setLanguages]
+  const selectedKinOption = useMemo(
+    () =>
+      KIN_OPTIONS.find(
+        (option) =>
+          option.species === selectedSpecies &&
+          option.ancestry === selectedAncestry
+      ),
+    [selectedSpecies, selectedAncestry]
   );
 
-  const handleSpeciesChange = useCallback(
-    (value: string) => {
-      const newSpeciesData = AllSpecies[value as keyof typeof AllSpecies];
+  const handleKinChange = useCallback(
+    (speciesName: string, ancestryName: string) => {
+      const newSpeciesData = AllSpecies[speciesName as keyof typeof AllSpecies];
+      const newAncestryData =
+        AllAncestries[ancestryName as keyof typeof AllAncestries];
       setCurrentBody(newSpeciesData.body);
       setCurrentMind(newSpeciesData.mind);
       setCurrentStamina(newSpeciesData.stamina);
-      setAncestry(newSpeciesData.ancestries[0]);
-      setSpecies(value);
+      setSpecies(speciesName);
+      setAncestry(ancestryName);
+      setLanguages(newAncestryData.languages);
     },
-    [setCurrentBody, setCurrentMind, setCurrentStamina, setSpecies, setAncestry]
+    [
+      setCurrentBody,
+      setCurrentMind,
+      setCurrentStamina,
+      setSpecies,
+      setAncestry,
+      setLanguages,
+    ]
   );
 
   const onSelect = useCallback(
     (api: CarouselApi) => {
       if (!api) return;
-      const selectedIndex = api.selectedScrollSnap();
-      const selectedSpeciesName = Object.keys(AllSpecies)[selectedIndex];
-      if (selectedSpeciesName) {
-        handleSpeciesChange(selectedSpeciesName);
+      const option = KIN_OPTIONS[api.selectedScrollSnap()];
+      if (option) {
+        handleKinChange(option.species, option.ancestry);
       }
     },
-    [handleSpeciesChange]
+    [handleKinChange]
   );
 
   useEffect(() => {
@@ -178,33 +180,27 @@ export const KinStep = () => {
     };
   }, [api, onSelect]);
 
-  // useEffect(() => {
-  //   if (!api || !selectedSpecies) return;
-  //   const selectedIndex = availableSpecies.indexOf(selectedSpecies);
-  //   if (selectedIndex !== -1) {
-  //     api.scrollTo(selectedIndex);
-  //   }
-  // }, [api, selectedSpecies, availableSpecies]);
+  useEffect(() => {
+    if (!api || !selectedSpecies || !selectedAncestry) return;
+    const selectedIndex = KIN_OPTIONS.findIndex(
+      (option) =>
+        option.species === selectedSpecies &&
+        option.ancestry === selectedAncestry
+    );
+    if (selectedIndex !== -1 && api.selectedScrollSnap() !== selectedIndex) {
+      api.scrollTo(selectedIndex);
+    }
+  }, [api, selectedSpecies, selectedAncestry]);
 
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 text-md text-muted-foreground">
         <div className="flex-1 sm:whitespace-nowrap">
-          Choose an ancestry and species to shape your character's heritage and
-          abilities.
+          Choose your kin to shape your character's heritage and abilities.
         </div>
       </div>
 
-      {/* Species Selection */}
       <div className="">
-        <h3 className="font-semibold mb-4 text-lg">Species</h3>
-        <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 text-md text-muted-foreground mb-4">
-          <div className="whitespace-nowrap">
-            Selected: {selectedSpecies || "None"}
-          </div>
-        </div>
-
-        {/* Species Carousel */}
         <div className="relative px-16">
           <div className="h-[220px] lg:h-[280px] flex items-center">
             <Carousel
@@ -216,48 +212,52 @@ export const KinStep = () => {
               className="w-full"
             >
               <CarouselContent>
-                {Object.values(AllSpecies).map((species) => (
-                  <CarouselItem
-                    key={species.name}
-                    className="basis-3/4 sm:basis-1/2 md:basis-1/3 cursor-pointer flex justify-center items-center"
-                    onClick={() => {
-                      const selectedIndex = Object.keys(AllSpecies).indexOf(
-                        species.name
-                      );
-                      if (selectedIndex !== -1) {
-                        api?.scrollTo(selectedIndex);
-                        handleSpeciesChange(species.name);
-                      }
-                    }}
-                  >
-                    <div className="flex flex-col justify-center items-center gap-2">
-                      <div
-                        className={cn(
-                          "transition-all duration-300 ease-in-out",
-                          species.name === selectedSpecies
-                            ? "h-40 w-40 lg:h-48 lg:w-48 opacity-100"
-                            : "h-36 w-36 lg:h-44 lg:w-44 opacity-50"
-                        )}
-                      >
-                        <img
-                          src={getSpeciesImage(species.name, selectedAncestry)}
-                          alt={species.name}
-                          className="w-full h-full object-contain rounded-lg"
-                        />
+                {KIN_OPTIONS.map((option, index) => {
+                  const isSelected =
+                    option.species === selectedSpecies &&
+                    option.ancestry === selectedAncestry;
+
+                  return (
+                    <CarouselItem
+                      key={`${option.ancestry}-${option.species}`}
+                      className="basis-3/4 sm:basis-1/2 md:basis-1/3 cursor-pointer flex justify-center items-center"
+                      onClick={() => {
+                        api?.scrollTo(index);
+                        handleKinChange(option.species, option.ancestry);
+                      }}
+                    >
+                      <div className="flex flex-col justify-center items-center gap-2">
+                        <div
+                          className={cn(
+                            "transition-all duration-300 ease-in-out",
+                            isSelected
+                              ? "h-40 w-40 lg:h-48 lg:w-48 opacity-100"
+                              : "h-36 w-36 lg:h-44 lg:w-44 opacity-50"
+                          )}
+                        >
+                          <img
+                            src={getSpeciesImage(
+                              option.species,
+                              option.ancestry
+                            )}
+                            alt={option.label}
+                            className="w-full h-full object-contain rounded-lg"
+                          />
+                        </div>
+                        <span
+                          className={cn(
+                            "font-medium text-center",
+                            !isSelected
+                              ? "text-md text-muted-foreground/50"
+                              : "text-lg"
+                          )}
+                        >
+                          {option.label}
+                        </span>
                       </div>
-                      <span
-                        className={cn(
-                          "font-medium",
-                          species.name !== selectedSpecies
-                            ? `text-md text-muted-foreground/50`
-                            : "text-lg"
-                        )}
-                      >
-                        {species.name}
-                      </span>
-                    </div>
-                  </CarouselItem>
-                ))}
+                    </CarouselItem>
+                  );
+                })}
               </CarouselContent>
               <CarouselPrevious />
               <CarouselNext />
@@ -266,63 +266,18 @@ export const KinStep = () => {
         </div>
       </div>
 
-      {/* Ancestry Selection */}
-      <div className="pt-6 border-t border-muted-foreground/20">
-        <h3 className="font-semibold mb-4 text-lg">Ancestry</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {Object.values(AllAncestries).map((ancestry) => {
-            const isAvailable = availableAncestries.includes(ancestry.name);
-            return (
-              <Card
-                key={ancestry.name}
-                className={cn(
-                  "p-4 transition-all duration-200 border-2",
-                  isAvailable
-                    ? "cursor-pointer hover:shadow-lg"
-                    : "cursor-not-allowed opacity-50",
-                  selectedAncestry === ancestry.name
-                    ? "border-primary bg-primary/5"
-                    : isAvailable
-                    ? "border-muted hover:border-primary/50"
-                    : "border-muted"
-                )}
-                onClick={() =>
-                  isAvailable && handleAncestryChange(ancestry.name)
-                }
-              >
-                <div className="space-y-2">
-                  <h4 className="font-semibold text-lg">{ancestry.name}</h4>
-                  <p className="text-sm text-muted-foreground">
-                    {ancestry.description}
-                  </p>
-                </div>
-              </Card>
-            );
-          })}
+      {selectedKinOption && (
+        <div className="p-4 bg-primary/10 rounded-lg">
+          <h4 className="font-semibold text-lg">{selectedKinOption.label}</h4>
+          <p className="text-sm text-muted-foreground mb-2">
+            {selectedKinOption.species} <strong>·</strong>{" "}
+            {selectedKinOption.ancestry}
+          </p>
+          <p className="text-sm text-muted-foreground">
+            {selectedKinOption.description}
+          </p>
         </div>
-      </div>
-
-      {/* Description */}
-      {selectedSpecies &&
-        selectedAncestry &&
-        (() => {
-          const folkInfo =
-            FOLK_DESCRIPTIONS[selectedAncestry]?.[selectedSpecies];
-          if (!folkInfo) return null;
-
-          return (
-            <div className="p-4 bg-primary/10 rounded-lg">
-              <h4 className="font-semibold text-lg mb-2">
-                {selectedSpecies === Human.name
-                  ? `${folkInfo.name} ${selectedSpecies}`
-                  : `${folkInfo.name} (${selectedSpecies})`}
-              </h4>
-              <p className="text-sm text-muted-foreground">
-                {folkInfo.description}
-              </p>
-            </div>
-          );
-        })()}
+      )}
 
       {/* Stats Display (only show if both ancestry and species are selected) */}
       {speciesData && ancestryData && (
@@ -383,17 +338,19 @@ export const KinStep = () => {
               Speed
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4">
-              {Object.entries(speciesData.speed).map(([type, value]) => (
-                <div key={type} className="flex items-center gap-2">
-                  <SpeedIcon type={type as Locomotion} size={16} />
-                  <div>
-                    <div className="text-sm font-medium">{type}</div>
+              {Object.entries(speciesData.speed)
+                .filter(([, value]) => value !== SpeedRating.None)
+                .map(([type, value]) => (
+                  <div key={type} className="flex items-center gap-2">
+                    <SpeedIcon type={type as Locomotion} size={16} />
                     <div>
-                      {value === SpeedRating.None ? "-" : String(value)}
+                      <div className="text-sm font-medium">{type}</div>
+                      <div>
+                        {value === SpeedRating.None ? "-" : String(value)}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
 
@@ -410,21 +367,27 @@ export const KinStep = () => {
                 { type: SenseType.Hearing, label: "Hearing" },
                 { type: SenseType.TremorHearing, label: "Tremor" },
                 { type: SenseType.Smell, label: "Smell" },
-              ].map(({ type, label }) => (
-                <div key={type} className="flex items-center gap-4">
-                  <SenseIcon type={type} />
-                  <div>
-                    <div className="text-sm font-medium">{label}</div>
+              ]
+                .filter(
+                  ({ type }) =>
+                    speciesData.senses.keen.includes(type) ||
+                    speciesData.senses.poor.includes(type)
+                )
+                .map(({ type, label }) => (
+                  <div key={type} className="flex items-center gap-4">
+                    <SenseIcon type={type} />
                     <div>
-                      {speciesData.senses.keen.includes(type)
-                        ? "Keen"
-                        : speciesData.senses.poor.includes(type)
-                        ? "Poor"
-                        : "-"}
+                      <div className="text-sm font-medium">{label}</div>
+                      <div>
+                        {speciesData.senses.keen.includes(type)
+                          ? "Keen"
+                          : speciesData.senses.poor.includes(type)
+                          ? "Poor"
+                          : "-"}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
 
