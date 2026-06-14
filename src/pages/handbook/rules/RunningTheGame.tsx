@@ -36,7 +36,7 @@ const main = (
         tags={["Humanoid"]}
         difficulty="Easy"
         health={8}
-        speed={{ [Locomotion.Walk]: SpeedRating.Moderate }}
+        speed={{ [Locomotion.Run]: SpeedRating.Moderate }}
         senses={{ [SenseType.Sight]: "Keen", [SenseType.Hearing]: "Keen" }}
         actions={[
           {

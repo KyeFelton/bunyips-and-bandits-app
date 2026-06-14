@@ -12,7 +12,7 @@ export type Species = {
   mind: number;
   stamina: number;
   speed: {
-    [Locomotion.Walk]: SpeedRating;
+    [Locomotion.Run]: SpeedRating;
     [Locomotion.Swim]: SpeedRating;
     [Locomotion.Climb]: SpeedRating;
     [Locomotion.Fly]: SpeedRating;

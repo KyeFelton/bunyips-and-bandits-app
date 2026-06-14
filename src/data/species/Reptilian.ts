@@ -12,7 +12,7 @@ export const Reptilian: Species = {
   mind: 7,
   stamina: 5,
   speed: {
-    [Locomotion.Walk]: SpeedRating.Moderate,
+    [Locomotion.Run]: SpeedRating.Moderate,
     [Locomotion.Swim]: SpeedRating.Slow,
     [Locomotion.Climb]: SpeedRating.Slow,
     [Locomotion.Fly]: SpeedRating.None,

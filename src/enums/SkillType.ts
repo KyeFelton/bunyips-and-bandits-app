@@ -4,7 +4,7 @@ export enum SkillType {
   Charisma = "Charisma",
   Dexterity = "Dexterity",
   Electric = "Electric",
-  Intelligence = "Intelligence",
+  Lore = "Lore",
   Kinetic = "Kinetic",
   Nature = "Nature",
   Perception = "Perception",

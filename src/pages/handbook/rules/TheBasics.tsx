@@ -234,14 +234,14 @@ const main = (
         <tr>
           <td className="pr-0">
             <SkillIcon
-              type={SkillType.Intelligence}
+              type={SkillType.Lore}
               className="inline-block mr-1 pb-1"
             />
           </td>
           <td>
-            <b>{SkillType.Intelligence}</b>
+            <b>{SkillType.Lore}</b>
           </td>
-          <td>{Skills.Intelligence.description}</td>
+          <td>{Skills.Lore.description}</td>
         </tr>
         <tr>
           <td className="pr-0">
@@ -473,10 +473,10 @@ const main = (
       <tbody>
         <tr>
           <td className="pr-0">
-            <SpeedIcon type={Locomotion.Walk} className="inline-block mr-1" />
+            <SpeedIcon type={Locomotion.Run} className="inline-block mr-1" />
           </td>
           <td>
-            <b>Walk</b>
+            <b>Run</b>
           </td>
           <td>Moving across land.</td>
         </tr>

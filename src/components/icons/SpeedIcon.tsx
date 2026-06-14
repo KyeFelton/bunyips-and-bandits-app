@@ -15,7 +15,7 @@ export const SpeedIcon = ({ type, size = 16, className = "" }: Props) => {
   };
 
   switch (type) {
-    case Locomotion.Walk:
+    case Locomotion.Run:
       return <PawPrint {...props} />;
     case Locomotion.Swim:
       return <Fish {...props} />;

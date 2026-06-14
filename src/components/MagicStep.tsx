@@ -170,10 +170,15 @@ export const MagicStep = () => {
                       );
                       const traits = unlockable?.traits || [];
                       const actions = unlockable?.actions || [];
-                      if (traits.length === 0 && actions.length === 0) return null;
+                      if (traits.length === 0 && actions.length === 0)
+                        return null;
                       return (
                         <div key={level} className="px-3">
-                          <ProgressionItems level={level} actions={actions} traits={traits} />
+                          <ProgressionItems
+                            level={level}
+                            actions={actions}
+                            traits={traits}
+                          />
                         </div>
                       );
                     }

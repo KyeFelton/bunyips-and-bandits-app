@@ -15,7 +15,7 @@ export const WindSpearOfCassreina: Item = {
     },
     {
       speed: {
-        locomotion: Locomotion.Walk,
+        locomotion: Locomotion.Run,
         bonus: 2,
       },
     },

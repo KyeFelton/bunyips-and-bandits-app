@@ -33,7 +33,7 @@ export const SkillIcon = ({ type, className = "h-4 w-4" }: Props) => {
       return <Route className={className} />;
     case SkillType.Dexterity:
       return <Hand className={className} />;
-    case SkillType.Intelligence:
+    case SkillType.Lore:
       return <Book className={className} />;
     case SkillType.Nature:
       return <Leaf className={className} />;

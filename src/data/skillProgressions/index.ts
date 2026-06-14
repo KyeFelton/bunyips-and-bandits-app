@@ -13,7 +13,7 @@ export const AllSkillProgressions: Record<SkillType, SkillProgression> = {
   [SkillType.Biotic]: BioticProgression,
   [SkillType.Charisma]: { skill: SkillType.Charisma, unlockables: [] },
   [SkillType.Electric]: ElectricProgression,
-  [SkillType.Intelligence]: { skill: SkillType.Intelligence, unlockables: [] },
+  [SkillType.Lore]: { skill: SkillType.Lore, unlockables: [] },
   [SkillType.Kinetic]: KineticProgression,
   [SkillType.Nature]: { skill: SkillType.Nature, unlockables: [] },
   [SkillType.Perception]: { skill: SkillType.Perception, unlockables: [] },

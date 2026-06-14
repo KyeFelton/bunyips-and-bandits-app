@@ -12,7 +12,7 @@ export const Goblin: Species = {
   mind: 5,
   stamina: 7,
   speed: {
-    [Locomotion.Walk]: SpeedRating.Moderate,
+    [Locomotion.Run]: SpeedRating.Moderate,
     [Locomotion.Swim]: SpeedRating.Slow,
     [Locomotion.Climb]: SpeedRating.Moderate,
     [Locomotion.Fly]: SpeedRating.None,
@@ -25,7 +25,7 @@ export const Goblin: Species = {
   skillModifiers: {
     [SkillType.Agility]: 1,
     [SkillType.Dexterity]: 1,
-    [SkillType.Intelligence]: -1,
+    [SkillType.Lore]: -1,
     [SkillType.Willpower]: -1,
     [SkillType.Stealth]: 1,
   },

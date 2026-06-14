@@ -40,11 +40,11 @@ export const Stealth: Skill = {
   form: SkillForm.Physical,
 };
 
-export const Intelligence: Skill = {
-  type: SkillType.Intelligence,
+export const Lore: Skill = {
+  type: SkillType.Lore,
   magicSkill: false,
   description:
-    "Tasks requiring mental acuity, such as investigating a scene, researching in a library, or recalling historical events.",
+    "Recollection of history, religion, medicine, and other scholarly knowledge.",
   form: SkillForm.Mental,
 };
 

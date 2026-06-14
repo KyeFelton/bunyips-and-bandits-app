@@ -71,7 +71,7 @@ export const EffectForm = ({ effects, onChange }: Props) => {
       case "speed":
         return {
           speed: {
-            locomotion: Locomotion.Walk,
+            locomotion: Locomotion.Run,
             increase: true,
           },
         };

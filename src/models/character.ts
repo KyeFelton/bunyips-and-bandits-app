@@ -29,7 +29,7 @@ export type Character = {
     current: number;
   };
   speed: {
-    [Locomotion.Walk]: SpeedRating;
+    [Locomotion.Run]: SpeedRating;
     [Locomotion.Swim]: SpeedRating;
     [Locomotion.Climb]: SpeedRating;
     [Locomotion.Fly]: SpeedRating;
@@ -51,7 +51,7 @@ export type Character = {
     [SkillType.Charisma]: number;
     [SkillType.Dexterity]: number;
     [SkillType.Electric]: number;
-    [SkillType.Intelligence]: number;
+    [SkillType.Lore]: number;
     [SkillType.Kinetic]: number;
     [SkillType.Nature]: number;
     [SkillType.Perception]: number;

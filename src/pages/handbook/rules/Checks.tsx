@@ -56,7 +56,7 @@ const main = (
       </li>
       <li>
         Performing first aid? That might be Dexterity (for steady hands) and
-        Intelligence (to know what medicine to use).
+        Lore (to know what medicine to use).
       </li>
     </ul>
     <h2>Difficulty Rating</h2>
@@ -206,7 +206,7 @@ const main = (
           difficulty="Moderate"
           health={12}
           speed={{
-            [Locomotion.Walk]: SpeedRating.Slow,
+            [Locomotion.Run]: SpeedRating.Slow,
             [Locomotion.Swim]: SpeedRating.Fast,
           }}
           senses={{

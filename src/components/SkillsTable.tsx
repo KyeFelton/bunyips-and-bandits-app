@@ -70,6 +70,8 @@ export const SkillsTable = () => {
     ...skillRollValues[skillType],
   }));
 
+  console.log(skillLevels);
+
   return (
     <div className="space-y-4">
       <Table>
@@ -83,7 +85,7 @@ export const SkillsTable = () => {
         <TableBody>
           {skillsArray
             .filter(
-              (skill) => !skill.magicSkill || (skill.level && skill.level > 0),
+              (skill) => !skill.magicSkill || (skill.level && skill.level > 0)
             )
             .map((skill) => {
               return (

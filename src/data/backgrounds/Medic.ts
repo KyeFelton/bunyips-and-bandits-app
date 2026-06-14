@@ -6,6 +6,6 @@ export const Medic: Background = {
   name: "Medic",
   description:
     "You have training in treating injuries and illnesses. Whether you're a frontier doctor, a field surgeon who patched up soldiers in combat, or a traveling healer bringing aid to remote settlements, you've seen your share of blood and know how to save lives.",
-  expertiseSkills: [SkillType.Intelligence, SkillType.Psychology],
+  expertiseSkills: [SkillType.Lore, SkillType.Psychology],
   traits: [Trait],
 };

@@ -1,5 +1,5 @@
 export enum Locomotion {
-  Walk = "Walk",
+  Run = "Run",
   Swim = "Swim",
   Climb = "Climb",
   Fly = "Fly",
