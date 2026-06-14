@@ -73,9 +73,7 @@ export const skillLevelsAtom = atom((get) => {
 
   // Initialize skills
   Object.values(Skills).forEach((skill) => {
-    if (skill.magicSkill) {
-      skills[skill.type] = 0;
-    } else {
+    if (!skill.magicSkill) {
       skills[skill.type] = 1;
     }
   });
@@ -83,9 +81,7 @@ export const skillLevelsAtom = atom((get) => {
   // Add selected magic skills
   magicSkills.forEach((skillName) => {
     const skillType = skillName as SkillType;
-    if (skills[skillType] === 0) {
-      skills[skillType] = 1;
-    }
+    skills[skillType] = 1;
   });
 
   // Apply background expertise
