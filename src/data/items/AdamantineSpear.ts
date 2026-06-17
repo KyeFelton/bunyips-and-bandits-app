@@ -14,6 +14,6 @@ export const AdamantineSpear: Item = {
     },
   ],
   singleUse: false,
-  weight: 1.2,
+  slots: 2,
   defaultCost: 6000,
 };

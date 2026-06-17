@@ -1,5 +1,5 @@
 import { SkillType } from "../enums/SkillType";
-import { ItemDictionary } from "./items";
+import { InventoryStack } from "./items";
 import { Trait } from "./traits";
 import { Condition } from "./conditions";
 import { startingKin } from "../data/kin";
@@ -23,7 +23,7 @@ export type CharacterSaveFile = {
   mindUpgrades: number;
   currentStamina: number;
   staminaUpgrades: number;
-  items: ItemDictionary;
+  items: InventoryStack[];
   money: number;
   image: string | undefined;
   conditions: Condition[];
@@ -47,7 +47,7 @@ export const defaultCharacter: CharacterSaveFile = {
   mindUpgrades: 0,
   currentStamina: startingKin.species.stamina,
   staminaUpgrades: 0,
-  items: {},
+  items: [],
   money: 0,
   image: undefined,
   conditions: [],

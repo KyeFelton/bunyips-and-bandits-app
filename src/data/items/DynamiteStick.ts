@@ -6,6 +6,7 @@ export const DynamiteStick: Item = {
     "The dynamite explodes upon ignition. Targets within 3m take 5 force damage. The dynamite can be stacked, with each additional stick adding 1 force damage.",
   effects: [],
   singleUse: true,
-  weight: 0.25,
+  slots: 1,
+  stackable: true,
   defaultCost: 500,
 };

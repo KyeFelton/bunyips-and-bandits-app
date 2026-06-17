@@ -1,4 +1,5 @@
 import { Item } from "../../models/items";
+import { WearType } from "../../enums/WearType";
 import { DamageType } from "../../enums/DamageType";
 
 export const CrocodileScaleHelm: Item = {
@@ -37,6 +38,7 @@ export const CrocodileScaleHelm: Item = {
     },
   ],
   singleUse: false,
-  weight: 0.5,
+  wearType: WearType.Accessory,
+  slots: 1,
   defaultCost: 750,
 };

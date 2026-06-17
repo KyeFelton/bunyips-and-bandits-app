@@ -13,5 +13,5 @@ export const FirstAidKit: Item = {
     },
   ],
   singleUse: false,
-  weight: 1,
+  slots: 1,
 };

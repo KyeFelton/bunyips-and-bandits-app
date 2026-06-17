@@ -13,6 +13,6 @@ export const PerfumeOfBewitching: Item = {
     },
   ],
   singleUse: false,
-  weight: 0.2,
+  slots: 1,
   defaultCost: 520,
 };

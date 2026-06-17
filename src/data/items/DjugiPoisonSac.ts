@@ -6,6 +6,7 @@ export const DjugiPoisonSac: Item = {
     "When thrown, the sac bursts and unleashes acid. Targets take 3 toxic damage.",
   effects: [],
   singleUse: true,
-  weight: 0.15,
+  slots: 1,
+  stackable: true,
   defaultCost: 90,
 };

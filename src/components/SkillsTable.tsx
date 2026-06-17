@@ -70,8 +70,6 @@ export const SkillsTable = () => {
     ...skillRollValues[skillType],
   }));
 
-  console.log(skillLevels);
-
   return (
     <div className="space-y-4">
       <Table>

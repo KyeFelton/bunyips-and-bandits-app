@@ -14,6 +14,6 @@ export const WoodenBoomerang: Item = {
     },
   ],
   singleUse: false,
-  weight: 0.25,
+  slots: 1,
   defaultCost: 50,
 };

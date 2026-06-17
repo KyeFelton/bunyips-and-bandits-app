@@ -5,6 +5,7 @@ export const FlaskOfAlchemistFire: Item = {
   description: "Can be thrown at a target to make them catch fire.",
   effects: [],
   singleUse: true,
-  weight: 0.4,
+  slots: 1,
+  stackable: true,
   defaultCost: 50,
 };

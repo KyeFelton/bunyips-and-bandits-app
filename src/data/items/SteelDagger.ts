@@ -13,6 +13,6 @@ export const SteelDagger: Item = {
     },
   ],
   singleUse: false,
-  weight: 0.5,
+  slots: 1,
   defaultCost: 50,
 };

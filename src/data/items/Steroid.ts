@@ -8,6 +8,7 @@ export const Steroid: Item = {
     condition: "Steroid Boost",
   },
   singleUse: true,
-  weight: 0.2,
+  slots: 1,
+  stackable: true,
   defaultCost: 110,
 };

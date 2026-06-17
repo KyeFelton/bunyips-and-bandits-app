@@ -13,6 +13,6 @@ export const SteelJavelin: Item = {
     },
   ],
   singleUse: false,
-  weight: 1,
+  slots: 1,
   defaultCost: 400,
 };

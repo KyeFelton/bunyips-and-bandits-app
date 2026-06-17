@@ -8,6 +8,7 @@ export const FeignDeathPotion: Item = {
     condition: "Feign Death",
   },
   singleUse: true,
-  weight: 0.2,
+  slots: 1,
+  stackable: true,
   defaultCost: 800,
 };

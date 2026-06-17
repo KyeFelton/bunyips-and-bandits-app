@@ -8,6 +8,7 @@ export const SleepingAid: Item = {
     condition: "Sleeping",
   },
   singleUse: true,
-  weight: 0.2,
+  slots: 1,
+  stackable: true,
   defaultCost: 105,
 };

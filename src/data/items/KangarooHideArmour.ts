@@ -1,4 +1,5 @@
 import { Item } from "../../models/items";
+import { WearType } from "../../enums/WearType";
 import { DamageType } from "../../enums/DamageType";
 
 export const KangarooHideArmour: Item = {
@@ -19,6 +20,7 @@ export const KangarooHideArmour: Item = {
     },
   ],
   singleUse: false,
-  weight: 5.0,
+  wearType: WearType.Clothes,
+  slots: 3,
   defaultCost: 100,
 };

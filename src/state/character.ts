@@ -1,6 +1,8 @@
 import { atom } from "jotai";
 import { SkillType } from "../enums/SkillType";
-import { ItemDictionary } from "../models/items";
+import { ItemLocation } from "../enums/ItemLocation";
+import { InventoryStack } from "../models/items";
+import { resolveStack } from "../utils/items";
 import { AllSkillProgressions } from "../data/skillProgressions";
 import { AllBackgrounds } from "../data/backgrounds";
 import { Effect } from "../models/effect";
@@ -50,8 +52,14 @@ export const currentStaminaAtom = atom<number>(startingKin.species.stamina);
 export const conditionsAtom = atom<Condition[]>([]);
 
 // Items and equipment
-export const itemsAtom = atom<ItemDictionary>({});
+export const itemsAtom = atom<InventoryStack[]>([]);
 export const moneyAtom = atom<number>(0);
+
+// Inventory stacks resolved against the catalog for reading.
+// Backpack capacity, slot usage and display rows live in state/items.ts.
+export const characterItemsAtom = atom((get) =>
+  get(itemsAtom).map(resolveStack)
+);
 
 // Custom traits
 export const customTraitsAtom = atom<Trait[]>([]);
@@ -161,7 +169,7 @@ export const traitsAtom = atom((get) => {
 // Effects atom
 export const effectsAtom = atom((get) => {
   const kin = get(kinAtom);
-  const items = get(itemsAtom);
+  const items = get(characterItemsAtom);
   const conditions = get(conditionsAtom);
   const traits = get(traitsAtom);
   const effects: Effect[] = [];
@@ -178,9 +186,14 @@ export const effectsAtom = atom((get) => {
     }
   });
 
-  // Collect effects from equipped items
-  Object.values(items)
-    .filter((item) => item.equipped && item.effects)
+  // Passive effects apply only while an item is worn or held.
+  items
+    .filter(
+      (item) =>
+        (item.location === ItemLocation.Worn ||
+          item.location === ItemLocation.Held) &&
+        item.effects
+    )
     .forEach((item) => {
       if (item.effects) {
         effects.push(...item.effects);

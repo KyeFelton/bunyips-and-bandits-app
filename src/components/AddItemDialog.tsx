@@ -1,6 +1,24 @@
+import { ArrowLeft, Plus } from "lucide-react";
+import { useAtom, useAtomValue } from "jotai";
 import { useState } from "react";
-import { useAtom } from "jotai";
-import { itemsAtom, moneyAtom } from "./../state/character";
+import { ItemLocation } from "../enums/ItemLocation";
+import { WearType } from "../enums/WearType";
+import { Item } from "../models/items";
+import {
+  AddItemTarget,
+  CLOTHES_INDEX,
+  canFitInBackpack,
+  canHoldItem,
+  catalogItems,
+  getCatalogItem,
+  isPartialSlotItem,
+  unitsPerSlot,
+} from "../utils/items";
+import { randomString } from "../utils/randomString";
+import { characterItemsAtom, itemsAtom, moneyAtom } from "../state/character";
+import { backpackSlotCapacityAtom } from "../state/items";
+import { EffectForm } from "./EffectForm";
+import { Button } from "./ui/button";
 import {
   Dialog,
   DialogContent,
@@ -8,11 +26,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
-import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { ArrowLeft, Plus } from "lucide-react";
-import * as Items from "./../data/items";
-import { Item } from "./../models/items";
 import {
   Select,
   SelectContent,
@@ -21,194 +35,217 @@ import {
   SelectValue,
 } from "./ui/select";
 import { Textarea } from "./ui/textarea";
-import { EffectForm } from "./EffectForm";
 
 type Props = {
-  maxWeight: number;
+  target: AddItemTarget;
+  trigger: React.ReactNode;
 };
 
-type ItemWithQuantity = Item & {
+type SelectedItem = Item & {
   quantity: number;
-  cost?: number;
+  cost: number | undefined;
+  isCustom: boolean;
 };
 
-const defaultCustomItem = {
+const LOCATION_LABELS: Record<ItemLocation, string> = {
+  [ItemLocation.Worn]: "Outfit",
+  [ItemLocation.Held]: "Hands",
+  [ItemLocation.Carried]: "Backpack",
+  [ItemLocation.Stored]: "Storage",
+};
+
+const defaultCustomItem: Item = {
   name: "",
   description: "",
   effects: [],
   singleUse: false,
-  weight: 0,
+  slots: 1,
 };
 
-export const AddItemDialog = ({ maxWeight }: Props) => {
-  const [items, setItems] = useAtom(itemsAtom);
+export const AddItemDialog = ({ target, trigger }: Props) => {
+  const [stacks, setStacks] = useAtom(itemsAtom);
   const [money, setMoney] = useAtom(moneyAtom);
-  const [search, setSearch] = useState("");
+  const characterItems = useAtomValue(characterItemsAtom);
+  const capacity = useAtomValue(backpackSlotCapacityAtom);
+
   const [open, setOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<ItemWithQuantity | null>(
-    null
-  );
+  const [search, setSearch] = useState("");
+  const [selectedItem, setSelectedItem] = useState<SelectedItem | null>(null);
   const [isCreatingItem, setIsCreatingItem] = useState(false);
   const [customItem, setCustomItem] = useState<Item>(defaultCustomItem);
   const [nameError, setNameError] = useState<string | null>(null);
+  const [storageLocation, setStorageLocation] = useState("");
 
-  const allItems = Object.values(Items)
-    .filter((item): item is Item => typeof item === "object" && "name" in item)
-    .sort((a, b) => a.name.localeCompare(b.name));
+  const destination = target.location;
+  const wearFilter: WearType | undefined =
+    destination === ItemLocation.Worn
+      ? target.index === CLOTHES_INDEX
+        ? WearType.Clothes
+        : WearType.Accessory
+      : undefined;
 
-  const filteredItems = allItems.filter(
+  const availableItems = catalogItems.filter(
+    (item) => !wearFilter || item.wearType === wearFilter
+  );
+  const filteredItems = availableItems.filter(
     (item) =>
       item.name.toLowerCase().includes(search.toLowerCase()) ||
       item.description.toLowerCase().includes(search.toLowerCase())
   );
 
+  const resetState = () => {
+    setSelectedItem(null);
+    setIsCreatingItem(false);
+    setCustomItem(defaultCustomItem);
+    setNameError(null);
+    setSearch("");
+    setStorageLocation("");
+  };
+
+  const handleOpenChange = (next: boolean) => {
+    setOpen(next);
+    if (!next) resetState();
+  };
+
   const handleSelectItem = (item: Item) => {
     setSelectedItem({
       ...item,
       quantity: 1,
-      cost: item.defaultCost ?? 0,
+      cost: undefined,
+      isCustom: false,
     });
   };
 
   const handleBack = () => {
     if (selectedItem) {
-      if (customItem.name.length > 0) {
-        setIsCreatingItem(true);
-      }
       setSelectedItem(null);
+      if (selectedItem.isCustom) setIsCreatingItem(true);
     } else {
-      setCustomItem(defaultCustomItem);
       setIsCreatingItem(false);
+      setCustomItem(defaultCustomItem);
       setNameError(null);
     }
   };
 
   const handleQuantityChange = (value: string) => {
     if (!selectedItem) return;
-    const quantity = parseInt(value) || 1;
     setSelectedItem({
       ...selectedItem,
-      quantity: Math.max(1, quantity),
+      quantity: Math.max(1, parseInt(value) || 1),
     });
   };
 
   const handleCostChange = (value: string) => {
     if (!selectedItem) return;
-    const cost = parseInt(value);
-    if (cost === undefined) {
-      setSelectedItem({
-        ...selectedItem,
-        cost: undefined,
-      });
-    }
     setSelectedItem({
       ...selectedItem,
-      cost: Math.max(0, cost),
+      cost: value === "" ? undefined : Math.max(0, parseInt(value) || 0),
     });
   };
 
-  const handleAddItem = () => {
-    if (!selectedItem) return;
-    const totalCost = (selectedItem.cost || 0) * selectedItem.quantity;
-
-    // Update or add item to inventory
-    setItems((prev) => {
-      const existingItem = prev[selectedItem.name];
-      return {
-        ...prev,
-        [selectedItem.name]: {
-          name: selectedItem.name,
-          weight: selectedItem.weight,
-          singleUse: selectedItem.singleUse,
-          description: selectedItem.description,
-          effects: selectedItem.effects,
-          immediateEffect: selectedItem.immediateEffect,
-          equipped: existingItem?.equipped || false,
-          quantity: (existingItem?.quantity || 0) + selectedItem.quantity,
-        },
-      };
-    });
-
-    setMoney(money - totalCost);
-    setOpen(false);
-    setSelectedItem(null);
-    setCustomItem(defaultCustomItem);
-    setNameError(null);
-  };
-
-  const validateItemName = (name: string) => {
+  const validateItemName = (name: string): boolean => {
     if (!name.trim()) {
       setNameError("Please give the item a name");
       return false;
     }
-
-    if (items[name] || allItems.find((item) => item.name === name)) {
+    if (getCatalogItem(name) || stacks.some((stack) => stack.name === name)) {
       setNameError("An item with this name already exists");
       return false;
     }
-
     setNameError(null);
     return true;
   };
 
-  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newName = e.target.value;
-    setCustomItem({ ...customItem, name: newName });
-    validateItemName(newName);
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const name = event.target.value;
+    setCustomItem({ ...customItem, name });
+    validateItemName(name);
   };
 
   const handleCreateItem = () => {
-    if (!validateItemName(customItem.name)) {
-      return;
-    }
-
+    if (!validateItemName(customItem.name)) return;
     setSelectedItem({
       ...customItem,
+      wearType: wearFilter ?? customItem.wearType,
       quantity: 1,
-      cost: 0,
+      cost: undefined,
+      isCustom: true,
     });
-
     setIsCreatingItem(false);
   };
 
-  const getTotalWeight = (item: ItemWithQuantity) => {
-    const existingQuantity = items[item.name]?.quantity || 0;
-    return item.weight * (item.quantity + existingQuantity);
-  };
+  const quantity = selectedItem
+    ? isPartialSlotItem(selectedItem)
+      ? selectedItem.quantity
+      : 1
+    : 1;
+  const totalCost = (selectedItem?.cost ?? 0) * quantity;
 
-  const canCarryWeight = (item: ItemWithQuantity) =>
-    getTotalWeight(item) <= maxWeight;
-
-  const canAffordCost = (item: ItemWithQuantity) =>
-    (item.cost || 0) * item.quantity <= money;
-
-  const canAddItem = (item: ItemWithQuantity) =>
-    canCarryWeight(item) && canAffordCost(item);
-
-  const getAddItemError = (item: ItemWithQuantity): string | null => {
-    const canCarry = canCarryWeight(item);
-    const canAfford = canAffordCost(item);
-
-    if (!canCarry && !canAfford) {
-      return "Exceeds weight capacity and insufficient funds";
+  const fits = (() => {
+    if (!selectedItem) return false;
+    const probe = { slots: selectedItem.slots, quantity };
+    if (destination === ItemLocation.Carried) {
+      return canFitInBackpack(probe, characterItems, capacity);
     }
-    if (!canCarry) {
-      return "Exceeds weight capacity";
+    if (destination === ItemLocation.Held) {
+      return canHoldItem(selectedItem, characterItems);
     }
-    if (!canAfford) {
-      return "Insufficient funds";
-    }
+    return true;
+  })();
+  const canAfford = totalCost <= money;
+  const canAdd = Boolean(selectedItem) && fits && canAfford;
+
+  const addError = (() => {
+    if (!fits && !canAfford) return "Insufficient space and funds";
+    if (!fits) return "Insufficient space";
+    if (!canAfford) return "Insufficient funds";
     return null;
+  })();
+
+  const handleAddItem = () => {
+    if (!selectedItem || !canAdd) return;
+
+    const custom = selectedItem.isCustom
+      ? {
+          description: selectedItem.description,
+          effects: selectedItem.effects,
+          immediateEffect: selectedItem.immediateEffect,
+          singleUse: selectedItem.singleUse,
+          slots: selectedItem.slots,
+          stackable: selectedItem.stackable,
+          wearType: selectedItem.wearType,
+          defaultCost: selectedItem.defaultCost,
+        }
+      : undefined;
+
+    setStacks([
+      ...stacks,
+      {
+        id: randomString(12),
+        name: selectedItem.name,
+        location: destination,
+        quantity,
+        index: target.index,
+        storageLocation:
+          destination === ItemLocation.Stored
+            ? storageLocation.trim() || undefined
+            : undefined,
+        custom,
+      },
+    ]);
+    if (selectedItem.cost !== undefined) setMoney(money - totalCost);
+    handleOpenChange(false);
   };
+
+  const dialogTitle = selectedItem
+    ? selectedItem.name
+    : isCreatingItem
+      ? "Create custom item"
+      : `Add to ${LOCATION_LABELS[destination]}`;
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button variant="outline" disabled={maxWeight <= 0}>
-          <Plus className="h-4 w-4 mr-2" />
-          Add
-        </Button>
-      </DialogTrigger>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
+      <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className="max-w-md h-[600px] overflow-auto flex flex-col">
         <DialogHeader>
           <div className="flex items-center gap-4 mb-2">
@@ -222,13 +259,7 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
                 <ArrowLeft className="h-4 w-4" />
               </Button>
             )}
-            <DialogTitle>
-              {selectedItem
-                ? selectedItem.name
-                : isCreatingItem
-                ? "Create Custom Item"
-                : "Add Items"}
-            </DialogTitle>
+            <DialogTitle>{dialogTitle}</DialogTitle>
           </div>
         </DialogHeader>
 
@@ -240,29 +271,32 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
               </p>
 
               <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Quantity</label>
-                  <Select
-                    value={selectedItem.quantity.toString()}
-                    onValueChange={handleQuantityChange}
-                  >
-                    <SelectTrigger className="w-24">
-                      <SelectValue placeholder="1" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {Array.from({ length: 10 }, (_, i) => i + 1).map(
-                        (num) => (
+                {isPartialSlotItem(selectedItem) && (
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Quantity</label>
+                    <Select
+                      value={selectedItem.quantity.toString()}
+                      onValueChange={handleQuantityChange}
+                    >
+                      <SelectTrigger className="w-24">
+                        <SelectValue placeholder="1" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {Array.from(
+                          { length: unitsPerSlot(selectedItem) },
+                          (_, index) => index + 1
+                        ).map((num) => (
                           <SelectItem key={num} value={num.toString()}>
                             {num}
                           </SelectItem>
-                        )
-                      )}
-                    </SelectContent>
-                  </Select>
-                </div>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                )}
                 <div className="space-y-2">
                   <label className="text-sm font-medium">
-                    Cost per item
+                    {isPartialSlotItem(selectedItem) ? "Cost per item" : "Cost"}
                   </label>
                   <div className="relative max-w-[100px]">
                     <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground pointer-events-none">
@@ -272,47 +306,41 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
                       type="number"
                       className="pl-7"
                       min="0"
-                      value={selectedItem.cost}
-                      onChange={(e) => handleCostChange(e.target.value)}
+                      value={selectedItem.cost ?? ""}
+                      onChange={(event) => handleCostChange(event.target.value)}
                     />
                   </div>
+                  {selectedItem.defaultCost !== undefined && (
+                    <p className="text-xs text-muted-foreground">
+                      Market value: £ {selectedItem.defaultCost}
+                    </p>
+                  )}
                 </div>
               </div>
 
-              <div className="space-y-4 pt-4">
+              {destination === ItemLocation.Stored && (
                 <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Total weight:</span>
-                    <span
-                      className={
-                        canCarryWeight(selectedItem) ? "" : "text-destructive"
-                      }
-                    >
-                      {getTotalWeight(selectedItem)} kg
-                    </span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">
-                      Your capacity:
-                    </span>
-                    <span>{maxWeight}kg</span>
-                  </div>
+                  <label className="text-sm font-medium">
+                    Where is it stored?
+                  </label>
+                  <Input
+                    value={storageLocation}
+                    onChange={(event) => setStorageLocation(event.target.value)}
+                    placeholder="e.g. Home, wagon, bank"
+                  />
                 </div>
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Total cost:</span>
-                    <span
-                      className={
-                        canAffordCost(selectedItem) ? "" : "text-destructive"
-                      }
-                    >
-                      £ {(selectedItem.cost || 0) * selectedItem.quantity}
-                    </span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Your money:</span>
-                    <span>£ {money}</span>
-                  </div>
+              )}
+
+              <div className="space-y-2">
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted-foreground">Total cost:</span>
+                  <span className={canAfford ? "" : "text-destructive"}>
+                    £ {totalCost}
+                  </span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted-foreground">Your money:</span>
+                  <span>£ {money}</span>
                 </div>
               </div>
             </div>
@@ -321,13 +349,13 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
               <Button
                 className="w-full"
                 onClick={handleAddItem}
-                disabled={!canAddItem(selectedItem)}
+                disabled={!canAdd}
               >
                 Add to inventory
               </Button>
-              {!canAddItem(selectedItem) && (
+              {addError && (
                 <p className="text-sm text-destructive text-center">
-                  {getAddItemError(selectedItem)}
+                  {addError}
                 </p>
               )}
             </div>
@@ -351,42 +379,40 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
                 <label className="text-sm font-medium">Description</label>
                 <Textarea
                   value={customItem.description}
-                  onChange={(e) =>
+                  onChange={(event) =>
                     setCustomItem({
                       ...customItem,
-                      description: e.target.value,
+                      description: event.target.value,
                     })
                   }
                   placeholder="Enter item description"
                 />
               </div>
-              <div className="flex gap-6">
-                <div>
-                  <label className="text-sm font-medium">Weight (kg)</label>
-                  <Input
-                    type="number"
-                    className="max-w-[100px]"
-                    min="0"
-                    step="0.1"
-                    value={customItem.weight}
-                    onChange={(e) =>
-                      setCustomItem({
-                        ...customItem,
-                        weight: parseFloat(e.target.value) || 0,
-                      })
-                    }
-                  />
-                </div>
+              <div>
+                <label className="text-sm font-medium">Backpack slots</label>
+                <Input
+                  type="number"
+                  className="max-w-[100px]"
+                  min="0.1"
+                  step="0.1"
+                  value={customItem.slots}
+                  onChange={(event) =>
+                    setCustomItem({
+                      ...customItem,
+                      slots: Math.max(0.1, parseFloat(event.target.value) || 1),
+                    })
+                  }
+                />
               </div>
               <div className="flex items-center gap-2">
                 <input
                   type="checkbox"
                   id="singleUse"
                   checked={customItem.singleUse}
-                  onChange={(e) =>
+                  onChange={(event) =>
                     setCustomItem({
                       ...customItem,
-                      singleUse: e.target.checked,
+                      singleUse: event.target.checked,
                     })
                   }
                 />
@@ -394,10 +420,24 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
                   Single use item
                 </label>
               </div>
-              <div>
-                <label className="text-sm font-medium block mb-2">
-                  Effects
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  id="stackable"
+                  checked={customItem.stackable || false}
+                  onChange={(event) =>
+                    setCustomItem({
+                      ...customItem,
+                      stackable: event.target.checked,
+                    })
+                  }
+                />
+                <label htmlFor="stackable" className="text-sm font-medium">
+                  Stackable effects
                 </label>
+              </div>
+              <div>
+                <label className="text-sm font-medium block mb-2">Effects</label>
                 <EffectForm
                   effects={customItem.effects || []}
                   onChange={(effects) =>
@@ -431,7 +471,7 @@ export const AddItemDialog = ({ maxWeight }: Props) => {
               <Input
                 placeholder="Search items..."
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={(event) => setSearch(event.target.value)}
                 className="w-full"
               />
             </div>

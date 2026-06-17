@@ -14,6 +14,6 @@ export const SteelSpear: Item = {
     },
   ],
   singleUse: false,
-  weight: 1,
+  slots: 2,
   defaultCost: 400,
 };

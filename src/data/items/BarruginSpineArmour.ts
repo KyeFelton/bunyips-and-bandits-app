@@ -1,6 +1,7 @@
 import { DamageType } from "../../enums/DamageType";
 import { SkillType } from "../../enums/SkillType";
 import { Item } from "../../models/items";
+import { WearType } from "../../enums/WearType";
 
 export const BarruginSpineArmour: Item = {
   name: "Barrugin spine armour",
@@ -51,6 +52,7 @@ export const BarruginSpineArmour: Item = {
     },
   ],
   singleUse: false,
-  weight: 20.0,
+  wearType: WearType.Clothes,
+  slots: 5,
   defaultCost: 20000,
 };

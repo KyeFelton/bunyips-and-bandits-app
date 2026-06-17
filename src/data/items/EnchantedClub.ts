@@ -14,6 +14,6 @@ export const EnchantedClub: Item = {
     },
   ],
   singleUse: false,
-  weight: 1.5,
+  slots: 2,
   defaultCost: 2,
 };

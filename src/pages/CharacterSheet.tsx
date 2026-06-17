@@ -12,7 +12,7 @@ import { SensesCard } from "../components/SensesCard";
 import { ArmourCard } from "../components/ArmourCard";
 import { SpeedCard } from "../components/SpeedCard";
 import { CombatCard } from "../components/CombatCard";
-import { ItemsTable } from "../components/ItemsTable";
+import { ItemsTab } from "../components/ItemsTab";
 import { SkillsTable } from "../components/SkillsTable";
 import { TraitsList } from "../components/TraitsList";
 import { ActionsList } from "../components/ActionsList";
@@ -78,7 +78,7 @@ export function CharacterSheet() {
 
           {activeSection === "items" && (
             <Card className="p-4 overflow-auto">
-              <ItemsTable />
+              <ItemsTab />
             </Card>
           )}
 
@@ -126,7 +126,7 @@ export function CharacterSheet() {
               </TabsContent>
               <TabsContent value="items" className="w-full flex-grow shadow-sm">
                 <Card className="h-[908px] p-4 overflow-auto rounded-tl-none">
-                  <ItemsTable />
+                  <ItemsTab />
                 </Card>
               </TabsContent>
               <TabsContent

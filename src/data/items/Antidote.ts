@@ -8,5 +8,6 @@ export const Antidote: Item = {
     body: 3,
   },
   singleUse: true,
-  weight: 0.2,
+  slots: 1,
+  stackable: true,
 };

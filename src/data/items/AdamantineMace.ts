@@ -13,6 +13,6 @@ export const AdamantineMace: Item = {
     },
   ],
   singleUse: false,
-  weight: 1,
+  slots: 2,
   defaultCost: 6000,
 };

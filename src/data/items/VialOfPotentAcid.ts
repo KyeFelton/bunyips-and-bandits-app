@@ -6,6 +6,7 @@ export const VialOfPotentAcid: Item = {
     "When thrown at a target, they take 1 toxic damage. If ingested or injected with a coated weapon, they take 3 toxic damage.",
   effects: [],
   singleUse: true,
-  weight: 0.15,
+  slots: 1,
+  stackable: true,
   defaultCost: 150,
 };

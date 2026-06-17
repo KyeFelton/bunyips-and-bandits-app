@@ -1,3 +1,5 @@
+import { ItemLocation } from "../enums/ItemLocation";
+import { WearType } from "../enums/WearType";
 import { Effect } from "./effect";
 
 export type ImmediateEffect = {
@@ -13,13 +15,28 @@ export type Item = {
   effects?: Effect[];
   immediateEffect?: ImmediateEffect;
   singleUse: boolean;
-  weight: number;
+  slots: number;
+  stackable?: boolean;
+  wearType?: WearType;
   defaultCost?: number;
 };
 
-export type CharacterItem = Item & {
-  equipped: boolean;
+// Persisted per character: a player's decision, not catalog data.
+export type InventoryStack = {
+  id: string;
+  name: string;
+  location: ItemLocation;
   quantity: number;
+  index?: number;
+  storageLocation?: string;
+  custom?: Omit<Item, "name">;
 };
 
-export type ItemDictionary = Record<string, CharacterItem>;
+// A stack resolved against the catalog (or its custom payload) for reading.
+export type CharacterItem = Item & {
+  id: string;
+  location: ItemLocation;
+  quantity: number;
+  index?: number;
+  storageLocation?: string;
+};

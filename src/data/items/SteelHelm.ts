@@ -1,5 +1,6 @@
 import { DamageType } from "../../enums/DamageType";
 import { Item } from "../../models/items";
+import { WearType } from "../../enums/WearType";
 
 export const SteelHelm: Item = {
   name: "Steel helm",
@@ -19,6 +20,7 @@ export const SteelHelm: Item = {
     },
   ],
   singleUse: false,
-  weight: 2,
+  wearType: WearType.Accessory,
+  slots: 2,
   defaultCost: 200,
 };

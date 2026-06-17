@@ -9,6 +9,7 @@ export const Adrenaline: Item = {
     condition: "Adrenaline Rush",
   },
   singleUse: true,
-  weight: 0.2,
+  slots: 1,
+  stackable: true,
   defaultCost: 125,
 };

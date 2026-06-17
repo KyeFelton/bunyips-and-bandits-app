@@ -14,5 +14,5 @@ export const LightningSwordOfRollo: Item = {
     },
   ],
   singleUse: false,
-  weight: 1,
+  slots: 1,
 };

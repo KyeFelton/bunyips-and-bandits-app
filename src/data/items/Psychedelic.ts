@@ -8,7 +8,8 @@ const MildPsychedelic: Item = {
     condition: "Psychedelic Trip (Mild)",
   },
   singleUse: true,
-  weight: 0.2,
+  slots: 1,
+  stackable: true,
   defaultCost: 85,
 };
 
@@ -20,7 +21,8 @@ const StrongPsychedelic: Item = {
     condition: "Psychedelic Trip (Strong)",
   },
   singleUse: true,
-  weight: 0.2,
+  slots: 1,
+  stackable: true,
   defaultCost: 300,
 };
 

@@ -1,4 +1,5 @@
 import { Item } from "../../models/items";
+import { WearType } from "../../enums/WearType";
 import { DamageType } from "../../enums/DamageType";
 import { SkillType } from "../../enums/SkillType";
 
@@ -51,6 +52,7 @@ export const SteelMailArmour: Item = {
     },
   ],
   singleUse: false,
-  weight: 20,
+  wearType: WearType.Clothes,
+  slots: 4,
   defaultCost: 1800,
 };

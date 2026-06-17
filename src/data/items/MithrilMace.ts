@@ -13,6 +13,6 @@ export const MithrilMace: Item = {
     },
   ],
   singleUse: false,
-  weight: 1.2,
+  slots: 2,
   defaultCost: 1000,
 };

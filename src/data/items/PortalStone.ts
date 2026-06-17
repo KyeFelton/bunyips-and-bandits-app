@@ -18,7 +18,8 @@ const SmallGreenPortalStone: Item = {
   description: description("Green", "South-East"),
   effects: [],
   singleUse: true,
-  weight: 0.1,
+  slots: 1,
+  stackable: true,
   defaultCost: 800,
 };
 
@@ -27,7 +28,8 @@ const SmallOrangePortalStone: Item = {
   description: description("Orange", "North-East"),
   effects: [],
   singleUse: true,
-  weight: 0.1,
+  slots: 1,
+  stackable: true,
   defaultCost: 800,
 };
 
@@ -36,7 +38,8 @@ const SmallPurplePortalStone: Item = {
   description: description("Purple", "West"),
   effects: [],
   singleUse: true,
-  weight: 0.1,
+  slots: 1,
+  stackable: true,
   defaultCost: 800,
 };
 
@@ -45,7 +48,8 @@ const LargeRedPortalStone: Item = {
   description: description("Red", "North"),
   effects: [],
   singleUse: true,
-  weight: 1,
+  slots: 1,
+  stackable: true,
   defaultCost: 2000,
 };
 
@@ -54,7 +58,8 @@ const LargeBluePortalStone: Item = {
   description: description("Blue", "South-West"),
   effects: [],
   singleUse: true,
-  weight: 1,
+  slots: 1,
+  stackable: true,
   defaultCost: 2000,
 };
 

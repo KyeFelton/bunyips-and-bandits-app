@@ -13,6 +13,6 @@ export const SteelMace: Item = {
     },
   ],
   singleUse: false,
-  weight: 1.5,
+  slots: 2,
   defaultCost: 400,
 };

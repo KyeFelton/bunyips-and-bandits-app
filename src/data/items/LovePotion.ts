@@ -8,6 +8,7 @@ export const LovePotion: Item = {
     condition: "Infatuated",
   },
   singleUse: true,
-  weight: 0.2,
+  slots: 1,
+  stackable: true,
   defaultCost: 450,
 };

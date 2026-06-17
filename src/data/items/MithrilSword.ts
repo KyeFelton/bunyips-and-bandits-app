@@ -13,6 +13,6 @@ export const MithrilSword: Item = {
     },
   ],
   singleUse: false,
-  weight: 0.8,
+  slots: 1,
   defaultCost: 1000,
 };

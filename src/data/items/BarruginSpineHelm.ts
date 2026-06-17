@@ -1,4 +1,5 @@
 import { Item } from "../../models/items";
+import { WearType } from "../../enums/WearType";
 import { DamageType } from "../../enums/DamageType";
 
 export const BarruginSpineHelm: Item = {
@@ -38,6 +39,7 @@ export const BarruginSpineHelm: Item = {
     },
   ],
   singleUse: false,
-  weight: 2.0,
+  wearType: WearType.Accessory,
+  slots: 2,
   defaultCost: 2500,
 };

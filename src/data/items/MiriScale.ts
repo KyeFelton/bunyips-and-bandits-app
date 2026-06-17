@@ -1,5 +1,6 @@
 import { SkillType } from "../../enums/SkillType";
 import { Item } from "../../models/items";
+import { WearType } from "../../enums/WearType";
 
 export const MiriScale: Item = {
   name: "Rainbow Serpent's scale",
@@ -20,6 +21,7 @@ export const MiriScale: Item = {
     },
   ],
   singleUse: false,
-  weight: 2,
+  wearType: WearType.Accessory,
+  slots: 1,
   defaultCost: 3000,
 };

@@ -48,6 +48,8 @@ import { DjugiPoisonSac } from "./DjugiPoisonSac";
 import { LightningstoneClub } from "./LightningstoneClub";
 import { SmokeBomb } from "./SmokeBomb";
 import { SunstoneClub } from "./SunstoneClub";
+import { SteelArrow } from "./SteelArrow";
+import { Caltrops } from "./Caltrops";
 
 export {
   AdamantineMace,
@@ -100,4 +102,6 @@ export {
   LightningstoneClub,
   SmokeBomb,
   SunstoneClub,
+  SteelArrow,
+  Caltrops,
 };

@@ -44,5 +44,5 @@ export const WaterHammerOfTytos: Item = {
     },
   ],
   singleUse: false,
-  weight: 1,
+  slots: 2,
 };

@@ -14,6 +14,6 @@ export const WindstoneClub: Item = {
     },
   ],
   singleUse: false,
-  weight: 2.0,
+  slots: 2,
   defaultCost: 2000,
 };
