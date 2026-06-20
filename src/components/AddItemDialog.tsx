@@ -192,8 +192,9 @@ export const AddItemDialog = ({ target, trigger }: Props) => {
     }
     return true;
   })();
+  const hasDestination = destination !== ItemLocation.Stored || storageLocation.trim() !== "";
   const canAfford = totalCost <= money;
-  const canAdd = Boolean(selectedItem) && fits && canAfford;
+  const canAdd = Boolean(selectedItem) && fits && canAfford && hasDestination;
 
   const addError = (() => {
     if (!fits && !canAfford) return "Insufficient space and funds";

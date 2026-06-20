@@ -128,6 +128,7 @@ export const SlotInventoryTable = ({
             inventoryCellClass,
             groupCellClass(groupKey),
             isMerged && "border-b border-border",
+            isEmpty && "px-2"
           )}
         >
           {isEmpty ? (
