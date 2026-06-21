@@ -3,8 +3,7 @@ import { Item } from "../../models/items";
 
 export const FirstAidKit: Item = {
   name: "First aid kit",
-  description: " You gain +1 bonus to biotic checks.",
-  effects: [
+  equippedEffects: [
     {
       skill: {
         skillType: SkillType.Biotic,

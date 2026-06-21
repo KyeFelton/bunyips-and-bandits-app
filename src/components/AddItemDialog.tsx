@@ -18,6 +18,7 @@ import { randomString } from "../utils/randomString";
 import { characterItemsAtom, itemsAtom, moneyAtom } from "../state/character";
 import { backpackSlotCapacityAtom } from "../state/items";
 import { EffectForm } from "./EffectForm";
+import { ItemEffectList } from "./ItemEffectList";
 import { Button } from "./ui/button";
 import {
   Dialog,
@@ -56,8 +57,7 @@ const LOCATION_LABELS: Record<ItemLocation, string> = {
 
 const defaultCustomItem: Item = {
   name: "",
-  description: "",
-  effects: [],
+  equippedEffects: [],
   singleUse: false,
   slots: 1,
 };
@@ -85,12 +85,12 @@ export const AddItemDialog = ({ target, trigger }: Props) => {
       : undefined;
 
   const availableItems = catalogItems.filter(
-    (item) => !wearFilter || item.wearType === wearFilter
+    (item) => !wearFilter || item.wearType === wearFilter,
   );
   const filteredItems = availableItems.filter(
     (item) =>
       item.name.toLowerCase().includes(search.toLowerCase()) ||
-      item.description.toLowerCase().includes(search.toLowerCase())
+      item.description?.toLowerCase().includes(search.toLowerCase()),
   );
 
   const resetState = () => {
@@ -192,7 +192,8 @@ export const AddItemDialog = ({ target, trigger }: Props) => {
     }
     return true;
   })();
-  const hasDestination = destination !== ItemLocation.Stored || storageLocation.trim() !== "";
+  const hasDestination =
+    destination !== ItemLocation.Stored || storageLocation.trim() !== "";
   const canAfford = totalCost <= money;
   const canAdd = Boolean(selectedItem) && fits && canAfford && hasDestination;
 
@@ -208,9 +209,11 @@ export const AddItemDialog = ({ target, trigger }: Props) => {
 
     const custom = selectedItem.isCustom
       ? {
-          description: selectedItem.description,
-          effects: selectedItem.effects,
-          immediateEffect: selectedItem.immediateEffect,
+          ...(selectedItem.description
+            ? { description: selectedItem.description }
+            : {}),
+          equippedEffects: selectedItem.equippedEffects,
+          consumedEffect: selectedItem.consumedEffect,
           singleUse: selectedItem.singleUse,
           slots: selectedItem.slots,
           stackable: selectedItem.stackable,
@@ -267,9 +270,16 @@ export const AddItemDialog = ({ target, trigger }: Props) => {
         {selectedItem ? (
           <div className="flex flex-col justify-between flex-1">
             <div className="space-y-6 py-4">
-              <p className="text-sm text-muted-foreground">
-                {selectedItem.description}
-              </p>
+              {selectedItem.description && (
+                <p className="text-sm text-muted-foreground">
+                  {selectedItem.description}
+                </p>
+              )}
+
+              <ItemEffectList
+                equippedEffects={selectedItem.equippedEffects}
+                consumedEffect={selectedItem.consumedEffect}
+              />
 
               <div className="grid grid-cols-2 gap-4">
                 {isPartialSlotItem(selectedItem) && (
@@ -285,7 +295,7 @@ export const AddItemDialog = ({ target, trigger }: Props) => {
                       <SelectContent>
                         {Array.from(
                           { length: unitsPerSlot(selectedItem) },
-                          (_, index) => index + 1
+                          (_, index) => index + 1,
                         ).map((num) => (
                           <SelectItem key={num} value={num.toString()}>
                             {num}
@@ -379,14 +389,14 @@ export const AddItemDialog = ({ target, trigger }: Props) => {
               <div>
                 <label className="text-sm font-medium">Description</label>
                 <Textarea
-                  value={customItem.description}
+                  value={customItem.description ?? ""}
                   onChange={(event) =>
                     setCustomItem({
                       ...customItem,
-                      description: event.target.value,
+                      description: event.target.value || undefined,
                     })
                   }
-                  placeholder="Enter item description"
+                  placeholder="Describe how the item looks, sounds, or smells"
                 />
               </div>
               <div>
@@ -438,11 +448,13 @@ export const AddItemDialog = ({ target, trigger }: Props) => {
                 </label>
               </div>
               <div>
-                <label className="text-sm font-medium block mb-2">Effects</label>
+                <label className="text-sm font-medium block mb-2">
+                  Effects
+                </label>
                 <EffectForm
-                  effects={customItem.effects || []}
+                  effects={customItem.equippedEffects || []}
                   onChange={(effects) =>
-                    setCustomItem({ ...customItem, effects })
+                    setCustomItem({ ...customItem, equippedEffects: effects })
                   }
                 />
               </div>

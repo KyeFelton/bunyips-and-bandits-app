@@ -4,6 +4,7 @@ import { Effect } from "./effect";
 
 export type ImmediateEffect = {
   body?: number;
+  custom?: string;
   mind?: number;
   stamina?: number;
   condition?: string;
@@ -11,9 +12,9 @@ export type ImmediateEffect = {
 
 export type Item = {
   name: string;
-  description: string;
-  effects?: Effect[];
-  immediateEffect?: ImmediateEffect;
+  description?: string;
+  equippedEffects?: Effect[];
+  consumedEffect?: ImmediateEffect;
   singleUse: boolean;
   slots: number;
   stackable?: boolean;

@@ -3,10 +3,10 @@ import { Item } from "../../models/items";
 import { WearType } from "../../enums/WearType";
 
 export const MiriScale: Item = {
-  name: "Rainbow Serpent's scale",
+  name: "Rainbow scale",
   description:
-    "A large, rainbow scale believed to belong to the Rainbow Serpent. Being in possession of the scale grants you +3 bonus to nature and spirit checks.",
-  effects: [
+    "A large, colourful scale believed to belong to the Rainbow Serpent.",
+  equippedEffects: [
     {
       skill: {
         skillType: SkillType.Nature,

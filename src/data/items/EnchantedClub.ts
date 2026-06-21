@@ -3,14 +3,15 @@ import { Item } from "../../models/items";
 
 export const EnchantedClub: Item = {
   name: "Enchanted club",
-  description:
-    "Your weapon attacks deal 2 force damage and stun enemies when wielded.",
-  effects: [
+  equippedEffects: [
     {
       weapon: {
         damageType: DamageType.Force,
         bonus: 2,
       },
+    },
+    {
+      custom: "Stun enemies when wielded.",
     },
   ],
   singleUse: false,

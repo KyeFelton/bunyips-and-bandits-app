@@ -2,6 +2,7 @@ import { HelpCircle } from "lucide-react";
 import { ItemLocation } from "../enums/ItemLocation";
 import { CharacterItem } from "../models/items";
 import { HAND_SLOT_COUNT } from "../utils/items";
+import { ItemEffectList } from "./ItemEffectList";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
 type Props = {
@@ -21,7 +22,15 @@ export const ItemNameCell = ({ item, displayName }: Props) => (
         <HelpCircle className="h-4 w-4 text-muted-foreground" />
       </PopoverTrigger>
       <PopoverContent className="max-w-[300px] text-sm" side="right">
-        <p>{item.description}</p>
+        <div className={item.description ? "space-y-3" : undefined}>
+          {item.description && (
+            <p className="text-muted-foreground">{item.description}</p>
+          )}
+          <ItemEffectList
+            equippedEffects={item.equippedEffects}
+            consumedEffect={item.consumedEffect}
+          />
+        </div>
       </PopoverContent>
     </Popover>
   </div>

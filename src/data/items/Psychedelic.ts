@@ -2,10 +2,10 @@ import { Item } from "../../models/items";
 
 const MildPsychedelic: Item = {
   name: "Mild psychedelic",
-  description:
-    "Grants the Psychedelic Trip (Mild) condition until your next rest, providing +1 bonus to psychic checks. If you have already consumed a psychedelic within the last hour, you also take 2 damage. At most three psychedelics can be consumed at one time.",
-  immediateEffect: {
+  consumedEffect: {
     condition: "Psychedelic Trip (Mild)",
+    custom:
+      "+1 bonus to psychic checks until your next rest. If you have already consumed a psychedelic within the last hour, you also take 2 damage. At most three psychedelics can be consumed at one time.",
   },
   singleUse: true,
   slots: 1,
@@ -15,10 +15,10 @@ const MildPsychedelic: Item = {
 
 const StrongPsychedelic: Item = {
   name: "Strong psychedelic",
-  description:
-    "Grants the Psychedelic Trip (Strong) condition until your next rest, providing +2 bonus to psychic checks. If you have already consumed a psychedelic within the last hour, you also take 2 damage. At most three psychedelics can be consumed at one time.",
-  immediateEffect: {
+  consumedEffect: {
     condition: "Psychedelic Trip (Strong)",
+    custom:
+      "+2 bonus to psychic checks until your next rest. If you have already consumed a psychedelic within the last hour, you also take 2 damage. At most three psychedelics can be consumed at one time.",
   },
   singleUse: true,
   slots: 1,

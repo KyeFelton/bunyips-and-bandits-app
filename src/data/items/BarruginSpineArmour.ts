@@ -1,54 +1,100 @@
 import { DamageType } from "../../enums/DamageType";
-import { SkillType } from "../../enums/SkillType";
 import { Item } from "../../models/items";
 import { WearType } from "../../enums/WearType";
+import { SenseType } from "../../enums/SenseType";
+import { SkillType } from "../../enums/SkillType";
+
+// export const BarruginSpineArmour: Item = {
+//   name: "Barrugin spine armour",
+//   equippedEffects: [
+//     {
+//       armour: {
+//         damageType: DamageType.Slash,
+//         bonus: 1,
+//       },
+//     },
+//     {
+//       armour: {
+//         damageType: DamageType.Force,
+//         bonus: 1,
+//       },
+//     },
+//     {
+//       custom: "Foes that make contact with the armour take 2 Slash damage.",
+//     },
+//   ],
+//   singleUse: false,
+//   wearType: WearType.Clothes,
+//   slots: 5,
+//   defaultCost: 20000,
+// };
 
 export const BarruginSpineArmour: Item = {
   name: "Barrugin spine armour",
-  description:
-    "You gain +3 armour for all damage types. Foes that touch your armour take 1d8 slash damage. You lose -1 on agility and dexterity checks.",
-  effects: [
-    {
-      armour: {
-        damageType: DamageType.Fire,
-        bonus: 3,
-      },
-    },
-    {
-      armour: {
-        damageType: DamageType.Electric,
-        bonus: 3,
-      },
-    },
-    {
-      armour: {
-        damageType: DamageType.Toxic,
-        bonus: 3,
-      },
-    },
+  equippedEffects: [
     {
       armour: {
         damageType: DamageType.Slash,
-        bonus: 3,
+        bonus: 2,
       },
     },
     {
       armour: {
         damageType: DamageType.Force,
-        bonus: 3,
+        bonus: 2,
       },
     },
     {
-      skill: {
+      armour: {
+        damageType: DamageType.Fire,
+        bonus: -1,
+      },
+    },
+    {
+      Skill: {
         skillType: SkillType.Agility,
         bonus: -1,
       },
     },
     {
-      skill: {
+      Skill: {
         skillType: SkillType.Dexterity,
         bonus: -1,
       },
+    },
+    {
+      Skill: {
+        skillType: SkillType.Strength,
+        bonus: 2,
+      },
+    },
+    {
+      sense: {
+        lose: SenseType.Smell,
+      }
+    },
+    {
+      sense: {
+        lose: SenseType.Sight,
+      }
+    },
+    {
+      sense: {
+        gain: SenseType.Psychic,
+      }
+    },
+    {
+      body: {
+        bonus: 2,
+      },
+    },
+    {
+      stamina: {
+        bonus: 2,
+      },
+    },
+    {
+      custom: "Foes that make contact with the armour take 2 Slash damage.",
     },
   ],
   singleUse: false,

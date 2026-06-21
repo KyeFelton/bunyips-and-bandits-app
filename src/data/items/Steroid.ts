@@ -2,10 +2,10 @@ import { Item } from "../../models/items";
 
 export const Steroid: Item = {
   name: "Steroid",
-  description:
-    "Grants the Steroid Boost condition until your next rest, providing +1 bonus to strength and agility checks. If you already have this condition and consume another, you also take 2 damage. At most three Steroid Boost conditions can be active at one time.",
-  immediateEffect: {
+  consumedEffect: {
     condition: "Steroid Boost",
+    custom:
+      "+1 bonus to strength and agility checks until your next rest. If you already have this condition and consume another, you also take 2 damage. At most three Steroid Boost conditions can be active at one time.",
   },
   singleUse: true,
   slots: 1,

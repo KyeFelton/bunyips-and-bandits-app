@@ -41,7 +41,6 @@ export const getCatalogItem = (name: string): Item | undefined =>
 
 const fallbackItem = (name: string): Item => ({
   name,
-  description: "",
   singleUse: false,
   slots: 1,
 });

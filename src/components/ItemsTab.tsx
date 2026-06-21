@@ -81,13 +81,13 @@ const partialSlotRemaining = (item: CharacterItem): number =>
 const canWearItem = (
   item: CharacterItem,
   items: CharacterItem[],
-  capacity: number
+  capacity: number,
 ): boolean => {
   if (item.wearType === WearType.Accessory) {
     const wornAccessories = items.filter(
       (worn) =>
         worn.location === ItemLocation.Worn &&
-        worn.wearType === WearType.Accessory
+        worn.wearType === WearType.Accessory,
     ).length;
     return wornAccessories < ACCESSORY_SLOT_COUNT;
   }
@@ -96,7 +96,7 @@ const canWearItem = (
     const existingClothes = items.find(
       (worn) =>
         worn.location === ItemLocation.Worn &&
-        worn.wearType === WearType.Clothes
+        worn.wearType === WearType.Clothes,
     );
     if (!existingClothes) return true;
 
@@ -110,17 +110,15 @@ const canWearItem = (
   return false;
 };
 
-const findFreeAccessoryIndex = (
-  items: CharacterItem[]
-): number | undefined => {
+const findFreeAccessoryIndex = (items: CharacterItem[]): number | undefined => {
   const used = new Set(
     items
       .filter(
         (item) =>
           item.location === ItemLocation.Worn &&
-          item.wearType === WearType.Accessory
+          item.wearType === WearType.Accessory,
       )
-      .map((item) => item.index)
+      .map((item) => item.index),
   );
   return ACCESSORY_INDICES.find((index) => !used.has(index));
 };
@@ -129,7 +127,7 @@ const findFreeHandIndex = (items: CharacterItem[]): number | undefined => {
   const used = new Set(
     items
       .filter((item) => item.location === ItemLocation.Held)
-      .map((item) => item.index)
+      .map((item) => item.index),
   );
   return [LEFT_HAND_INDEX, RIGHT_HAND_INDEX].find((index) => !used.has(index));
 };
@@ -155,8 +153,8 @@ export const ItemsTab = () => {
   const updateStack = (stackId: string, changes: Partial<InventoryStack>) => {
     setStacks((prev) =>
       prev.map((stack) =>
-        stack.id === stackId ? { ...stack, ...changes } : stack
-      )
+        stack.id === stackId ? { ...stack, ...changes } : stack,
+      ),
     );
   };
 
@@ -164,7 +162,7 @@ export const ItemsTab = () => {
     stack: InventoryStack,
     location: ItemLocation,
     index?: number,
-    displaced?: { id: string; location: ItemLocation }
+    displaced?: { id: string; location: ItemLocation },
   ) => {
     setStacks((prev) =>
       prev.map((current) => {
@@ -180,7 +178,7 @@ export const ItemsTab = () => {
           };
         }
         return current;
-      })
+      }),
     );
   };
 
@@ -193,7 +191,7 @@ export const ItemsTab = () => {
     if (!conditionData) return;
 
     const existingCount = conditions.filter(
-      (c) => c.name === conditionName
+      (c) => c.name === conditionName,
     ).length;
 
     // Repeatedly using a stackable condition item costs body.
@@ -226,7 +224,7 @@ export const ItemsTab = () => {
     const existingClothes = characterItems.find(
       (worn) =>
         worn.location === ItemLocation.Worn &&
-        worn.wearType === WearType.Clothes
+        worn.wearType === WearType.Clothes,
     );
     if (existingClothes && !canWearItem(item, characterItems, capacity)) return;
 
@@ -236,7 +234,7 @@ export const ItemsTab = () => {
       CLOTHES_INDEX,
       existingClothes
         ? { id: existingClothes.id, location: ItemLocation.Carried }
-        : undefined
+        : undefined,
     );
   };
 
@@ -245,7 +243,7 @@ export const ItemsTab = () => {
     const index =
       item.slots >= HAND_SLOT_COUNT
         ? LEFT_HAND_INDEX
-        : findFreeHandIndex(characterItems) ?? RIGHT_HAND_INDEX;
+        : (findFreeHandIndex(characterItems) ?? RIGHT_HAND_INDEX);
     moveStack(stack, ItemLocation.Held, index);
   };
 
@@ -257,7 +255,7 @@ export const ItemsTab = () => {
   const consumeItem = (item: CharacterItem, stack: InventoryStack) => {
     if (!item.singleUse) return;
 
-    const effect = item.immediateEffect;
+    const effect = item.consumedEffect;
     if (effect) {
       if (effect.body) {
         setCurrentBody((prev) => Math.min(prev + effect.body!, body.max));
@@ -267,7 +265,7 @@ export const ItemsTab = () => {
       }
       if (effect.stamina) {
         setCurrentStamina((prev) =>
-          Math.min(prev + effect.stamina!, stamina.max)
+          Math.min(prev + effect.stamina!, stamina.max),
         );
       }
       if (effect.condition) {
@@ -283,7 +281,7 @@ export const ItemsTab = () => {
   };
 
   const getActionDisabled = (
-    item: CharacterItem
+    item: CharacterItem,
   ): Partial<Record<ItemAction, boolean>> => ({
     wear: item.wearType ? !canWearItem(item, characterItems, capacity) : false,
     hold: !canHoldItem(item, characterItems),
@@ -294,7 +292,7 @@ export const ItemsTab = () => {
   const handleAction = (
     stackId: string,
     action: ItemAction,
-    rowUnits: number
+    rowUnits: number,
   ) => {
     const stack = stacks.find((current) => current.id === stackId);
     const item = characterItems.find((current) => current.id === stackId);

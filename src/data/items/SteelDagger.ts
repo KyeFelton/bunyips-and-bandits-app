@@ -3,8 +3,7 @@ import { DamageType } from "../../enums/DamageType";
 
 export const SteelDagger: Item = {
   name: "Steel dagger",
-  description: "Your weapon attacks deal 2 slash damage when wielded.",
-  effects: [
+  equippedEffects: [
     {
       weapon: {
         bonus: 2,

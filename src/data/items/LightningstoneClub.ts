@@ -3,14 +3,15 @@ import { DamageType } from "../../enums/DamageType";
 
 export const LightningstoneClub: Item = {
   name: "Lightningstone club",
-  description:
-    "Your weapon attacks deal 1 force damage when wielded and your target is stunned.",
-  effects: [
+  equippedEffects: [
     {
       weapon: {
         damageType: DamageType.Force,
         bonus: 1,
       },
+    },
+    {
+      custom: "Your target is stunned.",
     },
   ],
   singleUse: false,

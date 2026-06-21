@@ -1,12 +1,11 @@
 import { Item } from "../../models/items";
 
 export const Adrenaline: Item = {
-  name: "Adrenaline",
-  description:
-    "Grants the Adrenaline Rush condition until your next rest, increasing maximum stamina by 5. If you already have this condition and consume another, you take 2 damage.",
-  immediateEffect: {
+  name: "Adrenaline Shot",
+  consumedEffect: {
     stamina: 5,
     condition: "Adrenaline Rush",
+    custom: "Each additional use deals 2 damage.",
   },
   singleUse: true,
   slots: 1,

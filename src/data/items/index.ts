@@ -11,7 +11,6 @@ import { VialOfPotentAcid } from "./VialOfPotentAcid";
 import { AdamantineSword } from "./AdamantineSword";
 import { FeignDeathPotion } from "./FeignDeathPotion";
 import { MithrilMace } from "./MithrilMace";
-import { SteelHelm } from "./SteelHelm";
 import { WaterHammerOfTytos } from "./WaterHammerOfTytos";
 import { Adrenaline } from "./Adrenaline";
 import { FirstAidKit } from "./FirstAidKit";
@@ -28,7 +27,6 @@ import { GasMask } from "./GasMask";
 import { PerfumeOfBewitching } from "./PerfumeOfBewitching";
 import { SteelMailArmour } from "./SteelMailArmour";
 import { WoodenBoomerang } from "./WoodenBoomerang";
-import { BarruginSpineHelm } from "./BarruginSpineHelm";
 import { KangarooHideArmour } from "./KangarooHideArmour";
 import * as PortalStone from "./PortalStone";
 import { SteelPlateArmour } from "./SteelPlateArmour";
@@ -40,7 +38,6 @@ import { CrocodileScaleArmour } from "./CrocodileScaleArmour";
 import { LavastoneClub } from "./LavastoneClub";
 import { RubberSuit } from "./RubberSuit";
 import { SteelSword } from "./SteelSword";
-import { CrocodileScaleHelm } from "./CrocodileScaleHelm";
 import { LightningSwordOfRollo } from "./LightningSwordOfRollo";
 import { SleepingAid } from "./SleepingAid";
 import { Steroid } from "./Steroid";
@@ -65,7 +62,6 @@ export {
   AdamantineSword,
   FeignDeathPotion,
   MithrilMace,
-  SteelHelm,
   WaterHammerOfTytos,
   Adrenaline,
   FirstAidKit,
@@ -82,7 +78,6 @@ export {
   PerfumeOfBewitching,
   SteelMailArmour,
   WoodenBoomerang,
-  BarruginSpineHelm,
   KangarooHideArmour,
   PortalStone,
   SteelPlateArmour,
@@ -94,7 +89,6 @@ export {
   LavastoneClub,
   RubberSuit,
   SteelSword,
-  CrocodileScaleHelm,
   LightningSwordOfRollo,
   SleepingAid,
   Steroid,

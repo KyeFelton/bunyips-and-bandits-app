@@ -13,6 +13,7 @@ export type Effect = {
   armour?: StatModifier & {
     damageType: DamageType;
   };
+  custom?: string;
   evasions?: StatModifier;
   body?: StatModifier;
   mind?: StatModifier;

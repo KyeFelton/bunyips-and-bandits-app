@@ -4,18 +4,16 @@ import { WearType } from "../../enums/WearType";
 
 export const RubberSuit: Item = {
   name: "Rubber suit",
-  description:
-    "You gain +4 armour for electric damage.",
-  effects: [
+  equippedEffects: [
     {
       armour: {
         damageType: DamageType.Electric,
-        bonus: 4,
+        bonus: 2,
       },
     },
   ],
   singleUse: false,
   wearType: WearType.Clothes,
-  slots: 3,
-  defaultCost: 1000,
+  slots: 2,
+  defaultCost: 2000,
 };

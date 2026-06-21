@@ -3,8 +3,7 @@ import { SkillType } from "../../enums/SkillType";
 
 export const PerfumeOfBewitching: Item = {
   name: "Perfume of bewitching",
-  description: "Whilst worn, you have +2 bonus to charisma checks.",
-  effects: [
+  equippedEffects: [
     {
       skill: {
         skillType: SkillType.Charisma,

@@ -5,42 +5,22 @@ import { WearType } from "../../enums/WearType";
 
 export const SteelPlateArmour: Item = {
   name: "Steel plate armour",
-  description:
-    "You gain +2 armour for all damage types, and an additional +1 armour for slash and force damage. You lose -2 on agility and dexterity checks.",
-  effects: [
-    {
-      armour: {
-        damageType: DamageType.Fire,
-        bonus: 2,
-      },
-    },
-    {
-      armour: {
-        damageType: DamageType.Electric,
-        bonus: 2,
-      },
-    },
-    {
-      armour: {
-        damageType: DamageType.Toxic,
-        bonus: 2,
-      },
-    },
+  equippedEffects: [
     {
       armour: {
         damageType: DamageType.Slash,
-        bonus: 4,
+        bonus: 2,
       },
     },
     {
       armour: {
         damageType: DamageType.Force,
-        bonus: 4,
+        bonus: 2,
       },
     },
     {
       skill: {
-        skillType: SkillType.Dexterity,
+        skillType: SkillType.Stealth,
         bonus: -2,
       },
     },
@@ -53,6 +33,6 @@ export const SteelPlateArmour: Item = {
   ],
   singleUse: false,
   wearType: WearType.Clothes,
-  slots: 5,
+  slots: 3,
   defaultCost: 2500,
 };

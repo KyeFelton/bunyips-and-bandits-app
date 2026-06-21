@@ -4,8 +4,7 @@ import { DamageType } from "../../enums/DamageType";
 
 export const KangarooHideArmour: Item = {
   name: "Kangaroo hide armour",
-  description: "You gain +1 armour for force and slash damage types.",
-  effects: [
+  equippedEffects: [
     {
       armour: {
         damageType: DamageType.Slash,
@@ -21,6 +20,6 @@ export const KangarooHideArmour: Item = {
   ],
   singleUse: false,
   wearType: WearType.Clothes,
-  slots: 3,
+  slots: 2,
   defaultCost: 100,
 };

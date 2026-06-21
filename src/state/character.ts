@@ -36,10 +36,10 @@ export const imageAtom = atom<string | undefined>(undefined);
 // Character progression
 export const magicSkillsAtom = atom<string[]>(["Biotic"]);
 export const criticalSuccessesAtom = atom<Partial<Record<SkillType, number>>>(
-  {}
+  {},
 );
 export const skillsProgressedSinceRestAtom = atom<Set<SkillType>>(
-  new Set<SkillType>()
+  new Set<SkillType>(),
 );
 export const bodyUpgradesAtom = atom<number>(0);
 export const mindUpgradesAtom = atom<number>(0);
@@ -58,7 +58,7 @@ export const moneyAtom = atom<number>(0);
 // Inventory stacks resolved against the catalog for reading.
 // Backpack capacity, slot usage and display rows live in state/items.ts.
 export const characterItemsAtom = atom((get) =>
-  get(itemsAtom).map(resolveStack)
+  get(itemsAtom).map(resolveStack),
 );
 
 // Custom traits
@@ -109,7 +109,7 @@ export const skillLevelsAtom = atom((get) => {
   Object.keys(skills).forEach((skill) => {
     skills[skill as SkillType] = Math.max(
       1,
-      Math.min(MAX_SKILL_LEVEL, skills[skill as SkillType] || 1)
+      Math.min(MAX_SKILL_LEVEL, skills[skill as SkillType] || 1),
     );
   });
 
@@ -192,11 +192,11 @@ export const effectsAtom = atom((get) => {
       (item) =>
         (item.location === ItemLocation.Worn ||
           item.location === ItemLocation.Held) &&
-        item.effects
+        item.equippedEffects,
     )
     .forEach((item) => {
-      if (item.effects) {
-        effects.push(...item.effects);
+      if (item.equippedEffects) {
+        effects.push(...item.equippedEffects);
       }
     });
 
@@ -376,7 +376,7 @@ export const speedAtom = atom((get) => {
     if (body.current / body.max <= 0.5) {
       // Reduce speed rating by 1 level
       baseSpeed[locomotion as Locomotion] = numberToRating(
-        Math.max(0, currentValue - 1)
+        Math.max(0, currentValue - 1),
       );
     }
   });

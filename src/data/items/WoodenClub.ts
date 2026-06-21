@@ -3,8 +3,7 @@ import { DamageType } from "../../enums/DamageType";
 
 export const WoodenClub: Item = {
   name: "Wooden club",
-  description: "Your weapon attacks deal 1 force damage when wielded.",
-  effects: [
+  equippedEffects: [
     {
       weapon: {
         damageType: DamageType.Force,
