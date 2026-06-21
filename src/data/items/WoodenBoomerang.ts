@@ -1,4 +1,5 @@
 import { Item } from "../../models/items";
+import { ItemType } from "../../enums/ItemType";
 import { DamageType } from "../../enums/DamageType";
 
 export const WoodenBoomerang: Item = {
@@ -11,10 +12,12 @@ export const WoodenBoomerang: Item = {
       },
     },
     {
-      custom: "If thrown and misses the target, the weapon returns back to you.",
+      custom:
+        "If thrown and misses the target, the weapon returns back to you.",
     },
   ],
   singleUse: false,
   slots: 1,
   defaultCost: 50,
+  itemType: ItemType.RangedWeapon,
 };

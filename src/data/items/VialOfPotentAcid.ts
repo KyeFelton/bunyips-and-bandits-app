@@ -1,4 +1,5 @@
 import { Item } from "../../models/items";
+import { ItemType } from "../../enums/ItemType";
 
 export const VialOfPotentAcid: Item = {
   name: "Vial of potent acid",
@@ -11,4 +12,5 @@ export const VialOfPotentAcid: Item = {
   slots: 1,
   stackable: true,
   defaultCost: 150,
+  itemType: ItemType.Poison,
 };

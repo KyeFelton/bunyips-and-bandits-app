@@ -1,5 +1,6 @@
 import { DamageType } from "../../enums/DamageType";
 import { Item } from "../../models/items";
+import { ItemType } from "../../enums/ItemType";
 
 export const WaterHammerOfTytos: Item = {
   name: "Water Hammer of Tytos",
@@ -45,4 +46,5 @@ export const WaterHammerOfTytos: Item = {
   ],
   singleUse: false,
   slots: 2,
+  itemType: ItemType.ForceWeapon,
 };

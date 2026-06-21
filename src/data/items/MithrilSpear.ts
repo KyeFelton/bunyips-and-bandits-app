@@ -1,4 +1,5 @@
 import { Item } from "../../models/items";
+import { ItemType } from "../../enums/ItemType";
 import { DamageType } from "../../enums/DamageType";
 
 export const MithrilSpear: Item = {
@@ -18,4 +19,5 @@ export const MithrilSpear: Item = {
   singleUse: false,
   slots: 2,
   defaultCost: 1000,
+  itemType: ItemType.SlashWeapon,
 };

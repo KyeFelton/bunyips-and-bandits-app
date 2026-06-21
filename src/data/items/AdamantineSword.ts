@@ -1,5 +1,6 @@
 import { Item } from "../../models/items";
 import { DamageType } from "../../enums/DamageType";
+import { ItemType } from "../../enums/ItemType";
 
 export const AdamantineSword: Item = {
   name: "Adamantine sword",
@@ -14,4 +15,5 @@ export const AdamantineSword: Item = {
   singleUse: false,
   slots: 1,
   defaultCost: 6000,
+  itemType: ItemType.SlashWeapon,
 };

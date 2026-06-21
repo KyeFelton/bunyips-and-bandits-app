@@ -1,4 +1,6 @@
 import { ArrowLeft, Plus } from "lucide-react";
+import { ItemType } from "../enums/ItemType";
+import { ItemIcon } from "./icons/ItemIcon";
 import { useAtom, useAtomValue } from "jotai";
 import { useState } from "react";
 import { ItemLocation } from "../enums/ItemLocation";
@@ -60,6 +62,7 @@ const defaultCustomItem: Item = {
   equippedEffects: [],
   singleUse: false,
   slots: 1,
+  itemType: undefined,
 };
 
 export const AddItemDialog = ({ target, trigger }: Props) => {
@@ -415,6 +418,32 @@ export const AddItemDialog = ({ target, trigger }: Props) => {
                   }
                 />
               </div>
+              <div>
+                <label className="text-sm font-medium block mb-2">Icon</label>
+                <div className="flex flex-wrap gap-2">
+                  {Object.values(ItemType).map((type) => (
+                    <button
+                      key={type}
+                      type="button"
+                      onClick={() =>
+                        setCustomItem({
+                          ...customItem,
+                          itemType:
+                            customItem.itemType === type ? undefined : type,
+                        })
+                      }
+                      className={`p-2 rounded-md border transition-colors ${
+                        customItem.itemType === type
+                          ? "border-primary bg-primary/10"
+                          : "border-border hover:bg-accent-subtle"
+                      }`}
+                      title={type}
+                    >
+                      <ItemIcon itemType={type} className="h-4 w-4" />
+                    </button>
+                  ))}
+                </div>
+              </div>
               <div className="flex items-center gap-2">
                 <input
                   type="checkbox"
@@ -494,8 +523,12 @@ export const AddItemDialog = ({ target, trigger }: Props) => {
                   <button
                     key={item.name}
                     onClick={() => handleSelectItem(item)}
-                    className="w-full text-left px-2 py-2 rounded-md hover:bg-accent-subtle text-sm transition-colors"
+                    className="w-full text-left px-2 py-2 rounded-md hover:bg-accent-subtle text-sm transition-colors flex items-center gap-2"
                   >
+                    <ItemIcon
+                      itemType={item.itemType}
+                      className="h-4 w-4 shrink-0 text-muted-foreground"
+                    />
                     {item.name}
                   </button>
                 ))}

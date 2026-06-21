@@ -5,7 +5,7 @@ import { SoothingHerb } from "./SoothingHerb";
 import { ThunderstoneClub } from "./ThunderstoneClub";
 import { AdamantineSpear } from "./AdamantineSpear";
 import { EnchantedClub } from "./EnchantedClub";
-import { MiriScale } from "./MiriScale";
+import { RainbowScaleNecklace } from "./RainbowScaleNecklace";
 import { SteelDagger } from "./SteelDagger";
 import { VialOfPotentAcid } from "./VialOfPotentAcid";
 import { AdamantineSword } from "./AdamantineSword";
@@ -56,7 +56,7 @@ export {
   ThunderstoneClub,
   AdamantineSpear,
   EnchantedClub,
-  MiriScale,
+  RainbowScaleNecklace,
   SteelDagger,
   VialOfPotentAcid,
   AdamantineSword,

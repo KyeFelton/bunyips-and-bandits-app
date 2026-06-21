@@ -1,4 +1,5 @@
 import { Item } from "../../models/items";
+import { ItemType } from "../../enums/ItemType";
 import { DamageType } from "../../enums/DamageType";
 
 export const SteelDagger: Item = {
@@ -14,4 +15,5 @@ export const SteelDagger: Item = {
   singleUse: false,
   slots: 1,
   defaultCost: 50,
+  itemType: ItemType.SlashWeapon,
 };

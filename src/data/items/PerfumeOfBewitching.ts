@@ -1,4 +1,5 @@
 import { Item } from "../../models/items";
+import { ItemType } from "../../enums/ItemType";
 import { SkillType } from "../../enums/SkillType";
 
 export const PerfumeOfBewitching: Item = {
@@ -14,4 +15,6 @@ export const PerfumeOfBewitching: Item = {
   singleUse: false,
   slots: 1,
   defaultCost: 520,
+  itemType: ItemType.Concoction,
+  stackable: true,
 };

@@ -1,4 +1,5 @@
 import { Item } from "../../models/items";
+import { ItemType } from "../../enums/ItemType";
 
 export const DjugiPoisonSac: Item = {
   name: "Djugi poison sac",
@@ -10,4 +11,5 @@ export const DjugiPoisonSac: Item = {
   slots: 1,
   stackable: true,
   defaultCost: 90,
+  itemType: ItemType.Poison,
 };

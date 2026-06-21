@@ -1,4 +1,5 @@
 import { Item } from "../../models/items";
+import { ItemType } from "../../enums/ItemType";
 
 export const ChloroformAndCloth: Item = {
   name: "Chloroform and cloth",
@@ -11,4 +12,5 @@ export const ChloroformAndCloth: Item = {
   singleUse: false,
   slots: 1,
   defaultCost: 220,
+  itemType: ItemType.Poison,
 };

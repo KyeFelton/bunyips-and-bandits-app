@@ -1,4 +1,5 @@
 import { Item } from "../../models/items";
+import { ItemType } from "../../enums/ItemType";
 import { DamageType } from "../../enums/DamageType";
 
 export const LightningstoneClub: Item = {
@@ -17,4 +18,5 @@ export const LightningstoneClub: Item = {
   singleUse: false,
   slots: 2,
   defaultCost: 2000,
+  itemType: ItemType.ForceWeapon,
 };

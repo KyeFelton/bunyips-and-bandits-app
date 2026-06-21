@@ -1,12 +1,14 @@
 import { Item } from "../../models/items";
+import { ItemType } from "../../enums/ItemType";
 
 export const Caltrops: Item = {
   name: "Caltrops",
   consumedEffect: {
     custom:
-      "Scattered caltrops injure creatures that step on them. A handful covers a small area.",
+      "When stepped on, deals 2 Slash damage and ends movement that turn.",
   },
   singleUse: true,
-  slots: 0.1,
+  slots: 1,
   defaultCost: 2,
+  itemType: ItemType.Trap,
 };

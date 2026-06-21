@@ -1,4 +1,5 @@
 import { Item } from "../../models/items";
+import { ItemType } from "../../enums/ItemType";
 
 export const DynamiteStick: Item = {
   name: "Dynamite stick",
@@ -10,4 +11,5 @@ export const DynamiteStick: Item = {
   slots: 1,
   stackable: true,
   defaultCost: 500,
+  itemType: ItemType.Explosive,
 };

@@ -1,5 +1,6 @@
 import { DamageType } from "../../enums/DamageType";
 import { Item } from "../../models/items";
+import { ItemType } from "../../enums/ItemType";
 import { WearType } from "../../enums/WearType";
 
 export const RubberSuit: Item = {
@@ -16,4 +17,5 @@ export const RubberSuit: Item = {
   wearType: WearType.Clothes,
   slots: 2,
   defaultCost: 2000,
+  itemType: ItemType.Armour,
 };

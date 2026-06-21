@@ -1,4 +1,5 @@
 import { ItemLocation } from "../enums/ItemLocation";
+import { ItemType } from "../enums/ItemType";
 import { WearType } from "../enums/WearType";
 import { Effect } from "./effect";
 
@@ -20,6 +21,7 @@ export type Item = {
   stackable?: boolean;
   wearType?: WearType;
   defaultCost?: number;
+  itemType?: ItemType;
 };
 
 // Persisted per character: a player's decision, not catalog data.

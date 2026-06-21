@@ -1,5 +1,6 @@
 import { DamageType } from "../../enums/DamageType";
 import { Item } from "../../models/items";
+import { ItemType } from "../../enums/ItemType";
 
 export const LightningSwordOfRollo: Item = {
   name: "Lightning Sword of Rollo",
@@ -19,4 +20,5 @@ export const LightningSwordOfRollo: Item = {
   ],
   singleUse: false,
   slots: 1,
+  itemType: ItemType.SlashWeapon,
 };

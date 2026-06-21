@@ -1,4 +1,5 @@
 import { Item } from "../../models/items";
+import { ItemType } from "../../enums/ItemType";
 import { DamageType } from "../../enums/DamageType";
 import { Locomotion } from "../../enums/Locomotion";
 
@@ -16,25 +17,25 @@ export const WindSpearOfCassreina: Item = {
     {
       speed: {
         locomotion: Locomotion.Run,
-        bonus: 2,
+        increase: true,
       },
     },
     {
       speed: {
         locomotion: Locomotion.Swim,
-        bonus: 2,
+        increase: true,
       },
     },
     {
       speed: {
         locomotion: Locomotion.Climb,
-        bonus: 2,
+        increase: true,
       },
     },
     {
       speed: {
         locomotion: Locomotion.Fly,
-        bonus: 2,
+        increase: true,
       },
     },
     {
@@ -44,4 +45,5 @@ export const WindSpearOfCassreina: Item = {
   ],
   singleUse: false,
   slots: 2,
+  itemType: ItemType.SlashWeapon,
 };

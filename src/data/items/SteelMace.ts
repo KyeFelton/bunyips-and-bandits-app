@@ -1,4 +1,5 @@
 import { Item } from "../../models/items";
+import { ItemType } from "../../enums/ItemType";
 import { DamageType } from "../../enums/DamageType";
 
 export const SteelMace: Item = {
@@ -14,4 +15,5 @@ export const SteelMace: Item = {
   singleUse: false,
   slots: 2,
   defaultCost: 400,
+  itemType: ItemType.ForceWeapon,
 };

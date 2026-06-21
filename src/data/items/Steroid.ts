@@ -1,4 +1,5 @@
 import { Item } from "../../models/items";
+import { ItemType } from "../../enums/ItemType";
 
 export const Steroid: Item = {
   name: "Steroid",
@@ -11,4 +12,5 @@ export const Steroid: Item = {
   slots: 1,
   stackable: true,
   defaultCost: 110,
+  itemType: ItemType.Concoction,
 };

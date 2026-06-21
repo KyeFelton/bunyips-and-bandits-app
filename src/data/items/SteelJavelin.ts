@@ -1,4 +1,5 @@
 import { Item } from "../../models/items";
+import { ItemType } from "../../enums/ItemType";
 import { DamageType } from "../../enums/DamageType";
 
 export const SteelJavelin: Item = {
@@ -14,4 +15,5 @@ export const SteelJavelin: Item = {
   singleUse: false,
   slots: 1,
   defaultCost: 400,
+  itemType: ItemType.SlashWeapon,
 };

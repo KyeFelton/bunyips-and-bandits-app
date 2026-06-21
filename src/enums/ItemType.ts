@@ -1,0 +1,16 @@
+export enum ItemType {
+  Accessory = "Accessory",
+  Armour = "Armour",
+  ForceWeapon = "ForceWeapon",
+  Concoction = "Concoction",
+  Explosive = "Explosive",
+  Food = "Food",
+  Gemstone = "Gemstone",
+  Hat = "Hat",
+  Mask = "Mask",
+  Medical = "Medical",
+  Poison = "Poison",
+  RangedWeapon = "RangedWeapon",
+  SlashWeapon = "SlashWeapon",
+  Trap = "Trap",
+}

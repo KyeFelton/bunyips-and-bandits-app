@@ -1,4 +1,5 @@
 import { Item } from "../../models/items";
+import { ItemType } from "../../enums/ItemType";
 
 export const Adrenaline: Item = {
   name: "Adrenaline Shot",
@@ -11,4 +12,5 @@ export const Adrenaline: Item = {
   slots: 1,
   stackable: true,
   defaultCost: 125,
+  itemType: ItemType.Medical,
 };

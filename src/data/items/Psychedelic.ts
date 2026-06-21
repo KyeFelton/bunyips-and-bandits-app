@@ -1,7 +1,8 @@
 import { Item } from "../../models/items";
+import { ItemType } from "../../enums/ItemType";
 
 const MildPsychedelic: Item = {
-  name: "Mild psychedelic",
+  name: "Psychedelic (mild)",
   consumedEffect: {
     condition: "Psychedelic Trip (Mild)",
     custom:
@@ -11,10 +12,11 @@ const MildPsychedelic: Item = {
   slots: 1,
   stackable: true,
   defaultCost: 85,
+  itemType: ItemType.Concoction,
 };
 
 const StrongPsychedelic: Item = {
-  name: "Strong psychedelic",
+  name: "Psychedelic (strong)",
   consumedEffect: {
     condition: "Psychedelic Trip (Strong)",
     custom:
@@ -24,6 +26,7 @@ const StrongPsychedelic: Item = {
   slots: 1,
   stackable: true,
   defaultCost: 300,
+  itemType: ItemType.Concoction,
 };
 
 export { MildPsychedelic, StrongPsychedelic };

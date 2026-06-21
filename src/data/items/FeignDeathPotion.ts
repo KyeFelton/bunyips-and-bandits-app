@@ -1,4 +1,5 @@
 import { Item } from "../../models/items";
+import { ItemType } from "../../enums/ItemType";
 
 export const FeignDeathPotion: Item = {
   name: "Feign death potion",
@@ -11,4 +12,5 @@ export const FeignDeathPotion: Item = {
   slots: 1,
   stackable: true,
   defaultCost: 800,
+  itemType: ItemType.Concoction,
 };

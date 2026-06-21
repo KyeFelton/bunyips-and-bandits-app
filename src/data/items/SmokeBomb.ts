@@ -1,4 +1,5 @@
 import { Item } from "../../models/items";
+import { ItemType } from "../../enums/ItemType";
 
 export const SmokeBomb: Item = {
   name: "Smoke bomb",
@@ -11,4 +12,5 @@ export const SmokeBomb: Item = {
   slots: 1,
   stackable: true,
   defaultCost: 175,
+  itemType: ItemType.Explosive,
 };

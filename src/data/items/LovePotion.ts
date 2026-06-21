@@ -1,4 +1,5 @@
 import { Item } from "../../models/items";
+import { ItemType } from "../../enums/ItemType";
 
 export const LovePotion: Item = {
   name: "Love potion",
@@ -11,4 +12,5 @@ export const LovePotion: Item = {
   slots: 1,
   stackable: true,
   defaultCost: 450,
+  itemType: ItemType.Concoction,
 };

@@ -1,5 +1,6 @@
 import { SkillType } from "../../enums/SkillType";
 import { Item } from "../../models/items";
+import { ItemType } from "../../enums/ItemType";
 
 export const FirstAidKit: Item = {
   name: "First aid kit",
@@ -13,4 +14,5 @@ export const FirstAidKit: Item = {
   ],
   singleUse: false,
   slots: 1,
+  itemType: ItemType.Medical,
 };
