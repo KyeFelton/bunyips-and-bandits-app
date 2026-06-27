@@ -32,7 +32,7 @@ export const SensesCard = () => {
   const { keen: keenSenses, poor: poorSenses } = senses;
 
   return (
-    <Card>
+    <Card className="rounded-none md:rounded-lg">
       <CardHeader>
         <CardTitle>Senses</CardTitle>
       </CardHeader>

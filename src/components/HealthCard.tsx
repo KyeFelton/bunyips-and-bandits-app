@@ -27,6 +27,7 @@ import {
   Frightened,
   Condition,
 } from "../models/conditions";
+import { cn } from "../utils/cn";
 
 type Props = {
   className?: string;
@@ -92,7 +93,7 @@ export const HealthCard = ({ className }: Props) => {
   };
 
   return (
-    <Card className={className}>
+    <Card className={cn("rounded-none md:rounded-lg", className)}>
       <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle>Health</CardTitle>
         <Button

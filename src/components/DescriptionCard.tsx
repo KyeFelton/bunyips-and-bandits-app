@@ -28,7 +28,7 @@ export const DescriptionCard = () => {
     useState(false);
 
   return (
-    <Card className="sm:h-[472px] flex flex-col group">
+    <Card className="sm:h-[472px] flex flex-col group rounded-none md:rounded-lg">
       <CardHeader className="relative">
         <CardTitle>Description</CardTitle>
         <Button

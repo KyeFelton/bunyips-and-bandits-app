@@ -14,7 +14,7 @@ export const NameCard = () => {
   const [isEditNameDialogOpen, setIsEditNameDialogOpen] = useState(false);
 
   return (
-    <Card className="h-[332px] flex flex-col group">
+    <Card className="h-[332px] flex flex-col group rounded-none md:rounded-lg">
       <CardHeader className="p-4">
         <div className="relative flex flex-col items-center">
           <h3 className="px-8 text-2xl font-semibold text-center line-clamp-2">

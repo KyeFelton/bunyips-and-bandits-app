@@ -28,9 +28,7 @@ export function CharacterSheet() {
   useLoadCharacterFromUrl();
 
   return (
-    <div
-      className="w-full h-full relative"
-    >
+    <div className="w-full h-full relative">
       <div className="relative flex justify-center h-full">
         {/* Mobile Grid Navigation Button */}
         <button
@@ -50,40 +48,40 @@ export function CharacterSheet() {
         />
 
         {/* Mobile Content */}
-        <main className="md:hidden py-4 px-4 pb-24 w-full h-full overflow-auto">
+        <main className="md:hidden pb-24 w-full h-full overflow-auto">
           {activeSection === "character" && (
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col">
               <NameCard />
               <DescriptionCard />
             </div>
           )}
 
           {activeSection === "skills" && (
-            <Card className="p-4 overflow-auto">
+            <Card className="p-4 overflow-auto rounded-none md:rounded-lg">
               <SkillsTable />
             </Card>
           )}
 
           {activeSection === "traits" && (
-            <Card className="p-4 overflow-auto">
+            <Card className="p-4 overflow-auto rounded-none md:rounded-lg">
               <TraitsList />
             </Card>
           )}
 
           {activeSection === "actions" && (
-            <Card className="p-4 overflow-auto">
+            <Card className="p-4 overflow-auto rounded-none md:rounded-lg">
               <ActionsList />
             </Card>
           )}
 
           {activeSection === "items" && (
-            <Card className="p-4 overflow-auto">
+            <Card className="p-4 overflow-auto rounded-none md:rounded-lg">
               <ItemsTab />
             </Card>
           )}
 
           {activeSection === "stats" && (
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col rounded-none md:rounded-lg">
               <HealthCard className="overflow-auto" />
               <CombatCard />
               <SpeedCard />

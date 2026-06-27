@@ -14,7 +14,7 @@ export const ArmourCard = () => {
   const armour = useAtomValue(armourAtom);
 
   return (
-    <Card>
+    <Card className="rounded-none md:rounded-lg">
       <CardHeader>
         <CardTitle>Armour</CardTitle>
       </CardHeader>

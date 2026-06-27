@@ -30,7 +30,7 @@ export const SpeedCard = () => {
   const speed = useAtomValue(speedAtom);
 
   return (
-    <Card>
+    <Card className="rounded-none md:rounded-lg">
       <CardHeader>
         <CardTitle>Speed</CardTitle>
       </CardHeader>
