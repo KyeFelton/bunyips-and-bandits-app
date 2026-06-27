@@ -2,8 +2,8 @@ import { Item } from "../../models/items";
 import { ItemType } from "../../enums/ItemType";
 import { DamageType } from "../../enums/DamageType";
 
-export const WoodenBoomerang: Item = {
-  name: "Wooden boomerang",
+export const Boomerang: Item = {
+  name: "Boomerang",
   equippedEffects: [
     {
       weapon: {
@@ -13,7 +13,7 @@ export const WoodenBoomerang: Item = {
     },
     {
       custom:
-        "If thrown and misses the target, the weapon returns back to you.",
+        "If thrown and misses the target, returns back to thrower.",
     },
   ],
   singleUse: false,

@@ -26,7 +26,7 @@ import { BarruginSpineArmour } from "./BarruginSpineArmour";
 import { GasMask } from "./GasMask";
 import { PerfumeOfBewitching } from "./PerfumeOfBewitching";
 import { SteelMailArmour } from "./SteelMailArmour";
-import { WoodenBoomerang } from "./WoodenBoomerang";
+import { Boomerang } from "./Boomerang";
 import { KangarooHideArmour } from "./KangarooHideArmour";
 import * as PortalStone from "./PortalStone";
 import { SteelPlateArmour } from "./SteelPlateArmour";
@@ -45,8 +45,17 @@ import { DjugiPoisonSac } from "./DjugiPoisonSac";
 import { LightningstoneClub } from "./LightningstoneClub";
 import { SmokeBomb } from "./SmokeBomb";
 import { SunstoneClub } from "./SunstoneClub";
-import { SteelArrow } from "./SteelArrow";
 import { Caltrops } from "./Caltrops";
+import { Crowbar } from "./Crowbar";
+import { FlintAndSteel } from "./FlintAndSteel";
+import { GrapplingHook } from "./GrapplingHook";
+import { IronSpikes } from "./IronSpikes";
+import { Mirror } from "./Mirror";
+import { OilFlask } from "./OilFlask";
+import { Pole } from "./Pole";
+import { Rations } from "./Rations";
+import { Rope } from "./Rope";
+import { Torch } from "./Torch";
 
 export {
   AdamantineMace,
@@ -77,7 +86,7 @@ export {
   GasMask,
   PerfumeOfBewitching,
   SteelMailArmour,
-  WoodenBoomerang,
+  Boomerang,
   KangarooHideArmour,
   PortalStone,
   SteelPlateArmour,
@@ -96,6 +105,15 @@ export {
   LightningstoneClub,
   SmokeBomb,
   SunstoneClub,
-  SteelArrow,
   Caltrops,
+  Crowbar,
+  FlintAndSteel,
+  GrapplingHook,
+  IronSpikes,
+  Mirror,
+  OilFlask,
+  Pole,
+  Rations,
+  Rope,
+  Torch,
 };

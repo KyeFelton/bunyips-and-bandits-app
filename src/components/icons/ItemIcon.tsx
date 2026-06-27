@@ -11,6 +11,7 @@ import {
   Crown,
   Hamburger,
   VenetianMask,
+  Wrench,
 } from "lucide-react";
 import { ItemType } from "../../enums/ItemType";
 
@@ -51,6 +52,8 @@ export const ItemIcon = ({ itemType, className = "h-4 w-4" }: Props) => {
       return <Crown className={className} />;
     case ItemType.Mask:
       return <VenetianMask className={className} />;
+    case ItemType.Gear:
+      return <Wrench className={className} />;
     default:
       return null;
   }

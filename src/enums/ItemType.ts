@@ -5,6 +5,7 @@ export enum ItemType {
   Concoction = "Concoction",
   Explosive = "Explosive",
   Food = "Food",
+  Gear = "Gear",
   Gemstone = "Gemstone",
   Hat = "Hat",
   Mask = "Mask",
