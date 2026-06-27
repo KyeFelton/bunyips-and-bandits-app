@@ -1,4 +1,5 @@
-import { useAtomValue, useSetAtom } from "jotai";
+import { useState } from "react";
+import { useAtomValue } from "jotai";
 import {
   Table,
   TableBody,
@@ -8,12 +9,10 @@ import {
   TableRow,
 } from "./ui/table";
 import { SkillIcon } from "./icons/SkillIcon";
-import { HelpCircle, Lock, Minus, Plus } from "lucide-react";
+import { Edit2, HelpCircle, Lock } from "lucide-react";
 import { SkillType } from "./../enums/SkillType";
 import * as Skills from "./../models/skills";
 import {
-  criticalSuccessesAtom,
-  MAX_SKILL_LEVEL,
   skillLevelsAtom,
   skillRollValuesAtom,
   skillsProgressedSinceRestAtom,
@@ -23,20 +22,15 @@ import { Button } from "./ui/button";
 import { SkillForm } from "./../enums/SkillForm";
 import { RollText } from "./RollText";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { EditSkillsDialog } from "./EditSkillsDialog";
 
 export const SkillsTable = () => {
   const skillLevels = useAtomValue(skillLevelsAtom);
   const skillRollValues = useAtomValue(skillRollValuesAtom);
   const skillsProgressedSinceRest = useAtomValue(skillsProgressedSinceRestAtom);
-  const setCriticalSuccesses = useSetAtom(criticalSuccessesAtom);
   const showRollToast = useRollToast();
 
-  const adjustLevel = (type: SkillType, delta: number) => {
-    setCriticalSuccesses((prev) => ({
-      ...prev,
-      [type]: (prev[type] || 0) + delta,
-    }));
-  };
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
 
   const handleRoll = (skill: {
     type: SkillType;
@@ -83,7 +77,7 @@ export const SkillsTable = () => {
         <TableBody>
           {skillsArray
             .filter(
-              (skill) => !skill.magicSkill || (skill.level && skill.level > 0)
+              (skill) => !skill.magicSkill || (skill.level && skill.level > 0),
             )
             .map((skill) => {
               return (
@@ -113,30 +107,19 @@ export const SkillsTable = () => {
                     </div>
                   </TableCell>
                   <TableCell className="text-left">
-                    <div className="flex items-center justify-start gap-1">
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-6 w-6"
-                        disabled={(skill.level || 0) <= 1}
-                        onClick={() => adjustLevel(skill.type, -1)}
-                      >
-                        <Minus className="h-3 w-3" />
-                      </Button>
-                      <div className="text-sm font-medium w-4 text-center">
+                    <div className="flex items-center gap-2">
+                      <div className="text-sm font-medium">
                         {skill.level || 0}
                       </div>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-6 w-6"
-                        disabled={(skill.level || 0) >= MAX_SKILL_LEVEL}
-                        onClick={() => adjustLevel(skill.type, 1)}
-                      >
-                        <Plus className="h-3 w-3" />
-                      </Button>
                       {skillsProgressedSinceRest.has(skill.type) && (
-                        <Lock className="h-3 w-3 text-muted-foreground" />
+                        <Popover>
+                          <PopoverTrigger className="w-6 h-6 flex items-center justify-center text-muted-foreground rounded-full hover:bg-accent-subtle hover:text-accent-foreground">
+                            <Lock className="h-3 w-3" />
+                          </PopoverTrigger>
+                          <PopoverContent className="max-w-[260px] text-sm" side="right">
+                            <p>This skill has recently leveled up. You need to rest before it can level up again.</p>
+                          </PopoverContent>
+                        </Popover>
                       )}
                     </div>
                   </TableCell>
@@ -165,13 +148,21 @@ export const SkillsTable = () => {
             })}
         </TableBody>
       </Table>
-      <div className="text-xs text-muted-foreground mt-2 px-1">
-        <span className="inline-flex items-center gap-1">
-          <Lock className="h-3 w-3" />
-          indicates a skill has recently leveled up, and you need to rest before
-          you can level up again.
-        </span>
+      <div className="flex justify-end px-1">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="gap-1.5 text-muted-foreground"
+          onClick={() => setIsEditDialogOpen(true)}
+        >
+          <Edit2 className="h-3.5 w-3.5" />
+          Edit Skills
+        </Button>
       </div>
+      <EditSkillsDialog
+        isOpen={isEditDialogOpen}
+        onClose={() => setIsEditDialogOpen(false)}
+      />
     </div>
   );
 };
