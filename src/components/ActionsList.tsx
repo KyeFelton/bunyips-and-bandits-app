@@ -4,7 +4,7 @@ import {
   currentStaminaAtom,
   skillRollValuesAtom,
 } from "./../state/character";
-import { Users, Circle, Scan, HelpCircle } from "lucide-react";
+import { HelpCircle } from "lucide-react";
 import { AreaOfEffect } from "./../enums/AreaOfEffect";
 import { Range } from "./../enums/Range";
 import { Action } from "./../models/actions";
@@ -18,6 +18,7 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
+import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { SkillIcon } from "./icons/SkillIcon";
@@ -29,19 +30,38 @@ import {
   TooltipTrigger,
 } from "./ui/tooltip";
 
-const AreaIcon = ({ type }: { type: AreaOfEffect }) => {
-  switch (type) {
-    case AreaOfEffect.SingleTarget:
-      return <span className="text-muted-foreground">-</span>;
-    case AreaOfEffect.Close:
-      return <Users className="h-4 w-4" />;
-    case AreaOfEffect.Near:
-      return <Circle className="h-4 w-4" />;
-    case AreaOfEffect.Far:
-      return <Scan className="h-4 w-4" />;
-    default:
-      return <span className="text-muted-foreground">-</span>;
+const ActionTags = ({ action }: { action: Action }) => {
+  const tags:  string[] = [];
+
+  if (action.range !== Range.Self) {
+    tags.push(`${action.range} range`);
   }
+
+  if (action.areaOfEffect !== AreaOfEffect.SingleTarget) {
+    tags.push(`${action.areaOfEffect} area`);
+  }
+
+  if (action.staminaCost !== 0) {
+    const label =
+      action.staminaCost === "variable"
+        ? "X stamina"
+        : `${action.staminaCost} stamina`;
+    tags.push(label);
+}
+
+  if (action.duration) {
+    tags.push(action.duration);
+  }
+
+  return (
+    <div className="flex flex-wrap gap-1">
+      {tags.map((label) => (
+        <Badge key={label} variant="secondary">
+          {label}
+        </Badge>
+      ))}
+    </div>
+  );
 };
 
 export const ActionsList = () => {
@@ -87,10 +107,7 @@ export const ActionsList = () => {
           <TableRow>
             <TableHead>Name</TableHead>
             <TableHead>Skill</TableHead>
-            <TableHead>Range</TableHead>
-            <TableHead className="text-center">Area</TableHead>
-            <TableHead className="text-center">Stamina</TableHead>
-            <TableHead>Duration</TableHead>
+            <TableHead></TableHead>
             <TableHead className="text-right"></TableHead>
           </TableRow>
         </TableHeader>
@@ -130,29 +147,7 @@ export const ActionsList = () => {
                 </div>
               </TableCell>
               <TableCell>
-                {action.range === Range.Self ? "-" : action.range}
-              </TableCell>
-              <TableCell className="text-center">
-                <div className="flex justify-center">
-                  <Tooltip>
-                    <TooltipTrigger className="cursor-default text-muted-foreground hover:text-foreground transition-colors">
-                      <AreaIcon type={action.areaOfEffect} />
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>{action.areaOfEffect}</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </div>
-              </TableCell>
-              <TableCell className="text-center font-mono">
-                {typeof action.staminaCost === "number"
-                  ? action.staminaCost
-                  : "X"}
-              </TableCell>
-              <TableCell>
-                {action.duration ?? (
-                  <span className="text-muted-foreground">-</span>
-                )}
+                <ActionTags action={action} />
               </TableCell>
               <TableCell className="text-right">
                 <Button
