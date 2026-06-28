@@ -91,22 +91,43 @@ export function CharacterSheet() {
         </main>
 
         {/* Desktop Layout */}
-        <main className="hidden md:grid py-6 xl:py-12 px-8 grid-cols-4 gap-4 h-full w-full max-w-[1400px] overflow-auto min-w-[1024px]">
+        <main className="hidden md:grid py-6 xl:py-12 px-8 md:grid-cols-3 xl:grid-cols-4 gap-4 h-full w-full max-w-[1500px] overflow-auto min-w-[768px]">
+          {/* Left column */}
           <div className="h-full max-h-[1100px] flex flex-col overflow-auto bg-card rounded-lg">
             <NameCard />
-            <DescriptionCard />
+            <div className="xl:hidden flex flex-col divide-y divide-border overflow-auto">
+              <HealthCard />
+              <CombatCard />
+              <SpeedCard />
+              <ArmourCard />
+              <SensesCard />
+            </div>
+            <div className="hidden xl:block overflow-auto">
+              <DescriptionCard />
+            </div>
           </div>
+
+          {/* Middle 2 columns */}
           <div className="col-span-2 h-full max-h-[1100px] overflow-auto">
             <Tabs
               defaultValue="skills"
               className="flex flex-col items-start h-full"
             >
               <TabsList>
+                <TabsTrigger value="description" className="xl:hidden">
+                  Description
+                </TabsTrigger>
                 <TabsTrigger value="skills">Skills</TabsTrigger>
                 <TabsTrigger value="traits">Traits</TabsTrigger>
                 <TabsTrigger value="actions">Actions</TabsTrigger>
                 <TabsTrigger value="items">Items</TabsTrigger>
               </TabsList>
+              <TabsContent
+                value="description"
+                className="xl:hidden w-full flex-grow rounded-lg rounded-tl-none bg-card"
+              >
+                <DescriptionCard />
+              </TabsContent>
               <TabsContent
                 value="traits"
                 className="w-full flex-grow rounded-lg rounded-tl-none bg-card"
@@ -141,7 +162,9 @@ export function CharacterSheet() {
               </TabsContent>
             </Tabs>
           </div>
-          <div className="h-full max-h-[1100px] flex flex-col divide-y divide-border overflow-auto bg-card rounded-lg">
+
+          {/* Right column */}
+          <div className="hidden xl:flex h-full max-h-[1100px] flex-col divide-y divide-border overflow-auto bg-card rounded-lg">
             <HealthCard />
             <CombatCard />
             <SpeedCard />
