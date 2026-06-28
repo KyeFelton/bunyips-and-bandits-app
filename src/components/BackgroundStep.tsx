@@ -90,7 +90,12 @@ type MoneyTierCardProps = {
   onSelect: () => void;
 };
 
-const MoneyTierCard = ({ tier, amount, selected, onSelect }: MoneyTierCardProps) => (
+const MoneyTierCard = ({
+  tier,
+  amount,
+  selected,
+  onSelect,
+}: MoneyTierCardProps) => (
   <button
     type="button"
     onClick={onSelect}
@@ -102,7 +107,9 @@ const MoneyTierCard = ({ tier, amount, selected, onSelect }: MoneyTierCardProps)
     )}
   >
     <p className="font-semibold text-sm">{tier}</p>
-    <p className="text-sm text-muted-foreground">{amount.toLocaleString()} coins</p>
+    <p className="text-sm text-muted-foreground">
+      {amount.toLocaleString()} coins
+    </p>
   </button>
 );
 
@@ -289,15 +296,16 @@ export const BackgroundStep = () => {
                   <div className="flex flex-col justify-center items-center gap-2">
                     <div
                       className={cn(
-                        "transition-all duration-300 ease-in-out rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center",
+                        "rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center h-36 w-36 lg:h-44 lg:w-44",
                         backgroundItem.name === selectedBackground
-                          ? "h-40 w-40 lg:h-48 lg:w-48 opacity-100"
-                          : "h-36 w-36 lg:h-44 lg:w-44 opacity-50",
+                          ? "opacity-100"
+                          : "opacity-50",
                       )}
                     >
                       <BackgroundIcon
                         name={backgroundItem.name}
                         className={cn(
+                          "transition-all duration-300 ease-in-out ",
                           backgroundItem.name === selectedBackground
                             ? "h-16 w-16 lg:h-20 lg:w-20"
                             : "h-14 w-14 lg:h-16 lg:w-16",
@@ -344,6 +352,11 @@ export const BackgroundStep = () => {
               Expertise
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+              {backgroundData.expertiseSkills.length === 0 && (
+                <p className="text-sm text-muted-foreground">
+                  No expertise skills
+                </p>
+              )}
               {backgroundData.expertiseSkills.map((skill) => (
                 <div key={skill} className="flex items-center gap-2">
                   <SkillIcon type={skill as SkillType} />
@@ -356,23 +369,24 @@ export const BackgroundStep = () => {
             </div>
           </div>
           {/* Traits */}
-          {backgroundData.traits && backgroundData.traits.length > 0 && (
-            <div className="space-y-4 pt-6 border-t border-muted-foreground/20">
-              <h3 className="font-semibold mb-4 flex items-center gap-2">
-                <Star className="h-5 w-5" />
-                Trait
-              </h3>
-              <div className="space-y-3">
-                {backgroundData.traits.map((trait, index) => (
-                  <div key={index}>
-                    <p className="text-sm text-muted-foreground">
-                      {trait.description}
-                    </p>
-                  </div>
-                ))}
-              </div>
+          <div className="space-y-4 pt-6 border-t border-muted-foreground/20">
+            <h3 className="font-semibold mb-4 flex items-center gap-2">
+              <Star className="h-5 w-5" />
+              Trait
+            </h3>
+            <div className="space-y-3">
+              {backgroundData.traits.length === 0 && (
+                <p className="text-sm text-muted-foreground">No traits</p>
+              )}
+              {backgroundData.traits.map((trait, index) => (
+                <div key={index}>
+                  <p className="text-sm text-muted-foreground">
+                    {trait.description}
+                  </p>
+                </div>
+              ))}
             </div>
-          )}
+          </div>
           {/* Starting Money */}
           <div className="space-y-4 pt-6 border-t border-muted-foreground/20">
             <h3 className="font-semibold flex items-center gap-2">

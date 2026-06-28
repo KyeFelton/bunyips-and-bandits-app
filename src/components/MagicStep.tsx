@@ -39,7 +39,7 @@ export const MagicStep = () => {
       // Replace array with single skill (enforce single selection)
       setMagicSkills([skillType]);
     },
-    [setMagicSkills]
+    [setMagicSkills],
   );
 
   const onSelect = useCallback(
@@ -51,7 +51,7 @@ export const MagicStep = () => {
         handleSkillChange(selectedSkillType);
       }
     },
-    [handleSkillChange]
+    [handleSkillChange],
   );
 
   useEffect(() => {
@@ -105,18 +105,19 @@ export const MagicStep = () => {
                   <div className="flex flex-col justify-center items-center gap-2">
                     <div
                       className={cn(
-                        "transition-all duration-300 ease-in-out rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center",
+                        "rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center h-36 w-36 lg:h-44 lg:w-44",
                         skillType === selectedSkill
-                          ? "h-40 w-40 lg:h-48 lg:w-48 opacity-100"
-                          : "h-36 w-36 lg:h-44 lg:w-44 opacity-50"
+                          ? "opacity-100"
+                          : "opacity-50",
                       )}
                     >
                       <SkillIcon
                         type={skillType}
                         className={cn(
+                          "transition-all duration-300 ease-in-out ",
                           skillType === selectedSkill
                             ? "h-16 w-16 lg:h-20 lg:w-20"
-                            : "h-14 w-14 lg:h-16 lg:w-16"
+                            : "h-14 w-14 lg:h-16 lg:w-16",
                         )}
                       />
                     </div>
@@ -125,7 +126,7 @@ export const MagicStep = () => {
                         "font-medium",
                         skillType !== selectedSkill
                           ? "text-md text-muted-foreground/50"
-                          : "text-lg"
+                          : "text-lg",
                       )}
                     >
                       {skillType}
@@ -166,7 +167,7 @@ export const MagicStep = () => {
                   {Array.from({ length: MAX_SKILL_LEVEL }, (_, i) => i + 1).map(
                     (level) => {
                       const unlockable = progression.unlockables.find(
-                        (u) => u.level === level
+                        (u) => u.level === level,
                       );
                       const traits = unlockable?.traits || [];
                       const actions = unlockable?.actions || [];
@@ -181,7 +182,7 @@ export const MagicStep = () => {
                           />
                         </div>
                       );
-                    }
+                    },
                   )}
                 </div>
               </div>

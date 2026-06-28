@@ -29,7 +29,7 @@ import { Kin } from "../models/kin";
 import { AllKin } from "../data/kin";
 
 const KIN_OPTIONS: Kin[] = Object.values(AllKin).sort((a, b) =>
-  a.name.localeCompare(b.name)
+  a.name.localeCompare(b.name),
 );
 
 export const KinStep = () => {
@@ -48,7 +48,7 @@ export const KinStep = () => {
       setLanguages(kinOption.ancestry.languages);
       setKin(kinOption);
     },
-    [setCurrentBody, setCurrentMind, setCurrentStamina, setLanguages, setKin]
+    [setCurrentBody, setCurrentMind, setCurrentStamina, setLanguages, setKin],
   );
 
   const onSelect = useCallback(
@@ -59,7 +59,7 @@ export const KinStep = () => {
         handleKinChange(option);
       }
     },
-    [handleKinChange]
+    [handleKinChange],
   );
 
   useEffect(() => {
@@ -73,7 +73,7 @@ export const KinStep = () => {
   useEffect(() => {
     if (!api || !kin) return;
     const selectedIndex = KIN_OPTIONS.findIndex(
-      (option) => option.name === kin.name
+      (option) => option.name === kin.name,
     );
     if (selectedIndex !== -1 && api.selectedScrollSnap() !== selectedIndex) {
       api.scrollTo(selectedIndex);
@@ -114,10 +114,8 @@ export const KinStep = () => {
                       <div className="flex flex-col justify-center items-center gap-2">
                         <div
                           className={cn(
-                            "transition-all duration-300 ease-in-out",
-                            isSelected
-                              ? "h-40 w-40 lg:h-48 lg:w-48 opacity-100"
-                              : "h-36 w-36 lg:h-44 lg:w-44 opacity-50"
+                            "transition-all duration-300 ease-in-out h-36 w-36 lg:h-44 lg:w-44 ",
+                            isSelected ? "opacity-100" : "opacity-50",
                           )}
                         >
                           <img
@@ -131,7 +129,7 @@ export const KinStep = () => {
                             "font-medium text-center",
                             !isSelected
                               ? "text-md text-muted-foreground/50"
-                              : "text-lg"
+                              : "text-lg",
                           )}
                         >
                           {option.name}
@@ -249,7 +247,7 @@ export const KinStep = () => {
                 .filter(
                   ({ type }) =>
                     kin.species.senses.keen.includes(type) ||
-                    kin.species.senses.poor.includes(type)
+                    kin.species.senses.poor.includes(type),
                 )
                 .map(({ type, label }) => (
                   <div key={type} className="flex items-center gap-4">
@@ -260,8 +258,8 @@ export const KinStep = () => {
                         {kin.species.senses.keen.includes(type)
                           ? "Keen"
                           : kin.species.senses.poor.includes(type)
-                          ? "Poor"
-                          : "-"}
+                            ? "Poor"
+                            : "-"}
                       </div>
                     </div>
                   </div>
@@ -286,7 +284,7 @@ export const KinStep = () => {
                         <div>{value > 0 ? `+${value}` : String(value)}</div>
                       </div>
                     </div>
-                  )
+                  ),
                 )}
               </div>
             ) : (
