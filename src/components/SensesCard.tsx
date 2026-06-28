@@ -1,5 +1,4 @@
 import { useAtomValue } from "jotai";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { SenseType } from "./../enums/SenseType";
 import {
   Tooltip,
@@ -32,11 +31,13 @@ export const SensesCard = () => {
   const { keen: keenSenses, poor: poorSenses } = senses;
 
   return (
-    <Card className="rounded-none md:rounded-lg">
-      <CardHeader>
-        <CardTitle>Senses</CardTitle>
-      </CardHeader>
-      <CardContent>
+    <div>
+      <div className="p-6">
+        <h3 className="text-2xl font-semibold leading-none tracking-tight">
+          Senses
+        </h3>
+      </div>
+      <div className="p-6 pt-0">
         <TooltipProvider>
           <div className="flex items-center gap-3">
             <div className="flex gap-3">
@@ -86,7 +87,7 @@ export const SensesCard = () => {
             )}
           </div>
         </TooltipProvider>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };

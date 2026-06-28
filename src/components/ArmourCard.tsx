@@ -1,5 +1,4 @@
 import { useAtomValue } from "jotai";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { DamageType } from "./../enums/DamageType";
 import {
   Tooltip,
@@ -14,11 +13,13 @@ export const ArmourCard = () => {
   const armour = useAtomValue(armourAtom);
 
   return (
-    <Card className="rounded-none md:rounded-lg">
-      <CardHeader>
-        <CardTitle>Armour</CardTitle>
-      </CardHeader>
-      <CardContent>
+    <div>
+      <div className="p-6">
+        <h3 className="text-2xl font-semibold leading-none tracking-tight">
+          Armour
+        </h3>
+      </div>
+      <div className="p-6 pt-0">
         <TooltipProvider>
           <div className="grid grid-cols-3 gap-3">
             {Object.entries(armour).map(([type, value]) => (
@@ -50,7 +51,7 @@ export const ArmourCard = () => {
             ) : null}
           </div>
         </TooltipProvider>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };

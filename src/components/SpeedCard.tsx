@@ -1,5 +1,4 @@
 import { useAtomValue } from "jotai";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Locomotion } from "./../enums/Locomotion";
 import { SpeedRating } from "./../enums/SpeedRating";
 import {
@@ -30,11 +29,13 @@ export const SpeedCard = () => {
   const speed = useAtomValue(speedAtom);
 
   return (
-    <Card className="rounded-none md:rounded-lg">
-      <CardHeader>
-        <CardTitle>Speed</CardTitle>
-      </CardHeader>
-      <CardContent>
+    <div>
+      <div className="p-6">
+        <h3 className="text-2xl font-semibold leading-none tracking-tight">
+          Speed
+        </h3>
+      </div>
+      <div className="p-6 pt-0">
         <TooltipProvider>
           <div className="grid grid-cols-2 gap-3">
             {Object.entries(speed).map(([type, value]) => (
@@ -65,7 +66,7 @@ export const SpeedCard = () => {
             ))}
           </div>
         </TooltipProvider>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };

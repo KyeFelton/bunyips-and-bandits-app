@@ -1,5 +1,4 @@
 import { useAtomValue } from "jotai";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import {
   actionsCountAtom,
   evasionsCountAtom,
@@ -14,11 +13,13 @@ export const CombatCard = () => {
   const weapon = useAtomValue(weaponAtom);
 
   return (
-    <Card className="rounded-none md:rounded-lg">
-      <CardHeader>
-        <CardTitle>Combat</CardTitle>
-      </CardHeader>
-      <CardContent>
+    <div>
+      <div className="p-6">
+        <h3 className="text-2xl font-semibold leading-none tracking-tight">
+          Combat
+        </h3>
+      </div>
+      <div className="p-6 pt-0">
         <div className="space-y-2 text-sm">
           <div className="flex justify-between">
             <span className="text-muted-foreground">Actions</span>
@@ -36,7 +37,7 @@ export const CombatCard = () => {
             </span>
           </div>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };

@@ -1,4 +1,3 @@
-import { Card } from "../components/ui/card";
 import {
   Tabs,
   TabsContent,
@@ -50,38 +49,38 @@ export function CharacterSheet() {
         {/* Mobile Content */}
         <main className="md:hidden pb-24 w-full h-full overflow-auto">
           {activeSection === "character" && (
-            <div className="flex flex-col">
+            <div className="flex flex-col bg-card">
               <NameCard />
               <DescriptionCard />
             </div>
           )}
 
           {activeSection === "skills" && (
-            <Card className="p-4 overflow-auto rounded-none md:rounded-lg">
+            <div className="p-4 overflow-auto bg-card">
               <SkillsTable />
-            </Card>
+            </div>
           )}
 
           {activeSection === "traits" && (
-            <Card className="p-4 overflow-auto rounded-none md:rounded-lg">
+            <div className="p-4 overflow-auto bg-card">
               <TraitsList />
-            </Card>
+            </div>
           )}
 
           {activeSection === "actions" && (
-            <Card className="p-4 overflow-auto rounded-none md:rounded-lg">
+            <div className="p-4 overflow-auto bg-card">
               <ActionsList />
-            </Card>
+            </div>
           )}
 
           {activeSection === "items" && (
-            <Card className="p-4 overflow-auto rounded-none md:rounded-lg">
+            <div className="p-4 overflow-auto bg-card">
               <ItemsTab />
-            </Card>
+            </div>
           )}
 
           {activeSection === "stats" && (
-            <div className="flex flex-col rounded-none md:rounded-lg">
+            <div className="flex flex-col bg-card">
               <HealthCard className="overflow-auto" />
               <CombatCard />
               <SpeedCard />
@@ -91,15 +90,17 @@ export function CharacterSheet() {
           )}
         </main>
 
-        {/* Desktop Layout - Unchanged */}
-        <main className="hidden md:grid py-12 px-8 grid-cols-4 gap-4 h-full w-full max-w-[1400px] overflow-auto min-w-[1024px]">
-          <div className="flex flex-col gap-2 h-[948px] justify-between">
+        {/* Desktop Layout */}
+        <main className="hidden md:grid py-6 xl:py-12 px-8 grid-cols-4 gap-4 h-full w-full max-w-[1400px] overflow-auto min-w-[1024px]">
+          <div className="h-full max-h-[1100px] flex flex-col overflow-auto bg-card rounded-lg">
             <NameCard />
             <DescriptionCard />
-            <SensesCard />
           </div>
-          <div className="col-span-2">
-            <Tabs defaultValue="skills" className="flex flex-col items-start">
+          <div className="col-span-2 h-full max-h-[1100px] overflow-auto">
+            <Tabs
+              defaultValue="skills"
+              className="flex flex-col items-start h-full"
+            >
               <TabsList>
                 <TabsTrigger value="skills">Skills</TabsTrigger>
                 <TabsTrigger value="traits">Traits</TabsTrigger>
@@ -108,40 +109,44 @@ export function CharacterSheet() {
               </TabsList>
               <TabsContent
                 value="traits"
-                className="w-full flex-grow shadow-sm"
+                className="w-full flex-grow rounded-lg rounded-tl-none bg-card"
               >
-                <Card className="h-[908px] p-4 overflow-auto rounded-tl-none">
+                <div className="p-4 overflow-auto border-t border-border">
                   <TraitsList />
-                </Card>
+                </div>
               </TabsContent>
               <TabsContent
                 value="actions"
-                className="w-full flex-grow shadow-sm"
+                className="w-full flex-grow rounded-lg rounded-tl-none bg-card"
               >
-                <Card className="h-[908px] p-4 overflow-auto rounded-tl-none">
+                <div className="p-4 overflow-auto border-t border-border">
                   <ActionsList />
-                </Card>
+                </div>
               </TabsContent>
-              <TabsContent value="items" className="w-full flex-grow shadow-sm">
-                <Card className="h-[908px] p-4 overflow-auto rounded-tl-none">
+              <TabsContent
+                value="items"
+                className="w-full flex-grow rounded-lg rounded-tl-none bg-card"
+              >
+                <div className="p-4 overflow-auto border-t border-border">
                   <ItemsTab />
-                </Card>
+                </div>
               </TabsContent>
               <TabsContent
                 value="skills"
-                className="w-full flex-grow shadow-sm"
+                className="w-full flex-grow rounded-lg rounded-tl-none bg-card"
               >
-                <Card className="h-[908px] p-4 overflow-auto rounded-tl-none">
+                <div className="p-4 overflow-auto border-t border-border">
                   <SkillsTable />
-                </Card>
+                </div>
               </TabsContent>
             </Tabs>
           </div>
-          <div className="flex flex-col gap-4 h-[948px] justify-between">
-            <HealthCard className="h-[432px] overflow-auto" />
+          <div className="h-full max-h-[1100px] flex flex-col divide-y divide-border overflow-auto bg-card rounded-lg">
+            <HealthCard />
             <CombatCard />
             <SpeedCard />
             <ArmourCard />
+            <SensesCard />
           </div>
         </main>
       </div>

@@ -1,5 +1,4 @@
 import { useAtomValue } from "jotai";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { Edit2 } from "lucide-react";
@@ -28,9 +27,11 @@ export const DescriptionCard = () => {
     useState(false);
 
   return (
-    <Card className="sm:h-[472px] flex flex-col group rounded-none md:rounded-lg">
-      <CardHeader className="relative">
-        <CardTitle>Description</CardTitle>
+    <div className="flex flex-col group">
+      <div className="p-6 relative">
+        <h3 className="text-2xl font-semibold leading-none tracking-tight">
+          Description
+        </h3>
         <Button
           variant="ghost"
           size="icon"
@@ -39,8 +40,8 @@ export const DescriptionCard = () => {
         >
           <Edit2 className="h-3 w-3" />
         </Button>
-      </CardHeader>
-      <CardContent className="space-y-4 flex-grow min-h-0 overflow-auto">
+      </div>
+      <div className="p-6 pt-0 space-y-4 flex-grow min-h-0">
         <div>
           <div className="text-sm font-medium text-muted-foreground mb-1">
             Gender
@@ -103,11 +104,11 @@ export const DescriptionCard = () => {
             <div className="flex-1">{personality || "-"}</div>
           </div>
         </div>
-      </CardContent>
+      </div>
       <EditDescriptionDialog
         isOpen={isEditDescriptionDialogOpen}
         onClose={() => setIsEditDescriptionDialogOpen(false)}
       />
-    </Card>
+    </div>
   );
 };

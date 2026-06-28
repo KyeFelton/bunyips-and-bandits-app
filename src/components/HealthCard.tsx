@@ -1,5 +1,4 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
 import { Bed, Plus, X } from "lucide-react";
 import {
@@ -93,9 +92,11 @@ export const HealthCard = ({ className }: Props) => {
   };
 
   return (
-    <Card className={cn("rounded-none md:rounded-lg", className)}>
-      <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle>Health</CardTitle>
+    <div className={cn(className)}>
+      <div className="flex items-center justify-between p-6 pb-2">
+        <h3 className="text-2xl font-semibold leading-none tracking-tight">
+          Health
+        </h3>
         <Button
           onClick={handleRest}
           variant="outline"
@@ -105,8 +106,8 @@ export const HealthCard = ({ className }: Props) => {
           <Bed className="h-4 w-4" />
           Rest
         </Button>
-      </CardHeader>
-      <CardContent className="space-y-4 pt-4">
+      </div>
+      <div className="p-6 space-y-4 pt-4">
         <HealthBar
           colours={{ good: "good", warning: "warning", bad: "danger" }}
           max={body.max}
@@ -180,7 +181,7 @@ export const HealthCard = ({ className }: Props) => {
             )}
           </div>
         </div>
-      </CardContent>
+      </div>
       <AddConditionModal
         isOpen={isAddConditionModalOpen}
         onClose={() => setIsAddConditionModalOpen(false)}
@@ -278,6 +279,6 @@ export const HealthCard = ({ className }: Props) => {
           </div>
         </DialogContent>
       </Dialog>
-    </Card>
+    </div>
   );
 };

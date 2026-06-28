@@ -1,5 +1,4 @@
 import { useAtomValue } from "jotai";
-import { Card, CardHeader, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
 import { Edit2 } from "lucide-react";
 import { nameAtom, imageAtom, kinAtom } from "./../state/character";
@@ -14,8 +13,8 @@ export const NameCard = () => {
   const [isEditNameDialogOpen, setIsEditNameDialogOpen] = useState(false);
 
   return (
-    <Card className="h-[332px] flex flex-col group rounded-none md:rounded-lg">
-      <CardHeader className="p-4">
+    <div className="h-[332px] flex flex-col group">
+      <div className="p-4">
         <div className="relative flex flex-col items-center">
           <h3 className="px-8 text-2xl font-semibold text-center line-clamp-2">
             {name || "No name"}
@@ -30,18 +29,18 @@ export const NameCard = () => {
             <Edit2 className="h-3 w-3" />
           </Button>
         </div>
-      </CardHeader>
-      <CardContent className="flex-grow min-h-0 flex justify-center">
+      </div>
+      <div className="p-6 pt-0 flex-grow min-h-0 flex justify-center">
         <img
           src={image ?? kin.imageSrc}
           alt="character"
           className="w-full max-w-[250px] h-full max-h-[250px] rounded-md object-cover"
         />
-      </CardContent>
+      </div>
       <EditNameDialog
         isOpen={isEditNameDialogOpen}
         onClose={() => setIsEditNameDialogOpen(false)}
       />
-    </Card>
+    </div>
   );
 };
