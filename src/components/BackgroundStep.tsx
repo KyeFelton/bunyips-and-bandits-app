@@ -1,13 +1,19 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useCallback, useEffect, useState } from "react";
-import { GraduationCap, Package, Star } from "lucide-react";
+import { GraduationCap, Package, Star, Wallet } from "lucide-react";
 import {
   backgroundAtom,
   backgroundDataAtom,
   itemsAtom,
+  moneyAtom,
 } from "./../state/character";
 import { AllBackgrounds } from "./../data/backgrounds";
-import { Background, StartingItemGroup } from "./../models/backgrounds";
+import {
+  Background,
+  MONEY_TIER_AMOUNTS,
+  MoneyTier,
+  StartingItemGroup,
+} from "./../models/backgrounds";
 import { InventoryStack, Item } from "./../models/items";
 import { ItemType } from "./../enums/ItemType";
 import { ItemLocation } from "./../enums/ItemLocation";
@@ -77,6 +83,29 @@ function defaultGroupFor(bg: Background): string | null {
   return bg.startingItems[0].name ?? null;
 }
 
+type MoneyTierCardProps = {
+  tier: MoneyTier;
+  amount: number;
+  selected: boolean;
+  onSelect: () => void;
+};
+
+const MoneyTierCard = ({ tier, amount, selected, onSelect }: MoneyTierCardProps) => (
+  <button
+    type="button"
+    onClick={onSelect}
+    className={cn(
+      "text-left p-3 rounded-lg border-2 transition-colors duration-150 flex flex-col gap-1",
+      selected
+        ? "border-primary bg-primary/10"
+        : "border-muted hover:border-primary/50 bg-transparent",
+    )}
+  >
+    <p className="font-semibold text-sm">{tier}</p>
+    <p className="text-sm text-muted-foreground">{amount.toLocaleString()} coins</p>
+  </button>
+);
+
 type GroupCardProps = {
   group: StartingItemGroup;
   selected: boolean;
@@ -119,7 +148,12 @@ export const BackgroundStep = () => {
   const [selectedBackground, setBackground] = useAtom(backgroundAtom);
   const backgroundData = useAtomValue(backgroundDataAtom);
   const setItems = useSetAtom(itemsAtom);
+  const currentMoney = useAtomValue(moneyAtom);
+  const setMoney = useSetAtom(moneyAtom);
   const [selectedGroupName, setSelectedGroupName] = useState<string | null>(
+    null,
+  );
+  const [selectedMoneyTier, setSelectedMoneyTier] = useState<MoneyTier | null>(
     null,
   );
   const [api, setApi] = useState<CarouselApi>();
@@ -145,8 +179,13 @@ export const BackgroundStep = () => {
       const defaultGroup = bg.startingItems[0] ?? null;
       setSelectedGroupName(defaultGroup?.name ?? null);
       if (defaultGroup) applyGroup(defaultGroup);
+      const defaultTier = bg.availableMoneyTiers[0];
+      if (defaultTier) {
+        setSelectedMoneyTier(defaultTier);
+        setMoney(MONEY_TIER_AMOUNTS[defaultTier]);
+      }
     },
-    [setBackground, applyGroup],
+    [setBackground, applyGroup, setMoney],
   );
 
   const handleGroupSelect = useCallback(
@@ -155,6 +194,14 @@ export const BackgroundStep = () => {
       applyGroup(group);
     },
     [applyGroup],
+  );
+
+  const handleMoneyTierSelect = useCallback(
+    (tier: MoneyTier) => {
+      setSelectedMoneyTier(tier);
+      setMoney(MONEY_TIER_AMOUNTS[tier]);
+    },
+    [setMoney],
   );
 
   const onSelect = useCallback(
@@ -190,6 +237,22 @@ export const BackgroundStep = () => {
     const defaultGroup = backgroundData.startingItems[0];
     if (defaultGroup) applyGroup(defaultGroup);
   }, [backgroundData, selectedGroupName, applyGroup]);
+
+  // Sync money tier when backgroundData first resolves
+  useEffect(() => {
+    if (!backgroundData || selectedMoneyTier !== null) return;
+    const inferredTier = (
+      Object.entries(MONEY_TIER_AMOUNTS) as [MoneyTier, number][]
+    ).find(([, amount]) => amount === currentMoney)?.[0];
+    const tier =
+      inferredTier && backgroundData.availableMoneyTiers.includes(inferredTier)
+        ? inferredTier
+        : backgroundData.availableMoneyTiers[0];
+    if (tier) {
+      setSelectedMoneyTier(tier);
+      setMoney(MONEY_TIER_AMOUNTS[tier]);
+    }
+  }, [backgroundData, selectedMoneyTier, currentMoney, setMoney]);
 
   return (
     <div className="space-y-6">
@@ -310,6 +373,29 @@ export const BackgroundStep = () => {
               </div>
             </div>
           )}
+          {/* Starting Money */}
+          <div className="space-y-4 pt-6 border-t border-muted-foreground/20">
+            <h3 className="font-semibold flex items-center gap-2">
+              <Wallet className="h-5 w-5" />
+              Starting Money
+            </h3>
+            {backgroundData.availableMoneyTiers.length > 1 && (
+              <p className="text-sm text-muted-foreground">
+                Choose how much coin you begin with
+              </p>
+            )}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {backgroundData.availableMoneyTiers.map((tier) => (
+                <MoneyTierCard
+                  key={tier}
+                  tier={tier}
+                  amount={MONEY_TIER_AMOUNTS[tier]}
+                  selected={selectedMoneyTier === tier}
+                  onSelect={() => handleMoneyTierSelect(tier)}
+                />
+              ))}
+            </div>
+          </div>
           {/* Starting Items */}
           <div className="space-y-4 pt-6 border-t border-muted-foreground/20">
             <h3 className="font-semibold flex items-center gap-2">
@@ -330,7 +416,6 @@ export const BackgroundStep = () => {
               ))}
             </div>
           </div>
-          `
         </div>
       )}
     </div>

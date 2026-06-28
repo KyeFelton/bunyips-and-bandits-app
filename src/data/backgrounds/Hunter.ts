@@ -16,6 +16,7 @@ export const Hunter: Background = {
     "You've made your living tracking and hunting game in the wilderness. Whether you're a tracker following game through the outback, a ranger patrolling the bush, or a professional hunter supplying meat to settlements, you know how to read the land and survive in the wild.",
   expertiseSkills: [SkillType.Stealth, SkillType.Nature],
   traits: [Trait],
+  availableMoneyTiers: ["Poor", "Average"],
   startingItems: [
       {
         name: "Tracker",

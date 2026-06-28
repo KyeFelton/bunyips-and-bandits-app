@@ -19,7 +19,7 @@ import {
 import { AllSkillProgressions } from "../../../data/skillProgressions";
 import KinArticles from "./kin";
 import { AllBackgrounds } from "../../../data/backgrounds";
-import { Background } from "../../../models/backgrounds";
+import { Background, MONEY_TIER_AMOUNTS } from "../../../models/backgrounds";
 import { BackgroundIcon } from "../../../components/icons/BackgroundIcon";
 import { SkillIcon } from "../../../components/icons/SkillIcon";
 import { SkillType } from "../../../enums/SkillType";
@@ -148,6 +148,16 @@ function BackgroundCards({ backgrounds }: { backgrounds: Background[] }) {
               </p>
             ))}
           </div>
+          <div className="space-y-1.5">
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              Starting Money
+            </p>
+            <p className="text-sm text-muted-foreground">
+              {bg.availableMoneyTiers
+                .map((tier) => `${tier} (${MONEY_TIER_AMOUNTS[tier]} coins)`)
+                .join(", ")}
+            </p>
+          </div>
           {bg.startingItems && (
             <div className="space-y-2">
               <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
@@ -245,7 +255,8 @@ const main = (
       <li>
         <b>Choose your background</b>: Your background represents your
         character's past profession and upbringing. It grants expertise in
-        specific skills and special traits related to your profession.
+        specific skills, special traits related to your profession, and
+        determines how much coin you start with.
       </li>
       <li>
         <b>Choose a magic skill</b>: Select one magic skill you have been
@@ -324,10 +335,15 @@ const main = (
     <h2>Backgrounds</h2>
     <p>
       Your background represents your character's past profession and upbringing
-      before becoming an adventurer. Backgrounds grant expertise in specific
-      skills, starting them at level five instead of the initial level one. Each
-      background also provides special traits that give you advantages in
-      situations related to your past profession.
+      before becoming an adventurer. Most backgrounds grant expertise in two
+      skills, starting them at level five instead of level one, and provide a
+      special trait tied to that profession.
+    </p>
+    <p>
+      Each background also determines how much coin you start with. Most folk
+      begin poor or with modest savings. A few backgrounds can start wealthy.
+      The Noble background is the exception: it grants no expertise or traits,
+      but your family money means you begin with far more coin than anyone else.
     </p>
     <BackgroundCards backgrounds={Object.values(AllBackgrounds)} />
 

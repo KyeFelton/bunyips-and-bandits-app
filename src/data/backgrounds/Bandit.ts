@@ -16,6 +16,7 @@ export const Bandit: Background = {
     "You've lived on the fringes of society, taking what you need from those who have more. Whether you were a bushranger holding up coaches on dusty roads or a pickpocket working the crowded markets of port towns, you've learned to move quietly and strike quickly.",
   expertiseSkills: [SkillType.Agility, SkillType.Stealth],
   traits: [Trait],
+  availableMoneyTiers: ["Poor", "Average"],
   startingItems: [
     {
       name: "Bushranger",

@@ -15,6 +15,7 @@ export const Medic: Background = {
     "You have training in treating injuries and illnesses. Whether you're a frontier doctor, a field surgeon who patched up soldiers in combat, or a traveling healer bringing aid to remote settlements, you've seen your share of blood and know how to save lives.",
   expertiseSkills: [SkillType.Lore, SkillType.Psychology],
   traits: [Trait],
+  availableMoneyTiers: ["Average", "Wealthy"],
   startingItems: [
     {
       name: "Field surgeon",

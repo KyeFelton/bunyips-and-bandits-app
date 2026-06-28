@@ -3,6 +3,7 @@ import {
   BookOpen,
   HandCoins,
   Crown,
+  Gem,
   HatGlasses,
   Hammer,
   BriefcaseMedical,
@@ -44,6 +45,8 @@ export const BackgroundIcon = ({ name, className = "h-4 w-4" }: Props) => {
       return <HandCoins className={className} />;
     case "Monk":
       return <BookOpen className={className} />;
+    case "Noble":
+      return <Gem className={className} />;
     case "Performer":
       return <Guitar className={className} />;
     case "Soldier":
