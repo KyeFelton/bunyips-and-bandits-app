@@ -1,17 +1,18 @@
 import { Characters } from "./rules/Characters";
 import { Combat } from "./rules/Combat";
 import { TheBasics } from "./rules/TheBasics";
-import { Homebrew } from "./rules/Homebrew";
+// import { Homebrew } from "./rules/Homebrew";
 import { Introduction } from "./rules/Introduction";
-import { RunningTheGame } from "./rules/RunningTheGame";
+import { Items } from "./rules/Items";
+// import { RunningTheGame } from "./rules/RunningTheGame";
 import { Languages } from "./setting/Languages";
 import { Magic } from "./setting/Magic";
 import { Religion } from "./setting/Religion";
 import { Checks } from "./rules/Checks";
 import { WikiContent } from "../../models/wikiContent";
-import Continents from "./setting/continents";
-import Cultures from "./setting/cultures";
-import Fauna from "./setting/fauna";
+// import Continents from "./setting/continents";
+// import Cultures from "./setting/cultures";
+// import Fauna from "./setting/fauna";
 import Kin from "./rules/kin";
 
 export type HandbookPage = {
@@ -67,6 +68,7 @@ export const HANDBOOK_SECTIONS: HandbookSection[] = [
         component: Checks,
       },
       { kind: "page", id: "combat", label: "Combat", component: Combat },
+      { kind: "page", id: "items", label: "Items", component: Items },
       // {
       //   kind: "page",
       //   id: "running-the-game",
