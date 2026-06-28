@@ -4,9 +4,10 @@ import { WearType } from "../../enums/WearType";
 
 export const WorkClothes: Item = {
   name: "Work clothes",
-  description: "Sturdy, hard-wearing clothes built to withstand a day of hard labour.",
+  description:
+    "Sturdy, hard-wearing clothes built to withstand a day of hard labour.",
   singleUse: false,
-  slots: 0,
+  slots: 1,
   wearType: WearType.Clothes,
   itemType: ItemType.Clothing,
 };

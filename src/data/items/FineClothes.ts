@@ -15,7 +15,7 @@ export const FineClothes: Item = {
     },
   ],
   singleUse: false,
-  slots: 0,
+  slots: 1,
   wearType: WearType.Clothes,
   itemType: ItemType.Clothing,
 };

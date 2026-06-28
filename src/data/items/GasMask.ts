@@ -23,5 +23,5 @@ export const GasMask: Item = {
   wearType: WearType.Accessory,
   slots: 1,
   defaultCost: 500,
-  itemType: ItemType.Mask,
+  itemType: ItemType.Accessory,
 };

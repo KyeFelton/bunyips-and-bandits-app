@@ -8,10 +8,10 @@ import {
   Shirt,
   Sword,
   Crosshair,
-  Crown,
   Hamburger,
-  VenetianMask,
   Wrench,
+  HatGlasses,
+  Shield,
 } from "lucide-react";
 import { ItemType } from "../../enums/ItemType";
 
@@ -31,9 +31,9 @@ export const ItemIcon = ({ itemType, className = "h-4 w-4" }: Props) => {
     case ItemType.RangedWeapon:
       return <Crosshair className={className} />;
     case ItemType.Armour:
-      return <Shirt className={className} />;
+      return <Shield className={className} />;
     case ItemType.Accessory:
-      return <Gem className={className} />;
+      return <HatGlasses className={className} />;
     case ItemType.Medical:
       return <Cross className={className} />;
     case ItemType.Concoction:
@@ -48,12 +48,10 @@ export const ItemIcon = ({ itemType, className = "h-4 w-4" }: Props) => {
       return <Gem className={className} />;
     case ItemType.Food:
       return <Hamburger className={className} />;
-    case ItemType.Hat:
-      return <Crown className={className} />;
-    case ItemType.Mask:
-      return <VenetianMask className={className} />;
     case ItemType.Gear:
       return <Wrench className={className} />;
+    case ItemType.Clothing:
+      return <Shirt className={className} />;
     default:
       return null;
   }

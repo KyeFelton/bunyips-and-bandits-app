@@ -8,8 +8,6 @@ export enum ItemType {
   Food = "Food",
   Gear = "Gear",
   Gemstone = "Gemstone",
-  Hat = "Hat",
-  Mask = "Mask",
   Medical = "Medical",
   Poison = "Poison",
   RangedWeapon = "RangedWeapon",
