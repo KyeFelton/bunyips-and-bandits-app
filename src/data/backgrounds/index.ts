@@ -9,6 +9,7 @@ import { Leader } from "./Leader";
 import { Medic } from "./Medic";
 import { Merchant } from "./Merchant";
 import { Monk } from "./Monk";
+import { Noble } from "./Noble";
 import { Performer } from "./Performer";
 import { Soldier } from "./Soldier";
 import { Spy } from "./Spy";
@@ -25,6 +26,7 @@ export const AllBackgrounds = {
   Medic,
   Merchant,
   Monk,
+  Noble,
   Performer,
   Soldier,
   Spy,

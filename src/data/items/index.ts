@@ -56,6 +56,25 @@ import { Pole } from "./Pole";
 import { Rations } from "./Rations";
 import { Rope } from "./Rope";
 import { Torch } from "./Torch";
+import { Didgeridoo } from "./Didgeridoo";
+import { Disguise } from "./Disguise";
+import { DrumKit } from "./DrumKit";
+import { FineClothes } from "./FineClothes";
+import { Hammer } from "./Hammer";
+import { HerbalPouch } from "./HerbalPouch";
+import { HuntingKnife } from "./HuntingKnife";
+import { Pickaxe } from "./Pickaxe";
+import { Pitchfork } from "./Pitchfork";
+import { PrayerBeads } from "./PrayerBeads";
+import { Scythe } from "./Scythe";
+import { TravellingClothes } from "./TravellingClothes";
+import { Violin } from "./Violin";
+import { WalkingStaff } from "./WalkingStaff";
+import { WoodcutterAxe } from "./WoodcutterAxe";
+import { WorkClothes } from "./WorkClothes";
+import { BottleOfRum } from "./BottleOfRum";
+import { FishingNet } from "./FishingNet";
+import { Lantern } from "./Lantern";
 
 export {
   AdamantineMace,
@@ -116,4 +135,23 @@ export {
   Rations,
   Rope,
   Torch,
+  Didgeridoo,
+  Disguise,
+  DrumKit,
+  FineClothes,
+  Hammer,
+  HerbalPouch,
+  HuntingKnife,
+  Pickaxe,
+  Pitchfork,
+  PrayerBeads,
+  Scythe,
+  TravellingClothes,
+  Violin,
+  WalkingStaff,
+  WoodcutterAxe,
+  WorkClothes,
+  BottleOfRum,
+  FishingNet,
+  Lantern,
 };

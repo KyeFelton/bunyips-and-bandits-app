@@ -7,6 +7,7 @@ import { ImmediateEffect } from "../models/items";
 type Props = {
   equippedEffects?: Effect[];
   consumedEffect?: ImmediateEffect;
+  inline?: boolean;
 };
 
 const formatBonus = (bonus: number) => (bonus >= 0 ? `+${bonus}` : `${bonus}`);
@@ -146,10 +147,12 @@ const consumedEffectLabels = (effect: ImmediateEffect): string[] => {
   return labels;
 };
 
-export const ItemEffectList = ({ equippedEffects, consumedEffect }: Props) => {
+export const buildEffectLabels = (
+  equippedEffects?: Effect[],
+  consumedEffect?: ImmediateEffect,
+): string[] => {
   const effects = equippedEffects ?? [];
-
-  const allLabels = [
+  return [
     ...groupArmourEffects(effects),
     ...groupSkillEffects(effects),
     ...groupStatEffects(effects),
@@ -158,8 +161,20 @@ export const ItemEffectList = ({ equippedEffects, consumedEffect }: Props) => {
     ...effects.map(remainingEffectToLabel).filter((l): l is string => l !== null),
     ...(consumedEffect ? consumedEffectLabels(consumedEffect) : []),
   ];
+};
+
+export const ItemEffectList = ({ equippedEffects, consumedEffect, inline }: Props) => {
+  const allLabels = buildEffectLabels(equippedEffects, consumedEffect);
 
   if (allLabels.length === 0) return null;
+
+  if (inline) {
+    return (
+      <span className="text-sm text-muted-foreground">
+        {allLabels.join(", ")}
+      </span>
+    );
+  }
 
   // Other bullets: ◆ ◇ ◈ ▸ ✦ ✶ ⟡
   return (

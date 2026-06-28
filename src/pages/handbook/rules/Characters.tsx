@@ -66,7 +66,7 @@ function MagicSkillCards({ skills }: { skills: Skill[] }) {
                   "border-2 rounded-lg overflow-hidden transition-colors duration-200",
                   isOpen
                     ? "border-primary/50"
-                    : "border-muted hover:border-primary/30"
+                    : "border-muted hover:border-primary/30",
                 )}
               >
                 <CollapsibleTrigger className="w-full p-4 flex items-center justify-between gap-4 text-left cursor-pointer">
@@ -85,7 +85,7 @@ function MagicSkillCards({ skills }: { skills: Skill[] }) {
                   <ChevronDown
                     className={cn(
                       "h-4 w-4 flex-shrink-0 text-muted-foreground transition-transform duration-200",
-                      isOpen && "rotate-180"
+                      isOpen && "rotate-180",
                     )}
                   />
                 </CollapsibleTrigger>
@@ -94,7 +94,7 @@ function MagicSkillCards({ skills }: { skills: Skill[] }) {
                     {progression.unlockables
                       .filter(
                         ({ actions, traits }) =>
-                          actions.length > 0 || traits.length > 0
+                          actions.length > 0 || traits.length > 0,
                       )
                       .map(({ level, actions, traits }) => (
                         <ProgressionItems
@@ -137,7 +137,6 @@ function BackgroundCards({ backgrounds }: { backgrounds: Background[] }) {
                 </div>
               ))}
             </div>
-            {/* <p className="text-sm text-muted-foreground">{trait.description}</p> */}
           </div>
           <div className="space-y-2">
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
@@ -149,6 +148,26 @@ function BackgroundCards({ backgrounds }: { backgrounds: Background[] }) {
               </p>
             ))}
           </div>
+          {bg.startingItems && (
+            <div className="space-y-2">
+              <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                Starting Items
+              </p>
+              <div className="space-y-1.5">
+                {bg.startingItems.map((group) => (
+                  <div
+                    key={group.name}
+                    className="text-sm text-muted-foreground"
+                  >
+                    <span className="font-medium text-foreground">
+                      {group.name}:
+                    </span>{" "}
+                    {group.items.map((item) => item.name).join(", ")}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </Card>
       ))}
     </div>
@@ -178,10 +197,10 @@ function KinCards({ kin }: { kin: WikiContent[] }) {
               <h3 className="font-semibold text-lg">{item.title}</h3>
               {(() => {
                 const species = item.infoBox?.traits.find(
-                  (t) => t.key === "Species"
+                  (t) => t.key === "Species",
                 )?.value;
                 const ancestry = item.infoBox?.traits.find(
-                  (t) => t.key === "Ancestry"
+                  (t) => t.key === "Ancestry",
                 )?.value;
                 return species || ancestry ? (
                   <p className="text-sm text-muted-foreground">

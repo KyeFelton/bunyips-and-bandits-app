@@ -1,7 +1,20 @@
-import { useAtom, useAtomValue } from "jotai";
-import { backgroundAtom, backgroundDataAtom } from "./../state/character";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useCallback, useEffect, useState } from "react";
+import { GraduationCap, Package, Star } from "lucide-react";
+import {
+  backgroundAtom,
+  backgroundDataAtom,
+  itemsAtom,
+} from "./../state/character";
 import { AllBackgrounds } from "./../data/backgrounds";
-import { GraduationCap, Star } from "lucide-react";
+import { Background, StartingItemGroup } from "./../models/backgrounds";
+import { InventoryStack, Item } from "./../models/items";
+import { ItemType } from "./../enums/ItemType";
+import { ItemLocation } from "./../enums/ItemLocation";
+import { WearType } from "./../enums/WearType";
+import { cn } from "./../utils/cn";
+import { ACCESSORY_INDICES, CLOTHES_INDEX } from "./../utils/items";
+import { pascalToSentence } from "./../utils/capitalize";
 import { BackgroundIcon } from "./icons/BackgroundIcon";
 import { SkillIcon } from "./icons/SkillIcon";
 import { SkillType } from "./../enums/SkillType";
@@ -13,33 +26,144 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "./ui/carousel";
-import { cn } from "./../utils/cn";
-import { useCallback, useEffect, useState } from "react";
+
+const STARTING_ITEM_PREFIX = "starting_item_";
+
+function itemLocationFor(item: Item): ItemLocation {
+  if (
+    item.wearType === WearType.Clothes ||
+    item.wearType === WearType.Accessory ||
+    item.itemType === ItemType.Armour
+  ) {
+    return ItemLocation.Worn;
+  }
+  if (
+    item.itemType === ItemType.SlashWeapon ||
+    item.itemType === ItemType.ForceWeapon ||
+    item.itemType === ItemType.RangedWeapon
+  ) {
+    return ItemLocation.Held;
+  }
+  return ItemLocation.Carried;
+}
+
+function stacksForGroup(group: StartingItemGroup): InventoryStack[] {
+  const stacks: InventoryStack[] = [];
+  let heldIndex = 0;
+
+  for (const item of group.items) {
+    const location = itemLocationFor(item);
+    const stack: InventoryStack = {
+      id: `${STARTING_ITEM_PREFIX}${item.name}`,
+      name: item.name,
+      location,
+      quantity: 1,
+    };
+    if (location === ItemLocation.Worn) {
+      if (item.wearType === WearType.Clothes) stack.index = CLOTHES_INDEX;
+      else if (item.wearType === WearType.Accessory)
+        stack.index = ACCESSORY_INDICES[0];
+    } else if (location === ItemLocation.Held) {
+      stack.index = heldIndex;
+      heldIndex++;
+    }
+    stacks.push(stack);
+  }
+
+  return stacks;
+}
+
+function defaultGroupFor(bg: Background): string | null {
+  return bg.startingItems[0].name ?? null;
+}
+
+type GroupCardProps = {
+  group: StartingItemGroup;
+  selected: boolean;
+  onSelect: () => void;
+};
+
+const GroupCard = ({ group, selected, onSelect }: GroupCardProps) => (
+  <button
+    type="button"
+    onClick={onSelect}
+    className={cn(
+      "w-full text-left p-4 rounded-lg border-2 transition-colors duration-150 space-y-3 flex flex-col",
+      selected
+        ? "border-primary bg-primary/10"
+        : "border-muted hover:border-primary/50 bg-transparent",
+    )}
+  >
+    <p className="font-semibold">{group.name}</p>
+    <div className="space-y-1.5">
+      {group.items.map((item) => (
+        <div key={item.name} className="flex flex-col gap-0.5">
+          <div className="flex items-center gap-1.5">
+            <span className="text-sm">{item.name}</span>
+            {item.itemType && (
+              <span className="text-xs px-1.5 py-0.5 rounded bg-muted/50 text-muted-foreground font-medium">
+                {pascalToSentence(item.itemType)}
+              </span>
+            )}
+          </div>
+          {/* {item.equippedEffects && (
+            <ItemEffectList equippedEffects={item.equippedEffects} inline />
+          )} */}
+        </div>
+      ))}
+    </div>
+  </button>
+);
 
 export const BackgroundStep = () => {
   const [selectedBackground, setBackground] = useAtom(backgroundAtom);
   const backgroundData = useAtomValue(backgroundDataAtom);
+  const setItems = useSetAtom(itemsAtom);
+  const [selectedGroupName, setSelectedGroupName] = useState<string | null>(
+    null,
+  );
   const [api, setApi] = useState<CarouselApi>();
 
   const backgroundsArray = Object.values(AllBackgrounds);
 
+  const applyGroup = useCallback(
+    (group: StartingItemGroup) => {
+      const newStacks = stacksForGroup(group);
+      setItems((prev) => [
+        ...prev.filter((s) => !s.id.startsWith(STARTING_ITEM_PREFIX)),
+        ...newStacks,
+      ]);
+    },
+    [setItems],
+  );
+
   const handleBackgroundChange = useCallback(
     (backgroundName: string) => {
       setBackground(backgroundName);
+      const bg = AllBackgrounds[backgroundName as keyof typeof AllBackgrounds];
+      if (!bg) return;
+      const defaultGroup = bg.startingItems[0] ?? null;
+      setSelectedGroupName(defaultGroup?.name ?? null);
+      if (defaultGroup) applyGroup(defaultGroup);
     },
-    [setBackground]
+    [setBackground, applyGroup],
+  );
+
+  const handleGroupSelect = useCallback(
+    (group: StartingItemGroup) => {
+      setSelectedGroupName(group.name);
+      applyGroup(group);
+    },
+    [applyGroup],
   );
 
   const onSelect = useCallback(
     (api: CarouselApi) => {
       if (!api) return;
-      const selectedIndex = api.selectedScrollSnap();
-      const selectedBackgroundName = backgroundsArray[selectedIndex]?.name;
-      if (selectedBackgroundName) {
-        handleBackgroundChange(selectedBackgroundName);
-      }
+      const name = backgroundsArray[api.selectedScrollSnap()]?.name;
+      if (name) handleBackgroundChange(name);
     },
-    [handleBackgroundChange, backgroundsArray]
+    [handleBackgroundChange, backgroundsArray],
   );
 
   useEffect(() => {
@@ -52,13 +176,20 @@ export const BackgroundStep = () => {
 
   useEffect(() => {
     if (!api || !selectedBackground) return;
-    const selectedIndex = backgroundsArray.findIndex(
-      (b) => b.name === selectedBackground
+    const idx = backgroundsArray.findIndex(
+      (b) => b.name === selectedBackground,
     );
-    if (selectedIndex !== -1) {
-      api.scrollTo(selectedIndex);
-    }
+    if (idx !== -1) api.scrollTo(idx);
   }, [api, selectedBackground, backgroundsArray]);
+
+  // Sync default group when backgroundData first resolves (e.g. loaded from saved state)
+  useEffect(() => {
+    if (!backgroundData || selectedGroupName !== null) return;
+    const defaultName = defaultGroupFor(backgroundData);
+    setSelectedGroupName(defaultName);
+    const defaultGroup = backgroundData.startingItems[0];
+    if (defaultGroup) applyGroup(defaultGroup);
+  }, [backgroundData, selectedGroupName, applyGroup]);
 
   return (
     <div className="space-y-6">
@@ -73,58 +204,55 @@ export const BackgroundStep = () => {
       <div className="relative px-16">
         <div className="h-[220px] lg:h-[280px] flex items-center">
           <Carousel
-            opts={{
-              align: "center",
-              loop: true,
-            }}
+            opts={{ align: "center", loop: true }}
             setApi={setApi}
             className="w-full"
           >
             <CarouselContent>
               {backgroundsArray.map((backgroundItem) => (
-                  <CarouselItem
-                    key={backgroundItem.name}
-                    className="basis-3/4 sm:basis-1/2 md:basis-1/3 cursor-pointer flex justify-center items-center"
-                    onClick={() => {
-                      const selectedIndex = backgroundsArray.findIndex(
-                        (b) => b.name === backgroundItem.name
-                      );
-                      if (selectedIndex !== -1) {
-                        api?.scrollTo(selectedIndex);
-                        handleBackgroundChange(backgroundItem.name);
-                      }
-                    }}
-                  >
-                    <div className="flex flex-col justify-center items-center gap-2">
-                      <div
+                <CarouselItem
+                  key={backgroundItem.name}
+                  className="basis-3/4 sm:basis-1/2 md:basis-1/3 cursor-pointer flex justify-center items-center"
+                  onClick={() => {
+                    const idx = backgroundsArray.findIndex(
+                      (b) => b.name === backgroundItem.name,
+                    );
+                    if (idx !== -1) {
+                      api?.scrollTo(idx);
+                      handleBackgroundChange(backgroundItem.name);
+                    }
+                  }}
+                >
+                  <div className="flex flex-col justify-center items-center gap-2">
+                    <div
+                      className={cn(
+                        "transition-all duration-300 ease-in-out rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center",
+                        backgroundItem.name === selectedBackground
+                          ? "h-40 w-40 lg:h-48 lg:w-48 opacity-100"
+                          : "h-36 w-36 lg:h-44 lg:w-44 opacity-50",
+                      )}
+                    >
+                      <BackgroundIcon
+                        name={backgroundItem.name}
                         className={cn(
-                          "transition-all duration-300 ease-in-out rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center",
                           backgroundItem.name === selectedBackground
-                            ? "h-40 w-40 lg:h-48 lg:w-48 opacity-100"
-                            : "h-36 w-36 lg:h-44 lg:w-44 opacity-50"
+                            ? "h-16 w-16 lg:h-20 lg:w-20"
+                            : "h-14 w-14 lg:h-16 lg:w-16",
                         )}
-                      >
-                        <BackgroundIcon
-                          name={backgroundItem.name}
-                          className={cn(
-                            backgroundItem.name === selectedBackground
-                              ? "h-16 w-16 lg:h-20 lg:w-20"
-                              : "h-14 w-14 lg:h-16 lg:w-16"
-                          )}
-                        />
-                      </div>
-                      <span
-                        className={cn(
-                          "font-medium",
-                          backgroundItem.name !== selectedBackground
-                            ? "text-md text-muted-foreground/50"
-                            : "text-lg"
-                        )}
-                      >
-                        {backgroundItem.name}
-                      </span>
+                      />
                     </div>
-                  </CarouselItem>
+                    <span
+                      className={cn(
+                        "font-medium",
+                        backgroundItem.name !== selectedBackground
+                          ? "text-md text-muted-foreground/50"
+                          : "text-lg",
+                      )}
+                    >
+                      {backgroundItem.name}
+                    </span>
+                  </div>
+                </CarouselItem>
               ))}
             </CarouselContent>
             <CarouselPrevious />
@@ -164,7 +292,6 @@ export const BackgroundStep = () => {
               ))}
             </div>
           </div>
-
           {/* Traits */}
           {backgroundData.traits && backgroundData.traits.length > 0 && (
             <div className="space-y-4 pt-6 border-t border-muted-foreground/20">
@@ -183,6 +310,27 @@ export const BackgroundStep = () => {
               </div>
             </div>
           )}
+          {/* Starting Items */}
+          <div className="space-y-4 pt-6 border-t border-muted-foreground/20">
+            <h3 className="font-semibold flex items-center gap-2">
+              <Package className="h-5 w-5" />
+              Starting Items
+            </h3>
+            <p className="text-sm text-muted-foreground">
+              Choose your starting gear
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {backgroundData.startingItems.map((group) => (
+                <GroupCard
+                  key={group.name}
+                  group={group}
+                  selected={selectedGroupName === group.name}
+                  onSelect={() => handleGroupSelect(group)}
+                />
+              ))}
+            </div>
+          </div>
+          `
         </div>
       )}
     </div>

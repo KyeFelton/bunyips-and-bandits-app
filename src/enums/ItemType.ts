@@ -1,6 +1,7 @@
 export enum ItemType {
   Accessory = "Accessory",
   Armour = "Armour",
+  Clothing = "Clothing",
   ForceWeapon = "ForceWeapon",
   Concoction = "Concoction",
   Explosive = "Explosive",

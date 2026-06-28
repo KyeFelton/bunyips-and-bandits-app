@@ -9,7 +9,7 @@ export const Bard: Trait = {
     {
       skill: {
         skillType: SkillType.Charisma,
-        bonus: 3,
+        bonus: 2,
       },
     },
   ],
