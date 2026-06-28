@@ -136,6 +136,9 @@ function BackgroundCards({ backgrounds }: { backgrounds: Background[] }) {
                   <span className="text-sm font-medium">{skill}</span>
                 </div>
               ))}
+              {bg.expertiseSkills.length === 0 && (
+                <p className="text-sm">None</p>
+              )}
             </div>
           </div>
           <div className="space-y-2">
@@ -147,6 +150,7 @@ function BackgroundCards({ backgrounds }: { backgrounds: Background[] }) {
                 {trait.description}
               </p>
             ))}
+            {bg.traits.length === 0 && <p className="text-sm">None</p>}
           </div>
           <div className="space-y-1.5">
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
