@@ -1,5 +1,6 @@
 import { AreaOfEffect } from "../../enums/AreaOfEffect";
 import { Range } from "../../enums/Range";
+import { SkillType } from "../../enums/SkillType";
 import { Action } from "../../models/actions";
 
 export const Absorb: Action = {
@@ -9,4 +10,5 @@ export const Absorb: Action = {
   range: Range.Self,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 4,
+  skillType: SkillType.Biotic,
 };

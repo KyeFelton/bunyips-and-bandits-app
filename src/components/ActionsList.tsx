@@ -1,37 +1,21 @@
-import { useAtomValue, useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import {
   actionsAtom,
   currentStaminaAtom,
   skillRollValuesAtom,
 } from "./../state/character";
-import { HelpCircle } from "lucide-react";
 import { AreaOfEffect } from "./../enums/AreaOfEffect";
 import { Range } from "./../enums/Range";
 import { Action } from "./../models/actions";
 import { Brawl } from "./../data/actions/Brawl";
 import { Dash } from "./../data/actions/Dash";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "./ui/table";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { SkillIcon } from "./icons/SkillIcon";
 import { useRollToast } from "./RollToast";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./ui/tooltip";
 
 const ActionTags = ({ action }: { action: Action }) => {
-  const tags:  string[] = [];
+  const tags: string[] = [];
 
   if (action.range !== Range.Self) {
     tags.push(`${action.range} range`);
@@ -47,7 +31,7 @@ const ActionTags = ({ action }: { action: Action }) => {
         ? "X stamina"
         : `${action.staminaCost} stamina`;
     tags.push(label);
-}
+  }
 
   if (action.duration) {
     tags.push(action.duration);
@@ -70,10 +54,8 @@ export const ActionsList = () => {
   const skillRollValues = useAtomValue(skillRollValuesAtom);
   const showRollToast = useRollToast();
 
-  // Basic actions available to all characters
   const basicActions: Action[] = [Brawl, Dash];
 
-  // Combine and sort all actions
   const actions = [...basicActions, ...unlockedActions].sort((a, b) =>
     a.name.localeCompare(b.name),
   );
@@ -85,7 +67,6 @@ export const ActionsList = () => {
     if (stamina >= staminaCost) {
       setStamina(stamina - staminaCost);
 
-      // Only show roll toast for actions with a skill check
       if (action.skillType) {
         const rollValues = skillRollValues[action.skillType];
         showRollToast({
@@ -101,73 +82,54 @@ export const ActionsList = () => {
   };
 
   return (
-    <TooltipProvider>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Skill</TableHead>
-            <TableHead></TableHead>
-            <TableHead className="text-right"></TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {actions.map((action) => (
-            <TableRow key={action.name} className="group">
-              <TableCell>
-                <div className="flex items-center gap-1">
-                  {action.name}
-                  <Popover>
-                    <PopoverTrigger className="w-6 h-6 flex items-center justify-center text-muted-foreground text-left hover:bg-accent-subtle hover:text-accent-foreground rounded-full">
-                      <HelpCircle className="h-4 w-4 text-muted-foreground" />
-                    </PopoverTrigger>
-                    <PopoverContent
-                      className="max-w-[300px] text-sm"
-                      side="right"
-                    >
-                      <p>{action.effect}</p>
-                    </PopoverContent>
-                  </Popover>
-                </div>
-              </TableCell>
-              <TableCell>
-                <div className="flex justify-center">
-                  {action.skillType ? (
-                    <Tooltip>
-                      <TooltipTrigger className="cursor-default text-muted-foreground hover:text-foreground transition-colors">
-                        <SkillIcon type={action.skillType} />
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>{action.skillType}</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  ) : (
-                    <span className="text-muted-foreground">-</span>
-                  )}
-                </div>
-              </TableCell>
-              <TableCell>
-                <ActionTags action={action} />
-              </TableCell>
-              <TableCell className="text-right">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => handlePerformAction(action)}
-                  disabled={
-                    (typeof action.staminaCost === "number" &&
-                      stamina < action.staminaCost) ||
-                    (action.skillType &&
-                      skillRollValues[action.skillType].dice === 0)
-                  }
-                >
-                  Perform
-                </Button>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TooltipProvider>
+    <div className="divide-y divide-border">
+      {actions.map((action) => (
+        <div key={action.name} className="p-4 space-y-2">
+          {/* Header: name + tags */}
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="font-semibold">{action.name}</div>
+            <ActionTags action={action} />
+          </div>
+
+          {/* Skill */}
+          {action.skillType && (() => {
+            const roll = skillRollValues[action.skillType];
+            const rollLabel = roll.dice === 0
+              ? "No dice"
+              : roll.modifier !== 0
+                ? `d${roll.dice} ${roll.modifier > 0 ? "+" : ""}${roll.modifier}`
+                : `d${roll.dice}`;
+            return (
+              <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                <SkillIcon type={action.skillType} />
+                <span>{action.skillType}</span>
+                <span className="text-muted-foreground/60">·</span>
+                <span>{rollLabel}</span>
+              </div>
+            );
+          })()}
+
+          {/* Description */}
+          <p className="text-sm">{action.effect}</p>
+
+          {/* Perform */}
+          <div className="pt-1">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => handlePerformAction(action)}
+              disabled={
+                (typeof action.staminaCost === "number" &&
+                  stamina < action.staminaCost) ||
+                (action.skillType &&
+                  skillRollValues[action.skillType].dice === 0)
+              }
+            >
+              Perform
+            </Button>
+          </div>
+        </div>
+      ))}
+    </div>
   );
 };

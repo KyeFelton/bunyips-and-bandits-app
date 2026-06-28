@@ -1,5 +1,6 @@
 import { AreaOfEffect } from "../../enums/AreaOfEffect";
 import { Range } from "../../enums/Range";
+import { SkillType } from "../../enums/SkillType";
 import { Action } from "../../models/actions";
 
 export const Mutate: Action = {
@@ -10,4 +11,5 @@ export const Mutate: Action = {
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 2,
   duration: "1 round",
+  skillType: SkillType.Biotic,
 };
