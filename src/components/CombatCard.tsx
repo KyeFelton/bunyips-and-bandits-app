@@ -1,15 +1,10 @@
 import { useAtomValue } from "jotai";
-import {
-  actionsCountAtom,
-  evasionsCountAtom,
-  weaponAtom,
-} from "./../state/character";
+import { actionsCountAtom, weaponAtom } from "./../state/character";
 import { ArmourIcon } from "./icons/ArmourIcon";
 import { DamageType } from "./../enums/DamageType";
 
 export const CombatCard = () => {
   const actionsCount = useAtomValue(actionsCountAtom);
-  const evasionsCount = useAtomValue(evasionsCountAtom);
   const weapon = useAtomValue(weaponAtom);
 
   return (
@@ -24,10 +19,6 @@ export const CombatCard = () => {
           <div className="flex justify-between">
             <span className="text-muted-foreground">Actions</span>
             <span>{actionsCount <= 0 ? "-" : actionsCount}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-muted-foreground">Evasions</span>
-            <span>{evasionsCount <= 0 ? "-" : evasionsCount}</span>
           </div>
           <div className="flex justify-between">
             <span className="text-muted-foreground">Weapon Damage</span>

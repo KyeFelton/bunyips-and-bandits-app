@@ -13,7 +13,7 @@ export const NameCard = () => {
   const [isEditNameDialogOpen, setIsEditNameDialogOpen] = useState(false);
 
   return (
-    <div className="h-[332px] flex flex-col group">
+    <div className="flex flex-col group">
       <div className="p-4">
         <div className="relative flex flex-col items-center">
           <h3 className="px-8 text-2xl font-semibold text-center line-clamp-2">

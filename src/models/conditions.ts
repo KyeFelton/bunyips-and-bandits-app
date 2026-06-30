@@ -70,11 +70,11 @@ export const Disoriented: Condition = {
 
 export const Empowered: Condition = {
   name: "Empowered",
-  description: "You gain an evasion until your next turn.",
+  description: "You gain an action until your next turn.",
   stackable: 3,
   effects: [
     {
-      evasions: {
+      actions: {
         bonus: 1,
       },
     },
@@ -214,12 +214,11 @@ export const Silent: Condition = {
 
 export const Stunned: Condition = {
   name: "Stunned",
-  description:
-    "You lose an evasion until your next turn. If you have no evasions, then you lose an action on your next turn.",
+  description: "You lose an action until your next turn.",
   stackable: 3,
   effects: [
     {
-      evasions: {
+      actions: {
         bonus: -1,
       },
     },

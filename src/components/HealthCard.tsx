@@ -248,14 +248,6 @@ export const HealthCard = ({ className }: Props) => {
                             {effect.mind.bonus} Mind
                           </span>
                         )}
-                        {effect.evasions && (
-                          <span>
-                            {effect.evasions.bonus && effect.evasions.bonus > 0
-                              ? "+"
-                              : ""}
-                            {effect.evasions.bonus} Evasion
-                          </span>
-                        )}
                         {effect.armour && (
                           <span>
                             {effect.armour.bonus && effect.armour.bonus > 0

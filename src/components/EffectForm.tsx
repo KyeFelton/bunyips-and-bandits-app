@@ -24,7 +24,6 @@ type EffectType = keyof Effect;
 const EffectTypeLabels: Record<EffectType, string> = {
   actions: "Actions",
   armour: "Armour",
-  evasions: "Evasions",
   body: "Body",
   mind: "Mind",
   sense: "Sense",
@@ -32,13 +31,13 @@ const EffectTypeLabels: Record<EffectType, string> = {
   speed: "Speed",
   stamina: "Stamina",
   weapon: "Weapon",
+  custom: "",
 };
 
 export const EffectForm = ({ effects, onChange }: Props) => {
   const getDefaultEffect = (type: EffectType): Effect => {
     switch (type) {
       case "actions":
-      case "evasions":
       case "body":
       case "mind":
       case "stamina":
@@ -316,7 +315,6 @@ export const EffectForm = ({ effects, onChange }: Props) => {
             )}
 
             {(effectType === "actions" ||
-              effectType === "evasions" ||
               effectType === "body" ||
               effectType === "mind" ||
               effectType === "stamina") && (

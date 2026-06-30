@@ -28,7 +28,6 @@ function formatEquippedEffect(effect: Effect): string {
   if (effect.mind?.bonus) return `+${effect.mind.bonus} mind`;
   if (effect.stamina?.bonus) return `+${effect.stamina.bonus} stamina`;
   if (effect.actions?.bonus) return `+${effect.actions.bonus} actions`;
-  if (effect.evasions?.bonus) return `+${effect.evasions.bonus} evasions`;
   if (effect.skill) {
     const bonus = effect.skill.bonus ? `+${effect.skill.bonus}` : "";
     return `${bonus} ${effect.skill.skillType}`.trim();

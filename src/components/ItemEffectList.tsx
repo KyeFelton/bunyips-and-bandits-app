@@ -121,16 +121,16 @@ const remainingEffectToLabel = (effect: Effect): string | null => {
 
   if (effect.actions?.bonus !== undefined)
     return `${formatBonus(effect.actions.bonus)} Actions`;
-  if (effect.evasions?.bonus !== undefined)
-    return `${formatBonus(effect.evasions.bonus)} Evasions`;
 
   return null;
 };
 
 const groupConsumedStats = (effect: ImmediateEffect): string[] => {
   const entries: { bonus: number; label: string }[] = [];
-  if (effect.body !== undefined) entries.push({ bonus: effect.body, label: "Body" });
-  if (effect.mind !== undefined) entries.push({ bonus: effect.mind, label: "Mind" });
+  if (effect.body !== undefined)
+    entries.push({ bonus: effect.body, label: "Body" });
+  if (effect.mind !== undefined)
+    entries.push({ bonus: effect.mind, label: "Mind" });
   if (effect.stamina !== undefined)
     entries.push({ bonus: effect.stamina, label: "Stamina" });
 
@@ -158,12 +158,18 @@ export const buildEffectLabels = (
     ...groupStatEffects(effects),
     ...groupSenseEffects(effects),
     ...groupSpeedEffects(effects),
-    ...effects.map(remainingEffectToLabel).filter((l): l is string => l !== null),
+    ...effects
+      .map(remainingEffectToLabel)
+      .filter((l): l is string => l !== null),
     ...(consumedEffect ? consumedEffectLabels(consumedEffect) : []),
   ];
 };
 
-export const ItemEffectList = ({ equippedEffects, consumedEffect, inline }: Props) => {
+export const ItemEffectList = ({
+  equippedEffects,
+  consumedEffect,
+  inline,
+}: Props) => {
   const allLabels = buildEffectLabels(equippedEffects, consumedEffect);
 
   if (allLabels.length === 0) return null;
@@ -180,8 +186,11 @@ export const ItemEffectList = ({ equippedEffects, consumedEffect, inline }: Prop
   return (
     <ul className="space-y-1">
       {allLabels.map((label, index) => (
-        <li key={index} className="flex items-baseline gap-1.5 text-sm text-muted-foreground">
-            <span className="text-border shrink-0 select-none">⟡</span>
+        <li
+          key={index}
+          className="flex items-baseline gap-1.5 text-sm text-muted-foreground"
+        >
+          <span className="text-border shrink-0 select-none">⟡</span>
           <span>{label}</span>
         </li>
       ))}

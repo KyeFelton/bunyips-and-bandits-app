@@ -136,6 +136,19 @@ export const actionsAtom = atom((get) => {
   return actions;
 });
 
+// Action count
+export const actionsCountAtom = atom((get) => {
+  const effects = get(effectsAtom);
+  const baseActions = 3;
+
+  return effects.reduce((total, effect) => {
+    if (effect.actions?.bonus) {
+      return total + effect.actions.bonus;
+    }
+    return total;
+  }, baseActions);
+});
+
 // Traits atom - includes background traits, skill progression unlocked traits, and custom traits
 export const traitsAtom = atom((get) => {
   const skillLevels = get(skillLevelsAtom);
@@ -288,35 +301,6 @@ export const staminaAtom = atom((get) => {
     max: maxStamina,
     current: get(currentStaminaAtom),
   };
-});
-
-// Evasions
-export const evasionsCountAtom = atom((get) => {
-  const effects = get(effectsAtom);
-  const baseEvasions = 1;
-
-  return effects.reduce((total, effect) => {
-    if (effect.evasions?.bonus) {
-      return total + effect.evasions.bonus;
-    }
-    return total;
-  }, baseEvasions);
-});
-
-// Actions
-export const actionsCountAtom = atom((get) => {
-  const effects = get(effectsAtom);
-  const evasions = get(evasionsCountAtom);
-  const baseActions = 2;
-
-  return (
-    effects.reduce((total, effect) => {
-      if (effect.actions?.bonus) {
-        return total + effect.actions.bonus;
-      }
-      return total;
-    }, baseActions) + Math.min(evasions, 0)
-  );
 });
 
 // Speed

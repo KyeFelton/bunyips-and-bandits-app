@@ -132,7 +132,7 @@ export function CharacterSheet() {
                 value="traits"
                 className="w-full flex-grow rounded-lg rounded-tl-none bg-card"
               >
-                <div className="p-4 overflow-auto border-t border-border">
+                <div className="p-4 overflow-auto">
                   <TraitsList />
                 </div>
               </TabsContent>
@@ -140,7 +140,7 @@ export function CharacterSheet() {
                 value="actions"
                 className="w-full flex-grow rounded-lg rounded-tl-none bg-card"
               >
-                <div className="p-4 overflow-auto border-t border-border">
+                <div className="p-4 overflow-auto">
                   <ActionsList />
                 </div>
               </TabsContent>
@@ -148,7 +148,7 @@ export function CharacterSheet() {
                 value="items"
                 className="w-full flex-grow rounded-lg rounded-tl-none bg-card"
               >
-                <div className="p-4 overflow-auto border-t border-border">
+                <div className="p-4 overflow-auto">
                   <ItemsTab />
                 </div>
               </TabsContent>
@@ -156,7 +156,7 @@ export function CharacterSheet() {
                 value="skills"
                 className="w-full flex-grow rounded-lg rounded-tl-none bg-card"
               >
-                <div className="p-4 overflow-auto border-t border-border">
+                <div className="p-4 overflow-auto">
                   <SkillsTable />
                 </div>
               </TabsContent>
