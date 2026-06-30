@@ -1,15 +1,12 @@
 import { Item } from "../../models/items";
-import { AdamantineMace } from "./AdamantineMace";
 import { DynamiteStick } from "./DynamiteStick";
 import { LovePotion } from "./LovePotion";
 import { SoothingHerb } from "./SoothingHerb";
 import { ThunderstoneClub } from "./ThunderstoneClub";
-import { AdamantineSpear } from "./AdamantineSpear";
 import { EnchantedClub } from "./EnchantedClub";
 import { RainbowScaleNecklace } from "./RainbowScaleNecklace";
 import { SteelDagger } from "./SteelDagger";
 import { VialOfPotentAcid } from "./VialOfPotentAcid";
-import { AdamantineSword } from "./AdamantineSword";
 import { FeignDeathPotion } from "./FeignDeathPotion";
 import { MithrilMace } from "./MithrilMace";
 import { WaterHammerOfTytos } from "./WaterHammerOfTytos";
@@ -78,17 +75,14 @@ import { FishingNet } from "./FishingNet";
 import { Lantern } from "./Lantern";
 
 export {
-  AdamantineMace,
   DynamiteStick,
   LovePotion,
   SoothingHerb,
   ThunderstoneClub,
-  AdamantineSpear,
   EnchantedClub,
   RainbowScaleNecklace,
   SteelDagger,
   VialOfPotentAcid,
-  AdamantineSword,
   FeignDeathPotion,
   MithrilMace,
   WaterHammerOfTytos,
@@ -158,9 +152,6 @@ export {
 };
 
 export const AllItems: Item[] = [
-  AdamantineMace,
-  AdamantineSpear,
-  AdamantineSword,
   Adrenaline,
   Antidote,
   BarruginSpineArmour,
