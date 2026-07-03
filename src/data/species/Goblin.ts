@@ -12,9 +12,9 @@ export const Goblin: Species = {
   mind: 5,
   stamina: 7,
   speed: {
-    [Locomotion.Run]: SpeedRating.Moderate,
-    [Locomotion.Swim]: SpeedRating.Slow,
-    [Locomotion.Climb]: SpeedRating.Moderate,
+    [Locomotion.Run]: SpeedRating.Near,
+    [Locomotion.Swim]: SpeedRating.Close,
+    [Locomotion.Climb]: SpeedRating.Near,
     [Locomotion.Fly]: SpeedRating.None,
   },
   senses: {

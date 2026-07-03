@@ -29,7 +29,7 @@ export const DescriptionCard = () => {
   return (
     <div className="flex flex-col group">
       <div className="p-6 relative">
-        <h3 className="text-2xl font-semibold leading-none tracking-tight">
+        <h3 className="text-xl font-semibold leading-none tracking-tight">
           Description
         </h3>
         <Button
@@ -42,32 +42,34 @@ export const DescriptionCard = () => {
         </Button>
       </div>
       <div className="p-6 pt-0 space-y-4 flex-grow min-h-0">
-        <div>
-          <div className="text-sm font-medium text-muted-foreground mb-1">
-            Gender
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <div className="text-sm font-medium text-muted-foreground mb-1">
+              Gender
+            </div>
+            <div className="text-sm">{gender || "-"}</div>
           </div>
-          <div className="text-sm">{gender || "-"}</div>
-        </div>
 
-        <div>
-          <div className="text-sm font-medium text-muted-foreground mb-1">
-            Age
+          <div>
+            <div className="text-sm font-medium text-muted-foreground mb-1">
+              Age
+            </div>
+            <div className="text-sm">{age || "-"}</div>
           </div>
-          <div className="text-sm">{age || "-"}</div>
-        </div>
 
-        <div>
-          <div className="text-sm font-medium text-muted-foreground mb-1">
-            Size
+          <div>
+            <div className="text-sm font-medium text-muted-foreground mb-1">
+              Size
+            </div>
+            <div className="text-sm">{kin.species.size || "-"}</div>
           </div>
-          <div className="text-sm">{kin.species.size || "-"}</div>
-        </div>
 
-        <div>
-          <div className="text-sm font-medium text-muted-foreground mb-1">
-            Background
+          <div>
+            <div className="text-sm font-medium text-muted-foreground mb-1">
+              Background
+            </div>
+            <div className="text-sm">{background || "-"}</div>
           </div>
-          <div className="text-sm">{background || "-"}</div>
         </div>
 
         <div>

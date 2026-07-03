@@ -10,7 +10,7 @@ export const CombatCard = () => {
   return (
     <div>
       <div className="p-6">
-        <h3 className="text-2xl font-semibold leading-none tracking-tight">
+        <h3 className="text-xl font-semibold leading-none tracking-tight">
           Combat
         </h3>
       </div>
@@ -21,7 +21,7 @@ export const CombatCard = () => {
             <span>{actionsCount <= 0 ? "-" : actionsCount}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-muted-foreground">Weapon Damage</span>
+            <span className="text-muted-foreground">Weapon damage</span>
             <span className="flex items-center gap-1">
               <ArmourIcon type={weapon.damageType as DamageType} size={20} />
               {weapon.damage > 0 ? `+${weapon.damage}` : "-"}

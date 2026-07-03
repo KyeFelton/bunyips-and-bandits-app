@@ -1,4 +1,4 @@
-import { Squirrel, PawPrint, Fish, Bird } from "lucide-react";
+import { Mountain, PlaneTakeoff, SportShoe, Waves } from "lucide-react";
 import { Locomotion } from "../../enums/Locomotion";
 
 type Props = {
@@ -16,12 +16,12 @@ export const SpeedIcon = ({ type, size = 16, className = "" }: Props) => {
 
   switch (type) {
     case Locomotion.Run:
-      return <PawPrint {...props} />;
+      return <SportShoe {...props} />;
     case Locomotion.Swim:
-      return <Fish {...props} />;
+      return <Waves {...props} />;
     case Locomotion.Climb:
-      return <Squirrel {...props} />;
+      return <Mountain {...props} />;
     case Locomotion.Fly:
-      return <Bird {...props} />;
+      return <PlaneTakeoff {...props} />;
   }
 };

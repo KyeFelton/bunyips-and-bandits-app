@@ -418,49 +418,19 @@ const main = (
           </td>
           <td>Up to 50m</td>
         </tr>
-      </tbody>
-    </table>
-    <p>
-      Speed determines the distance that can be tranversed in a single action.
-      It is also grouped into bands. A standard move action is slow but doesn't
-      use stamina. A dash action consumes one stamina but allows you to traverse
-      more distance than a standard move.
-    </p>
-    <table className="md:mx-4 mb-8">
-      <thead>
-        <tr>
-          <th>Speed</th>
-          <th>Move</th>
-          <th>Dash</th>
-        </tr>
-      </thead>
-      <tbody>
         <tr>
           <td>
-            <b>Slow</b>
+            <b>Beyond</b>
           </td>
-          <td>-</td>
-          <td>Close</td>
-        </tr>
-        <tr>
-          <td>
-            <b>Moderate</b>
-          </td>
-          <td>Close</td>
-          <td>Near</td>
-        </tr>
-        <tr>
-          <td>
-            <b>Fast</b>
-          </td>
-          <td>Near</td>
-          <td>Far</td>
+          <td>Over 50m</td>
         </tr>
       </tbody>
     </table>
     <p>
-      Creatures can move through different means. For each movement, creatures
-      have a speed rating.
+      Creatures can move through different means. A distance is assigned to each
+      of your movement types to denote how far you can move in one dash action
+      for that movement. Dash actions consume stamina. If you choose not to
+      dash, you can move a close at no stamina cost.
     </p>
     <table className="md:mx-4">
       <thead>
@@ -476,7 +446,7 @@ const main = (
             <SpeedIcon type={Locomotion.Run} className="inline-block mr-1" />
           </td>
           <td>
-            <b>Run</b>
+            <b>{Locomotion.Run}</b>
           </td>
           <td>Moving across land.</td>
         </tr>
@@ -485,7 +455,7 @@ const main = (
             <SpeedIcon type={Locomotion.Climb} className="inline-block mr-1" />
           </td>
           <td>
-            <b>Climb</b>
+            <b>{Locomotion.Climb}</b>
           </td>
           <td>Scaling vertical surfaces or obstacles.</td>
         </tr>
@@ -494,7 +464,7 @@ const main = (
             <SpeedIcon type={Locomotion.Swim} className="inline-block mr-1" />
           </td>
           <td>
-            <b>Swim</b>
+            <b>{Locomotion.Swim}</b>
           </td>
           <td>Moving through water or other liquids.</td>
         </tr>
@@ -503,7 +473,7 @@ const main = (
             <SpeedIcon type={Locomotion.Fly} className="inline-block mr-1" />
           </td>
           <td>
-            <b>Fly</b>
+            <b>{Locomotion.Fly}</b>
           </td>
           <td>Moving through the air using wings or similar means.</td>
         </tr>
@@ -609,7 +579,7 @@ const main = (
             <ArmourIcon type={DamageType.Fire} className="inline-block mr-1" />
           </td>
           <td>
-            <b>Fire</b>
+            <b>{DamageType.Fire}</b>
           </td>
           <td>Damage from flames, heat, and radiation.</td>
         </tr>
@@ -621,7 +591,7 @@ const main = (
             />
           </td>
           <td>
-            <b>Electric</b>
+            <b>{DamageType.Electric}</b>
           </td>
           <td>Damage from electricity and lightning.</td>
         </tr>
@@ -639,7 +609,7 @@ const main = (
             <ArmourIcon type={DamageType.Slash} className="inline-block mr-1" />
           </td>
           <td>
-            <b>Slash</b>
+            <b>{DamageType.Slash}</b>
           </td>
           <td>Damage from cutting, slashing, or bladed weapons.</td>
         </tr>
@@ -648,7 +618,7 @@ const main = (
             <ArmourIcon type={DamageType.Force} className="inline-block mr-1" />
           </td>
           <td>
-            <b>Force</b>
+            <b>{DamageType.Force}</b>
           </td>
           <td>Damage from blunt force, impacts, and crushing.</td>
         </tr>
@@ -725,7 +695,7 @@ const main = (
             <SenseIcon type={SenseType.Sight} className="inline-block mt-1" />
           </td>
           <td>
-            <b>Standard sight</b>
+            <b>{SenseType.Sight}</b>
           </td>
 
           <td>Ability to see the visible light spectrum.</td>
@@ -738,7 +708,7 @@ const main = (
             />
           </td>
           <td>
-            <b>Infrared sight</b>
+            <b>{SenseType.InfraredSight}</b>
           </td>
 
           <td>Perception of heat radiated as infrared light.</td>
@@ -748,7 +718,7 @@ const main = (
             <SenseIcon type={SenseType.Hearing} className="inline-block mt-1" />
           </td>
           <td>
-            <b>Standard hearing</b>
+            <b>{SenseType.Hearing}</b>
           </td>
 
           <td>Capacity to hear airborne sounds.</td>
@@ -761,7 +731,7 @@ const main = (
             />
           </td>
           <td>
-            <b>Tremor hearing</b>
+            <b>{SenseType.TremorHearing}</b>
           </td>
 
           <td>Feeling vibrations in the ground or water.</td>
@@ -774,7 +744,7 @@ const main = (
             />
           </td>
           <td>
-            <b>Smell</b>
+            <b>{SenseType.Smell}</b>
           </td>
 
           <td>Detection of airborne odours.</td>
@@ -787,7 +757,7 @@ const main = (
             />
           </td>
           <td>
-            <b>Psychic sense</b>
+            <b>{SenseType.Psychic}</b>
           </td>
 
           <td>Sensing thought.</td>

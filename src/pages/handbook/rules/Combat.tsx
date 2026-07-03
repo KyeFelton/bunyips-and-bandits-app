@@ -22,9 +22,12 @@ const main = (
     </p>
     <h2>Actions</h2>
     <p>
-      You can do up to three actions on your turn. An action is any quick thing
-      your character can realistically do. It may be running to your enemy,
-      throwing an axe, or dodging an attack.
+      An action is any quick thing your character can realistically do. It may
+      be running to your enemy, throwing an axe, or dodging an attack.
+    </p>
+    <p>
+      You can do up to three actions on your turn. However, if you initiated the
+      comabt, then you only have two actions for your first turn.
     </p>
     <p>
       Some actions have a stamina cost. Performing these action depletes your

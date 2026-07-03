@@ -1,8 +1,8 @@
 export enum SenseType {
-  Sight = 'Sight',
-  InfraredSight = 'Infrared sight',
-  Hearing = 'Hearing',
-  TremorHearing = 'Tremor hearing',
-  Smell = 'Smell',
-  Psychic = 'Psychic sense',
+  Sight = "Sight",
+  InfraredSight = "Infrared",
+  Hearing = "Hearing",
+  TremorHearing = "Tremor",
+  Smell = "Smell",
+  Psychic = "Psychic",
 }

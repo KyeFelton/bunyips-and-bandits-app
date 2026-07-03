@@ -13,9 +13,9 @@ export const Floret: Species = {
   mind: 7,
   stamina: 5,
   speed: {
-    [Locomotion.Run]: SpeedRating.Moderate,
-    [Locomotion.Swim]: SpeedRating.Slow,
-    [Locomotion.Climb]: SpeedRating.Slow,
+    [Locomotion.Run]: SpeedRating.Near,
+    [Locomotion.Swim]: SpeedRating.Close,
+    [Locomotion.Climb]: SpeedRating.Close,
     [Locomotion.Fly]: SpeedRating.None,
   },
   senses: {

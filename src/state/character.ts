@@ -317,24 +317,21 @@ export const speedAtom = atom((get) => {
     switch (rating) {
       case SpeedRating.None:
         return -1;
-      case SpeedRating.Slow:
+      case SpeedRating.Close:
         return 0;
-      case SpeedRating.Moderate:
+      case SpeedRating.Near:
         return 1;
-      case SpeedRating.Fast:
+      case SpeedRating.Far:
         return 2;
-      case SpeedRating.Extreme:
-        return 3;
     }
   };
 
   // Helper function to convert numeric value back to rating
   const numberToRating = (value: number): SpeedRating => {
     if (value < 0) return SpeedRating.None;
-    if (value === 0) return SpeedRating.Slow;
-    if (value === 1) return SpeedRating.Moderate;
-    if (value === 2) return SpeedRating.Fast;
-    return SpeedRating.Extreme;
+    if (value === 0) return SpeedRating.Close;
+    if (value === 1) return SpeedRating.Near;
+    return SpeedRating.Far;
   };
 
   // Apply effects (rating changes)

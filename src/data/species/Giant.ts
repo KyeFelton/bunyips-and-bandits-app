@@ -12,8 +12,8 @@ export const Giant: Species = {
   mind: 5,
   stamina: 4,
   speed: {
-    [Locomotion.Run]: SpeedRating.Moderate,
-    [Locomotion.Swim]: SpeedRating.Slow,
+    [Locomotion.Run]: SpeedRating.Near,
+    [Locomotion.Swim]: SpeedRating.Close,
     [Locomotion.Climb]: SpeedRating.None,
     [Locomotion.Fly]: SpeedRating.None,
   },

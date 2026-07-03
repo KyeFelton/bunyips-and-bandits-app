@@ -12,9 +12,9 @@ export const Human: Species = {
   mind: 6,
   stamina: 6,
   speed: {
-    [Locomotion.Run]: SpeedRating.Moderate,
-    [Locomotion.Swim]: SpeedRating.Slow,
-    [Locomotion.Climb]: SpeedRating.Slow,
+    [Locomotion.Run]: SpeedRating.Near,
+    [Locomotion.Swim]: SpeedRating.Close,
+    [Locomotion.Climb]: SpeedRating.Close,
     [Locomotion.Fly]: SpeedRating.None,
   },
   senses: {

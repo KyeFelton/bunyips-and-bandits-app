@@ -82,10 +82,10 @@ export function CharacterSheet() {
           {activeSection === "stats" && (
             <div className="flex flex-col bg-card">
               <HealthCard className="overflow-auto" />
-              <CombatCard />
-              <SpeedCard />
               <ArmourCard />
+              <CombatCard />
               <SensesCard />
+              <SpeedCard />
             </div>
           )}
         </main>
@@ -97,10 +97,10 @@ export function CharacterSheet() {
             <NameCard />
             <div className="xl:hidden flex flex-col divide-y divide-border overflow-auto">
               <HealthCard />
-              <CombatCard />
-              <SpeedCard />
               <ArmourCard />
+              <CombatCard />
               <SensesCard />
+              <SpeedCard />
             </div>
             <div className="hidden xl:block overflow-auto">
               <DescriptionCard />
@@ -114,13 +114,13 @@ export function CharacterSheet() {
               className="flex flex-col items-start h-full"
             >
               <TabsList>
-                <TabsTrigger value="description" className="xl:hidden">
-                  Description
-                </TabsTrigger>
                 <TabsTrigger value="skills">Skills</TabsTrigger>
                 <TabsTrigger value="traits">Traits</TabsTrigger>
                 <TabsTrigger value="actions">Actions</TabsTrigger>
                 <TabsTrigger value="items">Items</TabsTrigger>
+                <TabsTrigger value="description" className="xl:hidden">
+                  Details
+                </TabsTrigger>
               </TabsList>
               <TabsContent
                 value="description"
@@ -166,10 +166,10 @@ export function CharacterSheet() {
           {/* Right column */}
           <div className="hidden xl:flex h-full max-h-[1100px] flex-col divide-y divide-border overflow-auto bg-card rounded-lg">
             <HealthCard />
-            <CombatCard />
-            <SpeedCard />
             <ArmourCard />
+            <CombatCard />
             <SensesCard />
+            <SpeedCard />
           </div>
         </main>
       </div>

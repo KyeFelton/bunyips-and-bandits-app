@@ -1,13 +1,4 @@
-import {
-  Eye,
-  Ear,
-  Soup,
-  Sun,
-  Flame,
-  Wind,
-  Mountain,
-  Brain,
-} from "lucide-react";
+import { Eye, Ear, Soup, Brain, ThermometerSun, Activity } from "lucide-react";
 import { cn } from "../../utils/cn";
 import { SenseType } from "../../enums/SenseType";
 
@@ -16,31 +7,19 @@ interface IconProps {
 }
 
 const StandardSightIcon = ({ className }: IconProps) => (
-  <div className={cn(`relative w-5`, className)}>
-    <Eye className="w-[80%] h-[80%]" />
-    <Sun className={`absolute -top-1 -right-2 h-3 w-3`} />
-  </div>
+  <Eye className={cn("h-4 w-4", className)} />
 );
 
 const InfraredSightIcon = ({ className }: IconProps) => (
-  <div className={cn(`relative w-5`, className)}>
-    <Eye className="w-[80%] h-[80%]" />
-    <Flame className={`absolute -bottom-1 -right-2 h-3 w-3`} />
-  </div>
+  <ThermometerSun className={cn("h-4 w-4", className)} />
 );
 
 const StandardHearingIcon = ({ className }: IconProps) => (
-  <div className={cn(`relative w-5`, className)}>
-    <Ear className="w-[80%] h-[80%]" />
-    <Wind className={`absolute -top-1 -right-2 h-3 w-3`} />
-  </div>
+  <Ear className={cn("h-4 w-4", className)} />
 );
 
-const TremorSenseIcon = ({ className }: IconProps) => (
-  <div className={cn(`relative w-5`, className)}>
-    <Ear className="w-[80%] h-[80%]" />
-    <Mountain className={`absolute -bottom-1 -right-2 h-3 w-3`} />
-  </div>
+const TremorHearingIcon = ({ className }: IconProps) => (
+  <Activity className={cn("h-4 w-4", className)} />
 );
 
 const SmellIcon = ({ className }: IconProps) => (
@@ -65,7 +44,7 @@ export const SenseIcon = ({ type, className = "" }: Props) => {
     case SenseType.Hearing:
       return <StandardHearingIcon className={className} />;
     case SenseType.TremorHearing:
-      return <TremorSenseIcon className={className} />;
+      return <TremorHearingIcon className={className} />;
     case SenseType.Smell:
       return <SmellIcon className={className} />;
     case SenseType.Psychic:

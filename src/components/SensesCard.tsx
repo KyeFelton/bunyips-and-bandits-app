@@ -1,30 +1,6 @@
 import { useAtomValue } from "jotai";
-import { SenseType } from "./../enums/SenseType";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./ui/tooltip";
 import { sensesAtom } from "./../state/character";
 import { SenseIcon } from "./icons/SenseIcon";
-
-const getSenseTooltipText = (senseType: SenseType, isKeen: boolean) => {
-  const senseNameMap: Record<SenseType, string> = {
-    [SenseType.Sight]: "Standard sight",
-    [SenseType.InfraredSight]: "Infrared sight",
-    [SenseType.Hearing]: "Standard hearing",
-    [SenseType.TremorHearing]: "Tremor hearing",
-    [SenseType.Smell]: "Smell",
-    [SenseType.Psychic]: "Psychic sense",
-  };
-
-  const actionText = isKeen
-    ? `is a keen sense. You can roll normally for Perception checks involving this sense.`
-    : `is a poor sense. You must roll with disadvantage for Perception checks involving this sense.`;
-
-  return `${senseNameMap[senseType]} ${actionText}`;
-};
 
 export const SensesCard = () => {
   const senses = useAtomValue(sensesAtom);
@@ -33,60 +9,33 @@ export const SensesCard = () => {
   return (
     <div>
       <div className="p-6">
-        <h3 className="text-2xl font-semibold leading-none tracking-tight">
+        <h3 className="text-xl font-semibold leading-none tracking-tight">
           Senses
         </h3>
       </div>
       <div className="p-6 pt-0">
-        <TooltipProvider>
-          <div className="flex items-center gap-3">
-            <div className="flex gap-3">
-              {keenSenses.map((senseType: SenseType) => (
-                <Tooltip key={senseType}>
-                  <TooltipTrigger asChild>
-                    <div className="text-muted-foreground hover:text-foreground transition-colors cursor-default">
-                      <SenseIcon type={senseType} className="w-6" />
-                    </div>
-                  </TooltipTrigger>
-                  <TooltipContent
-                    side="top"
-                    align="center"
-                    className="max-w-[250px]"
-                  >
-                    <p className="text-xs">
-                      {getSenseTooltipText(senseType, true)}
-                    </p>
-                  </TooltipContent>
-                </Tooltip>
-              ))}
+        <div className="flex flex-wrap gap-x-8 gap-y-3">
+          {Object.values(keenSenses).map((sense) => (
+            <div
+              key={sense}
+              className="flex items-center gap-1 text-muted-foreground text-sm"
+            >
+              <SenseIcon type={sense} />
+              <span>{sense}:</span>
+              <span className="text-foreground">Keen</span>
             </div>
-            {poorSenses.length > 0 && (
-              <>
-                <div className="h-6 w-px bg-border" />
-                <div className="flex gap-2 opacity-50">
-                  {poorSenses.map((senseType: SenseType) => (
-                    <Tooltip key={senseType}>
-                      <TooltipTrigger asChild>
-                        <div className="text-muted-foreground hover:text-foreground transition-colors cursor-default">
-                          <SenseIcon type={senseType} className="w-6" />
-                        </div>
-                      </TooltipTrigger>
-                      <TooltipContent
-                        side="top"
-                        align="center"
-                        className="max-w-[250px]"
-                      >
-                        <p className="text-xs">
-                          {getSenseTooltipText(senseType, false)}
-                        </p>
-                      </TooltipContent>
-                    </Tooltip>
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
-        </TooltipProvider>
+          ))}
+          {Object.values(poorSenses).map((sense) => (
+            <div
+              key={sense}
+              className="flex items-center gap-1 text-muted-foreground text-sm"
+            >
+              <SenseIcon type={sense} />
+              <span>{sense}:</span>
+              <span className="text-foreground">Poor</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

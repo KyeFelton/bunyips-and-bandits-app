@@ -206,8 +206,8 @@ const main = (
           difficulty="Moderate"
           health={12}
           speed={{
-            [Locomotion.Run]: SpeedRating.Slow,
-            [Locomotion.Swim]: SpeedRating.Fast,
+            [Locomotion.Run]: SpeedRating.Close,
+            [Locomotion.Swim]: SpeedRating.Far,
           }}
           senses={{
             [SenseType.Smell]: "Keen",

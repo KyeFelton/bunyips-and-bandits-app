@@ -94,7 +94,7 @@ export const HealthCard = ({ className }: Props) => {
   return (
     <div className={cn(className)}>
       <div className="flex items-center justify-between p-6 pb-2">
-        <h3 className="text-2xl font-semibold leading-none tracking-tight">
+        <h3 className="text-xl font-semibold leading-none tracking-tight">
           Health
         </h3>
         <Button
