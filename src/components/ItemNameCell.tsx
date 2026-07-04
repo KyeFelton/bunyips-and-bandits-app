@@ -2,8 +2,16 @@ import { HelpCircle } from "lucide-react";
 import { ItemLocation } from "../enums/ItemLocation";
 import { CharacterItem } from "../models/items";
 import { HAND_SLOT_COUNT } from "../utils/items";
-import { ItemEffectList } from "./ItemEffectList";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { ItemDetails } from "./ItemDetails";
+import { ItemIcon } from "./icons/ItemIcon";
+import { Button } from "./ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog";
 
 type Props = {
   name: string;
@@ -17,21 +25,30 @@ export const ItemNameCell = ({ item, displayName }: Props) => (
     {item.location === ItemLocation.Held && item.slots >= HAND_SLOT_COUNT && (
       <span className="text-xs text-muted-foreground">(2H)</span>
     )}
-    <Popover>
-      <PopoverTrigger className="h-7 w-7 shrink-0 flex items-center justify-center text-muted-foreground hover:bg-accent-subtle hover:text-accent-foreground rounded-full">
-        <HelpCircle className="h-4 w-4 text-muted-foreground" />
-      </PopoverTrigger>
-      <PopoverContent className="max-w-[300px] text-sm" side="right">
-        <div className={item.description ? "space-y-3" : undefined}>
-          {item.description && (
-            <p className="text-muted-foreground">{item.description}</p>
-          )}
-          <ItemEffectList
-            equippedEffects={item.equippedEffects}
-            consumedEffect={item.consumedEffect}
-          />
-        </div>
-      </PopoverContent>
-    </Popover>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="h-7 w-7 shrink-0 rounded-full text-muted-foreground hover:bg-accent-subtle hover:text-accent-foreground"
+        >
+          <HelpCircle className="h-4 w-4" />
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="max-w-md">
+        <DialogHeader>
+          <DialogTitle className="flex items-center gap-2">
+            {item.itemType && (
+              <ItemIcon
+                itemType={item.itemType}
+                className="h-5 w-5 shrink-0 text-muted-foreground"
+              />
+            )}
+            {displayName}
+          </DialogTitle>
+        </DialogHeader>
+        <ItemDetails item={item} />
+      </DialogContent>
+    </Dialog>
   </div>
 );

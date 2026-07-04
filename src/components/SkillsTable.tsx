@@ -21,6 +21,13 @@ import { useRollToast } from "./RollToast";
 import { Button } from "./ui/button";
 import { SkillForm } from "./../enums/SkillForm";
 import { RollText } from "./RollText";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { EditSkillsDialog } from "./EditSkillsDialog";
 
@@ -93,17 +100,25 @@ export const SkillsTable = () => {
                           {skill.form}
                         </span>
                       </div>
-                      <Popover>
-                        <PopoverTrigger className="w-6 h-6 flex items-center justify-center text-muted-foreground text-left hover:bg-accent-subtle hover:text-accent-foreground rounded-full">
-                          <HelpCircle className="h-4 w-4 text-muted-foreground" />
-                        </PopoverTrigger>
-                        <PopoverContent
-                          className="max-w-[300px] text-sm"
-                          side="right"
-                        >
-                          <p>{skill.description}</p>
-                        </PopoverContent>
-                      </Popover>
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-6 w-6 rounded-full text-muted-foreground hover:bg-accent-subtle hover:text-accent-foreground"
+                          >
+                            <HelpCircle className="h-4 w-4" />
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent className="max-w-md">
+                          <DialogHeader>
+                            <DialogTitle>{skill.type}</DialogTitle>
+                          </DialogHeader>
+                          <p className="text-sm text-muted-foreground">
+                            {skill.description}
+                          </p>
+                        </DialogContent>
+                      </Dialog>
                     </div>
                   </TableCell>
                   <TableCell className="text-left">
