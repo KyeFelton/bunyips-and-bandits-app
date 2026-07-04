@@ -24,7 +24,7 @@ export const CombatStats = () => {
             <span className="text-muted-foreground">Weapon damage</span>
             <span className="flex items-center gap-1">
               <ArmourIcon type={weapon.damageType as DamageType} size={20} />
-              {weapon.damage > 0 ? `+${weapon.damage}` : "-"}
+              {weapon.damageType}: {weapon.damage > 0 ? weapon.damage : "-"}
             </span>
           </div>
         </div>

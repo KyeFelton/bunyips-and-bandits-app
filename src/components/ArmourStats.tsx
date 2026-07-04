@@ -23,7 +23,7 @@ export const ArmourStats = () => {
             >
               <ArmourIcon type={type as DamageType} size={20} />
               <span className={value < 0 ? "text-destructive" : ""}>
-                {type} {value === 0 ? "-" : value > 0 ? `+${value}` : value}
+                {type}: {value === 0 ? "-" : value}
               </span>
             </div>
           ))}
