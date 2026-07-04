@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import {
   Dialog,
   DialogContent,
@@ -9,9 +9,19 @@ import {
 } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { Textarea } from "./ui/textarea";
 import { Label } from "./ui/label";
-import { Badge } from "./ui/badge";
+import { Image as ImageIcon, Plus, X } from "lucide-react";
+import {
+  nameAtom,
+  imageAtom,
+  kinAtom,
+  ageAtom,
+  backstoryAtom,
+  genderAtom,
+  languagesAtom,
+  personalityAtom,
+} from "../state/character";
+import { Textarea } from "./ui/textarea";
 import {
   Select,
   SelectContent,
@@ -19,16 +29,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { X, Plus } from "lucide-react";
-import {
-  backgroundAtom,
-  backstoryAtom,
-  personalityAtom,
-  languagesAtom,
-  ageAtom,
-  genderAtom,
-} from "../state/character";
-import { AllBackgrounds } from "../data/backgrounds";
+import { Badge } from "./ui/badge";
 
 const genders = ["Male", "Female", "Non-binary"];
 const CUSTOM_GENDER_OPTION = "Let me type...";
@@ -39,14 +40,19 @@ type Props = {
 };
 
 export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
-  const [background, setBackground] = useAtom(backgroundAtom);
+  const [name, setName] = useAtom(nameAtom);
+  const [image, setImage] = useAtom(imageAtom);
+  const kin = useAtomValue(kinAtom);
   const [backstory, setBackstory] = useAtom(backstoryAtom);
   const [personality, setPersonality] = useAtom(personalityAtom);
   const [selectedLanguages, setLanguages] = useAtom(languagesAtom);
   const [age, setAge] = useAtom(ageAtom);
   const [gender, setGender] = useAtom(genderAtom);
 
-  const [pendingBackground, setPendingBackground] = useState("");
+  const [pendingName, setPendingName] = useState("");
+  const [pendingImage, setPendingImage] = useState<string | undefined>(
+    undefined,
+  );
   const [pendingBackstory, setPendingBackstory] = useState("");
   const [pendingPersonality, setPendingPersonality] = useState("");
   const [pendingLanguages, setPendingLanguages] = useState<string[]>([]);
@@ -58,7 +64,8 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
 
   useEffect(() => {
     if (isOpen) {
-      setPendingBackground(background);
+      setPendingName(name);
+      setPendingImage(image);
       setPendingBackstory(backstory);
       setPendingPersonality(personality);
       setPendingLanguages([...selectedLanguages]);
@@ -80,7 +87,8 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
     }
   }, [
     isOpen,
-    background,
+    name,
+    image,
     backstory,
     personality,
     selectedLanguages,
@@ -89,16 +97,28 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
   ]);
 
   const handleSave = () => {
+    const finalName = pendingName.trim() === "" ? "No name" : pendingName;
     const finalGender = isCustomGender ? customGenderValue : pendingGender;
-
-    setBackground(pendingBackground);
+    setName(finalName);
+    setImage(pendingImage);
     setBackstory(pendingBackstory);
     setPersonality(pendingPersonality);
     setLanguages(pendingLanguages);
     setAge(pendingAge);
     setGender(finalGender);
-
     onClose();
+  };
+
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const imageData = e.target?.result as string;
+        setPendingImage(imageData);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleLanguageAdd = () => {
@@ -131,12 +151,47 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+      <DialogContent>
         <DialogHeader>
-          <DialogTitle>Edit Description</DialogTitle>
+          <DialogTitle>Edit Character</DialogTitle>
         </DialogHeader>
-        <div className="space-y-6 py-4">
-          {/* Editable fields */}
+        <div className="space-y-6 py-4 max-h-[60vh] overflow-y-auto px-1">
+          <div className="space-y-2">
+            <Label htmlFor="name">Name</Label>
+            <Input
+              id="name"
+              value={pendingName}
+              onChange={(e) => setPendingName(e.target.value)}
+              placeholder="Enter character name"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label>Character Image</Label>
+            <div className="relative group w-64 h-64 mx-auto">
+              <label htmlFor="image-upload" className="cursor-pointer">
+                <img
+                  src={pendingImage ?? image ?? kin.imageSrc}
+                  alt="character"
+                  className="w-64 h-64 rounded-lg object-cover"
+                />
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-foreground/50 rounded-lg">
+                  <div className="flex items-center justify-center px-4 py-2 rounded-md text-primary-foreground transition-colors">
+                    <ImageIcon className="h-5 w-5 mr-2" />
+                    Change image
+                  </div>
+                </div>
+              </label>
+              <input
+                id="image-upload"
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                className="hidden"
+              />
+            </div>
+          </div>
+
           <div className="space-y-2">
             <Label htmlFor="gender">Gender</Label>
             <div className="flex gap-2">
@@ -217,43 +272,6 @@ export const EditDescriptionDialog = ({ isOpen, onClose }: Props) => {
                 ))}
               </div>
             )}
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="background">Background</Label>
-            <Select
-              value={pendingBackground}
-              onValueChange={setPendingBackground}
-            >
-              <SelectTrigger id="background">
-                <SelectValue placeholder="Select a background" />
-              </SelectTrigger>
-              <SelectContent>
-                {Object.values(AllBackgrounds).map((bg) => (
-                  <SelectItem key={bg.name} value={bg.name}>
-                    {bg.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            {pendingBackground &&
-              AllBackgrounds[
-                pendingBackground as keyof typeof AllBackgrounds
-              ] && (
-                <p className="text-xs text-muted-foreground">
-                  {
-                    AllBackgrounds[
-                      pendingBackground as keyof typeof AllBackgrounds
-                    ].description
-                  }{" "}
-                  <span className="font-semibold">
-                    Expertise:{" "}
-                    {AllBackgrounds[
-                      pendingBackground as keyof typeof AllBackgrounds
-                    ].expertiseSkills.join(", ")}
-                  </span>
-                </p>
-              )}
           </div>
 
           <div className="space-y-2">

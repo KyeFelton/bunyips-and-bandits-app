@@ -1,9 +1,9 @@
 import { useAtomValue } from "jotai";
-import { actionsCountAtom, weaponAtom } from "./../state/character";
+import { actionsCountAtom, weaponAtom } from "../state/character";
 import { ArmourIcon } from "./icons/ArmourIcon";
-import { DamageType } from "./../enums/DamageType";
+import { DamageType } from "../enums/DamageType";
 
-export const CombatCard = () => {
+export const CombatStats = () => {
   const actionsCount = useAtomValue(actionsCountAtom);
   const weapon = useAtomValue(weaponAtom);
 

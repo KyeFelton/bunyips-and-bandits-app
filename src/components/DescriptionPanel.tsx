@@ -1,20 +1,24 @@
 import { useAtomValue } from "jotai";
 import { Button } from "./ui/button";
-import { Badge } from "./ui/badge";
 import { Edit2 } from "lucide-react";
-import { useState } from "react";
 import {
+  nameAtom,
+  imageAtom,
   kinAtom,
-  genderAtom,
   ageAtom,
-  languagesAtom,
   backgroundAtom,
   backstoryAtom,
+  genderAtom,
+  languagesAtom,
   personalityAtom,
-} from "./../state/character";
+} from "../state/character";
 import { EditDescriptionDialog } from "./EditDescriptionDialog";
+import { useState } from "react";
+import { Badge } from "./ui/badge";
 
-export const DescriptionCard = () => {
+export const DescriptionPanel = () => {
+  const name = useAtomValue(nameAtom);
+  const image = useAtomValue(imageAtom);
   const kin = useAtomValue(kinAtom);
   const gender = useAtomValue(genderAtom);
   const age = useAtomValue(ageAtom);
@@ -28,18 +32,28 @@ export const DescriptionCard = () => {
 
   return (
     <div className="flex flex-col group">
-      <div className="p-6 relative">
-        <h3 className="text-xl font-semibold leading-none tracking-tight">
-          Description
-        </h3>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="absolute top-4 right-4 h-6 w-6 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity"
-          onClick={() => setIsEditDescriptionDialogOpen(true)}
-        >
-          <Edit2 className="h-3 w-3" />
-        </Button>
+      <div className="p-4">
+        <div className="relative flex flex-col items-center">
+          <h3 className="px-8 text-2xl font-semibold text-center line-clamp-2">
+            {name || "No name"}
+          </h3>
+          <span className="text-md text-muted-foreground">{kin.name}</span>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="absolute top-0 right-0 h-6 w-6 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity"
+            onClick={() => setIsEditDescriptionDialogOpen(true)}
+          >
+            <Edit2 className="h-3 w-3" />
+          </Button>
+        </div>
+      </div>
+      <div className="p-6 pt-0 flex-grow min-h-0 flex justify-center">
+        <img
+          src={image ?? kin.imageSrc}
+          alt="character"
+          className="w-full max-w-[300px] h-full max-h-[300px] rounded-md object-cover"
+        />
       </div>
       <div className="p-6 pt-0 space-y-4 flex-grow min-h-0">
         <div className="grid grid-cols-2 gap-3">
@@ -89,7 +103,7 @@ export const DescriptionCard = () => {
           </div>
         </div>
 
-        <div>
+        <div className="md:hidden xl:block">
           <div className="text-sm font-medium text-muted-foreground mb-1">
             Backstory
           </div>
@@ -98,7 +112,7 @@ export const DescriptionCard = () => {
           </div>
         </div>
 
-        <div>
+        <div className="md:hidden xl:block">
           <div className="text-sm font-medium text-muted-foreground mb-1">
             Personality & Motivation
           </div>

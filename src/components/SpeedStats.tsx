@@ -1,10 +1,10 @@
 import { useAtomValue } from "jotai";
-import { Locomotion } from "./../enums/Locomotion";
-import { SpeedRating } from "./../enums/SpeedRating";
-import { speedAtom } from "./../state/character";
+import { Locomotion } from "../enums/Locomotion";
+import { SpeedRating } from "../enums/SpeedRating";
+import { speedAtom } from "../state/character";
 import { SpeedIcon } from "./icons/SpeedIcon";
 
-export const SpeedCard = () => {
+export const SpeedStats = () => {
   const speed = useAtomValue(speedAtom);
 
   return (

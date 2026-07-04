@@ -1,9 +1,9 @@
 import { useAtomValue } from "jotai";
-import { DamageType } from "./../enums/DamageType";
-import { armourAtom } from "./../state/character";
+import { DamageType } from "../enums/DamageType";
+import { armourAtom } from "../state/character";
 import { ArmourIcon } from "./icons/ArmourIcon";
 
-export const ArmourCard = () => {
+export const ArmourStats = () => {
   const armour = useAtomValue(armourAtom);
 
   return (

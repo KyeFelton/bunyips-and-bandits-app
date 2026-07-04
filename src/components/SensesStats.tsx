@@ -1,8 +1,8 @@
 import { useAtomValue } from "jotai";
-import { sensesAtom } from "./../state/character";
+import { sensesAtom } from "../state/character";
 import { SenseIcon } from "./icons/SenseIcon";
 
-export const SensesCard = () => {
+export const SensesStats = () => {
   const senses = useAtomValue(sensesAtom);
   const { keen: keenSenses, poor: poorSenses } = senses;
 

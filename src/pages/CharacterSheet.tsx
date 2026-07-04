@@ -4,13 +4,12 @@ import {
   TabsList,
   TabsTrigger,
 } from "../components/ui/tabs";
-import { NameCard } from "../components/NameCard";
-import { DescriptionCard } from "../components/DescriptionCard";
+import { DescriptionPanel } from "../components/DescriptionPanel";
 import { HealthCard } from "../components/HealthCard";
-import { SensesCard } from "../components/SensesCard";
-import { ArmourCard } from "../components/ArmourCard";
-import { SpeedCard } from "../components/SpeedCard";
-import { CombatCard } from "../components/CombatCard";
+import { SensesStats } from "../components/SensesStats";
+import { ArmourStats } from "../components/ArmourStats";
+import { SpeedStats } from "../components/SpeedStats";
+import { CombatStats } from "../components/CombatStats";
 import { ItemsTab } from "../components/ItemsTab";
 import { SkillsTable } from "../components/SkillsTable";
 import { TraitsList } from "../components/TraitsList";
@@ -50,8 +49,7 @@ export function CharacterSheet() {
         <main className="md:hidden pb-24 w-full h-full overflow-auto">
           {activeSection === "character" && (
             <div className="flex flex-col bg-card">
-              <NameCard />
-              <DescriptionCard />
+              <DescriptionPanel />
             </div>
           )}
 
@@ -82,10 +80,10 @@ export function CharacterSheet() {
           {activeSection === "stats" && (
             <div className="flex flex-col bg-card">
               <HealthCard className="overflow-auto" />
-              <ArmourCard />
-              <CombatCard />
-              <SensesCard />
-              <SpeedCard />
+              <ArmourStats />
+              <CombatStats />
+              <SensesStats />
+              <SpeedStats />
             </div>
           )}
         </main>
@@ -94,16 +92,13 @@ export function CharacterSheet() {
         <main className="hidden md:grid py-6 xl:py-12 px-8 md:grid-cols-3 xl:grid-cols-4 gap-4 h-full w-full max-w-[1500px] overflow-auto min-w-[768px]">
           {/* Left column */}
           <div className="h-full max-h-[1100px] flex flex-col overflow-auto bg-card rounded-lg">
-            <NameCard />
-            <div className="xl:hidden flex flex-col divide-y divide-border overflow-auto">
+            <DescriptionPanel />
+            <div className="xl:hidden flex flex-col divide-y divide-border">
               <HealthCard />
-              <ArmourCard />
-              <CombatCard />
-              <SensesCard />
-              <SpeedCard />
-            </div>
-            <div className="hidden xl:block overflow-auto">
-              <DescriptionCard />
+              <ArmourStats />
+              <CombatStats />
+              <SensesStats />
+              <SpeedStats />
             </div>
           </div>
 
@@ -118,16 +113,7 @@ export function CharacterSheet() {
                 <TabsTrigger value="traits">Traits</TabsTrigger>
                 <TabsTrigger value="actions">Actions</TabsTrigger>
                 <TabsTrigger value="items">Items</TabsTrigger>
-                <TabsTrigger value="description" className="xl:hidden">
-                  Details
-                </TabsTrigger>
               </TabsList>
-              <TabsContent
-                value="description"
-                className="xl:hidden w-full flex-grow rounded-lg rounded-tl-none bg-card"
-              >
-                <DescriptionCard />
-              </TabsContent>
               <TabsContent
                 value="traits"
                 className="w-full flex-grow rounded-lg rounded-tl-none bg-card"
@@ -166,10 +152,10 @@ export function CharacterSheet() {
           {/* Right column */}
           <div className="hidden xl:flex h-full max-h-[1100px] flex-col divide-y divide-border overflow-auto bg-card rounded-lg">
             <HealthCard />
-            <ArmourCard />
-            <CombatCard />
-            <SensesCard />
-            <SpeedCard />
+            <ArmourStats />
+            <CombatStats />
+            <SensesStats />
+            <SpeedStats />
           </div>
         </main>
       </div>
