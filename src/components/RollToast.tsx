@@ -1,28 +1,26 @@
-import { useToast } from "./../utils/use-toast";
-import { playDiceRollSound } from "./../utils/sound";
-import { RollText } from "./RollText";
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
+import { SkillType } from "./../enums/SkillType";
 import {
   criticalSuccessesAtom,
   skillsProgressedSinceRestAtom,
 } from "./../state/character";
-import { SkillType } from "./../enums/SkillType";
+import { activeRollAtom } from "./../state/roll";
 
 const rollDice = (sides: number) => {
   return Math.ceil(Math.random() * sides);
 };
 
-interface RollToastProps {
+type RollToastProps = {
   dice: number;
   hasAdvantage?: boolean;
   hasDisadvantage?: boolean;
   modifier: number;
   name: string;
   type: SkillType;
-}
+};
 
 export const useRollToast = () => {
-  const { toast } = useToast();
+  const setActiveRoll = useSetAtom(activeRollAtom);
   const [criticalSuccesses, setCriticalSuccesses] = useAtom(
     criticalSuccessesAtom
   );
@@ -38,8 +36,6 @@ export const useRollToast = () => {
     name,
     type,
   }: RollToastProps) => {
-    playDiceRollSound();
-
     const naturalRoll1 = rollDice(dice);
     const naturalRoll2 = rollDice(dice);
     const roll1 = naturalRoll1 + modifier;
@@ -58,13 +54,9 @@ export const useRollToast = () => {
       extraText = ` (${roll1}, ${roll2})`;
     }
 
-    // Check for critical success
     const isCriticalSuccess = naturalRoll === dice;
-
-    // Check if skill has already progressed since rest
     const alreadyProgressed = skillsProgressedSinceRest.has(type);
 
-    // Track critical success
     if (isCriticalSuccess && !alreadyProgressed) {
       const currentCrits = criticalSuccesses[type] || 0;
       const newCrits = currentCrits + 1;
@@ -73,42 +65,26 @@ export const useRollToast = () => {
         ...criticalSuccesses,
         [type]: newCrits,
       });
-      // Mark this skill as progressed since rest
       setSkillsProgressedSinceRest(
         new Set([...skillsProgressedSinceRest, type])
       );
     }
 
-    setTimeout(
-      () =>
-        toast({
-          title: name,
-          description: (
-            <div className="font-mono space-y-1">
-              <div className="">
-                <span className="text-xl font-bold">{roll}</span>
-                {isCriticalSuccess && (
-                  <span className="ml-2 text-sm">Critical!</span>
-                )}
-                {extraText && (
-                  <span className="text-lg text-muted-foreground">
-                    {extraText}
-                  </span>
-                )}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                <RollText
-                  dice={dice}
-                  hasAdvantage={hasAdvantage}
-                  hasDisadvantage={hasDisadvantage}
-                  modifier={modifier}
-                />
-              </div>
-            </div>
-          ),
-        }),
-      200
-    );
+    setActiveRoll({
+      id: crypto.randomUUID(),
+      name,
+      type,
+      dice,
+      modifier,
+      hasAdvantage,
+      hasDisadvantage,
+      naturalRoll1,
+      naturalRoll2,
+      naturalRoll,
+      roll,
+      extraText,
+      isCriticalSuccess,
+    });
   };
 
   return showRollToast;

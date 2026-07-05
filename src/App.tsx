@@ -5,6 +5,7 @@ import { Handbook } from "./pages/Handbook";
 import { CharactersPage } from "./pages/CharacterList";
 import { Home } from "./pages/Home";
 import { NavBar } from "./components/NavBar";
+import { RollOverlay } from "./components/RollOverlay";
 import { Toaster } from "./components/ui/toaster";
 import background from "./images/backgrounds/campfire.png";
 import frame from "./images/backgrounds/leaf-frame.png";
@@ -83,6 +84,7 @@ function App() {
         </div>
       </div>
 
+      <RollOverlay />
       <Toaster />
     </div>
   );
