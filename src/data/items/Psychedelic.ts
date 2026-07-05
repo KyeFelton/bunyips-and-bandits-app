@@ -1,26 +1,13 @@
 import { Item } from "../../models/items";
 import { ItemType } from "../../enums/ItemType";
+import { PsychicBoost } from "../../models/conditions";
 
-const MildPsychedelic: Item = {
-  name: "Psychedelic (mild)",
+export const Psychedelic: Item = {
+  name: "Psychedelic",
   consumedEffect: {
-    condition: "Psychedelic Trip (Mild)",
+    condition: PsychicBoost.name,
     custom:
-      "+1 bonus to psychic checks until your next rest. If you have already consumed a psychedelic within the last hour, you also take 2 damage. At most three psychedelics can be consumed at one time.",
-  },
-  singleUse: true,
-  slots: 1,
-  stackable: true,
-  defaultCost: 85,
-  itemType: ItemType.Concoction,
-};
-
-const StrongPsychedelic: Item = {
-  name: "Psychedelic (strong)",
-  consumedEffect: {
-    condition: "Psychedelic Trip (Strong)",
-    custom:
-      "+2 bonus to psychic checks until your next rest. If you have already consumed a psychedelic within the last hour, you also take 2 damage. At most three psychedelics can be consumed at one time.",
+      "If you have already consumed a psychedelic since your last rest, you also take 1 damage.",
   },
   singleUse: true,
   slots: 1,
@@ -28,5 +15,3 @@ const StrongPsychedelic: Item = {
   defaultCost: 300,
   itemType: ItemType.Concoction,
 };
-
-export { MildPsychedelic, StrongPsychedelic };

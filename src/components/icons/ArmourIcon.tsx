@@ -1,15 +1,17 @@
-import { Flame, Droplets, Gavel, Sword, Zap } from 'lucide-react';
-import { DamageType } from '../../enums/DamageType';
+import { Flame, Droplets, Gavel, Sword, Zap } from "lucide-react";
+import { DamageType } from "../../enums/DamageType";
+import { cn } from "../../utils/cn";
 
 type Props = {
   type: DamageType;
   size?: number;
   className?: string;
+  showText?: boolean;
 };
 
-export const ArmourIcon = ({ type, size = 16, className = '' }: Props) => {
+export const ArmourIcon = ({ type, size = 16, className = "" }: Props) => {
   const props = {
-    className,
+    className: cn("inline-flex align-text-text-bottom", className),
     width: size,
     height: size,
   };

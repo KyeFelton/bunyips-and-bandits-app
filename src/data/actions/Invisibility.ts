@@ -5,7 +5,7 @@ import { Action } from "../../models/actions";
 
 export const Invisibility: Action = {
   name: "Invisibility",
-  effect:
+  description:
     "Light passes through you or a target of your choice, making them invisible.",
   skillType: SkillType.Radiant,
   range: Range.Near,

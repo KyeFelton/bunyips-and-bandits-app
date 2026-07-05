@@ -5,7 +5,7 @@ import { Action } from "../../models/actions";
 
 export const Pandemonium: Action = {
   name: "Pandemonium",
-  effect:
+  description:
     "You bombard the minds of near creatures with illusions. They all hallucinate for one turn. Describe the illusions that they perceive to the GM.",
   skillType: SkillType.Psychic,
   range: Range.Self,

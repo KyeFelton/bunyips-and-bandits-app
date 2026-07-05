@@ -5,8 +5,8 @@ import { Action } from "../../models/actions";
 
 export const Amplify: Action = {
   name: "Amplify",
-  effect:
-    "You amplify your voice or a sound nearby. You can use this ability to draw attention and intimidate near creatures with hearing sense, as well as stun those who are close.",
+  description:
+    "You amplify your voice or a sound nearby. You can use this ability to draw attention and intimidate near creatures with {{sense:hearing}} sense, as well as stun those who are close.",
   skillType: SkillType.Sonic,
   range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,

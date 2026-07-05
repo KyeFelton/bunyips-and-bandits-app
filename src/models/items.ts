@@ -1,20 +1,12 @@
 import { ItemLocation } from "../enums/ItemLocation";
 import { ItemType } from "../enums/ItemType";
 import { WearType } from "../enums/WearType";
-import { Effect } from "./effect";
-
-export type ImmediateEffect = {
-  body?: number;
-  custom?: string;
-  mind?: number;
-  stamina?: number;
-  condition?: string;
-};
+import { OngoingEffect, ImmediateEffect } from "./effect";
 
 export type Item = {
   name: string;
   description?: string;
-  equippedEffects?: Effect[];
+  equippedEffects?: OngoingEffect[];
   consumedEffect?: ImmediateEffect;
   singleUse: boolean;
   slots: number;

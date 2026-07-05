@@ -5,7 +5,7 @@ import { Action } from "../../models/actions";
 
 export const Discharge: Action = {
   name: "Discharge",
-  effect: "Targets take 3 electric damage and are stunned.",
+  description: "Targets take 3 {{damage:electric}} damage and are stunned.",
   skillType: SkillType.Electric,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.Near,

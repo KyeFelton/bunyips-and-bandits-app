@@ -5,8 +5,8 @@ import { Action } from "../../models/actions";
 
 export const SummonBeast: Action = {
   name: "Summon beast",
-  effect:
-    "You call upon the spirit of dead animal that once roamed this land to aid you and your allies. The ghost of a large beast appears and performs a task for you. If attacking a foe, they deal 4 force damage.",
+  description:
+    "You call upon the spirit of dead animal that once roamed this land to aid you and your allies. The ghost of a large beast appears and performs a task for you. If attacking a foe, they deal 4 {{damage:force}} damage.",
   skillType: SkillType.Spirit,
   range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,

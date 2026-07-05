@@ -5,8 +5,8 @@ import { Action } from "../../models/actions";
 
 export const Incinerate: Action = {
   name: "Incinerate",
-  effect:
-    "You destroy your target with an incredibly hot fire. Your target takes 8 fire damage and catches fire. Metal instantly melts under the intense heat.",
+  description:
+    "You destroy your target with an incredibly hot fire. Your target takes 8 {{damage:fire}} damage and catches fire. Metal instantly melts under the intense heat.",
   skillType: SkillType.Pyro,
   range: Range.Close,
   areaOfEffect: AreaOfEffect.SingleTarget,

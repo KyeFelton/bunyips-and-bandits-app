@@ -5,7 +5,7 @@ import { Action } from "../../models/actions";
 
 export const Fireworks: Action = {
   name: "Fireworks",
-  effect:
+  description:
     "Fireworks shoot out in all directions to create chaos. Targets are stunned.",
   skillType: SkillType.Pyro,
   range: Range.Self,

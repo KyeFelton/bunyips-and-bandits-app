@@ -4,10 +4,7 @@ import { ItemType } from "../../enums/ItemType";
 export const SoothingHerb: Item = {
   name: "Soothing herb",
   consumedEffect: {
-    mind: 3,
-    condition: "Soothed",
-    custom:
-      "Grants the Soothed condition until your next rest. If you already have this condition and consume another, you take 2 damage.",
+    mind: 1,
   },
   singleUse: true,
   slots: 1,

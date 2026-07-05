@@ -5,7 +5,7 @@ import { Action } from "../../models/actions";
 
 export const Mimic: Action = {
   name: "Mimic",
-  effect:
+  description:
     "You change your voice to perfectly mimic that of another person, creature or object.",
   skillType: SkillType.Sonic,
   range: Range.Self,

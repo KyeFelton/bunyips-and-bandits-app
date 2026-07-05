@@ -3,8 +3,8 @@ import { ItemType } from "../../enums/ItemType";
 import { SkillType } from "../../enums/SkillType";
 import { WearType } from "../../enums/WearType";
 
-export const Disguise: Item = {
-  name: "Disguise",
+export const Cloak: Item = {
+  name: "Cloak",
   description:
     "An inconspicuous outfit with a concealed hood and reversible jacket, designed to help you blend in or disappear.",
   equippedEffects: [

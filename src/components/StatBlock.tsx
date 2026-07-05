@@ -1,6 +1,7 @@
 import { SpeedRating } from "../enums/SpeedRating";
 import { Difficulty, NpcStatBlock } from "../models/npc";
 import { cn } from "../utils/cn";
+import { RichDescription } from "./RichDescription";
 
 type Props = NpcStatBlock & {
   float?: "left" | "right";
@@ -146,7 +147,7 @@ export function StatBlock({
                   </span>
                 )}
                 {" — "}
-                {action.description}
+                <RichDescription text={action.description} />
               </p>
             ))}
           </div>

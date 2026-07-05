@@ -5,7 +5,8 @@ import { Action } from "../../models/actions";
 
 export const Brawl: Action = {
   name: "Brawl",
-  effect: "You strike your opponent with your fists to deal 1 force damage.",
+  description:
+    "You strike your opponent with your fists. Deal 1 {{damage:force}} damage.",
   skillType: SkillType.Strength,
   range: Range.Close,
   areaOfEffect: AreaOfEffect.SingleTarget,

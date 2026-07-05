@@ -5,7 +5,7 @@ import { InventoryStack } from "../models/items";
 import { resolveStack } from "../utils/items";
 import { AllSkillProgressions } from "../data/skillProgressions";
 import { AllBackgrounds } from "../data/backgrounds";
-import { Effect } from "../models/effect";
+import { OngoingEffect } from "../models/effect";
 import * as Skills from "../models/skills";
 import { Trait } from "../models/traits";
 import { Action } from "../models/actions";
@@ -185,7 +185,7 @@ export const effectsAtom = atom((get) => {
   const items = get(characterItemsAtom);
   const conditions = get(conditionsAtom);
   const traits = get(traitsAtom);
-  const effects: Effect[] = [];
+  const effects: OngoingEffect[] = [];
 
   // Collect effects from ancestry
   if (kin.ancestry.effects) {

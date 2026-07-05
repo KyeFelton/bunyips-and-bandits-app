@@ -10,7 +10,7 @@ import { Mirror } from "../items/Mirror";
 import { Rope } from "../items/Rope";
 import { SteelDagger } from "../items/SteelDagger";
 import { Torch } from "../items/Torch";
-import { WorkClothes } from "../items/WorkClothes";
+import { PlainClothes } from "../items/WorkClothes";
 
 export const Artisan: Background = {
   name: "Artisan",
@@ -22,11 +22,11 @@ export const Artisan: Background = {
   startingItems: [
     {
       name: "Blacksmith",
-      items: [WorkClothes, Hammer, IronSpikes, Torch],
+      items: [PlainClothes, Hammer, IronSpikes, Torch],
     },
     {
       name: "Woodworker",
-      items: [WorkClothes, Crowbar, Rope, FlintAndSteel],
+      items: [PlainClothes, Crowbar, Rope, FlintAndSteel],
     },
     {
       name: "Jeweller",

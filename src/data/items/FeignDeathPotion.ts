@@ -4,9 +4,8 @@ import { ItemType } from "../../enums/ItemType";
 export const FeignDeathPotion: Item = {
   name: "Feign death potion",
   consumedEffect: {
-    condition: "Feign Death",
     custom:
-      "Lasts 1hr. You appear dead to others but remain aware of your surroundings. For each additional potion you take within the same day, you take 1d4 toxic damage.",
+      "For 1 hour, you are unconscious and appear dead. You cannot take actions, but you remain aware of your surroundings.",
   },
   singleUse: true,
   slots: 1,

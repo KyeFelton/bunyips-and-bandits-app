@@ -10,7 +10,7 @@ import { SteelDagger } from "../items/SteelDagger";
 import { Torch } from "../items/Torch";
 import { TravellingClothes } from "../items/TravellingClothes";
 import { WoodenClub } from "../items/WoodenClub";
-import { WorkClothes } from "../items/WorkClothes";
+import { PlainClothes } from "../items/WorkClothes";
 
 export const Drifter: Background = {
   name: "Drifter",
@@ -20,17 +20,17 @@ export const Drifter: Background = {
   traits: [Trait],
   availableMoneyTiers: ["Poor"],
   startingItems: [
-      {
-        name: "Swagman",
-        items: [TravellingClothes, WoodenClub, Rations, Rope],
-      },
-      {
-        name: "Rover",
-        items: [TravellingClothes, SteelDagger, Torch, FlintAndSteel],
-      },
-      {
-        name: "Itinerant",
-        items: [WorkClothes, Crowbar, Rations, OilFlask],
-      },
-    ],
+    {
+      name: "Swagman",
+      items: [TravellingClothes, WoodenClub, Rations, Rope],
+    },
+    {
+      name: "Rover",
+      items: [TravellingClothes, SteelDagger, Torch, FlintAndSteel],
+    },
+    {
+      name: "Itinerant",
+      items: [PlainClothes, Crowbar, Rations, OilFlask],
+    },
+  ],
 };

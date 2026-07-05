@@ -3,10 +3,10 @@ import { ItemType } from "../../enums/ItemType";
 
 export const LovePotion: Item = {
   name: "Love potion",
+  description: "",
   consumedEffect: {
-    condition: "Infatuated",
     custom:
-      "When consumed, you must pass an extreme willpower check or gain the Infatuated condition with the first creature you see.",
+      "You must pass a hard willpower check or gain the Infatuated condition with the first creature you see.",
   },
   singleUse: true,
   slots: 1,

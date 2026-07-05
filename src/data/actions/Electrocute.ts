@@ -5,7 +5,7 @@ import { Action } from "../../models/actions";
 
 export const Electrocute: Action = {
   name: "Electrocute",
-  effect: "Target takes 10 electric damage and are stunned.",
+  description: "Target takes 10 {{damage:electric}} damage and are stunned.",
   skillType: SkillType.Electric,
   range: Range.Close,
   areaOfEffect: AreaOfEffect.SingleTarget,

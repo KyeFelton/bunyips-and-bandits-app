@@ -7,7 +7,7 @@ import { FirstAidKit } from "../items/FirstAidKit";
 import { Rope } from "../items/Rope";
 import { SoothingHerb } from "../items/SoothingHerb";
 import { TravellingClothes } from "../items/TravellingClothes";
-import { WorkClothes } from "../items/WorkClothes";
+import { PlainClothes } from "../items/WorkClothes";
 
 export const Medic: Background = {
   name: "Medic",
@@ -19,7 +19,7 @@ export const Medic: Background = {
   startingItems: [
     {
       name: "Field surgeon",
-      items: [WorkClothes, FirstAidKit, SoothingHerb, Antidote],
+      items: [PlainClothes, FirstAidKit, SoothingHerb, Antidote],
     },
     {
       name: "Frontier doctor",

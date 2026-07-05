@@ -5,7 +5,7 @@ import { Action } from "../../models/actions";
 
 export const Extinguish: Action = {
   name: "Extinguish",
-  effect:
+  description:
     "You dispel the heat of all nearby fires causing them to smother immediately.",
   skillType: SkillType.Pyro,
   range: Range.Self,

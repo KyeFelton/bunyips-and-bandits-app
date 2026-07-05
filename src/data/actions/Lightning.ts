@@ -5,7 +5,7 @@ import { Action } from "../../models/actions";
 
 export const Lightning: Action = {
   name: "Lightning",
-  effect: "Target takes 5 electric damage and are stunned.",
+  description: "Target takes 5 {{damage:electric}} damage and are stunned.",
   skillType: SkillType.Electric,
   range: Range.Near,
   areaOfEffect: AreaOfEffect.SingleTarget,

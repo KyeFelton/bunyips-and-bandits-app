@@ -5,7 +5,7 @@ import { Action } from "../../models/actions";
 
 export const Message: Action = {
   name: "Message",
-  effect:
+  description:
     "You send a telepathic message to creatures of your choosing within your psychic sense.",
   skillType: SkillType.Psychic,
   range: Range.Self,

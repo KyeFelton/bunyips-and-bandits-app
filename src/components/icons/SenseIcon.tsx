@@ -1,54 +1,34 @@
 import { Eye, Ear, Soup, Brain, ThermometerSun, Activity } from "lucide-react";
-import { cn } from "../../utils/cn";
 import { SenseType } from "../../enums/SenseType";
-
-interface IconProps {
-  className?: string;
-}
-
-const StandardSightIcon = ({ className }: IconProps) => (
-  <Eye className={cn("h-4 w-4", className)} />
-);
-
-const InfraredSightIcon = ({ className }: IconProps) => (
-  <ThermometerSun className={cn("h-4 w-4", className)} />
-);
-
-const StandardHearingIcon = ({ className }: IconProps) => (
-  <Ear className={cn("h-4 w-4", className)} />
-);
-
-const TremorHearingIcon = ({ className }: IconProps) => (
-  <Activity className={cn("h-4 w-4", className)} />
-);
-
-const SmellIcon = ({ className }: IconProps) => (
-  <Soup className={cn("h-4 w-4", className)} />
-);
-
-const PsychicSenseIcon = ({ className }: IconProps) => (
-  <Brain className={cn("h-4 w-4", className)} />
-);
+import { cn } from "../../utils/cn";
 
 type Props = {
   type: SenseType;
+  size?: number;
   className?: string;
+  showText?: boolean;
 };
 
-export const SenseIcon = ({ type, className = "" }: Props) => {
+export const SenseIcon = ({ type, size = 16, className = "" }: Props) => {
+  const props = {
+    className: cn("inline-flex align-text-text-bottom", className),
+    width: size,
+    height: size,
+  };
+
   switch (type) {
     case SenseType.Sight:
-      return <StandardSightIcon className={className} />;
+      return <Eye {...props} />;
     case SenseType.InfraredSight:
-      return <InfraredSightIcon className={className} />;
+      return <ThermometerSun {...props} />;
     case SenseType.Hearing:
-      return <StandardHearingIcon className={className} />;
+      return <Ear {...props} />;
     case SenseType.TremorHearing:
-      return <TremorHearingIcon className={className} />;
+      return <Activity {...props} />;
     case SenseType.Smell:
-      return <SmellIcon className={className} />;
+      return <Soup {...props} />;
     case SenseType.Psychic:
-      return <PsychicSenseIcon className={className} />;
+      return <Brain {...props} />;
     default:
       return null;
   }

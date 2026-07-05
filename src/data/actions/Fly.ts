@@ -5,7 +5,7 @@ import { Action } from "../../models/actions";
 
 export const Fly: Action = {
   name: "Fly",
-  effect: "You fly at a fast speed.",
+  description: "You fly at a fast speed.",
   skillType: SkillType.Kinetic,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.SingleTarget,

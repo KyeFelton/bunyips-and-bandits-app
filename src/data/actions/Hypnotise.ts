@@ -5,7 +5,7 @@ import { Action } from "../../models/actions";
 
 export const Hypnotise: Action = {
   name: "Hypnotise",
-  effect:
+  description:
     "You overpower the mind of your target and put them in a suggestive state. They are hypnotised by you and will obey your commands for the next turn.",
   skillType: SkillType.Psychic,
   range: Range.Near,

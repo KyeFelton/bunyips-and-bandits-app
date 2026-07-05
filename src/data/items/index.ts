@@ -30,7 +30,7 @@ import * as PortalStone from "./PortalStone";
 import { SteelPlateArmour } from "./SteelPlateArmour";
 import { WoodenClub } from "./WoodenClub";
 import { ChloroformAndCloth } from "./ChloroformAndCloth";
-import * as Psychedelic from "./Psychedelic";
+import { Psychedelic } from "./Psychedelic";
 import { SteelSpear } from "./SteelSpear";
 import { CrocodileScaleArmour } from "./CrocodileScaleArmour";
 import { LavastoneClub } from "./LavastoneClub";
@@ -55,7 +55,7 @@ import { Rations } from "./Rations";
 import { Rope } from "./Rope";
 import { Torch } from "./Torch";
 import { Didgeridoo } from "./Didgeridoo";
-import { Disguise } from "./Disguise";
+import { Cloak } from "./Disguise";
 import { DrumKit } from "./DrumKit";
 import { FineClothes } from "./FineClothes";
 import { Hammer } from "./Hammer";
@@ -69,7 +69,7 @@ import { TravellingClothes } from "./TravellingClothes";
 import { Violin } from "./Violin";
 import { WalkingStaff } from "./WalkingStaff";
 import { WoodcutterAxe } from "./WoodcutterAxe";
-import { WorkClothes } from "./WorkClothes";
+import { PlainClothes } from "./WorkClothes";
 import { BottleOfRum } from "./BottleOfRum";
 import { FishingNet } from "./FishingNet";
 import { Lantern } from "./Lantern";
@@ -131,7 +131,7 @@ export {
   Rope,
   Torch,
   Didgeridoo,
-  Disguise,
+  Cloak,
   DrumKit,
   FineClothes,
   Hammer,
@@ -145,7 +145,7 @@ export {
   Violin,
   WalkingStaff,
   WoodcutterAxe,
-  WorkClothes,
+  PlainClothes,
   BottleOfRum,
   FishingNet,
   Lantern,
@@ -162,7 +162,7 @@ export const AllItems: Item[] = [
   CrocodileScaleArmour,
   Crowbar,
   Didgeridoo,
-  Disguise,
+  Cloak,
   DjugiPoisonSac,
   DrumKit,
   DynamiteStick,
@@ -197,8 +197,7 @@ export const AllItems: Item[] = [
   PortalStone.SmallPortalStone,
   PortalStone.LargePortalStone,
   PrayerBeads,
-  Psychedelic.MildPsychedelic,
-  Psychedelic.StrongPsychedelic,
+  Psychedelic,
   RainbowScaleNecklace,
   Rations,
   Rope,
@@ -227,5 +226,5 @@ export const AllItems: Item[] = [
   WindstoneClub,
   WoodenClub,
   WoodcutterAxe,
-  WorkClothes,
+  PlainClothes,
 ];

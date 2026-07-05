@@ -5,7 +5,7 @@ import { Action } from "../../models/actions";
 
 export const Strike: Action = {
   name: "Strike",
-  effect: "You strike your opponent and deal your weapon's damage.",
+  description: "You strike your opponent and deal your weapon's damage.",
   skillType: SkillType.Martial,
   range: Range.Close,
   areaOfEffect: AreaOfEffect.SingleTarget,

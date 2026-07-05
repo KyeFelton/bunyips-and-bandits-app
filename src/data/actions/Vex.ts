@@ -5,7 +5,7 @@ import { Action } from "../../models/actions";
 
 export const Vex: Action = {
   name: "Vex",
-  effect:
+  description:
     "You overwhelm the mind of a near creature to perceive an illusion. They hallucinate for one turn. Describe the illusion that they perceive to the GM.",
   skillType: SkillType.Psychic,
   range: Range.Near,

@@ -22,7 +22,7 @@ export const ArmourStats = () => {
               className="flex items-center gap-1 text-muted-foreground text-sm"
             >
               <ArmourIcon type={type as DamageType} size={20} />
-              <span className={value < 0 ? "text-destructive" : ""}>
+              <span>
                 {type}: {value === 0 ? "-" : value}
               </span>
             </div>

@@ -7,7 +7,7 @@ import { Rations } from "../items/Rations";
 import { Rope } from "../items/Rope";
 import { Scythe } from "../items/Scythe";
 import { WoodenClub } from "../items/WoodenClub";
-import { WorkClothes } from "../items/WorkClothes";
+import { PlainClothes } from "../items/WorkClothes";
 
 export const Farmer: Background = {
   name: "Farmer",
@@ -17,17 +17,17 @@ export const Farmer: Background = {
   traits: [Trait],
   availableMoneyTiers: ["Poor", "Average"],
   startingItems: [
-      {
-        name: "Shearer",
-        items: [WorkClothes, Scythe, Rope, Rations],
-      },
-      {
-        name: "Drover",
-        items: [WorkClothes, WoodenClub, Rope, Rations],
-      },
-      {
-        name: "Homesteader",
-        items: [WorkClothes, Pitchfork, FlintAndSteel, Rations],
-      },
-    ],
+    {
+      name: "Shearer",
+      items: [PlainClothes, Scythe, Rope, Rations],
+    },
+    {
+      name: "Drover",
+      items: [PlainClothes, WoodenClub, Rope, Rations],
+    },
+    {
+      name: "Homesteader",
+      items: [PlainClothes, Pitchfork, FlintAndSteel, Rations],
+    },
+  ],
 };

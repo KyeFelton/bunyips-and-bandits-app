@@ -6,13 +6,13 @@ import { Input } from "../../../components/ui/input";
 import { WikiPage } from "../../../components/WikiPage";
 import { AllItems } from "../../../data/items";
 import { ItemType } from "../../../enums/ItemType";
-import { Effect } from "../../../models/effect";
+import { OngoingEffect } from "../../../models/effect";
 import { Item } from "../../../models/items";
 import { ItemIcon } from "../../../components/icons/ItemIcon";
 import { cn } from "../../../utils/cn";
 import { pascalToSentence } from "../../../utils/capitalize";
 
-function formatEquippedEffect(effect: Effect): string {
+function formatEquippedEffect(effect: OngoingEffect): string {
   if (effect.weapon) {
     const parts: string[] = [];
     if (effect.weapon.bonus) parts.push(`+${effect.weapon.bonus}`);

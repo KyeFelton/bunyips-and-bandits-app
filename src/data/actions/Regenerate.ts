@@ -5,7 +5,7 @@ import { Action } from "../../models/actions";
 
 export const Regenerate: Action = {
   name: "Regenerate",
-  effect: "Regain physical health equal to your biotic check.",
+  description: "Regain physical health equal to your biotic check.",
   skillType: SkillType.Biotic,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.SingleTarget,

@@ -73,16 +73,16 @@ export const DescriptionPanel = () => {
 
           <div>
             <div className="text-sm font-medium text-muted-foreground mb-1">
-              Size
+              Background
             </div>
-            <div className="text-sm">{kin.species.size || "-"}</div>
+            <div className="text-sm">{background || "-"}</div>
           </div>
 
           <div>
             <div className="text-sm font-medium text-muted-foreground mb-1">
-              Background
+              Size
             </div>
-            <div className="text-sm">{background || "-"}</div>
+            <div className="text-sm">{kin.species.size || "-"}</div>
           </div>
         </div>
 

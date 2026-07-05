@@ -5,7 +5,7 @@ import { Action } from "../../models/actions";
 
 export const Sweep: Action = {
   name: "Sweep",
-  effect:
+  description:
     "You melee attack all targets who are close to you. They take your weapon's damage.",
   skillType: SkillType.Strength,
   range: Range.Self,

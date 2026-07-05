@@ -2,8 +2,8 @@ import { Item } from "../../models/items";
 import { ItemType } from "../../enums/ItemType";
 import { WearType } from "../../enums/WearType";
 
-export const WorkClothes: Item = {
-  name: "Work clothes",
+export const PlainClothes: Item = {
+  name: "Plain clothes",
   description:
     "Sturdy, hard-wearing clothes built to withstand a day of hard labour.",
   singleUse: false,

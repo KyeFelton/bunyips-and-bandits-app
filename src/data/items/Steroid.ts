@@ -1,12 +1,13 @@
 import { Item } from "../../models/items";
 import { ItemType } from "../../enums/ItemType";
+import { StrengthBoost } from "../../models/conditions";
 
 export const Steroid: Item = {
   name: "Steroid",
   consumedEffect: {
-    condition: "Steroid Boost",
+    condition: StrengthBoost.name,
     custom:
-      "+1 bonus to strength and agility checks until your next rest. If you already have this condition and consume another, you also take 2 damage. At most three Steroid Boost conditions can be active at one time.",
+      "If you have already consumed a steroid since your last rest, take 1 damage.",
   },
   singleUse: true,
   slots: 1,

@@ -3,46 +3,132 @@ import {
   actionsAtom,
   currentStaminaAtom,
   skillRollValuesAtom,
-} from "./../state/character";
-import { AreaOfEffect } from "./../enums/AreaOfEffect";
-import { Range } from "./../enums/Range";
-import { Action } from "./../models/actions";
-import { Brawl } from "./../data/actions/Brawl";
-import { Dash } from "./../data/actions/Dash";
-import { Badge } from "./ui/badge";
+} from "../state/character";
+import { AreaOfEffect } from "../enums/AreaOfEffect";
+import { Range } from "../enums/Range";
+import { Action } from "../models/actions";
+import { ImmediateEffect } from "../models/effect";
+import { Brawl } from "../data/actions/Brawl";
+import { Dash } from "../data/actions/Dash";
 import { Button } from "./ui/button";
+import { ActionAttributeIconType, ActionIcons } from "./icons/ActionIcons";
 import { SkillIcon } from "./icons/SkillIcon";
+import { RichDescription } from "./RichDescription";
 import { useRollToast } from "./RollToast";
 
+type ActionAttributeProps = {
+  icon?: ActionAttributeIconType;
+  label?: string;
+  value: string;
+};
+
+const ActionAttribute = ({ icon, label, value }: ActionAttributeProps) => (
+  <div className="flex items-center text-muted-foreground text-sm">
+    {icon ? (
+      <>
+        <ActionIcons type={icon} showText />:
+        <span className="ml-1 text-foreground">{value}</span>
+      </>
+    ) : (
+      <>
+        {label && <span>{label}:</span>}
+        <span className="ml-1 text-foreground">{value}</span>
+      </>
+    )}
+  </div>
+);
+
+const formatBonus = (bonus: number) => (bonus >= 0 ? `+${bonus}` : `${bonus}`);
+
+const immediateEffectLabels = (effect: ImmediateEffect): string[] => {
+  const labels: string[] = [];
+  if (effect.custom) labels.push(effect.custom);
+  if (effect.body !== undefined)
+    labels.push(`${formatBonus(effect.body)} Body`);
+  if (effect.mind !== undefined)
+    labels.push(`${formatBonus(effect.mind)} Mind`);
+  if (effect.stamina !== undefined)
+    labels.push(`${formatBonus(effect.stamina)} Stamina`);
+  if (effect.condition) labels.push(`Applies condition: ${effect.condition}`);
+  return labels;
+};
+
+const hasStaminaCost = (action: Action) =>
+  action.staminaCost === "variable" ||
+  (typeof action.staminaCost === "number" && action.staminaCost !== 0);
+
+const formatStaminaCost = (action: Action) =>
+  action.staminaCost === "variable"
+    ? "X stamina"
+    : `${action.staminaCost} stamina`;
+
+const getRollValue = (
+  action: Action,
+  skillRollValues: ReturnType<typeof useAtomValue<typeof skillRollValuesAtom>>,
+) => {
+  if (!action.skillType) return null;
+  const roll = skillRollValues[action.skillType];
+  if (roll.dice === 0) return null;
+  return roll.modifier !== 0
+    ? `d${roll.dice} ${roll.modifier > 0 ? "+" : ""}${roll.modifier}`
+    : `d${roll.dice}`;
+};
+
+const getButtonContent = (
+  action: Action,
+  skillRollValues: ReturnType<typeof useAtomValue<typeof skillRollValuesAtom>>,
+) => {
+  const roll = getRollValue(action, skillRollValues);
+  if (roll) return roll;
+
+  if (hasStaminaCost(action)) return formatStaminaCost(action);
+
+  const effectLabels =
+    action.effectsToSelf?.flatMap(immediateEffectLabels) ?? [];
+  if (effectLabels.length > 0) return effectLabels.join(", ");
+
+  return null;
+};
+
+const shouldShowButton = (
+  action: Action,
+  skillRollValues: ReturnType<typeof useAtomValue<typeof skillRollValuesAtom>>,
+) =>
+  getRollValue(action, skillRollValues) !== null ||
+  hasStaminaCost(action) ||
+  (action.effectsToSelf?.length ?? 0) > 0;
+
 const ActionTags = ({ action }: { action: Action }) => {
-  const tags: string[] = [];
-
-  if (action.range !== Range.Self) {
-    tags.push(`${action.range} range`);
-  }
-
-  if (action.areaOfEffect !== AreaOfEffect.SingleTarget) {
-    tags.push(`${action.areaOfEffect} area`);
-  }
-
-  if (action.staminaCost !== 0) {
-    const label =
-      action.staminaCost === "variable"
-        ? "X stamina"
-        : `${action.staminaCost} stamina`;
-    tags.push(label);
-  }
-
-  if (action.duration) {
-    tags.push(action.duration);
-  }
+  const effectLabels =
+    action.effectsToSelf?.flatMap(immediateEffectLabels) ?? [];
 
   return (
-    <div className="flex flex-wrap gap-1">
-      {tags.map((label) => (
-        <Badge key={label} variant="secondary">
-          {label}
-        </Badge>
+    <div className="flex flex-wrap gap-x-8 gap-y-3">
+      {action.range !== Range.Self && (
+        <ActionAttribute icon="range" value={action.range} />
+      )}
+
+      {action.areaOfEffect !== AreaOfEffect.SingleTarget && (
+        <ActionAttribute icon="area" value={action.areaOfEffect} />
+      )}
+
+      {hasStaminaCost(action) && (
+        <ActionAttribute
+          icon="stamina"
+          value={
+            action.staminaCost === "variable"
+              ? "variable"
+              : String(action.staminaCost)
+          }
+        />
+      )}
+
+      {action.duration && (
+        <ActionAttribute icon="duration" value={action.duration} />
+      )}
+
+      {effectLabels.map((label) => (
+        <ActionAttribute key={label} label="effect" value={label} />
       ))}
     </div>
   );
@@ -83,53 +169,49 @@ export const ActionsList = () => {
 
   return (
     <div className="divide-y divide-border">
-      {actions.map((action) => (
-        <div key={action.name} className="p-4 space-y-2">
-          {/* Header: name + tags */}
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <div className="font-semibold">{action.name}</div>
-            <ActionTags action={action} />
+      {actions.map((action) => {
+        const buttonContent = getButtonContent(action, skillRollValues);
+        const showButton = shouldShowButton(action, skillRollValues);
+
+        return (
+          <div key={action.name} className="space-y-2 p-4">
+            {/* Header: name + tags */}
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="font-semibold">{action.name}</div>
+              {action.skillType && (
+                <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                  <SkillIcon type={action.skillType} />
+                  <span>{action.skillType}</span>
+                </div>
+              )}
+            </div>
+            <div className="">
+              <ActionTags action={action} />
+            </div>
+
+            {/* Description + perform */}
+            <div className="flex items-start gap-4">
+              <p className="min-w-0 flex-1 text-sm">
+                <RichDescription text={action.description} />
+              </p>
+              {showButton && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="shrink-0"
+                  onClick={() => handlePerformAction(action)}
+                  disabled={
+                    typeof action.staminaCost === "number" &&
+                    stamina < action.staminaCost
+                  }
+                >
+                  {buttonContent}
+                </Button>
+              )}
+            </div>
           </div>
-
-          {/* Skill */}
-          {action.skillType && (() => {
-            const roll = skillRollValues[action.skillType];
-            const rollLabel = roll.dice === 0
-              ? "No dice"
-              : roll.modifier !== 0
-                ? `d${roll.dice} ${roll.modifier > 0 ? "+" : ""}${roll.modifier}`
-                : `d${roll.dice}`;
-            return (
-              <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-                <SkillIcon type={action.skillType} />
-                <span>{action.skillType}</span>
-                <span className="text-muted-foreground/60">·</span>
-                <span>{rollLabel}</span>
-              </div>
-            );
-          })()}
-
-          {/* Description */}
-          <p className="text-sm">{action.effect}</p>
-
-          {/* Perform */}
-          <div className="pt-1">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => handlePerformAction(action)}
-              disabled={
-                (typeof action.staminaCost === "number" &&
-                  stamina < action.staminaCost) ||
-                (action.skillType &&
-                  skillRollValues[action.skillType].dice === 0)
-              }
-            >
-              Perform
-            </Button>
-          </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };

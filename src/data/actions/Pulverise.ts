@@ -5,8 +5,8 @@ import { Action } from "../../models/actions";
 
 export const Pulverise: Action = {
   name: "Pulverise",
-  effect:
-    "You pulverise your target with powerful shockwaves to deal 8 force damage.",
+  description:
+    "You pulverise your target with powerful shockwaves to deal 8 {{damage:force}} damage.",
   skillType: SkillType.Sonic,
   range: Range.Close,
   areaOfEffect: AreaOfEffect.SingleTarget,

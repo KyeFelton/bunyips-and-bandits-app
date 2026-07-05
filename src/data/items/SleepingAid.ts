@@ -1,12 +1,13 @@
 import { Item } from "../../models/items";
 import { ItemType } from "../../enums/ItemType";
+import { Sleeping } from "../../models/conditions";
 
 export const SleepingAid: Item = {
   name: "Sleeping aid",
   consumedEffect: {
-    condition: "Sleeping",
+    condition: Sleeping.name,
     custom:
-      "When consumed, you must pass an extreme willpower check or gain the Sleeping condition for 1hr. Can also be consumed in small doses to relieve pain.",
+      "You must pass a hard willpower check or gain the Sleeping condition for 1hr.",
   },
   singleUse: true,
   slots: 1,

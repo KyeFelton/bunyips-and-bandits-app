@@ -5,8 +5,8 @@ import { Action } from "../../models/actions";
 
 export const Inferno: Action = {
   name: "Inferno",
-  effect:
-    "You unleash a sudden explosion of fire that leads devastation in its wake. All targets around you take 5 fire damage, catch fire, and are blinded for one round.",
+  description:
+    "You unleash a sudden explosion of fire that leads devastation in its wake. All targets around you take 5 {{damage:fire}} damage, catch fire, and lose {{sense:sight}} for one round.",
   skillType: SkillType.Pyro,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.Near,

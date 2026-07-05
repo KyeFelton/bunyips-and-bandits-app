@@ -2,7 +2,7 @@ import { Background } from "../../models/backgrounds";
 import { SkillType } from "../../enums/SkillType";
 import { Spy as Trait } from "../traits/Spy";
 import { ChloroformAndCloth } from "../items/ChloroformAndCloth";
-import { Disguise } from "../items/Disguise";
+import { Cloak } from "../items/Disguise";
 import { Mirror } from "../items/Mirror";
 import { SmokeBomb } from "../items/SmokeBomb";
 import { SteelDagger } from "../items/SteelDagger";
@@ -18,7 +18,7 @@ export const Spy: Background = {
   startingItems: [
     {
       name: "Intelligence agent",
-      items: [Disguise, SteelDagger, SmokeBomb],
+      items: [Cloak, SteelDagger, SmokeBomb],
     },
     {
       name: "Private investigator",

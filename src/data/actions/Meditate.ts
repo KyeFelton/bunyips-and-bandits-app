@@ -4,7 +4,7 @@ import { Action } from "../../models/actions";
 
 export const Meditate: Action = {
   name: "Meditate",
-  effect:
+  description:
     "Once per day when out of combat, you can meditate for 10min to fully restore your mind health. If your allies join the meditation, their minds restore 2 health.",
   range: Range.Self,
   areaOfEffect: AreaOfEffect.SingleTarget,

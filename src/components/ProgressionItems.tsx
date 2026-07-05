@@ -1,4 +1,5 @@
 import { Badge } from "./ui/badge";
+import { RichDescription } from "./RichDescription";
 import { Action } from "../models/actions";
 import { Trait } from "../models/traits";
 
@@ -45,7 +46,9 @@ export function ProgressionItems({ level, actions, traits }: Props) {
                   </span>
                 )}
               </div>
-              <p className="text-sm text-muted-foreground">{action.effect}</p>
+              <p className="text-sm text-muted-foreground">
+                <RichDescription text={action.description} />
+              </p>
               <div className="flex flex-wrap gap-2">
                 {action.range !== "Self" && (
                   <Badge variant="outline" className="text-xs">

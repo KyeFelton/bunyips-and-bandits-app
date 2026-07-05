@@ -2,7 +2,7 @@ import { Background } from "../../models/backgrounds";
 import { SkillType } from "../../enums/SkillType";
 import { Bandit as Trait } from "../traits/Bandit";
 import { Caltrops } from "../items/Caltrops";
-import { Disguise } from "../items/Disguise";
+import { Cloak } from "../items/Disguise";
 import { KangarooHideArmour } from "../items/KangarooHideArmour";
 import { Rope } from "../items/Rope";
 import { SmokeBomb } from "../items/SmokeBomb";
@@ -20,7 +20,7 @@ export const Bandit: Background = {
   startingItems: [
     {
       name: "Bushranger",
-      items: [Disguise, WoodenClub, SmokeBomb, Rope],
+      items: [Cloak, WoodenClub, SmokeBomb, Rope],
     },
     {
       name: "Pickpocket",

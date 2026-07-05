@@ -8,7 +8,7 @@ export type StatModifier = {
   multiplier?: number;
 };
 
-export type Effect = {
+export type OngoingEffect = {
   actions?: StatModifier;
   armour?: StatModifier & {
     damageType: DamageType;
@@ -30,5 +30,22 @@ export type Effect = {
   weapon?: StatModifier & {
     damageType?: DamageType;
   };
+  custom?: string;
+};
+
+export type ImmediateEffect = {
+  body?: number;
+  condition?: string;
+  mind?: number;
+  stamina?: number;
+  custom?: string;
+};
+
+export type InflictedEffect = {
+  damage?: {
+    damageType: DamageType;
+    amount: number;
+  };
+  condition?: string;
   custom?: string;
 };

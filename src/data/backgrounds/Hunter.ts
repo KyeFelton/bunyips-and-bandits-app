@@ -3,7 +3,7 @@ import { SkillType } from "../../enums/SkillType";
 import { Hunter as Trait } from "../traits/Hunter";
 import { Boomerang } from "../items/Boomerang";
 import { Caltrops } from "../items/Caltrops";
-import { Disguise } from "../items/Disguise";
+import { Cloak } from "../items/Disguise";
 import { HuntingKnife } from "../items/HuntingKnife";
 import { IronSpikes } from "../items/IronSpikes";
 import { Rope } from "../items/Rope";
@@ -18,17 +18,17 @@ export const Hunter: Background = {
   traits: [Trait],
   availableMoneyTiers: ["Poor", "Average"],
   startingItems: [
-      {
-        name: "Tracker",
-        items: [TravellingClothes, HuntingKnife, Rope, Torch],
-      },
-      {
-        name: "Ranger",
-        items: [Disguise, HuntingKnife, Boomerang, Rope],
-      },
-      {
-        name: "Trapper",
-        items: [TravellingClothes, HuntingKnife, IronSpikes, Caltrops],
-      },
-    ],
+    {
+      name: "Tracker",
+      items: [TravellingClothes, HuntingKnife, Rope, Torch],
+    },
+    {
+      name: "Ranger",
+      items: [Cloak, HuntingKnife, Boomerang, Rope],
+    },
+    {
+      name: "Trapper",
+      items: [TravellingClothes, HuntingKnife, IronSpikes, Caltrops],
+    },
+  ],
 };

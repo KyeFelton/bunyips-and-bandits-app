@@ -5,8 +5,8 @@ import { Action } from "../../models/actions";
 
 export const Gust: Action = {
   name: "Gust",
-  effect:
-    "You manifest a large gust of wind. Targets lose their sight and smell for one round and must pass a moderate strength check otherwise be pushed back a close distance.",
+  description:
+    "You manifest a large gust of wind. Targets lose {{sense:sight}} and {{sense:smell}} for one round and must pass a moderate strength check otherwise be pushed back a close distance.",
   skillType: SkillType.Kinetic,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.Near,

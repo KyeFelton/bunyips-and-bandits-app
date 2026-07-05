@@ -5,8 +5,8 @@ import { Action } from "../../models/actions";
 
 export const Attract: Action = {
   name: "Attract",
-  effect:
-    "Your body turns into a super magnet that attracts magnetic metals. Nearby, unsecured metal objects are pulled towards you.",
+  description:
+    "Your body turns into a super magnet. Nearby, unsecured steel objects are pulled towards you.",
   skillType: SkillType.Electric,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.Near,

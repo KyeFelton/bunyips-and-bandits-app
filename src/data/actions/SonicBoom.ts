@@ -5,8 +5,8 @@ import { Action } from "../../models/actions";
 
 export const SonicBoom: Action = {
   name: "Sonic boom",
-  effect:
-    "You blast your surroundings with compressed air. Near creatures take 3 force damage and are deafened for one round and stunned. They must also pass a hard strength check otherwise be pushed back a close distance. If performed inside a small, enclosed room, then deal an additional 1 force damage.",
+  description:
+    "You blast your surroundings with compressed air. Near creatures take 3 {{damage:force}} damage, lose {{sense:hearing}} for one round, and are stunned. They must also pass a hard strength check otherwise be pushed back a close distance. If performed inside a small, enclosed room, then deal an additional 1 {{damage:force}} damage.",
   skillType: SkillType.Sonic,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.Near,

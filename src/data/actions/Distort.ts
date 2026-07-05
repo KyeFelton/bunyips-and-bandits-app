@@ -5,7 +5,7 @@ import { Action } from "../../models/actions";
 
 export const Distort: Action = {
   name: "Distort",
-  effect:
+  description:
     "You manipulate the noises of your target to make them sound different. The illusion lasts until your next turn.",
   skillType: SkillType.Sonic,
   range: Range.Near,

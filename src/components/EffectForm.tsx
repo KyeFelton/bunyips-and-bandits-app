@@ -1,4 +1,4 @@
-import { Effect } from "../models/effect";
+import { OngoingEffect } from "../models/effect";
 import { DamageType } from "../enums/DamageType";
 import { Locomotion } from "../enums/Locomotion";
 import { SkillType } from "../enums/SkillType";
@@ -15,11 +15,11 @@ import { Button } from "./ui/button";
 import { Plus, X } from "lucide-react";
 
 type Props = {
-  effects: Effect[];
-  onChange: (effects: Effect[]) => void;
+  effects: OngoingEffect[];
+  onChange: (effects: OngoingEffect[]) => void;
 };
 
-type EffectType = keyof Effect;
+type EffectType = keyof OngoingEffect;
 
 const EffectTypeLabels: Record<EffectType, string> = {
   actions: "Actions",
@@ -35,7 +35,7 @@ const EffectTypeLabels: Record<EffectType, string> = {
 };
 
 export const EffectForm = ({ effects, onChange }: Props) => {
-  const getDefaultEffect = (type: EffectType): Effect => {
+  const getDefaultEffect = (type: EffectType): OngoingEffect => {
     switch (type) {
       case "actions":
       case "body":
@@ -89,7 +89,7 @@ export const EffectForm = ({ effects, onChange }: Props) => {
     onChange(newEffects);
   };
 
-  const handleUpdateEffect = (index: number, updatedEffect: Effect) => {
+  const handleUpdateEffect = (index: number, updatedEffect: OngoingEffect) => {
     const newEffects = [...effects];
     newEffects[index] = updatedEffect;
     onChange(newEffects);
@@ -98,7 +98,7 @@ export const EffectForm = ({ effects, onChange }: Props) => {
   return (
     <div className="space-y-2">
       {effects.map((effect, index) => {
-        const effectType = Object.keys(effect)[0] as keyof Effect;
+        const effectType = Object.keys(effect)[0] as keyof OngoingEffect;
         const effectValue = effect[effectType];
         if (!effectType || !effectValue) return null;
         return (

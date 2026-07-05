@@ -5,8 +5,8 @@ import { Action } from "../../models/actions";
 
 export const Shriek: Action = {
   name: "Shriek",
-  effect:
-    "You make an earsplitting sound that deafens for one round and stuns near creatures with hearing sense. Glass and other fragile materials instantly shatter.",
+  description:
+    "You make an earsplitting sound that causes targets to lose {{sense:hearing}} for one round and stuns near creatures with {{sense:hearing}} sense. Glass and other fragile materials instantly shatter.",
   skillType: SkillType.Sonic,
   range: Range.Near,
   areaOfEffect: AreaOfEffect.Near,

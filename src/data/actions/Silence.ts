@@ -5,7 +5,7 @@ import { Action } from "../../models/actions";
 
 export const Silence: Action = {
   name: "Silence",
-  effect:
+  description:
     "You soften all vibrations around you, making you and adjacent allies silent.",
   skillType: SkillType.Sonic,
   range: Range.Self,

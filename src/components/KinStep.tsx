@@ -238,22 +238,22 @@ export const KinStep = () => {
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
               {[
-                { type: SenseType.Sight, label: "Sight" },
-                { type: SenseType.InfraredSight, label: "Infradanger" },
-                { type: SenseType.Hearing, label: "Hearing" },
-                { type: SenseType.TremorHearing, label: "Tremor" },
-                { type: SenseType.Smell, label: "Smell" },
+                SenseType.Sight,
+                SenseType.InfraredSight,
+                SenseType.Hearing,
+                SenseType.TremorHearing,
+                SenseType.Smell,
               ]
                 .filter(
-                  ({ type }) =>
+                  (type) =>
                     kin.species.senses.keen.includes(type) ||
                     kin.species.senses.poor.includes(type),
                 )
-                .map(({ type, label }) => (
+                .map((type) => (
                   <div key={type} className="flex items-center gap-4">
                     <SenseIcon type={type} />
                     <div>
-                      <div className="text-sm font-medium">{label}</div>
+                      <div className="text-sm font-medium">{type}</div>
                       <div>
                         {kin.species.senses.keen.includes(type)
                           ? "Keen"

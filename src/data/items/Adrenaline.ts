@@ -2,11 +2,9 @@ import { Item } from "../../models/items";
 import { ItemType } from "../../enums/ItemType";
 
 export const Adrenaline: Item = {
-  name: "Adrenaline Shot",
+  name: "Adrenaline shot",
   consumedEffect: {
-    stamina: 5,
-    condition: "Adrenaline Rush",
-    custom: "Each additional use deals 2 damage.",
+    stamina: 2,
   },
   singleUse: true,
   slots: 1,

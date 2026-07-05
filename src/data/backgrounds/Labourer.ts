@@ -10,7 +10,7 @@ import { Rope } from "../items/Rope";
 import { SteelDagger } from "../items/SteelDagger";
 import { TravellingClothes } from "../items/TravellingClothes";
 import { WoodcutterAxe } from "../items/WoodcutterAxe";
-import { WorkClothes } from "../items/WorkClothes";
+import { PlainClothes } from "../items/WorkClothes";
 
 export const Labourer: Background = {
   name: "Labourer",
@@ -20,17 +20,17 @@ export const Labourer: Background = {
   traits: [Trait],
   availableMoneyTiers: ["Poor"],
   startingItems: [
-      {
-        name: "Miner",
-        items: [WorkClothes, Pickaxe, OilFlask, Lantern, BottleOfRum],
-      },
-      {
-        name: "Logger",
-        items: [WorkClothes, WoodcutterAxe, Rope, BottleOfRum],
-      },
-      {
-        name: "Sailor",
-        items: [TravellingClothes, FishingNet, Rope, SteelDagger, BottleOfRum],
-      },
-    ],
+    {
+      name: "Miner",
+      items: [PlainClothes, Pickaxe, OilFlask, Lantern, BottleOfRum],
+    },
+    {
+      name: "Logger",
+      items: [PlainClothes, WoodcutterAxe, Rope, BottleOfRum],
+    },
+    {
+      name: "Sailor",
+      items: [TravellingClothes, FishingNet, Rope, SteelDagger, BottleOfRum],
+    },
+  ],
 };

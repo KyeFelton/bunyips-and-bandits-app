@@ -5,8 +5,8 @@ import { Action } from "../../models/actions";
 
 export const Cyclone: Action = {
   name: "Cyclone",
-  effect:
-    "You bombard an area with rapid winds. Targets lose their sense of smell for one round. Any creature that attempts to move through or throw an object must pass a hard strength check to succeed.",
+  description:
+    "A storm rages around you. Targets lose {{sense:smell}} for one round. Any creature that attempts to move through or throw an object must pass a hard strength check to succeed.",
   skillType: SkillType.Kinetic,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.Far,

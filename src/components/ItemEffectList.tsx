@@ -1,11 +1,10 @@
 import { DamageType } from "../enums/DamageType";
 import { SenseType } from "../enums/SenseType";
 import { SkillType } from "../enums/SkillType";
-import { Effect } from "../models/effect";
-import { ImmediateEffect } from "../models/items";
+import { OngoingEffect, ImmediateEffect } from "../models/effect";
 
 type Props = {
-  equippedEffects?: Effect[];
+  equippedEffects?: OngoingEffect[];
   consumedEffect?: ImmediateEffect;
   inline?: boolean;
 };
@@ -27,7 +26,7 @@ const groupByBonus = <T extends string>(
   return map;
 };
 
-const groupArmourEffects = (effects: Effect[]): string[] => {
+const groupArmourEffects = (effects: OngoingEffect[]): string[] => {
   const entries = effects
     .filter((e) => e.armour?.bonus !== undefined)
     .map((e) => ({ bonus: e.armour!.bonus!, label: e.armour!.damageType }));
@@ -37,7 +36,7 @@ const groupArmourEffects = (effects: Effect[]): string[] => {
   );
 };
 
-const groupSkillEffects = (effects: Effect[]): string[] => {
+const groupSkillEffects = (effects: OngoingEffect[]): string[] => {
   const entries = effects
     .filter((e) => e.skill?.bonus !== undefined)
     .map((e) => ({ bonus: e.skill!.bonus!, label: e.skill!.skillType }));
@@ -54,7 +53,7 @@ const STAT_LABELS: Record<StatKey, string> = {
   stamina: "Stamina",
 };
 
-const groupStatEffects = (effects: Effect[]): string[] => {
+const groupStatEffects = (effects: OngoingEffect[]): string[] => {
   const entries: { bonus: number; label: string }[] = [];
   for (const effect of effects) {
     for (const key of ["body", "mind", "stamina"] as StatKey[]) {
@@ -67,7 +66,7 @@ const groupStatEffects = (effects: Effect[]): string[] => {
   );
 };
 
-const groupSenseEffects = (effects: Effect[]): string[] => {
+const groupSenseEffects = (effects: OngoingEffect[]): string[] => {
   const gained: SenseType[] = [];
   const lost: SenseType[] = [];
   for (const effect of effects) {
@@ -80,7 +79,7 @@ const groupSenseEffects = (effects: Effect[]): string[] => {
   return labels;
 };
 
-const groupSpeedEffects = (effects: Effect[]): string[] => {
+const groupSpeedEffects = (effects: OngoingEffect[]): string[] => {
   const increased: string[] = [];
   const decreased: string[] = [];
   for (const effect of effects) {
@@ -98,7 +97,7 @@ const groupSpeedEffects = (effects: Effect[]): string[] => {
   return labels;
 };
 
-const remainingEffectToLabel = (effect: Effect): string | null => {
+const remainingEffectToLabel = (effect: OngoingEffect): string | null => {
   if (effect.custom) return effect.custom;
   if (
     effect.armour ||
@@ -148,7 +147,7 @@ const consumedEffectLabels = (effect: ImmediateEffect): string[] => {
 };
 
 export const buildEffectLabels = (
-  equippedEffects?: Effect[],
+  equippedEffects?: OngoingEffect[],
   consumedEffect?: ImmediateEffect,
 ): string[] => {
   const effects = equippedEffects ?? [];

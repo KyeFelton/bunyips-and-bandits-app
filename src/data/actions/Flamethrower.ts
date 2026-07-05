@@ -5,8 +5,8 @@ import { Action } from "../../models/actions";
 
 export const Flamethrower: Action = {
   name: "Flamethrower",
-  effect:
-    "Fire erupts from your body, engulfing your target in flames and dealing 3 fire damage and catches fire.",
+  description:
+    "Fire erupts from your body, engulfing your target in flames and dealing 3 {{damage:fire}} damage and catches fire.",
   skillType: SkillType.Pyro,
   range: Range.Close,
   areaOfEffect: AreaOfEffect.SingleTarget,

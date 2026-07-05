@@ -8,7 +8,7 @@ import { SoothingHerb } from "../items/SoothingHerb";
 import { SteelSword } from "../items/SteelSword";
 import { Torch } from "../items/Torch";
 import { WalkingStaff } from "../items/WalkingStaff";
-import { WorkClothes } from "../items/WorkClothes";
+import { PlainClothes } from "../items/WorkClothes";
 
 export const Leader: Background = {
   name: "Leader",
@@ -28,7 +28,7 @@ export const Leader: Background = {
     },
     {
       name: "Foreman",
-      items: [WorkClothes, WalkingStaff, Rope, Torch],
+      items: [PlainClothes, WalkingStaff, Rope, Torch],
     },
   ],
 };

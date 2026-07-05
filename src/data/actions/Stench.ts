@@ -5,8 +5,8 @@ import { Action } from "../../models/actions";
 
 export const Stench: Action = {
   name: "Stench",
-  effect:
-    "A horrendous stench radiates from your body. Nearby targets lose their sense of smell for one round and are stunned.",
+  description:
+    "A horrendous stench radiates from your body. Nearby targets lose {{sense:smell}} for one round and are stunned.",
   skillType: SkillType.Biotic,
   range: Range.Self,
   areaOfEffect: AreaOfEffect.Near,
