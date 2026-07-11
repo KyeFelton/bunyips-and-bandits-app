@@ -14,7 +14,7 @@ import { Button } from "./ui/button";
 import { ActionAttributeIconType, ActionIcon } from "./icons/ActionIcon";
 import { SkillIcon } from "./icons/SkillIcon";
 import { RichDescription } from "./RichDescription";
-import { useRollToast } from "./RollToast";
+import { RollButton } from "./RollButton";
 
 type ActionAttributeProps = {
   icon?: ActionAttributeIconType;
@@ -90,14 +90,6 @@ const getButtonContent = (
   return null;
 };
 
-const shouldShowButton = (
-  action: Action,
-  skillRollValues: ReturnType<typeof useAtomValue<typeof skillRollValuesAtom>>,
-) =>
-  getRollValue(action, skillRollValues) !== null ||
-  hasStaminaCost(action) ||
-  (action.effectsToSelf?.length ?? 0) > 0;
-
 const ActionTags = ({ action }: { action: Action }) => {
   const effectLabels =
     action.effectsToSelf?.flatMap(immediateEffectLabels) ?? [];
@@ -138,7 +130,6 @@ export const ActionsList = () => {
   const unlockedActions = useAtomValue(actionsAtom);
   const [stamina, setStamina] = useAtom(currentStaminaAtom);
   const skillRollValues = useAtomValue(skillRollValuesAtom);
-  const showRollToast = useRollToast();
 
   const basicActions: Action[] = [Brawl, Dash];
 
@@ -152,26 +143,26 @@ export const ActionsList = () => {
 
     if (stamina >= staminaCost) {
       setStamina(stamina - staminaCost);
-
-      if (action.skillType) {
-        const rollValues = skillRollValues[action.skillType];
-        showRollToast({
-          name: `${action.name} (${action.skillType})`,
-          type: action.skillType,
-          dice: rollValues.dice,
-          modifier: rollValues.modifier,
-          hasAdvantage: rollValues.hasAdvantage,
-          hasDisadvantage: rollValues.hasDisadvantage,
-        });
-      }
     }
   };
 
   return (
     <div className="divide-y divide-border">
       {actions.map((action) => {
+        const rollValue = action.skillType
+          ? getRollValue(action, skillRollValues)
+          : null;
+        const showRollButton = rollValue !== null;
+        const showPerformButton =
+          !showRollButton &&
+          (hasStaminaCost(action) || (action.effectsToSelf?.length ?? 0) > 0);
         const buttonContent = getButtonContent(action, skillRollValues);
-        const showButton = shouldShowButton(action, skillRollValues);
+        const rollValues = action.skillType
+          ? skillRollValues[action.skillType]
+          : null;
+        const staminaDisabled =
+          typeof action.staminaCost === "number" &&
+          stamina < action.staminaCost;
 
         return (
           <div key={action.name} className="space-y-2 p-4">
@@ -194,16 +185,25 @@ export const ActionsList = () => {
               <p className="min-w-0 flex-1 text-sm">
                 <RichDescription text={action.description} />
               </p>
-              {showButton && (
+              {showRollButton && rollValues && action.skillType && (
+                <RollButton
+                  name={`${action.name} (${action.skillType})`}
+                  skillType={action.skillType}
+                  dice={rollValues.dice}
+                  modifier={rollValues.modifier}
+                  hasAdvantage={rollValues.hasAdvantage}
+                  hasDisadvantage={rollValues.hasDisadvantage}
+                  disabled={staminaDisabled}
+                  onRoll={() => handlePerformAction(action)}
+                />
+              )}
+              {showPerformButton && (
                 <Button
                   variant="outline"
                   size="sm"
                   className="shrink-0"
                   onClick={() => handlePerformAction(action)}
-                  disabled={
-                    typeof action.staminaCost === "number" &&
-                    stamina < action.staminaCost
-                  }
+                  disabled={staminaDisabled}
                 >
                   {buttonContent}
                 </Button>

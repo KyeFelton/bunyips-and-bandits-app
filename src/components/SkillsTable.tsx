@@ -17,10 +17,9 @@ import {
   skillRollValuesAtom,
   skillsProgressedSinceRestAtom,
 } from "./../state/character";
-import { useRollToast } from "./RollToast";
 import { Button } from "./ui/button";
 import { SkillForm } from "./../enums/SkillForm";
-import { RollText } from "./RollText";
+import { RollButton } from "./RollButton";
 import {
   Dialog,
   DialogContent,
@@ -35,26 +34,8 @@ export const SkillsTable = () => {
   const skillLevels = useAtomValue(skillLevelsAtom);
   const skillRollValues = useAtomValue(skillRollValuesAtom);
   const skillsProgressedSinceRest = useAtomValue(skillsProgressedSinceRestAtom);
-  const showRollToast = useRollToast();
 
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
-
-  const handleRoll = (skill: {
-    type: SkillType;
-    dice: number;
-    modifier: number;
-    hasAdvantage: boolean;
-    hasDisadvantage: boolean;
-  }) => {
-    showRollToast({
-      name: skill.type,
-      type: skill.type,
-      dice: skill.dice,
-      modifier: skill.modifier,
-      hasAdvantage: skill.hasAdvantage,
-      hasDisadvantage: skill.hasDisadvantage,
-    });
-  };
 
   const skillsArray = Object.values(SkillType).map((skillType) => ({
     type: skillType,
@@ -78,7 +59,7 @@ export const SkillsTable = () => {
           <TableRow>
             <TableHead>Skill</TableHead>
             <TableHead className="text-left w-20">Level</TableHead>
-            <TableHead className="text-left w-24">Roll</TableHead>
+            <TableHead className="text-left w-36">Roll</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -131,29 +112,29 @@ export const SkillsTable = () => {
                           <PopoverTrigger className="w-6 h-6 flex items-center justify-center text-muted-foreground rounded-full hover:bg-accent-subtle hover:text-accent-foreground">
                             <Lock className="h-3 w-3" />
                           </PopoverTrigger>
-                          <PopoverContent className="max-w-[260px] text-sm" side="right">
-                            <p>This skill has recently leveled up. You need to rest before it can level up again.</p>
+                          <PopoverContent
+                            className="max-w-[260px] text-sm"
+                            side="right"
+                          >
+                            <p>
+                              This skill has recently leveled up. You need to
+                              rest before it can level up again.
+                            </p>
                           </PopoverContent>
                         </Popover>
                       )}
                     </div>
                   </TableCell>
-                  <TableCell className="text-left font-mono">
+                  <TableCell className="text-left font-mono whitespace-nowrap">
                     {skill.dice ? (
-                      <div className="flex items-center gap-1">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => handleRoll(skill)}
-                        >
-                          <RollText
-                            dice={skill.dice}
-                            hasAdvantage={skill.hasAdvantage}
-                            hasDisadvantage={skill.hasDisadvantage}
-                            modifier={skill.modifier}
-                          />
-                        </Button>
-                      </div>
+                      <RollButton
+                        name={skill.type}
+                        skillType={skill.type}
+                        dice={skill.dice}
+                        modifier={skill.modifier}
+                        hasAdvantage={skill.hasAdvantage}
+                        hasDisadvantage={skill.hasDisadvantage}
+                      />
                     ) : (
                       <div className="ml-3">Fail</div>
                     )}

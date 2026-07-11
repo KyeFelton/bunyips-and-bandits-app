@@ -160,8 +160,6 @@ export const RollOverlay = () => {
                   <div className="text-xs text-muted-foreground">
                     <RollText
                       dice={activeRoll.dice}
-                      hasAdvantage={activeRoll.hasAdvantage}
-                      hasDisadvantage={activeRoll.hasDisadvantage}
                       modifier={activeRoll.modifier}
                     />
                   </div>
