@@ -4,23 +4,11 @@ import { Trait } from "../../models/traits";
 export const WindShield: Trait = {
   name: "Wind shield",
   description:
-    "Whilst in combat, you surround yourself with a torrent of wind. You gain +1 armour for all damage types.",
+    "Whilst in combat, you surround yourself with a torrent of wind. Gain 1 {{damage:fire}}, {{damage:slash}}, and {{damage:force}} armour.",
   effects: [
     {
       armour: {
         damageType: DamageType.Fire,
-        bonus: 1,
-      },
-    },
-    {
-      armour: {
-        damageType: DamageType.Electric,
-        bonus: 1,
-      },
-    },
-    {
-      armour: {
-        damageType: DamageType.Toxic,
         bonus: 1,
       },
     },

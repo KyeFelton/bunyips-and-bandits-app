@@ -3,8 +3,7 @@ import { Trait } from "./../../models/traits";
 
 export const ToxicResistance: Trait = {
   name: "Toxic resistance",
-  description:
-    "Your body has grown resilient to the many types of poisons and acids. Gain +2 toxic armour.",
+  description: "Gain 2 {{damage:toxic}} armour.",
   effects: [
     {
       armour: {

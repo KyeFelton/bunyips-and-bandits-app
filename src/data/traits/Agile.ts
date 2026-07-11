@@ -3,12 +3,12 @@ import { Trait } from "./../../models/traits";
 
 export const Agile: Trait = {
   name: "Agile",
-  description: "Gain +2 bonus to agility checks.",
+  description: "Add +1 bonus to {{skill:agility}} checks.",
   effects: [
     {
       skill: {
         skillType: SkillType.Agility,
-        bonus: 2,
+        bonus: 1,
       },
     },
   ],

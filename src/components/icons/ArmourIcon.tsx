@@ -6,7 +6,6 @@ type Props = {
   type: DamageType;
   size?: number;
   className?: string;
-  showText?: boolean;
 };
 
 export const ArmourIcon = ({ type, size = 16, className = "" }: Props) => {

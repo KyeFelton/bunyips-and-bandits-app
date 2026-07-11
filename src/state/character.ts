@@ -7,7 +7,7 @@ import { AllSkillProgressions } from "../data/skillProgressions";
 import { AllBackgrounds } from "../data/backgrounds";
 import { OngoingEffect } from "../models/effect";
 import * as Skills from "../models/skills";
-import { Trait } from "../models/traits";
+import { Trait, TraitEntry } from "../models/traits";
 import { Action } from "../models/actions";
 import { getDiceForLevel } from "../utils/dice";
 import { SkillForm } from "../enums/SkillForm";
@@ -149,35 +149,46 @@ export const actionsCountAtom = atom((get) => {
   }, baseActions);
 });
 
-// Traits atom - includes background traits, skill progression unlocked traits, and custom traits
-export const traitsAtom = atom((get) => {
+// Trait entries with source, sorted alphabetically by name
+export const traitEntriesAtom = atom((get) => {
   const skillLevels = get(skillLevelsAtom);
   const customTraits = get(customTraitsAtom);
   const backgroundData = get(backgroundDataAtom);
-  const traits: Trait[] = [];
+  const entries: TraitEntry[] = [];
 
-  // Add background traits
   if (backgroundData?.traits) {
-    traits.push(...backgroundData.traits);
+    backgroundData.traits.forEach((trait) => {
+      entries.push({ trait, source: "Background" });
+    });
   }
 
-  // Add skill progression unlocked traits
   Object.entries(skillLevels).forEach(([skillType, level]) => {
     const progression = AllSkillProgressions[skillType as SkillType];
     if (progression && level) {
       progression.unlockables
         .filter((unlock) => unlock.level <= level)
         .forEach((unlock) => {
-          if (unlock.traits) traits.push(...unlock.traits);
+          unlock.traits?.forEach((trait) => {
+            entries.push({ trait, source: skillType as SkillType });
+          });
         });
     }
   });
 
-  // Add custom traits
-  traits.push(...customTraits);
+  customTraits.forEach((trait, index) => {
+    entries.push({ trait, source: "Custom", customIndex: index });
+  });
 
-  return traits;
+  return entries.sort((a, b) =>
+    a.trait.name.localeCompare(b.trait.name, undefined, {
+      sensitivity: "base",
+    }),
+  );
 });
+
+export const traitsAtom = atom((get) =>
+  get(traitEntriesAtom).map((entry) => entry.trait),
+);
 
 // Effects atom
 export const effectsAtom = atom((get) => {

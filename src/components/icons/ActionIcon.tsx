@@ -1,4 +1,5 @@
 import { BatteryMedium, ClockFading, Ruler, Scan } from "lucide-react";
+import { cn } from "../../utils/cn";
 
 export type ActionAttributeIconType = "range" | "area" | "stamina" | "duration";
 
@@ -16,14 +17,14 @@ type Props = {
   showText?: boolean;
 };
 
-export const ActionIcons = ({
+export const ActionIcon = ({
   type,
   size = 14,
   className = "",
   showText = false,
 }: Props) => {
   const props = {
-    className,
+    className: cn("inline-flex align-text-text-bottom", className),
     width: size,
     height: size,
   };

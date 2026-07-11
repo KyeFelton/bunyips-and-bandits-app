@@ -2,11 +2,11 @@ import { Trait } from "./../../models/traits";
 
 export const Unbending: Trait = {
   name: "Unbending",
-  description: "Your mind increases by 50%.",
+  description: "Gain 2 {{health:mind}}.",
   effects: [
     {
       mind: {
-        multiplier: 1.5,
+        bonus: 2,
       },
     },
   ],

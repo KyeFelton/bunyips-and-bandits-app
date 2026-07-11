@@ -3,12 +3,12 @@ import { Trait } from "./../../models/traits";
 
 export const Stealthy: Trait = {
   name: "Stealthy",
-  description: "Gain +2 bonus to stealth checks.",
+  description: "Add +1 bonus to {{skill:stealth}} checks.",
   effects: [
     {
       skill: {
         skillType: SkillType.Stealth,
-        bonus: 2,
+        bonus: 1,
       },
     },
   ],

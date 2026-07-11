@@ -6,7 +6,6 @@ import {
   Leaf,
   ShipWheel,
   Speech,
-  Brain,
   VenetianMask,
   Radio,
   Flame,
@@ -15,8 +14,9 @@ import {
   Sun,
   Music2,
   BrainCircuit,
-  Heart,
   Ghost,
+  BrainCog,
+  Shell,
 } from "lucide-react";
 import { SkillType } from "../../enums/SkillType";
 
@@ -42,7 +42,7 @@ export const SkillIcon = ({ type, className = "h-4 w-4" }: Props) => {
     case SkillType.Charisma:
       return <Speech className={className} />;
     case SkillType.Psychology:
-      return <Brain className={className} />;
+      return <BrainCog className={className} />;
     case SkillType.Stealth:
       return <VenetianMask className={className} />;
     case SkillType.Perception:
@@ -60,7 +60,7 @@ export const SkillIcon = ({ type, className = "h-4 w-4" }: Props) => {
     case SkillType.Psychic:
       return <BrainCircuit className={className} />;
     case SkillType.Biotic:
-      return <Heart className={className} />;
+      return <Shell className={className} />;
     case SkillType.Spirit:
       return <Ghost className={className} />;
     default:

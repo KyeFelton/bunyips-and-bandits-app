@@ -3,7 +3,7 @@ import { Trait } from "./../../models/traits";
 
 export const SharpSenses: Trait = {
   name: "Sharp senses",
-  description: "You gain +1 to perception checks.",
+  description: "Add +1 bonus to {{skill:perception}} checks.",
   effects: [
     {
       skill: {

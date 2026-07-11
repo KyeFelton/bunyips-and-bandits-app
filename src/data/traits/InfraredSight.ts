@@ -3,8 +3,7 @@ import { Trait } from "./../../models/traits";
 
 export const InfraredSight: Trait = {
   name: "Infrared sight",
-  description:
-    "Your eyes become attuned to the various spectrums of light. You can now see heat emitted in your environment as infrared light.",
+  description: "Gain {{sense:infrared}} sense.",
   effects: [
     {
       sense: {

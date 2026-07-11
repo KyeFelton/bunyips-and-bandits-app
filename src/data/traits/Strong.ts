@@ -3,12 +3,12 @@ import { Trait } from "./../../models/traits";
 
 export const Strong: Trait = {
   name: "Strong",
-  description: "Gain +2 bonus to strength checks.",
+  description: "Gain +1 bonus to {{skill:strength}} checks.",
   effects: [
     {
       skill: {
         skillType: SkillType.Strength,
-        bonus: 2,
+        bonus: 1,
       },
     },
   ],

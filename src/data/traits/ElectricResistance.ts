@@ -3,7 +3,7 @@ import { Trait } from "./../../models/traits";
 
 export const ElectricResistance: Trait = {
   name: "Electric resistance",
-  description: "Gain +2 armour for electric damage.",
+  description: "Gain 2 {{damage:electric}} armour.",
   effects: [
     {
       armour: {

@@ -30,7 +30,7 @@ export function ProgressionItems({ level, actions, traits }: Props) {
                 )}
               </div>
               <p className="text-sm text-muted-foreground">
-                {item.data.description}
+                <RichDescription text={item.data.description} />
               </p>
             </div>
           );

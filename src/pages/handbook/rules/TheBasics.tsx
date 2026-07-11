@@ -504,6 +504,7 @@ const main = (
       (e.g. 4-6 on a d6), you're alive and regain one health. If lower, you're
       dead.
     </p>
+    {/*  You can also attempt to resuscitate a creature that has died in the last minute. If you succeed, the creature is brought back to life with 1 physical health. */}
     <h3>Mind</h3>
     <p>
       Mind refers to your mental health, tested by terrifying encounters and

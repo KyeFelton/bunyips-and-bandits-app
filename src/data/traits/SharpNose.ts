@@ -1,15 +1,13 @@
-import { SkillType } from "../../enums/SkillType";
+import { SenseType } from "../../enums/SenseType";
 import { Trait } from "./../../models/traits";
 
 export const SharpNose: Trait = {
   name: "Sharp nose",
-  description:
-    "Your smell sharpens, allowing you to trace faint scents and track down other creatures. You gain +3 bonus to Perception checks using smell.",
+  description: "Your {{sense:smell}} sense is keen.",
   effects: [
     {
-      skill: {
-        skillType: SkillType.Perception,
-        bonus: 3,
+      sense: {
+        gain: SenseType.Smell,
       },
     },
   ],

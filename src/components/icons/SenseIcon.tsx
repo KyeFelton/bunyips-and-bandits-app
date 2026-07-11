@@ -6,7 +6,6 @@ type Props = {
   type: SenseType;
   size?: number;
   className?: string;
-  showText?: boolean;
 };
 
 export const SenseIcon = ({ type, size = 16, className = "" }: Props) => {

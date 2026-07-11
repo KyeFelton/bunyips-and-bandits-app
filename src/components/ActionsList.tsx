@@ -11,7 +11,7 @@ import { ImmediateEffect } from "../models/effect";
 import { Brawl } from "../data/actions/Brawl";
 import { Dash } from "../data/actions/Dash";
 import { Button } from "./ui/button";
-import { ActionAttributeIconType, ActionIcons } from "./icons/ActionIcons";
+import { ActionAttributeIconType, ActionIcon } from "./icons/ActionIcon";
 import { SkillIcon } from "./icons/SkillIcon";
 import { RichDescription } from "./RichDescription";
 import { useRollToast } from "./RollToast";
@@ -26,7 +26,7 @@ const ActionAttribute = ({ icon, label, value }: ActionAttributeProps) => (
   <div className="flex items-center text-muted-foreground text-sm">
     {icon ? (
       <>
-        <ActionIcons type={icon} showText />:
+        <ActionIcon type={icon} showText />:
         <span className="ml-1 text-foreground">{value}</span>
       </>
     ) : (

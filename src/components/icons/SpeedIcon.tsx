@@ -6,7 +6,6 @@ type Props = {
   type: Locomotion;
   size?: number;
   className?: string;
-  showText?: boolean;
 };
 
 export const SpeedIcon = ({ type, size = 16, className = "" }: Props) => {

@@ -3,8 +3,7 @@ import { Trait } from "./../../models/traits";
 
 export const FireResistance: Trait = {
   name: "Fire resistant",
-  description:
-    "Your body adapts to hot environments. You gain +2 armour for fire damage.",
+  description: "Gain 2 {{damage:fire}} armour.",
   effects: [
     {
       armour: {

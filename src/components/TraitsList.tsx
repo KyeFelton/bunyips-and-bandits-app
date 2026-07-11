@@ -1,11 +1,13 @@
 import { useAtom, useAtomValue } from "jotai";
-import { traitsAtom, customTraitsAtom } from "./../state/character";
+import { customTraitsAtom, traitEntriesAtom } from "./../state/character";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
-import { Plus, Trash2, Edit2 } from "lucide-react";
+import { Plus, Star, Trash2, Edit2, UserRound } from "lucide-react";
 import { EffectForm } from "./EffectForm";
-import { Trait } from "./../models/traits";
+import { SkillIcon } from "./icons/SkillIcon";
+import { RichDescription } from "./RichDescription";
+import { Trait, TraitSource } from "./../models/traits";
 import { useState } from "react";
 import {
   Dialog,
@@ -17,7 +19,7 @@ import {
 } from "./ui/dialog";
 
 export const TraitsList = () => {
-  const traits = useAtomValue(traitsAtom);
+  const traits = useAtomValue(traitEntriesAtom);
   const [customTraits, setCustomTraits] = useAtom(customTraitsAtom);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingTrait, setEditingTrait] = useState<Trait | null>(null);
@@ -83,17 +85,6 @@ export const TraitsList = () => {
     setEditingIndex(null);
   };
 
-  const isCustomTrait = (index: number) => {
-    // Custom traits are at the end of the traits array
-    const customStartIndex = traits.length - customTraits.length;
-    return index >= customStartIndex;
-  };
-
-  const getCustomTraitIndex = (traitIndex: number) => {
-    const customStartIndex = traits.length - customTraits.length;
-    return traitIndex - customStartIndex;
-  };
-
   if (traits.length === 0) {
     return (
       <>
@@ -126,18 +117,20 @@ export const TraitsList = () => {
     <>
       <div className="space-y-4">
         <div className="divide-y divide-border">
-          {traits.map((trait, index) => {
-            const isCustom = isCustomTrait(index);
-            const customIndex = isCustom ? getCustomTraitIndex(index) : -1;
-
-            return (
-              <div key={`${trait.name}-${index}`} className="p-4">
-                <div className="flex justify-between items-start">
-                  <div className="flex-1">
-                    <div className="font-semibold">{trait.name}</div>
-                    <p className="text-sm">{trait.description}</p>
+          {traits.map(({ trait, source, customIndex }) => (
+            <div key={`${trait.name}-${source}`} className="p-4">
+              <div className="flex-1 space-y-0.5">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div className="font-semibold">{trait.name}</div>
+                  <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                    <TraitSourceLabel source={source} />
                   </div>
-                  {isCustom && (
+                </div>
+                <div className="flex justify-between items-start">
+                  <p className="text-sm pt-1">
+                    <RichDescription text={trait.description} />
+                  </p>
+                  {source === "Custom" && customIndex !== undefined && (
                     <div className="flex gap-1 ml-2">
                       <Button
                         variant="ghost"
@@ -157,8 +150,8 @@ export const TraitsList = () => {
                   )}
                 </div>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
         <div className="flex justify-center pt-2">
           <Button variant="outline" onClick={handleAddTrait}>
@@ -184,6 +177,37 @@ export const TraitsList = () => {
         onCancel={() => setTraitToDelete(null)}
       />
     </>
+  );
+};
+
+type TraitSourceLabelProps = {
+  source: TraitSource;
+};
+
+const TraitSourceLabel = ({ source }: TraitSourceLabelProps) => {
+  if (source === "Background") {
+    return (
+      <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+        <UserRound className="h-4 w-4" />
+        <span>Background</span>
+      </div>
+    );
+  }
+
+  if (source === "Custom") {
+    return (
+      <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+        <Star className="h-4 w-4" />
+        <span>Custom</span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+      <SkillIcon type={source} />
+      <span>{source}</span>
+    </div>
   );
 };
 
