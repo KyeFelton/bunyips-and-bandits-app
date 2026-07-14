@@ -1,20 +1,9 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
-import {
-  Amnesia,
-  Condition,
-  Deluded,
-  Frightened,
-  Hysteria,
-} from "./../models/conditions";
 import { useAtom } from "jotai";
-import { conditionsAtom } from "./../state/character";
 import { useEffect } from "react";
-import {
-  playHuhSound,
-  playLaughSound,
-  playScaredSound,
-  playTwinkleSound,
-} from "../utils/sound";
+import { playHeartbeatSound } from "../utils/sound";
+import { Condition } from "./../models/conditions";
+import { conditionsAtom } from "./../state/character";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 
 type Props = {
   isOpen: boolean;
@@ -27,27 +16,21 @@ export const ConditionGainedModal = ({ isOpen, onClose, condition }: Props) => {
 
   useEffect(() => {
     if (isOpen) {
-      if (condition === Amnesia) playHuhSound();
-      else if (condition === Hysteria) playLaughSound();
-      else if (condition === Deluded) playTwinkleSound();
-      else if (condition === Frightened) playScaredSound();
+      playHeartbeatSound();
     }
-  }, [isOpen, condition]);
+  }, [isOpen]);
 
   const handleClose = () => {
     const existingCount = conditions.filter(
-      (c) => c.name === condition.name
+      (c) => c.name === condition.name,
     ).length;
 
-    // Check if we can add this condition
     if (condition.stackable === 0 && existingCount > 0) {
-      // Non-stackable condition already exists, can't add
       onClose();
       return;
     }
 
     if (condition.stackable > 0 && existingCount >= condition.stackable) {
-      // Already at max stack count
       onClose();
       return;
     }
@@ -57,7 +40,7 @@ export const ConditionGainedModal = ({ isOpen, onClose, condition }: Props) => {
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={handleClose}>
+    <Dialog open={isOpen} onOpenChange={(open) => !open && handleClose()}>
       <DialogContent className="sm:max-w-sm">
         <DialogHeader>
           <DialogTitle className="text-center">

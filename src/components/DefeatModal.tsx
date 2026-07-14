@@ -1,50 +1,30 @@
 import { HeartPulse, Skull, Stethoscope } from "lucide-react";
 import { useEffect, useState } from "react";
 import { playBreatheSound, playDeadSound, playHeartbeatSound } from "../utils/sound";
-import { DefeatPulseOverlay, defeatPulseFadeOutMs } from "./DefeatPulseOverlay";
 import { Button } from "./ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 
 type Props = {
   isOpen: boolean;
   onClose: () => void;
+  onRevealedChange?: (isRevealed: boolean) => void;
 };
 
-export const DefeatModal = ({ isOpen, onClose }: Props) => {
+export const DefeatModal = ({ isOpen, onClose, onRevealedChange }: Props) => {
   const [isRevealed, setIsRevealed] = useState(false);
   const [isDead, setIsDead] = useState(Math.random() < 0.5);
-  const [isPulseVisible, setIsPulseVisible] = useState(false);
-  const [isPulseFadingOut, setIsPulseFadingOut] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
       setIsRevealed(false);
-      setIsPulseFadingOut(false);
-      setIsPulseVisible(true);
+      onRevealedChange?.(false);
       playHeartbeatSound();
-      return;
     }
-
-    setIsPulseVisible(false);
-    setIsPulseFadingOut(false);
-  }, [isOpen]);
-
-  useEffect(() => {
-    if (!isRevealed) {
-      return;
-    }
-
-    setIsPulseFadingOut(true);
-    const fadeTimer = window.setTimeout(() => {
-      setIsPulseVisible(false);
-      setIsPulseFadingOut(false);
-    }, defeatPulseFadeOutMs);
-
-    return () => window.clearTimeout(fadeTimer);
-  }, [isRevealed]);
+  }, [isOpen, onRevealedChange]);
 
   const handleReveal = () => {
     setIsRevealed(true);
+    onRevealedChange?.(true);
     const isDead = Math.random() < 0.5;
     setIsDead(isDead);
 
@@ -56,59 +36,53 @@ export const DefeatModal = ({ isOpen, onClose }: Props) => {
   };
 
   return (
-    <>
-      <DefeatPulseOverlay
-        active={isPulseVisible}
-        fadingOut={isPulseFadingOut}
-      />
-      <Dialog open={isOpen} onOpenChange={onClose}>
-        <DialogContent className="sm:max-w-sm">
-          <DialogHeader>
-            <DialogTitle className="text-center">
-              {!isRevealed
-                ? "You have been defeated"
-                : isDead
-                  ? "You are dead"
-                  : "You are alive!"}
-            </DialogTitle>
-          </DialogHeader>
-          <div className="flex flex-col items-center space-y-4 py-4 text-muted-foreground text-center">
-            {!isRevealed ? (
-              <>
-                <Stethoscope className="h-16 w-16" />
-                <p>
-                  You have been pushed to your breaking point and collapse to the
-                  floor unconscious.
-                </p>
-                <p>
-                  Until an ally checks your vital signs, no one knows for sure if
-                  you're alive... Click Reveal Fate once an ally comes to your
-                  aid.
-                </p>
-                <div />
-                <Button onClick={handleReveal} className="w-full">
-                  Reveal Fate
-                </Button>
-              </>
-            ) : isDead ? (
-              <div className="fate-content flex flex-col items-center space-y-4">
-                <Skull className="fate-dead-icon h-16 w-16" />
-                <p>Your journey has come to an end...</p>
-              </div>
-            ) : (
-              <div className="fate-content flex flex-col items-center space-y-4">
-                <HeartPulse className="fate-alive-icon h-16 w-16 text-danger" />
-                <p>...but only just</p>
-                <p>
-                  You regain consciousness, but are still weak. If you take any
-                  more damage whilst your body is at zero health, you will fall
-                  back unconscious and test your chances of survival again.
-                </p>
-              </div>
-            )}
-          </div>
-        </DialogContent>
-      </Dialog>
-    </>
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent className="sm:max-w-sm">
+        <DialogHeader>
+          <DialogTitle className="text-center">
+            {!isRevealed
+              ? "You have been defeated"
+              : isDead
+                ? "You are dead"
+                : "You are alive!"}
+          </DialogTitle>
+        </DialogHeader>
+        <div className="flex flex-col items-center space-y-4 py-4 text-muted-foreground text-center">
+          {!isRevealed ? (
+            <>
+              <Stethoscope className="h-16 w-16" />
+              <p>
+                You have been pushed to your breaking point and collapse to the
+                floor unconscious.
+              </p>
+              <p>
+                Until an ally checks your vital signs, no one knows for sure if
+                you're alive... Click Reveal Fate once an ally comes to your
+                aid.
+              </p>
+              <div />
+              <Button onClick={handleReveal} className="w-full">
+                Reveal Fate
+              </Button>
+            </>
+          ) : isDead ? (
+            <div className="fate-content flex flex-col items-center space-y-4">
+              <Skull className="fate-dead-icon h-16 w-16" />
+              <p>Your journey has come to an end...</p>
+            </div>
+          ) : (
+            <div className="fate-content flex flex-col items-center space-y-4">
+              <HeartPulse className="fate-alive-icon h-16 w-16 text-danger" />
+              <p>...but only just</p>
+              <p>
+                You regain consciousness, but are still weak. If you take any
+                more damage whilst your body is at zero health, you will fall
+                back unconscious and test your chances of survival again.
+              </p>
+            </div>
+          )}
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 };

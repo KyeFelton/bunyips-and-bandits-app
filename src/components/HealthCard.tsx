@@ -16,8 +16,10 @@ import { HealthBar } from "./HealthBar";
 import { Badge } from "./ui/badge";
 import { useState } from "react";
 import { AddConditionModal } from "./AddConditionModal";
-import { DefeatModal } from "./DefeatModal";
 import { ConditionGainedModal } from "./ConditionGainedModal";
+import { DefeatModal } from "./DefeatModal";
+import { DefeatPulseOverlay } from "./DefeatPulseOverlay";
+import { useDefeatPulse } from "../hooks/useDefeatPulse";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 import {
   Hysteria,
@@ -45,8 +47,13 @@ export const HealthCard = ({ className }: Props) => {
   );
   const [isAddConditionModalOpen, setIsAddConditionModalOpen] = useState(false);
   const [isDefeatModalOpen, setIsDefeatModalOpen] = useState(false);
+  const [isDefeatRevealed, setIsDefeatRevealed] = useState(false);
   const [isConditionGainedModalOpen, setIsConditionGainedModalOpen] =
     useState(false);
+  const { isPulseVisible, isPulseFadingOut, pulseSession } = useDefeatPulse(
+    isDefeatModalOpen || isConditionGainedModalOpen,
+    isDefeatRevealed && isDefeatModalOpen,
+  );
   const [gainedCondition, setGainedCondition] = useState<Condition | null>(
     null,
   );
@@ -81,6 +88,7 @@ export const HealthCard = ({ className }: Props) => {
   ) => {
     setter(value);
     if (value === 0 && setter === setCurrentBody) {
+      setIsDefeatRevealed(false);
       setIsDefeatModalOpen(true);
     } else if (value === 0 && setter === setCurrentMind) {
       const mentalConditions = [Hysteria, Amnesia, Deluded, Frightened];
@@ -186,9 +194,18 @@ export const HealthCard = ({ className }: Props) => {
         isOpen={isAddConditionModalOpen}
         onClose={() => setIsAddConditionModalOpen(false)}
       />
+      <DefeatPulseOverlay
+        active={isPulseVisible}
+        fadingOut={isPulseFadingOut}
+        pulseSession={pulseSession}
+      />
       <DefeatModal
         isOpen={isDefeatModalOpen}
-        onClose={() => setIsDefeatModalOpen(false)}
+        onClose={() => {
+          setIsDefeatModalOpen(false);
+          setIsDefeatRevealed(false);
+        }}
+        onRevealedChange={setIsDefeatRevealed}
       />
       {gainedCondition && (
         <ConditionGainedModal
