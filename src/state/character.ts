@@ -63,6 +63,9 @@ export const characterItemsAtom = atom((get) =>
 
 // Custom traits
 export const customTraitsAtom = atom<Trait[]>([]);
+export const injuriesAtom = atom<Trait[]>([]);
+export const traumasAtom = atom<Trait[]>([]);
+export const isDeadAtom = atom<boolean>(false);
 
 // Get background data
 export const backgroundDataAtom = atom((get) => {
@@ -153,6 +156,8 @@ export const actionsCountAtom = atom((get) => {
 export const traitEntriesAtom = atom((get) => {
   const skillLevels = get(skillLevelsAtom);
   const customTraits = get(customTraitsAtom);
+  const injuries = get(injuriesAtom);
+  const traumas = get(traumasAtom);
   const backgroundData = get(backgroundDataAtom);
   const entries: TraitEntry[] = [];
 
@@ -177,6 +182,14 @@ export const traitEntriesAtom = atom((get) => {
 
   customTraits.forEach((trait, index) => {
     entries.push({ trait, source: "Custom", customIndex: index });
+  });
+
+  injuries.forEach((trait) => {
+    entries.push({ trait, source: "Injury" });
+  });
+
+  traumas.forEach((trait) => {
+    entries.push({ trait, source: "Trauma" });
   });
 
   return entries.sort((a, b) =>
@@ -268,7 +281,7 @@ export const bodyAtom = atom((get) => {
   }, baseMaxBody);
 
   return {
-    max: maxBody,
+    max: Math.ceil(maxBody),
     current: get(currentBodyAtom),
   };
 });
@@ -290,7 +303,7 @@ export const mindAtom = atom((get) => {
   }, baseMaxMind);
 
   return {
-    max: maxMind,
+    max: Math.ceil(maxMind),
     current: get(currentMindAtom),
   };
 });
@@ -305,11 +318,14 @@ export const staminaAtom = atom((get) => {
     if (effect.stamina?.bonus) {
       return total + effect.stamina.bonus;
     }
+    if (effect.stamina?.multiplier) {
+      return total * effect.stamina.multiplier;
+    }
     return total;
   }, baseMaxStamina);
 
   return {
-    max: maxStamina,
+    max: Math.ceil(maxStamina),
     current: get(currentStaminaAtom),
   };
 });

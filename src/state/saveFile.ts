@@ -14,6 +14,8 @@ import {
   languagesAtom,
   magicSkillsAtom,
   customTraitsAtom,
+  injuriesAtom,
+  isDeadAtom,
   criticalSuccessesAtom,
   currentBodyAtom,
   bodyUpgradesAtom,
@@ -25,6 +27,7 @@ import {
   moneyAtom,
   imageAtom,
   conditionsAtom,
+  traumasAtom,
 } from "./character";
 
 // Save file atom with localStorage persistence
@@ -32,7 +35,7 @@ import {
 // and load from localStorage on initialization
 export const saveFileAtom = atomWithStorage<SaveFile>(
   "bunyips-and-bandits-save-file",
-  { characters: {} }
+  { characters: {} },
 );
 
 export const focalCharacterIdAtom = atom<string | undefined>(undefined);
@@ -49,6 +52,9 @@ export const focalCharacterAtom = atom<CharacterSaveFile>((get) => ({
   languages: get(languagesAtom),
   magicSkills: get(magicSkillsAtom),
   customTraits: get(customTraitsAtom),
+  injuries: get(injuriesAtom),
+  traumas: get(traumasAtom),
+  isDead: get(isDeadAtom),
   criticalSuccesses: get(criticalSuccessesAtom),
   currentBody: get(currentBodyAtom),
   bodyUpgrades: get(bodyUpgradesAtom),

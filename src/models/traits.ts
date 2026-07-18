@@ -7,7 +7,12 @@ export type Trait = {
   effects?: OngoingEffect[];
 };
 
-export type TraitSource = "Background" | "Custom" | SkillType;
+export type TraitSource =
+  | "Background"
+  | "Custom"
+  | "Injury"
+  | "Trauma"
+  | SkillType;
 
 export type TraitEntry = {
   trait: Trait;

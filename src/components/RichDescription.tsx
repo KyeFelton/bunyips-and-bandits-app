@@ -79,7 +79,7 @@ const renderMarker = (category: string, value: string): ReactNode => {
     if (token === "Stamina") {
       return (
         <>
-          <ActionIcon type={"stamina"} /> stamina
+          <ActionIcon type={"stamina"} /> Stamina
         </>
       );
     }

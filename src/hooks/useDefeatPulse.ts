@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 /** Tune these to match heartbeat.mp3 */
 export const DEFEAT_PULSE_CONFIG = {
-  cycleDurationMs: 820,
+  cycleDurationMs: 790,
   startDelayMs: 0,
   beatCount: 10,
   lubPeakPercent: 12,

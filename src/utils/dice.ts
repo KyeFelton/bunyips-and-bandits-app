@@ -19,3 +19,5 @@ export const getDiceForLevel = (level: number | undefined) => {
       return 0;
   }
 };
+
+export const LUCK_DIE = 6;

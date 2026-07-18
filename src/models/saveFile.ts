@@ -16,6 +16,9 @@ export type CharacterSaveFile = {
   languages: string[];
   magicSkills: string[];
   customTraits: Trait[];
+  injuries: Trait[];
+  traumas: Trait[];
+  isDead: boolean;
   criticalSuccesses: Partial<Record<SkillType, number>>;
   currentBody: number;
   bodyUpgrades: number;
@@ -40,6 +43,9 @@ export const defaultCharacter: CharacterSaveFile = {
   languages: ["Dharrigal", "Englorian"],
   magicSkills: ["Biotic"],
   customTraits: [],
+  injuries: [],
+  traumas: [],
+  isDead: false,
   criticalSuccesses: {},
   currentBody: startingKin.species.body,
   bodyUpgrades: 0,

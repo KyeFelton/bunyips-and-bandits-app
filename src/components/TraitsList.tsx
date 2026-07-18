@@ -3,7 +3,15 @@ import { customTraitsAtom, traitEntriesAtom } from "./../state/character";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
-import { Plus, Star, Trash2, Edit2, UserRound } from "lucide-react";
+import {
+  Plus,
+  Star,
+  Trash2,
+  Edit2,
+  UserRound,
+  BoneFracture,
+  Brain,
+} from "lucide-react";
 import { EffectForm } from "./EffectForm";
 import { SkillIcon } from "./icons/SkillIcon";
 import { RichDescription } from "./RichDescription";
@@ -199,6 +207,24 @@ const TraitSourceLabel = ({ source }: TraitSourceLabelProps) => {
       <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
         <Star className="h-4 w-4" />
         <span>Custom</span>
+      </div>
+    );
+  }
+
+  if (source === "Injury") {
+    return (
+      <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+        <BoneFracture className="h-4 w-4" />
+        <span>Injury</span>
+      </div>
+    );
+  }
+
+  if (source === "Trauma") {
+    return (
+      <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+        <Brain className="h-4 w-4" />
+        <span>Trauma</span>
       </div>
     );
   }

@@ -270,15 +270,15 @@ const main = (
       </thead>
       <tbody>
         <tr>
-          <td>1–2</td>
+          <td>1-2</td>
           <td>Goes against you</td>
         </tr>
         <tr>
-          <td>3–4</td>
+          <td>3-4</td>
           <td>Partially in your favour with a problem</td>
         </tr>
         <tr>
-          <td>5–6</td>
+          <td>5-6</td>
           <td>Goes in your favour</td>
         </tr>
       </tbody>

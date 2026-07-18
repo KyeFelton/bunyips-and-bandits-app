@@ -22,8 +22,11 @@ import {
   moneyAtom,
   itemsAtom,
   customTraitsAtom,
+  injuriesAtom,
+  isDeadAtom,
   criticalSuccessesAtom,
   conditionsAtom,
+  traumasAtom,
 } from "../state/character";
 
 /**
@@ -53,6 +56,9 @@ export const useLoadCharacterFromUrl = () => {
   const setMoney = useSetAtom(moneyAtom);
   const setItems = useSetAtom(itemsAtom);
   const setCustomTraits = useSetAtom(customTraitsAtom);
+  const setInjuries = useSetAtom(injuriesAtom);
+  const setTraumas = useSetAtom(traumasAtom);
+  const setIsDead = useSetAtom(isDeadAtom);
   const setCriticalSuccesses = useSetAtom(criticalSuccessesAtom);
   const setConditions = useSetAtom(conditionsAtom);
 
@@ -79,6 +85,9 @@ export const useLoadCharacterFromUrl = () => {
       setMoney(character.money);
       setItems(character.items);
       setCustomTraits(character.customTraits);
+      setInjuries(character.injuries || []);
+      setTraumas(character.traumas || []);
+      setIsDead(character.isDead || false);
       setCriticalSuccesses(character.criticalSuccesses);
       setConditions(character.conditions || []);
     }
@@ -104,6 +113,9 @@ export const useLoadCharacterFromUrl = () => {
     setMoney,
     setItems,
     setCustomTraits,
+    setInjuries,
+    setTraumas,
+    setIsDead,
     setCriticalSuccesses,
     setConditions,
     setKin,

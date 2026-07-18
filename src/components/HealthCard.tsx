@@ -1,34 +1,27 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { Button } from "./ui/button";
 import { Bed, Plus, X } from "lucide-react";
+import { useState } from "react";
+import { Unconscious, Condition } from "../models/conditions";
+import { SkillType } from "../enums/SkillType";
 import {
   bodyAtom,
-  mindAtom,
-  staminaAtom,
+  conditionsAtom,
   currentBodyAtom,
   currentMindAtom,
   currentStaminaAtom,
-  conditionsAtom,
+  mindAtom,
   skillsProgressedSinceRestAtom,
+  staminaAtom,
 } from "../state/character";
-import { SkillType } from "../enums/SkillType";
-import { HealthBar } from "./HealthBar";
-import { Badge } from "./ui/badge";
-import { useState } from "react";
+import { cn } from "../utils/cn";
 import { AddConditionModal } from "./AddConditionModal";
-import { ConditionGainedModal } from "./ConditionGainedModal";
 import { DefeatModal } from "./DefeatModal";
 import { DefeatPulseOverlay } from "./DefeatPulseOverlay";
+import { HealthBar } from "./HealthBar";
 import { useDefeatPulse } from "../hooks/useDefeatPulse";
+import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
-import {
-  Hysteria,
-  Amnesia,
-  Deluded,
-  Frightened,
-  Condition,
-} from "../models/conditions";
-import { cn } from "../utils/cn";
 
 type Props = {
   className?: string;
@@ -48,14 +41,10 @@ export const HealthCard = ({ className }: Props) => {
   const [isAddConditionModalOpen, setIsAddConditionModalOpen] = useState(false);
   const [isDefeatModalOpen, setIsDefeatModalOpen] = useState(false);
   const [isDefeatRevealed, setIsDefeatRevealed] = useState(false);
-  const [isConditionGainedModalOpen, setIsConditionGainedModalOpen] =
-    useState(false);
+  const [defeatTrack, setDefeatTrack] = useState<"body" | "mind">("body");
   const { isPulseVisible, isPulseFadingOut, pulseSession } = useDefeatPulse(
-    isDefeatModalOpen || isConditionGainedModalOpen,
+    isDefeatModalOpen,
     isDefeatRevealed && isDefeatModalOpen,
-  );
-  const [gainedCondition, setGainedCondition] = useState<Condition | null>(
-    null,
   );
   const [selectedCondition, setSelectedCondition] = useState<Condition | null>(
     null,
@@ -82,20 +71,26 @@ export const HealthCard = ({ className }: Props) => {
     setConditions((prev) => prev.filter((c) => c.name !== conditionName));
   };
 
+  const applyUnconscious = () => {
+    setConditions((prev) => {
+      if (prev.some((condition) => condition.name === Unconscious.name)) {
+        return prev;
+      }
+      return [...prev, Unconscious];
+    });
+  };
+
   const handleHealthChange = (
     value: number,
     setter: (value: number) => void,
+    track: "body" | "mind",
   ) => {
     setter(value);
-    if (value === 0 && setter === setCurrentBody) {
+    if (value === 0) {
+      applyUnconscious();
+      setDefeatTrack(track);
       setIsDefeatRevealed(false);
       setIsDefeatModalOpen(true);
-    } else if (value === 0 && setter === setCurrentMind) {
-      const mentalConditions = [Hysteria, Amnesia, Deluded, Frightened];
-      const randomCondition =
-        mentalConditions[Math.floor(Math.random() * mentalConditions.length)];
-      setGainedCondition(randomCondition);
-      setIsConditionGainedModalOpen(true);
     }
   };
 
@@ -120,14 +115,18 @@ export const HealthCard = ({ className }: Props) => {
           colours={{ good: "good", warning: "warning", bad: "danger" }}
           max={body.max}
           name="Body"
-          onChange={(value) => handleHealthChange(value, setCurrentBody)}
+          onChange={(value) =>
+            handleHealthChange(value, setCurrentBody, "body")
+          }
           value={body.current}
         />
         <HealthBar
           colours={{ good: "good", warning: "warning", bad: "danger" }}
           max={mind.max}
           name="Mind"
-          onChange={(value) => handleHealthChange(value, setCurrentMind)}
+          onChange={(value) =>
+            handleHealthChange(value, setCurrentMind, "mind")
+          }
           value={mind.current}
         />
         <HealthBar
@@ -201,19 +200,13 @@ export const HealthCard = ({ className }: Props) => {
       />
       <DefeatModal
         isOpen={isDefeatModalOpen}
+        track={defeatTrack}
         onClose={() => {
           setIsDefeatModalOpen(false);
           setIsDefeatRevealed(false);
         }}
         onRevealedChange={setIsDefeatRevealed}
       />
-      {gainedCondition && (
-        <ConditionGainedModal
-          isOpen={isConditionGainedModalOpen}
-          onClose={() => setIsConditionGainedModalOpen(false)}
-          condition={gainedCondition}
-        />
-      )}
       <Dialog
         open={selectedCondition !== null}
         onOpenChange={(open) => !open && setSelectedCondition(null)}

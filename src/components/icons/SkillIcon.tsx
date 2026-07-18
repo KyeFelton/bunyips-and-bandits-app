@@ -16,53 +16,61 @@ import {
   BrainCircuit,
   Ghost,
   BrainCog,
-  Shell,
+  Dna,
 } from "lucide-react";
 import { SkillType } from "../../enums/SkillType";
+import { cn } from "../../utils/cn";
 
 type Props = {
   type: SkillType;
   className?: string;
+  size?: number;
 };
 
-export const SkillIcon = ({ type, className = "h-4 w-4" }: Props) => {
+export const SkillIcon = ({ type, size = 16, className = "" }: Props) => {
+  const props = {
+    className: cn("inline-flex align-text-text-bottom", className),
+    width: size,
+    height: size,
+  };
+
   switch (type) {
     case SkillType.Strength:
-      return <BicepsFlexed className={className} />;
+      return <BicepsFlexed {...props} />;
     case SkillType.Agility:
-      return <Route className={className} />;
+      return <Route {...props} />;
     case SkillType.Dexterity:
-      return <Hand className={className} />;
+      return <Hand {...props} />;
     case SkillType.Lore:
-      return <Book className={className} />;
+      return <Book {...props} />;
     case SkillType.Nature:
-      return <Leaf className={className} />;
+      return <Leaf {...props} />;
     case SkillType.Willpower:
-      return <ShipWheel className={className} />;
+      return <ShipWheel {...props} />;
     case SkillType.Charisma:
-      return <Speech className={className} />;
+      return <Speech {...props} />;
     case SkillType.Psychology:
-      return <BrainCog className={className} />;
+      return <BrainCog {...props} />;
     case SkillType.Stealth:
-      return <VenetianMask className={className} />;
+      return <VenetianMask {...props} />;
     case SkillType.Perception:
-      return <Radio className={className} />;
+      return <Radio {...props} />;
     case SkillType.Pyro:
-      return <Flame className={className} />;
+      return <Flame {...props} />;
     case SkillType.Electric:
-      return <Zap className={className} />;
+      return <Zap {...props} />;
     case SkillType.Kinetic:
-      return <Wind className={className} />;
+      return <Wind {...props} />;
     case SkillType.Radiant:
-      return <Sun className={className} />;
+      return <Sun {...props} />;
     case SkillType.Sonic:
-      return <Music2 className={className} />;
+      return <Music2 {...props} />;
     case SkillType.Psychic:
-      return <BrainCircuit className={className} />;
+      return <BrainCircuit {...props} />;
     case SkillType.Biotic:
-      return <Shell className={className} />;
+      return <Dna {...props} />;
     case SkillType.Spirit:
-      return <Ghost className={className} />;
+      return <Ghost {...props} />;
     default:
       return null;
   }

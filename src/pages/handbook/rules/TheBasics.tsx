@@ -10,6 +10,11 @@ import { ArmourIcon } from "../../../components/icons/ArmourIcon";
 import { SenseIcon } from "../../../components/icons/SenseIcon";
 import { DamageType } from "../../../enums/DamageType";
 import { SenseType } from "../../../enums/SenseType";
+import {
+  mentalInjuries,
+  physicalInjuries,
+} from "../../../data/traits/injuries";
+import { RichDescription } from "../../../components/RichDescription";
 
 const main = (
   <>
@@ -493,17 +498,52 @@ const main = (
     <h3>Body</h3>
     <p>
       Body tracks how much physical damage you can endure before collapsing.
-      From burns to punches, anything that physically harms you can reduce your
+      From burns to punches, anything that physically harms you reduces your
       body.
     </p>
     <p>
       If your physical health drops below half, you have disadvantage on all
-      physical skill checks. When at zero health, you're knocked unconscious or
-      potentially dead. To determine your state, an ally must check your vital
-      signs. When they do, roll any die. If the result is greater than half
-      (e.g. 4-6 on a d6), you're alive and regain one health. If lower, you're
-      dead.
+      physical skill checks. When at zero health, you collapse unconscious.
+      Until an ally checks your vital signs, no one knows if you're alive or
+      dead. Once an ally comes to your aid, roll a d6 to determine your state:
     </p>
+    <table className="ml-8 mt-0 w-auto text-center border-collapse">
+      <thead>
+        <tr>
+          <th>Roll</th>
+          <th>Outcome</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1-2</td>
+          <td>You are dead</td>
+        </tr>
+        <tr>
+          <td>3-4</td>
+          <td>
+            You regain consciousness and one health, but must also choose an
+            injury
+          </td>
+        </tr>
+        <tr>
+          <td>5-6</td>
+          <td>You regain consciousness and one health</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      Injuries are permanent conditions that generally you cannot recover from.
+      When picking an injury, choose one that best suits your character and the
+      situation. You cannot choose the same injury more than once.
+    </p>
+    <ul>
+      {physicalInjuries.map((injury) => (
+        <li>
+          <b>{injury.name}</b>: <RichDescription text={injury.description} />
+        </li>
+      ))}
+    </ul>
     {/*  You can also attempt to resuscitate a creature that has died in the last minute. If you succeed, the creature is brought back to life with 1 physical health. */}
     <h3>Mind</h3>
     <p>
@@ -520,29 +560,48 @@ const main = (
     </div>
     <p>
       When your mental health drops below half, you have disadvantage on all
-      mental skill checks. Upon dropping to zero, you lose control. Roll a d4
-      and then take the matching condition from the list below. The condition
-      lasts until you rest.
+      mental skill checks. Upon dropping to zero, you faint. Until an ally
+      checks your vital signs, no one knows if you're ok. Once an ally comes to
+      your aid, roll a d6 to determine your state:
     </p>
-
-    <ol className="list-decimal ml-4">
-      <li>
-        <b>Delusions</b>: You experience constant hallucinations. You may
-        mistake people for monsters, monsters for people or have flashbacks of
-        past experiences.
-      </li>
-      <li>
-        <b>Hysteria</b>: You have frequent, uncontrollable emotional outbursts
-        of laughter, crying or screaming.
-      </li>
-      <li>
-        <b>Amnesia</b>: You forget who you are and why you're here.
-      </li>
-      <li>
-        <b>Paranoia</b>: You're overwhelmed with fear, easy to startle and flee
-        from all danger. You even have trouble trusting your friends.
-      </li>
-    </ol>
+    <table className="ml-8 mt-0 w-auto text-center border-collapse">
+      <thead>
+        <tr>
+          <th>Roll</th>
+          <th>Outcome</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1-2</td>
+          <td>You are unconscious and gain a trauma</td>
+        </tr>
+        <tr>
+          <td>3-4</td>
+          <td>
+            You regain consciousness and one health, but must also choose a
+            trauma
+          </td>
+        </tr>
+        <tr>
+          <td>5-6</td>
+          <td>You regain consciousness and one health</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      Traumas, like injuries, are permanent conditions that generally you cannot
+      recover from. When picking a trauma, choose one that best suits your
+      character and the situation. You cannot choose the same trauma more than
+      once.
+    </p>
+    <ul>
+      {mentalInjuries.map((trauma) => (
+        <li>
+          <b>{trauma.name}</b>: <RichDescription text={trauma.description} />
+        </li>
+      ))}
+    </ul>
     <h3>Stamina</h3>
     <p>
       Your stamina is how much energy you have before exhaustion sets in.
