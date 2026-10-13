@@ -89,7 +89,7 @@ export function CharacterSheet() {
         </main>
 
         {/* Desktop Layout */}
-        <main className="hidden md:grid py-6 xl:py-12 px-8 md:grid-cols-3 xl:grid-cols-4 gap-4 h-full w-full max-w-[1500px] overflow-auto min-w-[768px]">
+        <main className="hidden md:grid py-6 2xl:py-12 px-8 md:grid-cols-3 xl:grid-cols-4 gap-4 h-full w-full max-w-[1500px] overflow-auto min-w-[768px]">
           {/* Left column */}
           <div className="h-full max-h-[1100px] flex flex-col overflow-auto bg-card rounded-lg">
             <DescriptionPanel />

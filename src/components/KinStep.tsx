@@ -82,12 +82,6 @@ export const KinStep = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 text-md text-muted-foreground">
-        <div className="flex-1 sm:whitespace-nowrap">
-          Choose your kin to shape your character's heritage and abilities.
-        </div>
-      </div>
-
       <div className="">
         <div className="relative px-16">
           <div className="h-[220px] lg:h-[280px] flex items-center">
@@ -97,7 +91,7 @@ export const KinStep = () => {
                 loop: true,
               }}
               setApi={setApi}
-              className="w-full"
+              className="w-full max-w-[700px] mx-auto"
             >
               <CarouselContent>
                 {KIN_OPTIONS.map((option, index) => {

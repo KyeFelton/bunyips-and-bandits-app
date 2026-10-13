@@ -72,11 +72,6 @@ export const MagicStep = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 text-md text-muted-foreground">
-        <div className="flex-1">
-          Choose a magic skill that your character has been trained in.
-        </div>
-      </div>
 
       {/* Magic Skill Carousel */}
       <div className="relative px-16">
@@ -87,7 +82,7 @@ export const MagicStep = () => {
               loop: true,
             }}
             setApi={setApi}
-            className="w-full"
+            className="w-full max-w-[700px] mx-auto"
           >
             <CarouselContent>
               {MAGIC_SKILLS.map((skillType) => (

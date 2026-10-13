@@ -263,20 +263,13 @@ export const BackgroundStep = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 text-md text-muted-foreground">
-        <div className="flex-1">
-          Choose your background to represent your character's past profession
-          and training.
-        </div>
-      </div>
-
       {/* Background Carousel */}
       <div className="relative px-16">
         <div className="h-[220px] lg:h-[280px] flex items-center">
           <Carousel
             opts={{ align: "center", loop: true }}
             setApi={setApi}
-            className="w-full"
+            className="w-full max-w-[700px] mx-auto"
           >
             <CarouselContent>
               {backgroundsArray.map((backgroundItem) => (

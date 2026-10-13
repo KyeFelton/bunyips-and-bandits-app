@@ -264,10 +264,6 @@ export const DescriptionStep = () => {
 
   return (
     <div className="space-y-4">
-      <p className="text-md text-muted-foreground">
-        Define your character's name, appearance, attributes and backstory to
-        bring them to life.
-      </p>
 
       {/* Main grid layout: image/stats on left, details on right */}
       <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-4 lg:gap-6">
