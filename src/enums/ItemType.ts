@@ -2,7 +2,6 @@ export enum ItemType {
   Accessory = "Accessory",
   Armour = "Armour",
   Clothing = "Clothing",
-  ForceWeapon = "ForceWeapon",
   Concoction = "Concoction",
   Explosive = "Explosive",
   Food = "Food",
@@ -11,7 +10,7 @@ export enum ItemType {
   Gemstone = "Gemstone",
   Medical = "Medical",
   Poison = "Poison",
-  RangedWeapon = "RangedWeapon",
-  SlashWeapon = "SlashWeapon",
+  RangedWeapon = "Ranged weapon",
+  MeleeWeapon = "Melee weapon",
   Trap = "Trap",
 }

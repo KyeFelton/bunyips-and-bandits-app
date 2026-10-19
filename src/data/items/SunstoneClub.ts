@@ -18,5 +18,5 @@ export const SunstoneClub: Item = {
   singleUse: false,
   slots: 2,
   defaultCost: 2,
-  itemType: ItemType.ForceWeapon,
+  itemType: ItemType.MeleeWeapon,
 };

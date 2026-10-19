@@ -45,5 +45,5 @@ export const WindSpearOfCassreina: Item = {
   ],
   singleUse: false,
   slots: 2,
-  itemType: ItemType.SlashWeapon,
+  itemType: ItemType.MeleeWeapon,
 };

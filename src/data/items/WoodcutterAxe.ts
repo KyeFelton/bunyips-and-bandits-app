@@ -4,7 +4,8 @@ import { DamageType } from "../../enums/DamageType";
 
 export const WoodcutterAxe: Item = {
   name: "Woodcutter's axe",
-  description: "A broad-headed felling axe built for splitting timber. Effective at close range.",
+  description:
+    "A broad-headed felling axe built for splitting timber. Effective at close range.",
   equippedEffects: [
     {
       weapon: {
@@ -15,5 +16,5 @@ export const WoodcutterAxe: Item = {
   ],
   singleUse: false,
   slots: 2,
-  itemType: ItemType.SlashWeapon,
+  itemType: ItemType.MeleeWeapon,
 };

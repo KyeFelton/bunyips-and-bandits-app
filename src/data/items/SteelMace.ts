@@ -15,5 +15,5 @@ export const SteelMace: Item = {
   singleUse: false,
   slots: 2,
   defaultCost: 400,
-  itemType: ItemType.ForceWeapon,
+  itemType: ItemType.MeleeWeapon,
 };

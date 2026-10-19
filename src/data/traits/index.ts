@@ -44,9 +44,8 @@ import { ThickSkin } from "./ThickSkin";
 import { Stealthy } from "./Stealthy";
 import { Artisan } from "./Artisan";
 import { Bandit } from "./Bandit";
-import { Drifter } from "./Drifter";
+import { Traveller } from "./Traveller";
 import { Farmer } from "./Farmer";
-import { Herbalist } from "./Herbalist";
 import { Hunter } from "./Hunter";
 import { Labourer } from "./Labourer";
 import { Leader } from "./Leader";
@@ -104,9 +103,8 @@ export {
   ThickSkin,
   Artisan,
   Bandit,
-  Drifter,
+  Traveller,
   Farmer,
-  Herbalist,
   Hunter,
   Labourer,
   Leader,

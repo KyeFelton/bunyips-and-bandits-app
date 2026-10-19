@@ -32,6 +32,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "./ui/carousel";
+import { RichDescription } from "./RichDescription";
 
 const STARTING_ITEM_PREFIX = "starting_item_";
 
@@ -44,8 +45,8 @@ function itemLocationFor(item: Item): ItemLocation {
     return ItemLocation.Worn;
   }
   if (
-    item.itemType === ItemType.SlashWeapon ||
-    item.itemType === ItemType.ForceWeapon ||
+    item.itemType === ItemType.MeleeWeapon ||
+    item.itemType === ItemType.MeleeWeapon ||
     item.itemType === ItemType.RangedWeapon
   ) {
     return ItemLocation.Held;
@@ -381,7 +382,7 @@ export const BackgroundStep = () => {
               {backgroundData.traits.map((trait, index) => (
                 <div key={index}>
                   <p className="text-sm text-muted-foreground">
-                    {trait.description}
+                    <RichDescription text={trait.description} />
                   </p>
                 </div>
               ))}

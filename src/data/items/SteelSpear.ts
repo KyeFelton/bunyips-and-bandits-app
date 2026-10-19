@@ -19,5 +19,5 @@ export const SteelSpear: Item = {
   singleUse: false,
   slots: 2,
   defaultCost: 400,
-  itemType: ItemType.SlashWeapon,
+  itemType: ItemType.MeleeWeapon,
 };

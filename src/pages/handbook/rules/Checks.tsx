@@ -65,7 +65,7 @@ const main = (
       reasonable. Each rating has a target value that needs to be met in order
       to successfully complete the task.
     </p>
-    <table className="ml-8 mt-0 w-auto text-center border-collapse">
+    <table className="md:mx-4 text-center border-collapse">
       <thead>
         <tr>
           <th>Difficulty</th>
@@ -261,7 +261,7 @@ const main = (
       To perform a luck check, roll a d6. The GM determines the outcome based on
       the result.
     </p>
-    <table className="ml-8 mt-0 w-auto text-center border-collapse">
+    <table className="md:mx-4 text-center border-collapse">
       <thead>
         <tr>
           <th>Roll</th>

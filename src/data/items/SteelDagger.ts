@@ -15,5 +15,5 @@ export const SteelDagger: Item = {
   singleUse: false,
   slots: 1,
   defaultCost: 50,
-  itemType: ItemType.SlashWeapon,
+  itemType: ItemType.MeleeWeapon,
 };

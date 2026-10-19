@@ -4,7 +4,8 @@ import { DamageType } from "../../enums/DamageType";
 
 export const Hammer: Item = {
   name: "Hammer",
-  description: "A heavy iron-headed work hammer. Useful for driving nails or cracking skulls.",
+  description:
+    "A heavy iron-headed work hammer. Useful for driving nails or cracking skulls.",
   equippedEffects: [
     {
       weapon: {
@@ -15,5 +16,5 @@ export const Hammer: Item = {
   ],
   singleUse: false,
   slots: 1,
-  itemType: ItemType.ForceWeapon,
+  itemType: ItemType.MeleeWeapon,
 };

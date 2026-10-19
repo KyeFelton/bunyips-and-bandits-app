@@ -4,7 +4,8 @@ import { DamageType } from "../../enums/DamageType";
 
 export const Pickaxe: Item = {
   name: "Pickaxe",
-  description: "A heavy iron pick used for breaking rock. Slow but devastating on impact.",
+  description:
+    "A heavy iron pick used for breaking rock. Slow but devastating on impact.",
   equippedEffects: [
     {
       weapon: {
@@ -15,5 +16,5 @@ export const Pickaxe: Item = {
   ],
   singleUse: false,
   slots: 2,
-  itemType: ItemType.ForceWeapon,
+  itemType: ItemType.MeleeWeapon,
 };

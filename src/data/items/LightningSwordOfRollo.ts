@@ -20,5 +20,5 @@ export const LightningSwordOfRollo: Item = {
   ],
   singleUse: false,
   slots: 1,
-  itemType: ItemType.SlashWeapon,
+  itemType: ItemType.MeleeWeapon,
 };

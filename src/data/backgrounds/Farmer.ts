@@ -1,33 +1,27 @@
 import { Background } from "../../models/backgrounds";
 import { SkillType } from "../../enums/SkillType";
 import { Farmer as Trait } from "../traits/Farmer";
-import { FlintAndSteel } from "../items/FlintAndSteel";
-import { Pitchfork } from "../items/Pitchfork";
-import { Rations } from "../items/Rations";
-import { Rope } from "../items/Rope";
-import { Scythe } from "../items/Scythe";
-import { WoodenClub } from "../items/WoodenClub";
 import { PlainClothes } from "../items/WorkClothes";
 
 export const Farmer: Background = {
   name: "Farmer",
   description:
-    "You've spent your life working the land, tending crops and livestock. Whether you were a drover herding cattle across vast stations, a shearer working the wool sheds, or a homesteader growing wheat in the bush, you know the rhythms of nature and the value of hard work.",
+    "You've spent your life working the land, tending crops and livestock. You could be a drover herding cattle across vast stations, a shearer working the wool sheds, or a homesteader growing your own crops.",
   expertiseSkills: [SkillType.Strength, SkillType.Nature],
   traits: [Trait],
   availableMoneyTiers: ["Poor", "Average"],
   startingItems: [
     {
       name: "Shearer",
-      items: [PlainClothes, Scythe, Rope, Rations],
+      items: [PlainClothes],
     },
     {
       name: "Drover",
-      items: [PlainClothes, WoodenClub, Rope, Rations],
+      items: [PlainClothes],
     },
     {
       name: "Homesteader",
-      items: [PlainClothes, Pitchfork, FlintAndSteel, Rations],
+      items: [PlainClothes],
     },
   ],
 };

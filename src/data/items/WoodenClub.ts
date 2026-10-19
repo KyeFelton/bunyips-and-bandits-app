@@ -15,5 +15,5 @@ export const WoodenClub: Item = {
   singleUse: false,
   slots: 2,
   defaultCost: 10,
-  itemType: ItemType.ForceWeapon,
+  itemType: ItemType.MeleeWeapon,
 };

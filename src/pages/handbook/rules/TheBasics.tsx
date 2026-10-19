@@ -347,7 +347,7 @@ const main = (
       skill. It dictates what die to roll when performing a check for that
       skill. The higher the roll value, the more favourable the outcome.
     </p>
-    <table className="ml-8 mt-0 w-auto text-center border-collapse">
+    <table className="md:mx-4 w-auto text-center border-collapse">
       <thead>
         <tr>
           <th>Level</th>
@@ -397,7 +397,7 @@ const main = (
       its up to the GM adjudicate. No one wants miss out on performing a cool
       action if they are just one step short from their enemy.
     </p>
-    <table className="md:mx-4 mb-8">
+    <table className="md:mx-4">
       <thead>
         <tr>
           <th>Class</th>
@@ -507,7 +507,7 @@ const main = (
       Until an ally checks your vital signs, no one knows if you're alive or
       dead. Once an ally comes to your aid, roll a d6 to determine your state:
     </p>
-    <table className="ml-8 mt-0 w-auto text-center border-collapse">
+    <table className="md:mx-4 text-center border-collapse">
       <thead>
         <tr>
           <th>Roll</th>
@@ -522,8 +522,7 @@ const main = (
         <tr>
           <td>3-4</td>
           <td>
-            You regain consciousness and one health, but must also choose an
-            injury
+            You regain consciousness and one health, but also gain an injury
           </td>
         </tr>
         <tr>
@@ -564,7 +563,7 @@ const main = (
       checks your vital signs, no one knows if you're ok. Once an ally comes to
       your aid, roll a d6 to determine your state:
     </p>
-    <table className="ml-8 mt-0 w-auto text-center border-collapse">
+    <table className="md:mx-4 text-center border-collapse">
       <thead>
         <tr>
           <th>Roll</th>
@@ -574,13 +573,12 @@ const main = (
       <tbody>
         <tr>
           <td>1-2</td>
-          <td>You are unconscious and gain a trauma</td>
+          <td>You are still unconscious and gain a trauma</td>
         </tr>
         <tr>
           <td>3-4</td>
           <td>
-            You regain consciousness and one health, but must also choose a
-            trauma
+            You regain consciousness and one health, but also gain a trauma
           </td>
         </tr>
         <tr>

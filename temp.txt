@@ -1,0 +1,75 @@
+Artisan
+Blacksmith: Hammer, knife, tongs, whetstone, iron spikes.
+Baker: Knife, camping kit, spice kit.
+Seamstress: sewing kit, magnifying glass, notebook and paper.
+
+Bandit
+Bushranger: sword, smoke bomb, 10m rope, caltrops, thieves mask.
+Pickpocket: knife, lockpicks, fire crackers, thieves mask, cloak.
+
+Farmer
+Shearer: shears.
+Drover: whip, 10m rope.
+Homesteader: shears, herbalist kit
+
+Hunter
+Huntsman: spear, hatchet.
+Trapper: foothold trap, snare wire, fishing net, 10m rope, knife.
+Fisherman: fishing rod and line, tackle box, fishing net, knife.
+
+Labourer
+Miner: pickaxe, oil lantern, oil flask, chalk.
+Logger: felling axe, hand saw, timber wedges, 10m rope.
+Sailor: knife, 10m rope, marlinspike.
+
+Leader
+Captain: spyglass, notebook and pen.
+Elder: walking stick, soothing herb.
+Folk Hero: sword, battered shield, lucky charm.
+
+Medic
+Surgeon: first aid kit, sewing kit, hand saw, .
+Bush Healer: herbalist kit
+Herbalist: herbalist kit, gas mask, antidote.
+
+Merchant
+Shopkeeper: scales, notebook and pen.
+Smuggler: false-bottom satchel, grappling hook, oil lanturn, oil flask.
+Peddler: wagon.
+
+Monk
+Preacher: notebook and pen, religious scriptures, prayer beads.
+Scholar: notebook and pen, magnifying glass, herbalist kit.
+
+Noble
+Noble: signet ring, gold necklace.
+
+Performer
+Musician: violin, didgeridoo, tuning fork.
+Acrobat: grappling hook, chalk.
+Actor: sewing kit, makeup kit, decorative mask.
+
+Soldier
+Infantry: sword, shield.
+Rebel: sword, mirror, smoke bomb.
+Hired Guard: spear.
+
+Spy
+Detective: notebook and pen, magnifying lens, fingerprinting kit.
+Informant: knife, notebook and pen, sewing kit, makeup kit, mirror, thieves mask, cloak.
+
+Traveller
+Explorer: camping kit, knife, compass, spyglass, notebook and pen, tucker.
+Swagman: camping kit, knife, harmonica, tucker.
+
+Swag 1 slot
+Billy can, knife, matches, water bottle
+Tucker x5 per slot
+
+Kits:
+* Camping kit (2) - Swag, billy can, tinderbox, spoon
+* First aid kit - Bandages, needles, thread, antiseptics
+* Sewing kit - Thread, needles, scissors, measuring tape, thimble
+* Makeup kit - Compact mirror, powder puff, greasepaint pots, brushes
+* Herbalist kit - Scissors, tweezers, empty vials, mortar and pestle, filter cloth
+* Spice kit - Packets of various spices

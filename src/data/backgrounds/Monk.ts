@@ -1,33 +1,22 @@
 import { Background } from "../../models/backgrounds";
 import { SkillType } from "../../enums/SkillType";
 import { Monk as Trait } from "../traits/Monk";
-import { FineClothes } from "../items/FineClothes";
-import { FlintAndSteel } from "../items/FlintAndSteel";
-import { PrayerBeads } from "../items/PrayerBeads";
-import { Rations } from "../items/Rations";
-import { Torch } from "../items/Torch";
-import { TravellingClothes } from "../items/TravellingClothes";
-import { WalkingStaff } from "../items/WalkingStaff";
 
 export const Monk: Background = {
   name: "Monk",
   description:
-    "You have devoted yourself to study, contemplation, and spiritual discipline. Whether you served in a temple, monastery, or as a wandering ascetic, you've spent years learning the histories, philosophies, and sacred texts of your faith.",
+    "You have devoted yourself to study, contemplation, and spiritual discipline. You may be a preacher of your faith, or scholar dedicated to your field of study.",
   expertiseSkills: [SkillType.Lore, SkillType.Willpower],
   traits: [Trait],
   availableMoneyTiers: ["Poor"],
   startingItems: [
     {
-      name: "Contemplative",
-      items: [FineClothes, PrayerBeads, WalkingStaff],
-    },
-    {
-      name: "Wandering ascetic",
-      items: [TravellingClothes, PrayerBeads, WalkingStaff, Rations],
+      name: "Preacher",
+      items: [],
     },
     {
       name: "Scholar",
-      items: [FineClothes, PrayerBeads, Torch, FlintAndSteel],
+      items: [],
     },
   ],
 };

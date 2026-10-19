@@ -19,5 +19,5 @@ export const MithrilSpear: Item = {
   singleUse: false,
   slots: 2,
   defaultCost: 1000,
-  itemType: ItemType.SlashWeapon,
+  itemType: ItemType.MeleeWeapon,
 };

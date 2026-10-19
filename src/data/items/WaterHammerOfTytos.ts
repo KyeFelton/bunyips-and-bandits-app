@@ -46,5 +46,5 @@ export const WaterHammerOfTytos: Item = {
   ],
   singleUse: false,
   slots: 2,
-  itemType: ItemType.ForceWeapon,
+  itemType: ItemType.MeleeWeapon,
 };

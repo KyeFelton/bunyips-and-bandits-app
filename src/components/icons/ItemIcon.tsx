@@ -25,9 +25,9 @@ export const ItemIcon = ({ itemType, className = "h-4 w-4" }: Props) => {
   if (!itemType) return null;
 
   switch (itemType) {
-    case ItemType.SlashWeapon:
+    case ItemType.MeleeWeapon:
       return <Sword className={className} />;
-    case ItemType.ForceWeapon:
+    case ItemType.MeleeWeapon:
       return <Gavel className={className} />;
     case ItemType.RangedWeapon:
       return <Crosshair className={className} />;

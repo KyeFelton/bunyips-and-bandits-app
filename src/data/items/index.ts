@@ -51,7 +51,7 @@ import { IronSpikes } from "./IronSpikes";
 import { Mirror } from "./Mirror";
 import { OilFlask } from "./OilFlask";
 import { Pole } from "./Pole";
-import { Rations } from "./Rations";
+import { Tucker } from "./Tucker";
 import { Rope } from "./Rope";
 import { Torch } from "./Torch";
 import { Didgeridoo } from "./Didgeridoo";
@@ -127,7 +127,7 @@ export {
   Mirror,
   OilFlask,
   Pole,
-  Rations,
+  Tucker,
   Rope,
   Torch,
   Didgeridoo,
@@ -199,7 +199,7 @@ export const AllItems: Item[] = [
   PrayerBeads,
   Psychedelic,
   RainbowScaleNecklace,
-  Rations,
+  Tucker,
   Rope,
   RubberSuit,
   Scythe,

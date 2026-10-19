@@ -15,5 +15,5 @@ export const SteelJavelin: Item = {
   singleUse: false,
   slots: 1,
   defaultCost: 400,
-  itemType: ItemType.SlashWeapon,
+  itemType: ItemType.MeleeWeapon,
 };

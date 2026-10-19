@@ -18,5 +18,5 @@ export const LightningstoneClub: Item = {
   singleUse: false,
   slots: 2,
   defaultCost: 2000,
-  itemType: ItemType.ForceWeapon,
+  itemType: ItemType.MeleeWeapon,
 };

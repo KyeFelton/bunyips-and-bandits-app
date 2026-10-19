@@ -1,6 +1,6 @@
 import { Trait } from "../../models/traits";
 
-export const Drifter: Trait = {
-  name: "Drifter",
+export const Traveller: Trait = {
+  name: "Traveller",
   description: "Roll luck checks with advantage.",
 };

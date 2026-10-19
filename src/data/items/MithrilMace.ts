@@ -15,5 +15,5 @@ export const MithrilMace: Item = {
   singleUse: false,
   slots: 2,
   defaultCost: 1000,
-  itemType: ItemType.ForceWeapon,
+  itemType: ItemType.MeleeWeapon,
 };

@@ -4,7 +4,8 @@ import { DamageType } from "../../enums/DamageType";
 
 export const HuntingKnife: Item = {
   name: "Hunting knife",
-  description: "A sturdy fixed-blade knife used for field dressing game. Reliable in close combat.",
+  description:
+    "A sturdy fixed-blade knife used for field dressing game. Reliable in close combat.",
   equippedEffects: [
     {
       weapon: {
@@ -15,5 +16,5 @@ export const HuntingKnife: Item = {
   ],
   singleUse: false,
   slots: 1,
-  itemType: ItemType.SlashWeapon,
+  itemType: ItemType.MeleeWeapon,
 };

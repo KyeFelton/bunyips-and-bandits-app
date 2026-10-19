@@ -1,33 +1,26 @@
 import { Background } from "../../models/backgrounds";
 import { SkillType } from "../../enums/SkillType";
 import { Medic as Trait } from "../traits/Medic";
-import { Antidote } from "../items/Antidote";
-import { FineClothes } from "../items/FineClothes";
-import { FirstAidKit } from "../items/FirstAidKit";
-import { Rope } from "../items/Rope";
-import { SoothingHerb } from "../items/SoothingHerb";
-import { TravellingClothes } from "../items/TravellingClothes";
-import { PlainClothes } from "../items/WorkClothes";
 
 export const Medic: Background = {
   name: "Medic",
   description:
-    "You have training in treating injuries and illnesses. Whether you're a frontier doctor, a field surgeon who patched up soldiers in combat, or a traveling healer bringing aid to remote settlements, you've seen your share of blood and know how to save lives.",
-  expertiseSkills: [SkillType.Lore, SkillType.Psychology],
+    "You have training in treating injuries and illnesses. You could be a surgeon who has patched up soldiers in combat, a bush healer bringing spiritual aid to remote communities, or a herablist crafting ointments and potions.",
+  expertiseSkills: [SkillType.Lore, SkillType.Nature],
   traits: [Trait],
   availableMoneyTiers: ["Average", "Wealthy"],
   startingItems: [
     {
-      name: "Field surgeon",
-      items: [PlainClothes, FirstAidKit, SoothingHerb, Antidote],
+      name: "Surgeon",
+      items: [],
     },
     {
-      name: "Frontier doctor",
-      items: [FineClothes, FirstAidKit, Antidote],
+      name: "Bush healer",
+      items: [],
     },
     {
-      name: "Travelling healer",
-      items: [TravellingClothes, SoothingHerb, Antidote, Rope],
+      name: "Herbalist",
+      items: [],
     },
   ],
 };
