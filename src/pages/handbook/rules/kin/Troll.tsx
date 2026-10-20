@@ -50,7 +50,7 @@ export const Troll: WikiContent = {
   infoBox: {
     imageSrc: kin.imageSrc,
     traits: [
-      { key: "Species", value: kin.name },
+      { key: "Species", value: kin.species.name },
       { key: "Ancestry", value: kin.ancestry.name },
       { key: "Size", value: kin.size },
     ],

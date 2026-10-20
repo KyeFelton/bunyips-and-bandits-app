@@ -5,7 +5,7 @@ import { Action } from "../../models/actions";
 export const Dash: Action = {
   name: "Dash",
   description:
-    "You move quickly, reaching one speed tier higher than your normal movement. Slow→Close, Moderate→Near, Fast→Far. Extreme speed cannot dash further.",
+    "Move at your speed",
   range: Range.Self,
   areaOfEffect: AreaOfEffect.SingleTarget,
   staminaCost: 1,

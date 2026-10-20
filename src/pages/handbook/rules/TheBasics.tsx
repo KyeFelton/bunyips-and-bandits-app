@@ -15,13 +15,15 @@ import {
   physicalInjuries,
 } from "../../../data/traits/injuries";
 import { RichDescription } from "../../../components/RichDescription";
+import { Link } from "react-router-dom";
+import { getHandbookPageRoute } from "../../../routes";
 
 const main = (
   <>
     <p>
       Bunyips and Bandits is all about collaborative storytelling. Before you
-      dive into adventure, you'll create your own character with a unique
-      background, skills, and motivations. They might be a cunning trickster, a
+      dive into your adventure, you'll create your own character with a unique
+      background, skills, and motivations. They could be a cunning trickster, a
       brawny bushranger, or a clumsy sorcerer. The choice is yours.
     </p>
     <p>
@@ -52,7 +54,7 @@ const main = (
       consequences. As a rule of thumb, creativity is always favoured.
     </p>
     <p>
-      This rules should be viewed as a framework to align everyone, rather than
+      The rules should be viewed as a framework to align everyone, rather than
       a rigid system. If anything is unclear, discuss it with your party and
       agree on a ruling. If something doesn't quite fit your playstyle, discuss
       that too and potentially tweak it. The game is meant to be adaptable and
@@ -65,7 +67,7 @@ const main = (
       character has a list of skills ranging in levels from one to ten.
     </p>
     <p>
-      Most skills are inherent. Magic skills need to be trained to acquire them.
+      Non-magical skills are inherent to all players. Magic skills need to be trained to acquire them.
       You have the option to choose one trained magic skill when creating your
       character, otherwise, you must seek out training to acquire them. Training
       requires spending one month of in-game time with a mentor or at an
@@ -344,7 +346,7 @@ const main = (
     <h3>Skill Levels</h3>
     <p>
       Your skill level reflects how well your character is trained in that
-      skill. It dictates what die to roll when performing a check for that
+      skill. It dictates what die to roll when performing a <Link to={getHandbookPageRoute("rules", "checks")}>check</Link> for that
       skill. The higher the roll value, the more favourable the outcome.
     </p>
     <table className="ml-8 mt-0 w-auto text-center border-collapse">
@@ -380,21 +382,14 @@ const main = (
 
     <h3>Skill Modifiers</h3>
     <p>
-      Skill modifiers are separate from skill levels. Skill modifiers come from
+      Whilst your skill level represents your training, your skill modifiers reflect your
       natural abilities or items in your possession that make you better adapted
-      at that skill. These modifiers are added to your roll.
+      at that skill. These modifiers are always added to your skill check roll.
     </p>
-    <Callout variant="tip">
-      Your Charisma is level 3, so you roll a d6. You also recently took a love
-      potion that gives you a +3 Charisma modifier until your next rest. When
-      the GM calls for a Charisma check, you roll 1d6 and add 3. A roll of 2 on
-      the die becomes a 5 after the modifier.
-    </Callout>
-
     <h2>Movement</h2>
     <p>
       Distance is grouped into bands. Each band is meant to be approximate and
-      its up to the GM adjudicate. No one wants miss out on performing a cool
+      its up to the GM adjudicate. No one should miss out on performing a cool
       action if they are just one step short from their enemy.
     </p>
     <table className="md:mx-4 mb-8">
@@ -432,10 +427,8 @@ const main = (
       </tbody>
     </table>
     <p>
-      Creatures can move through different means. A distance is assigned to each
-      of your movement types to denote how far you can move in one dash action
-      for that movement. Dash actions consume stamina. If you choose not to
-      dash, you can move a close at no stamina cost.
+      Characters can move through different means. A distance is assigned to each
+      of your movement types to denote how far you can move in a single dash action.
     </p>
     <table className="md:mx-4">
       <thead>
@@ -485,7 +478,7 @@ const main = (
       </tbody>
     </table>
     <p>
-      When competing creatures have the same speed, the one with the highest
+      When competing characters have the same speed, the one with the highest
       agility is faster.
     </p>
 
@@ -499,7 +492,7 @@ const main = (
     <p>
       Body tracks how much physical damage you can endure before collapsing.
       From burns to punches, anything that physically harms you reduces your
-      body.
+      body track.
     </p>
     <p>
       If your physical health drops below half, you have disadvantage on all
@@ -533,8 +526,7 @@ const main = (
       </tbody>
     </table>
     <p>
-      Injuries are permanent conditions that generally you cannot recover from.
-      When picking an injury, choose one that best suits your character and the
+      Injuries are permanent conditions. When picking an injury, choose one that best suits your character and the
       situation. You cannot choose the same injury more than once.
     </p>
     <ul>
@@ -544,7 +536,7 @@ const main = (
         </li>
       ))}
     </ul>
-    {/*  You can also attempt to resuscitate a creature that has died in the last minute. If you succeed, the creature is brought back to life with 1 physical health. */}
+    {/*  You can also attempt to resuscitate a character that has died in the last minute. If you succeed, the character is brought back to life with 1 physical health. */}
     <h3>Mind</h3>
     <p>
       Mind refers to your mental health, tested by terrifying encounters and
@@ -590,8 +582,7 @@ const main = (
       </tbody>
     </table>
     <p>
-      Traumas, like injuries, are permanent conditions that generally you cannot
-      recover from. When picking a trauma, choose one that best suits your
+      Traumas, like injuries, are permanent conditions. When picking a trauma, choose one that best suits your
       character and the situation. You cannot choose the same trauma more than
       once.
     </p>
@@ -616,7 +607,7 @@ const main = (
       Resting restores all your stamina. If your stamina was at half or more
       your maximum before resting, then you recover two physical and mental
       health after the rest. If you have less than half, you only recover one
-      health per rest. If none, you don't recover any health.
+      of each per rest. If none, you don't recover any health.
     </p>
 
     <h2>Armour</h2>
@@ -691,8 +682,8 @@ const main = (
 
     <h2>Size</h2>
     <p>
-      Every creature has a size. Some actions or environmental hazards may
-      affect creatures differently based on their size. Sizes are categorised
+      Every character has a size. Some actions or environmental hazards may
+      affect characters differently based on their size. Sizes are categorised
       based on their approximate dimensions.
     </p>
     <table className="md:mx-4 mb-8">
@@ -825,8 +816,8 @@ const main = (
       </tbody>
     </table>
     <p>
-      Creatures have different sensory strengths. Each sense may be marked as
-      keen or poor to describe the acuteness.
+      Characters have different sensory strengths. Each sense may be marked as
+      keen or poor to describe the character's acuteness.
     </p>
   </>
 );

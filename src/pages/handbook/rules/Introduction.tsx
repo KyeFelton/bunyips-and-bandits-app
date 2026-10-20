@@ -5,7 +5,7 @@ const main = (
   <>
     <p>
       G'day, adventurer! Bunyips and Bandits is a tabletop role-playing game set
-      in a fantasy world inspired by the landscapes, creatures, and legends of
+      in a fantasy world inspired by the landscapes, people, and legends of
       Australia. Whether you're trekking through the Outback, navigating the
       waterways of a crocodile-infested billabong, or trading stories at a smoky
       bush pub, adventure is never far away.
@@ -41,7 +41,7 @@ const main = (
     </Callout>
 
     <h2>Core Principles</h2>
-    <p>Curiosity, creativity, and courage is at the heart of this game.</p>
+    <p>Bunyips and Bandits has been designed with the following core principles in mind.</p>
     <p>
       <b>Reduce cognitive load.</b> The rules are intended to be simple.
       Calculations and status tracking should be automated by this website where
@@ -94,13 +94,12 @@ const main = (
     <p>This game is a good fit if you're looking for:</p>
     <ul className="list-disc ml-4">
       <li>
-        <b>A rules-light experience.</b> The game uses minimal rules and expects
-        the GM to make calls. You won't find a rule for every edge case—just
-        clear intent and the expectation that the table will sort it out.
+        <b>A rules-light experience.</b> The game uses minimal rules and guidleines show intent.
+        You won't find a rule for every edge case, leaving the table to make thier own calls.
       </li>
       <li>
         <b>An Australian themed setting.</b> From kangaroos to didgeridoos,
-        sausage sangas to thongs, you'll be immersed to in a fantasy world
+        sausage sangas to thongs, you'll be immersed in a fantasy world
         inspired by Australia that feels distinct from your classical European
         or Asian settings.
       </li>

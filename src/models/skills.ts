@@ -108,7 +108,7 @@ export const Kinetic: Skill = {
   type: SkillType.Kinetic,
   magicSkill: true,
   description:
-    "Kinetic sorcery, such as levitating an object or manifesting a powerful windstorms.",
+    "Kinetic sorcery, such as levitating an object or manifesting powerful windstorms.",
   form: SkillForm.Physical,
 };
 

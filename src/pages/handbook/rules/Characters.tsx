@@ -34,6 +34,7 @@ import {
   Sonic,
   Spirit,
 } from "../../../models/skills";
+import { RichDescription } from "../../../components/RichDescription";
 
 const magicSkills: Skill[] = [
   Biotic,
@@ -147,7 +148,7 @@ function BackgroundCards({ backgrounds }: { backgrounds: Background[] }) {
             </p>
             {bg.traits.map((trait) => (
               <p key={trait.name} className="text-sm">
-                {trait.description}
+                <RichDescription text={trait.description} />
               </p>
             ))}
             {bg.traits.length === 0 && <p className="text-sm">None</p>}
@@ -235,7 +236,7 @@ const main = (
     <p>
       At the heart of Bunyips and Bandits are the characters you create and
       play. While the GM plays the role of everyone and everything else, you are
-      in control of one character each. You make their choices, speak in their
+      in control of an character each. You make their choices, speak in their
       voice, and decide how they handle the dangers and opportunities that come
       their way.
     </p>
@@ -276,78 +277,26 @@ const main = (
     </ol>
     <h2>Kin</h2>
     <p>
-      Kin defines your herritage and physical characteristics. You choose both a
-      species and an ancestry to define your kin.
+      Kin defines your herritage and physical characteristics, including size, base movement, senses and skill modifiers.
+      Each kin option is associated with a species and an ancestry.
     </p>
     <p>
       <b>Species</b> refers to your prehistoric bloodline. People of the same
-      species share biological characteristics despite potentially looking very
-      different across different parts of the world. Species determines your
-      base movement, senses, size, skill modifiers and natural traits.
+      species tend to share biological characteristics despite potentially looking very
+      different across different parts of the world.
     </p>
-    <ul>
-      <li>
-        <b>Avian</b>: Descended from bird-like ancestors. Defined by feathered
-        bodies, beaked faces, and sharp eyesight.
-      </li>
-      <li>
-        <b>Delver</b>: Folk who have adapted over countless millennia to
-        subterranean life. Typically small in stature with heightened senses for
-        navigating dark and confined spaces.
-      </li>
-      <li>
-        <b>Giant</b>: Enormous humanoids that once roamed wide open territories.
-        They stand two to four metres tall, with considerable strength and
-        physical endurance.
-      </li>
-      <li>
-        <b>Goblin</b>: Small, adaptable folk built for survival in harsh
-        environments. Compact in build with swift reflexes and a natural
-        aptitude for climbing and tight spaces.
-      </li>
-      <li>
-        <b>Human</b>: The most common of all peoples. They are social and
-        versatile.
-      </li>
-      <li>
-        <b>Reptilian</b>: Ancient lizard-like ancestors. Characterised by scaled
-        skin, infrared vision, and a heightened capacity for patience and
-        perception.
-      </li>
-    </ul>
     <p>
       <b>Ancestry</b> is where your more recent ancestors are from. It usually
       includes the culture you were raised in, the language you grew up
       speaking, and the traditions that shaped you.
     </p>
-    <ul>
-      <li>
-        <b>Dharrigal</b>: The peoples of Downunda. An island of desert plains,
-        dense eucalypt forest and tropical rainforests. Their traditions span
-        tens of thousands of years, grounded in a close relationship with their
-        country, oral history, and the land's creatures.
-      </li>
-      <li>
-        <b>Englorian</b>: The peoples of Engloria. A temperate continent of
-        rolling hills, dense forests, and walled settlements. Their culture has
-        been shaped by centuries of trade, maritime expansion, and the steady
-        rise of kingdoms and institutions.
-      </li>
-    </ul>
     <KinCards kin={KinArticles} />
 
     <h2>Backgrounds</h2>
     <p>
       Your background represents your character's past profession and upbringing
-      before becoming an adventurer. Most backgrounds grant expertise in two
-      skills, starting them at level five instead of level one, and provide a
-      special trait tied to that profession.
-    </p>
-    <p>
-      Each background also determines how much coin you start with. Most folk
-      begin poor or with modest savings. A few backgrounds can start wealthy.
-      The Noble background is the exception: it grants no expertise or traits,
-      but your family money means you begin with far more coin than anyone else.
+      before becoming an adventurer. Each background grants expertise in
+      skills, starting them at a higher level, special traits, and determines your starting items.
     </p>
     <BackgroundCards backgrounds={Object.values(AllBackgrounds)} />
 

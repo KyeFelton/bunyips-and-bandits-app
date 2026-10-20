@@ -65,6 +65,8 @@ const main = (
             far. Costs 1 stamina.
           </li>
         </ul>
+        <p>Dash actions consume stamina. If you choose not to
+          dash, you can move a close at no stamina cost.</p>
       </li>
       <li>
         <b>Magic</b>: Actions unlocked by levelling up{" "}
@@ -188,9 +190,9 @@ const main = (
     </p>
     <h2>Stun</h2>
     <p>
-      Some actions may stun your opponents. A stunned creature cannot react to
-      the next action that targets them. The stun clears after that action
-      resolves, whether or not it hits.
+      Some actions may stun an opponent. A stunned creature cannot react to
+      the next action that targets them. The stun clears after that next action
+      resolves (whether it hits or not) or the opponent takes their turn.
     </p>
     <h2>Morale</h2>
     <p>
