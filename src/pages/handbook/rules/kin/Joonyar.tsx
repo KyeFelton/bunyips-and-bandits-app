@@ -51,9 +51,9 @@ export const Joonyar: WikiContent = {
   infoBox: {
     imageSrc: kin.imageSrc,
     traits: [
-      { key: "Species", value: kin.species.name },
+      { key: "Species", value: kin.name },
       { key: "Ancestry", value: kin.ancestry.name },
-      { key: "Size", value: kin.species.size },
+      { key: "Size", value: kin.size },
     ],
   },
 };

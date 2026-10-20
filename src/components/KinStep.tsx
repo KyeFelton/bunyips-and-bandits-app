@@ -42,9 +42,9 @@ export const KinStep = () => {
 
   const handleKinChange = useCallback(
     (kinOption: Kin) => {
-      setCurrentBody(kinOption.species.body);
-      setCurrentMind(kinOption.species.mind);
-      setCurrentStamina(kinOption.species.stamina);
+      setCurrentBody(kinOption.body);
+      setCurrentMind(kinOption.mind);
+      setCurrentStamina(kinOption.stamina);
       setLanguages(kinOption.ancestry.languages);
       setKin(kinOption);
     },
@@ -163,11 +163,11 @@ export const KinStep = () => {
                 <div className="flex items-center justify-between mb-2">
                   <div className="text-sm font-medium">Body</div>
                   <div className="text-xl font-semibold">
-                    {kin.species.body}
+                    {kin.body}
                   </div>
                 </div>
                 <SpeciesHealthBar
-                  value={kin.species.body}
+                  value={kin.body}
                   maxValue={10}
                   color="danger"
                 />
@@ -176,11 +176,11 @@ export const KinStep = () => {
                 <div className="flex items-center justify-between mb-2">
                   <div className="text-sm font-medium">Mind</div>
                   <div className="text-xl font-semibold">
-                    {kin.species.mind}
+                    {kin.mind}
                   </div>
                 </div>
                 <SpeciesHealthBar
-                  value={kin.species.mind}
+                  value={kin.mind}
                   maxValue={10}
                   color="good"
                 />
@@ -189,11 +189,11 @@ export const KinStep = () => {
                 <div className="flex items-center justify-between mb-2">
                   <div className="text-sm font-medium">Stamina</div>
                   <div className="text-xl font-semibold">
-                    {kin.species.stamina}
+                    {kin.stamina}
                   </div>
                 </div>
                 <SpeciesHealthBar
-                  value={kin.species.stamina}
+                  value={kin.stamina}
                   maxValue={10}
                   color="info"
                 />
@@ -208,7 +208,7 @@ export const KinStep = () => {
               Speed
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4">
-              {Object.entries(kin.species.speed)
+              {Object.entries(kin.speed)
                 .filter(([, value]) => value !== SpeedRating.None)
                 .map(([type, value]) => (
                   <div key={type} className="flex items-center gap-2">
@@ -240,8 +240,8 @@ export const KinStep = () => {
               ]
                 .filter(
                   (type) =>
-                    kin.species.senses.keen.includes(type) ||
-                    kin.species.senses.poor.includes(type),
+                    kin.senses.keen.includes(type) ||
+                    kin.senses.poor.includes(type),
                 )
                 .map((type) => (
                   <div key={type} className="flex items-center gap-4">
@@ -249,9 +249,9 @@ export const KinStep = () => {
                     <div>
                       <div className="text-sm font-medium">{type}</div>
                       <div>
-                        {kin.species.senses.keen.includes(type)
+                        {kin.senses.keen.includes(type)
                           ? "Keen"
-                          : kin.species.senses.poor.includes(type)
+                          : kin.senses.poor.includes(type)
                             ? "Poor"
                             : "-"}
                       </div>
@@ -267,9 +267,9 @@ export const KinStep = () => {
               <ChartNoAxesColumn className="h-5 w-5" />
               Skill Modifiers
             </h3>
-            {Object.keys(kin.species.skillModifiers).length > 0 ? (
+            {Object.keys(kin.skillModifiers).length > 0 ? (
               <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4">
-                {Object.entries(kin.species.skillModifiers).map(
+                {Object.entries(kin.skillModifiers).map(
                   ([skill, value]) => (
                     <div key={skill} className="flex items-center gap-2">
                       <SkillIcon type={skill as SkillType} />
@@ -295,7 +295,7 @@ export const KinStep = () => {
               Armour
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4">
-              {Object.entries(kin.species.armour).map(([type, value]) => (
+              {Object.entries(kin.armour).map(([type, value]) => (
                 <div key={type} className="flex items-center gap-2">
                   <ArmourIcon type={type as DamageType} size={16} />
                   <div>

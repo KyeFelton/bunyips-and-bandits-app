@@ -20,10 +20,10 @@ const statCellClass = "px-3 border-r border-border";
 const valueCellClass = "px-3";
 
 export function KinStatsTable({ kin }: Props) {
-  const speedEntries = Object.entries(kin.species.speed).filter(
+  const speedEntries = Object.entries(kin.speed).filter(
     ([, v]) => v !== SpeedRating.None
   );
-  const skillEntries = Object.entries(kin.species.skillModifiers);
+  const skillEntries = Object.entries(kin.skillModifiers);
 
   return (
     <div className="prose border-t overflow-hidden text-sm">
@@ -31,9 +31,9 @@ export function KinStatsTable({ kin }: Props) {
         <tbody className="">
           {/* Health */}
           {[
-            { label: "Body", value: String(kin.species.body) },
-            { label: "Mind", value: String(kin.species.mind) },
-            { label: "Stamina", value: String(kin.species.stamina) },
+            { label: "Body", value: String(kin.body) },
+            { label: "Mind", value: String(kin.mind) },
+            { label: "Stamina", value: String(kin.stamina) },
           ].map((row, i) => (
             <tr key={row.label}>
               {i === 0 && (
@@ -61,9 +61,9 @@ export function KinStatsTable({ kin }: Props) {
 
           {/* Senses */}
           {ALL_SENSES.map(({ type, label }, i) => {
-            const value = kin.species.senses.keen.includes(type)
+            const value = kin.senses.keen.includes(type)
               ? "Keen"
-              : kin.species.senses.poor.includes(type)
+              : kin.senses.poor.includes(type)
               ? "Poor"
               : "—";
             return (

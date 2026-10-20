@@ -1,32 +1,5 @@
-import { CreatureSize } from "../../enums/CreatureSize";
-import { Locomotion } from "../../enums/Locomotion";
-import { SenseType } from "../../enums/SenseType";
-import { SkillType } from "../../enums/SkillType";
-import { SpeedRating } from "../../enums/SpeedRating";
 import { Species } from "../../models/species";
 
 export const Delver: Species = {
   name: "Delver",
-  size: CreatureSize.Small,
-  body: 4,
-  mind: 6,
-  stamina: 8,
-  speed: {
-    [Locomotion.Run]: SpeedRating.Near,
-    [Locomotion.Swim]: SpeedRating.Close,
-    [Locomotion.Climb]: SpeedRating.Close,
-    [Locomotion.Fly]: SpeedRating.None,
-  },
-  senses: {
-    keen: [SenseType.Sight, SenseType.Hearing, SenseType.TremorHearing],
-    poor: [SenseType.Smell],
-  },
-  armour: {},
-  skillModifiers: {
-    [SkillType.Strength]: -2,
-    [SkillType.Agility]: 2,
-    [SkillType.Dexterity]: 1,
-    [SkillType.Charisma]: -1,
-    [SkillType.Stealth]: 2,
-  },
 };

@@ -1,30 +1,6 @@
-import { CreatureSize } from "../../enums/CreatureSize";
-import { Locomotion } from "../../enums/Locomotion";
-import { SenseType } from "../../enums/SenseType";
-import { SkillType } from "../../enums/SkillType";
-import { SpeedRating } from "../../enums/SpeedRating";
 import { Species } from "../../models/species";
 
 export const Avian: Species = {
   name: "Avian",
-  size: CreatureSize.Medium,
-  body: 5,
-  mind: 6,
-  stamina: 7,
-  speed: {
-    [Locomotion.Run]: SpeedRating.Near,
-    [Locomotion.Swim]: SpeedRating.Close,
-    [Locomotion.Climb]: SpeedRating.Close,
-    [Locomotion.Fly]: SpeedRating.None,
-  },
-  senses: {
-    keen: [SenseType.Sight, SenseType.Hearing],
-    poor: [SenseType.Smell],
-  },
-  armour: {},
-  skillModifiers: {
-    [SkillType.Willpower]: -1,
-    [SkillType.Charisma]: 1,
-    [SkillType.Perception]: 1,
-  },
+
 };
