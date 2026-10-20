@@ -1,8 +1,14 @@
-import { useAtom, useAtomValue } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import {
   actionsAtom,
+  bodyAtom,
+  conditionsAtom,
+  currentBodyAtom,
+  currentMindAtom,
   currentStaminaAtom,
+  mindAtom,
   skillRollValuesAtom,
+  staminaAtom,
 } from "../state/character";
 import { AreaOfEffect } from "../enums/AreaOfEffect";
 import { Range } from "../enums/Range";
@@ -15,6 +21,7 @@ import { ActionAttributeIconType, ActionIcon } from "./icons/ActionIcon";
 import { SkillIcon } from "./icons/SkillIcon";
 import { RichDescription } from "./RichDescription";
 import { RollButton } from "./RollButton";
+import { AllConditions } from "../models/conditions";
 
 type ActionAttributeProps = {
   icon?: ActionAttributeIconType;
@@ -118,18 +125,21 @@ const ActionTags = ({ action }: { action: Action }) => {
       {action.duration && (
         <ActionAttribute icon="duration" value={action.duration} />
       )}
-
-      {effectLabels.map((label) => (
-        <ActionAttribute key={label} label="effect" value={label} />
-      ))}
     </div>
   );
 };
 
 export const ActionsList = () => {
   const unlockedActions = useAtomValue(actionsAtom);
-  const [stamina, setStamina] = useAtom(currentStaminaAtom);
   const skillRollValues = useAtomValue(skillRollValuesAtom);
+
+  const body = useAtomValue(bodyAtom);
+  const mind = useAtomValue(mindAtom);
+  const stamina = useAtomValue(staminaAtom);
+  const setCurrentBody = useSetAtom(currentBodyAtom);
+  const setCurrentMind = useSetAtom(currentMindAtom);
+  const setCurrentStamina = useSetAtom(currentStaminaAtom);
+  const [conditions, setConditions] = useAtom(conditionsAtom);
 
   const basicActions: Action[] = [Brawl, Dash];
 
@@ -137,12 +147,57 @@ export const ActionsList = () => {
     a.name.localeCompare(b.name),
   );
 
+  const applyCondition = (conditionName: string) => {
+    const conditionData = AllConditions.find((c) => c.name === conditionName);
+    if (!conditionData) return;
+
+    const existingCount = conditions.filter(
+      (c) => c.name === conditionName,
+    ).length;
+
+    // Repeatedly using a stackable condition item costs body.
+    if (existingCount > 0) {
+      setCurrentBody((prev) => Math.max(0, prev - 2));
+    }
+
+    setConditions((prev) => {
+      if (conditionData.stackable > 0) {
+        return existingCount < conditionData.stackable
+          ? [...prev, conditionData]
+          : prev;
+      }
+      return prev.some((c) => c.name === conditionName)
+        ? prev
+        : [...prev, conditionData];
+    });
+  };
+
   const handlePerformAction = (action: Action) => {
     const staminaCost =
       typeof action.staminaCost === "number" ? action.staminaCost : 0;
 
-    if (stamina >= staminaCost) {
-      setStamina(stamina - staminaCost);
+    if (stamina.current >= staminaCost) {
+      setCurrentStamina(stamina.current - staminaCost);
+    }
+
+    const effects = action.effectsToSelf;
+    if (effects) {
+      for (const effect of effects) {
+        if (effect.body) {
+          setCurrentBody((prev) => Math.min(prev + effect.body!, body.max));
+        }
+        if (effect.mind) {
+          setCurrentMind((prev) => Math.min(prev + effect.mind!, mind.max));
+        }
+        if (effect.stamina) {
+          setCurrentStamina((prev) =>
+            Math.min(prev + effect.stamina!, stamina.max),
+          );
+        }
+        if (effect.condition) {
+          applyCondition(effect.condition);
+        }
+      }
     }
   };
 
@@ -162,7 +217,7 @@ export const ActionsList = () => {
           : null;
         const staminaDisabled =
           typeof action.staminaCost === "number" &&
-          stamina < action.staminaCost;
+          stamina.current < action.staminaCost;
 
         return (
           <div key={action.name} className="space-y-2 p-4">
