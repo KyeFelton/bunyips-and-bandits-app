@@ -43,7 +43,6 @@ export function StatBlock({
     ? Object.entries(armour).filter(([, v]) => (v ?? 0) !== 0)
     : [];
 
-  const hasSkills = skills && Object.keys(skills).length > 0;
   const hasActions = actions && actions.length > 0;
   const hasTraits = traits && traits.length > 0;
 
@@ -66,22 +65,47 @@ export function StatBlock({
         )}
       </div>
 
-      {/* Health */}
       <div className="bg-secondary/30 divide-y divide-primary/20 leading-snug">
-        {/* Difficulty, health */}
-        <div className="px-4 py-2 space-y-1">
-          <div>
-            <span className="font-semibold">Difficulty </span>
-            <span className={difficultyColour[difficulty]}>{difficulty}</span>
-          </div>
 
+        {/* Skills */}
+        <div className="px-4 py-2 space-y-1">
+          <div className="flex flex-wrap gap-x-4">
+            <div>
+              <span className="font-semibold">Difficulty </span>
+              <span className={difficultyColour[difficulty]}>{difficulty}</span>
+            </div>
+            {Object.entries(skills!).map(([skill, dc]) => (
+              <span key={skill}>
+                <span>{skill} </span>
+                <span className={difficultyColour[dc]}>{dc}</span>
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Health */}
+        <div className="px-4 py-2 space-y-1">
           {hasStats && health !== undefined && (
             <div>
               <span className="font-semibold">Health </span>
               {health}
             </div>
           )}
+          {/* Armour */}
+          {nonZeroArmour.length > 0 && (
+            <div className="flex flex-wrap gap-x-4">
+              <span className="font-semibold">Armour</span>
+              {nonZeroArmour.map(([type, value]) => (
+                <span key={type}>
+                  {(value as number) > 0 ? "+" : ""}
+                  {value} {type}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
+
+
 
         {/* Speed */}
         {nonNoneSpeeds.length > 0 && (
@@ -107,30 +131,15 @@ export function StatBlock({
           </div>
         )}
 
-        {/* Armour */}
-        {nonZeroArmour.length > 0 && (
-          <div className="px-4 py-2 flex flex-wrap gap-x-4">
-            <span className="font-semibold">Armour</span>
-            {nonZeroArmour.map(([type, value]) => (
-              <span key={type}>
-                {(value as number) > 0 ? "+" : ""}
-                {value} {type}
-              </span>
+        {/* Traits */}
+        {hasTraits && (
+          <div className="px-4 py-2 space-y-2">
+            {traits!.map((trait) => (
+              <p key={trait.name} className="m-0">
+                <span className="font-semibold italic">{trait.name}: </span>
+                {trait.description}
+              </p>
             ))}
-          </div>
-        )}
-
-        {/* Skills */}
-        {hasSkills && (
-          <div className="px-4 py-2 space-y-1">
-            <div className="flex flex-wrap gap-x-4">
-              {Object.entries(skills!).map(([skill, dc]) => (
-                <span key={skill}>
-                  <span className="font-semibold">{skill} </span>
-                  <span className={difficultyColour[dc]}>{dc}</span>
-                </span>
-              ))}
-            </div>
           </div>
         )}
 
@@ -148,18 +157,6 @@ export function StatBlock({
                 )}
                 {" — "}
                 <RichDescription text={action.description} />
-              </p>
-            ))}
-          </div>
-        )}
-
-        {/* Traits */}
-        {hasTraits && (
-          <div className="px-4 py-2 space-y-2">
-            {traits!.map((trait) => (
-              <p key={trait.name} className="m-0">
-                <span className="font-semibold italic">{trait.name}: </span>
-                {trait.description}
               </p>
             ))}
           </div>
