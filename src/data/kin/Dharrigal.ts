@@ -6,6 +6,7 @@ import { SkillType } from "../../enums/SkillType";
 import { SpeedRating } from "../../enums/SpeedRating";
 import imageSrc from "../../images/kin/dharrigal.png";
 import { Kin } from "../../models/kin";
+import { Punch } from "../actions";
 import { Downunda } from "../ancestries";
 import { Human } from "../species";
 
@@ -40,4 +41,5 @@ export const Dharrigal: Kin = {
   skillModifiers: {
     [SkillType.Nature]: 1,
   },
+  actions: [Punch],
 };

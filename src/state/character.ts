@@ -122,6 +122,7 @@ export const skillLevelsAtom = atom((get) => {
 // Actions atom - includes skill progression unlocked actions
 export const actionsAtom = atom((get) => {
   const skillLevels = get(skillLevelsAtom);
+  const kin = get(kinAtom);
   const actions: Action[] = [];
 
   // Add skill progression unlocked actions
@@ -135,6 +136,10 @@ export const actionsAtom = atom((get) => {
         });
     }
   });
+
+  if (kin.actions) {
+    actions.push(...kin.actions);
+  }
 
   return actions;
 });

@@ -4,6 +4,7 @@ import { Locomotion } from "../enums/Locomotion";
 import { SenseType } from "../enums/SenseType";
 import { SkillType } from "../enums/SkillType";
 import { SpeedRating } from "../enums/SpeedRating";
+import { Action } from "./actions";
 import { Ancestry } from "./ancestry";
 import { Species } from "./species";
 
@@ -29,4 +30,5 @@ export type Kin = {
   };
   armour: Partial<Record<DamageType, number>>;
   skillModifiers: Partial<Record<SkillType, number>>;
+  actions: Action[];
 };

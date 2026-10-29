@@ -5,6 +5,7 @@ import { SkillType } from "../../enums/SkillType";
 import { SpeedRating } from "../../enums/SpeedRating";
 import imageSrc from "../../images/kin/drop bear.png";
 import { Kin } from "../../models/kin";
+import { Punch, Scratch } from "../actions";
 import { Downunda } from "../ancestries";
 import { Goblin } from "../species";
 
@@ -35,4 +36,5 @@ export const DropBear: Kin = {
     [SkillType.Perception]: 1,
     [SkillType.Agility]: 1,
   },
+  actions: [Punch, Scratch],
 };

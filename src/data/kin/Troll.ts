@@ -5,6 +5,7 @@ import { SkillType } from "../../enums/SkillType";
 import { SpeedRating } from "../../enums/SpeedRating";
 import imageSrc from "../../images/kin/troll.png";
 import { Kin } from "../../models/kin";
+import { PunchStrong } from "../actions";
 import { Engloria } from "../ancestries";
 import { Giant } from "../species";
 
@@ -36,4 +37,5 @@ export const Troll: Kin = {
     [SkillType.Dexterity]: -1,
     [SkillType.Stealth]: -1,
   },
+  actions: [PunchStrong],
 };

@@ -14,7 +14,6 @@ import { AreaOfEffect } from "../enums/AreaOfEffect";
 import { Range } from "../enums/Range";
 import { Action } from "../models/actions";
 import { ImmediateEffect } from "../models/effect";
-import { Brawl } from "../data/actions/Brawl";
 import { Dash } from "../data/actions/Dash";
 import { Button } from "./ui/button";
 import { ActionAttributeIconType, ActionIcon } from "./icons/ActionIcon";
@@ -98,9 +97,6 @@ const getButtonContent = (
 };
 
 const ActionTags = ({ action }: { action: Action }) => {
-  const effectLabels =
-    action.effectsToSelf?.flatMap(immediateEffectLabels) ?? [];
-
   return (
     <div className="flex flex-wrap gap-x-8 gap-y-3">
       {action.range !== Range.Self && (
@@ -141,9 +137,9 @@ export const ActionsList = () => {
   const setCurrentStamina = useSetAtom(currentStaminaAtom);
   const [conditions, setConditions] = useAtom(conditionsAtom);
 
-  const basicActions: Action[] = [Brawl, Dash];
+  const commonActions: Action[] = [Dash];
 
-  const actions = [...basicActions, ...unlockedActions].sort((a, b) =>
+  const actions = [...commonActions, ...unlockedActions].sort((a, b) =>
     a.name.localeCompare(b.name),
   );
 

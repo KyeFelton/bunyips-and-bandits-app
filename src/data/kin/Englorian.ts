@@ -6,6 +6,7 @@ import { SkillType } from "../../enums/SkillType";
 import { SpeedRating } from "../../enums/SpeedRating";
 import imageSrc from "../../images/kin/englorian.png";
 import { Kin } from "../../models/kin";
+import { Punch } from "../actions";
 import { Engloria } from "../ancestries";
 import { Human } from "../species";
 
@@ -40,4 +41,5 @@ export const Englorian: Kin = {
   skillModifiers: {
     [SkillType.Lore]: 1,
   },
+  actions: [Punch],
 };

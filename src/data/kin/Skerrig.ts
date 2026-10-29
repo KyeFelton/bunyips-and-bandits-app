@@ -5,6 +5,7 @@ import { SkillType } from "../../enums/SkillType";
 import { SpeedRating } from "../../enums/SpeedRating";
 import imageSrc from "../../images/kin/skerrig.png";
 import { Kin } from "../../models/kin";
+import { Punch, Scratch } from "../actions";
 import { Engloria } from "../ancestries";
 import { Avian } from "../species";
 
@@ -34,4 +35,5 @@ export const Skerrig: Kin = {
     [SkillType.Willpower]: -2,
     [SkillType.Charisma]: 2,
   },
+  actions: [Punch, Scratch],
 };

@@ -3,7 +3,7 @@ import { Apparition } from "./Apparition";
 import { Attract } from "./Attract";
 import { GlowingOrb } from "./GlowingOrb";
 import { BlindingFlash } from "./BlindingFlash";
-import { Brawl } from "./Brawl";
+import { Punch } from "./Punch";
 import { Catapult } from "./Catapult";
 import { Cyclone } from "./Cyclone";
 import { Dash } from "./Dash";
@@ -70,6 +70,8 @@ import { DistantNoise } from "./DistantNoise";
 import { Mimic } from "./Mimic";
 import { Commune } from "./Commune";
 import { SpiritLink } from "./SpiritLink";
+import { PunchStrong } from "./PunchStrong";
+import { Scratch } from "./Scratch";
 
 export {
   Meditate,
@@ -79,7 +81,7 @@ export {
   Attract,
   GlowingOrb,
   BlindingFlash,
-  Brawl,
+  Punch,
   Catapult,
   Cyclone,
   Dash,
@@ -144,4 +146,6 @@ export {
   Mimic,
   Commune,
   SpiritLink,
+  Scratch,
+  PunchStrong,
 };

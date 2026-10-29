@@ -5,6 +5,7 @@ import { SkillType } from "../../enums/SkillType";
 import { SpeedRating } from "../../enums/SpeedRating";
 import imageSrc from "../../images/kin/gnome.png";
 import { Kin } from "../../models/kin";
+import { Punch } from "../actions";
 import { Engloria } from "../ancestries";
 import { Delver } from "../species";
 
@@ -36,4 +37,5 @@ export const Gnome: Kin = {
     [SkillType.Dexterity]: 1,
     [SkillType.Stealth]: 1,
   },
+  actions: [Punch],
 };

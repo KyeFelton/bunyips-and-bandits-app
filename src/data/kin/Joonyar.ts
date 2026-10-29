@@ -5,6 +5,7 @@ import { SkillType } from "../../enums/SkillType";
 import { SpeedRating } from "../../enums/SpeedRating";
 import imageSrc from "../../images/kin/joonyar.png";
 import { Kin } from "../../models/kin";
+import { Punch } from "../actions";
 import { Downunda } from "../ancestries";
 import { Delver } from "../species";
 
@@ -36,4 +37,5 @@ export const Joonyar: Kin = {
     [SkillType.Dexterity]: 1,
     [SkillType.Stealth]: 1,
   },
+  actions: [Punch],
 };

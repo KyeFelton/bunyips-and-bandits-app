@@ -5,6 +5,7 @@ import { SkillType } from "../../enums/SkillType";
 import { SpeedRating } from "../../enums/SpeedRating";
 import imageSrc from "../../images/kin/birim.png";
 import { Kin } from "../../models/kin";
+import { Punch, Scratch } from "../actions";
 import { Downunda } from "../ancestries";
 import { Reptilian } from "../species";
 
@@ -34,4 +35,5 @@ export const Birim: Kin = {
     [SkillType.Charisma]: -2,
     [SkillType.Willpower]: 2,
   },
+  actions: [Punch, Scratch],
 };
