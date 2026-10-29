@@ -72,6 +72,7 @@ import { Commune } from "./Commune";
 import { SpiritLink } from "./SpiritLink";
 import { PunchStrong } from "./PunchStrong";
 import { Scratch } from "./Scratch";
+import { Aim } from "./Aim";
 
 export {
   Meditate,
@@ -148,4 +149,5 @@ export {
   SpiritLink,
   Scratch,
   PunchStrong,
+  Aim,
 };

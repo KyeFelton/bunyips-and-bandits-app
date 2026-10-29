@@ -14,13 +14,13 @@ import { AreaOfEffect } from "../enums/AreaOfEffect";
 import { Range } from "../enums/Range";
 import { Action } from "../models/actions";
 import { ImmediateEffect } from "../models/effect";
-import { Dash } from "../data/actions/Dash";
 import { Button } from "./ui/button";
 import { ActionAttributeIconType, ActionIcon } from "./icons/ActionIcon";
 import { SkillIcon } from "./icons/SkillIcon";
 import { RichDescription } from "./RichDescription";
 import { RollButton } from "./RollButton";
 import { AllConditions } from "../models/conditions";
+import { Aim, Dash } from "../data/actions";
 
 type ActionAttributeProps = {
   icon?: ActionAttributeIconType;
@@ -137,7 +137,7 @@ export const ActionsList = () => {
   const setCurrentStamina = useSetAtom(currentStaminaAtom);
   const [conditions, setConditions] = useAtom(conditionsAtom);
 
-  const commonActions: Action[] = [Dash];
+  const commonActions: Action[] = [Aim, Dash];
 
   const actions = [...commonActions, ...unlockedActions].sort((a, b) =>
     a.name.localeCompare(b.name),
