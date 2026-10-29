@@ -95,16 +95,6 @@ const main = (
       <Link to={getHandbookPageRoute("rules", "checks")}>DR</Link> to land the
       hit. If not, any roll above a one succeeds.
     </p>
-    <p>
-      Rolling more than half your maximum die value is called a strong hit.
-      Strong hits deal double damage.
-    </p>
-    <Callout variant="tip">
-      You attempt to Punch a bandit with a Moderate DR. Your Strength is level
-      5, so you roll a d8. If you roll five or above, you succeed a strong hit
-      and deal 2 force damage instead of 1. A roll of 4 meets the difficulty and
-      hits normally for 1 force damage. A roll of 3 or less misses.
-    </Callout>
     <h2>Reactions</h2>
     <p>
       A reaction is a quick response to something that directly affects you.
