@@ -24,9 +24,9 @@ const main = (
     </div>
     <p>
       The GM decides when a check is needed. Checks should be reserved for
-      challenging situations where characters are pushing their abilities and
-      testing their limits. The GM shouldn't call for rolls on easy or mundane
-      tasks where the character would normally succeed at.
+      challenging situations where you are pushing your abilities and
+      testing your limits. The GM shouldn't call for rolls on easy or mundane
+      tasks where you would normally succeed at.
     </p>
     <ul className="list-disc ml-4">
       <li>
@@ -41,7 +41,7 @@ const main = (
       Performing a check involves rolling the die that corresponds to your level
       for the skill that is being checked. If you have modifiers, add them. For
       example, if you want to read the intentions of an NPC, the GM may call for
-      a psychology check. If your pshycology skill is level five with +3
+      a Psychology check. If your Psychology skill is level five with +3
       modifier, then roll 1d8+3.
     </p>
     <p>The skill you roll depends on how you approach the problem.</p>
@@ -75,7 +75,7 @@ const main = (
       <tbody>
         <tr>
           <td>Easy</td>
-          <td>2+</td>
+          <td>3+</td>
         </tr>
         <tr>
           <td>Moderate</td>
@@ -104,8 +104,8 @@ const main = (
       don't go to plan.
     </p>
     <Callout variant="tip">
-      You're climbing a crumbling cliff face to reach a bandit camp above. The
-      GM calls for an Agility check at Hard difficulty (6+). Your Agility is
+      You're climbing a crumbling cliff face to reach an enemy camp above. The
+      GM calls for a Stealth check at Hard difficulty (6+). Your Stealth is
       level 5, so you roll a d8.
       <ul className="list-disc ml-4 mt-2">
         <li>
@@ -113,12 +113,11 @@ const main = (
           cover before anyone notices.
         </li>
         <li>
-          <b>Roll 6.</b> You make it, but a chunk of rock breaks loose under
-          your boot. The noise carries to the camp above.
+          <b>Roll 6.</b> You make it unnoticed, but leave footprints behind.
         </li>
         <li>
-          <b>Roll 5 or less.</b> Your grip gives out halfway up. You drop back
-          to the base of the cliff and the moment is lost.
+          <b>Roll 5 or less.</b> A chunk of rock breaks loose under
+          your boot and the noise carries to the campo above. You hear men shouting and dogs barking.
         </li>
       </ul>
     </Callout>
@@ -138,51 +137,64 @@ const main = (
       out and you roll normally. Multiple sources of advantage and disadvantage
       stack.
     </p>
+    <h2>Pushed Checks</h2>
+    <p>
+      Once per session, you can request to push a failed check.
+      Pushing a check means you re-roll the check in an attempt to succeed, but if you fail,
+      you suffer a more severe consequence decided by the GM. The GM declares the consequence
+      before you decide whether to follow through with the push. If the GM is unsure
+      what the cost should be, they can reframe the question and ask you 'what are you most
+      afraid of will happen if you fail this check?'.
+    </p>
 
     <h2>Perception</h2>
     <p>
       When performing a Perception check, the GM will declare which senses are
       relevant. You may use sight for spotting a hidden creature, hearing for
-      detecting faint footsteps, or smell for tracking a scent trail. If the
-      relevant sense is keen for your character, you roll normally. If it is
+      detecting faint footsteps, or smell for tracking a scent trail. If your
+      proficiency for the applicable skill is keen, you roll normally. If it is
       poor, you roll with disadvantage. If you lack the sense entirely, you
       cannot make the check.
     </p>
     <p>
       The environment also affects perception. A dark cave makes sight checks
       harder unless you have infrared vision. A windy night makes smell checks
-      nearly impossible. The GM may set different DRs for each sense based on
+      more difficult. The GM may set different DRs for each sense based on
       the situation.
+    </p>
+
+    <h2>Group Checks</h2>
+    <p>
+      Some situations may call for a check from multiple characters to complete a task with a single result. If you are
+      assisting each other, such as breaking open a door together
+      or persuading an NPC to join you, everyone rolls the check, and the highest value is kept.
+      If you are not, such as sneaking pass an enemy as a group, everyone rolls the check,
+      and the median value is kept.
     </p>
 
     <h2>NPC Checks</h2>
     <p>
-      Each NPC has a base DR. The base DR indicates the general skill level of
-      that NPC. Some NPCs include DRs for specific skills as well. When doing a
-      check for the NPC, use the DR of the specified skill if included,
-      otherwise refer to the base DR.
+      The GM does not roll checks for non-playable characters (NPC). Instead, they refer to a
+      static DR set for the NPC to keep the game quick. Every NPC has a base DR that indicates
+      their general skill level, and may also list additional DRs for specific skills.
     </p>
     <p>
-      The GM does not roll for NPC checks. Instead, they refer to the NPCs
-      static DR. The NPC succeeds the check if their DR beats the difficulty
-      rating of the task. They succeed with a consequence if their rating is
-      equal. They fail if less. If the player opposes the NPC, then they must
-      perform a check against their opponents DR to determine if they succeed.
+      To resolve a check for the NPC, the GM uses the DR of the specified skill if included,
+      otherwise they can refer to the base DR. The
+      DRs are not all encompassing, so apply common sense logic. For example, many animals may have a base DR of Moderate,
+      but being animals, do not have Lore. Magic skills also need to be explicilty stated to be usable.
     </p>
-
+    <p>
+      The NPC succeeds the check if their DR beats the DR of the required task, succeed with a consequence if equal,
+      and fail if less. If you oppose the NPC, then you must perform a check against their DR to determine if you succeed.
+    </p>
     <div className="flex flex-col md:flex-row gap-4 items-start">
       <Callout variant="tip" className="my-0">
         <p className="mt-0">
-          A saltwater crocodile is tangled in rope. The GM decides the
-          difficulty to break free is Hard. The crocodile has a Strength DR of
-          Hard as well, so it succeeds and breaks free, but injures its leg in
-          the process.
-        </p>
-        <p>
-          You attempt to sneak past the lurking crocodile. The crocodile doesn't
-          have a DR for Perception, so the GM uses the crocodile's base DR of
-          Medium. You must make a Stealth check against the crocodile's Medium
-          DR (4+). Your Stealth is level 2 and you have a +1 bonus from your
+          You attempt to sneak past a lurking crocodile. The GM calls for
+          a Stealth check against the crocodile's Perception. The crocodile doesn't
+          have a DR for Perception, so the GM uses the crocodile's base Moderate DR.
+          Your Stealth is level 2 and you have a +1 bonus from your
           camouflage clothing, so you roll a d4 and add 1 to the result.
         </p>
         <ul className="list-disc ml-4 mt-2">
@@ -191,7 +203,7 @@ const main = (
           </li>
           <li>
             <b>Roll 3.</b> You slip past, but the croc senses something was here
-            and becomes more alert.
+            and becomes more alert. Any subsequent attempt to sneak past has disadvantage.
           </li>
           <li>
             <b>Roll 2 or less.</b> The croc spots you and lunges forward.
@@ -207,7 +219,7 @@ const main = (
           health={12}
           speed={{
             [Locomotion.Run]: SpeedRating.Close,
-            [Locomotion.Swim]: SpeedRating.Far,
+            [Locomotion.Swim]: SpeedRating.Near,
           }}
           senses={{
             [SenseType.Smell]: "Keen",
@@ -218,6 +230,7 @@ const main = (
           }}
           skills={{
             [SkillType.Strength]: "Hard",
+            [SkillType.Agility]: "Easy",
           }}
           actions={[
             {
@@ -247,7 +260,8 @@ const main = (
       As you adventure, your character improves through practice and experience.
       Each time you perform a skill check and roll the maximum value on your die
       (a critical success), you level up your skill. Each skill can level up at
-      most once per rest.
+      most once per rest, so subsequent critical successes before resting
+      do not increase the skill level.
     </p>
 
     <h2>Luck</h2>

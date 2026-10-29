@@ -27,66 +27,23 @@ const main = (
     </p>
     <p>
       You can do up to three actions on your turn. However, if you initiated the
-      comabt, then you only have two actions for your first turn.
+      combat, then you only have two actions for your first turn.
     </p>
     <p>
-      Some actions have a stamina cost. Performing these action depletes your
-      stamina. If the stamina cost is higher than your remaining stamina, you
-      cannot do it.
-    </p>
-    <p>
-      Every character has a list of standard actions they can do based on their
-      abilities and skills. The actions can be basic, magic or item-based.
-    </p>
-    <ul className="list-disc ml-6 mb-4">
-      <li>
-        <b>Basic</b>: Actions common to all humanoid creatures.
-        <ul>
-          <li>
-            <b>Brawl</b>: You strike your opponent with your fists or feet to
-            deal 1 force damage.
-          </li>
-          <li>
-            <b>Aim</b>: You focus on hitting your next target. You have
-            advantage on your next attack.
-          </li>
-          <li>
-            <b>Assess</b>: You study a target within sight. The GM reveals one
-            piece of useful information about it, such as its DR, an armour
-            type, or a special trait.
-          </li>
-          <li>
-            <b>Move</b>: You move to a new position. If your speed is medium,
-            move a close distance. If fast, move near.
-          </li>
-          <li>
-            <b>Dash</b>: You move further than a standard Move action. Slow
-            creatures move a close distance, moderate moves near, and fast moves
-            far. Costs 1 stamina.
-          </li>
-        </ul>
-        <p>Dash actions consume stamina. If you choose not to
-          dash, you can move a close at no stamina cost.</p>
-      </li>
-      <li>
-        <b>Magic</b>: Actions unlocked by levelling up{" "}
-        <Link to={getHandbookPageRoute("rules", "characters")}>
-          magic skills
-        </Link>
-        .
-      </li>
-      <li>
-        <b>Item</b>: Actions unlocked by eqipping items.
-      </li>
-    </ul>
-    <p>
-      These standard actions are a guide on what you can do, what the
-      requirements and what the outcome may be. You don't have to do an action
+      Every character has a list of standard actions they can do. Some actions may be common to
+      all characters, others unlocked from acquiring items or progressing magic skills.
+      These actions are a guide on what you can do, what the
+      requirements are and what the outcome may be. You don't have to do an action
       from the list. Instead, you can describe an action and your intent to the
       GM. You could try to trip, grapple or disarm an enemy, mount a creature,
       or shout an insult to provoke your foe. Whatever you do, the GM will
       decide whether a check is required, and the outcome based on the situation
       and check result.
+    </p>
+    <p>
+      Some actions have a stamina cost. Performing these action depletes your
+      stamina. If the stamina cost is higher than your remaining stamina, you
+      cannot do it.
     </p>
     <h2>Duration</h2>
     <p>
@@ -105,7 +62,7 @@ const main = (
       An action may specify a range and an area of effect. Range determines how
       far the target point can be located from you. Area of effect determines
       how big of an area the action can impact. You choose the size (not
-      exceeding the maximum) and shape (circle, cone or line) of the affected
+      exceeding the specified maximum distance) and shape (circle, cone or line) of the affected
       area. All things within the area are affected, friend or foe. If range or
       area of effect is not stated, then you can only target a single thing that
       is within reach to you.
@@ -120,11 +77,12 @@ const main = (
     </p>
     <h2>Movement</h2>
     <p>
-      You can move by doing a Move and Dash action. The amount of distance
-      traversed is dependent on your speed and action chosen.
+      Moving is an action. You can either perform a standard move action to move a Close distance, or
+      a dash to move the distance specified for your character's speed. You can perform multiple move
+      and dash actions on your turn.
     </p>
     <p>
-      Some terrain may hinder your movement (mud, dense bush). Other
+      Some terrain (mud, dense bush) may hinder your ability to move or dash. Other
       environments may include hazards (unstable bridges, slippery surfaces)
       which require a check. The GM should decide and disclose when these
       conditions apply based on the scenario.
@@ -142,7 +100,7 @@ const main = (
       Strong hits deal double damage.
     </p>
     <Callout variant="tip">
-      You attempt to Brawl a bandit with a Moderate DR. Your Strength is level
+      You attempt to Punch a bandit with a Moderate DR. Your Strength is level
       5, so you roll a d8. If you roll five or above, you succeed a strong hit
       and deal 2 force damage instead of 1. A roll of 4 meets the difficulty and
       hits normally for 1 force damage. A roll of 3 or less misses.
@@ -154,7 +112,7 @@ const main = (
       check applies.
     </p>
     <p>
-      Most often, you use a reaction to evade an attack. Roll the relevant skill
+      Most often you use a reaction to evade an attack. Roll the relevant skill
       and meet or beat the attacker's DR to avoid the attack and its effects.
       There are three standard evasions.
     </p>
@@ -181,7 +139,8 @@ const main = (
     <p>
       Flammable objects and creatures can catch fire. Whilst on fire, you take
       one fire damage at the start of your turn. You can spend an action to
-      douse the flames and remove the infliction.
+      douse the flames and remove the infliction. If you have fire armour, you
+      cannot catch fire.
     </p>
     <p>
       Fire spreads. If a burning creature moves through flammable terrain or
@@ -196,11 +155,10 @@ const main = (
     </p>
     <h2>Morale</h2>
     <p>
-      Most foes won't fight to the death. When an opponent drops to half their
+      Most foes won't fight to the death. When an opponent drops below half their
       health, sees their leader fall, or finds themselves clearly outnumbered,
-      they look for a way out. If there's a path to flee, they'll take it. A
-      person who is surrounded with no escape will throw down their weapons and
-      surrender. A beast will bare its teeth and hold its ground, but won't
+      they look for a way out. If there's a path to flee, they'll take it. If
+      surrounded with no escape, they may surrender or hold their stance, but won't
       press the attack unless provoked.
     </p>
     <p>

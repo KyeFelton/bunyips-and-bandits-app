@@ -13,7 +13,6 @@ import { WikiContent } from "../../../models/wikiContent";
 import { Callout, WikiPage } from "../../../components/WikiPage";
 import summonerImage from "../../../images/handbook/summoner.png";
 import {
-  getHandbookPageRoute,
   getHandbookSubsectionPageRoute,
 } from "../../../routes";
 import { AllSkillProgressions } from "../../../data/skillProgressions";
@@ -305,42 +304,45 @@ const main = (
       You can begin with training in one magic skill. This skill starts at level
       one and can be improved over time. As you level up your magic skill,
       you'll unlock new actions and traits. Each school of magic has a distinct
-      flavour. See{" "}
-      <Link to={getHandbookPageRoute("setting", "magic")}>Magic</Link> for more
-      details.
+      flavour.
     </p>
     <MagicSkillCards skills={magicSkills} />
 
     <h2>Describing Your Character</h2>
-    <p>Describe your character beyond the archetypes to give more flavour.</p>
-    <p>
-      Start off with the basics. What is their name, age and gender. Then start
-      to understand their personality. Any distinguishing features, the way they
-      carry themselves, a scar they won't explain. Are they loud and easy to
-      read, or guarded and hard to get a word out of? Identify a virtue that
-      makes them worth following, and a flaw gives them room to develop.
-      Finally, consider what motivates your character to explain why they're out
-      on an adventure in the first place.
-    </p>
-    <p>
-      Next, write about their past. Where did they come from? What shaped them?
+    <p>The final step is to bring your character to life. Try to describe them beyond the standard archetypes.
+      Start off with an idea in my mind, then write about their past.
+      Where did they come from? What shaped them?
       A few lines gives the GM hooks to weave your character into the world. If
       you've got a grudge against a merchant guild, expect it to come up. If you
-      had a traumatic experience with spiders, prepare to face them. The GM may
-      also award your character custom traits or items to begin with. You may
-      have a family heirloom with magical properties. Perhaps you learnt to
+      had a traumatic experience with spiders, prepare to face them.
+    </p>
+    <p>
+      Depending on your backstory, you may want
+      to give your character custom traits or items to begin with. You may
+      have a family heirloom with magical properties, or perhaps you learnt to
       communicate with wildlife from a rural upbringing.
+      Customising your character is up to you and the GM's own discretion.
+    </p>
+    <p>
+      Finally, articulate your character's personality and motivation. You can write a description about your character in your own words, or you can choose from the
+      pre-filled options for the following.
+      <ul>
+        <li>A personality trait that they're known for</li>
+        <li>A virtue that that makes them worth following</li>
+        <li>A flaw gives them room to develop</li>
+        <li>A motive to explain why they're out on an adventure in the first place</li>
+      </ul>
     </p>
     <Callout variant="tip">
-      Jackie is quiet and deliberate, green-scaled, with a thin scar across her
-      left eye that she won't explain. She served six years in a border garrison
-      before a bad order got her unit killed. She's on the road north to find
-      the officer who gave that command. Her virtue is steadiness under
-      pressure. Her flaw is that she defers to authority even when she
-      shouldn't.
+      Ked grew up on a hardscrabble farm in the bush, driven to banditry after the mayor's
+      men drove his family off their land. Now he roams the countryside as a folk hero to the
+      poor and a wanted outlaw to the crown. He is most welHe is fiercely loyal to his mates and generous in
+      sharing his loot. He has a hot temper that turns any insult into a feud. He keeps one
+      step ahead of the bounty hunters, with the aim to raise enough coin to buy his friends'
+      and family's friend.
     </Callout>
     <p>
-      You don't need every answer before the first session. A lot of the best
+      You don't need every answer before the first session. Some of the best
       character moments come from figuring things out at the table. Focus on
       hitting the key elements so the GM has something to work with.
     </p>

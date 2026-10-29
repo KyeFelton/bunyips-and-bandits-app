@@ -428,7 +428,8 @@ const main = (
     </table>
     <p>
       Characters can move through different means. A distance is assigned to each
-      of your movement types to denote how far you can move in a single dash action.
+      movement type to denote how far you can move in a quick dash.
+      If a movement type is not specified for your character, you cannot do it.
     </p>
     <table className="md:mx-4">
       <thead>
