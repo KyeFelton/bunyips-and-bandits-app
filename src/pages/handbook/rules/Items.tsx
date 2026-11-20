@@ -6,35 +6,12 @@ import { Input } from "../../../components/ui/input";
 import { WikiPage } from "../../../components/WikiPage";
 import { AllItems } from "../../../data/items";
 import { ItemType } from "../../../enums/ItemType";
-import { OngoingEffect } from "../../../models/effect";
 import { Item } from "../../../models/items";
 import { ItemIcon } from "../../../components/icons/ItemIcon";
 import { cn } from "../../../utils/cn";
 import { pascalToSentence } from "../../../utils/capitalize";
-
-function formatEquippedEffect(effect: OngoingEffect): string {
-  if (effect.weapon) {
-    const parts: string[] = [];
-    if (effect.weapon.bonus) parts.push(`+${effect.weapon.bonus}`);
-    if (effect.weapon.damageType) parts.push(effect.weapon.damageType);
-    parts.push("weapon damage");
-    return parts.join(" ");
-  }
-  if (effect.armour) {
-    const bonus = effect.armour.bonus ? `+${effect.armour.bonus}` : "";
-    return `${bonus} ${effect.armour.damageType} armour`.trim();
-  }
-  if (effect.body?.bonus) return `+${effect.body.bonus} body`;
-  if (effect.mind?.bonus) return `+${effect.mind.bonus} mind`;
-  if (effect.stamina?.bonus) return `+${effect.stamina.bonus} stamina`;
-  if (effect.actions?.bonus) return `+${effect.actions.bonus} actions`;
-  if (effect.skill) {
-    const bonus = effect.skill.bonus ? `+${effect.skill.bonus}` : "";
-    return `${bonus} ${effect.skill.skillType}`.trim();
-  }
-  if (effect.custom) return effect.custom;
-  return "";
-}
+import { buildDescription } from "../../../utils/items";
+import { RichDescription } from "../../../components/RichDescription";
 
 function ItemCard({ item }: { item: Item }) {
   return (
@@ -52,54 +29,7 @@ function ItemCard({ item }: { item: Item }) {
         )}
       </div>
 
-      {item.description && (
-        <p className="text-sm text-muted-foreground">{item.description}</p>
-      )}
-
-      {item.equippedEffects && item.equippedEffects.length > 0 && (
-        <div className="space-y-1">
-          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-            When Equipped
-          </p>
-          <ul className="space-y-0.5">
-            {item.equippedEffects.map((effect, i) => {
-              const text = formatEquippedEffect(effect);
-              return text ? (
-                <li key={i} className="text-sm">
-                  {text}
-                </li>
-              ) : null;
-            })}
-          </ul>
-        </div>
-      )}
-
-      {item.consumedEffect && (
-        <div className="space-y-1">
-          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-            When Consumed
-          </p>
-          <div className="text-sm space-y-0.5">
-            {item.consumedEffect.stamina !== undefined && (
-              <p>+{item.consumedEffect.stamina} stamina</p>
-            )}
-            {item.consumedEffect.body !== undefined && (
-              <p>+{item.consumedEffect.body} body</p>
-            )}
-            {item.consumedEffect.mind !== undefined && (
-              <p>+{item.consumedEffect.mind} mind</p>
-            )}
-            {item.consumedEffect.condition && (
-              <p className="italic">{item.consumedEffect.condition}</p>
-            )}
-            {item.consumedEffect.custom && (
-              <p className="text-muted-foreground">
-                {item.consumedEffect.custom}
-              </p>
-            )}
-          </div>
-        </div>
-      )}
+      <RichDescription className="text-sm text-muted-foreground" text={[item.description, buildDescription(item)].join(" ")} />
 
       <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground pt-1 border-t border-muted mt-auto">
         {item.defaultCost !== undefined && (
@@ -107,7 +37,6 @@ function ItemCard({ item }: { item: Item }) {
         )}
         <span>{item.slots === 1 ? "1 slot" : `${item.slots} slots`}</span>
         {item.singleUse && <span>Single use</span>}
-        {item.stackable && <span>Stackable</span>}
       </div>
     </Card>
   );

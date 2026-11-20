@@ -8,7 +8,7 @@ type Props = {
 
 export const BodyIcon = ({ size = 16, className = "" }: Props) => {
   const props = {
-    className: cn("inline-flex align-text-text-bottom", className),
+    className: cn("inline-flex", className),
     width: size,
     height: size,
   };
@@ -17,7 +17,7 @@ export const BodyIcon = ({ size = 16, className = "" }: Props) => {
 
 export const MindIcon = ({ size = 16, className = "" }: Props) => {
   const props = {
-    className: cn("inline-flex align-text-text-bottom", className),
+    className: cn("inline-flex", className),
     width: size,
     height: size,
   };

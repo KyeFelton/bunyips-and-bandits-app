@@ -6,11 +6,11 @@ export const ChloroformAndCloth: Item = {
   equippedEffects: [
     {
       custom:
-        "When pressed against a target's face, the target is knocked unconscious for 30min. It takes 1min to knock a medium or smaller sized creature unconscious, and 5min for a larger creature.",
+        "When pressed against a target's face for a short duration, the target is knocked unconscious.",
     },
   ],
   singleUse: false,
   slots: 1,
   defaultCost: 220,
-  itemType: ItemType.Poison,
+  itemType: ItemType.Consumable,
 };

@@ -6,10 +6,9 @@ export const FlaskOfAlchemistFire: Item = {
   consumedEffect: {
     custom: "Can be thrown at a target to make them catch fire.",
   },
-  equippedEffects: [],
   singleUse: true,
   slots: 1,
   stackable: true,
   defaultCost: 50,
-  itemType: ItemType.Explosive,
+  itemType: ItemType.Ammunition,
 };

@@ -1,6 +1,6 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useCallback, useEffect, useState } from "react";
-import { GraduationCap, Package, Star, Wallet } from "lucide-react";
+import { GraduationCap, Package, Star } from "lucide-react";
 import {
   backgroundAtom,
   backgroundDataAtom,
@@ -10,16 +10,13 @@ import {
 import { AllBackgrounds } from "./../data/backgrounds";
 import {
   Background,
-  MONEY_TIER_AMOUNTS,
-  MoneyTier,
   StartingItemGroup,
 } from "./../models/backgrounds";
 import { InventoryStack, Item } from "./../models/items";
 import { ItemType } from "./../enums/ItemType";
 import { ItemLocation } from "./../enums/ItemLocation";
-import { WearType } from "./../enums/WearType";
 import { cn } from "./../utils/cn";
-import { ACCESSORY_INDICES, CLOTHES_INDEX } from "./../utils/items";
+import { ACCESSORY_INDICES, ARMOUR_INDEX, CLOTHES_INDEX, isHoldableItem, isWearableItem } from "./../utils/items";
 import { pascalToSentence } from "./../utils/capitalize";
 import { BackgroundIcon } from "./icons/BackgroundIcon";
 import { SkillIcon } from "./icons/SkillIcon";
@@ -32,23 +29,13 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "./ui/carousel";
+import { RichDescription } from "./RichDescription";
 
 const STARTING_ITEM_PREFIX = "starting_item_";
 
 function itemLocationFor(item: Item): ItemLocation {
-  if (
-    item.wearType === WearType.Clothes ||
-    item.wearType === WearType.Accessory ||
-    item.itemType === ItemType.Armour
-  ) {
+  if (isWearableItem(item)) {
     return ItemLocation.Worn;
-  }
-  if (
-    item.itemType === ItemType.SlashWeapon ||
-    item.itemType === ItemType.ForceWeapon ||
-    item.itemType === ItemType.RangedWeapon
-  ) {
-    return ItemLocation.Held;
   }
   return ItemLocation.Carried;
 }
@@ -66,8 +53,9 @@ function stacksForGroup(group: StartingItemGroup): InventoryStack[] {
       quantity: 1,
     };
     if (location === ItemLocation.Worn) {
-      if (item.wearType === WearType.Clothes) stack.index = CLOTHES_INDEX;
-      else if (item.wearType === WearType.Accessory)
+      if (item.itemType === ItemType.Clothing) stack.index = CLOTHES_INDEX;
+      if (item.itemType === ItemType.Armour) stack.index = ARMOUR_INDEX;
+      else if (item.itemType === ItemType.Accessory)
         stack.index = ACCESSORY_INDICES[0];
     } else if (location === ItemLocation.Held) {
       stack.index = heldIndex;
@@ -82,36 +70,6 @@ function stacksForGroup(group: StartingItemGroup): InventoryStack[] {
 function defaultGroupFor(bg: Background): string | null {
   return bg.startingItems[0].name ?? null;
 }
-
-type MoneyTierCardProps = {
-  tier: MoneyTier;
-  amount: number;
-  selected: boolean;
-  onSelect: () => void;
-};
-
-const MoneyTierCard = ({
-  tier,
-  amount,
-  selected,
-  onSelect,
-}: MoneyTierCardProps) => (
-  <button
-    type="button"
-    onClick={onSelect}
-    className={cn(
-      "text-left p-3 rounded-lg border-2 transition-colors duration-150 flex flex-col gap-1",
-      selected
-        ? "border-primary bg-primary/10"
-        : "border-muted hover:border-primary/50 bg-transparent",
-    )}
-  >
-    <p className="font-semibold text-sm">{tier}</p>
-    <p className="text-sm text-muted-foreground">
-      {amount.toLocaleString()} coins
-    </p>
-  </button>
-);
 
 type GroupCardProps = {
   group: StartingItemGroup;
@@ -132,6 +90,11 @@ const GroupCard = ({ group, selected, onSelect }: GroupCardProps) => (
   >
     <p className="font-semibold">{group.name}</p>
     <div className="space-y-1.5">
+      {group.money > 0 && (
+        <p className="text-sm">
+          {group.money} coins
+        </p>
+      )}
       {group.items.map((item) => (
         <div key={item.name} className="flex flex-col gap-0.5">
           <div className="flex items-center gap-1.5">
@@ -142,9 +105,6 @@ const GroupCard = ({ group, selected, onSelect }: GroupCardProps) => (
               </span>
             )}
           </div>
-          {/* {item.equippedEffects && (
-            <ItemEffectList equippedEffects={item.equippedEffects} inline />
-          )} */}
         </div>
       ))}
     </div>
@@ -155,12 +115,8 @@ export const BackgroundStep = () => {
   const [selectedBackground, setBackground] = useAtom(backgroundAtom);
   const backgroundData = useAtomValue(backgroundDataAtom);
   const setItems = useSetAtom(itemsAtom);
-  const currentMoney = useAtomValue(moneyAtom);
   const setMoney = useSetAtom(moneyAtom);
   const [selectedGroupName, setSelectedGroupName] = useState<string | null>(
-    null,
-  );
-  const [selectedMoneyTier, setSelectedMoneyTier] = useState<MoneyTier | null>(
     null,
   );
   const [api, setApi] = useState<CarouselApi>();
@@ -174,8 +130,9 @@ export const BackgroundStep = () => {
         ...prev.filter((s) => !s.id.startsWith(STARTING_ITEM_PREFIX)),
         ...newStacks,
       ]);
+      setMoney(group.money);
     },
-    [setItems],
+    [setItems, setMoney],
   );
 
   const handleBackgroundChange = useCallback(
@@ -186,11 +143,6 @@ export const BackgroundStep = () => {
       const defaultGroup = bg.startingItems[0] ?? null;
       setSelectedGroupName(defaultGroup?.name ?? null);
       if (defaultGroup) applyGroup(defaultGroup);
-      const defaultTier = bg.availableMoneyTiers[0];
-      if (defaultTier) {
-        setSelectedMoneyTier(defaultTier);
-        setMoney(MONEY_TIER_AMOUNTS[defaultTier]);
-      }
     },
     [setBackground, applyGroup, setMoney],
   );
@@ -201,14 +153,6 @@ export const BackgroundStep = () => {
       applyGroup(group);
     },
     [applyGroup],
-  );
-
-  const handleMoneyTierSelect = useCallback(
-    (tier: MoneyTier) => {
-      setSelectedMoneyTier(tier);
-      setMoney(MONEY_TIER_AMOUNTS[tier]);
-    },
-    [setMoney],
   );
 
   const onSelect = useCallback(
@@ -244,22 +188,6 @@ export const BackgroundStep = () => {
     const defaultGroup = backgroundData.startingItems[0];
     if (defaultGroup) applyGroup(defaultGroup);
   }, [backgroundData, selectedGroupName, applyGroup]);
-
-  // Sync money tier when backgroundData first resolves
-  useEffect(() => {
-    if (!backgroundData || selectedMoneyTier !== null) return;
-    const inferredTier = (
-      Object.entries(MONEY_TIER_AMOUNTS) as [MoneyTier, number][]
-    ).find(([, amount]) => amount === currentMoney)?.[0];
-    const tier =
-      inferredTier && backgroundData.availableMoneyTiers.includes(inferredTier)
-        ? inferredTier
-        : backgroundData.availableMoneyTiers[0];
-    if (tier) {
-      setSelectedMoneyTier(tier);
-      setMoney(MONEY_TIER_AMOUNTS[tier]);
-    }
-  }, [backgroundData, selectedMoneyTier, currentMoney, setMoney]);
 
   return (
     <div className="space-y-6">
@@ -338,24 +266,24 @@ export const BackgroundStep = () => {
       {/* Background Details */}
       {backgroundData && (
         <div className="space-y-6 pt-6 border-t border-muted-foreground/20">
-          {/* Expertise Skills */}
+          {/* Starting Skill Levels */}
           <div>
             <h3 className="font-semibold mb-4 flex items-center gap-2">
               <GraduationCap className="h-5 w-5" />
               Expertise
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-              {backgroundData.expertiseSkills.length === 0 && (
+              {backgroundData.startingSkillLevels.length === 0 && (
                 <p className="text-sm text-muted-foreground">
                   No expertise skills
                 </p>
               )}
-              {backgroundData.expertiseSkills.map((skill) => (
-                <div key={skill} className="flex items-center gap-2">
-                  <SkillIcon type={skill as SkillType} />
+              {backgroundData.startingSkillLevels.map((skillLevel) => (
+                <div key={skillLevel.skill} className="flex items-center gap-2">
+                  <SkillIcon type={skillLevel.skill as SkillType} />
                   <div>
-                    <div className="text-sm font-medium">{skill}</div>
-                    <div>Level 5</div>
+                    <div className="text-sm font-medium">{skillLevel.skill}</div>
+                    <div>Level {skillLevel.level}</div>
                   </div>
                 </div>
               ))}
@@ -374,32 +302,9 @@ export const BackgroundStep = () => {
               {backgroundData.traits.map((trait, index) => (
                 <div key={index}>
                   <p className="text-sm text-muted-foreground">
-                    {trait.description}
+                    <RichDescription text={trait.description} />
                   </p>
                 </div>
-              ))}
-            </div>
-          </div>
-          {/* Starting Money */}
-          <div className="space-y-4 pt-6 border-t border-muted-foreground/20">
-            <h3 className="font-semibold flex items-center gap-2">
-              <Wallet className="h-5 w-5" />
-              Starting Money
-            </h3>
-            {backgroundData.availableMoneyTiers.length > 1 && (
-              <p className="text-sm text-muted-foreground">
-                Choose how much coin you begin with
-              </p>
-            )}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              {backgroundData.availableMoneyTiers.map((tier) => (
-                <MoneyTierCard
-                  key={tier}
-                  tier={tier}
-                  amount={MONEY_TIER_AMOUNTS[tier]}
-                  selected={selectedMoneyTier === tier}
-                  onSelect={() => handleMoneyTierSelect(tier)}
-                />
               ))}
             </div>
           </div>

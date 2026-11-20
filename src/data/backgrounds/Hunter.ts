@@ -1,34 +1,38 @@
 import { Background } from "../../models/backgrounds";
 import { SkillType } from "../../enums/SkillType";
 import { Hunter as Trait } from "../traits/Hunter";
-import { Boomerang } from "../items/Boomerang";
-import { Caltrops } from "../items/Caltrops";
-import { Cloak } from "../items/Disguise";
-import { HuntingKnife } from "../items/HuntingKnife";
-import { IronSpikes } from "../items/IronSpikes";
-import { Rope } from "../items/Rope";
-import { Torch } from "../items/Torch";
-import { TravellingClothes } from "../items/TravellingClothes";
+import { FishingNet, FlintAndSteel, FootholdTrap, HuntingKnife, Rope, SteelJavelin, Torch } from "../items";
 
 export const Hunter: Background = {
   name: "Hunter",
   description:
-    "You've made your living tracking and hunting game in the wilderness. Whether you're a tracker following game through the outback, a ranger patrolling the bush, or a professional hunter supplying meat to settlements, you know how to read the land and survive in the wild.",
-  expertiseSkills: [SkillType.Stealth, SkillType.Nature],
-  traits: [Trait],
-  availableMoneyTiers: ["Poor", "Average"],
-  startingItems: [
+    "You've made your living tracking and hunting game in the wilderness. You could be a huntsman following game through the outback, a trapper collecting pelts, or a fisherman searching the open seas for a big catch.",
+  startingSkillLevels: [
     {
-      name: "Tracker",
-      items: [TravellingClothes, HuntingKnife, Rope, Torch],
+      skill: SkillType.Nature,
+      level: 5
     },
     {
-      name: "Ranger",
-      items: [Cloak, HuntingKnife, Boomerang, Rope],
+      skill: SkillType.Perception,
+      level: 3
+    }
+  ],
+  traits: [Trait],
+  startingItems: [
+    {
+      name: "Huntsman",
+      money: 10,
+      items: [HuntingKnife, SteelJavelin, Rope, Torch, FlintAndSteel],
     },
     {
       name: "Trapper",
-      items: [TravellingClothes, HuntingKnife, IronSpikes, Caltrops],
+      money: 10,
+      items: [HuntingKnife, FootholdTrap, Rope],
+    },
+    {
+      name: "Fisherman",
+      money: 10,
+      items: [HuntingKnife, FishingNet, SteelJavelin],
     },
   ],
 };

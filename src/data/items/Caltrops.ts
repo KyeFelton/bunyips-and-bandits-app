@@ -5,10 +5,10 @@ export const Caltrops: Item = {
   name: "Caltrops",
   consumedEffect: {
     custom:
-      "When stepped on, deals 2 Slash damage and ends movement that turn.",
+      "When stepped on, deals 2 {{damage:slash}} damage and ends movement that turn.",
   },
   singleUse: true,
   slots: 1,
   defaultCost: 2,
-  itemType: ItemType.Trap,
+  itemType: ItemType.Tool,
 };

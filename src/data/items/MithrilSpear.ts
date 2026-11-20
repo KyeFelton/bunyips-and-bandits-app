@@ -13,11 +13,11 @@ export const MithrilSpear: Item = {
     },
     {
       custom:
-        "Creatures that are 2m away from you are considered adjacent when attacking with this weapon.",
+        "When a seen enemy moves from Near to Close distance with you, you may immediately make a free attack against them with the spear.",
     },
   ],
   singleUse: false,
   slots: 2,
-  defaultCost: 1000,
-  itemType: ItemType.SlashWeapon,
+  defaultCost: 1200,
+  itemType: ItemType.Weapon,
 };

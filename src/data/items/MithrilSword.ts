@@ -14,6 +14,6 @@ export const MithrilSword: Item = {
   ],
   singleUse: false,
   slots: 1,
-  defaultCost: 1000,
-  itemType: ItemType.SlashWeapon,
+  defaultCost: 1200,
+  itemType: ItemType.Weapon,
 };

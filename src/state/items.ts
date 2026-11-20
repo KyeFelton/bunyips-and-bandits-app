@@ -1,10 +1,10 @@
 import { atom } from "jotai";
 import { ItemLocation } from "../enums/ItemLocation";
 import { SkillType } from "../enums/SkillType";
-import { WearType } from "../enums/WearType";
 import { CharacterItem } from "../models/items";
 import {
   ACCESSORY_INDICES,
+  ARMOUR_INDEX,
   CLOTHES_INDEX,
   HAND_SLOT_COUNT,
   LEFT_HAND_INDEX,
@@ -14,8 +14,9 @@ import {
   isPartialSlotItem,
 } from "../utils/items";
 import { characterItemsAtom, skillModifiersAtom } from "./character";
+import { ItemType } from "../enums/ItemType";
 
-const BASE_BACKPACK_SLOTS = 5;
+const BASE_BACKPACK_SLOTS = 8;
 
 // Row builders
 
@@ -25,7 +26,8 @@ const displayName = (item: CharacterItem): string =>
 const itemRow = (
   slotIndex: number,
   label: string,
-  item?: CharacterItem
+  itemType?: ItemType,
+  item?: CharacterItem,
 ): SlotDisplayRow => ({
   slotIndex,
   label,
@@ -33,6 +35,7 @@ const itemRow = (
   rowSpan: 1,
   rowUnits: item?.quantity ?? 0,
   itemName: item?.name,
+  itemType: itemType,
   displayName: item ? displayName(item) : undefined,
   item,
   stackId: item?.id,
@@ -40,15 +43,17 @@ const itemRow = (
 
 const buildWornRows = (items: CharacterItem[]): SlotDisplayRow[] => {
   const worn = items.filter((item) => item.location === ItemLocation.Worn);
-  const clothes = worn.find((item) => item.wearType === WearType.Clothes);
+  const clothes = worn.find((item) => item.itemType === ItemType.Clothing);
+  const armour = worn.find((item) => item.itemType === ItemType.Armour);
   const accessories = worn
-    .filter((item) => item.wearType === WearType.Accessory)
+    .filter((item) => item.itemType === ItemType.Accessory)
     .sort((a, b) => (a.index ?? 99) - (b.index ?? 99));
 
   return [
-    itemRow(CLOTHES_INDEX, "Clothes", clothes),
+    itemRow(CLOTHES_INDEX, "Clothes", ItemType.Clothing, clothes),
+    itemRow(ARMOUR_INDEX, "Armour", ItemType.Armour, armour),
     ...ACCESSORY_INDICES.map((slotIndex, position) =>
-      itemRow(slotIndex, "Accessory", accessories[position])
+      itemRow(slotIndex, "Accessory", ItemType.Accessory, accessories[position]),
     ),
   ];
 };
@@ -81,7 +86,7 @@ const buildHeldRows = (items: CharacterItem[]): SlotDisplayRow[] => {
   }
 
   const unassigned = held.filter(
-    (item) => item.index !== LEFT_HAND_INDEX && item.index !== RIGHT_HAND_INDEX
+    (item) => item.index !== LEFT_HAND_INDEX && item.index !== RIGHT_HAND_INDEX,
   );
   const left =
     held.find((item) => item.index === LEFT_HAND_INDEX) ?? unassigned.shift();
@@ -89,17 +94,17 @@ const buildHeldRows = (items: CharacterItem[]): SlotDisplayRow[] => {
     held.find((item) => item.index === RIGHT_HAND_INDEX) ?? unassigned.shift();
 
   return [
-    itemRow(LEFT_HAND_INDEX, "Left hand", left),
-    itemRow(RIGHT_HAND_INDEX, "Right hand", right),
+    itemRow(LEFT_HAND_INDEX, "Left hand", undefined, left),
+    itemRow(RIGHT_HAND_INDEX, "Right hand", undefined, right),
   ];
 };
 
 const buildCarriedRows = (
   items: CharacterItem[],
-  capacity: number
+  capacity: number,
 ): SlotDisplayRow[] => {
   const carried = items.filter(
-    (item) => item.location === ItemLocation.Carried
+    (item) => item.location === ItemLocation.Carried,
   );
   const rows: SlotDisplayRow[] = [];
   let slot = 0;
@@ -107,7 +112,7 @@ const buildCarriedRows = (
   for (const item of carried) {
     if (isPartialSlotItem(item)) {
       slot += 1;
-      rows.push(itemRow(slot - 1, `Slot ${slot}`, item));
+      rows.push(itemRow(slot - 1, `Slot ${slot}`, undefined, item));
       continue;
     }
 
@@ -149,7 +154,7 @@ const buildCarriedRows = (
 const buildStoredRows = (items: CharacterItem[]): SlotDisplayRow[] => {
   const stored = items.filter((item) => item.location === ItemLocation.Stored);
   const rows = stored.map((item, index) =>
-    itemRow(index, item.storageLocation ?? "", item)
+    itemRow(index, item.storageLocation ?? "", undefined, item),
   );
   rows.push(itemRow(stored.length, ""));
   return rows;
@@ -160,11 +165,11 @@ const buildStoredRows = (items: CharacterItem[]): SlotDisplayRow[] => {
 // Backpack capacity is slot-based: 5 + the character's Strength modifier.
 export const backpackSlotCapacityAtom = atom((get) => {
   const strengthModifier = get(skillModifiersAtom)[SkillType.Strength] ?? 0;
-  return Math.max(1, BASE_BACKPACK_SLOTS + strengthModifier);
+  return Math.max(1, BASE_BACKPACK_SLOTS + strengthModifier * 2);
 });
 
 export const carriedSlotUsageAtom = atom((get) =>
-  getCarriedSlotUsage(get(characterItemsAtom))
+  getCarriedSlotUsage(get(characterItemsAtom)),
 );
 
 // Total value of all carried/worn/held/stored items, based on each item's
@@ -172,8 +177,8 @@ export const carriedSlotUsageAtom = atom((get) =>
 export const assetsValueAtom = atom((get) =>
   get(characterItemsAtom).reduce(
     (total, item) => total + (item.defaultCost ?? 0) * item.quantity,
-    0
-  )
+    0,
+  ),
 );
 
 export const inventoryRowsAtom = atom((get) => {

@@ -55,9 +55,9 @@ export const SlotInventoryTable = ({
   const getGroupHoverHandlers = (groupKey: string | null) =>
     groupKey
       ? {
-          onMouseEnter: () => setHoveredGroupKey(groupKey),
-          onMouseLeave: () => setHoveredGroupKey(null),
-        }
+        onMouseEnter: () => setHoveredGroupKey(groupKey),
+        onMouseLeave: () => setHoveredGroupKey(null),
+      }
       : {};
 
   const isGroupHovered = (groupKey: string | null) =>
@@ -144,6 +144,7 @@ export const SlotInventoryTable = ({
                   Add item
                 </Button>
               }
+              typeFilter={row.itemType}
             />
           ) : (
             item &&

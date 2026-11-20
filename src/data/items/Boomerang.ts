@@ -13,11 +13,11 @@ export const Boomerang: Item = {
     },
     {
       custom:
-        "If thrown and misses the target, returns back to thrower.",
+        "If thrown at a target and misses, returns back to your hand.",
     },
   ],
   singleUse: false,
   slots: 1,
   defaultCost: 50,
-  itemType: ItemType.RangedWeapon,
+  itemType: ItemType.Weapon,
 };

@@ -5,7 +5,7 @@ import { ItemType } from "../../enums/ItemType";
 export const WaterHammerOfTytos: Item = {
   name: "Water Hammer of Tytos",
   description:
-    "The water hammer is believed to be the weapon gifted by Eva to Tytos to fight the Night Dragon. The hammer is made of an unknown, marine blue metal, and decorated with symbols of water.",
+    "A warhammer believed to be the weapon gifted by Eva to Tytos to fight the Night Dragon. Made of an unknown, marine blue metal, and decorated with symbols of water.",
   equippedEffects: [
     {
       weapon: {
@@ -46,5 +46,5 @@ export const WaterHammerOfTytos: Item = {
   ],
   singleUse: false,
   slots: 2,
-  itemType: ItemType.ForceWeapon,
+  itemType: ItemType.Weapon,
 };

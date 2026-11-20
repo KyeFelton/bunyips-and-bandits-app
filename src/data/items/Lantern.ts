@@ -6,5 +6,5 @@ export const Lantern: Item = {
   description: "A metal-framed oil lantern that casts a steady light. Brighter and more windproof than a torch, but requires oil to burn.",
   singleUse: false,
   slots: 1,
-  itemType: ItemType.Gear,
+  itemType: ItemType.Tool,
 };

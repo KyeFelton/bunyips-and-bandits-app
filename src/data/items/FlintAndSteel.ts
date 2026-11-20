@@ -8,5 +8,5 @@ export const FlintAndSteel: Item = {
   singleUse: false,
   slots: 1,
   defaultCost: 5,
-  itemType: ItemType.Gear,
+  itemType: ItemType.Tool,
 };

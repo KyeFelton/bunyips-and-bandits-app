@@ -10,7 +10,7 @@ import {
   Leaf,
   Guitar,
   Pickaxe,
-  Sailboat,
+  Tent,
   HandFist,
   Swords,
   Wheat,
@@ -27,8 +27,8 @@ export const BackgroundIcon = ({ name, className = "h-4 w-4" }: Props) => {
       return <Hammer className={className} />;
     case "Bandit":
       return <HandFist className={className} />;
-    case "Drifter":
-      return <Sailboat className={className} />;
+    case "Traveller":
+      return <Tent className={className} />;
     case "Farmer":
       return <Wheat className={className} />;
     case "Herbalist":

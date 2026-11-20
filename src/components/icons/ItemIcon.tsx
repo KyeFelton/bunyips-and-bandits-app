@@ -13,6 +13,7 @@ import {
   HatGlasses,
   Shield,
   Beer,
+  Guitar,
 } from "lucide-react";
 import { ItemType } from "../../enums/ItemType";
 
@@ -25,36 +26,24 @@ export const ItemIcon = ({ itemType, className = "h-4 w-4" }: Props) => {
   if (!itemType) return null;
 
   switch (itemType) {
-    case ItemType.SlashWeapon:
+    case ItemType.Weapon:
       return <Sword className={className} />;
-    case ItemType.ForceWeapon:
-      return <Gavel className={className} />;
-    case ItemType.RangedWeapon:
-      return <Crosshair className={className} />;
     case ItemType.Armour:
       return <Shield className={className} />;
     case ItemType.Accessory:
       return <HatGlasses className={className} />;
-    case ItemType.Medical:
-      return <Cross className={className} />;
-    case ItemType.Concoction:
+    case ItemType.Consumable:
       return <FlaskConical className={className} />;
-    case ItemType.Poison:
-      return <FlaskConical className={className} />;
-    case ItemType.Explosive:
+    case ItemType.Ammunition:
       return <Bomb className={className} />;
-    case ItemType.Trap:
-      return <Asterisk className={className} />;
-    case ItemType.Gemstone:
+    case ItemType.Relic:
       return <Gem className={className} />;
-    case ItemType.Food:
-      return <Hamburger className={className} />;
-    case ItemType.Gear:
+    case ItemType.Tool:
       return <Wrench className={className} />;
     case ItemType.Clothing:
       return <Shirt className={className} />;
-    case ItemType.Drink:
-      return <Beer className={className} />;
+    case ItemType.Instrument:
+      return <Guitar className={className} />;
     default:
       return null;
   }

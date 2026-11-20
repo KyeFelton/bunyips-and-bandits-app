@@ -11,5 +11,5 @@ export const FeignDeathPotion: Item = {
   slots: 1,
   stackable: true,
   defaultCost: 800,
-  itemType: ItemType.Concoction,
+  itemType: ItemType.Consumable,
 };

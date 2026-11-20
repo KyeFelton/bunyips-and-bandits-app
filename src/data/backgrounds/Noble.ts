@@ -1,17 +1,17 @@
 import { Background } from "../../models/backgrounds";
-import { FineClothes } from "../items/FineClothes";
+import { SignetRing, TopHat } from "../items";
 
 export const Noble: Background = {
   name: "Noble",
   description:
-    "You were born to a great station family, raised on wool money and the quiet certainty that the world arranges itself around old names. The land worked for you. You simply spent its rewards.",
-  expertiseSkills: [],
+    "You were born to a wealthy family, raised on money and had the quiet certainty that the world arranges itself around you.",
+  startingSkillLevels: [],
   traits: [],
   startingItems: [
     {
       name: "Noble",
-      items: [FineClothes],
+      money: 10000,
+      items: [SignetRing, TopHat],
     },
   ],
-  availableMoneyTiers: ["Prosperous"],
 };

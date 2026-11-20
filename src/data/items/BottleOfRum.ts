@@ -8,5 +8,5 @@ export const BottleOfRum: Item = {
   singleUse: true,
   stackable: true,
   slots: 0.5,
-  itemType: ItemType.Drink,
+  itemType: ItemType.Consumable,
 };

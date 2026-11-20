@@ -8,15 +8,15 @@ export const WindstoneClub: Item = {
     {
       weapon: {
         damageType: DamageType.Force,
-        bonus: 1,
+        bonus: 2,
       },
     },
     {
-      custom: "Your target is knocked back 5m if medium sized or smaller.",
+      custom: "Your target is knocked back a Near distance if medium sized or smaller.",
     },
   ],
   singleUse: false,
   slots: 2,
   defaultCost: 2000,
-  itemType: ItemType.ForceWeapon,
+  itemType: ItemType.Weapon,
 };

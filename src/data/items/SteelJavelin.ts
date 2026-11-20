@@ -7,13 +7,17 @@ export const SteelJavelin: Item = {
   equippedEffects: [
     {
       weapon: {
-        bonus: 3,
+        bonus: 2,
         damageType: DamageType.Slash,
       },
     },
+    {
+      custom:
+        "When thrown, roll with advantage.",
+    }
   ],
   singleUse: false,
   slots: 1,
   defaultCost: 400,
-  itemType: ItemType.SlashWeapon,
+  itemType: ItemType.Weapon,
 };

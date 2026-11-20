@@ -18,7 +18,7 @@ import {
 import { AllSkillProgressions } from "../../../data/skillProgressions";
 import KinArticles from "./kin";
 import { AllBackgrounds } from "../../../data/backgrounds";
-import { Background, MONEY_TIER_AMOUNTS } from "../../../models/backgrounds";
+import { Background } from "../../../models/backgrounds";
 import { BackgroundIcon } from "../../../components/icons/BackgroundIcon";
 import { SkillIcon } from "../../../components/icons/SkillIcon";
 import { SkillType } from "../../../enums/SkillType";
@@ -130,13 +130,21 @@ function BackgroundCards({ backgrounds }: { backgrounds: Background[] }) {
               Expertise
             </p>
             <div className="flex flex-wrap gap-3">
-              {bg.expertiseSkills.map((skill) => (
-                <div key={skill} className="flex items-center gap-1.5">
-                  <SkillIcon type={skill as SkillType} className="h-4 w-4" />
-                  <span className="text-sm font-medium">{skill}</span>
+              {bg.startingSkillLevels.map((skillLevel) => (
+                <div key={skillLevel.skill} className="flex items-center gap-1.5">
+                  <SkillIcon type={skillLevel.skill as SkillType} className="h-4 w-4" />
+                  <span className="text-sm font-medium">{skillLevel.skill}: Level {skillLevel.level}</span>
                 </div>
+
+                // <div key={skillLevel.skill} className="flex items-center gap-2">
+                //   <SkillIcon type={skillLevel.skill as SkillType} />
+                //   <div>
+                //     <div className="text-sm font-medium">{skillLevel.skill}</div>
+                //     <div>Level {skillLevel.level}</div>
+                //   </div>
+                // </div>
               ))}
-              {bg.expertiseSkills.length === 0 && (
+              {bg.startingSkillLevels.length === 0 && (
                 <p className="text-sm">None</p>
               )}
             </div>
@@ -152,16 +160,6 @@ function BackgroundCards({ backgrounds }: { backgrounds: Background[] }) {
             ))}
             {bg.traits.length === 0 && <p className="text-sm">None</p>}
           </div>
-          <div className="space-y-1.5">
-            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-              Starting Money
-            </p>
-            <p className="text-sm text-muted-foreground">
-              {bg.availableMoneyTiers
-                .map((tier) => `${tier} (${MONEY_TIER_AMOUNTS[tier]} coins)`)
-                .join(", ")}
-            </p>
-          </div>
           {bg.startingItems && (
             <div className="space-y-2">
               <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
@@ -175,7 +173,7 @@ function BackgroundCards({ backgrounds }: { backgrounds: Background[] }) {
                   >
                     <span className="font-medium text-foreground">
                       {group.name}:
-                    </span>{" "}
+                    </span>{group.money > 0 ? ` ${group.money} coins, ` : " "}
                     {group.items.map((item) => item.name).join(", ")}
                   </div>
                 ))}
@@ -321,18 +319,18 @@ const main = (
       to give your character custom traits or items to begin with. You may
       have a family heirloom with magical properties, or perhaps you learnt to
       communicate with wildlife from a rural upbringing.
-      Customising your character is up to you and the GM's own discretion.
+      Customising your character is up to you and your GM's discretion.
     </p>
     <p>
-      Finally, articulate your character's personality and motivation. You can write a description about your character in your own words, or you can choose from the
-      pre-filled options for the following.
-      <ul>
-        <li>A personality trait that they're known for</li>
-        <li>A virtue that that makes them worth following</li>
-        <li>A flaw gives them room to develop</li>
-        <li>A motive to explain why they're out on an adventure in the first place</li>
-      </ul>
+      Finally, articulate your character's personality and motivation. You can write write your own detailed description, or you can simply choose from some
+      of the pre-filled options.
     </p>
+    <ul>
+      <li>A personality trait that they're known for</li>
+      <li>A virtue that that makes them worth following</li>
+      <li>A flaw gives them room to develop</li>
+      <li>A motive to explain why they're out on an adventure in the first place</li>
+    </ul>
     <Callout variant="tip">
       Ked grew up on a hardscrabble farm in the bush, driven to banditry after the mayor's
       men drove his family off their land. Now he roams the countryside as a folk hero to the

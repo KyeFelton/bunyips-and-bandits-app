@@ -6,5 +6,5 @@ export const FishingNet: Item = {
   description: "A weighted cast net for catching fish or entangling small creatures. Can be thrown to restrain a target.",
   singleUse: false,
   slots: 2,
-  itemType: ItemType.Gear,
+  itemType: ItemType.Tool,
 };

@@ -13,7 +13,7 @@ export const MithrilMace: Item = {
     },
   ],
   singleUse: false,
-  slots: 2,
-  defaultCost: 1000,
-  itemType: ItemType.ForceWeapon,
+  slots: 1,
+  defaultCost: 1200,
+  itemType: ItemType.Weapon,
 };

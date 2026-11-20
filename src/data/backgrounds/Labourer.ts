@@ -1,36 +1,43 @@
 import { Background } from "../../models/backgrounds";
 import { SkillType } from "../../enums/SkillType";
 import { Labourer as Trait } from "../traits/Labourer";
-import { BottleOfRum } from "../items/BottleOfRum";
-import { FishingNet } from "../items/FishingNet";
-import { Lantern } from "../items/Lantern";
-import { OilFlask } from "../items/OilFlask";
-import { Pickaxe } from "../items/Pickaxe";
-import { Rope } from "../items/Rope";
-import { SteelDagger } from "../items/SteelDagger";
-import { TravellingClothes } from "../items/TravellingClothes";
-import { WoodcutterAxe } from "../items/WoodcutterAxe";
-import { PlainClothes } from "../items/WorkClothes";
+import { BottleOfRum, FishingNet, Lantern, OilFlask, Pickaxe, Rope, SteelDagger, WoodcutterAxe, TimberWedge, SewingKit, FeatherDuster, MobCap } from "../items";
 
 export const Labourer: Background = {
   name: "Labourer",
   description:
-    "Years of hard physical work have built your strength and endurance. Whether you were a miner digging for gold, a logger felling timber in the bush, or a sailor working the docks of a bustling port, you've learned to push through exhaustion and keep working when others would quit.",
-  expertiseSkills: [SkillType.Strength, SkillType.Willpower],
+    "Years of hard physical work have built your strength and endurance. You could be a miner digging for gold, a logger felling timber in the bush, or a sailor working on a ship.",
+  startingSkillLevels: [
+    {
+      skill: SkillType.Strength,
+      level: 5
+    },
+    {
+      skill: SkillType.Willpower,
+      level: 3
+    }
+  ],
   traits: [Trait],
-  availableMoneyTiers: ["Poor"],
   startingItems: [
     {
-      name: "Miner",
-      items: [PlainClothes, Pickaxe, OilFlask, Lantern, BottleOfRum],
+      name: "Digger",
+      money: 10,
+      items: [Pickaxe, OilFlask, Lantern, BottleOfRum],
     },
     {
       name: "Logger",
-      items: [PlainClothes, WoodcutterAxe, Rope, BottleOfRum],
+      money: 10,
+      items: [WoodcutterAxe, TimberWedge, Rope, BottleOfRum],
     },
     {
       name: "Sailor",
-      items: [TravellingClothes, FishingNet, Rope, SteelDagger, BottleOfRum],
+      money: 10,
+      items: [FishingNet, Rope, SteelDagger, BottleOfRum],
+    },
+    {
+      name: "Maid",
+      money: 10,
+      items: [SewingKit, FeatherDuster, MobCap],
     },
   ],
 };

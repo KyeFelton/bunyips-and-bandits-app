@@ -53,7 +53,7 @@ export const conditionsAtom = atom<Condition[]>([]);
 
 // Items and equipment
 export const itemsAtom = atom<InventoryStack[]>([]);
-export const moneyAtom = atom<number>(0);
+export const moneyAtom = atom<number>(10);
 
 // Inventory stacks resolved against the catalog for reading.
 // Backpack capacity, slot usage and display rows live in state/items.ts.
@@ -96,9 +96,9 @@ export const skillLevelsAtom = atom((get) => {
   });
 
   // Apply background expertise
-  if (backgroundData?.expertiseSkills) {
-    backgroundData.expertiseSkills.forEach((skillType) => {
-      skills[skillType] = 5;
+  if (backgroundData?.startingSkillLevels) {
+    backgroundData.startingSkillLevels.forEach((skillLevel) => {
+      skills[skillLevel.skill] = skillLevel.level;
     });
   }
 

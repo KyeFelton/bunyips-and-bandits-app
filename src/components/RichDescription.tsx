@@ -10,6 +10,7 @@ import { SkillType } from "../enums/SkillType";
 import { SpeedIcon } from "./icons/SpeedIcon";
 import { Locomotion } from "../enums/Locomotion";
 import { ActionIcon } from "./icons/ActionIcon";
+import { cn } from "../utils/cn";
 
 type Props = {
   text: string;
@@ -20,12 +21,13 @@ const MARKER_PATTERN = /\{\{(\w+):(\w+)\}\}/g;
 
 const renderMarker = (category: string, value: string): ReactNode => {
   const token = capitalize(value);
+  const iconClassName = "ml-[-2px] mr-[-4px] pb-[3px]";
 
   if (category === "skill") {
     if (token) {
       return (
         <>
-          <SkillIcon type={token as SkillType} /> {token}
+          <SkillIcon className={iconClassName} type={token as SkillType} /> {token}
         </>
       );
     }
@@ -35,7 +37,7 @@ const renderMarker = (category: string, value: string): ReactNode => {
     if (token) {
       return (
         <>
-          <ArmourIcon type={token as DamageType} /> {token}
+          <ArmourIcon className={iconClassName} type={token as DamageType} /> {token}
         </>
       );
     }
@@ -45,7 +47,7 @@ const renderMarker = (category: string, value: string): ReactNode => {
     if (token) {
       return (
         <>
-          <SenseIcon type={token as SenseType} /> {token}
+          <SenseIcon className={iconClassName} type={token as SenseType} /> {token}
         </>
       );
     }
@@ -55,7 +57,7 @@ const renderMarker = (category: string, value: string): ReactNode => {
     if (token) {
       return (
         <>
-          <SpeedIcon type={token as Locomotion} /> {token}
+          <SpeedIcon className={iconClassName} type={token as Locomotion} /> {token}
         </>
       );
     }
@@ -65,21 +67,21 @@ const renderMarker = (category: string, value: string): ReactNode => {
     if (token === "Body") {
       return (
         <>
-          <BodyIcon /> physical health
+          <BodyIcon className={iconClassName} /> Body
         </>
       );
     }
     if (token === "Mind") {
       return (
         <>
-          <MindIcon /> mental health
+          <MindIcon className={iconClassName} /> Mind
         </>
       );
     }
     if (token === "Stamina") {
       return (
         <>
-          <ActionIcon type={"stamina"} /> Stamina
+          <ActionIcon className={iconClassName} type={"stamina"} /> Stamina
         </>
       );
     }
@@ -121,5 +123,5 @@ const parseDescription = (text: string): ReactNode[] => {
 };
 
 export const RichDescription = ({ text, className }: Props) => (
-  <span className={className}>{parseDescription(text)}</span>
+  <span className={cn(className, "align-baseline")}>{parseDescription(text)}</span>
 );

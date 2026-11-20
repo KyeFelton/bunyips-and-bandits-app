@@ -1,230 +1,131 @@
-import { Item } from "../../models/items";
-import { DynamiteStick } from "./DynamiteStick";
-import { LovePotion } from "./LovePotion";
-import { SoothingHerb } from "./SoothingHerb";
-import { ThunderstoneClub } from "./ThunderstoneClub";
-import { EnchantedClub } from "./EnchantedClub";
-import { RainbowScaleNecklace } from "./RainbowScaleNecklace";
-import { SteelDagger } from "./SteelDagger";
-import { VialOfPotentAcid } from "./VialOfPotentAcid";
-import { FeignDeathPotion } from "./FeignDeathPotion";
-import { MithrilMace } from "./MithrilMace";
-import { WaterHammerOfTytos } from "./WaterHammerOfTytos";
-import { Adrenaline } from "./Adrenaline";
-import { FirstAidKit } from "./FirstAidKit";
-import { MithrilSpear } from "./MithrilSpear";
-import { SteelJavelin } from "./SteelJavelin";
-import { WindSpearOfCassreina } from "./WindSpearOfCassreina";
-import { Antidote } from "./Antidote";
-import { FlaskOfAlchemistFire } from "./FlaskOfAlchemistFire";
-import { MithrilSword } from "./MithrilSword";
-import { SteelMace } from "./SteelMace";
-import { WindstoneClub } from "./WindstoneClub";
-import { BarruginSpineArmour } from "./BarruginSpineArmour";
-import { GasMask } from "./GasMask";
-import { PerfumeOfBewitching } from "./PerfumeOfBewitching";
-import { SteelMailArmour } from "./SteelMailArmour";
-import { Boomerang } from "./Boomerang";
-import { KangarooHideArmour } from "./KangarooHideArmour";
-import * as PortalStone from "./PortalStone";
-import { SteelPlateArmour } from "./SteelPlateArmour";
-import { WoodenClub } from "./WoodenClub";
-import { ChloroformAndCloth } from "./ChloroformAndCloth";
-import { Psychedelic } from "./Psychedelic";
-import { SteelSpear } from "./SteelSpear";
-import { CrocodileScaleArmour } from "./CrocodileScaleArmour";
-import { LavastoneClub } from "./LavastoneClub";
-import { RubberSuit } from "./RubberSuit";
-import { SteelSword } from "./SteelSword";
-import { LightningSwordOfRollo } from "./LightningSwordOfRollo";
-import { SleepingAid } from "./SleepingAid";
-import { Steroid } from "./Steroid";
-import { DjugiPoisonSac } from "./DjugiPoisonSac";
-import { LightningstoneClub } from "./LightningstoneClub";
-import { SmokeBomb } from "./SmokeBomb";
-import { SunstoneClub } from "./SunstoneClub";
-import { Caltrops } from "./Caltrops";
-import { Crowbar } from "./Crowbar";
-import { FlintAndSteel } from "./FlintAndSteel";
-import { GrapplingHook } from "./GrapplingHook";
-import { IronSpikes } from "./IronSpikes";
-import { Mirror } from "./Mirror";
-import { OilFlask } from "./OilFlask";
-import { Pole } from "./Pole";
-import { Rations } from "./Rations";
-import { Rope } from "./Rope";
-import { Torch } from "./Torch";
-import { Didgeridoo } from "./Didgeridoo";
-import { Cloak } from "./Disguise";
-import { DrumKit } from "./DrumKit";
-import { FineClothes } from "./FineClothes";
-import { Hammer } from "./Hammer";
-import { HerbalPouch } from "./HerbalPouch";
-import { HuntingKnife } from "./HuntingKnife";
-import { Pickaxe } from "./Pickaxe";
-import { Pitchfork } from "./Pitchfork";
-import { PrayerBeads } from "./PrayerBeads";
-import { Scythe } from "./Scythe";
-import { TravellingClothes } from "./TravellingClothes";
-import { Violin } from "./Violin";
-import { WalkingStaff } from "./WalkingStaff";
-import { WoodcutterAxe } from "./WoodcutterAxe";
-import { PlainClothes } from "./WorkClothes";
-import { BottleOfRum } from "./BottleOfRum";
-import { FishingNet } from "./FishingNet";
-import { Lantern } from "./Lantern";
+import type { Item } from "../../models/items";
 
-export {
-  DynamiteStick,
-  LovePotion,
-  SoothingHerb,
-  ThunderstoneClub,
-  EnchantedClub,
-  RainbowScaleNecklace,
-  SteelDagger,
-  VialOfPotentAcid,
-  FeignDeathPotion,
-  MithrilMace,
-  WaterHammerOfTytos,
-  Adrenaline,
-  FirstAidKit,
-  MithrilSpear,
-  SteelJavelin,
-  WindSpearOfCassreina,
-  Antidote,
-  FlaskOfAlchemistFire,
-  MithrilSword,
-  SteelMace,
-  WindstoneClub,
-  BarruginSpineArmour,
-  GasMask,
-  PerfumeOfBewitching,
-  SteelMailArmour,
-  Boomerang,
-  KangarooHideArmour,
-  PortalStone,
-  SteelPlateArmour,
-  WoodenClub,
-  ChloroformAndCloth,
-  Psychedelic,
-  SteelSpear,
-  CrocodileScaleArmour,
-  LavastoneClub,
-  RubberSuit,
-  SteelSword,
-  LightningSwordOfRollo,
-  SleepingAid,
-  Steroid,
-  DjugiPoisonSac,
-  LightningstoneClub,
-  SmokeBomb,
-  SunstoneClub,
-  Caltrops,
-  Crowbar,
-  FlintAndSteel,
-  GrapplingHook,
-  IronSpikes,
-  Mirror,
-  OilFlask,
-  Pole,
-  Rations,
-  Rope,
-  Torch,
-  Didgeridoo,
-  Cloak,
-  DrumKit,
-  FineClothes,
-  Hammer,
-  HerbalPouch,
-  HuntingKnife,
-  Pickaxe,
-  Pitchfork,
-  PrayerBeads,
-  Scythe,
-  TravellingClothes,
-  Violin,
-  WalkingStaff,
-  WoodcutterAxe,
-  PlainClothes,
-  BottleOfRum,
-  FishingNet,
-  Lantern,
-};
+export * from "./Adrenaline";
+export * from "./Akubra";
+export * from "./Antidote";
+export * from "./BarruginSpineArmour";
+export * from "./BillyCan";
+export * from "./BlouseAndSkirt";
+export * from "./Boomerang";
+export * from "./BottleOfRum";
+export * from "./BowlerHat";
+export * from "./BreadKnife";
+export * from "./BustleDress";
+export * from "./Chalk";
+export * from "./Caltrops";
+export * from "./ChloroformAndCloth";
+export * from "./CrocodileScaleArmour";
+export * from "./Crowbar";
+export * from "./DayDress";
+export * from "./DecorativeBonnet";
+export * from "./DenimOveralls";
+export * from "./Didgeridoo";
+export * from "./DjugiPoisonSac";
+export * from "./DrumKit";
+export * from "./DynamiteStick";
+export * from "./EnchantedClub";
+export * from "./FeatherDuster";
+export * from "./FeatheredHat";
+export * from "./FeignDeathPotion";
+export * from "./FirstAidKit";
+export * from "./FishingNet";
+export * from "./FlaskOfAlchemistFire";
+export * from "./FlatCap";
+export * from "./FlintAndSteel";
+export * from "./FootholdTrap";
+export * from "./FrockCoatAndBreeches";
+export * from "./FullBodyCloak";
+export * from "./GasMask";
+export * from "./GrapplingHook";
+export * from "./GuernseyAndTrousers";
+export * from "./Hammer";
+export * from "./ApothecaryKit";
+export * from "./HuntingKnife";
+export * from "./IronSpikes";
+export * from "./KangarooHideArmour";
+export * from "./Lantern";
+export * from "./LavastoneClub";
+export * from "./LeatherApron";
+export * from "./LeatherDuster";
+export * from "./LightningSwordOfRollo";
+export * from "./LightningstoneClub";
+export * from "./LockpickKit";
+export * from "./LovePotion";
+export * from "./MagnifyingGlass"
+export * from "./MakeupKit";
+export * from "./Mantle";
+export * from "./MilitaryCap";
+export * from "./MilitaryUniform";
+export * from "./Mirror";
+export * from "./MithrilMace";
+export * from "./MithrilSpear";
+export * from "./MithrilSword";
+export * from "./MobCap";
+export * from "./Notebook";
+export * from "./OilFlask";
+export * from "./Pickaxe";
+export * from "./PinaforeAndDress";
+export * from "./Pitchfork";
+export * from "./ShirtAndTrousers";
+export * from "./Pole";
+export * from "./PortalStone";
+export * from "./PrayerBeads";
+export * from "./Psychedelic";
+export * from "./RainbowScaleNecklace";
+export * from "./Robes";
+export * from "./RidingHabit";
+export * from "./RollingPin";
+export * from "./Rope";
+export * from "./RubberSuit";
+export * from "./Scythe";
+export * from "./SewingKit";
+export * from "./Shears";
+export * from "./SignetRing";
+export * from "./SleepingAid";
+export * from "./SmokeBomb";
+export * from "./SoothingHerb";
+export * from "./SpiceKit";
+export * from "./Spyglass";
+export * from "./StageCostume";
+export * from "./SteelDagger";
+export * from "./SteelJavelin";
+export * from "./SteelMace";
+export * from "./SteelMailArmour";
+export * from "./SteelPlateArmour";
+export * from "./SteelSpear";
+export * from "./SteelSword";
+export * from "./Steroid";
+export * from "./SunstoneClub";
+export * from "./Swag";
+export * from "./TailcoatAndBreeches";
+export * from "./TimberWedge";
+export * from "./ThunderstoneClub";
+export * from "./TopHat";
+export * from "./Tongs";
+export * from "./Torch";
+export * from "./Tucker";
+export * from "./VialOfPotentAcid";
+export * from "./Violin";
+export * from "./WalkingDress";
+export * from "./WalkingStaff";
+export * from "./WaterHammerOfTytos";
+export * from "./Whip";
+export * from "./WindSpearOfCassreina";
+export * from "./WindstoneClub";
+export * from "./WoodcutterAxe";
+export * from "./WoodenClub";
 
-export const AllItems: Item[] = [
-  Adrenaline,
-  Antidote,
-  BarruginSpineArmour,
-  Boomerang,
-  BottleOfRum,
-  Caltrops,
-  ChloroformAndCloth,
-  CrocodileScaleArmour,
-  Crowbar,
-  Didgeridoo,
-  Cloak,
-  DjugiPoisonSac,
-  DrumKit,
-  DynamiteStick,
-  EnchantedClub,
-  FeignDeathPotion,
-  FineClothes,
-  FirstAidKit,
-  FishingNet,
-  FlaskOfAlchemistFire,
-  FlintAndSteel,
-  GasMask,
-  GrapplingHook,
-  Hammer,
-  HerbalPouch,
-  HuntingKnife,
-  IronSpikes,
-  KangarooHideArmour,
-  Lantern,
-  LavastoneClub,
-  LightningSwordOfRollo,
-  LightningstoneClub,
-  LovePotion,
-  Mirror,
-  MithrilMace,
-  MithrilSpear,
-  MithrilSword,
-  OilFlask,
-  PerfumeOfBewitching,
-  Pickaxe,
-  Pitchfork,
-  Pole,
-  PortalStone.SmallPortalStone,
-  PortalStone.LargePortalStone,
-  PrayerBeads,
-  Psychedelic,
-  RainbowScaleNecklace,
-  Rations,
-  Rope,
-  RubberSuit,
-  Scythe,
-  SleepingAid,
-  SmokeBomb,
-  SoothingHerb,
-  SteelDagger,
-  SteelJavelin,
-  SteelMace,
-  SteelMailArmour,
-  SteelPlateArmour,
-  SteelSpear,
-  SteelSword,
-  Steroid,
-  SunstoneClub,
-  ThunderstoneClub,
-  Torch,
-  TravellingClothes,
-  VialOfPotentAcid,
-  Violin,
-  WalkingStaff,
-  WaterHammerOfTytos,
-  WindSpearOfCassreina,
-  WindstoneClub,
-  WoodenClub,
-  WoodcutterAxe,
-  PlainClothes,
-];
+const isItem = (value: unknown): value is Item =>
+  typeof value === "object" &&
+  value !== null &&
+  "name" in value &&
+  "slots" in value;
+
+const itemModules = import.meta.glob<Record<string, unknown>>(
+  ["./*.ts", "!./index.ts"],
+  { eager: true }
+);
+
+export const AllItems: Item[] = Object.values(itemModules)
+  .flatMap((module) => Object.values(module))
+  .filter(isItem);

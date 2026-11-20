@@ -1,6 +1,5 @@
 import { Item } from "../../models/items";
 import { ItemType } from "../../enums/ItemType";
-import { WearType } from "../../enums/WearType";
 import { DamageType } from "../../enums/DamageType";
 
 export const CrocodileScaleArmour: Item = {
@@ -20,7 +19,6 @@ export const CrocodileScaleArmour: Item = {
     },
   ],
   singleUse: false,
-  wearType: WearType.Clothes,
   itemType: ItemType.Armour,
   slots: 3,
   defaultCost: 3500,

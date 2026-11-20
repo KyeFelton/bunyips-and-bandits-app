@@ -8,7 +8,7 @@ export const SunstoneClub: Item = {
     {
       weapon: {
         damageType: DamageType.Force,
-        bonus: 1,
+        bonus: 2,
       },
     },
     {
@@ -18,5 +18,5 @@ export const SunstoneClub: Item = {
   singleUse: false,
   slots: 2,
   defaultCost: 2,
-  itemType: ItemType.ForceWeapon,
+  itemType: ItemType.Weapon,
 };

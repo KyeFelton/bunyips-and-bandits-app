@@ -4,16 +4,17 @@ import { DamageType } from "../../enums/DamageType";
 
 export const WalkingStaff: Item = {
   name: "Walking staff",
-  description: "A stout wooden staff, useful for travel and capable of delivering a firm strike.",
+  description:
+    "A stout wooden staff, useful for travel.",
   equippedEffects: [
     {
       weapon: {
-        bonus: 2,
+        bonus: 1,
         damageType: DamageType.Force,
       },
     },
   ],
   singleUse: false,
-  slots: 2,
-  itemType: ItemType.ForceWeapon,
+  slots: 1,
+  itemType: ItemType.Accessory,
 };

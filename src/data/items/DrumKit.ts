@@ -6,5 +6,5 @@ export const DrumKit: Item = {
   description: "A small frame drum and a pair of sticks, light enough to carry on the road.",
   singleUse: false,
   slots: 1,
-  itemType: ItemType.Gear,
+  itemType: ItemType.Instrument,
 };

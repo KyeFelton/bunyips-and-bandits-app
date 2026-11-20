@@ -7,5 +7,5 @@ export const Crowbar: Item = {
   singleUse: false,
   slots: 1,
   defaultCost: 10,
-  itemType: ItemType.Gear,
+  itemType: ItemType.Tool,
 };

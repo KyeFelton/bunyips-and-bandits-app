@@ -3,13 +3,14 @@ import { ItemType } from "../../enums/ItemType";
 
 export const DynamiteStick: Item = {
   name: "Dynamite stick",
+  description: "A stick of explosive dynamite.",
   consumedEffect: {
     custom:
-      "The dynamite explodes upon ignition. Targets within 3m take 5 force damage. The dynamite can be stacked, with each additional stick adding 1 force damage.",
+      "When ignited, targets within Close range take 5 {{damage:force}} damage, and those within Near range take 2 {{damage:force}} damage. The dynamite can be stacked, with each additional stick adding 1 {{damage:force}} damage.",
   },
   singleUse: true,
   slots: 1,
   stackable: true,
   defaultCost: 500,
-  itemType: ItemType.Explosive,
+  itemType: ItemType.Ammunition,
 };

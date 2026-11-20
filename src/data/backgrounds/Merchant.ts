@@ -1,33 +1,33 @@
 import { Background } from "../../models/backgrounds";
 import { SkillType } from "../../enums/SkillType";
 import { Merchant as Trait } from "../traits/Merchant";
-import { FineClothes } from "../items/FineClothes";
-import { Mirror } from "../items/Mirror";
-import { Rations } from "../items/Rations";
-import { Rope } from "../items/Rope";
-import { SmokeBomb } from "../items/SmokeBomb";
-import { SteelDagger } from "../items/SteelDagger";
-import { TravellingClothes } from "../items/TravellingClothes";
+import { BowlerHat, GrapplingHook, Lantern, MagnifyingGlass, Notebook, OilFlask } from "../items";
 
 export const Merchant: Background = {
   name: "Merchant",
   description:
-    "You've spent your life buying, selling, and negotiating deals. Whether you're a trader at a bustling port, a shopkeeper in a frontier town, or a traveling peddler hawking goods between settlements, you excel at reading people and persuading them to see things your way.",
-  expertiseSkills: [SkillType.Charisma, SkillType.Psychology],
-  traits: [Trait],
-  availableMoneyTiers: ["Average", "Wealthy"],
-  startingItems: [
+    "You've spent your life buying, selling, and negotiating deals. You could be a shopkeeper in a frontier town, a smuggler at a bustling port, or a traveling peddler hawking goods between settlements.",
+  startingSkillLevels: [
     {
-      name: "Trader",
-      items: [FineClothes, Mirror, SteelDagger, Rations],
+      skill: SkillType.Psychology,
+      level: 5
     },
     {
-      name: "Peddler",
-      items: [TravellingClothes, Mirror, Rope, Rations],
+      skill: SkillType.Charisma,
+      level: 3
+    }
+  ],
+  traits: [Trait],
+  startingItems: [
+    {
+      name: "Shopkeeper",
+      money: 100,
+      items: [Notebook, MagnifyingGlass, BowlerHat],
     },
     {
       name: "Smuggler",
-      items: [TravellingClothes, SteelDagger, SmokeBomb, Rope],
+      money: 100,
+      items: [GrapplingHook, Lantern, OilFlask],
     },
   ],
 };

@@ -12,11 +12,11 @@ export const EnchantedClub: Item = {
       },
     },
     {
-      custom: "Stun enemies when wielded.",
+      custom: "Each successful hit stuns the opponent too.",
     },
   ],
   singleUse: false,
   slots: 2,
   defaultCost: 2,
-  itemType: ItemType.ForceWeapon,
+  itemType: ItemType.Weapon,
 };

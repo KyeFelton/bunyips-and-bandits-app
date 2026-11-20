@@ -1,33 +1,38 @@
 import { Background } from "../../models/backgrounds";
 import { SkillType } from "../../enums/SkillType";
 import { Performer as Trait } from "../traits/Performer";
-import { Didgeridoo } from "../items/Didgeridoo";
-import { DrumKit } from "../items/DrumKit";
-import { FineClothes } from "../items/FineClothes";
-import { SmokeBomb } from "../items/SmokeBomb";
-import { SteelDagger } from "../items/SteelDagger";
-import { TravellingClothes } from "../items/TravellingClothes";
-import { Violin } from "../items/Violin";
+import { Chalk, Didgeridoo, GrapplingHook, MakeupKit, SewingKit, StageCostume, Violin } from "../items";
 
 export const Performer: Background = {
   name: "Performer",
   description:
-    "You've made your living entertaining others with your talents. Whether you're a musician playing folk songs in bush pubs, an acrobat with a traveling circus, or a theatrical actor bringing stories to life on stage, you know how to captivate an audience.",
-  expertiseSkills: [SkillType.Charisma, SkillType.Dexterity],
+    "You've made your living entertaining others with your talents. You could be a musician playing tunes in bush pubs, an acrobat with a traveling circus, or a theatrical actor working on stage.",
+  startingSkillLevels: [
+    {
+      skill: SkillType.Charisma,
+      level: 5
+    },
+    {
+      skill: SkillType.Dexterity,
+      level: 3
+    }
+  ],
   traits: [Trait],
-  availableMoneyTiers: ["Poor", "Average"],
   startingItems: [
     {
-      name: "Drummer",
-      items: [FineClothes, DrumKit, SteelDagger],
+      name: "Musician",
+      money: 10,
+      items: [Violin, Didgeridoo],
     },
     {
-      name: "Fiddler",
-      items: [FineClothes, Violin, SteelDagger],
+      name: "Clown",
+      money: 10,
+      items: [StageCostume, MakeupKit],
     },
     {
-      name: "Didgeridoo player",
-      items: [TravellingClothes, Didgeridoo, SmokeBomb],
+      name: "Actor",
+      money: 10,
+      items: [StageCostume, MakeupKit, SewingKit],
     },
   ],
 };

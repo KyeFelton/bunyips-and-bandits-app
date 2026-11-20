@@ -4,11 +4,10 @@ import { ItemIcon } from "./icons/ItemIcon";
 import { useAtom, useAtomValue } from "jotai";
 import { useState } from "react";
 import { ItemLocation } from "../enums/ItemLocation";
-import { WearType } from "../enums/WearType";
 import { Item } from "../models/items";
 import {
   AddItemTarget,
-  CLOTHES_INDEX,
+  buildDescription,
   canFitInBackpack,
   canHoldItem,
   catalogItems,
@@ -20,7 +19,6 @@ import { randomString } from "../utils/randomString";
 import { characterItemsAtom, itemsAtom, moneyAtom } from "../state/character";
 import { backpackSlotCapacityAtom } from "../state/items";
 import { EffectForm } from "./EffectForm";
-import { ItemEffectList } from "./ItemEffectList";
 import { Button } from "./ui/button";
 import {
   Dialog,
@@ -38,9 +36,11 @@ import {
   SelectValue,
 } from "./ui/select";
 import { Textarea } from "./ui/textarea";
+import { RichDescription } from "./RichDescription";
 
 type Props = {
   target: AddItemTarget;
+  typeFilter?: ItemType;
   trigger: React.ReactNode;
 };
 
@@ -65,7 +65,7 @@ const defaultCustomItem: Item = {
   itemType: undefined,
 };
 
-export const AddItemDialog = ({ target, trigger }: Props) => {
+export const AddItemDialog = ({ target, trigger, typeFilter }: Props) => {
   const [stacks, setStacks] = useAtom(itemsAtom);
   const [money, setMoney] = useAtom(moneyAtom);
   const characterItems = useAtomValue(characterItemsAtom);
@@ -73,6 +73,7 @@ export const AddItemDialog = ({ target, trigger }: Props) => {
 
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
+  // const [typeFilter, setTypeFilter] = useState<ItemType | undefined>(undefined);
   const [selectedItem, setSelectedItem] = useState<SelectedItem | null>(null);
   const [isCreatingItem, setIsCreatingItem] = useState(false);
   const [customItem, setCustomItem] = useState<Item>(defaultCustomItem);
@@ -80,20 +81,12 @@ export const AddItemDialog = ({ target, trigger }: Props) => {
   const [storageLocation, setStorageLocation] = useState("");
 
   const destination = target.location;
-  const wearFilter: WearType | undefined =
-    destination === ItemLocation.Worn
-      ? target.index === CLOTHES_INDEX
-        ? WearType.Clothes
-        : WearType.Accessory
-      : undefined;
 
-  const availableItems = catalogItems.filter(
-    (item) => !wearFilter || item.wearType === wearFilter,
-  );
-  const filteredItems = availableItems.filter(
+  const filteredItems = catalogItems.filter(
     (item) =>
-      item.name.toLowerCase().includes(search.toLowerCase()) ||
-      item.description?.toLowerCase().includes(search.toLowerCase()),
+      (item.name.toLowerCase().includes(search.toLowerCase()) ||
+        item.description?.toLowerCase().includes(search.toLowerCase())) &&
+      (!typeFilter || item.itemType === typeFilter),
   );
 
   const resetState = () => {
@@ -169,7 +162,6 @@ export const AddItemDialog = ({ target, trigger }: Props) => {
     if (!validateItemName(customItem.name)) return;
     setSelectedItem({
       ...customItem,
-      wearType: wearFilter ?? customItem.wearType,
       quantity: 1,
       cost: undefined,
       isCustom: true,
@@ -212,17 +204,16 @@ export const AddItemDialog = ({ target, trigger }: Props) => {
 
     const custom = selectedItem.isCustom
       ? {
-          ...(selectedItem.description
-            ? { description: selectedItem.description }
-            : {}),
-          equippedEffects: selectedItem.equippedEffects,
-          consumedEffect: selectedItem.consumedEffect,
-          singleUse: selectedItem.singleUse,
-          slots: selectedItem.slots,
-          stackable: selectedItem.stackable,
-          wearType: selectedItem.wearType,
-          defaultCost: selectedItem.defaultCost,
-        }
+        ...(selectedItem.description
+          ? { description: selectedItem.description }
+          : {}),
+        equippedEffects: selectedItem.equippedEffects,
+        consumedEffect: selectedItem.consumedEffect,
+        singleUse: selectedItem.singleUse,
+        slots: selectedItem.slots,
+        stackable: selectedItem.stackable,
+        defaultCost: selectedItem.defaultCost,
+      }
       : undefined;
 
     setStacks([
@@ -273,16 +264,7 @@ export const AddItemDialog = ({ target, trigger }: Props) => {
         {selectedItem ? (
           <div className="flex flex-col justify-between flex-1">
             <div className="space-y-6 py-4">
-              {selectedItem.description && (
-                <p className="text-sm text-muted-foreground">
-                  {selectedItem.description}
-                </p>
-              )}
-
-              <ItemEffectList
-                equippedEffects={selectedItem.equippedEffects}
-                consumedEffect={selectedItem.consumedEffect}
-              />
+              <RichDescription className="text-sm text-muted-foreground" text={[selectedItem.description, buildDescription(selectedItem)].join(" ")} />
 
               <div className="grid grid-cols-2 gap-4">
                 {isPartialSlotItem(selectedItem) && (
@@ -432,11 +414,10 @@ export const AddItemDialog = ({ target, trigger }: Props) => {
                             customItem.itemType === type ? undefined : type,
                         })
                       }
-                      className={`p-2 rounded-md border transition-colors ${
-                        customItem.itemType === type
-                          ? "border-primary bg-primary/10"
-                          : "border-border hover:bg-accent-subtle"
-                      }`}
+                      className={`p-2 rounded-md border transition-colors ${customItem.itemType === type
+                        ? "border-primary bg-primary/10"
+                        : "border-border hover:bg-accent-subtle"
+                        }`}
                       title={type}
                     >
                       <ItemIcon itemType={type} className="h-4 w-4" />

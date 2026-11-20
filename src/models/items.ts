@@ -1,6 +1,5 @@
 import { ItemLocation } from "../enums/ItemLocation";
 import { ItemType } from "../enums/ItemType";
-import { WearType } from "../enums/WearType";
 import { OngoingEffect, ImmediateEffect } from "./effect";
 
 export type Item = {
@@ -11,7 +10,6 @@ export type Item = {
   singleUse: boolean;
   slots: number;
   stackable?: boolean;
-  wearType?: WearType;
   defaultCost?: number;
   itemType?: ItemType;
 };

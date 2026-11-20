@@ -1,6 +1,5 @@
 import { DamageType } from "../../enums/DamageType";
 import { Item } from "../../models/items";
-import { WearType } from "../../enums/WearType";
 import { ItemType } from "../../enums/ItemType";
 
 export const BarruginSpineArmour: Item = {
@@ -19,11 +18,10 @@ export const BarruginSpineArmour: Item = {
       },
     },
     {
-      custom: "Foes that make contact with the armour take 2 Slash damage.",
+      custom: "Foes that make contact with the armour take 2 {{damage:slash}} damage.",
     },
   ],
   singleUse: false,
-  wearType: WearType.Clothes,
   slots: 5,
   defaultCost: 20000,
   itemType: ItemType.Armour,

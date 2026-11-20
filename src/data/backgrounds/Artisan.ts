@@ -1,36 +1,38 @@
 import { Background } from "../../models/backgrounds";
 import { SkillType } from "../../enums/SkillType";
 import { Artisan as Trait } from "../traits/Artisan";
-import { Crowbar } from "../items/Crowbar";
-import { FineClothes } from "../items/FineClothes";
-import { FlintAndSteel } from "../items/FlintAndSteel";
-import { Hammer } from "../items/Hammer";
-import { IronSpikes } from "../items/IronSpikes";
-import { Mirror } from "../items/Mirror";
-import { Rope } from "../items/Rope";
-import { SteelDagger } from "../items/SteelDagger";
-import { Torch } from "../items/Torch";
-import { PlainClothes } from "../items/WorkClothes";
+import { BillyCan, BreadKnife, Hammer, IronSpikes, LeatherApron, MagnifyingGlass, Notebook, SewingKit, SpiceKit, Tongs } from "../items";
 
 export const Artisan: Background = {
   name: "Artisan",
   description:
-    "You are a skilled craftsperson who creates useful and beautiful items with your hands. Whether you're a blacksmith forging tools, a potter shaping clay, or a weaver working wool from the shearing sheds, your trade demands precision and patience.",
-  expertiseSkills: [SkillType.Dexterity, SkillType.Perception],
+    "You are a skilled craftsman who creates useful and beautiful items with your hands. You could be a blacksmith forging tools, a baker cooking meat pies, or a seamstress making ornate dresses.",
+  startingSkillLevels: [
+    {
+      skill: SkillType.Dexterity,
+      level: 5
+    },
+    {
+      skill: SkillType.Perception,
+      level: 3
+    }
+  ],
   traits: [Trait],
-  availableMoneyTiers: ["Poor", "Average", "Wealthy"],
   startingItems: [
     {
       name: "Blacksmith",
-      items: [PlainClothes, Hammer, IronSpikes, Torch],
+      money: 10,
+      items: [Hammer, IronSpikes, Tongs, LeatherApron],
     },
     {
-      name: "Woodworker",
-      items: [PlainClothes, Crowbar, Rope, FlintAndSteel],
+      name: "Baker",
+      money: 10,
+      items: [BillyCan, SpiceKit, BreadKnife, LeatherApron],
     },
     {
-      name: "Jeweller",
-      items: [FineClothes, Mirror, SteelDagger],
+      name: "Seamstress",
+      money: 10,
+      items: [SewingKit, Notebook, MagnifyingGlass],
     },
   ],
 };

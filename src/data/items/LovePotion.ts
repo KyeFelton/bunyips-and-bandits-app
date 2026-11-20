@@ -1,16 +1,17 @@
 import { Item } from "../../models/items";
 import { ItemType } from "../../enums/ItemType";
+import { Infatuated } from "../../models/conditions";
 
 export const LovePotion: Item = {
   name: "Love potion",
-  description: "",
+  description: "A vial of sparkling pink liquid.",
   consumedEffect: {
     custom:
-      "You must pass a hard willpower check or gain the Infatuated condition with the first creature you see.",
+      `Upon drinking, you must pass a hard {{skill:Willpower}} check or gain the ${Infatuated.name} condition with the first creature you see.`,
   },
   singleUse: true,
   slots: 1,
   stackable: true,
   defaultCost: 450,
-  itemType: ItemType.Concoction,
+  itemType: ItemType.Consumable,
 };

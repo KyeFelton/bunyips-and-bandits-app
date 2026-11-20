@@ -1,7 +1,6 @@
 import { Item } from "../../models/items";
 import { ItemType } from "../../enums/ItemType";
 import { SkillType } from "../../enums/SkillType";
-import { WearType } from "../../enums/WearType";
 
 export const PrayerBeads: Item = {
   name: "Prayer beads",
@@ -15,7 +14,6 @@ export const PrayerBeads: Item = {
     },
   ],
   singleUse: false,
-  slots: 0,
-  wearType: WearType.Accessory,
+  slots: 1,
   itemType: ItemType.Accessory,
 };

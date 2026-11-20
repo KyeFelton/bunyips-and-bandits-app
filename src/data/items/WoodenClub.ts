@@ -8,12 +8,12 @@ export const WoodenClub: Item = {
     {
       weapon: {
         damageType: DamageType.Force,
-        bonus: 1,
+        bonus: 2,
       },
     },
   ],
   singleUse: false,
   slots: 2,
   defaultCost: 10,
-  itemType: ItemType.ForceWeapon,
+  itemType: ItemType.Weapon,
 };

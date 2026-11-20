@@ -1,6 +1,8 @@
 import { ItemLocation } from "../enums/ItemLocation";
 import * as Items from "../data/items";
 import { CharacterItem, InventoryStack, Item } from "../models/items";
+import { ImmediateEffect, OngoingEffect } from "../models/effect";
+import { ItemType } from "../enums/ItemType";
 
 // Catalog
 
@@ -63,7 +65,8 @@ export const resolveStack = (stack: InventoryStack): CharacterItem => {
 // Slot positions and capacity
 
 export const CLOTHES_INDEX = 0;
-export const ACCESSORY_INDICES = [1, 2, 3];
+export const ARMOUR_INDEX = 1;
+export const ACCESSORY_INDICES = [2, 3, 4];
 export const ACCESSORY_SLOT_COUNT = ACCESSORY_INDICES.length;
 export const LEFT_HAND_INDEX = 0;
 export const RIGHT_HAND_INDEX = 1;
@@ -77,6 +80,7 @@ export type SlotDisplayRow = {
   rowUnits: number;
   itemName?: string;
   displayName?: string;
+  itemType?: ItemType;
   item?: CharacterItem;
   stackId?: string;
 };
@@ -123,3 +127,112 @@ export const canHoldItem = (
     .reduce((total, held) => total + (held.slots >= HAND_SLOT_COUNT ? 2 : 1), 0);
   return HAND_SLOT_COUNT - usedHands >= (item.slots >= HAND_SLOT_COUNT ? 2 : 1);
 };
+
+const parseConsumedBonus = (stat: string, value: number): string =>
+  `${value > 0 ? "Restores" : "Depletes"} ${Math.abs(value)} ${stat}.`;
+
+const parseConsumedEffect = (effect: ImmediateEffect): string => {
+  const effects: string[] = [];
+  const healthStats = [
+    ["body", effect.body],
+    ["mind", effect.mind],
+    ["stamina", effect.stamina],
+  ] as const;
+  for (const [stat, value] of healthStats) {
+    if (value) effects.push(parseConsumedBonus(`{{health:${stat}}}`, value));
+  }
+  if (effect.condition) effects.push(`Gain the condition ${effect.condition}.`);
+  if (effect.custom) effects.push(effect.custom);
+  return effects.join(" ");
+};
+
+const parseOngoingBonus = (stat: string, value: number): string =>
+  `${value > 0 ? "Grants" : "Removes"} ${Math.abs(value)} ${stat}.`;
+
+const parseOngoingMultiplier = (stat: string, value: number): string =>
+  `${value > 0 ? "Increases" : "Reduces"} ${stat} by ${Math.abs((1 - value) * 100)}%.`;
+
+const parseOngoingEffect = (effect: OngoingEffect): string => {
+  for (const stat of ["body", "mind", "stamina"] as const) {
+    const modifier = effect[stat];
+    if (modifier?.bonus) {
+      return parseOngoingBonus(`{{health:${stat}}}`, modifier.bonus);
+    }
+    if (modifier?.multiplier) {
+      return parseOngoingMultiplier(`{{health:${stat}}}`, modifier.multiplier);
+    }
+  }
+  if (effect.weapon) {
+    return `Deals ${effect.weapon.bonus} {{damage:${effect.weapon.damageType}}} damage when wielded.`;
+  }
+  if (effect.skill?.bonus) {
+    return parseOngoingBonus(`{{skill:${effect.skill.skillType}}}`, effect.skill.bonus);
+  }
+  if (effect.custom) {
+    return effect.custom;
+  }
+  return "";
+};
+
+const joinList = (values: string[]): string =>
+  values.length < 2
+    ? values[0] ?? ""
+    : `${values.slice(0, -1).join(", ")} and ${values[values.length - 1]}`;
+
+type BonusEntry = { value: number; stat: string };
+
+const describeBonusGroups = (entries: BonusEntry[], suffix = ""): string[] => {
+  const gained: string[] = [];
+  const lost: string[] = [];
+  for (const { value, stat } of entries) {
+    if (value > 0) gained.push(`${value} ${stat}`);
+    if (value < 0) lost.push(`${Math.abs(value)} ${stat}`);
+  }
+
+  return [
+    ...(gained.length ? [`Grants ${joinList(gained)}${suffix}.`] : []),
+    ...(lost.length ? [`Removes ${joinList(lost)}${suffix}.`] : []),
+  ];
+};
+
+export const buildDescription = (
+  item: Item
+): string => {
+  if (item.consumedEffect) return parseConsumedEffect(item.consumedEffect);
+
+  const equippedEffects = item.equippedEffects ?? [];
+  const armourBonuses = equippedEffects.flatMap((effect) =>
+    effect.armour?.bonus === undefined
+      ? []
+      : [{
+        value: effect.armour.bonus,
+        stat: `{{damage:${effect.armour.damageType}}}`,
+      }],
+  );
+  const skillBonuses = equippedEffects.flatMap((effect) =>
+    effect.skill?.bonus === undefined
+      ? []
+      : [{
+        value: effect.skill.bonus,
+        stat: `{{skill:${effect.skill.skillType}}}`,
+      }],
+  );
+  const otherEffects = equippedEffects
+    .filter((effect) => !effect.armour && !effect.skill)
+    .map(parseOngoingEffect)
+    .filter(Boolean);
+
+  return [
+    ...describeBonusGroups(armourBonuses, " armour"),
+    ...describeBonusGroups(skillBonuses),
+    ...otherEffects,
+  ].join(" ");
+};
+
+export const isWearableItem = (item: Item): boolean =>
+  item.itemType === ItemType.Accessory ||
+  item.itemType === ItemType.Clothing ||
+  item.itemType === ItemType.Armour;
+
+export const isHoldableItem = (item: Item): boolean =>
+  item.itemType === ItemType.Weapon || item.itemType === ItemType.Tool;

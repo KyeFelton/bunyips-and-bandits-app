@@ -2,19 +2,19 @@ import { Item } from "../../models/items";
 import { ItemType } from "../../enums/ItemType";
 import { SkillType } from "../../enums/SkillType";
 
-export const PerfumeOfBewitching: Item = {
-  name: "Perfume of bewitching",
+export const FullBodyCloak: Item = {
+  name: "Full-body cloak",
+  description:
+    "A dark, hooded cloak designed to help you blend in and disappear.",
   equippedEffects: [
     {
       skill: {
-        skillType: SkillType.Charisma,
-        bonus: 2,
+        skillType: SkillType.Stealth,
+        bonus: 1,
       },
     },
   ],
   singleUse: false,
   slots: 1,
-  defaultCost: 520,
-  itemType: ItemType.Concoction,
-  stackable: true,
+  itemType: ItemType.Accessory,
 };

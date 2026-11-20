@@ -4,16 +4,17 @@ import { DamageType } from "../../enums/DamageType";
 
 export const Scythe: Item = {
   name: "Scythe",
-  description: "A long-handled farming tool with a curved blade. Unwieldy but brutal in close combat.",
+  description:
+    "A long-handled farming tool with a curved blade.",
   equippedEffects: [
     {
       weapon: {
-        bonus: 3,
+        bonus: 2,
         damageType: DamageType.Slash,
       },
     },
   ],
   singleUse: false,
-  slots: 2,
-  itemType: ItemType.SlashWeapon,
+  slots: 1,
+  itemType: ItemType.Weapon,
 };

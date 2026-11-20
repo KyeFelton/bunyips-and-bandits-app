@@ -2,7 +2,6 @@ import { DamageType } from "../../enums/DamageType";
 import { SkillType } from "../../enums/SkillType";
 import { Item } from "../../models/items";
 import { ItemType } from "../../enums/ItemType";
-import { WearType } from "../../enums/WearType";
 
 export const SteelPlateArmour: Item = {
   name: "Steel plate armour",
@@ -33,7 +32,6 @@ export const SteelPlateArmour: Item = {
     },
   ],
   singleUse: false,
-  wearType: WearType.Clothes,
   slots: 3,
   defaultCost: 2500,
   itemType: ItemType.Armour,

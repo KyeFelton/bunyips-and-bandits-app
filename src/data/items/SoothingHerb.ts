@@ -5,10 +5,12 @@ export const SoothingHerb: Item = {
   name: "Soothing herb",
   consumedEffect: {
     mind: 1,
+    custom:
+      "Additional soothing herbs consumed in the same day have no effect.",
   },
   singleUse: true,
   slots: 1,
   stackable: true,
   defaultCost: 150,
-  itemType: ItemType.Concoction,
+  itemType: ItemType.Consumable,
 };

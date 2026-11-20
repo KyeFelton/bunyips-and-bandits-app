@@ -24,7 +24,7 @@ export const ActionIcon = ({
   showText = false,
 }: Props) => {
   const props = {
-    className: cn("inline-flex align-text-text-bottom", className),
+    className: cn("inline-flex", className),
     width: size,
     height: size,
   };

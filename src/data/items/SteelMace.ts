@@ -13,7 +13,7 @@ export const SteelMace: Item = {
     },
   ],
   singleUse: false,
-  slots: 2,
-  defaultCost: 400,
-  itemType: ItemType.ForceWeapon,
+  slots: 1,
+  defaultCost: 500,
+  itemType: ItemType.Weapon,
 };

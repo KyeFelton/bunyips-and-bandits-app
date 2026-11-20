@@ -6,7 +6,7 @@ import { Locomotion } from "../../enums/Locomotion";
 export const WindSpearOfCassreina: Item = {
   name: "Wind Spear of Cassreina",
   description:
-    "The wind spear is believed to be the weapon gifted by Eva to Cassreina to fight the Night Dragon. The spear is made of an unknown, silver metal, and decorated with symbols of wind.",
+    "A spear believed to be the weapon gifted by Eva to Cassreina to fight the Night Dragon. Made of an unknown, silver metal, and decorated with symbols of wind.",
   equippedEffects: [
     {
       weapon: {
@@ -40,10 +40,10 @@ export const WindSpearOfCassreina: Item = {
     },
     {
       custom:
-        "Creatures that are 2m away from you are considered adjacent when attacking with this weapon.",
+        "When a seen enemy moves from Near to Close distance with you, you may immediately make a free attack against them with the spear.",
     },
   ],
   singleUse: false,
   slots: 2,
-  itemType: ItemType.SlashWeapon,
+  itemType: ItemType.Weapon,
 };

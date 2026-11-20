@@ -4,16 +4,17 @@ import { DamageType } from "../../enums/DamageType";
 
 export const Pitchfork: Item = {
   name: "Pitchfork",
-  description: "A long-handled fork used for moving hay. The tines make it a serviceable polearm.",
+  description:
+    "A long-handled fork used for moving hay.",
   equippedEffects: [
     {
       weapon: {
         bonus: 2,
-        damageType: DamageType.Force,
+        damageType: DamageType.Slash,
       },
     },
   ],
   singleUse: false,
   slots: 2,
-  itemType: ItemType.ForceWeapon,
+  itemType: ItemType.Weapon,
 };

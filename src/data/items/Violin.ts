@@ -6,5 +6,5 @@ export const Violin: Item = {
   description: "A simple but well-made fiddle, worn smooth from years of playing.",
   singleUse: false,
   slots: 1,
-  itemType: ItemType.Gear,
+  itemType: ItemType.Instrument,
 };

@@ -2,7 +2,6 @@ import { Backpack, Hand, Shirt, Warehouse } from "lucide-react";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useState } from "react";
 import { ItemLocation } from "../enums/ItemLocation";
-import { WearType } from "../enums/WearType";
 import { AllConditions } from "../models/conditions";
 import { CharacterItem, InventoryStack } from "../models/items";
 import {
@@ -14,9 +13,8 @@ import {
   RIGHT_HAND_INDEX,
   canFitInBackpack,
   canHoldItem,
-  getCarriedSlotUsage,
   isPartialSlotItem,
-  slotCost,
+  isWearableItem,
   unitsPerSlot,
 } from "../utils/items";
 import {
@@ -39,6 +37,7 @@ import { RemoveItemDialog } from "./RemoveItemDialog";
 import { SellItemDialog } from "./SellItemDialog";
 import { SlotInventoryTable } from "./SlotInventoryTable";
 import { StorageLocationDialog } from "./StorageLocationDialog";
+import { ItemType } from "../enums/ItemType";
 
 type SectionConfig = {
   title: string;
@@ -81,30 +80,32 @@ const partialSlotRemaining = (item: CharacterItem): number =>
 const canWearItem = (
   item: CharacterItem,
   items: CharacterItem[],
-  capacity: number,
 ): boolean => {
-  if (item.wearType === WearType.Accessory) {
+  if (item.itemType === ItemType.Accessory) {
     const wornAccessories = items.filter(
       (worn) =>
         worn.location === ItemLocation.Worn &&
-        worn.wearType === WearType.Accessory,
+        worn.itemType === ItemType.Accessory,
     ).length;
     return wornAccessories < ACCESSORY_SLOT_COUNT;
   }
 
-  if (item.wearType === WearType.Clothes) {
+  if (item.itemType === ItemType.Clothing) {
     const existingClothes = items.find(
       (worn) =>
         worn.location === ItemLocation.Worn &&
-        worn.wearType === WearType.Clothes,
+        worn.itemType === ItemType.Clothing,
     );
-    if (!existingClothes) return true;
+    return existingClothes ? false : true;
+  }
 
-    // Swapping clothes displaces the old set to the backpack; the move is only
-    // allowed if the displaced clothes fits there.
-    const freed = item.location === ItemLocation.Carried ? slotCost(item) : 0;
-    const needed = slotCost(existingClothes);
-    return getCarriedSlotUsage(items) - freed + needed <= capacity;
+  if (item.itemType === ItemType.Armour) {
+    const existingArmour = items.find(
+      (worn) =>
+        worn.location === ItemLocation.Worn &&
+        worn.itemType === ItemType.Armour,
+    );
+    return existingArmour ? false : true;
   }
 
   return false;
@@ -116,7 +117,7 @@ const findFreeAccessoryIndex = (items: CharacterItem[]): number | undefined => {
       .filter(
         (item) =>
           item.location === ItemLocation.Worn &&
-          item.wearType === WearType.Accessory,
+          item.itemType === ItemType.Accessory,
       )
       .map((item) => item.index),
   );
@@ -162,20 +163,11 @@ export const ItemsTab = () => {
     stack: InventoryStack,
     location: ItemLocation,
     index?: number,
-    displaced?: { id: string; location: ItemLocation },
   ) => {
     setStacks((prev) =>
       prev.map((current) => {
         if (current.id === stack.id) {
           return { ...current, location, index, storageLocation: undefined };
-        }
-        if (displaced && current.id === displaced.id) {
-          return {
-            ...current,
-            location: displaced.location,
-            index: undefined,
-            storageLocation: undefined,
-          };
         }
         return current;
       }),
@@ -212,30 +204,30 @@ export const ItemsTab = () => {
   };
 
   const wear = (item: CharacterItem, stack: InventoryStack) => {
-    if (item.wearType === WearType.Accessory) {
+    if (!canWearItem(item, characterItems)) return;
+
+    if (item.itemType === ItemType.Accessory) {
       const index = findFreeAccessoryIndex(characterItems);
       if (index === undefined) return;
       moveStack(stack, ItemLocation.Worn, index);
       return;
     }
 
-    if (item.wearType !== WearType.Clothes) return;
+    if (item.itemType === ItemType.Clothing) {
+      moveStack(
+        stack,
+        ItemLocation.Worn,
+        CLOTHES_INDEX,
+      );
+    }
 
-    const existingClothes = characterItems.find(
-      (worn) =>
-        worn.location === ItemLocation.Worn &&
-        worn.wearType === WearType.Clothes,
-    );
-    if (existingClothes && !canWearItem(item, characterItems, capacity)) return;
-
-    moveStack(
-      stack,
-      ItemLocation.Worn,
-      CLOTHES_INDEX,
-      existingClothes
-        ? { id: existingClothes.id, location: ItemLocation.Carried }
-        : undefined,
-    );
+    if (item.itemType === ItemType.Armour) {
+      moveStack(
+        stack,
+        ItemLocation.Worn,
+        CLOTHES_INDEX,
+      );
+    }
   };
 
   const hold = (item: CharacterItem, stack: InventoryStack) => {
@@ -283,7 +275,9 @@ export const ItemsTab = () => {
   const getActionDisabled = (
     item: CharacterItem,
   ): Partial<Record<ItemAction, boolean>> => ({
-    wear: item.wearType ? !canWearItem(item, characterItems, capacity) : false,
+    wear: isWearableItem(item)
+      ? !canWearItem(item, characterItems)
+      : false,
     hold: !canHoldItem(item, characterItems),
     carry: !canFitInBackpack(item, characterItems, capacity),
     addMore: isPartialSlotItem(item) ? partialSlotRemaining(item) <= 0 : false,

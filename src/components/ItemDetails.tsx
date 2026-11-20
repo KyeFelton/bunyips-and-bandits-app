@@ -1,7 +1,7 @@
 import { ItemLocation } from "../enums/ItemLocation";
 import { CharacterItem } from "../models/items";
-import { isPartialSlotItem, unitsPerSlot } from "../utils/items";
-import { ItemEffectList } from "./ItemEffectList";
+import { buildDescription, isPartialSlotItem, unitsPerSlot } from "../utils/items";
+import { RichDescription } from "./RichDescription";
 
 type Props = {
   item: CharacterItem;
@@ -29,9 +29,6 @@ const buildDetailRows = (item: CharacterItem): DetailRow[] => {
     rows.push({ label: "Market value", value: `£ ${item.defaultCost}` });
   }
   rows.push({ label: "Backpack slots", value: formatSlots(item) });
-  if (item.wearType) {
-    rows.push({ label: "Wear type", value: item.wearType });
-  }
   if (item.singleUse) {
     rows.push({ label: "Single use", value: "Yes" });
   }
@@ -50,14 +47,7 @@ export const ItemDetails = ({ item }: Props) => {
 
   return (
     <div className="space-y-6">
-      {item.description && (
-        <p className="text-sm text-muted-foreground">{item.description}</p>
-      )}
-
-      <ItemEffectList
-        equippedEffects={item.equippedEffects}
-        consumedEffect={item.consumedEffect}
-      />
+      <RichDescription className="text-sm text-muted-foreground" text={[item.description, buildDescription(item)].join(" ")} />
 
       <dl className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
         {rows.map(({ label, value }) => (

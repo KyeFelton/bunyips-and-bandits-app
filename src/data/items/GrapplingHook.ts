@@ -7,5 +7,5 @@ export const GrapplingHook: Item = {
   singleUse: false,
   slots: 1,
   defaultCost: 25,
-  itemType: ItemType.Gear,
+  itemType: ItemType.Tool,
 };

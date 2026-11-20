@@ -1,7 +1,6 @@
 import { DamageType } from "../../enums/DamageType";
 import { Item } from "../../models/items";
 import { ItemType } from "../../enums/ItemType";
-import { WearType } from "../../enums/WearType";
 import { SenseType } from "../../enums/SenseType";
 
 export const GasMask: Item = {
@@ -20,7 +19,6 @@ export const GasMask: Item = {
     },
   ],
   singleUse: false,
-  wearType: WearType.Accessory,
   slots: 1,
   defaultCost: 500,
   itemType: ItemType.Accessory,

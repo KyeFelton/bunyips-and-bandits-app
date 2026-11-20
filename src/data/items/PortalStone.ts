@@ -16,7 +16,7 @@ const SmallPortalStone: Item = {
   slots: 1,
   stackable: true,
   defaultCost: 800,
-  itemType: ItemType.Gemstone,
+  itemType: ItemType.Tool,
 };
 
 const LargePortalStone: Item = {
@@ -27,7 +27,7 @@ const LargePortalStone: Item = {
   slots: 1,
   stackable: true,
   defaultCost: 2000,
-  itemType: ItemType.Gemstone,
+  itemType: ItemType.Tool,
 };
 
 export { SmallPortalStone, LargePortalStone };

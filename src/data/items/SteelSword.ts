@@ -14,6 +14,6 @@ export const SteelSword: Item = {
   ],
   singleUse: false,
   slots: 1,
-  defaultCost: 400,
-  itemType: ItemType.SlashWeapon,
+  defaultCost: 500,
+  itemType: ItemType.Weapon,
 };
