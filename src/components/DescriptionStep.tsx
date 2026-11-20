@@ -1,4 +1,4 @@
-import { useAtom, useAtomValue } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useState, useEffect } from "react";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
@@ -22,10 +22,45 @@ import {
   languagesAtom,
   nameAtom,
   personalityAtom,
+  itemsAtom,
 } from "./../state/character";
+import { InventoryStack } from "../models/items";
+import { Akubra, BlouseAndSkirt, BowlerHat, BustleDress, DayDress, DecorativeBonnet, DenimOveralls, FeatheredHat, FrockCoatAndBreeches, GuernseyAndTrousers, LeatherDuster, MilitaryCap, MilitaryUniform, MobCap, PinaforeAndDress, ShirtAndTrousers, TailcoatAndBreeches, TopHat, WalkingDress, WalkingStaff } from "../data/items";
+import { CorkHat } from "../data/items/CorkHat";
+import { ItemLocation } from "../enums/ItemLocation";
+import { ACCESSORY_INDICES, CLOTHES_INDEX } from "../utils/items";
 
 const genders = ["Male", "Female", "Non-binary"];
 const CUSTOM_GENDER_OPTION = "Let me type...";
+
+const clothes = [
+  BlouseAndSkirt,
+  BustleDress,
+  DayDress,
+  DenimOveralls,
+  FrockCoatAndBreeches,
+  GuernseyAndTrousers,
+  MilitaryUniform,
+  PinaforeAndDress,
+  ShirtAndTrousers,
+  TailcoatAndBreeches,
+  WalkingDress
+].map(i => i.name);
+
+const accessories = [
+  Akubra,
+  BowlerHat,
+  CorkHat,
+  DecorativeBonnet,
+  FeatheredHat,
+  LeatherDuster,
+  MilitaryCap,
+  MobCap,
+  TopHat,
+  WalkingStaff
+].map(i => i.name);
+
+const DESCRIPTION_ITEM_PREFIX = "description_item_";
 
 const personalities = [
   "Quiet and watchful",
@@ -160,6 +195,10 @@ export const DescriptionStep = () => {
   const [pickedFlaw, setPickedFlaw] = useState("");
   const [pickedMotivation, setPickedMotivation] = useState("");
 
+  const [selectedClothes, setSelectedClothes] = useState<string | undefined>();
+  const [selectedAccessory, setSelectedAccessory] = useState<string | undefined>();
+  const setItems = useSetAtom(itemsAtom);
+
   // Initialize custom gender state if character has a custom gender value
   useEffect(() => {
     if (
@@ -182,6 +221,38 @@ export const DescriptionStep = () => {
       setGender(value);
       setCustomGenderValue("");
     }
+  };
+
+  const handleClothingChange = (value: string) => {
+    setSelectedClothes(value);
+    const stack: InventoryStack = {
+      id: `${DESCRIPTION_ITEM_PREFIX}${value}`,
+      name: value,
+      location: ItemLocation.Worn,
+      quantity: 1,
+      index: CLOTHES_INDEX
+    };
+    setItems((prev) =>
+      [
+        ...prev.filter((s) => !(s.index === CLOTHES_INDEX && s.location === ItemLocation.Worn)),
+        stack
+      ])
+  };
+
+  const handleAccessoryChange = (value: string) => {
+    setSelectedAccessory(value);
+    const stack: InventoryStack = {
+      id: `${DESCRIPTION_ITEM_PREFIX}${value}`,
+      name: value,
+      location: ItemLocation.Worn,
+      quantity: 1,
+      index: ACCESSORY_INDICES[1],
+    };
+    setItems((prev) =>
+      [
+        ...prev.filter((s) => !(s.index === ACCESSORY_INDICES[1] && s.location === ItemLocation.Worn)),
+        stack
+      ])
   };
 
   const handleCustomGenderChange = (value: string) => {
@@ -267,7 +338,7 @@ export const DescriptionStep = () => {
 
       {/* Main grid layout: image/stats on left, details on right */}
       <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-4 lg:gap-6">
-        {/* Left column: Image and basic stats */}
+        {/* Left column */}
         <div className="space-y-4">
           {/* Character Image */}
           <div className="space-y-2">
@@ -395,8 +466,49 @@ export const DescriptionStep = () => {
           </div>
         </div>
 
-        {/* Right column: Backstory and personality */}
+        {/* Right column */}
         <div className="space-y-4 md:space-y-8">
+          {/* Clothing */}
+          <div className="grid grid-cols-2 gap-3">
+            <div className="space-y-2">
+              <Label htmlFor="clothing">Clothes</Label>
+              <Select
+                value={selectedClothes}
+                onValueChange={handleClothingChange}
+              >
+                <SelectTrigger id="clothing">
+                  <SelectValue placeholder="None" />
+                </SelectTrigger>
+                <SelectContent>
+                  {clothes.map((c) => (
+                    <SelectItem key={c} value={c}>
+                      {c}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="accessory">Accessory</Label>
+              <Select
+                value={selectedAccessory}
+                onValueChange={handleAccessoryChange}
+              >
+                <SelectTrigger id="accessory">
+                  <SelectValue placeholder="None" />
+                </SelectTrigger>
+                <SelectContent>
+                  {accessories.map((c) => (
+                    <SelectItem key={c} value={c}>
+                      {c}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          {/* Backstory */}
           <div className="space-y-2">
             <Label htmlFor="backstory">Backstory</Label>
             <Textarea
@@ -416,22 +528,20 @@ export const DescriptionStep = () => {
                 <button
                   type="button"
                   onClick={() => handleModeChange("pick")}
-                  className={`px-3 py-1 text-sm transition-colors ${
-                    personalityMode === "pick"
-                      ? "bg-primary text-primary-foreground"
-                      : "bg-card text-muted-foreground hover:text-foreground"
-                  }`}
+                  className={`px-3 py-1 text-sm transition-colors ${personalityMode === "pick"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-card text-muted-foreground hover:text-foreground"
+                    }`}
                 >
                   Select
                 </button>
                 <button
                   type="button"
                   onClick={() => handleModeChange("write")}
-                  className={`px-3 py-1 text-sm transition-colors ${
-                    personalityMode === "write"
-                      ? "bg-primary text-primary-foreground"
-                      : "bg-card text-muted-foreground hover:text-foreground"
-                  }`}
+                  className={`px-3 py-1 text-sm transition-colors ${personalityMode === "write"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-card text-muted-foreground hover:text-foreground"
+                    }`}
                 >
                   Custom
                 </button>
