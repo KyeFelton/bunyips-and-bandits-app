@@ -10,7 +10,6 @@ export const SmokeBomb: Item = {
   equippedEffects: [],
   singleUse: true,
   slots: 1,
-  stackable: true,
   defaultCost: 175,
   itemType: ItemType.Ammunition,
 };

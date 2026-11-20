@@ -211,7 +211,6 @@ export const AddItemDialog = ({ target, trigger, typeFilter }: Props) => {
         consumedEffect: selectedItem.consumedEffect,
         singleUse: selectedItem.singleUse,
         slots: selectedItem.slots,
-        stackable: selectedItem.stackable,
         defaultCost: selectedItem.defaultCost,
       }
       : undefined;
@@ -439,22 +438,6 @@ export const AddItemDialog = ({ target, trigger, typeFilter }: Props) => {
                 />
                 <label htmlFor="singleUse" className="text-sm font-medium">
                   Single use item
-                </label>
-              </div>
-              <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  id="stackable"
-                  checked={customItem.stackable || false}
-                  onChange={(event) =>
-                    setCustomItem({
-                      ...customItem,
-                      stackable: event.target.checked,
-                    })
-                  }
-                />
-                <label htmlFor="stackable" className="text-sm font-medium">
-                  Stackable effects
                 </label>
               </div>
               <div>

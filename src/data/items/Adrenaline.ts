@@ -10,7 +10,6 @@ export const Adrenaline: Item = {
   },
   singleUse: true,
   slots: 1,
-  stackable: true,
   defaultCost: 125,
   itemType: ItemType.Consumable,
 };

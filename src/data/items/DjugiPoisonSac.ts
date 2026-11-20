@@ -9,7 +9,6 @@ export const DjugiPoisonSac: Item = {
   },
   singleUse: true,
   slots: 1,
-  stackable: true,
   defaultCost: 90,
   itemType: ItemType.Ammunition,
 };

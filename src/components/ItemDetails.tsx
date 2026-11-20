@@ -32,9 +32,6 @@ const buildDetailRows = (item: CharacterItem): DetailRow[] => {
   if (item.singleUse) {
     rows.push({ label: "Single use", value: "Yes" });
   }
-  if (item.stackable) {
-    rows.push({ label: "Stackable effects", value: "Yes" });
-  }
   if (item.location === ItemLocation.Stored && item.storageLocation) {
     rows.push({ label: "Stored at", value: item.storageLocation });
   }

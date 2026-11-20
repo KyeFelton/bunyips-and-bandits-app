@@ -11,7 +11,6 @@ export const LovePotion: Item = {
   },
   singleUse: true,
   slots: 1,
-  stackable: true,
   defaultCost: 450,
   itemType: ItemType.Consumable,
 };

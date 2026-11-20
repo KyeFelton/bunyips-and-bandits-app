@@ -9,7 +9,6 @@ export const Tongs: Item = {
   },
   singleUse: true,
   slots: 1,
-  stackable: true,
   defaultCost: 800,
   itemType: ItemType.Tool,
 };

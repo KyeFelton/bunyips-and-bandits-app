@@ -8,7 +8,6 @@ export const FlaskOfAlchemistFire: Item = {
   },
   singleUse: true,
   slots: 1,
-  stackable: true,
   defaultCost: 50,
   itemType: ItemType.Ammunition,
 };

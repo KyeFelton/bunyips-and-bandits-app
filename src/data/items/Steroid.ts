@@ -11,7 +11,6 @@ export const Steroid: Item = {
   },
   singleUse: true,
   slots: 1,
-  stackable: true,
   defaultCost: 110,
   itemType: ItemType.Consumable,
 };

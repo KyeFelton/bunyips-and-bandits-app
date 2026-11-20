@@ -9,7 +9,6 @@ export const Antidote: Item = {
   },
   singleUse: true,
   slots: 1,
-  stackable: true,
   defaultCost: 50,
   itemType: ItemType.Consumable,
 };

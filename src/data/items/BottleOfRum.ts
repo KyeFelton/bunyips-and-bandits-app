@@ -6,7 +6,6 @@ export const BottleOfRum: Item = {
   description:
     "A dark glass bottle of rough colonial rum. Takes the edge off a hard day's work.",
   singleUse: true,
-  stackable: true,
   slots: 0.5,
   itemType: ItemType.Consumable,
 };

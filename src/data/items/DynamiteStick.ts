@@ -10,7 +10,6 @@ export const DynamiteStick: Item = {
   },
   singleUse: true,
   slots: 1,
-  stackable: true,
   defaultCost: 500,
   itemType: ItemType.Ammunition,
 };

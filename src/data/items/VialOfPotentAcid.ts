@@ -10,7 +10,6 @@ export const VialOfPotentAcid: Item = {
   equippedEffects: [],
   singleUse: true,
   slots: 1,
-  stackable: true,
   defaultCost: 150,
   itemType: ItemType.Consumable,
 };

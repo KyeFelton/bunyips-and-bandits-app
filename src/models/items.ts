@@ -9,7 +9,6 @@ export type Item = {
   consumedEffect?: ImmediateEffect;
   singleUse: boolean;
   slots: number;
-  stackable?: boolean;
   defaultCost?: number;
   itemType?: ItemType;
 };

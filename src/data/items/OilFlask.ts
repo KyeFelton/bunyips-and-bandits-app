@@ -6,7 +6,6 @@ export const OilFlask: Item = {
   description: "Burns for 1 hour when lit. Can be used as a lubricant.",
   singleUse: true,
   slots: 1,
-  stackable: true,
   defaultCost: 5,
   itemType: ItemType.Tool,
 };

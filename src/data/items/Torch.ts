@@ -6,7 +6,6 @@ export const Torch: Item = {
   description: "When lit, provides light for a Near distance for 1 hour.",
   singleUse: true,
   slots: 1,
-  stackable: true,
   defaultCost: 2,
   itemType: ItemType.Tool,
 };

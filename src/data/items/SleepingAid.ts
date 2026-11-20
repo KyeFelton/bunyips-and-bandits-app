@@ -9,7 +9,6 @@ export const SleepingAid: Item = {
   },
   singleUse: true,
   slots: 1,
-  stackable: true,
   defaultCost: 105,
   itemType: ItemType.Consumable,
 };

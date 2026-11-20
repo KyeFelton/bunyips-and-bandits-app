@@ -14,7 +14,6 @@ const SmallPortalStone: Item = {
   consumedEffect: consumedEffect("1d6 × 10m"),
   singleUse: true,
   slots: 1,
-  stackable: true,
   defaultCost: 800,
   itemType: ItemType.Tool,
 };
@@ -25,7 +24,6 @@ const LargePortalStone: Item = {
   consumedEffect: consumedEffect("1d6 × 1km"),
   singleUse: true,
   slots: 1,
-  stackable: true,
   defaultCost: 2000,
   itemType: ItemType.Tool,
 };

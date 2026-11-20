@@ -11,7 +11,6 @@ export const Psychedelic: Item = {
   },
   singleUse: true,
   slots: 1,
-  stackable: true,
   defaultCost: 300,
   itemType: ItemType.Consumable,
 };

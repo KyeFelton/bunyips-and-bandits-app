@@ -10,7 +10,6 @@ export const SoothingHerb: Item = {
   },
   singleUse: true,
   slots: 1,
-  stackable: true,
   defaultCost: 150,
   itemType: ItemType.Consumable,
 };
