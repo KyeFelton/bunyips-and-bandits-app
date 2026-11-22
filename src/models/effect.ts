@@ -9,7 +9,6 @@ export type StatModifier = {
 };
 
 export type OngoingEffect = {
-  actions?: StatModifier;
   armour?: StatModifier & {
     damageType: DamageType;
   };
@@ -27,9 +26,6 @@ export type OngoingEffect = {
     increase: boolean;
   };
   stamina?: StatModifier;
-  weapon?: StatModifier & {
-    damageType?: DamageType;
-  };
   custom?: string;
 };
 

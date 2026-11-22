@@ -9,7 +9,6 @@ import { HealthCard } from "../components/HealthCard";
 import { SensesStats } from "../components/SensesStats";
 import { ArmourStats } from "../components/ArmourStats";
 import { SpeedStats } from "../components/SpeedStats";
-import { CombatStats } from "../components/CombatStats";
 import { ItemsTab } from "../components/ItemsTab";
 import { SkillsTable } from "../components/SkillsTable";
 import { TraitsList } from "../components/TraitsList";
@@ -96,7 +95,6 @@ export function CharacterSheet() {
             <div className="xl:hidden flex flex-col divide-y divide-border">
               <HealthCard />
               <ArmourStats />
-              <CombatStats />
               <SensesStats />
               <SpeedStats />
             </div>
@@ -153,7 +151,6 @@ export function CharacterSheet() {
           <div className="hidden xl:flex h-full max-h-[1100px] flex-col divide-y divide-border overflow-auto bg-card rounded-lg">
             <HealthCard />
             <ArmourStats />
-            <CombatStats />
             <SensesStats />
             <SpeedStats />
           </div>

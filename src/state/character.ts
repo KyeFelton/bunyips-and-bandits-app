@@ -144,19 +144,6 @@ export const actionsAtom = atom((get) => {
   return actions;
 });
 
-// Action count
-export const actionsCountAtom = atom((get) => {
-  const effects = get(effectsAtom);
-  const baseActions = 3;
-
-  return effects.reduce((total, effect) => {
-    if (effect.actions?.bonus) {
-      return total + effect.actions.bonus;
-    }
-    return total;
-  }, baseActions);
-});
-
 // Trait entries with source, sorted alphabetically by name
 export const traitEntriesAtom = atom((get) => {
   const skillLevels = get(skillLevelsAtom);
@@ -480,24 +467,4 @@ export const armourAtom = atom((get) => {
   });
 
   return armour;
-});
-
-// Weapon damage
-export const weaponAtom = atom((get) => {
-  const effects = get(effectsAtom);
-
-  const damage = effects.reduce((damage, effect) => {
-    if (effect.weapon?.bonus) {
-      return damage + effect.weapon.bonus;
-    }
-    return damage;
-  }, 0);
-
-  const damageType = effects.find((effect) => effect.weapon?.damageType)?.weapon
-    ?.damageType;
-
-  return {
-    damage,
-    damageType,
-  };
 });
